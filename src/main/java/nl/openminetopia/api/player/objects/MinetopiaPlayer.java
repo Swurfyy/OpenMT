@@ -61,8 +61,6 @@ public class MinetopiaPlayer {
 
     private @Setter Fitness fitness;
 
-    private final DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
-
     private final PlayerModule playerModule = OpenMinetopia.getModuleManager().getModule(PlayerModule.class);
     private final PrefixModule prefixModule = OpenMinetopia.getModuleManager().getModule(PrefixModule.class);
     private final ColorModule colorModule = OpenMinetopia.getModuleManager().getModule(ColorModule.class);
@@ -76,7 +74,9 @@ public class MinetopiaPlayer {
     public CompletableFuture<Void> load() {
         CompletableFuture<Void> loadFuture = new CompletableFuture<>();
 
-        getBukkit().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
+        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+
+        this.getBukkit().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
 
         this.fitness = FitnessManager.getInstance().getFitness(uuid);
         fitness.load().thenAccept((unused) -> {
@@ -222,11 +222,12 @@ public class MinetopiaPlayer {
 
     
     public void removePrefix(Prefix prefix) {
+        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
         prefixes.remove(prefix);
 
         if (activePrefix == prefix) {
             activePrefix = new Prefix(-1, configuration.getDefaultPrefix(), -1);
-            setActivePrefix(activePrefix);
+            this.setActivePrefix(activePrefix);
         }
 
         prefixModule.removePrefix(prefix);
@@ -241,12 +242,13 @@ public class MinetopiaPlayer {
 
     
     public Prefix getActivePrefix() {
+        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
         if (activePrefix == null) {
             activePrefix = new Prefix(-1, configuration.getDefaultPrefix(), -1);
         }
 
         if (activePrefix.isExpired()) {
-            getBukkit().sendMessage(ChatUtils.color("<red>Je prefix <dark_red>" + activePrefix.getPrefix() + " <red>is verlopen!"));
+            this.getBukkit().sendMessage(ChatUtils.color("<red>Je prefix <dark_red>" + activePrefix.getPrefix() + " <red>is verlopen!"));
             this.removePrefix(activePrefix);
             this.setActivePrefix(new Prefix(-1, configuration.getDefaultPrefix(), -1));
         }
@@ -274,7 +276,7 @@ public class MinetopiaPlayer {
 
     
     public void removeColor(OwnableColor color) {
-        colors.remove(color);
+        this.colors.remove(color);
         this.colorModule.removeColor(color);
     }
 
@@ -303,10 +305,10 @@ public class MinetopiaPlayer {
     
     public OwnableColor getActiveColor(OwnableColorType type) {
         OwnableColor color = switch (type) {
-            case PREFIX -> activePrefixColor;
-            case NAME -> activeNameColor;
-            case CHAT -> activeChatColor;
-            case LEVEL -> activeLevelColor;
+            case PREFIX -> this.activePrefixColor;
+            case NAME -> this.activeNameColor;
+            case CHAT -> this.activeChatColor;
+            case LEVEL -> this.activeLevelColor;
         };
 
         if (color == null || color.getId() == 0) {
@@ -322,6 +324,7 @@ public class MinetopiaPlayer {
     }
 
     private OwnableColor getDefaultColor(OwnableColorType type) {
+        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
         return switch (type) {
             case PREFIX -> new PrefixColor(-1, configuration.getDefaultPrefixColor(), -1);
             case NAME -> new NameColor(-1, configuration.getDefaultNameColor(), -1);

@@ -29,7 +29,7 @@ public class ScoreboardManager {
     public void updateBoard(MinetopiaPlayer minetopiaPlayer) {
         Sidebar sidebar = getScoreboard(minetopiaPlayer.getUuid());
         if (sidebar == null) return;
-        if (!((MinetopiaPlayer) minetopiaPlayer).isScoreboardVisible()) return;
+        if (!minetopiaPlayer.isScoreboardVisible()) return;
 
         Player player = minetopiaPlayer.getBukkit().getPlayer();
         if (player == null) return;
