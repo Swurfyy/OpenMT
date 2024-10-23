@@ -26,7 +26,7 @@ public class BankingDeleteCommand extends BaseCommand {
             return;
         }
 
-        dataModule.getAdapter().deleteBankAccount(accountModel.getUniqueId()).whenComplete((v, throwable) -> {
+        bankingModule.deleteBankAccount(accountModel.getUniqueId()).whenComplete((v, throwable) -> {
             if (throwable != null) {
                 sender.sendMessage(ChatUtils.color("<red>Er ging iets fout tijdens het verwijderen van het account."));
                 return;

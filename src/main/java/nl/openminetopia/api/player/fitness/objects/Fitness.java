@@ -42,31 +42,31 @@ public class Fitness {
     public CompletableFuture<Void> load() {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
-        CompletableFuture<FitnessModel> fitnessModelFuture = dataModule.getAdapter().getFitness(this).whenComplete((fitnessModel, throwable) -> {
-            if (throwable != null) {
-                throwable.printStackTrace();
-                return;
-            }
-            this.fitnessModel = fitnessModel;
-        });
-
-        fitnessModelFuture.whenComplete((unused, throwable) -> {
-            dataModule.getAdapter().getStatistics(this).whenComplete((statistics, throwable1) -> {
-                if (throwable1 != null) {
-                    throwable1.printStackTrace();
-                    return;
-                }
-                this.statistics = statistics;
-            });
-        });
-
-        dataModule.getAdapter().getFitnessBoosters(this).whenComplete((boosters, throwable) -> {
-            if (throwable != null) {
-                throwable.printStackTrace();
-                return;
-            }
-            this.boosters = boosters;
-        });
+//        CompletableFuture<FitnessModel> fitnessModelFuture = dataModule.getAdapter().getFitness(this).whenComplete((fitnessModel, throwable) -> {
+//            if (throwable != null) {
+//                throwable.printStackTrace();
+//                return;
+//            }
+//            this.fitnessModel = fitnessModel;
+//        });
+//
+//        fitnessModelFuture.whenComplete((unused, throwable) -> {
+//            dataModule.getAdapter().getStatistics(this).whenComplete((statistics, throwable1) -> {
+//                if (throwable1 != null) {
+//                    throwable1.printStackTrace();
+//                    return;
+//                }
+//                this.statistics = statistics;
+//            });
+//        });
+//
+//        dataModule.getAdapter().getFitnessBoosters(this).whenComplete((boosters, throwable) -> {
+//            if (throwable != null) {
+//                throwable.printStackTrace();
+//                return;
+//            }
+//            this.boosters = boosters;
+//        });
 
         future.complete(null);
         return future;
@@ -75,16 +75,16 @@ public class Fitness {
     public CompletableFuture<Void> save() {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
-        dataModule.getAdapter().saveFitnessBoosters(this).whenComplete((unused, throwable) -> {
-            if (throwable != null) {
-                throwable.printStackTrace();
-            }
-        });
-        dataModule.getAdapter().saveStatistics(this).whenComplete((unused, throwable) -> {
-            if (throwable != null) {
-                throwable.printStackTrace();
-            }
-        });
+//        dataModule.getAdapter().saveFitnessBoosters(this).whenComplete((unused, throwable) -> {
+//            if (throwable != null) {
+//                throwable.printStackTrace();
+//            }
+//        });
+//        dataModule.getAdapter().saveStatistics(this).whenComplete((unused, throwable) -> {
+//            if (throwable != null) {
+//                throwable.printStackTrace();
+//            }
+//        });
 
         future.complete(null);
         return future;
@@ -110,19 +110,19 @@ public class Fitness {
     }
 
     public void addBooster(FitnessBooster booster) {
-        dataModule.getAdapter().addFitnessBooster(this, booster).whenComplete((id, throwable) -> {
-            if (throwable != null) {
-                throwable.printStackTrace();
-                return;
-            }
-
-            boosters.add(new FitnessBooster(id, booster.getAmount(), booster.getExpiresAt()));
-            runnable.run();
-        });
+//        dataModule.getAdapter().addFitnessBooster(this, booster).whenComplete((id, throwable) -> {
+//            if (throwable != null) {
+//                throwable.printStackTrace();
+//                return;
+//            }
+//
+//            boosters.add(new FitnessBooster(id, booster.getAmount(), booster.getExpiresAt()));
+//            runnable.run();
+//        });
     }
 
     public void removeBooster(FitnessBooster booster) {
         boosters.remove(booster);
-        dataModule.getAdapter().removeFitnessBooster(this, booster);
+//        dataModule.getAdapter().removeFitnessBooster(this, booster);
     }
 }

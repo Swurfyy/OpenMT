@@ -7,11 +7,14 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.banking.commands.BankingCommand;
 import nl.openminetopia.modules.banking.commands.subcommands.*;
+import nl.openminetopia.modules.banking.enums.AccountPermission;
+import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.listeners.BankingInteractionListener;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.storm.models.BankAccountModel;
 import nl.openminetopia.modules.data.storm.models.BankPermissionModel;
+import nl.openminetopia.modules.data.utils.StormUtils;
 import org.bukkit.Bukkit;
 
 import java.sql.SQLException;
@@ -41,8 +44,8 @@ public class BankingModule extends Module {
 
         Bukkit.getScheduler().runTaskLater(OpenMinetopia.getInstance(), () -> {
             OpenMinetopia.getInstance().getLogger().info("Loading bank accounts..");
-            DataModule dataModule = OpenMinetopia.getModuleManager().getModule(DataModule.class);
-            dataModule.getAdapter().getBankAccounts().whenComplete((accounts, accountThrowable) -> {
+
+            this.getBankAccounts().whenComplete((accounts, accountThrowable) -> {
                 if (accountThrowable != null) {
                     OpenMinetopia.getInstance().getLogger().severe("Something went wrong while trying to load all bank accounts: " + accountThrowable.getMessage());
                     return;
@@ -53,7 +56,7 @@ public class BankingModule extends Module {
 
                 OpenMinetopia.getInstance().getLogger().info("Loaded a total of " + bankAccountModels.size() + " accounts.");
 
-                dataModule.getAdapter().getBankPermissions().whenComplete((permissions, throwable) -> {
+                this.getBankPermissions().whenComplete((permissions, throwable) -> {
                     if (throwable != null) {
                         OpenMinetopia.getInstance().getLogger().severe("Something went wrong while trying to load all bank permissions: " + throwable.getMessage());
                         return;
@@ -112,6 +115,114 @@ public class BankingModule extends Module {
 
     public BankAccountModel getAccountById(UUID uuid) {
         return bankAccountModels.stream().filter(account -> account.getUniqueId().equals(uuid)).findAny().orElse(null);
+    }
+
+    public CompletableFuture<Collection<BankAccountModel>> getBankAccounts() {
+        CompletableFuture<Collection<BankAccountModel>> completableFuture = new CompletableFuture<>();
+
+        StormDatabase.getExecutorService().submit(() -> {
+            try {
+                Collection<BankAccountModel> accountModels = StormDatabase.getInstance().getStorm().buildQuery(BankAccountModel.class)
+                        .where("type", Where.NOT_EQUAL, AccountType.PRIVATE.toString())
+                        .execute().join();
+                completableFuture.complete(accountModels);
+            } catch (Exception e) {
+                completableFuture.completeExceptionally(e);
+            }
+        });
+
+        return completableFuture;
+    }
+
+    public CompletableFuture<Collection<BankPermissionModel>> getBankPermissions() {
+        CompletableFuture<Collection<BankPermissionModel>> completableFuture = new CompletableFuture<>();
+
+        StormDatabase.getExecutorService().submit(() -> {
+            try {
+                Collection<BankPermissionModel> permissionModels = StormDatabase.getInstance().getStorm().buildQuery(BankPermissionModel.class)
+                        .execute().join();
+                completableFuture.complete(permissionModels);
+            } catch (Exception e) {
+                completableFuture.completeExceptionally(e);
+            }
+        });
+
+        return completableFuture;
+    }
+
+    public CompletableFuture<BankAccountModel> createBankAccount(UUID uuid, AccountType type, double balance, String name, boolean frozen) {
+        CompletableFuture<BankAccountModel> completableFuture = new CompletableFuture<>();
+
+        StormDatabase.getExecutorService().submit(() -> {
+            BankAccountModel accountModel = new BankAccountModel();
+            accountModel.setUniqueId(uuid);
+            accountModel.setType(type);
+            accountModel.setBalance(balance);
+            accountModel.setName(name);
+            accountModel.setFrozen(frozen);
+
+            StormDatabase.getInstance().saveStormModel(accountModel);
+            completableFuture.complete(accountModel);
+        });
+
+        return completableFuture;
+    }
+
+    public CompletableFuture<Void> saveBankAccount(BankAccountModel accountModel) {
+        CompletableFuture<Void> completableFuture = new CompletableFuture<>();
+
+        StormUtils.updateModelData(BankAccountModel.class,
+                query -> query.where("uuid", Where.EQUAL, accountModel.getUniqueId().toString()),
+                model -> {
+                    model.setBalance(accountModel.getBalance());
+                    model.setFrozen(accountModel.getFrozen());
+                    model.setName(accountModel.getName());
+                    model.setType(accountModel.getType());
+                }
+        );
+
+        return completableFuture;
+    }
+
+    public CompletableFuture<Void> deleteBankAccount(UUID accountUuid) {
+        CompletableFuture<Void> completableFuture = new CompletableFuture<>();
+
+        StormDatabase.getExecutorService().submit(() -> {
+            StormUtils.deleteModelData(BankAccountModel.class,
+                    query -> query.where("uuid", Where.EQUAL, accountUuid.toString())
+            ).join();
+
+            StormUtils.deleteModelData(BankPermissionModel.class,
+                    query -> query.where("account", Where.EQUAL, accountUuid.toString())
+            ).join();
+
+            completableFuture.complete(null);
+        });
+
+        return completableFuture;
+    }
+
+    public CompletableFuture<BankPermissionModel> createBankPermission(UUID player, UUID accountId, AccountPermission permission) {
+        CompletableFuture<BankPermissionModel> completableFuture = new CompletableFuture<>();
+
+        StormDatabase.getExecutorService().submit(() -> {
+            BankPermissionModel permissionModel = new BankPermissionModel();
+            permissionModel.setUuid(player);
+            permissionModel.setAccount(accountId);
+            permissionModel.setPermission(permission);
+
+            StormDatabase.getInstance().saveStormModel(permissionModel);
+            completableFuture.complete(permissionModel);
+        });
+
+        return completableFuture;
+    }
+
+    public CompletableFuture<Void> deleteBankPermission(UUID accountUuid, UUID playerUuid) {
+        return StormUtils.deleteModelData(BankPermissionModel.class, query -> {
+            query.where("uuid", Where.EQUAL, playerUuid.toString());
+            query.where("account", Where.EQUAL, accountUuid.toString());
+        });
     }
 
     @SneakyThrows

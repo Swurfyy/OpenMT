@@ -4,7 +4,6 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.ScoreboardManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.api.player.objects.OnlineMinetopiaPlayer;
 import nl.openminetopia.modules.scoreboard.ScoreboardModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
@@ -23,11 +22,11 @@ public class PlayerJoinListener implements Listener {
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) {
-            player.kick(ChatUtils.color("<red>Er is een fout opgetreden bij het laden van je gegevens! Probeer het later opnieuw."));
+            player.kick(ChatUtils.color("<red>3 Er is een fout opgetreden bij het laden van je gegevens! Probeer het later opnieuw."));
             return;
         }
 
-        ((OnlineMinetopiaPlayer) minetopiaPlayer).setScoreboardVisible(true);
+        minetopiaPlayer.setScoreboardVisible(true);
         ScoreboardManager.getInstance().addScoreboard(player);
 
         Bukkit.getServer().getScheduler().runTaskTimer(OpenMinetopia.getInstance(), task -> {

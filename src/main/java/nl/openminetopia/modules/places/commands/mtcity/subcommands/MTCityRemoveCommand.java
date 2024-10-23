@@ -4,8 +4,9 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.api.places.MTCityManager;
-import nl.openminetopia.api.places.objects.MTCity;
+import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.data.storm.models.CityModel;
+import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 
@@ -15,14 +16,15 @@ public class MTCityRemoveCommand extends BaseCommand {
     @Subcommand("remove")
     @CommandPermission("openminetopia.city.remove")
     public void onRemove(Player player, String cityName) {
-        // Remove the world from the database
-        MTCity mtWorld = MTCityManager.getInstance().getCity(cityName);
-        if (mtWorld == null) {
-            player.sendMessage(ChatUtils.color("<red>World <white>" + cityName + " <red>does not exist!"));
+        PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
+
+        CityModel cityModel = placesModule.getCity(cityName);
+        if (cityModel == null) {
+            player.sendMessage(ChatUtils.color("<red>City <white>" + cityName + " <red>does not exist!"));
             return;
         }
 
-        MTCityManager.getInstance().deleteCity(mtWorld);
+        placesModule.deleteCity(cityModel);
         player.sendMessage(ChatUtils.color("<red>World <white>" + cityName + " <red>has been removed!"));
     }
 }

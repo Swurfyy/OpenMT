@@ -5,11 +5,12 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import nl.openminetopia.api.places.MTCityManager;
-import nl.openminetopia.api.places.objects.MTCity;
-import nl.openminetopia.api.places.objects.MTWorld;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.modules.data.storm.models.CityModel;
+import nl.openminetopia.modules.data.storm.models.WorldModel;
+import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.entity.Player;
@@ -21,16 +22,18 @@ public class MTCityCreateCommand extends BaseCommand {
     @CommandPermission("openminetopia.city.create")
     public void onCreate(Player player, String name, String loadingName) {
 
+        PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
+
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
-        MTWorld world = minetopiaPlayer.getWorld();
+        WorldModel world = minetopiaPlayer.getWorld();
         if (world == null) {
             player.sendMessage(ChatUtils.color("<red>You are not in a world!"));
             return;
         }
 
-        for (MTCity city : MTCityManager.getInstance().getCities()) {
+        for (CityModel city : placesModule.getCityModels()) {
             if (city.getName().equalsIgnoreCase(name)) {
                 player.sendMessage(ChatUtils.color("<red>City <white>" + name + " <red>already exists!"));
                 return;
@@ -42,8 +45,14 @@ public class MTCityCreateCommand extends BaseCommand {
             if (!region.getId().equalsIgnoreCase(name)) continue;
 
             String title = "<bold>" + loadingName.toUpperCase();
-            MTCity city = new MTCity(world.getId(), name, title, "<gold>", 21.64, loadingName);
-            MTCityManager.getInstance().createCity(city);
+            placesModule.createCity(name, title, "<gold>", 21.64, loadingName)
+                    .whenComplete((cityModel, throwable) -> {
+                        if (throwable != null) {
+                            player.sendMessage(ChatUtils.color("<red>Failed to create city: " + throwable.getMessage()));
+                            return;
+                        }
+                        placesModule.getCityModels().add(cityModel);
+                    });
 
             player.sendMessage(ChatUtils.color("<green>City <white>" + loadingName + " <green>has been created!"));
             return;

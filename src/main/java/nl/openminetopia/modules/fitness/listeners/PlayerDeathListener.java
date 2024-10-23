@@ -3,7 +3,7 @@ package nl.openminetopia.modules.fitness.listeners;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.objects.FitnessBooster;
-import nl.openminetopia.api.player.objects.OnlineMinetopiaPlayer;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -16,7 +16,7 @@ public class PlayerDeathListener implements Listener {
         if (!configuration.isFitnessDeathPunishmentEnabled()) return;
 
         var player = event.getEntity();
-        var minetopiaPlayer = (OnlineMinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
+        var minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
         int punishmentInMillis = configuration.getFitnessDeathPunishmentDuration() * 60 * 1000;

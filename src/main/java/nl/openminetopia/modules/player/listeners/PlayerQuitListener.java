@@ -2,7 +2,7 @@ package nl.openminetopia.modules.player.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.OnlineMinetopiaPlayer;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.data.storm.models.BankAccountModel;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ public class PlayerQuitListener implements Listener {
         bankingModule.getBankAccountModels().remove(accountModel);
         accountModel.getSavingTask().saveAndCancel();
 
-        OnlineMinetopiaPlayer minetopiaPlayer = (OnlineMinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
+        MinetopiaPlayer minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
         minetopiaPlayer.save().whenComplete((unused, throwable) -> {

@@ -6,7 +6,6 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
 import nl.openminetopia.api.player.fitness.statistics.types.HealthStatistic;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.objects.FitnessLevel;
 import org.bukkit.Bukkit;

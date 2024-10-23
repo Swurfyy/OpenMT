@@ -7,8 +7,7 @@ import nl.openminetopia.api.player.fitness.objects.Fitness;
 import nl.openminetopia.api.player.fitness.statistics.FitnessStatistic;
 import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
 import nl.openminetopia.api.player.fitness.statistics.types.*;
-import nl.openminetopia.api.player.objects.OnlineMinetopiaPlayer;
-import nl.openminetopia.configuration.DefaultConfiguration;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.utils.FitnessUtils;
 import org.bukkit.Bukkit;
@@ -28,7 +27,7 @@ public class FitnessRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        OnlineMinetopiaPlayer minetopiaPlayer = (OnlineMinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
+        MinetopiaPlayer minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
         if (!minetopiaPlayer.isInPlace()) {
