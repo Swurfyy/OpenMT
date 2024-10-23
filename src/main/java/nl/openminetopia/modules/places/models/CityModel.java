@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.data.storm.models;
+package nl.openminetopia.modules.places.models;
 
 import com.craftmend.storm.api.StormModel;
 import com.craftmend.storm.api.markers.Column;
@@ -9,11 +9,14 @@ import nl.openminetopia.api.places.objects.MTPlace;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-@Table(name = "worlds")
-public class WorldModel extends StormModel implements MTPlace {
+@Table(name = "cities")
+public class CityModel extends StormModel implements MTPlace {
 
-    @Column(name = "world_name", unique = true)
+    @Column(name = "city_name", unique = true)
     private String name;
+
+    @Column(name = "world_id")
+    private Integer worldId;
 
     @Column(name = "color")
     private String color;

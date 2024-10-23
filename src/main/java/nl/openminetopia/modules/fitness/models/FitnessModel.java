@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.data.storm.models;
+package nl.openminetopia.modules.fitness.models;
 
 
 import com.craftmend.storm.api.StormModel;

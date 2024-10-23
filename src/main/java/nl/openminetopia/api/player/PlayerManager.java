@@ -4,14 +4,13 @@ import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.DataModule;
-import nl.openminetopia.modules.data.storm.models.PlayerModel;
+import nl.openminetopia.modules.player.models.PlayerModel;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 @Getter
 public class PlayerManager {

@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.data.storm.models;
+package nl.openminetopia.modules.player.models;
 
 import com.craftmend.storm.api.StormModel;
 import com.craftmend.storm.api.enums.ColumnType;
@@ -6,6 +6,8 @@ import com.craftmend.storm.api.markers.Column;
 import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import nl.openminetopia.modules.color.models.ColorModel;
+import nl.openminetopia.modules.prefix.models.PrefixModel;
 
 import java.util.ArrayList;
 import java.util.List;

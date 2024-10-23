@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
-import nl.openminetopia.modules.data.storm.models.BankAccountModel;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.PersistentDataUtil;
 import nl.openminetopia.utils.item.ItemBuilder;

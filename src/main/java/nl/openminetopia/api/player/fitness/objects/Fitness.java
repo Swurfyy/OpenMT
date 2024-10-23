@@ -7,7 +7,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.statistics.FitnessStatistic;
 import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
 import nl.openminetopia.modules.data.DataModule;
-import nl.openminetopia.modules.data.storm.models.FitnessModel;
+import nl.openminetopia.modules.fitness.models.FitnessModel;
 import nl.openminetopia.modules.fitness.runnables.FitnessRunnable;
 import nl.openminetopia.modules.fitness.utils.FitnessUtils;
 import org.bukkit.Bukkit;

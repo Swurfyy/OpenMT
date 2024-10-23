@@ -9,8 +9,8 @@ import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType
 import nl.openminetopia.api.player.fitness.statistics.types.*;
 import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.data.storm.StormDatabase;
-import nl.openminetopia.modules.data.storm.models.FitnessBoosterModel;
-import nl.openminetopia.modules.data.storm.models.FitnessModel;
+import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
+import nl.openminetopia.modules.fitness.models.FitnessModel;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.fitness.commands.FitnessCommand;
 import nl.openminetopia.modules.fitness.commands.subcommands.FitnessBoosterCommand;

@@ -13,7 +13,7 @@ import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.menu.BankContentsMenu;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.menus.ColorTypeMenu;
-import nl.openminetopia.modules.data.storm.models.BankAccountModel;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.player.utils.PlaytimeUtil;
 import nl.openminetopia.modules.staff.admintool.menus.fitness.AdminToolFitnessMenu;
 import nl.openminetopia.utils.ChatUtils;

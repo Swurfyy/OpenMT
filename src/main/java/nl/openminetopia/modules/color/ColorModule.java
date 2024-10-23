@@ -12,8 +12,8 @@ import nl.openminetopia.modules.color.commands.subcommands.ColorRemoveCommand;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.objects.*;
 import nl.openminetopia.modules.data.storm.StormDatabase;
-import nl.openminetopia.modules.data.storm.models.ColorModel;
-import nl.openminetopia.modules.data.storm.models.PlayerModel;
+import nl.openminetopia.modules.color.models.ColorModel;
+import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import org.bukkit.Bukkit;
 

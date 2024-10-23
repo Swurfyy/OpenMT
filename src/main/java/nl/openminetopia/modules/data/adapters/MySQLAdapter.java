@@ -10,12 +10,20 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
+import nl.openminetopia.modules.banking.models.BankPermissionModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
+import nl.openminetopia.modules.color.models.ColorModel;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.storm.adapters.AccountPermissionAdapter;
 import nl.openminetopia.modules.data.storm.adapters.AccountTypeAdapter;
 import nl.openminetopia.modules.data.storm.adapters.OwnableColorTypeAdapter;
-import nl.openminetopia.modules.data.storm.models.*;
+import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
+import nl.openminetopia.modules.fitness.models.FitnessModel;
+import nl.openminetopia.modules.places.models.CityModel;
+import nl.openminetopia.modules.places.models.WorldModel;
+import nl.openminetopia.modules.player.models.PlayerModel;
+import nl.openminetopia.modules.prefix.models.PrefixModel;
 
 public class MySQLAdapter implements DatabaseAdapter{
 
