@@ -82,7 +82,7 @@ dependencies {
     implementation("org.bstats:bstats-bukkit:3.1.0")
 
     /* Vault */
-    compileOnly("com.github.MilkBowl:VaultAPI:1.7") {
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7.1") {
         exclude(group = "org.bukkit", module = "bukkit")
     }
 }
