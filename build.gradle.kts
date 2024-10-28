@@ -52,7 +52,7 @@ dependencies {
     /* Database */
     compileOnly("com.zaxxer:HikariCP:6.0.0")
     compileOnly("mysql:mysql-connector-java:8.0.33")
-    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.4.1")
+    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.5.0")
     compileOnly("org.xerial:sqlite-jdbc:3.46.1.3")
     implementation("com.github.Mindgamesnl:storm:e1f961b480")
 
