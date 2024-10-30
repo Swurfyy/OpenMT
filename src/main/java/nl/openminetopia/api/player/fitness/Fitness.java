@@ -41,8 +41,6 @@ public class Fitness {
     public CompletableFuture<Void> save() {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
-        OpenMinetopia.getInstance().getLogger().info("Saving fitness for " + uuid);
-
         StormDatabase.getInstance().saveStormModel(fitnessModel);
         fitnessModel.getBoosters().forEach(StormDatabase.getInstance()::saveStormModel);
         fitnessModel.getStatistics().forEach(StormDatabase.getInstance()::saveStormModel);
