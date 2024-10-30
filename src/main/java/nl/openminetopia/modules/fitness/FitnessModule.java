@@ -7,7 +7,6 @@ import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.fitness.commands.FitnessCommand;
 import nl.openminetopia.modules.fitness.commands.subcommands.FitnessBoosterCommand;
-import nl.openminetopia.modules.fitness.commands.subcommands.FitnessInfoCommand;
 import nl.openminetopia.modules.fitness.listeners.PlayerDeathListener;
 import nl.openminetopia.modules.fitness.listeners.PlayerDrinkListener;
 import nl.openminetopia.modules.fitness.listeners.PlayerChangeWorldListener;
@@ -31,7 +30,6 @@ public class FitnessModule extends Module {
 
     public void enable() {
         registerCommand(new FitnessCommand());
-        registerCommand(new FitnessInfoCommand());
         registerCommand(new FitnessBoosterCommand());
 
         registerListener(new PlayerEatListener());
