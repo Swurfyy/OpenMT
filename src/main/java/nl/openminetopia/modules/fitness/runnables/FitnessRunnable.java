@@ -28,6 +28,11 @@ public class FitnessRunnable extends BukkitRunnable {
     public void run() {
         FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
 
+        if (player == null || !player.isOnline()) {
+            cancel();
+            return;
+        }
+
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
             FitnessUtils.clearFitnessEffects(player);

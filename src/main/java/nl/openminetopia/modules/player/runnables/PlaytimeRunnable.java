@@ -15,7 +15,7 @@ public class PlaytimeRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (!player.isOnline()) {
+        if (player == null || !player.isOnline()) {
             cancel();
             return;
         }
