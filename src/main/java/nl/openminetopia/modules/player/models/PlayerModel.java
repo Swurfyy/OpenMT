@@ -64,7 +64,7 @@ public class PlayerModel extends StormModel {
     @Column(name = "active_levelcolor_id")
     private Integer activeLevelColorId;
 
-    @Column(name = "staffchat")
+    @Column(name = "staffchat", defaultValue = "false")
     private Boolean staffchatEnabled;
 
     @Column(name = "command_spy_enabled", defaultValue = "false")

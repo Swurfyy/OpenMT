@@ -5,7 +5,6 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
-import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.event.EventHandler;

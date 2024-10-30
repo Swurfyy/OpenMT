@@ -18,6 +18,7 @@ import nl.openminetopia.modules.color.models.ColorModel;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.storm.adapters.AccountPermissionAdapter;
 import nl.openminetopia.modules.data.storm.adapters.AccountTypeAdapter;
+import nl.openminetopia.modules.data.storm.adapters.FixedBooleanAdapter;
 import nl.openminetopia.modules.data.storm.adapters.FitnessStatisticTypeAdapter;
 import nl.openminetopia.modules.data.storm.adapters.OwnableColorTypeAdapter;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
@@ -62,6 +63,7 @@ public class MySQLAdapter implements DatabaseAdapter{
         TypeRegistry.registerAdapter(AccountPermission.class, new AccountPermissionAdapter());
         TypeRegistry.registerAdapter(OwnableColorType.class, new OwnableColorTypeAdapter());
         TypeRegistry.registerAdapter(FitnessStatisticType.class, new FitnessStatisticTypeAdapter());
+        TypeRegistry.registerAdapter(Boolean.class, new FixedBooleanAdapter());
 
         registerStormModel(new BankAccountModel());
         registerStormModel(new BankPermissionModel());
