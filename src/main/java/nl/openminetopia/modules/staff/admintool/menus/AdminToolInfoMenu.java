@@ -5,15 +5,14 @@ import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
-import nl.openminetopia.api.player.fitness.statistics.types.TotalStatistic;
+import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.menu.BankContentsMenu;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.menus.ColorTypeMenu;
-import nl.openminetopia.modules.data.storm.models.BankAccountModel;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.player.utils.PlaytimeUtil;
 import nl.openminetopia.modules.staff.admintool.menus.fitness.AdminToolFitnessMenu;
 import nl.openminetopia.utils.ChatUtils;
@@ -49,6 +48,8 @@ public class AdminToolInfoMenu extends Menu {
         Icon targetSkullIcon = new Icon(10, skullBuilder.toItemStack(), event -> event.setCancelled(true));
         this.addItem(targetSkullIcon);
 
+        /* -------- Colors -------- */
+
         ItemBuilder colorItemBuilder = new ItemBuilder(Material.YELLOW_CONCRETE)
                 .setName("<gold>Kleuren")
                 .addLoreLine("")
@@ -59,6 +60,8 @@ public class AdminToolInfoMenu extends Menu {
             new ColorTypeMenu(player, offlinePlayer).open(player);
         });
         this.addItem(targetColorIcon);
+
+        /* -------- Level -------- */
 
         ItemBuilder levelItemBuilder = new ItemBuilder(Material.TRIPWIRE_HOOK)
                 .setName("<gold>Level")
@@ -76,10 +79,13 @@ public class AdminToolInfoMenu extends Menu {
         });
         this.addItem(targetLevelIcon);
 
-        TotalStatistic totalStatistic = (TotalStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.TOTAL);
+        /* -------- Fitness -------- */
+
+        Fitness fitness = minetopiaPlayer.getFitness();
         ItemBuilder fitnessItemBuilder = new ItemBuilder(Material.MUSHROOM_STEW)
                 .setName("<gold>Fitheid")
-                .addLoreLine("<gold>Fitheid: " + totalStatistic.getFitnessGained() + " / " + totalStatistic.getMaxFitnessGainable())
+                .addLoreLine("<gold>Fitheid: " + fitness.getTotalFitness() + " / "
+                        + OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel())
                 .addLoreLine("")
                 .addLoreLine("<gold>Klik <yellow>hier <gold>om de <yellow>fitheid <gold>van de speler te bekijken.");
 
@@ -89,27 +95,35 @@ public class AdminToolInfoMenu extends Menu {
         });
         this.addItem(targetFitnessIcon);
 
+        /* -------- Banking -------- */
 
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountsFromPlayer(offlinePlayer.getUniqueId())
                 .stream().filter(account -> account.getType() == AccountType.PRIVATE)
                 .findFirst().orElse(null);
 
-        if (accountModel == null) {
-            player.sendMessage(ChatUtils.color("<red>Er is geen account gevonden voor deze speler."));
-            return;
+        ItemBuilder bankItemBuilder;
+        Icon targetBankIcon;
+        if (accountModel != null) {
+             bankItemBuilder = new ItemBuilder(Material.GOLD_INGOT)
+                    .setName("<gold>Banksaldo")
+                    .addLoreLine("<gold>Banksaldo: " + bankingModule.format(accountModel.getBalance()))
+                    .addLoreLine("")
+                    .addLoreLine("<gold>Klik <yellow>hier <gold>om de <yellow>bank <gold>van de speler te openen.");
+             targetBankIcon = new Icon(14, bankItemBuilder.toItemStack(), event -> {
+                new BankContentsMenu(player, accountModel, true).open(player);
+            });
+        } else {
+            player.sendMessage(ChatUtils.color("<red>Deze speler heeft geen bankrekening."));
+            bankItemBuilder = new ItemBuilder(Material.BARRIER)
+                    .setName("<gold>Banksaldo")
+                    .addLoreLine("<red>Deze speler heeft geen bankrekening.");
+
+            targetBankIcon = new Icon(14, bankItemBuilder.toItemStack(), event -> event.setCancelled(true));
         }
-
-        ItemBuilder bankItemBuilder = new ItemBuilder(Material.GOLD_INGOT)
-                .setName("<gold>Banksaldo")
-                .addLoreLine("<gold>Banksaldo: " + bankingModule.format(accountModel.getBalance()))
-                .addLoreLine("")
-                .addLoreLine("<gold>Klik <yellow>hier <gold>om de <yellow>bank <gold>van de speler te openen.");
-
-        Icon targetBankIcon = new Icon(14, bankItemBuilder.toItemStack(), event -> {
-            new BankContentsMenu(player, accountModel, true).open(player);
-        });
         this.addItem(targetBankIcon);
+
+        /* -------- Back -------- */
 
         ItemBuilder backItemBuilder = new ItemBuilder(Material.OAK_DOOR)
                 .setName("<gray>Terug");

@@ -1,18 +1,19 @@
-package nl.openminetopia.modules.data.storm.models;
+package nl.openminetopia.modules.places.models;
 
 import com.craftmend.storm.api.StormModel;
 import com.craftmend.storm.api.markers.Column;
 import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import nl.openminetopia.api.places.objects.MTPlace;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
 @Table(name = "cities")
-public class CityModel extends StormModel {
+public class CityModel extends StormModel implements MTPlace {
 
     @Column(name = "city_name", unique = true)
-    private String cityName;
+    private String name;
 
     @Column(name = "world_id")
     private Integer worldId;

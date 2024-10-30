@@ -5,71 +5,83 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.api.places.MTWorldManager;
-import nl.openminetopia.api.places.objects.MTWorld;
+import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.data.storm.StormDatabase;
+import nl.openminetopia.modules.places.models.WorldModel;
+import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 
 @CommandAlias("mtwereld|mtworld")
 public class MTWorldSettingCommand extends BaseCommand {
 
+    private final PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
+
     @Subcommand("setcolor")
     @CommandPermission("openminetopia.world.setcolor")
     @CommandCompletion("@worldNames")
-    public void onSetColor(Player player, String worldName, String color) {
-        // Remove the world from the database
-        MTWorld mtWorld = MTWorldManager.getInstance().getWorld(worldName);
-        if (mtWorld == null) {
+    public void setColor(Player player, String worldName, String color) {
+        WorldModel worldModel = placesModule.getWorldModels().stream()
+                .filter(worldModel1 -> worldModel1.getName().equalsIgnoreCase(worldName))
+                .findFirst().orElse(null);
+        if (worldModel == null) {
             player.sendMessage(ChatUtils.color("<red>World <white>" + worldName + " <red>does not exist!"));
             return;
         }
 
-        MTWorldManager.getInstance().setColor(mtWorld, color);
+        worldModel.setColor(color);
+        StormDatabase.getInstance().saveStormModel(worldModel);
         player.sendMessage(ChatUtils.color("<red>World color of " + color + worldName + " <red>has been changed!"));
     }
 
     @Subcommand("settemperature")
     @CommandPermission("openminetopia.world.settemperature")
     @CommandCompletion("@worldNames")
-    public void onSetTemperature(Player player, String worldName, Double temperature) {
-        // Remove the world from the database
-        MTWorld mtWorld = MTWorldManager.getInstance().getWorld(worldName);
-        if (mtWorld == null) {
+    public void setTemperature(Player player, String worldName, Double temperature) {
+        WorldModel worldModel = placesModule.getWorldModels().stream()
+                .filter(worldModel1 -> worldModel1.getName().equalsIgnoreCase(worldName))
+                .findFirst().orElse(null);
+        if (worldModel == null) {
             player.sendMessage(ChatUtils.color("<red>World <white>" + worldName + " <red>does not exist!"));
             return;
         }
 
-        MTWorldManager.getInstance().setTemperature(mtWorld, temperature);
+        worldModel.setTemperature(temperature);
+        StormDatabase.getInstance().saveStormModel(worldModel);
         player.sendMessage(ChatUtils.color("<red>World temperatuur of " + worldName + " <red>has been changed!"));
     }
 
     @Subcommand("setloadingname")
     @CommandPermission("openminetopia.world.setloadingname")
     @CommandCompletion("@worldNames")
-    public void onSetLoadingname(Player player, String worldName, String loadingName) {
-        // Remove the world from the database
-        MTWorld mtWorld = MTWorldManager.getInstance().getWorld(worldName);
-        if (mtWorld == null) {
+    public void setLoadingName(Player player, String worldName, String loadingName) {
+        WorldModel worldModel = placesModule.getWorldModels().stream()
+                .filter(worldModel1 -> worldModel1.getName().equalsIgnoreCase(worldName))
+                .findFirst().orElse(null);
+        if (worldModel == null) {
             player.sendMessage(ChatUtils.color("<red>World <white>" + worldName + " <red>does not exist!"));
             return;
         }
 
-        MTWorldManager.getInstance().setLoadingName(mtWorld, loadingName);
+        worldModel.setLoadingName(loadingName);
+        StormDatabase.getInstance().saveStormModel(worldModel);
         player.sendMessage(ChatUtils.color("<red>World loadingName of " + worldName + " <red>has been changed!"));
     }
 
     @Subcommand("settitle")
     @CommandPermission("openminetopia.world.settitle")
     @CommandCompletion("@worldNames")
-    public void onSetTitle(Player player, String worldName, String title) {
-        // Remove the world from the database
-        MTWorld mtWorld = MTWorldManager.getInstance().getWorld(worldName);
-        if (mtWorld == null) {
+    public void setTitle(Player player, String worldName, String title) {
+        WorldModel worldModel = placesModule.getWorldModels().stream()
+                .filter(worldModel1 -> worldModel1.getName().equalsIgnoreCase(worldName))
+                .findFirst().orElse(null);
+        if (worldModel == null) {
             player.sendMessage(ChatUtils.color("<red>World <white>" + worldName + " <red>does not exist!"));
             return;
         }
 
-        MTWorldManager.getInstance().setTitle(mtWorld, title);
+        worldModel.setTitle(title);
+        StormDatabase.getInstance().saveStormModel(worldModel);
         player.sendMessage(ChatUtils.color("<red>World title of " + worldName + " <red>has been changed!"));
     }
 }

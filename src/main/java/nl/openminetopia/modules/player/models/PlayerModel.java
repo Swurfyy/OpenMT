@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.data.storm.models;
+package nl.openminetopia.modules.player.models;
 
 import com.craftmend.storm.api.StormModel;
 import com.craftmend.storm.api.enums.ColumnType;
@@ -6,6 +6,9 @@ import com.craftmend.storm.api.markers.Column;
 import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import nl.openminetopia.modules.color.models.ColorModel;
+import nl.openminetopia.modules.fitness.models.FitnessModel;
+import nl.openminetopia.modules.prefix.models.PrefixModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,13 @@ public class PlayerModel extends StormModel {
     )
     private List<PrefixModel> prefixes = new ArrayList<>();
 
+    @Column(
+            type = ColumnType.ONE_TO_MANY,
+            references = FitnessModel.class,
+            matchTo = "player_id"
+    )
+    private List<FitnessModel> fitness = new ArrayList<>();
+
     @Column(name = "active_prefix_id")
     private Integer activePrefixId;
 
@@ -54,7 +64,7 @@ public class PlayerModel extends StormModel {
     @Column(name = "active_levelcolor_id")
     private Integer activeLevelColorId;
 
-    @Column(name = "staffchat")
+    @Column(name = "staffchat", defaultValue = "false")
     private Boolean staffchatEnabled;
 
     @Column(name = "command_spy_enabled", defaultValue = "false")

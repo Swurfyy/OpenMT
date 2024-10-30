@@ -25,9 +25,9 @@ public class DataModule extends Module {
 
     @Override
     public void disable() {
-        if (adapter != null) {
-            adapter.disconnect();
-        }
+//        if (adapter != null) {
+//            adapter.disconnect();
+//        }
     }
 
 }

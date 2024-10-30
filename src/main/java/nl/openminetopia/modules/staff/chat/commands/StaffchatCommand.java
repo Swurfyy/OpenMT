@@ -6,7 +6,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Optional;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.OnlineMinetopiaPlayer;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -17,7 +17,7 @@ public class StaffchatCommand extends BaseCommand {
     @Default
     @CommandPermission("openminetopia.staffchat")
     public void onStaffchat(Player player, @Optional String message) {
-        OnlineMinetopiaPlayer minetopiaPlayer = (OnlineMinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
+        MinetopiaPlayer minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
         if (message == null) {

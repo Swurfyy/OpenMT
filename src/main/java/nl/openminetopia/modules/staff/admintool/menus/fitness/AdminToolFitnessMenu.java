@@ -5,10 +5,10 @@ import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
-import nl.openminetopia.api.player.fitness.statistics.types.*;
+import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.staff.admintool.menus.AdminToolInfoMenu;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
@@ -33,9 +33,9 @@ public class AdminToolFitnessMenu extends Menu {
 
         FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
 
-        DrinkingStatistic drinkingStatistic = (DrinkingStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
+        FitnessStatisticModel drinkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
         ItemBuilder drinkingItemBuilder = new ItemBuilder(Material.POTION)
-                .setName("<gold>Drinken " + drinkingStatistic.getFitnessGained() + "/" + drinkingStatistic.getMaxFitnessGainable())
+                .setName("<gold>Drinken " + drinkingStatistic.getFitnessGained() + "/" + drinkingStatistic.getMaximum())
                 .addLoreLine(" ")
                 .addLoreLine("<gold>Precieze score: <yellow>" + drinkingStatistic.getPoints())
                 .addLoreLine(" ")
@@ -46,9 +46,9 @@ public class AdminToolFitnessMenu extends Menu {
         Icon targetDrinkingIcon = new Icon(9, drinkingItemBuilder.toItemStack(), event -> event.setCancelled(true));
         this.addItem(targetDrinkingIcon);
 
-        HealthStatistic healthStatistic = (HealthStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.HEALTH);
+        FitnessStatisticModel healthStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.HEALTH);
         ItemBuilder healthItemBuilder = new ItemBuilder(Material.APPLE)
-                .setName("<gold>Fatsoenlijk eten " + healthStatistic.getFitnessGained() + "/" + healthStatistic.getMaxFitnessGainable())
+                .setName("<gold>Fatsoenlijk eten " + healthStatistic.getFitnessGained() + "/" + healthStatistic.getMaximum())
                 .addLoreLine(" ")
                 .addLoreLine("<gold>Precieze score: <yellow>" + healthStatistic.getPoints())
                 .addLoreLine(" ")
@@ -65,13 +65,13 @@ public class AdminToolFitnessMenu extends Menu {
         Icon targetHealthIcon = new Icon(10, healthItemBuilder.toItemStack(), event -> event.setCancelled(true));
         this.addItem(targetHealthIcon);
 
-        EatingStatistic eatingStatistic = (EatingStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
+        FitnessStatisticModel eatingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
 
         ItemBuilder foodItemBuilder = new ItemBuilder(Material.GOLDEN_APPLE)
-                .setName("<gold>Eten " + eatingStatistic.getFitnessGained() + "/" + eatingStatistic.getMaxFitnessGainable())
+                .setName("<gold>Eten " + eatingStatistic.getFitnessGained() + "/" + eatingStatistic.getMaximum())
                 .addLoreLine(" ")
-                .addLoreLine("<gold>Luxe eten genuttigd: <yellow>" + eatingStatistic.getLuxuryFood())
-                .addLoreLine("<gold>Goedkoop eten genuttigd: <yellow>" + eatingStatistic.getCheapFood())
+                .addLoreLine("<gold>Luxe eten genuttigd: <yellow>" + eatingStatistic.getTertiaryPoints().intValue())
+                .addLoreLine("<gold>Goedkoop eten genuttigd: <yellow>" + eatingStatistic.getSecondaryPoints().intValue())
                 .addLoreLine(" ")
                 .addLoreLine("<dark_purple>Luxe eten:")
                 .addLoreLine("<light_purple>" + configuration.getLuxuryFood().toString().replace("[", "").replace("]", ""))
@@ -86,69 +86,75 @@ public class AdminToolFitnessMenu extends Menu {
         Icon targetFoodIcon = new Icon(11, foodItemBuilder.toItemStack(), event -> event.setCancelled(true));
         this.addItem(targetFoodIcon);
 
-        ClimbingStatistic climbingStatistic = (ClimbingStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.CLIMBING);
+        FitnessStatisticModel climbingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.CLIMBING);
         ItemBuilder climbingItemBuilder = new ItemBuilder(Material.LADDER)
-                .setName("<gold>Klimmen " + climbingStatistic.getFitnessGained() + "/" + climbingStatistic.getMaxFitnessGainable())
+                .setName("<gold>Klimmen " + climbingStatistic.getFitnessGained() + "/" + climbingStatistic.getMaximum())
                 .addLoreLine(" ")
-                .addLoreLine("<gold>Kilometers geklommen: <yellow>" + (minetopiaPlayer.getBukkit().getStatistic(Statistic.CLIMB_ONE_CM) / 1000))
+                .addLoreLine("<gold>Kilometers geklommen: <yellow>"
+                        + (minetopiaPlayer.getBukkit().getStatistic(Statistic.CLIMB_ONE_CM) / 1000))
                 .addLoreLine(" ")
-                .addLoreLine("<dark_purple>Spelers krijgen <light_purple>1 <dark_purple>punt per <light_purple>" + (configuration.getCmPerClimbingPoint() / 1000) + " <dark_purple>kilometer klimmen.")
+                .addLoreLine("<dark_purple>Spelers krijgen <light_purple>1 <dark_purple>punt per <light_purple>"
+                        + (configuration.getCmPerClimbingLevel() / 1000) + " <dark_purple>kilometer klimmen.")
                 .addLoreLine(" ");
 
         Icon targetClimbingIcon = new Icon(12, climbingItemBuilder.toItemStack(), event -> event.setCancelled(true));
         this.addItem(targetClimbingIcon);
 
-        FlyingStatistic flyingStatistic = (FlyingStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.FLYING);
+        FitnessStatisticModel flyingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.FLYING);
         ItemBuilder flyingItemBuilder = new ItemBuilder(Material.ELYTRA)
-                .setName("<gold>Vliegen " + flyingStatistic.getFitnessGained() + "/" + flyingStatistic.getMaxFitnessGainable())
+                .setName("<gold>Vliegen " + flyingStatistic.getFitnessGained() + "/" + flyingStatistic.getMaximum())
                 .addLoreLine(" ")
                 .addLoreLine("<gold>Kilometers gevlogen: <yellow>" + (minetopiaPlayer.getBukkit().getStatistic(Statistic.AVIATE_ONE_CM) / 1000))
                 .addLoreLine(" ")
-                .addLoreLine("<dark_purple>Spelers krijgen <light_purple>1 <dark_purple>punt per <light_purple>" + (configuration.getCmPerFlyingPoint() / 1000) + " <dark_purple>kilometer vliegen.")
+                .addLoreLine("<dark_purple>Spelers krijgen <light_purple>1 <dark_purple>punt per <light_purple>"
+                        + (configuration.getCmPerFlyingLevel() / 1000) + " <dark_purple>kilometer vliegen.")
                 .addLoreLine(" ");
 
         Icon targetFlyingIcon = new Icon(13, flyingItemBuilder.toItemStack(), event -> event.setCancelled(true));
         this.addItem(targetFlyingIcon);
 
-        WalkingStatistic walkingStatistic = (WalkingStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.WALKING);
+        FitnessStatisticModel walkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.WALKING);
         ItemBuilder walkingItemBuilder = new ItemBuilder(Material.LEATHER_BOOTS)
-                .setName("<gold>Lopen " + walkingStatistic.getFitnessGained() + "/" + walkingStatistic.getMaxFitnessGainable())
+                .setName("<gold>Lopen " + walkingStatistic.getFitnessGained() + "/" + walkingStatistic.getMaximum())
                 .addLoreLine(" ")
                 .addLoreLine("<gold>Kilometers gelopen: <yellow>" + (minetopiaPlayer.getBukkit().getStatistic(Statistic.WALK_ONE_CM) / 1000))
                 .addLoreLine(" ")
-                .addLoreLine("<dark_purple>Spelers krijgen <light_purple>1 <dark_purple>punt per <light_purple>" + (configuration.getCmPerWalkingPoint() / 1000) + " <dark_purple>kilometer lopen.")
+                .addLoreLine("<dark_purple>Spelers krijgen <light_purple>1 <dark_purple>punt per <light_purple>"
+                        + (configuration.getCmPerWalkingLevel() / 1000) + " <dark_purple>kilometer lopen.")
                 .addLoreLine(" ");
 
         Icon targetWalkingIcon = new Icon(14, walkingItemBuilder.toItemStack(), event -> event.setCancelled(true));
         this.addItem(targetWalkingIcon);
 
-        SwimmingStatistic swimmingStatistic = (SwimmingStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.SWIMMING);
+        FitnessStatisticModel swimmingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.SWIMMING);
         ItemBuilder swimmingItemBuilder = new ItemBuilder(Material.OAK_BOAT)
-                .setName("<gold>Zwemmen " + swimmingStatistic.getFitnessGained() + "/" + swimmingStatistic.getMaxFitnessGainable())
+                .setName("<gold>Zwemmen " + swimmingStatistic.getFitnessGained() + "/" + swimmingStatistic.getMaximum())
                 .addLoreLine(" ")
                 .addLoreLine("<gold>Kilometers gezwommen: <yellow>" + (minetopiaPlayer.getBukkit().getStatistic(Statistic.SWIM_ONE_CM) / 1000))
                 .addLoreLine(" ")
-                .addLoreLine("<dark_purple>Spelers krijgen <light_purple>1 <dark_purple>punt per <light_purple>" + (configuration.getCmPerWalkingPoint() / 1000) + " <dark_purple>kilometer zwemmen.")
+                .addLoreLine("<dark_purple>Spelers krijgen <light_purple>1 <dark_purple>punt per <light_purple>"
+                        + (configuration.getCmPerSwimmingLevel() / 1000) + " <dark_purple>kilometer zwemmen.")
                 .addLoreLine(" ");
 
         Icon targetSwimmingIcon = new Icon(15, swimmingItemBuilder.toItemStack(), event -> event.setCancelled(true));
         this.addItem(targetSwimmingIcon);
 
-        SprintingStatistic sprintingStatistic = (SprintingStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.SPRINTING);
+        FitnessStatisticModel sprintingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.SPRINTING);
         ItemBuilder sprintingItemBuilder = new ItemBuilder(Material.DIAMOND_BOOTS)
-                .setName("<gold>Rennen " + sprintingStatistic.getFitnessGained() + "/" + sprintingStatistic.getMaxFitnessGainable())
+                .setName("<gold>Rennen " + sprintingStatistic.getFitnessGained() + "/" + sprintingStatistic.getMaximum())
                 .addLoreLine(" ")
                 .addLoreLine("<gold>Kilometers gerend: <yellow>" + (minetopiaPlayer.getBukkit().getStatistic(Statistic.SPRINT_ONE_CM) / 1000))
                 .addLoreLine(" ")
-                .addLoreLine("<dark_purple>Spelers krijgen <light_purple>1 <dark_purple>punt per <light_purple>" + (configuration.getCmPerSprintingPoint() / 1000) + " <dark_purple>kilometer rennen.")
+                .addLoreLine("<dark_purple>Spelers krijgen <light_purple>1 <dark_purple>punt per <light_purple>"
+                        + (configuration.getCmPerSprintingLevel() / 1000) + " <dark_purple>kilometer rennen.")
                 .addLoreLine(" ");
 
         Icon targetSprintingIcon = new Icon(16, sprintingItemBuilder.toItemStack(), event -> event.setCancelled(true));
         this.addItem(targetSprintingIcon);
 
-        TotalStatistic totalStatistic = (TotalStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.TOTAL);
         ItemBuilder totalItemBuilder = new ItemBuilder(Material.PAPER)
-                .setName("<gold>Totaal: <yellow>" + totalStatistic.getFitnessGained() + "<gold>/<yellow>" + totalStatistic.getMaxFitnessGainable())
+                .setName("<gold>Totaal: <yellow>" + minetopiaPlayer.getFitness().getTotalFitness()
+                        + "<gold>/<yellow>" + OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel())
                 .addLoreLine(" ")
                 .addLoreLine("<gold>Klik om de <yellow>fitness boosters <gold>te bekijken.");
 

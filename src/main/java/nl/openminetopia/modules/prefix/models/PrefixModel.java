@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.data.storm.models;
+package nl.openminetopia.modules.prefix.models;
 
 import com.craftmend.storm.api.StormModel;
 import com.craftmend.storm.api.enums.KeyType;
@@ -6,6 +6,7 @@ import com.craftmend.storm.api.markers.Column;
 import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import nl.openminetopia.modules.player.models.PlayerModel;
 
 @Data
 @EqualsAndHashCode(callSuper=false)

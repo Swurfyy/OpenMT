@@ -2,9 +2,9 @@ package nl.openminetopia.modules.player.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.OnlineMinetopiaPlayer;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
-import nl.openminetopia.modules.data.storm.models.BankAccountModel;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -22,7 +22,7 @@ public class PlayerQuitListener implements Listener {
         bankingModule.getBankAccountModels().remove(accountModel);
         accountModel.getSavingTask().saveAndCancel();
 
-        OnlineMinetopiaPlayer minetopiaPlayer = (OnlineMinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
         minetopiaPlayer.save().whenComplete((unused, throwable) -> {
@@ -32,8 +32,6 @@ public class PlayerQuitListener implements Listener {
             }
             OpenMinetopia.getInstance().getLogger().info("Saved player data for " + player.getName());
         });
-//        PlayerModel playerModel = minetopiaPlayer.getPlayerModel();
-//        StormDatabase.getInstance().saveStormModel(playerModel);
 
         minetopiaPlayer.getFitness().getRunnable().cancel();
         minetopiaPlayer.getPlaytimeRunnable().cancel();

@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.data.storm.models;
+package nl.openminetopia.modules.color.models;
 
 import com.craftmend.storm.api.StormModel;
 import com.craftmend.storm.api.enums.KeyType;
@@ -6,6 +6,8 @@ import com.craftmend.storm.api.markers.Column;
 import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import nl.openminetopia.modules.color.enums.OwnableColorType;
+import nl.openminetopia.modules.player.models.PlayerModel;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -22,7 +24,7 @@ public class ColorModel extends StormModel {
     private String colorId;
 
     @Column(name = "type")
-    private String type;
+    private OwnableColorType type;
 
     @Column(name = "expires_at")
     private Long expiresAt;

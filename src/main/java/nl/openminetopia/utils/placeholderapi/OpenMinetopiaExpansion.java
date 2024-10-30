@@ -3,10 +3,9 @@ package nl.openminetopia.utils.placeholderapi;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
-import nl.openminetopia.modules.data.storm.models.BankAccountModel;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +54,7 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
             return minetopiaPlayer.getPlace().getTemperature() + "";
         }
 
-        if(params.startsWith("balance")) {
+        if (params.startsWith("balance")) {
             BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
             BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
             if(accountModel == null) return null;
@@ -68,11 +67,11 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
         }
 
         if (params.equalsIgnoreCase("fitness")) {
-            return minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.TOTAL).getFitnessGained() + "";
+            return minetopiaPlayer.getFitness().getTotalFitness() + "";
         }
 
         if (params.equalsIgnoreCase("max_fitness")) {
-            return minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.TOTAL).getMaxFitnessGainable() + "";
+            return OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel() + "";
         }
 
         return null; //

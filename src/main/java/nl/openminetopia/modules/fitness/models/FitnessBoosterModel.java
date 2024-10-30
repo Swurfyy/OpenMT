@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.data.storm.models;
+package nl.openminetopia.modules.fitness.models;
 
 import com.craftmend.storm.api.StormModel;
 import com.craftmend.storm.api.enums.KeyType;
@@ -18,9 +18,13 @@ public class FitnessBoosterModel extends StormModel {
     )
     private Integer fitnessId;
 
-    @Column(name = "fitness", defaultValue = "0")
-    private Integer fitness;
+    @Column(name = "amount", defaultValue = "0")
+    private Integer amount;
 
     @Column(name = "expires_at")
     private Long expiresAt;
+
+    public boolean isExpired() {
+        return expiresAt != -1 && System.currentTimeMillis() >= expiresAt;
+    }
 }

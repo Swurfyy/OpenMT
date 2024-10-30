@@ -2,12 +2,10 @@ package nl.openminetopia.modules.fitness.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.fitness.objects.Fitness;
-import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
-import nl.openminetopia.api.player.fitness.statistics.types.DrinkingStatistic;
+import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,7 +37,7 @@ public class PlayerDrinkListener implements Listener {
             return;
         }
 
-        DrinkingStatistic drinkingStatistic = (DrinkingStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
+        FitnessStatisticModel drinkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
 
         double currentDrinkingPoints = drinkingStatistic.getPoints(); // Huidige drink punten
         double drinkingPointsPerBottle = configuration.getDrinkingPointsPerWaterBottle();
@@ -60,7 +58,9 @@ public class PlayerDrinkListener implements Listener {
 
         if (drinkingStatistic.getPoints() >= 1 && drinkingStatistic.getFitnessGained() <= configuration.getMaxFitnessByDrinking()) {
             drinkingStatistic.setFitnessGained(drinkingStatistic.getFitnessGained() + 1);
-            drinkingStatistic.setPoints(0);
+            drinkingStatistic.setPoints(0.0);
         }
+
+        minetopiaPlayer.getFitness().setStatistic(FitnessStatisticType.DRINKING, drinkingStatistic);
     }
 }

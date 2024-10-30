@@ -4,8 +4,8 @@ import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.fitness.objects.FitnessBooster;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Material;
@@ -29,7 +29,7 @@ public class AdminToolFitnessBoostersMenu extends PaginatedMenu {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer);
         if (minetopiaPlayer == null) return;
 
-        for (FitnessBooster booster : minetopiaPlayer.getFitness().getBoosters()) {
+        for (FitnessBoosterModel booster : minetopiaPlayer.getFitness().getBoosters()) {
             ItemBuilder icon = new ItemBuilder(Material.POTION)
                     .setName("<gold>Booster")
                     .addLoreLine(" ")

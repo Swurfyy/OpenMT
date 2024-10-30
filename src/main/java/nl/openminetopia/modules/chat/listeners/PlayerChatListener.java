@@ -3,7 +3,7 @@ package nl.openminetopia.modules.chat.listeners;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.OnlineMinetopiaPlayer;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.chat.utils.SpyUtils;
 import nl.openminetopia.utils.ChatUtils;
@@ -23,7 +23,7 @@ public class PlayerChatListener implements Listener {
     @EventHandler
     public void onPlayerChat(AsyncChatEvent event) {
         Player source = event.getPlayer();
-        OnlineMinetopiaPlayer minetopiaPlayer = (OnlineMinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(source);
+        MinetopiaPlayer minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(source);
         if (minetopiaPlayer == null) return;
 
         if (!minetopiaPlayer.isInPlace()) return;
