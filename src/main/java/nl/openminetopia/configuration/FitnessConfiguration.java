@@ -3,7 +3,7 @@ package nl.openminetopia.configuration;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.modules.fitness.objects.FitnessLevel;
+import nl.openminetopia.modules.fitness.objects.FitnessLevelEffect;
 import nl.openminetopia.utils.ConfigurateConfig;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
@@ -22,32 +22,35 @@ public class FitnessConfiguration extends ConfigurateConfig {
     private final int maxFitnessByDrinking;
     private final double drinkingPointsPerPotion;
     private final double drinkingPointsPerWaterBottle;
-    private final int drinkingPointsPerFitnessPoint;
+    private final int drinkingPointsPerFitnessLevel;
     private final int drinkingCooldown;
 
-    private final int maxFitnessByWalking;
-    private final int cmPerWalkingPoint;
+    private final int maxFitnessByHealth;
+    private final int healthCheckInterval;
+    private final double pointsAbove9Hearts;
+    private final double pointsBelow5Hearts;
+    private final double pointsBelow2Hearts;
+    private final double healthPointsPerFitnessLevel;
 
-    private final int maxFitnessByClimbing;
-    private final int cmPerClimbingPoint;
+    private final int maxFitnessByWalking;
+    private final int cmPerWalkingLevel;
 
     private final int maxFitnessBySprinting;
-    private final int cmPerSprintingPoint;
+    private final int cmPerSprintingLevel;
+
+    private final int maxFitnessByClimbing;
+    private final int cmPerClimbingLevel;
 
     private final int maxFitnessBySwimming;
-    private final int cmPerSwimmingPoint;
+    private final int cmPerSwimmingLevel;
 
     private final int maxFitnessByFlying;
-    private final int cmPerFlyingPoint;
-
-    private final int maxFitnessByHealth;
-    private final int pointsAbove9Hearts;
-    private final int pointsBelow5Hearts;
-    private final int pointsBelow2Hearts;
+    private final int cmPerFlyingLevel;
 
     private final int maxFitnessByEating;
     private final double pointsForLuxuryFood;
     private final double pointsForCheapFood;
+    private final double eatingPointsPerFitnessLevel;
     private final List<String> cheapFood;
     private final List<String> luxuryFood;
 
@@ -57,94 +60,81 @@ public class FitnessConfiguration extends ConfigurateConfig {
 
     private final boolean rainSlowdownEnabled;
 
-    private final Map<String, FitnessLevel> fitnessLevels = new HashMap<>();
+    private final Map<Integer, FitnessLevelEffect> levelEffects = new HashMap<>();
 
     @SneakyThrows
     public FitnessConfiguration(File file) {
         super(file, "fitness.yml", "default-fitness.yml");
 
-        this.maxFitnessLevel = rootNode.node("fitness", "maxFitnessLevel").getInt(225);
-        this.defaultFitnessLevel = rootNode.node("fitness", "defaultFitnessLevel").getInt(20);
+        this.maxFitnessLevel = rootNode.node("fitness", "max-fitness-level").getInt(225);
+        this.defaultFitnessLevel = rootNode.node("fitness", "default-fitness-level").getInt(20);
+        this.rainSlowdownEnabled = rootNode.node("fitness", "rain-slowdown-enabled").getBoolean(false);
 
-        this.maxFitnessByDrinking = rootNode.node("fitness", "drinking", "maxFitnessByDrinking").getInt(20);
-        this.drinkingPointsPerPotion = rootNode.node("fitness", "drinking", "drinkingPointsPerPotion").getDouble(0.05);
-        this.drinkingPointsPerWaterBottle = rootNode.node("fitness", "drinking", "drinkingPointsPerWaterBottle").getDouble(0.02);
-        this.drinkingPointsPerFitnessPoint = rootNode.node("fitness", "drinking", "drinkingPointsPerFitnessPoint").getInt(1);
-        this.drinkingCooldown = rootNode.node("fitness", "drinking", "drinkingCooldown").getInt(5);
+        ConfigurationNode drinkingNode = rootNode.node("fitness", "statistics", "drinking");
+        this.maxFitnessByDrinking = drinkingNode.node("max-fitness").getInt(20);
+        this.drinkingPointsPerPotion = drinkingNode.node("points-per-potion").getDouble(0.05);
+        this.drinkingPointsPerWaterBottle = drinkingNode.node("points-per-water-bottle").getDouble(0.02);
+        this.drinkingPointsPerFitnessLevel = drinkingNode.node("points-per-fitness-level").getInt(1);
+        this.drinkingCooldown = drinkingNode.node("drinking-cooldown").getInt(5);
 
-        this.maxFitnessByWalking = rootNode.node("fitness", "statistics", "maxFitnessByWalking").getInt(30);
-        this.cmPerWalkingPoint = rootNode.node("fitness", "statistics", "cmPerWalkingPoint").getInt(1000000);
+        ConfigurationNode healthNode = rootNode.node("fitness", "statistics", "health");
+        this.maxFitnessByHealth = healthNode.node("max-fitness").getInt(10);
+        this.healthCheckInterval = healthNode.node("check-interval").getInt(3600);
+        this.pointsAbove9Hearts = healthNode.node("points-above-9-hearts").getDouble(0.08);
+        this.pointsBelow5Hearts = healthNode.node("points-below-5-hearts").getDouble(-0.066);
+        this.pointsBelow2Hearts = healthNode.node("points-below-2-hearts").getDouble(-0.1);
+        this.healthPointsPerFitnessLevel = healthNode.node("points-per-health-level").getDouble(1.0);
 
-        this.maxFitnessBySprinting = rootNode.node("fitness", "statistics", "maxFitnessBySprinting").getInt(40);
-        this.cmPerSprintingPoint = rootNode.node("fitness", "statistics", "cmPerSprintingPoint").getInt(2000000);
+        ConfigurationNode eatingNode = rootNode.node("fitness", "statistics", "eating");
+        this.maxFitnessByEating = eatingNode.node("max-fitness").getInt(20);
+        this.pointsForLuxuryFood = eatingNode.node("points-for-luxury-food").getDouble(0.05);
+        this.pointsForCheapFood = eatingNode.node("points-for-cheap-food").getDouble(0.02);
+        this.eatingPointsPerFitnessLevel = eatingNode.node("points-per-fitness-level").getDouble(1.0);
+        this.luxuryFood = eatingNode.node("food-items", "luxury").getList(String.class, List.of("COOKED_BEEF", "MUSHROOM_STEW", "COOKED_PORKCHOP", "COOKED_SALMON", "COOKED_COD", "BAKED_POTATO", "COOKED_RABBIT"));
+        this.cheapFood = eatingNode.node("food-items", "cheap").getList(String.class, List.of("APPLE", "BREAD", "MELON_BLOCK", "RAW_FISH", "COOKED_CHICKEN", "COOKED_MUTTON", "COOKIE"));
 
-        this.maxFitnessByClimbing = rootNode.node("fitness", "statistics", "maxFitnessByClimbing").getInt(30);
-        this.cmPerClimbingPoint = rootNode.node("fitness", "statistics", "cmPerClimbingPoint").getInt(500000);
+        ConfigurationNode statisticsNode = rootNode.node("fitness", "statistics");
+        this.maxFitnessByWalking = statisticsNode.node("walking", "max-fitness").getInt(30);
+        this.cmPerWalkingLevel = statisticsNode.node("walking", "cm-per-level").getInt(1000000);
 
-        this.maxFitnessBySwimming = rootNode.node("fitness", "statistics", "maxFitnessBySwimming").getInt(30);
-        this.cmPerSwimmingPoint = rootNode.node("fitness", "statistics", "cmPerSwimmingPoint").getInt(600000);
+        this.maxFitnessBySprinting = statisticsNode.node("sprinting", "max-fitness").getInt(40);
+        this.cmPerSprintingLevel = statisticsNode.node("sprinting", "cm-per-level").getInt(2000000);
 
-        this.maxFitnessByFlying = rootNode.node("fitness", "statistics", "maxFitnessByFlying").getInt(30);
-        this.cmPerFlyingPoint = rootNode.node("fitness", "statistics", "cmPerFlyingPoint").getInt(3000000);
+        this.maxFitnessByClimbing = statisticsNode.node("climbing", "max-fitness").getInt(30);
+        this.cmPerClimbingLevel = statisticsNode.node("climbing", "cm-per-level").getInt(500000);
 
-        this.maxFitnessByHealth = rootNode.node("fitness", "health", "maxFitnessByHealth").getInt(10);
-        this.pointsAbove9Hearts = rootNode.node("fitness", "health", "pointsAbove9Hearts").getInt(60);
-        this.pointsBelow5Hearts = rootNode.node("fitness", "health", "pointsBelow5Hearts").getInt(-50);
-        this.pointsBelow2Hearts = rootNode.node("fitness", "health", "pointsBelow2Hearts").getInt(-75);
+        this.maxFitnessBySwimming = statisticsNode.node("swimming", "max-fitness").getInt(30);
+        this.cmPerSwimmingLevel = statisticsNode.node("swimming", "cm-per-level").getInt(600000);
 
-        this.maxFitnessByEating = rootNode.node("fitness", "eating", "maxFitnessByEating").getInt(20);
-        this.pointsForLuxuryFood = rootNode.node("fitness", "eating", "pointsForLuxuryFood").getDouble(5);
-        this.pointsForCheapFood = rootNode.node("fitness", "eating", "pointsForCheapFood").getDouble(2);
-        this.luxuryFood = rootNode.node("fitness", "eating", "luxuryFood").getList(String.class, List.of("COOKED_BEEF", "MUSHROOM_STEW", "COOKED_PORKCHOP", "COOKED_SALMON", "COOKED_COD", "BAKED_POTATO", "COOKED_RABBIT"));
-        this.cheapFood = rootNode.node("fitness", "eating", "cheapFood").getList(String.class, List.of("APPLE", "BREAD", "MELON_BLOCK", "RAW_FISH", "COOKED_CHICKEN", "COOKED_MUTTON", "COOKIE"));
+        this.maxFitnessByFlying = statisticsNode.node("flying", "max-fitness").getInt(30);
+        this.cmPerFlyingLevel = statisticsNode.node("flying", "cm-per-level").getInt(3000000);
 
-        this.fitnessDeathPunishmentDuration = rootNode.node("fitness", "deathPunishment", "duration").getInt(1440);
-        this.fitnessDeathPunishmentEnabled = rootNode.node("fitness", "deathPunishment", "enabled").getBoolean(true);
-        this.fitnessDeathPunishmentAmount = rootNode.node("fitness", "deathPunishment", "amount").getInt(-20);
+        ConfigurationNode deathPunishmentNode = rootNode.node("fitness", "death-punishment");
+        this.fitnessDeathPunishmentEnabled = deathPunishmentNode.node("enabled").getBoolean(true);
+        this.fitnessDeathPunishmentAmount = deathPunishmentNode.node("amount").getInt(-20);
+        this.fitnessDeathPunishmentDuration = deathPunishmentNode.node("duration").getInt(1440);
 
-// Use LinkedHashMap to keep the order of the fitness levels in the configuration
-//
-//
-//        Map<String, FitnessLevel> defaultFitnessLevels = new LinkedHashMap<>();
-//        defaultFitnessLevels.put("1-9", new FitnessLevel(0.1, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("10-19", new FitnessLevel(0.12, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("20-29", new FitnessLevel(0.15, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("30-39", new FitnessLevel(0.16, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("40-49", new FitnessLevel(0.17, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("50-59", new FitnessLevel(0.19, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("60-69", new FitnessLevel(0.19, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("70-79", new FitnessLevel(0.2, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("80-99", new FitnessLevel(0.22, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("100-119", new FitnessLevel(0.235, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("120-139", new FitnessLevel(0.25, List.of("JUMP_BOOST:0")));
-//        defaultFitnessLevels.put("140-159", new FitnessLevel(0.27, List.of("JUMP_BOOST:1")));
-//        defaultFitnessLevels.put("160-179", new FitnessLevel(0.29, List.of("JUMP_BOOST:2")));
-//        defaultFitnessLevels.put("180-199", new FitnessLevel(0.31, List.of("JUMP_BOOST:2")));
-//        defaultFitnessLevels.put("200-209", new FitnessLevel(0.325, List.of("JUMP_BOOST:3")));
-//        defaultFitnessLevels.put("210-225", new FitnessLevel(0.335, List.of("JUMP_BOOST:3")));
-//
-//
-//        for (Map.Entry<String, FitnessLevel> fitnessLevelMap : defaultFitnessLevels.entrySet()) {
-//            ConfigurationNode levelNode = fitnessNode.node(fitnessLevelMap.getKey());
-//
-//            FitnessLevel value = fitnessLevelMap.getValue();
-//
-//            levelNode.node("effects").getList(String.class, value.getEffects());
-//            levelNode.node("walkSpeed").getDouble(value.getWalkSpeed());
-//        }
-        ConfigurationNode fitnessNode = this.rootNode.node("fitness", "levels");
-
-        fitnessNode.childrenMap().forEach((key, val) -> {
+        ConfigurationNode levelNode = rootNode.node("fitness", "levels");
+        levelNode.childrenMap().forEach((key, val) -> {
             try {
-                String level = key.toString();
-                FitnessLevel fitnessLevel = new FitnessLevel(val.node("walkSpeed").getDouble(0.1), val.node("effects").getList(String.class, List.of("JUMP_BOOST:1", "LEVITATION:1")));
-                this.fitnessLevels.put(level, fitnessLevel);
+                String[] range = key.toString().split("-");
+                int minLevel = Integer.parseInt(range[0]);
+                int maxLevel = Integer.parseInt(range[1]);
+
+                FitnessLevelEffect fitnessLevelEffect = new FitnessLevelEffect(
+                        val.node("walk-speed").getDouble(0.1),
+                        val.node("effects").getList(String.class, List.of("JUMP_BOOST:1"))
+                );
+
+                for (int i = minLevel; i <= maxLevel; i++) {
+                    this.levelEffects.put(i, fitnessLevelEffect);
+                }
             } catch (SerializationException e) {
                 OpenMinetopia.getInstance().getLogger().severe("An error occurred while loading the fitness levels.");
                 e.printStackTrace();
+            } catch (NumberFormatException e) {
+                OpenMinetopia.getInstance().getLogger().severe("Invalid level range format in configuration: " + key);
             }
         });
-
-        this.rainSlowdownEnabled = rootNode.node("fitness", "rainSlowdownEnabled").getBoolean(false);
     }
 }

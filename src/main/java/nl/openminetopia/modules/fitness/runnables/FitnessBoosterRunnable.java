@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.fitness.runnables;
 
-import nl.openminetopia.api.player.fitness.objects.Fitness;
+import nl.openminetopia.api.player.fitness.Fitness;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class FitnessBoosterRunnable extends BukkitRunnable {
@@ -13,7 +13,7 @@ public class FitnessBoosterRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        fitness.getBoosters().forEach(booster -> {
+        fitness.getFitnessModel().getBoosters().forEach(booster -> {
             boolean triggerUpdate = false;
             if (booster.isExpired()) {
                 fitness.removeBooster(booster);

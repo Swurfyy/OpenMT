@@ -101,23 +101,4 @@ public class PlayerModule extends Module {
 
         return completableFuture;
     }
-
-    public CompletableFuture<Void> savePlayer(PlayerModel playerModel) {
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        StormUtils.updateModelData(PlayerModel.class,
-                query -> query.where("uuid", Where.EQUAL, playerModel.getUniqueId()),
-                model -> {
-                    model.setLevel(playerModel.getLevel());
-                    model.setActivePrefixId(playerModel.getActivePrefixId());
-                    model.setActivePrefixColorId(playerModel.getActivePrefixColorId());
-                    model.setActiveChatColorId(playerModel.getActiveChatColorId());
-                    model.setActiveNameColorId(playerModel.getActiveNameColorId());
-                    model.setActiveLevelColorId(playerModel.getActiveLevelColorId());
-                    model.setPlaytime(playerModel.getPlaytime());
-                    model.setStaffchatEnabled(playerModel.getStaffchatEnabled());
-                }
-        );
-        future.complete(null);
-        return future;
-    }
 }

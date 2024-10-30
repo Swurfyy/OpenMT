@@ -3,8 +3,8 @@ package nl.openminetopia.modules.fitness.commands.subcommands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.fitness.objects.FitnessBooster;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -14,7 +14,7 @@ public class FitnessBoosterCommand extends BaseCommand {
     @Subcommand("booster")
     @CommandPermission("openminetopia.fitness.booster")
     @CommandCompletion("@players")
-    public void onBooster(Player player, OfflinePlayer offlinePlayer, int amount, @Optional Integer expiresAt) {
+    public void booster(Player player, OfflinePlayer offlinePlayer, int amount, @Optional Integer expiresAt) {
         if (offlinePlayer.getPlayer() == null) return;
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer.getPlayer());
         if (minetopiaPlayer == null) return;
@@ -22,8 +22,9 @@ public class FitnessBoosterCommand extends BaseCommand {
         if (expiresAt == null || expiresAt <= 0) expiresAt = -1;
         long expiresAtMillis = expiresAt == -1 ? -1 : System.currentTimeMillis() + (expiresAt * 1000);
 
-
-        FitnessBooster fitnessBooster = new FitnessBooster(amount, expiresAtMillis);
+        FitnessBoosterModel fitnessBooster = new FitnessBoosterModel();
+        fitnessBooster.setAmount(amount);
+        fitnessBooster.setExpiresAt(expiresAtMillis);
         minetopiaPlayer.getFitness().addBooster(fitnessBooster);
         
         player.sendMessage("Added fitness booster to " + offlinePlayer.getName());

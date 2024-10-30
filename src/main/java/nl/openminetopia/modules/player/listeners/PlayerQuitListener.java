@@ -22,7 +22,7 @@ public class PlayerQuitListener implements Listener {
         bankingModule.getBankAccountModels().remove(accountModel);
         accountModel.getSavingTask().saveAndCancel();
 
-        MinetopiaPlayer minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
         minetopiaPlayer.save().whenComplete((unused, throwable) -> {
@@ -32,8 +32,6 @@ public class PlayerQuitListener implements Listener {
             }
             OpenMinetopia.getInstance().getLogger().info("Saved player data for " + player.getName());
         });
-//        PlayerModel playerModel = minetopiaPlayer.getPlayerModel();
-//        StormDatabase.getInstance().saveStormModel(playerModel);
 
         minetopiaPlayer.getFitness().getRunnable().cancel();
         minetopiaPlayer.getPlaytimeRunnable().cancel();

@@ -18,9 +18,13 @@ public class FitnessBoosterModel extends StormModel {
     )
     private Integer fitnessId;
 
-    @Column(name = "fitness", defaultValue = "0")
-    private Integer fitness;
+    @Column(name = "amount", defaultValue = "0")
+    private Integer amount;
 
     @Column(name = "expires_at")
     private Long expiresAt;
+
+    public boolean isExpired() {
+        return expiresAt != -1 && System.currentTimeMillis() >= expiresAt;
+    }
 }

@@ -2,8 +2,10 @@ package nl.openminetopia.modules.fitness.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.fitness.objects.FitnessBooster;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -12,16 +14,19 @@ public class PlayerDeathListener implements Listener {
 
     @EventHandler
     public void playerDeath(final PlayerDeathEvent event) {
-        var configuration = OpenMinetopia.getFitnessConfiguration();
+        FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
         if (!configuration.isFitnessDeathPunishmentEnabled()) return;
 
-        var player = event.getEntity();
-        var minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
+        Player player = event.getEntity();
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
         int punishmentInMillis = configuration.getFitnessDeathPunishmentDuration() * 60 * 1000;
 
-        var fitnessBooster = new FitnessBooster(configuration.getFitnessDeathPunishmentAmount(), System.currentTimeMillis() + punishmentInMillis);
+        FitnessBoosterModel fitnessBooster = new FitnessBoosterModel();
+        fitnessBooster.setAmount(configuration.getFitnessDeathPunishmentAmount());
+        fitnessBooster.setExpiresAt(System.currentTimeMillis() + punishmentInMillis);
+
         minetopiaPlayer.getFitness().addBooster(fitnessBooster);
         minetopiaPlayer.getFitness().getRunnable().run();
     }

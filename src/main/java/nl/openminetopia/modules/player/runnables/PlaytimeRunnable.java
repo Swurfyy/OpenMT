@@ -15,6 +15,11 @@ public class PlaytimeRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
+        if (!player.isOnline()) {
+            cancel();
+            return;
+        }
+
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 

@@ -5,8 +5,7 @@ import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
-import nl.openminetopia.api.player.fitness.statistics.types.TotalStatistic;
+import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountType;
@@ -76,10 +75,11 @@ public class AdminToolInfoMenu extends Menu {
         });
         this.addItem(targetLevelIcon);
 
-        TotalStatistic totalStatistic = (TotalStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.TOTAL);
+        Fitness fitness = minetopiaPlayer.getFitness();
         ItemBuilder fitnessItemBuilder = new ItemBuilder(Material.MUSHROOM_STEW)
                 .setName("<gold>Fitheid")
-                .addLoreLine("<gold>Fitheid: " + totalStatistic.getFitnessGained() + " / " + totalStatistic.getMaxFitnessGainable())
+                .addLoreLine("<gold>Fitheid: " + fitness.getTotalFitness() + " / "
+                        + OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel())
                 .addLoreLine("")
                 .addLoreLine("<gold>Klik <yellow>hier <gold>om de <yellow>fitheid <gold>van de speler te bekijken.");
 

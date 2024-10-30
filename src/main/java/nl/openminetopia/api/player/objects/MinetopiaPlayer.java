@@ -5,13 +5,14 @@ import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
-import nl.openminetopia.api.player.fitness.FitnessManager;
-import nl.openminetopia.api.player.fitness.objects.Fitness;
+import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.objects.*;
 import nl.openminetopia.modules.data.storm.StormDatabase;
+import nl.openminetopia.modules.fitness.FitnessModule;
+import nl.openminetopia.modules.fitness.models.FitnessModel;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.fitness.runnables.HealthStatisticRunnable;
@@ -23,6 +24,7 @@ import nl.openminetopia.modules.prefix.PrefixModule;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -65,6 +67,7 @@ public class MinetopiaPlayer {
     private final PrefixModule prefixModule = OpenMinetopia.getModuleManager().getModule(PrefixModule.class);
     private final ColorModule colorModule = OpenMinetopia.getModuleManager().getModule(ColorModule.class);
     private final PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
+    private final FitnessModule fitnessModule = OpenMinetopia.getModuleManager().getModule(FitnessModule.class);
 
     public MinetopiaPlayer(UUID uuid, PlayerModel playerModel) {
         this.uuid = uuid;
@@ -76,13 +79,11 @@ public class MinetopiaPlayer {
 
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
 
-        this.getBukkit().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
+        if (this.getBukkit().getPlayer() != null && this.getBukkit().isOnline())
+            this.getBukkit().getPlayer().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
 
-        this.fitness = FitnessManager.getInstance().getFitness(uuid);
-        fitness.load().thenAccept((unused) -> {
-            fitness.getRunnable().runTaskTimer(OpenMinetopia.getInstance(), 0, 60 * 20L);
-            fitness.apply();
-        });
+        this.fitness = fitnessModule.getFitnessFromPlayer(this.playerModel);
+        Bukkit.getScheduler().runTaskLaterAsynchronously(OpenMinetopia.getInstance(), () -> fitness.getRunnable().run(), 1L);
 
         this.playtime = this.playerModel.getPlaytime();
         this.level = this.playerModel.getLevel();
@@ -108,14 +109,14 @@ public class MinetopiaPlayer {
         this.activePrefix = prefixModule.getActivePrefixFromPlayer(playerModel)
                 .orElse(new Prefix(-1, configuration.getDefaultPrefix(), -1));
 
-        this.playtimeRunnable = new PlaytimeRunnable(getBukkit());
-        playtimeRunnable.runTaskTimer(OpenMinetopia.getInstance(), 0, 20L);
+        this.playtimeRunnable = new PlaytimeRunnable(getBukkit().getPlayer());
+        playtimeRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L);
 
         this.levelcheckRunnable = new LevelCheckRunnable(this);
-        levelcheckRunnable.runTaskTimer(OpenMinetopia.getInstance(), 0, 20L * 30);
+        levelcheckRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L * 30);
 
         this.healthStatisticRunnable = new HealthStatisticRunnable(this);
-        healthStatisticRunnable.runTaskTimer(OpenMinetopia.getInstance(), 0, 20L);
+        healthStatisticRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L);
 
         loadFuture.complete(null);
         return loadFuture;
@@ -124,21 +125,16 @@ public class MinetopiaPlayer {
     public CompletableFuture<Void> save() {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
-        this.playerModule.savePlayer(this.playerModel);
-
-        fitness.save().whenComplete((unused, throwable) -> {
-            if (throwable != null) {
-                throwable.printStackTrace();
-            }
-        });
+        StormDatabase.getInstance().saveStormModel(this.playerModel);
+        this.fitness.save();
 
         future.complete(null);
         return future;
     }
 
     
-    public Player getBukkit() {
-        return Bukkit.getPlayer(uuid);
+    public OfflinePlayer getBukkit() {
+        return Bukkit.getOfflinePlayer(uuid);
     }
 
     /* Playtime */
@@ -169,8 +165,11 @@ public class MinetopiaPlayer {
     }
 
     public WorldModel getWorld() {
+        if (getBukkit().getPlayer() == null) {
+            return null;
+        }
         return placesModule.getWorldModels().stream()
-                .filter(worldModel -> worldModel.getName().equalsIgnoreCase(getBukkit().getWorld().getName()))
+                .filter(worldModel -> worldModel.getName().equalsIgnoreCase(getBukkit().getPlayer().getWorld().getName()))
                 .findFirst().orElse(null);
     }
 
@@ -248,7 +247,9 @@ public class MinetopiaPlayer {
         }
 
         if (activePrefix.isExpired()) {
-            this.getBukkit().sendMessage(ChatUtils.color("<red>Je prefix <dark_red>" + activePrefix.getPrefix() + " <red>is verlopen!"));
+            Player player = this.getBukkit().getPlayer();
+            if (player != null && player.isOnline())
+                player.sendMessage(ChatUtils.color("<red>Je prefix <dark_red>" + activePrefix.getPrefix() + " <red>is verlopen!"));
             this.removePrefix(activePrefix);
             this.setActivePrefix(new Prefix(-1, configuration.getDefaultPrefix(), -1));
         }
@@ -316,7 +317,9 @@ public class MinetopiaPlayer {
         }
 
         if (color.isExpired()) {
-            getBukkit().sendMessage(ChatUtils.color("<red>Je " + type.name().toLowerCase() + " kleur <dark_red>" + color.getColorId() + " is verlopen!"));
+            Player player = this.getBukkit().getPlayer();
+            if (player != null && player.isOnline())
+                player.sendMessage(ChatUtils.color("<red>Je " + type.name().toLowerCase() + " kleur <dark_red>" + color.getColorId() + " is verlopen!"));
             removeColor(color);
             setActiveColor(getDefaultColor(type), type);
         }

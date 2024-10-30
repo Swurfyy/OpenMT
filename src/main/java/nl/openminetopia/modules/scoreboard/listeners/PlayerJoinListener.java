@@ -14,15 +14,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
 
-    private final ScoreboardModule scoreboardModule = OpenMinetopia.getModuleManager().getModule(ScoreboardModule.class);
-
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) {
-            player.kick(ChatUtils.color("<red>3 Er is een fout opgetreden bij het laden van je gegevens! Probeer het later opnieuw."));
+            player.kick(ChatUtils.color("<red>Er is een fout opgetreden bij het laden van je gegevens! Probeer het later opnieuw."));
             return;
         }
 

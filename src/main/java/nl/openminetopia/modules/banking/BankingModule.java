@@ -172,22 +172,6 @@ public class BankingModule extends Module {
         return completableFuture;
     }
 
-    public CompletableFuture<Void> saveBankAccount(BankAccountModel accountModel) {
-        CompletableFuture<Void> completableFuture = new CompletableFuture<>();
-
-        StormUtils.updateModelData(BankAccountModel.class,
-                query -> query.where("uuid", Where.EQUAL, accountModel.getUniqueId().toString()),
-                model -> {
-                    model.setBalance(accountModel.getBalance());
-                    model.setFrozen(accountModel.getFrozen());
-                    model.setName(accountModel.getName());
-                    model.setType(accountModel.getType());
-                }
-        );
-
-        return completableFuture;
-    }
-
     public CompletableFuture<Void> deleteBankAccount(UUID accountUuid) {
         CompletableFuture<Void> completableFuture = new CompletableFuture<>();
 

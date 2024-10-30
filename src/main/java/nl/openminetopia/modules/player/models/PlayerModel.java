@@ -7,6 +7,7 @@ import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.openminetopia.modules.color.models.ColorModel;
+import nl.openminetopia.modules.fitness.models.FitnessModel;
 import nl.openminetopia.modules.prefix.models.PrefixModel;
 
 import java.util.ArrayList;
@@ -33,6 +34,13 @@ public class PlayerModel extends StormModel {
             matchTo = "player_id"
     )
     private List<PrefixModel> prefixes = new ArrayList<>();
+
+    @Column(
+            type = ColumnType.ONE_TO_MANY,
+            references = FitnessModel.class,
+            matchTo = "player_id"
+    )
+    private List<FitnessModel> fitness = new ArrayList<>();
 
     @Column(name = "active_prefix_id")
     private Integer activePrefixId;
