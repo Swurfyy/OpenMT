@@ -62,8 +62,6 @@ public class ColorSelectMenu extends PaginatedMenu {
 
             this.addItem(new Icon(icon.toItemStack(), (e) -> {
                 minetopiaPlayer.setActiveColor(color, type);
-                System.out.println(color.getId());
-                System.out.println(minetopiaPlayer.getActiveColor(type).color());
                 player.sendMessage(ChatUtils.color(type.getDisplayName() + " <reset><gray>veranderd naar: "
                         + color.displayName()));
             }));
