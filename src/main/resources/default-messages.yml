@@ -49,6 +49,12 @@ chat_no_players_in_range: "<red>Er zijn geen spelers in de buurt om je bericht t
 chat_chatspy_format: "<dark_gray>[<gray>ChatSpy<dark_gray>]<gray> <player>: <message>"
 chat_commandspy_format: "<dark_gray>[<gray>CommandSpy<dark_gray>]<gray> <player>: <command>"
 
+# Prefix
+prefix_added: "<gold>Je hebt de prefix <red><prefix> <gold>toegevoegd."
+prefix_removed: "<gold>Je hebt de prefix <red><prefix> <gold>verwijderd."
+prefix_not_found: "<red>Deze speler heeft deze prefix niet."
+prefix_already_exists: "<red>Deze speler heeft deze prefix al."
+
 # Color
 color_not_found: "<red>Deze kleur bestaat niet."
 color_prefix_exists: "<red>Deze kleur bestaat al."
