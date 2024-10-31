@@ -1,5 +1,6 @@
 package nl.openminetopia.api.player.objects;
 
+import com.craftmend.storm.api.enums.Where;
 import lombok.Getter;
 import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
@@ -11,6 +12,7 @@ import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.objects.*;
 import nl.openminetopia.modules.data.storm.StormDatabase;
+import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.places.models.WorldModel;
@@ -19,6 +21,8 @@ import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.runnables.LevelCheckRunnable;
 import nl.openminetopia.modules.player.runnables.PlaytimeRunnable;
+import nl.openminetopia.modules.police.PoliceModule;
+import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.prefix.PrefixModule;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;
@@ -26,6 +30,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -67,6 +72,7 @@ public class MinetopiaPlayer {
     private final ColorModule colorModule = OpenMinetopia.getModuleManager().getModule(ColorModule.class);
     private final PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
     private final FitnessModule fitnessModule = OpenMinetopia.getModuleManager().getModule(FitnessModule.class);
+    private final PoliceModule policeModule = OpenMinetopia.getModuleManager().getModule(PoliceModule.class);
 
     public MinetopiaPlayer(UUID uuid, PlayerModel playerModel) {
         this.uuid = uuid;
@@ -131,12 +137,12 @@ public class MinetopiaPlayer {
         return future;
     }
 
-    
+
     public OfflinePlayer getBukkit() {
         return Bukkit.getOfflinePlayer(uuid);
     }
 
-    /* Playtime */
+    /* ---------- Playtime ---------- */
 
     /**
      * Sets the playtime in seconds
@@ -145,7 +151,7 @@ public class MinetopiaPlayer {
      * @param updateDatabase If true, the playtime will be pushed to the database, otherwise it will only be set in the object
      *                       This should be set to false by default, and only set to true when the player logs out to prevent unnecessary database calls
      */
-    
+
     public void setPlaytime(int seconds, boolean updateDatabase) {
         this.playtime = seconds;
         if (updateDatabase) {
@@ -154,7 +160,7 @@ public class MinetopiaPlayer {
         }
     }
 
-    /* Places */
+    /* ---------- Places ---------- */
     public boolean isInPlace() {
         return getPlace() != null;
     }
@@ -172,7 +178,7 @@ public class MinetopiaPlayer {
                 .findFirst().orElse(null);
     }
 
-    /* Level */
+    /* ---------- Level ---------- */
 
     public void setLevel(int level) {
         if (level < 0) {
@@ -183,7 +189,7 @@ public class MinetopiaPlayer {
         StormDatabase.getInstance().saveStormModel(this.playerModel);
     }
 
-    /* Staffchat */
+    /* ---------- Staffchat ---------- */
 
     public void setStaffchatEnabled(boolean staffchatEnabled) {
         this.staffchatEnabled = staffchatEnabled;
@@ -191,7 +197,7 @@ public class MinetopiaPlayer {
         StormDatabase.getInstance().saveStormModel(playerModel);
     }
 
-    /* Spy */
+    /* ---------- Spy ---------- */
 
     public void setCommandSpyEnabled(boolean commandSpyEnabled) {
         this.commandSpyEnabled = commandSpyEnabled;
@@ -205,9 +211,9 @@ public class MinetopiaPlayer {
         StormDatabase.getInstance().saveStormModel(this.playerModel);
     }
 
-    /* Prefix */
+    /* ---------- Prefix ---------- */
 
-    
+
     public void addPrefix(Prefix prefix) {
         prefixModule.addPrefix(this, prefix).whenComplete((id, throwable) -> {
             if (throwable != null) {
@@ -218,7 +224,7 @@ public class MinetopiaPlayer {
         });
     }
 
-    
+
     public void removePrefix(Prefix prefix) {
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
         prefixes.remove(prefix);
@@ -231,14 +237,14 @@ public class MinetopiaPlayer {
         prefixModule.removePrefix(prefix);
     }
 
-    
+
     public void setActivePrefix(Prefix prefix) {
         this.activePrefix = prefix;
         this.playerModel.setActivePrefixId(prefix.getId());
         StormDatabase.getInstance().saveStormModel(this.playerModel);
     }
 
-    
+
     public Prefix getActivePrefix() {
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
         if (activePrefix == null) {
@@ -256,8 +262,8 @@ public class MinetopiaPlayer {
         return activePrefix;
     }
 
-    /* Colors */
-    
+    /* ---------- Colors ---------- */
+
     public void addColor(OwnableColor color) {
         this.colorModule.addColor(this, color).whenComplete((id, throwable) -> {
             if (throwable != null) {
@@ -274,13 +280,11 @@ public class MinetopiaPlayer {
         });
     }
 
-    
     public void removeColor(OwnableColor color) {
         this.colors.remove(color);
         this.colorModule.removeColor(color);
     }
 
-    
     public void setActiveColor(OwnableColor color, OwnableColorType type) {
         switch (type) {
             case PREFIX:
@@ -302,7 +306,7 @@ public class MinetopiaPlayer {
         }
         StormDatabase.getInstance().saveStormModel(this.playerModel);
     }
-    
+
     public OwnableColor getActiveColor(OwnableColorType type) {
         OwnableColor color = switch (type) {
             case PREFIX -> this.activePrefixColor;
@@ -333,5 +337,19 @@ public class MinetopiaPlayer {
             case CHAT -> new ChatColor(-1, configuration.getDefaultChatColor(), -1);
             case LEVEL -> new LevelColor(-1, configuration.getDefaultLevelColor(), -1);
         };
+    }
+
+    /* ---------- Criminal record ---------- */
+
+    public void addCriminalRecord(String description, UUID officer, Long date) {
+        policeModule.addCriminalRecord(this.playerModel, description, officer, date);
+    }
+
+    public void removeCriminalRecord(CriminalRecordModel criminalRecord) {
+        policeModule.removeCriminalRecord(this.playerModel, criminalRecord);
+    }
+
+    public List<CriminalRecordModel> getCriminalRecords() {
+        return playerModel.getCriminalRecords();
     }
 }

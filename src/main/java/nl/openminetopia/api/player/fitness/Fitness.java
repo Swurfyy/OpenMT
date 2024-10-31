@@ -97,14 +97,12 @@ public class Fitness {
     public void addBooster(FitnessBoosterModel booster) {
         playerModel.getBoosters().add(booster);
         StormDatabase.getInstance().saveStormModel(booster);
-        StormDatabase.getInstance().saveStormModel(playerModel);
     }
 
     public void removeBooster(FitnessBoosterModel booster) {
         playerModel.getBoosters().remove(booster);
         StormUtils.deleteModelData(FitnessBoosterModel.class, query ->
                 query.where("id", Where.EQUAL, booster.getId()));
-        StormDatabase.getInstance().saveStormModel(playerModel);
     }
 
     public List<FitnessStatisticModel> getStatistics() {

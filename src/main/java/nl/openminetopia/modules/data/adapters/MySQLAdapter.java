@@ -26,6 +26,7 @@ import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.places.models.CityModel;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.player.models.PlayerModel;
+import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.prefix.models.PrefixModel;
 
 public class MySQLAdapter implements DatabaseAdapter{
@@ -73,6 +74,7 @@ public class MySQLAdapter implements DatabaseAdapter{
         registerStormModel(new ColorModel());
         registerStormModel(new WorldModel());
         registerStormModel(new CityModel());
+        registerStormModel(new CriminalRecordModel());
     }
 
     @SneakyThrows
