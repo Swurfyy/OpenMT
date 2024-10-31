@@ -119,6 +119,6 @@ public class CriminalRecordCommand extends BaseCommand {
     }
 
     private String formatDate(long date) {
-        return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date(date));
+        return new SimpleDateFormat(MessageConfiguration.message("criminal_record_date_format")).format(new Date(date));
     }
 }

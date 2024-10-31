@@ -142,6 +142,7 @@ plot_member_added: "<dark_aqua>Je hebt <aqua><player><dark_aqua>toegevoegd aan h
 plot_member_not_added: "<red><player> is geen member van dit plot."
 
 # Criminal records
+criminal_record_date_format: "dd-MM-yyyy HH:mm:ss"
 criminal_record_none: "<yellow><player> <gold>heeft geen strafblad."
 criminal_record_not_found: "<dark_red><player> <red>heeft geen strafblad gevonden met dit ID."
 criminal_record_added: "<gold>Succesvol <yellow><description> <gold>toegevoegd aan het strafblad van <yellow><player><gold>."
