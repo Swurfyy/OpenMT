@@ -9,7 +9,7 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import org.bukkit.entity.Player;
 
-@CommandAlias("fitness")
+@CommandAlias("fitness|fitheid")
 public class FitnessCommand extends BaseCommand {
 
     @HelpCommand

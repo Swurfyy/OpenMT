@@ -10,7 +10,7 @@ import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-@CommandAlias("fitness")
+@CommandAlias("fitness|fitheid")
 public class FitnessBoosterCommand extends BaseCommand {
 
     @Subcommand("booster")

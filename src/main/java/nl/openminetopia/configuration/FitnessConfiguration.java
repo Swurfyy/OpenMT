@@ -121,6 +121,9 @@ public class FitnessConfiguration extends ConfigurateConfig {
                 int minLevel = Integer.parseInt(range[0]);
                 int maxLevel = Integer.parseInt(range[1]);
 
+                /* For some odd reason these values cannot be passed in directly into the FitnessLevelEffect constructor
+                 * because Configurate somehow uses walkSpeed instead of the hyphenated walk-speed?
+                 */
                 double walkSpeed = val.node("walk-speed").getDouble(0.1);
                 List<String> effects = val.node("effects").getList(String.class, List.of("JUMP_BOOST:1"));
 
