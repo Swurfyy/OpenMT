@@ -151,5 +151,6 @@ police_criminal_record_info_entry: "<yellow><id>. <gold>- <yellow><description> 
 
 # Bodysearch
 police_bodysearch_self: "<red>Je kunt jezelf <dark_red>niet <red>fouilleren!"
+police_bodysearch_too_far: "<red>Deze speler is te ver weg om te kunnen <dark_red>fouilleren<red>!"
 police_bodysearch_executor: "<gold>Je bent <yellow><player> <gold>aan het fouilleren."
 police_bodysearch_target: "<gold>Je wordt gefouilleerd door <yellow><player><gold>."

@@ -100,6 +100,11 @@ public class DefaultConfiguration extends ConfigurateConfig {
      */
     private final List<String> headWhitelist;
 
+    /**
+     * Bodysearch configuration
+     */
+    private final int bodysearchRange;
+
     @SneakyThrows
     public DefaultConfiguration(File file) {
         super(file, "config.yml", "");
@@ -301,6 +306,11 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "DIAMOND_HOE:89",
                 "GREEN_DYE"
         ));
+
+        /*
+         * Bodysearch configuration
+         */
+        this.bodysearchRange = rootNode.node("bodysearch", "range").getInt(10);
     }
 
     @SneakyThrows

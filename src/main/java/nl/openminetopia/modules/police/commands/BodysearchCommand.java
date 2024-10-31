@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Syntax;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -32,6 +33,12 @@ public class BodysearchCommand extends BaseCommand {
 
         if (minetopiaTarget == null) {
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+            return;
+        }
+
+        if (player.getLocation().distance(target.getLocation()) > OpenMinetopia.getDefaultConfiguration().getBodysearchRange()) {
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_bodysearch_too_far")
+                    .replace("<player>", target.getName()));
             return;
         }
 
