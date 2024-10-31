@@ -22,7 +22,6 @@ import nl.openminetopia.modules.data.storm.adapters.FixedBooleanAdapter;
 import nl.openminetopia.modules.data.storm.adapters.FitnessStatisticTypeAdapter;
 import nl.openminetopia.modules.data.storm.adapters.OwnableColorTypeAdapter;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
-import nl.openminetopia.modules.fitness.models.FitnessModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.places.models.CityModel;
 import nl.openminetopia.modules.places.models.WorldModel;
@@ -68,7 +67,6 @@ public class MySQLAdapter implements DatabaseAdapter{
         registerStormModel(new BankAccountModel());
         registerStormModel(new BankPermissionModel());
         registerStormModel(new PlayerModel());
-        registerStormModel(new FitnessModel());
         registerStormModel(new FitnessBoosterModel());
         registerStormModel(new FitnessStatisticModel());
         registerStormModel(new PrefixModel());

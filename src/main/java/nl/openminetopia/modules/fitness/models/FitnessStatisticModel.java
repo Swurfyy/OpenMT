@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.player.models.PlayerModel;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -17,9 +18,9 @@ public class FitnessStatisticModel extends StormModel {
 
     @Column(
             keyType = KeyType.FOREIGN,
-            references = {FitnessModel.class}
+            references = {PlayerModel.class}
     )
-    private Integer fitnessId;
+    private Integer playerId;
 
     @Column(name = "type")
     private FitnessStatisticType type;

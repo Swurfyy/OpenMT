@@ -7,7 +7,8 @@ import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.openminetopia.modules.color.models.ColorModel;
-import nl.openminetopia.modules.fitness.models.FitnessModel;
+import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
+import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.prefix.models.PrefixModel;
 
 import java.util.ArrayList;
@@ -34,13 +35,6 @@ public class PlayerModel extends StormModel {
             matchTo = "player_id"
     )
     private List<PrefixModel> prefixes = new ArrayList<>();
-
-    @Column(
-            type = ColumnType.ONE_TO_MANY,
-            references = FitnessModel.class,
-            matchTo = "player_id"
-    )
-    private List<FitnessModel> fitness = new ArrayList<>();
 
     @Column(name = "active_prefix_id")
     private Integer activePrefixId;
@@ -73,4 +67,17 @@ public class PlayerModel extends StormModel {
     @Column(name = "chat_spy_enabled", defaultValue = "false")
     private Boolean chatSpyEnabled;
 
+    @Column(
+            type = ColumnType.ONE_TO_MANY,
+            references = FitnessStatisticModel.class,
+            matchTo = "player_id"
+    )
+    private List<FitnessStatisticModel> statistics = new ArrayList<>();
+
+    @Column(
+            type = ColumnType.ONE_TO_MANY,
+            references = FitnessBoosterModel.class,
+            matchTo = "player_id"
+    )
+    private List<FitnessBoosterModel> boosters = new ArrayList<>();
 }

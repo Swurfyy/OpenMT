@@ -6,6 +6,7 @@ import com.craftmend.storm.api.markers.Column;
 import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import nl.openminetopia.modules.player.models.PlayerModel;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -14,9 +15,9 @@ public class FitnessBoosterModel extends StormModel {
 
     @Column(
             keyType = KeyType.FOREIGN,
-            references = {FitnessModel.class}
+            references = {PlayerModel.class}
     )
-    private Integer fitnessId;
+    private Integer playerId;
 
     @Column(name = "amount", defaultValue = "0")
     private Integer amount;

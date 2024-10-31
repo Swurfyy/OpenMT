@@ -12,7 +12,6 @@ import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.objects.*;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.fitness.FitnessModule;
-import nl.openminetopia.modules.fitness.models.FitnessModel;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.fitness.runnables.HealthStatisticRunnable;
@@ -82,7 +81,7 @@ public class MinetopiaPlayer {
         if (this.getBukkit().getPlayer() != null && this.getBukkit().isOnline())
             this.getBukkit().getPlayer().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
 
-        this.fitness = fitnessModule.getFitnessFromPlayer(this.playerModel);
+        this.fitness = new Fitness(uuid, playerModel);
         Bukkit.getScheduler().runTaskLaterAsynchronously(OpenMinetopia.getInstance(), () -> fitness.getRunnable().run(), 1L);
 
         this.playtime = this.playerModel.getPlaytime();

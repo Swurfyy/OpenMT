@@ -25,7 +25,7 @@ public class FitnessBoosterCommand extends BaseCommand {
         long expiresAtMillis = expiresAt == -1 ? -1 : System.currentTimeMillis() + (expiresAt * 1000);
 
         FitnessBoosterModel fitnessBooster = new FitnessBoosterModel();
-        fitnessBooster.setFitnessId(minetopiaPlayer.getFitness().getFitnessModel().getId());
+        fitnessBooster.setPlayerId(minetopiaPlayer.getPlayerModel().getId());
         fitnessBooster.setAmount(amount);
         fitnessBooster.setExpiresAt(expiresAtMillis);
         minetopiaPlayer.getFitness().addBooster(fitnessBooster);

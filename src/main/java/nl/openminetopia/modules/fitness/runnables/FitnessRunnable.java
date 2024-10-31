@@ -33,7 +33,7 @@ public class FitnessRunnable extends BukkitRunnable {
             return;
         }
 
-        fitness.getFitnessModel().getBoosters().forEach(booster -> {
+        fitness.getPlayerModel().getBoosters().forEach(booster -> {
             if (booster.isExpired()) fitness.removeBooster(booster);
         });
 
