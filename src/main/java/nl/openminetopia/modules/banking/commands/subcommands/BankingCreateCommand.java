@@ -54,7 +54,7 @@ public class BankingCreateCommand extends BaseCommand {
         }
 
         UUID accountId = UUID.randomUUID();
-        dataModule.getAdapter().createBankAccount(accountId, type, 0L, name, false).whenComplete(((accountModel, throwable) -> {
+        bankingModule.createBankAccount(accountId, type, 0L, name, false).whenComplete(((accountModel, throwable) -> {
             if (throwable != null) {
                 sender.sendMessage(MessageConfiguration.component("banking_account_creation_error"));
                 OpenMinetopia.getInstance().getLogger().severe("Something went wrong while trying to create an account: " + throwable.getMessage());

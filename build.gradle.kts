@@ -4,7 +4,7 @@ plugins {
     java
     id("io.freefair.lombok") version "8.10.2"
     id("com.gradleup.shadow") version "8.3.3"
-    id("io.papermc.paperweight.userdev") version "1.7.3"
+    id("io.papermc.paperweight.userdev") version "1.7.4"
 }
 
 group = "nl.openminetopia"
@@ -52,8 +52,8 @@ dependencies {
     /* Database */
     compileOnly("com.zaxxer:HikariCP:6.0.0")
     compileOnly("mysql:mysql-connector-java:8.0.33")
-    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.4.1")
-    compileOnly("org.xerial:sqlite-jdbc:3.46.1.3")
+    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.5.0")
+    compileOnly("org.xerial:sqlite-jdbc:3.47.0.0")
     implementation("com.github.Mindgamesnl:storm:e1f961b480")
 
     /* Command Framework */
@@ -80,6 +80,11 @@ dependencies {
 
     /* bStats */
     implementation("org.bstats:bstats-bukkit:3.1.0")
+
+    /* Vault */
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7.1") {
+        exclude(group = "org.bukkit", module = "bukkit")
+    }
 }
 
 val targetJavaVersion = 21

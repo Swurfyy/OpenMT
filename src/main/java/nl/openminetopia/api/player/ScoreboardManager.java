@@ -4,7 +4,6 @@ import lombok.Getter;
 import net.megavex.scoreboardlibrary.api.sidebar.Sidebar;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.api.player.objects.OnlineMinetopiaPlayer;
 import nl.openminetopia.modules.scoreboard.ScoreboardModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
@@ -30,7 +29,7 @@ public class ScoreboardManager {
     public void updateBoard(MinetopiaPlayer minetopiaPlayer) {
         Sidebar sidebar = getScoreboard(minetopiaPlayer.getUuid());
         if (sidebar == null) return;
-        if (!((OnlineMinetopiaPlayer) minetopiaPlayer).isScoreboardVisible()) return;
+        if (!minetopiaPlayer.isScoreboardVisible()) return;
 
         Player player = minetopiaPlayer.getBukkit().getPlayer();
         if (player == null) return;
@@ -40,7 +39,7 @@ public class ScoreboardManager {
             sidebar.removePlayer(player);
             return;
         }
-        if (minetopiaPlayer.isInPlace() && !sidebar.players().contains(player) && ((OnlineMinetopiaPlayer) minetopiaPlayer).isScoreboardVisible()) {
+        if (minetopiaPlayer.isInPlace() && !sidebar.players().contains(player) && ((MinetopiaPlayer) minetopiaPlayer).isScoreboardVisible()) {
             sidebar.addPlayer(player);
         }
 

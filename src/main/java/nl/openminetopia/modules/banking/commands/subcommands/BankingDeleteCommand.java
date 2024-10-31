@@ -6,7 +6,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.data.DataModule;
-import nl.openminetopia.modules.data.storm.models.BankAccountModel;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.command.CommandSender;
 
@@ -27,7 +27,7 @@ public class BankingDeleteCommand extends BaseCommand {
             return;
         }
 
-        dataModule.getAdapter().deleteBankAccount(accountModel.getUniqueId()).whenComplete((v, throwable) -> {
+        bankingModule.deleteBankAccount(accountModel.getUniqueId()).whenComplete((v, throwable) -> {
             if (throwable != null) {
                 sender.sendMessage(MessageConfiguration.component("banking_account_deletion_error"));
                 return;

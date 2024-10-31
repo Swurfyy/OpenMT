@@ -28,8 +28,7 @@ public class AdminToolMenu extends Menu {
                 .setSkullOwner(offlinePlayer);
 
         Icon targetSkullIcon = new Icon(10, skullBuilder.toItemStack(), event -> {
-            AdminToolInfoMenu menu = new AdminToolInfoMenu(player, offlinePlayer);
-            menu.open((Player) event.getWhoClicked());
+            new AdminToolInfoMenu(player, offlinePlayer).open((Player) event.getWhoClicked());
         });
         this.addItem(targetSkullIcon);
 

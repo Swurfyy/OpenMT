@@ -7,7 +7,7 @@ import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.data.DataModule;
-import nl.openminetopia.modules.data.storm.models.BankAccountModel;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -35,7 +35,7 @@ public class BankingUsersCommand extends BaseCommand {
             return;
         }
 
-        dataModule.getAdapter().createBankPermission(target.getUniqueId(), accountModel.getUniqueId(), permission).whenComplete(((permissionModel, throwable) -> {
+        bankingModule.createBankPermission(target.getUniqueId(), accountModel.getUniqueId(), permission).whenComplete(((permissionModel, throwable) -> {
             if (throwable != null) {
                 sender.sendMessage(MessageConfiguration.component("database_update_error"));
                 return;
@@ -62,7 +62,7 @@ public class BankingUsersCommand extends BaseCommand {
             return;
         }
 
-        dataModule.getAdapter().deleteBankPermission(accountModel.getUniqueId(), target.getUniqueId()).whenComplete((v, throwable) -> {
+        bankingModule.deleteBankPermission(accountModel.getUniqueId(), target.getUniqueId()).whenComplete((v, throwable) -> {
             if (throwable != null) {
                 sender.sendMessage(MessageConfiguration.component("database_update_error"));
                 return;

@@ -6,7 +6,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import org.bukkit.entity.Player;
@@ -54,7 +53,7 @@ public class ChatUtils {
         }
 
         if (minetopiaPlayer.getFitness().getStatistics() != null && !minetopiaPlayer.getFitness().getStatistics().isEmpty()) {
-            message = message.replace("<fitness>", minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.TOTAL).getFitnessGained() + "")
+            message = message.replace("<fitness>", minetopiaPlayer.getFitness().getTotalFitness() + "")
                     .replace("<max_fitness>", OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel() + "");
         }
 

@@ -5,8 +5,10 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.api.places.MTCityManager;
-import nl.openminetopia.api.places.objects.MTCity;
+import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.data.storm.StormDatabase;
+import nl.openminetopia.modules.places.models.CityModel;
+import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 
@@ -16,60 +18,68 @@ public class MTCitySettingCommand extends BaseCommand {
     @Subcommand("setcolor")
     @CommandPermission("openminetopia.city.setcolor")
     @CommandCompletion("@cityNames")
-    public void onSetColor(Player player, String cityName, String color) {
-        // Remove the city from the database
-        MTCity MTCity = MTCityManager.getInstance().getCity(cityName);
-        if (MTCity == null) {
+    public void setColor(Player player, String cityName, String color) {
+        PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
+
+        CityModel cityModel = placesModule.getCity(cityName);
+        if (cityModel == null) {
             player.sendMessage(ChatUtils.color("<red>City <white>" + cityName + " <red>does not exist!"));
             return;
         }
 
-        MTCityManager.getInstance().setColor(MTCity, color);
+        cityModel.setColor(color);
+        StormDatabase.getInstance().saveStormModel(cityModel);
         player.sendMessage(ChatUtils.color("<red>City color of " + color + cityName + " <red>has been changed!"));
     }
 
     @Subcommand("settemperature")
     @CommandPermission("openminetopia.city.settemperature")
     @CommandCompletion("@cityNames")
-    public void onSetTemperature(Player player, String cityName, Double temperature) {
-        // Remove the city from the database
-        MTCity MTCity = MTCityManager.getInstance().getCity(cityName);
-        if (MTCity == null) {
+    public void setTemperature(Player player, String cityName, Double temperature) {
+        PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
+
+        CityModel cityModel = placesModule.getCity(cityName);
+        if (cityModel == null) {
             player.sendMessage(ChatUtils.color("<red>City <white>" + cityName + " <red>does not exist!"));
             return;
         }
 
-        MTCityManager.getInstance().setTemperature(MTCity, temperature);
+        cityModel.setTemperature(temperature);
+        StormDatabase.getInstance().saveStormModel(cityModel);
         player.sendMessage(ChatUtils.color("<red>City temperatuur of " + cityName + " <red>has been changed!"));
     }
 
     @Subcommand("setloadingname")
     @CommandPermission("openminetopia.city.setloadingname")
     @CommandCompletion("@cityNames")
-    public void onSetLoadingname(Player player, String cityName, String loadingName) {
-        // Remove the city from the database
-        MTCity MTCity = MTCityManager.getInstance().getCity(cityName);
-        if (MTCity == null) {
+    public void setLoadingName(Player player, String cityName, String loadingName) {
+        PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
+
+        CityModel cityModel = placesModule.getCity(cityName);
+        if (cityModel == null) {
             player.sendMessage(ChatUtils.color("<red>City <white>" + cityName + " <red>does not exist!"));
             return;
         }
 
-        MTCityManager.getInstance().setLoadingName(MTCity, loadingName);
+        cityModel.setLoadingName(loadingName);
+        StormDatabase.getInstance().saveStormModel(cityModel);
         player.sendMessage(ChatUtils.color("<red>City loadingName of " + cityName + " <red>has been changed!"));
     }
 
     @Subcommand("settitle")
     @CommandPermission("openminetopia.city.settitle")
     @CommandCompletion("@cityNames")
-    public void onSetTitle(Player player, String cityName, String title) {
-        // Remove the city from the database
-        MTCity MTCity = MTCityManager.getInstance().getCity(cityName);
-        if (MTCity == null) {
+    public void setTitle(Player player, String cityName, String title) {
+        PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
+
+        CityModel cityModel = placesModule.getCity(cityName);
+        if (cityModel == null) {
             player.sendMessage(ChatUtils.color("<red>City <white>" + cityName + " <red>does not exist!"));
             return;
         }
 
-        MTCityManager.getInstance().setTitle(MTCity, title);
+        cityModel.setTitle(title);
+        StormDatabase.getInstance().saveStormModel(cityModel);
         player.sendMessage(ChatUtils.color("<red>City title of " + cityName + " <red>has been changed!"));
     }
 }

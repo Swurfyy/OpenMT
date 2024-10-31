@@ -29,6 +29,7 @@ public class StormDatabase {
 
     public CompletableFuture<Integer> saveStormModel(StormModel stormModel) {
         CompletableFuture<Integer> completableFuture = new CompletableFuture<>();
+
         executorService.submit(() -> {
             try {
                 completableFuture.complete(storm.save(stormModel));

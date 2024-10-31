@@ -2,8 +2,9 @@ package nl.openminetopia.modules.banking.tasks;
 
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.modules.data.DataModule;
-import nl.openminetopia.modules.data.storm.models.BankAccountModel;
+import nl.openminetopia.modules.banking.BankingModule;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
+import nl.openminetopia.modules.data.storm.StormDatabase;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @Getter
@@ -17,8 +18,7 @@ public class AccountSavingTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        DataModule dataModule = OpenMinetopia.getModuleManager().getModule(DataModule.class);
-        dataModule.getAdapter().saveBankAccount(account);
+        StormDatabase.getInstance().saveStormModel(account);
     }
 
     public void saveAndCancel() {
