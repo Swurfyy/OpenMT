@@ -141,6 +141,11 @@ plot_member_already: "<red><player> is al een member van dit plot."
 plot_member_added: "<dark_aqua>Je hebt <aqua><player><dark_aqua>toegevoegd aan het plot."
 plot_member_not_added: "<red><player> is geen member van dit plot."
 
+# Emergency command
+emergency_too_soon: "<red><b>112</b></red> <dark_gray>| <gray>Je kan niet zo snel achter elkaar een melding maken."
+emergency_cooldown: "<red><b>112</b></red> <dark_gray>| <gray>Probeer het over <white><time> <gray> nog eens."
+emergency_format: "<red><b>112</b></red> <dark_gray>| <gray><sender>: <white><message>"
+
 # Criminal records
 police_criminal_record_date_format: "dd-MM-yyyy HH:mm:ss"
 police_criminal_record_none: "<yellow><player> <gold>heeft geen strafblad."

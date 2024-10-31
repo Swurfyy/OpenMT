@@ -78,6 +78,11 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final List<String> commandsOnPlotCreate;
 
     /**
+     * Emergency command configuration
+     */
+    private final int emergencyCooldown;
+
+    /**
      * Balaclava configuration
      */
     private final List<String> balaclavaItems;
@@ -250,6 +255,11 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "rg flag <plot> -w <world> INTERACT -g MEMBERS ALLOW",
                 "rg flag <plot> -w <world> PVP ALLOW"
         ));
+
+        /*
+         * Emergency command configuration
+         */
+        this.emergencyCooldown = rootNode.node("emergency", "cooldown").getInt(300);
 
         /*
          * Balaclava configuration
