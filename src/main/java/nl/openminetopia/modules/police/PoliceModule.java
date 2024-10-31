@@ -7,6 +7,7 @@ import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.player.models.PlayerModel;
+import nl.openminetopia.modules.police.commands.BodysearchCommand;
 import nl.openminetopia.modules.police.commands.CriminalRecordCommand;
 import nl.openminetopia.modules.police.commands.EmergencyCommand;
 import nl.openminetopia.modules.police.balaclava.listeners.PlayerArmorChangeListener;
@@ -29,6 +30,7 @@ public class PoliceModule extends Module {
     public void enable() {
         registerCommand(new EmergencyCommand());
         registerCommand(new CriminalRecordCommand());
+        registerCommand(new BodysearchCommand());
         registerListener(new PlayerArmorChangeListener());
 
         registerListener(new PlayerInteractEntityListener());

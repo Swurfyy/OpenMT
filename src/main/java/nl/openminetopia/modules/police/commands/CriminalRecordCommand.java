@@ -48,7 +48,7 @@ public class CriminalRecordCommand extends BaseCommand {
         if (targetMinetopiaPlayer == null) return;
 
         targetMinetopiaPlayer.addCriminalRecord(description, player.getUniqueId(), System.currentTimeMillis());
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("criminal_record_added")
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_added")
                 .replace("<description>", description));
     }
 
@@ -73,14 +73,14 @@ public class CriminalRecordCommand extends BaseCommand {
         for (CriminalRecordModel criminalRecord : targetMinetopiaPlayer.getCriminalRecords()) {
             if (criminalRecord.getId() == id) {
                 targetMinetopiaPlayer.removeCriminalRecord(criminalRecord);
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("criminal_record_removed")
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_removed")
                         .replace("<description>", criminalRecord.getDescription())
                         .replace("<id>", String.valueOf(id)));
                 return;
             }
         }
 
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("criminal_record_not_found"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_not_found"));
     }
 
     @Subcommand("info")
@@ -102,7 +102,7 @@ public class CriminalRecordCommand extends BaseCommand {
         if (targetMinetopiaPlayer == null) return;
 
         if (targetMinetopiaPlayer.getCriminalRecords().isEmpty()) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("criminal_record_none"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_none"));
             return;
         }
 
@@ -110,7 +110,7 @@ public class CriminalRecordCommand extends BaseCommand {
 
             OfflinePlayer officer = Bukkit.getOfflinePlayer(criminalRecord.getOfficerId());
 
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("criminal_record_info_entry")
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_info_entry")
                     .replace("<id>", String.valueOf(criminalRecord.getId()))
                     .replace("<description>", criminalRecord.getDescription())
                     .replace("<officer>", (officer.getName() == null ? "Onbekend" : officer.getName()))
@@ -119,6 +119,6 @@ public class CriminalRecordCommand extends BaseCommand {
     }
 
     private String formatDate(long date) {
-        return new SimpleDateFormat(MessageConfiguration.message("criminal_record_date_format")).format(new Date(date));
+        return new SimpleDateFormat(MessageConfiguration.message("police_criminal_record_date_format")).format(new Date(date));
     }
 }
