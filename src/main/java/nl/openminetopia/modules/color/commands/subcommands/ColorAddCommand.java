@@ -26,14 +26,15 @@ public class ColorAddCommand extends BaseCommand {
     @CommandPermission("openminetopia.color.add")
     @Description("Add a color to a player.")
     public void prefix(Player player, OfflinePlayer offlinePlayer, OwnableColorType type, String draftColor) {
+
         if (offlinePlayer.getPlayer() == null) {
-            player.sendMessage(MessageConfiguration.component("player_not_found"));
+            ChatUtils.sendMessage(player, MessageConfiguration.message("player_not_found"));
             return;
         }
 
         final String colorId = draftColor.toLowerCase();
         if (!OpenMinetopia.getColorsConfiguration().exists(colorId)) {
-            player.sendMessage(MessageConfiguration.component("color_not_found"));
+            ChatUtils.sendMessage(player, MessageConfiguration.message("color_not_found"));
             return;
         }
 
@@ -43,49 +44,48 @@ public class ColorAddCommand extends BaseCommand {
         switch (type) {
             case PREFIX:
                 if (minetopiaPlayer.getColors().stream().anyMatch(prefixColor -> prefixColor.getColorId().equalsIgnoreCase(colorId) && prefixColor.getType() == type)) {
-                    player.sendMessage(MessageConfiguration.component("color_prefix_exists"));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_prefix_exists"));
                     return;
                 }
 
                 PrefixColor prefixColor = new PrefixColor(colorId, -1L);
                 minetopiaPlayer.addColor(prefixColor);
-                // TODO: Replace <color> with actual color
-                // OLD: player.sendMessage(ChatUtils.color("<dark_aqua>Je hebt de ").append(Component.text(colorId).append(ChatUtils.color(" kleur <dark_aqua>toegevoegd."))));
-                player.sendMessage(MessageConfiguration.component("color_prefix_added"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_prefix_added")
+                        .replace("<color>", prefixColor.getColorId()));
                 break;
 
             case CHAT:
                 if (minetopiaPlayer.getColors().stream().anyMatch(chatColor -> chatColor.getColorId().equalsIgnoreCase(colorId) && chatColor.getType() == type)) {
-                    player.sendMessage(MessageConfiguration.component("color_chat_exists"));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_chat_exists"));
                     return;
                 }
 
                 ChatColor chatColor = new ChatColor(colorId, -1L);
                 minetopiaPlayer.addColor(chatColor);
-                // TODO: Replace <color> with actual color
-                player.sendMessage(MessageConfiguration.component("color_chat_added"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_chat_added")
+                        .replace("<color>", chatColor.getColorId()));
                 break;
             case NAME:
                 if (minetopiaPlayer.getColors().stream().anyMatch(nameColor -> nameColor.getColorId().equalsIgnoreCase(colorId) && nameColor.getType() == type)) {
-                    player.sendMessage(MessageConfiguration.component("color_name_exists"));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_name_exists"));
                     return;
                 }
 
                 NameColor nameColor = new NameColor(colorId, -1L);
                 minetopiaPlayer.addColor(nameColor);
-                // TODO: Replace <color> with actual color
-                player.sendMessage(MessageConfiguration.component("color_name_added"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_name_added")
+                        .replace("<color>", nameColor.getColorId()));
                 break;
             case LEVEL:
                 if (minetopiaPlayer.getColors().stream().anyMatch(levelColor -> levelColor.getColorId().equalsIgnoreCase(colorId) && levelColor.getType() == type)) {
-                    player.sendMessage(MessageConfiguration.component("color_level_exists"));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_level_exists"));
                     return;
                 }
 
                 LevelColor levelColor = new LevelColor(colorId, -1L);
                 minetopiaPlayer.addColor(levelColor);
-                // TODO: Replace <color> with actual color
-                player.sendMessage(MessageConfiguration.component("color_level_added"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_level_added")
+                        .replace("<color>", levelColor.getColorId()));
 
                 break;
         }

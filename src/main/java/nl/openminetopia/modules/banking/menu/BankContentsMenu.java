@@ -5,6 +5,8 @@ import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
@@ -98,8 +100,10 @@ public class BankContentsMenu extends Menu {
         if (!PersistentDataUtil.contains(item, "bank_note_value")) return;
         if (PersistentDataUtil.getDouble(item, "bank_note_value") == null) return;
 
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
+        
         if(!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.DEPOSIT)) {
-            player.sendMessage(MessageConfiguration.component("banking_no_deposit_permission"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_deposit_permission"));
             return;
         }
 
@@ -108,8 +112,8 @@ public class BankContentsMenu extends Menu {
 
         item.setAmount(0);
         accountModel.setBalance(accountModel.getBalance() + totalValue);
-        // TODO: Replace <deposit_value> with the actual value
-        player.sendMessage(MessageConfiguration.component("banking_deposit_message"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
+                .replace("<deposit_value>", bankingModule.format(totalValue)));
         new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
     }
 
@@ -117,21 +121,23 @@ public class BankContentsMenu extends Menu {
         double balance = accountModel.getBalance();
         double totalValue = note.getValue() * amount;
 
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
+
         if (balance < totalValue) {
-            player.sendMessage(MessageConfiguration.component("banking_not_enough_money"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_not_enough_money"));
             return;
         }
 
         if(!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.WITHDRAW)) {
-            player.sendMessage(MessageConfiguration.component("banking_no_withdraw_permission"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_withdraw_permission"));
             return;
         }
 
         accountModel.setBalance(balance - totalValue);
 
         player.getInventory().addItem(note.toNote(amount));
-        // TODO: Replace <withdraw_value> with the actual value
-        player.sendMessage(MessageConfiguration.component("banking_withdraw_message"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_withdraw_message")
+                .replace("<withdraw_value>", bankingModule.format(totalValue)));
         new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
     }
 

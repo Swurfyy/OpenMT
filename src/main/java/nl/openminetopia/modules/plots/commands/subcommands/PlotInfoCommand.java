@@ -29,12 +29,12 @@ public class PlotInfoCommand extends BaseCommand {
         if (minetopiaPlayer == null) return;
 
         if (region == null) {
-            player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_invalid_location"));
             return;
         }
 
         if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
-            player.sendMessage(MessageConfiguration.component("plot_not_valid"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_not_valid"));
             return;
         }
 
@@ -46,22 +46,23 @@ public class PlotInfoCommand extends BaseCommand {
                 .map(memberId -> Bukkit.getOfflinePlayer(memberId).getName())
                 .collect(Collectors.joining(", "));
 
-        player.sendMessage(MessageConfiguration.component("plot_info_header"));
-        // TODO: Replace <plotname> with actual plot name.
-        player.sendMessage(MessageConfiguration.component("plot_info_title"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_header"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_title")
+                .replace("<plotname>", region.getId()));
         player.sendMessage(Component.empty());
-        // TODO: Replace <owners> with actual owners. (If there are no owners, replace with "Geen.")
-        player.sendMessage(MessageConfiguration.component("plot_info_owners"));
-        // TODO: Replace <members> with actual owners. (If there are no owners, replace with "Geen.")
-        player.sendMessage(MessageConfiguration.component("plot_info_members"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_owners")
+                .replace("<owners>", (region.getOwners().size() > 0 ? owners : "Geen.")));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_members")
+                .replace("<members>", (region.getMembers().size() > 0 ? members : "Geen.")));
 
-        if(region.getFlag(PlotModule.PLOT_DESCRIPTION) != null) {
+        if (region.getFlag(PlotModule.PLOT_DESCRIPTION) != null) {
             String description = region.getFlag(PlotModule.PLOT_DESCRIPTION);
-            // TODO: Replace <description> with actual description.
-            player.sendMessage(MessageConfiguration.component("plot_info_description"));
+            if (description != null && !description.isEmpty())
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_description")
+                        .replace("<description>", description));
         }
 
-        player.sendMessage(MessageConfiguration.component("plot_info_footer"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_footer"));
     }
 
 }

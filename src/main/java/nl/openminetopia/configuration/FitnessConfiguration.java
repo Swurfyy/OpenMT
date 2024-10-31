@@ -121,9 +121,12 @@ public class FitnessConfiguration extends ConfigurateConfig {
                 int minLevel = Integer.parseInt(range[0]);
                 int maxLevel = Integer.parseInt(range[1]);
 
+                double walkSpeed = val.node("walk-speed").getDouble(0.1);
+                List<String> effects = val.node("effects").getList(String.class, List.of("JUMP_BOOST:1"));
+
                 FitnessLevelEffect fitnessLevelEffect = new FitnessLevelEffect(
-                        val.node("walk-speed").getDouble(0.1),
-                        val.node("effects").getList(String.class, List.of("JUMP_BOOST:1"))
+                        walkSpeed,
+                        effects
                 );
 
                 for (int i = minLevel; i <= maxLevel; i++) {

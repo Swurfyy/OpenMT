@@ -17,4 +17,11 @@ public class FitnessCommand extends BaseCommand {
         help.showHelp();
     }
 
+    @Subcommand("trigger")
+    public void trigger(Player player) {
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
+
+        minetopiaPlayer.getFitness().getRunnable().run();
+    }
 }

@@ -28,7 +28,7 @@ banking_account_info_line3: "<gold> - Balance: <red><account_balance></red>"
 banking_account_info_line4: "<gold> - Users: <red><account_users></red>"
 banking_user_already_exists: "<red><player> is al toegevoegd op deze rekening."
 banking_user_added: "<gold>Je hebt</gold> <red><player></red><gold>toegevoegd aan de rekening</gold> <red><account_name></red> <gold>met de rechten</gold> <red><permission></red><gold>."
-banking_user_deleted: "<gold>Je hebt</gold> <red><player_name></red><gold>verwijderd van de de rekening</gold> <red><account_name></red><gold>."
+banking_user_deleted: "<gold>Je hebt</gold> <red><player></red><gold>verwijderd van de de rekening</gold> <red><account_name></red><gold>."
 banking_private_account: "Privérekening" # No nolors supported.
 banking_company_account: "Bedrijfsrekening" # No colors supported.
 banking_savings_account: "Spaarrekening" # No colors supported.
@@ -46,8 +46,8 @@ banking_note_lore2: "<yellow>Eigendom van de Centrale Bank."
 
 # Chat
 chat_no_players_in_range: "<red>Er zijn geen spelers in de buurt om je bericht te horen!"
-chat_chatspy_format: "<dark_gray>[<gray>ChatSpy<dark_gray>]<gray> <player_name>: <message>"
-chat_commandspy_format: "<dark_gray>[<gray>CommandSpy<dark_gray>]<gray> <player_name>: <command>"
+chat_chatspy_format: "<dark_gray>[<gray>ChatSpy<dark_gray>]<gray> <player>: <message>"
+chat_commandspy_format: "<dark_gray>[<gray>CommandSpy<dark_gray>]<gray> <player>: <command>"
 
 # Color
 color_not_found: "<red>Deze kleur bestaat niet."

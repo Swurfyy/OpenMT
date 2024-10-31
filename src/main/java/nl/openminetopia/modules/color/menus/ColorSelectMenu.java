@@ -45,8 +45,8 @@ public class ColorSelectMenu extends PaginatedMenu {
                     .setName(color.displayName());
 
             if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() < -1) icon.addLoreLine(MessageConfiguration.component("color_expired"));
-            // TODO: Replace <time> with millisToTime component
-            if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine(MessageConfiguration.component("color_expires_in"));
+            if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine(MessageConfiguration.message("color_expires_in")
+                    .replace("<time>", millisToTime(color.getExpiresAt() - System.currentTimeMillis())));
             if (color.getExpiresAt() == -1) icon.addLoreLine(MessageConfiguration.component("color_never_expires"));
 
             this.addItem(new Icon(icon.toItemStack(), (e) -> {
@@ -63,13 +63,14 @@ public class ColorSelectMenu extends PaginatedMenu {
                 (e) -> new ColorLockedMenu(player, this).open(player)));
     }
 
-    private Component millisToTime(long millis) {
+    private String millisToTime(long millis) {
         long hours = millisToHours(millis);
         long minutes = millisToMinutes(millis) - (hours * 60);
 
-        // TODO: Replace <hours> <minutes> <seconds> with actual values
-        return MessageConfiguration.component("color_time_format");
-
+        return MessageConfiguration.message("color_time_format")
+                .replace("<hours>", String.valueOf(hours))
+                .replace("<minutes>", String.valueOf(minutes))
+                .replace("<seconds>", String.valueOf(millisToSeconds(millis)));
     }
 
     private int millisToHours(long millis) {

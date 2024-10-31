@@ -6,10 +6,13 @@ import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("accounts|account|rekening")
@@ -22,18 +25,25 @@ public class BankingInfoCommand extends BaseCommand {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
 
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer((OfflinePlayer) sender);
+
         if (accountModel == null) {
-            sender.sendMessage(MessageConfiguration.component("banking_account_not_found"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
             return;
         }
 
-        // TODO: Replace <account_name> <account_id> <account_frozen> <account_balance> <account_users> with the actual values
-        // TODO: When boolean is used, show yes or no component.
-        sender.sendMessage(MessageConfiguration.component("banking_account_info_line1"));
-        sender.sendMessage(MessageConfiguration.component("banking_account_info_line2"));
-        sender.sendMessage(MessageConfiguration.component("banking_account_info_line3"));
-        sender.sendMessage(MessageConfiguration.component("banking_account_info_line4"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line1"), accountModel));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line2"), accountModel));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line3"), accountModel));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line4"), accountModel));
 
     }
 
+    private String replacePlaceholders(String message, BankAccountModel accountModel) {
+        return message.replace("<account_name>", accountModel.getName())
+                .replace("<account_id>", accountModel.getUniqueId().toString())
+                .replace("<account_frozen>", String.valueOf(accountModel.getFrozen()))
+                .replace("<account_balance>", String.valueOf(accountModel.getBalance()))
+                .replace("<account_users>", accountModel.getUsers().toString().replace("[", "").replace("]", ""));
+    }
 }

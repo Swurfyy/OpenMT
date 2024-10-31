@@ -46,14 +46,12 @@ public class PlotMembersCommand extends BaseCommand {
         }
 
         if (region.getMembers().contains(target.getUniqueId())) {
-            // TODO: Repalce <playername> with actual value.
-            player.sendMessage(MessageConfiguration.component("plot_member_already"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_member_already"));
             return;
         }
 
         region.getMembers().addPlayer(target.getUniqueId());
-        // TODO: Replace <playername> with actual value.
-        player.sendMessage(MessageConfiguration.component("plot_member_added"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_member_added"));
     }
 
     @Subcommand("removemember")

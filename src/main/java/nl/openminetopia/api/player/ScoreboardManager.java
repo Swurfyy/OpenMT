@@ -24,7 +24,7 @@ public class ScoreboardManager {
         return instance;
     }
 
-    public HashMap<UUID, Sidebar> scoreboards = new HashMap<>();
+    public final HashMap<UUID, Sidebar> scoreboards = new HashMap<>();
 
     public void updateBoard(MinetopiaPlayer minetopiaPlayer) {
         Sidebar sidebar = getScoreboard(minetopiaPlayer.getUuid());

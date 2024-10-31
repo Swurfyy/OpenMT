@@ -33,6 +33,10 @@ public class FitnessRunnable extends BukkitRunnable {
             return;
         }
 
+        fitness.getFitnessModel().getBoosters().forEach(booster -> {
+            if (booster.isExpired()) fitness.removeBooster(booster);
+        });
+
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
             FitnessUtils.clearFitnessEffects(player);

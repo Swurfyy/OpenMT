@@ -28,18 +28,18 @@ public class ColorRemoveCommand extends BaseCommand {
     @Description("Remove a color from a player.")
     public void prefix(Player player, OfflinePlayer offlinePlayer, OwnableColorType type, String draftColor) {
         if (offlinePlayer.getPlayer() == null) {
-            player.sendMessage(MessageConfiguration.component("player_not_found"));
-            return;
-        }
-
-        final String colorId = draftColor.toLowerCase();
-        if (!OpenMinetopia.getColorsConfiguration().exists(colorId)) {
-            player.sendMessage(MessageConfiguration.component("color_not_found"));
+            ChatUtils.sendMessage(player, MessageConfiguration.message("player_not_found"));
             return;
         }
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer.getPlayer());
         if (minetopiaPlayer == null) return;
+
+        final String colorId = draftColor.toLowerCase();
+        if (!OpenMinetopia.getColorsConfiguration().exists(colorId)) {
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_not_found"));
+            return;
+        }
 
         switch (type) {
             case PREFIX:
@@ -48,13 +48,13 @@ public class ColorRemoveCommand extends BaseCommand {
                         .map(c -> (PrefixColor) c)
                         .findAny();
                 if (prefixColor.isEmpty()) {
-                    player.sendMessage(MessageConfiguration.component("color_prefix_not_found"));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_prefix_not_found"));
                     return;
                 }
 
                 minetopiaPlayer.removeColor(prefixColor.get());
-                // TODO: Replace <color> with the actual color
-                player.sendMessage(MessageConfiguration.component("color_prefix_removed"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_prefix_removed")
+                        .replace("<color>", prefixColor.get().getColorId()));
                 break;
 
             case CHAT:
@@ -63,13 +63,13 @@ public class ColorRemoveCommand extends BaseCommand {
                         .map(c -> (ChatColor) c)
                         .findAny();
                 if (chatColor.isEmpty()) {
-                    player.sendMessage(MessageConfiguration.component("color_chat_not_found"));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_chat_not_found"));
                     return;
                 }
 
                 minetopiaPlayer.removeColor(chatColor.get());
-                // TODO: Replace <color> with the actual color
-                player.sendMessage(MessageConfiguration.component("color_chat_removed"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_chat_removed")
+                        .replace("<color>", chatColor.get().getColorId()));
                 break;
 
             case NAME:
@@ -78,13 +78,13 @@ public class ColorRemoveCommand extends BaseCommand {
                         .map(c -> (NameColor) c)
                         .findAny();
                 if (nameColor.isEmpty()) {
-                    player.sendMessage(MessageConfiguration.component("color_name_not_found"));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_name_not_found"));
                     return;
                 }
 
                 minetopiaPlayer.removeColor(nameColor.get());
-                // TODO: Replace <color> with the actual color
-                player.sendMessage(MessageConfiguration.component("color_name_removed"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_name_removed")
+                        .replace("<color>", nameColor.get().getColorId()));
                 break;
 
             case LEVEL:
@@ -93,13 +93,13 @@ public class ColorRemoveCommand extends BaseCommand {
                         .map(c -> (LevelColor) c)
                         .findAny();
                 if (levelColor.isEmpty()) {
-                    player.sendMessage(MessageConfiguration.component("color_level_not_found"));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_level_not_found"));
                     return;
                 }
 
                 minetopiaPlayer.removeColor(levelColor.get());
-                // TODO: Replace <color> with the actual color
-                player.sendMessage(MessageConfiguration.component("color_level_removed"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_level_removed")
+                        .replace("<color>", levelColor.get().getColorId()));
                 break;
         }
     }

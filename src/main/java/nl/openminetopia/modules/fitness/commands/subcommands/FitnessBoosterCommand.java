@@ -6,6 +6,7 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -24,11 +25,12 @@ public class FitnessBoosterCommand extends BaseCommand {
         long expiresAtMillis = expiresAt == -1 ? -1 : System.currentTimeMillis() + (expiresAt * 1000);
 
         FitnessBoosterModel fitnessBooster = new FitnessBoosterModel();
+        fitnessBooster.setFitnessId(minetopiaPlayer.getFitness().getFitnessModel().getId());
         fitnessBooster.setAmount(amount);
         fitnessBooster.setExpiresAt(expiresAtMillis);
         minetopiaPlayer.getFitness().addBooster(fitnessBooster);
 
-        // TODO: Replace <playername> with actual value
-        player.sendMessage(MessageConfiguration.component("fitness_booster_added_to"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("fitness_booster_added_to")
+                .replace("<playername>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName())));
     }
 }

@@ -3,6 +3,8 @@ package nl.openminetopia.modules.color.commands.subcommands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
@@ -15,10 +17,11 @@ public class ColorCreateCommand extends BaseCommand {
     @CommandPermission("openminetopia.color.create")
     @Description("Add a new color to the configuration.")
     public void create(Player player, String identifier, String displayName, String prefixColor) {
-        OpenMinetopia.getColorsConfiguration().createColor(identifier, displayName, prefixColor);
-        player.sendMessage(MessageConfiguration.component("color_created"));
-        // TODO: Replace <color> <identifier> with actual values
-        player.sendMessage(ChatUtils.color("<gold>Succesvol toegevoegd, kleur: " + prefixColor + identifier));
-    }
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
 
+        OpenMinetopia.getColorsConfiguration().createColor(identifier, displayName, prefixColor);
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_created")
+                .replace("<color>", displayName)
+                .replace("<identifier>", identifier));
+    }
 }

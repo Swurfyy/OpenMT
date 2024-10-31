@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -15,8 +16,9 @@ import java.util.Optional;
 public class SpyUtils {
 
     public void chatSpy(Player player, String message, List<Player> ignore) {
-        // TODO: Replace <player_name> <message> with actual values
-        Component spiedMessage = MessageConfiguration.component("chat_chatspy_format");
+        String spiedMessage = MessageConfiguration.message("chat_chatspy_format")
+                .replace("<player>", player.getName())
+                .replace("<message>", message);
 
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
@@ -26,13 +28,14 @@ public class SpyUtils {
             if (optional.isEmpty()) continue;
 
             MinetopiaPlayer mPlayer = optional.get();
-            if (mPlayer.isChatSpyEnabled()) onlinePlayer.sendMessage(spiedMessage);
+            if (mPlayer.isChatSpyEnabled()) ChatUtils.sendFormattedMessage(mPlayer, spiedMessage);
         }
     }
 
     public void commandSpy(Player player, String command) {
-        // TODO: Replace <player_name> <command> with actual values
-        Component spiedMessage = MessageConfiguration.component("chat_commandspy_format");
+        String spiedMessage = MessageConfiguration.message("chat_commandspy_format")
+                .replace("<player>", player.getName())
+                .replace("<command>", command);
 
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
@@ -41,7 +44,7 @@ public class SpyUtils {
             if (optional.isEmpty()) continue;
 
             MinetopiaPlayer mPlayer = optional.get();
-            if (mPlayer.isCommandSpyEnabled()) onlinePlayer.sendMessage(spiedMessage);
+            if (mPlayer.isCommandSpyEnabled()) ChatUtils.sendFormattedMessage(mPlayer, spiedMessage);
         }
     }
 
