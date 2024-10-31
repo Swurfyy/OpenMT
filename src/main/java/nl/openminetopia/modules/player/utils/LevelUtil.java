@@ -2,8 +2,7 @@ package nl.openminetopia.modules.player.utils;
 
 import lombok.experimental.UtilityClass;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
-import nl.openminetopia.api.player.fitness.statistics.types.TotalStatistic;
+import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.LevelCheckConfiguration;
 import nl.openminetopia.utils.WorldGuardUtils;
@@ -25,9 +24,9 @@ public class LevelUtil {
         }
 
         // Points per 20 fitness
-        TotalStatistic totalStatistic = (TotalStatistic) minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.TOTAL);
-        if (totalStatistic == null) return 0;
-        for (int fitness = totalStatistic.getFitnessGained(); fitness >= 20; fitness -= 20) {
+        Fitness fitness = minetopiaPlayer.getFitness();
+        if (fitness == null) return 0;
+        for (int i = fitness.getTotalFitness(); i >= 20; i -= 20) {
             points += configuration.getPointsPer20Fitness();
         }
 
@@ -49,6 +48,7 @@ public class LevelUtil {
 
         level = Math.max(OpenMinetopia.getDefaultConfiguration().getDefaultLevel(),
                 Math.min(level, OpenMinetopia.getLevelcheckConfiguration().getMaxLevel()));
+
 
         return level;
     }

@@ -18,12 +18,10 @@ public class FitnessCommand extends BaseCommand {
     }
 
     @Subcommand("trigger")
-    public void onTriggerCommand(Player player) {
-        // Trigger the fitness runnable
+    public void trigger(Player player) {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
         minetopiaPlayer.getFitness().getRunnable().run();
-
     }
 }

@@ -7,15 +7,14 @@ import com.jazzkuh.inventorylib.objects.Menu;
 import com.jeff_media.customblockdata.CustomBlockData;
 import lombok.Getter;
 import lombok.Setter;
-import nl.openminetopia.configuration.ColorsConfiguration;
-import nl.openminetopia.configuration.DefaultConfiguration;
-import nl.openminetopia.configuration.LevelCheckConfiguration;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.*;
 import nl.openminetopia.modules.ModuleManager;
+import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.chat.ChatModule;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.core.CoreModule;
 import nl.openminetopia.modules.data.DataModule;
+import nl.openminetopia.modules.detectiongates.DetectionModule;
 import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.misc.MiscModule;
 import nl.openminetopia.modules.places.PlacesModule;
@@ -28,6 +27,8 @@ import nl.openminetopia.modules.staff.StaffModule;
 import nl.openminetopia.modules.teleporter.TeleporterModule;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.placeholderapi.OpenMinetopiaExpansion;
+import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -36,22 +37,37 @@ public final class OpenMinetopia extends JavaPlugin {
 
     @Getter
     private static OpenMinetopia instance;
+
     @Getter
     private static ModuleManager moduleManager;
+
     @Getter
+    @Setter
     private static PaperCommandManager commandManager;
+
     @Getter
     @Setter
     private static DefaultConfiguration defaultConfiguration;
+
     @Getter
     @Setter
     private static MessageConfiguration messageConfiguration;
+
     @Getter
     @Setter
     private static LevelCheckConfiguration levelcheckConfiguration;
+
     @Getter
     @Setter
     private static ColorsConfiguration colorsConfiguration;
+
+    @Getter
+    @Setter
+    private static BankingConfiguration bankingConfiguration;
+
+    @Getter
+    @Setter
+    private static FitnessConfiguration fitnessConfiguration;
 
     @Override
     public void onEnable() {
@@ -65,6 +81,11 @@ public final class OpenMinetopia extends JavaPlugin {
         defaultConfiguration = new DefaultConfiguration(getDataFolder());
         defaultConfiguration.saveConfiguration();
 
+        if (defaultConfiguration.isMetricsEnabled()) {
+            Metrics metrics = new Metrics(this, 23547);
+            metrics.addCustomChart(new SimplePie("storage", () -> defaultConfiguration.getDatabaseType().toString()));
+        }
+
         messageConfiguration = new MessageConfiguration(getDataFolder());
         messageConfiguration.saveConfiguration();
 
@@ -74,9 +95,16 @@ public final class OpenMinetopia extends JavaPlugin {
         colorsConfiguration = new ColorsConfiguration(getDataFolder());
         colorsConfiguration.saveConfiguration();
 
+        bankingConfiguration = new BankingConfiguration(getDataFolder());
+        bankingConfiguration.saveConfiguration();
+
+        fitnessConfiguration = new FitnessConfiguration(getDataFolder());
+        fitnessConfiguration.saveConfiguration();
+
         moduleManager.register(
                 new CoreModule(),
                 new DataModule(),
+                new BankingModule(),
                 new PlayerModule(),
                 new FitnessModule(),
                 new StaffModule(),
@@ -86,6 +114,8 @@ public final class OpenMinetopia extends JavaPlugin {
                 new PlacesModule(),
                 new ScoreboardModule(),
                 new PlotModule(),
+                new TeleporterModule(),
+                new DetectionModule()
                 new TeleporterModule(),
                 new PoliceModule(),
                 new MiscModule()
@@ -99,7 +129,10 @@ public final class OpenMinetopia extends JavaPlugin {
         Menu.init(this);
         InventoryLoader.setFormattingProvider(message -> ChatUtils.color("<red>" + message));
 
-        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) new OpenMinetopiaExpansion().register();
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            new OpenMinetopiaExpansion().register();
+            getLogger().info("Registered PlaceholderAPI expansion.");
+        }
     }
 
     @Override

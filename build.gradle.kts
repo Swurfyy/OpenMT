@@ -2,13 +2,13 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     java
-    id("io.freefair.lombok") version "8.10"
+    id("io.freefair.lombok") version "8.10.2"
     id("com.gradleup.shadow") version "8.3.3"
-    id("io.papermc.paperweight.userdev") version "1.7.3"
+    id("io.papermc.paperweight.userdev") version "1.7.4"
 }
 
 group = "nl.openminetopia"
-version = "1.0-SNAPSHOT"
+version = "1.1-SNAPSHOT"
 
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
 
@@ -52,15 +52,15 @@ dependencies {
     /* Database */
     compileOnly("com.zaxxer:HikariCP:6.0.0")
     compileOnly("mysql:mysql-connector-java:8.0.33")
-    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.4.1")
-    compileOnly("org.xerial:sqlite-jdbc:3.46.1.3")
+    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.5.0")
+    compileOnly("org.xerial:sqlite-jdbc:3.47.0.0")
     implementation("com.github.Mindgamesnl:storm:e1f961b480")
 
     /* Command Framework */
     implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
 
     /* Scoreboard */
-    val scoreboardLibraryVersion = "2.1.12"
+    val scoreboardLibraryVersion = "2.2.0"
     implementation("net.megavex:scoreboard-library-api:$scoreboardLibraryVersion")
     runtimeOnly("net.megavex:scoreboard-library-implementation:$scoreboardLibraryVersion")
     runtimeOnly("net.megavex:scoreboard-library-modern:$scoreboardLibraryVersion:mojmap")
@@ -77,6 +77,14 @@ dependencies {
 
     /* InventoryLib (JAZZZZ) */
     implementation("com.github.Jazzkuh.InventoryLib:spigot:bc68f4f677")
+
+    /* bStats */
+    implementation("org.bstats:bstats-bukkit:3.1.0")
+
+    /* Vault */
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7.1") {
+        exclude(group = "org.bukkit", module = "bukkit")
+    }
 }
 
 val targetJavaVersion = 21
@@ -121,6 +129,7 @@ tasks.named<ShadowJar>("shadowJar") {
     relocate("com.jeff_media.customblockdata", "nl.openminetopia.shaded.customblockdata")
     relocate("com.jeff_media.morepersistentdatatypes", "nl.openminetopia.shaded.morepersistentdatatypes")
     relocate("com.jazzkuh.inventorylib", "nl.openminetopia.shaded.inventorylib")
+    relocate("org.bstats", "nl.openminetopia.shaded.bstats")
 }
 
 tasks.build {

@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
@@ -15,24 +16,31 @@ public class PrefixRemoveCommand extends BaseCommand {
     @Subcommand("remove")
     @Syntax("<player> <prefix>")
     @CommandPermission("openminetopia.prefix.remove")
-    @CommandCompletion("@players")
+    @CommandCompletion("@players @playerPrefixes")
     @Description("Remove a prefix from a player.")
-    public static void removePrefix(Player player, OfflinePlayer offlinePlayer, String prefixName) {
+    public void removePrefix(Player player, OfflinePlayer offlinePlayer, String prefixName) {
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
+
         if (offlinePlayer.getPlayer() == null) {
-            player.sendMessage("This player does not exist.");
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
             return;
         }
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer.getPlayer());
-        if (minetopiaPlayer == null) return;
+        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer);
+        if (targetMinetopiaPlayer == null) return;
 
-        for (Prefix prefix : minetopiaPlayer.getPrefixes()) {
+        for (Prefix prefix : targetMinetopiaPlayer.getPrefixes()) {
             if (prefix.getPrefix().equalsIgnoreCase(prefixName)) {
-                player.sendMessage("Removed the prefix from the player.");
-                minetopiaPlayer.removePrefix(prefix);
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_removed")
+                        .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
+                        .replace("<prefix>", prefix.getPrefix()));
+                targetMinetopiaPlayer.removePrefix(prefix);
                 return;
             }
         }
-        player.sendMessage(ChatUtils.color("<red>This player does not have this prefix."));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_not_found")
+                .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
+                .replace("<prefix>", prefixName));
     }
 }

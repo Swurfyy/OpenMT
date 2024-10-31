@@ -6,7 +6,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.api.player.fitness.statistics.enums.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import org.bukkit.entity.Player;
@@ -27,7 +26,9 @@ public class ChatUtils {
 
         int levelUps = minetopiaPlayer.getCalculatedLevel() - minetopiaPlayer.getLevel();
 
-        message = message.replace("<level_color>", minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).color())
+        message = message
+                .replace("<player>", player.getName())
+                .replace("<level_color>", minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).color())
                 .replace("<level>", minetopiaPlayer.getLevel() + "")
                 .replace("<calculated_level>", minetopiaPlayer.getCalculatedLevel() + "")
                 .replace("<levelups>", levelUps == 0 ? "<gold>0" : (levelUps > 0 ? "<green>+" + levelUps : "<red>" + levelUps))
@@ -53,8 +54,8 @@ public class ChatUtils {
         }
 
         if (minetopiaPlayer.getFitness().getStatistics() != null && !minetopiaPlayer.getFitness().getStatistics().isEmpty()) {
-            message = message.replace("<fitness>", minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.TOTAL).getFitnessGained() + "")
-                    .replace("<max_fitness>", OpenMinetopia.getDefaultConfiguration().getMaxFitnessLevel() + "");
+            message = message.replace("<fitness>", minetopiaPlayer.getFitness().getTotalFitness() + "")
+                    .replace("<max_fitness>", OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel() + "");
         }
 
         if (OpenMinetopia.getInstance().getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {

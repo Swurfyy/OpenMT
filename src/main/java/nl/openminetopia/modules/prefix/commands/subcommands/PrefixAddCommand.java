@@ -4,7 +4,10 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.modules.player.utils.PlaytimeUtil;
 import nl.openminetopia.modules.prefix.objects.Prefix;
+import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -15,32 +18,46 @@ public class PrefixAddCommand extends BaseCommand {
      * Add a prefix to a player.
      * @param expiresAt The time in minutes when the prefix expires.
      */
-
     @Subcommand("add")
-    @Syntax("<player> <expiresAt> <prefix>")
+    @Syntax("<player> <minutes> <prefix>")
     @CommandCompletion("@players")
     @CommandPermission("openminetopia.prefix.add")
     @Description("Add a prefix to a player.")
-    public static void addPrefix(Player player, OfflinePlayer offlinePlayer, Integer expiresAt, String prefix) {
+    public void addPrefix(Player player, OfflinePlayer offlinePlayer, Integer expiresAt, String prefix) {
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
+
         if (offlinePlayer.getPlayer() == null) {
-            player.sendMessage("This player does not exist.");
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
             return;
         }
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer.getPlayer());
-        if (minetopiaPlayer == null) return;
+        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer);
+        if (targetMinetopiaPlayer == null) return;
 
-        for (Prefix prefix1 : minetopiaPlayer.getPrefixes()) {
+        for (Prefix prefix1 : targetMinetopiaPlayer.getPrefixes()) {
             if (prefix1.getPrefix().equalsIgnoreCase(prefix)) {
-                player.sendMessage("This player already has this prefix.");
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_already_exists")
+                        .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
+                        .replace("<prefix>", prefix));
                 return;
             }
         }
 
-        player.sendMessage("Added the prefix to the player.");
-
         long expiresAtMillis = System.currentTimeMillis() + (expiresAt * 60 * 1000);
+
+        if (expiresAt == -1) expiresAtMillis = -1;
+
         Prefix prefix1 = new Prefix(prefix, expiresAtMillis);
-        minetopiaPlayer.addPrefix(prefix1);
+        targetMinetopiaPlayer.addPrefix(prefix1);
+
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_added")
+                .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
+                .replace("<prefix>", prefix)
+                .replace("<time>", expiresAt == -1 ? "nooit" : PlaytimeUtil.formatPlaytime(minutesToMillis(expiresAt))));
+    }
+
+    private int minutesToMillis(int minutes) {
+        return minutes * 60 * 1000;
     }
 }

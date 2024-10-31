@@ -1,0 +1,124 @@
+fitness:
+  max-fitness-level: 225
+  default-fitness-level: 20
+  rain-slowdown-enabled: false
+  statistics:
+    drinking:
+      max-fitness: 20
+      points-per-potion: 0.05
+      points-per-water-bottle: 0.02
+      points-per-fitness-level: 1
+      drinking-cooldown: 5
+    health:
+      max-fitness: 10
+      check-interval: 3600 # How often the health is checked in seconds, based on playtime
+      points-above-9-hearts: 0.08
+      points-below-5-hearts: -0.066
+      points-below-2-hearts: -0.1
+      points-per-fitness-level: 1
+    eating:
+      max-fitness: 20
+      points-for-luxury-food: 0.05
+      points-for-cheap-food: 0.02
+      points-per-fitness-level: 1
+      food-items:
+        luxury:
+          - COOKED_BEEF
+          - MUSHROOM_STEW
+          - COOKED_PORKCHOP
+          - COOKED_SALMON
+          - COOKED_COD
+          - BAKED_POTATO
+          - COOKED_RABBIT
+        cheap:
+          - APPLE
+          - BREAD
+          - MELON_BLOCK
+          - RAW_FISH
+          - COOKED_CHICKEN
+          - COOKED_MUTTON
+          - COOKIE
+    walking:
+      max-fitness: 30
+      cm-per-level: 1000000
+    sprinting:
+      max-fitness: 40
+      cm-per-level: 2000000
+    climbing:
+      max-fitness: 30
+      cm-per-level: 500000
+    swimming:
+      max-fitness: 30
+      cm-per-level: 600000
+    flying:
+      max-fitness: 30
+      cm-per-level: 3000000
+  death-punishment:
+    duration: 1440
+    enabled: true
+    amount: -20
+  levels:
+    1-9:
+      walk-speed: 0.1
+      effects:
+        - JUMP_BOOST:0
+    10-19:
+      walk-speed: 0.12
+      effects:
+        - JUMP_BOOST:0
+    20-29:
+      walk-speed: 0.15
+      effects:
+        - JUMP_BOOST:0
+    30-39:
+      walk-speed: 0.16
+      effects:
+        - JUMP_BOOST:0
+    40-49:
+      walk-speed: 0.17
+      effects:
+        - JUMP_BOOST:0
+    50-59:
+      walk-speed: 0.19
+      effects:
+        - JUMP_BOOST:0
+    60-69:
+      walk-speed: 0.19
+      effects:
+        - JUMP_BOOST:0
+    70-79:
+      walk-speed: 0.2
+      effects:
+        - JUMP_BOOST:0
+    80-99:
+      walk-speed: 0.22
+      effects:
+        - JUMP_BOOST:0
+    100-119:
+      walk-speed: 0.235
+      effects:
+        - JUMP_BOOST:0
+    120-139:
+      walk-speed: 0.25
+      effects:
+        - JUMP_BOOST:0
+    140-159:
+      walk-speed: 0.27
+      effects:
+        - JUMP_BOOST:1
+    160-179:
+      walk-speed: 0.29
+      effects:
+        - JUMP_BOOST:2
+    180-199:
+      walk-speed: 0.31
+      effects:
+        - JUMP_BOOST:2
+    200-209:
+      walk-speed: 0.325
+      effects:
+        - JUMP_BOOST:3
+    210-225:
+      walk-speed: 0.335
+      effects:
+        - JUMP_BOOST:3

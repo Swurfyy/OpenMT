@@ -1,22 +1,20 @@
 package nl.openminetopia.modules.color.enums;
 
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.color.objects.*;
 
 @Getter
 public enum OwnableColorType {
-    PREFIX("<red>Prefixkleur", OpenMinetopia.getDefaultConfiguration().getDefaultPrefixColor()),
-    CHAT("<green>Chatkleur", OpenMinetopia.getDefaultConfiguration().getDefaultChatColor()),
-    NAME("<blue>Naamkleur", OpenMinetopia.getDefaultConfiguration().getDefaultNameColor()),
-    LEVEL("<light_purple>Levelkleur", OpenMinetopia.getDefaultConfiguration().getDefaultLevelColor());
+    PREFIX(MessageConfiguration.message("color_prefix_display_name")),
+    CHAT(MessageConfiguration.message("color_chat_display_name")),
+    NAME(MessageConfiguration.message("color_name_display_name")),
+    LEVEL(MessageConfiguration.message("color_level_display_name")),;
 
     private final String displayName;
-    private final String defaultColor;
 
-    OwnableColorType(String displayName, String defaultColor) {
+    OwnableColorType(String displayName) {
         this.displayName = displayName;
-        this.defaultColor = defaultColor;
     }
 
     public Class<? extends OwnableColor> correspondingClass() {
@@ -27,4 +25,5 @@ public enum OwnableColorType {
             case LEVEL -> LevelColor.class;
         };
     }
+
 }

@@ -9,7 +9,7 @@ import co.aikar.commands.annotation.HelpCommand;
 public class ModCommand extends BaseCommand {
 
     @HelpCommand
-    public void onHelp(CommandHelp help) {
+    public void help(CommandHelp help) {
         help.showHelp();
     }
 }

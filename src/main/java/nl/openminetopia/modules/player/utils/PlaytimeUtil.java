@@ -1,6 +1,9 @@
 package nl.openminetopia.modules.player.utils;
 
 import lombok.experimental.UtilityClass;
+import net.kyori.adventure.text.Component;
+import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.utils.ChatUtils;
 
 @UtilityClass
 public class PlaytimeUtil {
@@ -10,6 +13,10 @@ public class PlaytimeUtil {
         int hours = (playtimeInSeconds % 86400) / 3600;
         int minutes = ((playtimeInSeconds % 86400) % 3600) / 60;
         int seconds = ((playtimeInSeconds % 86400) % 3600) % 60;
-        return "<aqua>" + days + " <dark_aqua>dagen, <aqua>" + hours + " <dark_aqua>uren, <aqua>"+ minutes + " <dark_aqua>minuten, <aqua>" + seconds + " <dark_aqua>seconden.";
+        return MessageConfiguration.message("player_time_format")
+                .replace("<days>", days + "")
+                .replace("<hours>", hours + "")
+                .replace("<minutes>", minutes + "")
+                .replace("<seconds>", seconds + "");
     }
 }

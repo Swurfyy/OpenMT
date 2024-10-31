@@ -2,7 +2,7 @@ package nl.openminetopia.modules.staff.chat.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.OnlineMinetopiaPlayer;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -17,7 +17,7 @@ public class PlayerChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncChatEvent event) {
         Player source = event.getPlayer();
-        OnlineMinetopiaPlayer minetopiaPlayer = (OnlineMinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(source);
+        MinetopiaPlayer minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(source);
         if (minetopiaPlayer == null) return;
 
         if (!source.hasPermission("openminetopia.staffchat") || !minetopiaPlayer.isStaffchatEnabled()) return;
