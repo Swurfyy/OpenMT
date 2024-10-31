@@ -15,7 +15,6 @@ public class DataModule extends Module {
 
     @Override
     public void enable() {
-        // TODO: Get this value from the config
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
         DatabaseType type = configuration.getDatabaseType();
 

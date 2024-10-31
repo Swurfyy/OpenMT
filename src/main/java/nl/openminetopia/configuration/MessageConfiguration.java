@@ -17,7 +17,7 @@ public class MessageConfiguration extends ConfigurateConfig {
         super(file, "messages.yml", "default-messages.yml");
 
         rootNode.childrenMap().forEach((s, node) -> {
-            String identifier = (String) s;
+            if (!(s instanceof String identifier)) return;
             messages.put(identifier, node.getString());
         });
     }

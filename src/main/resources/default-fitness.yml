@@ -59,66 +59,66 @@ fitness:
     amount: -20
   levels:
     1-9:
-      effects:
-        - JUMP_BOOST:0
       walk-speed: 0.1
+      effects:
+        - JUMP_BOOST:0
     10-19:
-      effects:
-        - JUMP_BOOST:0
       walk-speed: 0.12
+      effects:
+        - JUMP_BOOST:0
     20-29:
-      effects:
-        - JUMP_BOOST:0
       walk-speed: 0.15
+      effects:
+        - JUMP_BOOST:0
     30-39:
-      effects:
-        - JUMP_BOOST:0
       walk-speed: 0.16
+      effects:
+        - JUMP_BOOST:0
     40-49:
-      effects:
-        - JUMP_BOOST:0
       walk-speed: 0.17
+      effects:
+        - JUMP_BOOST:0
     50-59:
+      walk-speed: 0.19
       effects:
         - JUMP_BOOST:0
-      walk-speed: 0.19
     60-69:
-      effects:
-        - JUMP_BOOST:0
       walk-speed: 0.19
+      effects:
+        - JUMP_BOOST:0
     70-79:
-      effects:
-        - JUMP_BOOST:0
       walk-speed: 0.2
+      effects:
+        - JUMP_BOOST:0
     80-99:
-      effects:
-        - JUMP_BOOST:0
       walk-speed: 0.22
+      effects:
+        - JUMP_BOOST:0
     100-119:
-      effects:
-        - JUMP_BOOST:0
       walk-speed: 0.235
-    120-139:
       effects:
         - JUMP_BOOST:0
+    120-139:
       walk-speed: 0.25
+      effects:
+        - JUMP_BOOST:0
     140-159:
+      walk-speed: 0.27
       effects:
         - JUMP_BOOST:1
-      walk-speed: 0.27
     160-179:
-      effects:
-        - JUMP_BOOST:2
       walk-speed: 0.29
-    180-199:
       effects:
         - JUMP_BOOST:2
+    180-199:
       walk-speed: 0.31
+      effects:
+        - JUMP_BOOST:2
     200-209:
-      effects:
-        - JUMP_BOOST:3
       walk-speed: 0.325
-    210-225:
       effects:
         - JUMP_BOOST:3
+    210-225:
       walk-speed: 0.335
+      effects:
+        - JUMP_BOOST:3

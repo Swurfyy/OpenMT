@@ -24,6 +24,7 @@ public class PlayerDeathListener implements Listener {
         int punishmentInMillis = configuration.getFitnessDeathPunishmentDuration() * 60 * 1000;
 
         FitnessBoosterModel fitnessBooster = new FitnessBoosterModel();
+        fitnessBooster.setFitnessId(minetopiaPlayer.getFitness().getFitnessModel().getId());
         fitnessBooster.setAmount(configuration.getFitnessDeathPunishmentAmount());
         fitnessBooster.setExpiresAt(System.currentTimeMillis() + punishmentInMillis);
 

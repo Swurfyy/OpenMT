@@ -8,6 +8,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.kyori.adventure.text.Component;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.WorldGuardUtils;
@@ -28,12 +29,12 @@ public class PlotInfoCommand extends BaseCommand {
         if (minetopiaPlayer == null) return;
 
         if (region == null) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Je staat niet op een geldig plot."));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_invalid_location"));
             return;
         }
 
         if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Dit is geen geldig plot."));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_not_valid"));
             return;
         }
 
@@ -45,18 +46,23 @@ public class PlotInfoCommand extends BaseCommand {
                 .map(memberId -> Bukkit.getOfflinePlayer(memberId).getName())
                 .collect(Collectors.joining(", "));
 
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua><st>----------------------------------------------"));
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Plot informatie voor: <aqua>" + region.getId()));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_header"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_title")
+                .replace("<plotname>", region.getId()));
         player.sendMessage(Component.empty());
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Owners: <aqua>" + (region.getOwners().size() > 0 ? owners : "Geen.")));
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Members: <aqua>" + (region.getMembers().size() > 0 ? members : "Geen.")));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_owners")
+                .replace("<owners>", (region.getOwners().size() > 0 ? owners : "Geen.")));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_members")
+                .replace("<members>", (region.getMembers().size() > 0 ? members : "Geen.")));
 
-        if(region.getFlag(PlotModule.PLOT_DESCRIPTION) != null) {
+        if (region.getFlag(PlotModule.PLOT_DESCRIPTION) != null) {
             String description = region.getFlag(PlotModule.PLOT_DESCRIPTION);
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Beschrijving: <aqua>" + description));
+            if (description != null && !description.isEmpty())
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_description")
+                        .replace("<description>", description));
         }
 
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua><st>----------------------------------------------"));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_footer"));
     }
 
 }

@@ -5,6 +5,9 @@ import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
@@ -97,8 +100,10 @@ public class BankContentsMenu extends Menu {
         if (!PersistentDataUtil.contains(item, "bank_note_value")) return;
         if (PersistentDataUtil.getDouble(item, "bank_note_value") == null) return;
 
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
+        
         if(!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.DEPOSIT)) {
-            player.sendMessage(ChatUtils.color("<red>Je hebt geen recht om geld te storten op deze rekening."));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_deposit_permission"));
             return;
         }
 
@@ -107,7 +112,8 @@ public class BankContentsMenu extends Menu {
 
         item.setAmount(0);
         accountModel.setBalance(accountModel.getBalance() + totalValue);
-        player.sendMessage(ChatUtils.color("<gold>Je hebt <red>" + bankingModule.format(totalValue) + " <gold>gestort naar je rekening."));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
+                .replace("<deposit_value>", bankingModule.format(totalValue)));
         new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
     }
 
@@ -115,20 +121,23 @@ public class BankContentsMenu extends Menu {
         double balance = accountModel.getBalance();
         double totalValue = note.getValue() * amount;
 
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
+
         if (balance < totalValue) {
-            player.sendMessage(ChatUtils.color("<red>Je hebt niet genoeg op je rekening staan!"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_not_enough_money"));
             return;
         }
 
         if(!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.WITHDRAW)) {
-            player.sendMessage(ChatUtils.color("<red>Je hebt geen recht om geld op te nemen van deze rekening."));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_withdraw_permission"));
             return;
         }
 
         accountModel.setBalance(balance - totalValue);
 
         player.getInventory().addItem(note.toNote(amount));
-        player.sendMessage(ChatUtils.color("<gold>Je hebt <red>" + bankingModule.format(amount * note.getValue()) + " <gold>opgenomen van je rekening."));
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_withdraw_message")
+                .replace("<withdraw_value>", bankingModule.format(totalValue)));
         new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
     }
 
@@ -148,8 +157,8 @@ public class BankContentsMenu extends Menu {
         private ItemStack toNote(int amount) {
             return new ItemBuilder(material, amount)
                     .setName("<gold>" + bankingModule.format(value))
-                    .addLoreLine("<yellow>Officieel Horizons bankbiljet.")
-                    .addLoreLine("<yellow>Eigendom van de Centrale Bank.")
+                    .addLoreLine(MessageConfiguration.component("banking_note_lore1"))
+                    .addLoreLine(MessageConfiguration.component("banking_note_lore2"))
                     .setNBT("bank_note_value", value)
                     .toItemStack();
         }

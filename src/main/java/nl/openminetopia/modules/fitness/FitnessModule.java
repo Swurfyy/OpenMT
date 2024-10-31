@@ -25,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
 @Getter
 public class FitnessModule extends Module {
 
-    public Map<UUID, Long> lastDrinkingTimes = new HashMap<>();
+    public final Map<UUID, Long> lastDrinkingTimes = new HashMap<>();
     public Collection<FitnessModel> fitnessModels = new ArrayList<>();
 
     public void enable() {

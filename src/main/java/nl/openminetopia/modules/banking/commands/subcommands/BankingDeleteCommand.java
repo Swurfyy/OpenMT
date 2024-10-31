@@ -3,10 +3,14 @@ package nl.openminetopia.modules.banking.commands.subcommands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("accounts|account|rekening")
@@ -18,21 +22,23 @@ public class BankingDeleteCommand extends BaseCommand {
     @CommandPermission("openminetopia.banking.delete")
     public void deleteAccount(CommandSender sender, String accountName) {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
-        DataModule dataModule = OpenMinetopia.getModuleManager().getModule(DataModule.class);
         BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
 
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer((OfflinePlayer) sender);
+
         if (accountModel == null) {
-            sender.sendMessage(ChatUtils.color("<red>Er is geen account gevonden met deze naam."));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
             return;
         }
 
         bankingModule.deleteBankAccount(accountModel.getUniqueId()).whenComplete((v, throwable) -> {
             if (throwable != null) {
-                sender.sendMessage(ChatUtils.color("<red>Er ging iets fout tijdens het verwijderen van het account."));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_deletion_error"));
                 return;
             }
 
-            sender.sendMessage(ChatUtils.color("<gold>Het account</gold> <red>" + accountModel.getName() + "</red> <gold>is verwijderd."));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_deleted")
+                    .replace("<account_name>", accountModel.getName()));
             bankingModule.getBankAccountModels().remove(accountModel);
         });
     }

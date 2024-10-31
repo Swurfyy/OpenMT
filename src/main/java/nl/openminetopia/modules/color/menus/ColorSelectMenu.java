@@ -3,8 +3,10 @@ package nl.openminetopia.modules.color.menus;
 import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.objects.OwnableColor;
 import nl.openminetopia.utils.ChatUtils;
@@ -42,9 +44,10 @@ public class ColorSelectMenu extends PaginatedMenu {
                     .addLoreLine("")
                     .setName(color.displayName());
 
-            if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() < -1) icon.addLoreLine("<red>Deze kleur is vervallen.");
-            if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine("<gold>Deze kleur vervalt over <yellow>" + millisToTime(color.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
-            if (color.getExpiresAt() == -1) icon.addLoreLine("<gold>Deze kleur vervalt <yellow>nooit<gold>.");
+            if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() < -1) icon.addLoreLine(MessageConfiguration.component("color_expired"));
+            if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine(MessageConfiguration.message("color_expires_in")
+                    .replace("<time>", millisToTime(color.getExpiresAt() - System.currentTimeMillis())));
+            if (color.getExpiresAt() == -1) icon.addLoreLine(MessageConfiguration.component("color_never_expires"));
 
             this.addItem(new Icon(icon.toItemStack(), (e) -> {
                 minetopiaPlayer.setActiveColor(color, type);
@@ -53,7 +56,7 @@ public class ColorSelectMenu extends PaginatedMenu {
             }));
         });
 
-        this.addSpecialIcon(new Icon(13, new ItemBuilder(Material.LADDER).setName("<gray>Ga terug").toItemStack(),
+        this.addSpecialIcon(new Icon(13, new ItemBuilder(Material.LADDER).setName(MessageConfiguration.message("go_back")).toItemStack(),
                 (e) -> new ColorTypeMenu(player, target).open(player)));
 
         this.addSpecialIcon(new Icon(14, new ItemBuilder(Material.BARRIER).setName("<red>Locked").toItemStack(),
@@ -64,7 +67,10 @@ public class ColorSelectMenu extends PaginatedMenu {
         long hours = millisToHours(millis);
         long minutes = millisToMinutes(millis) - (hours * 60);
 
-        return "<yellow>" + hours + " uur, <yellow>" + minutes + " <gold>minuten en <yellow>" + millisToSeconds(millis) + " <gold>seconden";
+        return MessageConfiguration.message("color_time_format")
+                .replace("<hours>", String.valueOf(hours))
+                .replace("<minutes>", String.valueOf(minutes))
+                .replace("<seconds>", String.valueOf(millisToSeconds(millis)));
     }
 
     private int millisToHours(long millis) {
@@ -82,14 +88,14 @@ public class ColorSelectMenu extends PaginatedMenu {
     @Override
     public Icon getPreviousPageItem() {
         return new Icon(9, new ItemBuilder(Material.ARROW)
-                .setName("<gold>Vorige pagina")
+                .setName(MessageConfiguration.message("previous_page"))
                 .toItemStack(), event -> event.setCancelled(true));
     }
 
     @Override
     public Icon getNextPageItem() {
         return new Icon(17, new ItemBuilder(Material.ARROW)
-                .setName("<gold>Volgende pagina")
+                .setName(MessageConfiguration.message("next_page"))
                 .toItemStack(), event -> event.setCancelled(true));
     }
 

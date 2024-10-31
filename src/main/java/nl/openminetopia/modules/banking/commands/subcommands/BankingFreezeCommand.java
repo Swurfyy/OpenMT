@@ -7,10 +7,14 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
 import com.craftmend.storm.api.enums.Where;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.utils.ChatUtils;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 
 import java.util.concurrent.CompletableFuture;
@@ -25,8 +29,10 @@ public class BankingFreezeCommand extends BaseCommand {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
 
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer((OfflinePlayer) sender);
+
         if (accountModel == null) {
-            sender.sendMessage(ChatUtils.color("<red>Er is geen account gevonden met deze naam."));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
             return;
         }
 
@@ -39,18 +45,19 @@ public class BankingFreezeCommand extends BaseCommand {
 
         updateFuture.whenComplete((v, throwable) -> {
             if(throwable != null) {
-                sender.sendMessage(ChatUtils.color("<red>Er ging iets mis met het updaten van de database informatie."));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("database_update_error"));
                 return;
             }
             accountModel.setFrozen(newState);
             accountModel.save();
 
             if (newState) {
-                sender.sendMessage(ChatUtils.color("<gold>Het account <red>" + accountModel.getName() + " <gold>is nu bevroren."));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_frozen")
+                        .replace("<account_name>", accountModel.getName()));
                 return;
             }
-
-            sender.sendMessage(ChatUtils.color("<gold>Het account <red>" + accountModel.getName() + " <gold>is nu niet langer bevroren."));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_unfrozen")
+                    .replace("<account_name>", accountModel.getName()));
         });
 
     }

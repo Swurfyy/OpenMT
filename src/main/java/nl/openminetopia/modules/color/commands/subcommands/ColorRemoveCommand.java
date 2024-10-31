@@ -6,8 +6,12 @@ import net.kyori.adventure.text.Component;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
-import nl.openminetopia.modules.color.objects.OwnableColor;
+import nl.openminetopia.modules.color.objects.ChatColor;
+import nl.openminetopia.modules.color.objects.LevelColor;
+import nl.openminetopia.modules.color.objects.NameColor;
+import nl.openminetopia.modules.color.objects.PrefixColor;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -17,7 +21,6 @@ import java.util.Optional;
 @CommandAlias("color")
 public class ColorRemoveCommand extends BaseCommand {
 
-    /* This and the add code is horrific */
     @Subcommand("remove")
     @Syntax("<player> <type> <color>")
     @CommandCompletion("@players @colorTypes @playerColors")
@@ -25,64 +28,78 @@ public class ColorRemoveCommand extends BaseCommand {
     @Description("Remove a color from a player.")
     public void prefix(Player player, OfflinePlayer offlinePlayer, OwnableColorType type, String draftColor) {
         if (offlinePlayer.getPlayer() == null) {
-            player.sendMessage(ChatUtils.color("<red>Deze speler bestaat niet."));
-            return;
-        }
-
-        final String colorId = draftColor.toLowerCase();
-        if (!OpenMinetopia.getColorsConfiguration().exists(colorId)) {
-            player.sendMessage(ChatUtils.color("<red>Deze kleur bestaat niet."));
+            ChatUtils.sendMessage(player, MessageConfiguration.message("player_not_found"));
             return;
         }
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer.getPlayer());
         if (minetopiaPlayer == null) return;
 
+        final String colorId = draftColor.toLowerCase();
+        if (!OpenMinetopia.getColorsConfiguration().exists(colorId)) {
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_not_found"));
+            return;
+        }
+
         switch (type) {
             case PREFIX:
-                Optional<OwnableColor> prefixColor = minetopiaPlayer.getColors().stream()
-                        .filter(c -> c.getColorId().equals(colorId) && c.getType().equals(type)).findAny();
+                Optional<PrefixColor> prefixColor = minetopiaPlayer.getColors().stream()
+                        .filter(c -> c.getColorId().equals(colorId) && c.getType().equals(type))
+                        .map(c -> (PrefixColor) c)
+                        .findAny();
                 if (prefixColor.isEmpty()) {
-                    player.sendMessage(ChatUtils.color("<red>Deze prefixkleur heeft de speler niet."));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_prefix_not_found"));
                     return;
                 }
 
                 minetopiaPlayer.removeColor(prefixColor.get());
-                player.sendMessage(ChatUtils.color("<dark_aqua>Je hebt de ").append(Component.text(colorId).append(ChatUtils.color(" kleur <dark_aqua>verwijderd."))));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_prefix_removed")
+                        .replace("<color>", prefixColor.get().getColorId()));
                 break;
 
             case CHAT:
-                Optional<OwnableColor> chatColor = minetopiaPlayer.getColors().stream()
-                        .filter(c -> c.getColorId().equals(colorId) && c.getType().equals(type)).findAny();
+                Optional<ChatColor> chatColor = minetopiaPlayer.getColors().stream()
+                        .filter(c -> c.getColorId().equals(colorId) && c.getType().equals(type))
+                        .map(c -> (ChatColor) c)
+                        .findAny();
                 if (chatColor.isEmpty()) {
-                    player.sendMessage(ChatUtils.color("<red>Deze chatkleur heeft de speler niet."));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_chat_not_found"));
                     return;
                 }
 
                 minetopiaPlayer.removeColor(chatColor.get());
-                player.sendMessage(ChatUtils.color("<dark_aqua>Je hebt de ").append(Component.text(colorId).append(ChatUtils.color(" chatkleur <dark_aqua>verwijderd."))));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_chat_removed")
+                        .replace("<color>", chatColor.get().getColorId()));
                 break;
+
             case NAME:
-                Optional<OwnableColor> nameColor = minetopiaPlayer.getColors().stream()
-                        .filter(c -> c.getColorId().equals(colorId) && c.getType().equals(type)).findAny();
+                Optional<NameColor> nameColor = minetopiaPlayer.getColors().stream()
+                        .filter(c -> c.getColorId().equals(colorId) && c.getType().equals(type))
+                        .map(c -> (NameColor) c)
+                        .findAny();
                 if (nameColor.isEmpty()) {
-                    player.sendMessage(ChatUtils.color("<red>Deze naamkleur heeft de speler niet."));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_name_not_found"));
                     return;
                 }
 
                 minetopiaPlayer.removeColor(nameColor.get());
-                player.sendMessage(ChatUtils.color("<dark_aqua>Je hebt de ").append(Component.text(colorId).append(ChatUtils.color(" naamkleur <dark_aqua>verwijderd."))));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_name_removed")
+                        .replace("<color>", nameColor.get().getColorId()));
                 break;
+
             case LEVEL:
-                Optional<OwnableColor> levelColor = minetopiaPlayer.getColors().stream()
-                        .filter(c -> c.getColorId().equals(colorId) && c.getType().equals(type)).findAny();
+                Optional<LevelColor> levelColor = minetopiaPlayer.getColors().stream()
+                        .filter(c -> c.getColorId().equals(colorId) && c.getType().equals(type))
+                        .map(c -> (LevelColor) c)
+                        .findAny();
                 if (levelColor.isEmpty()) {
-                    player.sendMessage(ChatUtils.color("<red>Deze levelkleur heeft de speler niet."));
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_level_not_found"));
                     return;
                 }
 
                 minetopiaPlayer.removeColor(levelColor.get());
-                player.sendMessage(ChatUtils.color("<dark_aqua>Je hebt de ").append(Component.text(colorId).append(ChatUtils.color(" levelkleur <dark_aqua>verwijderd."))));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_level_removed")
+                        .replace("<color>", levelColor.get().getColorId()));
                 break;
         }
     }
