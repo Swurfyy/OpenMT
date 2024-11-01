@@ -6,6 +6,8 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.types.DatabaseType;
 import nl.openminetopia.utils.ConfigurateConfig;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.spongepowered.configurate.ConfigurationNode;
 
 import java.io.File;
@@ -68,7 +70,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final int detectionCooldown;
     private final Material detectionPressurePlate;
     private final Material detectionActivationBlock;
-    private final List<Material> detectionMaterials;
+    private final List<ItemStack> detectionMaterials;
     private final Map<Material, Material> detectionSafeBlocks;
     private final Map<Material, Material> detectionFlaggedBlocks;
 
@@ -196,9 +198,20 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 Material.STONE_HOE.toString(),
                 Material.POISONOUS_POTATO.toString()
         )).forEach(materialString -> {
-            Material material = Material.matchMaterial(materialString);
+            String[] parts = materialString.split(":");
+
+            Material material = Material.matchMaterial(parts[0]);
+            int customModelData = materialString.split(":").length > 1 ? Integer.parseInt(parts[1]) : 0;
             if (material != null) {
-                this.detectionMaterials.add(material);
+                ItemStack itemStack = new ItemStack(material);
+                if (customModelData != 0) {
+                    ItemMeta itemMeta = itemStack.getItemMeta();
+                    if (itemMeta != null) {
+                        itemMeta.setCustomModelData(customModelData);
+                        itemStack.setItemMeta(itemMeta);
+                    }
+                }
+                this.detectionMaterials.add(itemStack);
             }
         });
 
