@@ -20,6 +20,7 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.api.plots.events.PlotCreateEvent;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -73,9 +74,11 @@ public class PlotCreateCommand extends BaseCommand {
                 PlotCreateEvent event = new PlotCreateEvent(player, wgRegion);
                 Bukkit.getPluginManager().callEvent(event);
 
-                player.sendMessage(MessageConfiguration.component("plot_creation_success"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_creation_success")
+                        .replace("<plot>", name)
+                );
             } catch (IncompleteRegionException e) {
-                player.sendMessage(MessageConfiguration.component("plot_no_selection"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_no_selection"));
             }
         }, Throwable::printStackTrace);
     }
