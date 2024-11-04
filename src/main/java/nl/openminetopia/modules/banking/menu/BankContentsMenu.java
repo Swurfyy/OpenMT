@@ -100,45 +100,45 @@ public class BankContentsMenu extends Menu {
         if (!PersistentDataUtil.contains(item, "bank_note_value")) return;
         if (PersistentDataUtil.getDouble(item, "bank_note_value") == null) return;
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        
-        if(!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.DEPOSIT)) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_deposit_permission"));
-            return;
-        }
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if(!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.DEPOSIT)) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_deposit_permission"));
+                return;
+            }
 
-        double noteValue = PersistentDataUtil.getDouble(item, "bank_note_value");
-        double totalValue = noteValue * item.getAmount();
+            double noteValue = PersistentDataUtil.getDouble(item, "bank_note_value");
+            double totalValue = noteValue * item.getAmount();
 
-        item.setAmount(0);
-        accountModel.setBalance(accountModel.getBalance() + totalValue);
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
-                .replace("<deposit_value>", bankingModule.format(totalValue)));
-        new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
+            item.setAmount(0);
+            accountModel.setBalance(accountModel.getBalance() + totalValue);
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
+                    .replace("<deposit_value>", bankingModule.format(totalValue)));
+            new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
+        }, Throwable::printStackTrace);
     }
 
     private void withdrawMoney(BankNote note, int amount) {
         double balance = accountModel.getBalance();
         double totalValue = note.getValue() * amount;
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (balance < totalValue) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_not_enough_money"));
+                return;
+            }
 
-        if (balance < totalValue) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_not_enough_money"));
-            return;
-        }
+            if(!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.WITHDRAW)) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_withdraw_permission"));
+                return;
+            }
 
-        if(!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.WITHDRAW)) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_withdraw_permission"));
-            return;
-        }
+            accountModel.setBalance(balance - totalValue);
 
-        accountModel.setBalance(balance - totalValue);
-
-        player.getInventory().addItem(note.toNote(amount));
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_withdraw_message")
-                .replace("<withdraw_value>", bankingModule.format(totalValue)));
-        new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
+            player.getInventory().addItem(note.toNote(amount));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_withdraw_message")
+                    .replace("<withdraw_value>", bankingModule.format(totalValue)));
+            new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
+        }, Throwable::printStackTrace);
     }
 
     @Getter
@@ -162,7 +162,5 @@ public class BankContentsMenu extends Menu {
                     .setNBT("bank_note_value", value)
                     .toItemStack();
         }
-
     }
-
 }

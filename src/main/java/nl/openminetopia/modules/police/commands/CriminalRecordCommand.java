@@ -35,21 +35,22 @@ public class CriminalRecordCommand extends BaseCommand {
     @CommandCompletion("@players")
     @CommandPermission("openminetopia.criminalrecord.add")
     public void add(Player player, OfflinePlayer target, String description) {
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+            if (target == null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+                return;
+            }
 
-        if (target == null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
-            return;
-        }
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+                if (targetMinetopiaPlayer == null) return;
 
-        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(target);
-        if (targetMinetopiaPlayer == null) return;
-
-        targetMinetopiaPlayer.addCriminalRecord(description, player.getUniqueId(), System.currentTimeMillis());
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_added")
-                .replace("<description>", description));
+                targetMinetopiaPlayer.addCriminalRecord(description, player.getUniqueId(), System.currentTimeMillis());
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_added")
+                        .replace("<description>", description));
+            }, Throwable::printStackTrace);
+        }, Throwable::printStackTrace);
     }
 
     @Subcommand("remove")
@@ -59,31 +60,33 @@ public class CriminalRecordCommand extends BaseCommand {
     @CommandPermission("openminetopia.criminalrecord.remove")
     public void remove(Player player, OfflinePlayer target, int id) {
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (target == null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
-            return;
-        }
-
-        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(target);
-        if (targetMinetopiaPlayer == null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
-            return;
-        }
-
-        for (CriminalRecordModel criminalRecord : targetMinetopiaPlayer.getCriminalRecords()) {
-            if (criminalRecord.getId() == id) {
-                targetMinetopiaPlayer.removeCriminalRecord(criminalRecord);
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_removed")
-                        .replace("<description>", criminalRecord.getDescription())
-                        .replace("<id>", String.valueOf(id)));
+            if (target == null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                 return;
             }
-        }
 
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_not_found"));
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+                if (targetMinetopiaPlayer == null) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+                    return;
+                }
+
+                for (CriminalRecordModel criminalRecord : targetMinetopiaPlayer.getCriminalRecords()) {
+                    if (criminalRecord.getId() == id) {
+                        targetMinetopiaPlayer.removeCriminalRecord(criminalRecord);
+                        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_removed")
+                                .replace("<description>", criminalRecord.getDescription())
+                                .replace("<id>", String.valueOf(id)));
+                        return;
+                    }
+                }
+
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_not_found"));
+            }, Throwable::printStackTrace);
+        }, Throwable::printStackTrace);
     }
 
     @Subcommand("info")
@@ -93,36 +96,38 @@ public class CriminalRecordCommand extends BaseCommand {
     @CommandPermission("openminetopia.criminalrecord.info")
     public void info(Player player, OfflinePlayer target) {
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (target == null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
-            return;
-        }
+            if (target == null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+                return;
+            }
 
-        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(target);
-        if (targetMinetopiaPlayer == null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
-            return;
-        }
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+                if (targetMinetopiaPlayer == null) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+                    return;
+                }
 
-        if (targetMinetopiaPlayer.getCriminalRecords().isEmpty()) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_none")
-                    .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName())));
-            return;
-        }
+                if (targetMinetopiaPlayer.getCriminalRecords().isEmpty()) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_none")
+                            .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName())));
+                    return;
+                }
 
-        targetMinetopiaPlayer.getCriminalRecords().forEach(criminalRecord -> {
+                targetMinetopiaPlayer.getCriminalRecords().forEach(criminalRecord -> {
 
-            OfflinePlayer officer = Bukkit.getOfflinePlayer(criminalRecord.getOfficerId());
+                    OfflinePlayer officer = Bukkit.getOfflinePlayer(criminalRecord.getOfficerId());
 
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_info_entry")
-                    .replace("<id>", String.valueOf(criminalRecord.getId()))
-                    .replace("<description>", criminalRecord.getDescription())
-                    .replace("<officer>", (officer.getName() == null ? "Onbekend" : officer.getName()))
-                    .replace("<date>", formatDate(criminalRecord.getDate())));
-        });
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_info_entry")
+                            .replace("<id>", String.valueOf(criminalRecord.getId()))
+                            .replace("<description>", criminalRecord.getDescription())
+                            .replace("<officer>", (officer.getName() == null ? "Onbekend" : officer.getName()))
+                            .replace("<date>", formatDate(criminalRecord.getDate())));
+                });
+            }, Throwable::printStackTrace);
+        }, Throwable::printStackTrace);
     }
 
     private String formatDate(long date) {

@@ -16,6 +16,11 @@ public class LevelCheckRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
+        if (player == null || !player.getBukkit().isOnline()) {
+            cancel();
+            return;
+        }
+
         LevelCheckConfiguration configuration = OpenMinetopia.getLevelcheckConfiguration();
         if (!player.isInPlace()) return;
         int calculatedLevel = LevelUtil.calculateLevel(player);

@@ -17,23 +17,26 @@ public class PlayerChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncChatEvent event) {
         Player source = event.getPlayer();
-        MinetopiaPlayer minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(source);
-        if (minetopiaPlayer == null) return;
 
-        if (!source.hasPermission("openminetopia.staffchat") || !minetopiaPlayer.isStaffchatEnabled()) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(source, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        event.setCancelled(true);
+            if (!source.hasPermission("openminetopia.staffchat") || !minetopiaPlayer.isStaffchatEnabled()) return;
 
-        List<Player> recipients = new ArrayList<>();
+            event.setCancelled(true);
 
-        Bukkit.getServer().getOnlinePlayers().forEach(target -> {
-            if (target.hasPermission("openminetopia.staffchat")) recipients.add(target);
-        });
+            List<Player> recipients = new ArrayList<>();
 
-        // Iterate over recipients
-        recipients.forEach(player -> {
-            // Send the formatted message to the player
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b>" + player.getWorld().getName() + "</b><dark_gray>) <green>" + source.getName() + "<white>: " + ChatUtils.stripMiniMessage(event.message())));
-        });
+            Bukkit.getServer().getOnlinePlayers().forEach(target -> {
+                if (target.hasPermission("openminetopia.staffchat")) recipients.add(target);
+            });
+
+            // Iterate over recipients
+            recipients.forEach(player -> {
+                // Send the formatted message to the player
+                player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b>" + source.getWorld().getName() + "</b><dark_gray>) <green>" + source.getName() + "<white>: " + ChatUtils.stripMiniMessage(event.message())));
+            });
+            Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b>" + source.getWorld().getName() + "</b><dark_gray>) <green>" + source.getName() + "<white>: " + ChatUtils.stripMiniMessage(event.message())));
+        }, Throwable::printStackTrace);
     }
 }

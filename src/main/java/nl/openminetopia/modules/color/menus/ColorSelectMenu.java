@@ -3,7 +3,6 @@ package nl.openminetopia.modules.color.menus;
 import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
-import net.kyori.adventure.text.Component;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -23,13 +22,12 @@ public class ColorSelectMenu extends PaginatedMenu {
     private List<OwnableColor> colors;
     private final OwnableColorType type;
 
-    public ColorSelectMenu(Player player, OfflinePlayer target, OwnableColorType type) {
+    public ColorSelectMenu(Player player, OfflinePlayer target, MinetopiaPlayer minetopiaPlayer, OwnableColorType type) {
         super(ChatUtils.color(type.getDisplayName() + "<reset><dark_gray> menu"), 2);
         this.registerPageSlotsBetween(0, 8);
 
         this.type = type;
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(target);
         if (minetopiaPlayer == null) {
             inventory.close();
             return;
@@ -55,10 +53,12 @@ public class ColorSelectMenu extends PaginatedMenu {
                     .addLoreLine("")
                     .setName(color.displayName());
 
-            if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() < -1) icon.addLoreLine(MessageConfiguration.component("color_expired"));
-            if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine(MessageConfiguration.message("color_expires_in")
-                    .replace("<time>", millisToTime(color.getExpiresAt() - System.currentTimeMillis())));
-            if (color.getExpiresAt() == -1) icon.addLoreLine(MessageConfiguration.component("color_never_expires"));
+            if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() < -1)
+                icon.addLoreLine(MessageConfiguration.component("color_expired"));
+            if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() > -1)
+                icon.addLoreLine(MessageConfiguration.message("color_expires_in")
+                        .replace("<time>", millisToTime(color.getExpiresAt() - System.currentTimeMillis())));
+            if (color.getExpiresAt() == -1) icon.addLoreLine(MessageConfiguration.component("color_expires_never"));
 
             this.addItem(new Icon(icon.toItemStack(), (e) -> {
                 minetopiaPlayer.setActiveColor(color, type);
@@ -68,7 +68,7 @@ public class ColorSelectMenu extends PaginatedMenu {
         });
 
         this.addSpecialIcon(new Icon(13, new ItemBuilder(Material.LADDER).setName(MessageConfiguration.message("go_back")).toItemStack(),
-                (e) -> new ColorTypeMenu(player, target).open(player)));
+                (e) -> new ColorTypeMenu(player, target, minetopiaPlayer).open(player)));
 
         this.addSpecialIcon(new Icon(14, new ItemBuilder(Material.BARRIER).setName("<red>Locked").toItemStack(),
                 (e) -> new ColorLockedMenu(player, this).open(player)));

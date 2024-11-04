@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
+import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.chat.utils.SpyUtils;
 import nl.openminetopia.utils.ChatUtils;
@@ -19,12 +20,12 @@ public class ModCommandSpyCommand extends BaseCommand {
     @CommandPermission("openminetopia.mod.commandspy")
     @Description("Enables or disables CommandSpy")
     public void commandSpy(Player player) {
-        Optional<MinetopiaPlayer> optional = SpyUtils.obtainPlayer(player);
-        if (optional.isEmpty()) return;
 
-        MinetopiaPlayer mPlayer = optional.get();
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        mPlayer.setCommandSpyEnabled(!mPlayer.isCommandSpyEnabled());
-        player.sendMessage(ChatUtils.color("<gold>Je hebt <yellow>CommandSpy <gold>" + (mPlayer.isCommandSpyEnabled() ? "aangezet" : "uitgezet") + "!"));
+            minetopiaPlayer.setCommandSpyEnabled(!minetopiaPlayer.isCommandSpyEnabled());
+            player.sendMessage(ChatUtils.color("<gold>Je hebt <yellow>CommandSpy <gold>" + (minetopiaPlayer.isCommandSpyEnabled() ? "aangezet" : "uitgezet") + "!"));
+        }, Throwable::printStackTrace);
     }
 }

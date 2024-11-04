@@ -39,7 +39,7 @@ public class ScoreboardManager {
             sidebar.removePlayer(player);
             return;
         }
-        if (minetopiaPlayer.isInPlace() && !sidebar.players().contains(player) && ((MinetopiaPlayer) minetopiaPlayer).isScoreboardVisible()) {
+        if (minetopiaPlayer.isInPlace() && !sidebar.players().contains(player) && minetopiaPlayer.isScoreboardVisible()) {
             sidebar.addPlayer(player);
         }
 

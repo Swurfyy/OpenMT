@@ -1,6 +1,5 @@
 package nl.openminetopia.modules.police.handcuff.listeners;
 
-import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.handcuff.HandcuffManager;
@@ -39,12 +38,15 @@ public class PlayerInteractEntityListener implements Listener {
 
         source.sendMessage(ChatUtils.color("<red>Je hebt <dark_red>" + target.getName() + " <red>in de boeien geslagen!"));
 
-        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(target);
-        if (targetMinetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+            if (targetMinetopiaPlayer == null) return;
 
-        MinetopiaPlayer sourceMinetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(source);
-        if (sourceMinetopiaPlayer == null) return;
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(source,sourceMinetopiaPlayer -> {
+                if (sourceMinetopiaPlayer == null) return;
 
-        HandcuffManager.getInstance().handcuff(targetMinetopiaPlayer, sourceMinetopiaPlayer);
+                HandcuffManager.getInstance().handcuff(targetMinetopiaPlayer, sourceMinetopiaPlayer);
+            }, Throwable::printStackTrace);
+        }, Throwable::printStackTrace);
+
     }
 }

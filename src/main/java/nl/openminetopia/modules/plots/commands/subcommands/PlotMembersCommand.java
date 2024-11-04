@@ -23,35 +23,40 @@ public class PlotMembersCommand extends BaseCommand {
     @Subcommand("addmember")
     @Description("Voegt een speler toe aan een plot.")
     @Syntax("<speler>")
-    public void addPlotMember(Player player, OnlinePlayer onlinePlayer) {
+    public void addPlotMember(Player player, OfflinePlayer offlinePlayer) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
-        Player target = onlinePlayer.getPlayer();
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
-
-        if (region == null) {
-            player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
+        if (offlinePlayer == null) {
+            player.sendMessage(MessageConfiguration.component("player_not_found"));
             return;
         }
 
-        if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
-            player.sendMessage(MessageConfiguration.component("plot_not_valid"));
-            return;
-        }
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (!region.getOwners().contains(player.getUniqueId())) {
-            player.sendMessage(MessageConfiguration.component("plot_not_owner"));
-            return;
-        }
+            if (region == null) {
+                player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
+                return;
+            }
 
-        if (region.getMembers().contains(target.getUniqueId())) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_member_already"));
-            return;
-        }
+            if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
+                player.sendMessage(MessageConfiguration.component("plot_not_valid"));
+                return;
+            }
 
-        region.getMembers().addPlayer(target.getUniqueId());
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_member_added"));
+            if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("openminetopia.plot.removemember")) {
+                player.sendMessage(MessageConfiguration.component("plot_not_owner"));
+                return;
+            }
+
+            if (region.getMembers().contains(offlinePlayer.getUniqueId())) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_member_already"));
+                return;
+            }
+
+            region.getMembers().addPlayer(offlinePlayer.getUniqueId());
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_member_added"));
+        }, Throwable::printStackTrace);
     }
 
     @Subcommand("removemember")
@@ -61,31 +66,31 @@ public class PlotMembersCommand extends BaseCommand {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
         PlayerProfile profile = offlinePlayer.getPlayerProfile();
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (region == null) {
-            player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
-            return;
-        }
+            if (region == null) {
+                player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
+                return;
+            }
 
-        if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
-            player.sendMessage(MessageConfiguration.component("plot_not_valid"));
-            return;
-        }
+            if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
+                player.sendMessage(MessageConfiguration.component("plot_not_valid"));
+                return;
+            }
 
-        if (!region.getOwners().contains(player.getUniqueId())) {
-            player.sendMessage(MessageConfiguration.component("plot_not_owner"));
-            return;
-        }
+            if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("openminetopia.plot.removemember")) {
+                player.sendMessage(MessageConfiguration.component("plot_not_owner"));
+                return;
+            }
 
-        if (!region.getMembers().contains(profile.getId())) {
-            player.sendMessage(MessageConfiguration.component("plot_member_not_added"));
-            return;
-        }
+            if (!region.getMembers().contains(profile.getId())) {
+                player.sendMessage(MessageConfiguration.component("plot_member_not_added"));
+                return;
+            }
 
-        region.getMembers().removePlayer(profile.getId());
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Je hebt <aqua>" + profile.getName() + " <dark_aqua>verwijderd van dit plot."));
+            region.getMembers().removePlayer(profile.getId());
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Je hebt <aqua>" + profile.getName() + " <dark_aqua>verwijderd van dit plot."));
+        }, Throwable::printStackTrace);
     }
-
 }

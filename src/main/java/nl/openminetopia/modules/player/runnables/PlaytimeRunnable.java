@@ -20,17 +20,18 @@ public class PlaytimeRunnable extends BukkitRunnable {
             return;
         }
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        int newPlaytime = minetopiaPlayer.getPlaytime() + 1;
+            int newPlaytime = minetopiaPlayer.getPlaytime() + 1;
 
-        // If the new playtime is a multiple of 60, update the playtime in the database, so it's only updated every minute
-        if (newPlaytime % 60 == 0) {
-            minetopiaPlayer.setPlaytime(newPlaytime, true);
-            return;
-        }
-        minetopiaPlayer.setPlaytime(newPlaytime, false);
+            // If the new playtime is a multiple of 60, update the playtime in the database, so it's only updated every minute
+            if (newPlaytime % 60 == 0) {
+                minetopiaPlayer.setPlaytime(newPlaytime, true);
+                return;
+            }
+            minetopiaPlayer.setPlaytime(newPlaytime, false);
+        }, Throwable::printStackTrace);
     }
 }
 

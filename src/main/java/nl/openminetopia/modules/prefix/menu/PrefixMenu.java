@@ -20,13 +20,12 @@ public class PrefixMenu extends PaginatedMenu {
     private final OfflinePlayer offlinePlayer;
     private final Player player;
 
-    public PrefixMenu(Player player, OfflinePlayer offlinePlayer) {
+    public PrefixMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer) {
         super(ChatUtils.color("<black>Kies een prefix"), 2);
         this.registerPageSlotsBetween(0, 9);
         this.offlinePlayer = offlinePlayer;
         this.player = player;
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer);
         if (minetopiaPlayer == null) return;
 
         List<Prefix> prefixes = new ArrayList<>(minetopiaPlayer.getPrefixes());
@@ -53,8 +52,10 @@ public class PrefixMenu extends PaginatedMenu {
                     .addLoreLine("<gold>Klik <yellow>hier <gold>om deze prefix te selecteren.")
                     .addLoreLine("");
 
-            if (prefix.getExpiresAt() != -1 && prefix.getExpiresAt() - System.currentTimeMillis() < -1) builder.addLoreLine("<red>Deze prefix is vervallen.");
-            if (prefix.getExpiresAt() != -1 && prefix.getExpiresAt() - System.currentTimeMillis() > -1) builder.addLoreLine("<gold>Deze prefix vervalt over <yellow>" + millisToTime(prefix.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
+            if (prefix.getExpiresAt() != -1 && prefix.getExpiresAt() - System.currentTimeMillis() < -1)
+                builder.addLoreLine("<red>Deze prefix is vervallen.");
+            if (prefix.getExpiresAt() != -1 && prefix.getExpiresAt() - System.currentTimeMillis() > -1)
+                builder.addLoreLine("<gold>Deze prefix vervalt over <yellow>" + millisToTime(prefix.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
             if (prefix.getExpiresAt() == -1) builder.addLoreLine("<gold>Deze prefix vervalt <yellow>nooit<gold>.");
 
             Icon prefixIcon = new Icon(builder.toItemStack(),
@@ -62,7 +63,7 @@ public class PrefixMenu extends PaginatedMenu {
                         event.setCancelled(true);
                         minetopiaPlayer.setActivePrefix(prefix.getId() == -1 ? new Prefix(-1, OpenMinetopia.getDefaultConfiguration().getDefaultPrefix(), -1) : prefix);
                         player.sendMessage(ChatUtils.format(minetopiaPlayer, "<gold>Je hebt de prefix <yellow>" + prefix.getPrefix() + " <gold>geselecteerd."));
-                        new PrefixMenu(player, offlinePlayer).open(player);
+                        new PrefixMenu(player, offlinePlayer, minetopiaPlayer).open(player);
                     });
             this.addItem(prefixIcon);
         }

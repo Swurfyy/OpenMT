@@ -18,34 +18,33 @@ public class PlayerEatListener implements Listener {
         if (!event.getItem().getType().isEdible()) return;
         FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
 
-        OpenMinetopia.getInstance().getLogger().info("Player ate: " + event.getItem().getType().name());
-        if (!configuration.getCheapFood().contains(event.getItem().getType().name()) && !configuration.getLuxuryFood().contains(event.getItem().getType().name())) return;
+        if (!configuration.getCheapFood().contains(event.getItem().getType().name()) && !configuration.getLuxuryFood().contains(event.getItem().getType().name()))
+            return;
 
-        OpenMinetopia.getInstance().getLogger().info("Player ate food form config: " + event.getItem().getType().name());
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(event.getPlayer(), minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(event.getPlayer());
-        if (minetopiaPlayer == null) return;
+            FitnessStatisticModel eatingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
 
-        FitnessStatisticModel eatingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
-
-        if (configuration.getCheapFood().contains(event.getItem().getType().name())) {
-            eatingStatistic.setPoints(eatingStatistic.getPoints() + configuration.getPointsForCheapFood());
-            eatingStatistic.setSecondaryPoints(eatingStatistic.getSecondaryPoints() + 1);
-        } else if (configuration.getLuxuryFood().contains(event.getItem().getType().name())) {
-            eatingStatistic.setPoints(eatingStatistic.getPoints() + configuration.getPointsForLuxuryFood());
-            eatingStatistic.setTertiaryPoints(eatingStatistic.getTertiaryPoints() + 1);
-        }
-
-        double currentEatingPoints = eatingStatistic.getPoints();
-
-        if (eatingStatistic.getPoints() >= 1 && eatingStatistic.getFitnessGained() <= configuration.getMaxFitnessByDrinking()) {
-            if (currentEatingPoints % (eatingStatistic.getSecondaryPoints() + eatingStatistic.getTertiaryPoints()) == 0) {
-                minetopiaPlayer.getFitness().setStatistic(FitnessStatisticType.EATING, eatingStatistic);
-                return;
+            if (configuration.getCheapFood().contains(event.getItem().getType().name())) {
+                eatingStatistic.setPoints(eatingStatistic.getPoints() + configuration.getPointsForCheapFood());
+                eatingStatistic.setSecondaryPoints(eatingStatistic.getSecondaryPoints() + 1);
+            } else if (configuration.getLuxuryFood().contains(event.getItem().getType().name())) {
+                eatingStatistic.setPoints(eatingStatistic.getPoints() + configuration.getPointsForLuxuryFood());
+                eatingStatistic.setTertiaryPoints(eatingStatistic.getTertiaryPoints() + 1);
             }
-            eatingStatistic.setFitnessGained(eatingStatistic.getFitnessGained() + 1);
-            eatingStatistic.setPoints(0.0);
-        }
-        minetopiaPlayer.getFitness().setStatistic(FitnessStatisticType.EATING, eatingStatistic);
+
+            double currentEatingPoints = eatingStatistic.getPoints();
+
+            if (eatingStatistic.getPoints() >= 1 && eatingStatistic.getFitnessGained() <= configuration.getMaxFitnessByDrinking()) {
+                if (currentEatingPoints % (eatingStatistic.getSecondaryPoints() + eatingStatistic.getTertiaryPoints()) == 0) {
+                    minetopiaPlayer.getFitness().setStatistic(FitnessStatisticType.EATING, eatingStatistic);
+                    return;
+                }
+                eatingStatistic.setFitnessGained(eatingStatistic.getFitnessGained() + 1);
+                eatingStatistic.setPoints(0.0);
+            }
+            minetopiaPlayer.getFitness().setStatistic(FitnessStatisticType.EATING, eatingStatistic);
+        }, Throwable::printStackTrace);
     }
 }

@@ -23,63 +23,64 @@ public class PlayerChatListener implements Listener {
     @EventHandler
     public void onPlayerChat(AsyncChatEvent event) {
         Player source = event.getPlayer();
-        MinetopiaPlayer minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(source);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(source, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (!minetopiaPlayer.isInPlace()) return;
-        if (minetopiaPlayer.isStaffchatEnabled()) return;
+            if (!minetopiaPlayer.isInPlace()) return;
+            if (minetopiaPlayer.isStaffchatEnabled()) return;
 
-        List<Player> recipients = new ArrayList<>();
+            List<Player> recipients = new ArrayList<>();
 
-        event.setCancelled(true);
+            event.setCancelled(true);
 
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+            DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
 
-        Bukkit.getServer().getOnlinePlayers().forEach(target -> {
-            if (target.getWorld().equals(source.getWorld())
-                    && source.getLocation().distance(target.getLocation()) <= configuration.getChatRadiusRange())
-                recipients.add(target);
-        });
+            Bukkit.getServer().getOnlinePlayers().forEach(target -> {
+                if (target.getWorld().equals(source.getWorld())
+                        && source.getLocation().distance(target.getLocation()) <= configuration.getChatRadiusRange())
+                    recipients.add(target);
+            });
 
-        recipients.remove(source);
-        if (recipients.isEmpty() && configuration.isNotifyWhenNobodyInRange()) {
-            event.getPlayer().sendMessage(MessageConfiguration.component("chat_no_players_in_range"));
-            return;
-        }
-        recipients.add(source);
-
-        // Format the message
-        String originalMessage = ChatUtils.stripMiniMessage(event.message());
-        String formattedMessage = configuration.getChatFormat();
-
-        SpyUtils.chatSpy(source, originalMessage, recipients);
-
-        // Iterate over recipients
-        recipients.forEach(player -> {
-            // Replace <message> placeholder with original message
-            String finalMessage = formattedMessage.replace("<message>", originalMessage);
-
-            if (BalaclavaUtils.isBalaclavaItem(source.getInventory().getHelmet())) {
-                finalMessage = finalMessage.replace("<level>", configuration.getDefaultLevel() + "")
-                        .replace("<prefix>", configuration.getDefaultPrefix())
-                        .replace("<name_color>", configuration.getDefaultNameColor())
-                        .replace("<level_color>", configuration.getDefaultLevelColor())
-                        .replace("<prefix_color>", configuration.getDefaultPrefixColor())
-                        .replace("<chat_color>", configuration.getDefaultChatColor());
+            recipients.remove(source);
+            if (recipients.isEmpty() && configuration.isNotifyWhenNobodyInRange()) {
+                event.getPlayer().sendMessage(MessageConfiguration.component("chat_no_players_in_range"));
+                return;
             }
+            recipients.add(source);
 
-            // Check if the player's name is in the original message and highlight it
-            if (originalMessage.contains(player.getName())) {
-                String highlightedMessage = originalMessage.replace(player.getName(), "<green>" + player.getName() + "<white>");
-                finalMessage = formattedMessage.replace("<message>", highlightedMessage);
+            // Format the message
+            String originalMessage = ChatUtils.rawMiniMessage(event.message());
+            String formattedMessage = configuration.getChatFormat();
 
-                // Play sound for the mentioned player
-                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-            }
+            SpyUtils.chatSpy(source, originalMessage, recipients);
 
-            // Send the formatted message to the player
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage));
-            Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage.replace("<display_name>", player.getName()))); // Log the message without potential scrambled name
-        });
+            // Iterate over recipients
+            recipients.forEach(player -> {
+                // Replace <message> placeholder with original message
+                String finalMessage = formattedMessage.replace("<message>", originalMessage);
+
+                if (BalaclavaUtils.isBalaclavaItem(source.getInventory().getHelmet())) {
+                    finalMessage = finalMessage.replace("<level>", configuration.getDefaultLevel() + "")
+                            .replace("<prefix>", configuration.getDefaultPrefix())
+                            .replace("<name_color>", configuration.getDefaultNameColor())
+                            .replace("<level_color>", configuration.getDefaultLevelColor())
+                            .replace("<prefix_color>", configuration.getDefaultPrefixColor())
+                            .replace("<chat_color>", configuration.getDefaultChatColor());
+                }
+
+                // Check if the player's name is in the original message and highlight it
+                if (originalMessage.contains(player.getName())) {
+                    String highlightedMessage = originalMessage.replace(player.getName(), "<green>" + player.getName() + "<white>");
+                    finalMessage = formattedMessage.replace("<message>", highlightedMessage);
+
+                    // Play sound for the mentioned player
+                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                }
+
+                // Send the formatted message to the player
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, finalMessage);
+                Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage.replace("<display_name>", player.getName()))); // Log the message without potential scrambled name
+            });
+        }, Throwable::printStackTrace);
     }
 }

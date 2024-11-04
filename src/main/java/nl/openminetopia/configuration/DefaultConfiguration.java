@@ -145,7 +145,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Chat configuration
          */
-        this.chatFormat = rootNode.node("chat", "format").getString("<dark_gray>[<level_color>Level <level><dark_gray>] <dark_gray>[<prefix_color><prefix><dark_gray>] <name_color><display_name>: <chat_color><message>");
+        this.chatFormat = rootNode.node("chat", "format").getString("<dark_gray>[<level_color>Level <level><reset><dark_gray>] <dark_gray>[<prefix_color><prefix><reset><dark_gray>] <name_color><player><reset>: <chat_color><message>");
         this.chatEnabled = rootNode.node("chat", "enabled").getBoolean(true);
         this.chatRadiusEnabled = rootNode.node("chat", "radius", "enabled").getBoolean(true);
         this.chatRadiusRange = rootNode.node("chat", "radius", "range").getInt(20);
@@ -231,7 +231,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.detectionSafeBlocks = new HashMap<>();
         safeBlocksNode.childrenMap().forEach((key, val) -> {
             Material keyMaterial = Material.matchMaterial(key.toString());
-            Material valueMaterial = Material.matchMaterial(val.getString().toString());
+            Material valueMaterial = Material.matchMaterial(val.getString());
             if (keyMaterial != null && valueMaterial != null) {
                 this.detectionSafeBlocks.put(keyMaterial, valueMaterial);
             }
@@ -252,7 +252,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.detectionFlaggedBlocks = new HashMap<>();
         flaggedBlocksNode.childrenMap().forEach((key, val) -> {
             Material keyMaterial = Material.matchMaterial(key.toString());
-            Material valueMaterial = Material.matchMaterial(val.getString().toString());
+            Material valueMaterial = Material.matchMaterial(val.getString());
             if (keyMaterial != null && valueMaterial != null) {
                 this.detectionFlaggedBlocks.put(keyMaterial, valueMaterial);
             }

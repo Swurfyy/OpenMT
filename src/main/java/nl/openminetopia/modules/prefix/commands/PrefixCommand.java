@@ -5,6 +5,7 @@ import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.HelpCommand;
+import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.prefix.menu.PrefixMenu;
 import org.bukkit.entity.Player;
 
@@ -18,6 +19,9 @@ public class PrefixCommand extends BaseCommand {
 
     @Default
     public void prefixCommand(Player player) {
-        new PrefixMenu(player, player).open(player);
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
+            new PrefixMenu(player, player, minetopiaPlayer).open(player);
+        }, Throwable::printStackTrace);
     }
 }

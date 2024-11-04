@@ -14,6 +14,10 @@ public class HealthStatisticRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
+        if (minetopiaPlayer == null || !minetopiaPlayer.getBukkit().isOnline()) {
+            cancel();
+            return;
+        }
         // check if playtime is a multiple of 3600
         if (minetopiaPlayer.getPlaytime() % 3600 == 0) FitnessUtils.healthCheck(minetopiaPlayer);
     }

@@ -16,6 +16,7 @@ public class PrefixAddCommand extends BaseCommand {
 
     /**
      * Add a prefix to a player.
+     *
      * @param expiresAt The time in minutes when the prefix expires.
      */
     @Subcommand("add")
@@ -24,37 +25,42 @@ public class PrefixAddCommand extends BaseCommand {
     @CommandPermission("openminetopia.prefix.add")
     @Description("Add a prefix to a player.")
     public void addPrefix(Player player, OfflinePlayer offlinePlayer, Integer expiresAt, String prefix) {
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (offlinePlayer.getPlayer() == null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
-            return;
-        }
-
-        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer);
-        if (targetMinetopiaPlayer == null) return;
-
-        for (Prefix prefix1 : targetMinetopiaPlayer.getPrefixes()) {
-            if (prefix1.getPrefix().equalsIgnoreCase(prefix)) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_already_exists")
-                        .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
-                        .replace("<prefix>", prefix));
+            if (offlinePlayer == null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                 return;
             }
-        }
 
-        long expiresAtMillis = System.currentTimeMillis() + (expiresAt * 60 * 1000);
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer, targetMinetopiaPlayer -> {
+                if (targetMinetopiaPlayer == null) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+                    return;
+                }
 
-        if (expiresAt == -1) expiresAtMillis = -1;
+                for (Prefix prefix1 : targetMinetopiaPlayer.getPrefixes()) {
+                    if (prefix1.getPrefix().equalsIgnoreCase(prefix)) {
+                        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_already_exists")
+                                .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
+                                .replace("<prefix>", prefix));
+                        return;
+                    }
+                }
 
-        Prefix prefix1 = new Prefix(prefix, expiresAtMillis);
-        targetMinetopiaPlayer.addPrefix(prefix1);
+                long expiresAtMillis = System.currentTimeMillis() + (expiresAt * 60 * 1000);
 
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_added")
-                .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
-                .replace("<prefix>", prefix)
-                .replace("<time>", expiresAt == -1 ? "nooit" : PlaytimeUtil.formatPlaytime(minutesToMillis(expiresAt))));
+                if (expiresAt == -1) expiresAtMillis = -1;
+
+                Prefix prefix1 = new Prefix(prefix, expiresAtMillis);
+                targetMinetopiaPlayer.addPrefix(prefix1);
+
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_added")
+                        .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
+                        .replace("<prefix>", prefix)
+                        .replace("<time>", expiresAt == -1 ? "nooit" : PlaytimeUtil.formatPlaytime(minutesToMillis(expiresAt))));
+            }, Throwable::printStackTrace);
+        }, Throwable::printStackTrace);
     }
 
     private int minutesToMillis(int minutes) {

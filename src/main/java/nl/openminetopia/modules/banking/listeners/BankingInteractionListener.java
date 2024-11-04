@@ -15,7 +15,7 @@ public class BankingInteractionListener implements Listener {
 
     @EventHandler
     public void bankingInteraction(PlayerInteractEvent event) {
-        if(!(event.getHand() != EquipmentSlot.HAND)) return;
+        if(event.getHand() == EquipmentSlot.HAND) return;
         if(event.getClickedBlock() == null) return;
 
         Player player = event.getPlayer();

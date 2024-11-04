@@ -76,7 +76,6 @@ public class Fitness {
             model.setTertiaryPoints(0.0);
             playerModel.getStatistics().add(model);
             StormDatabase.getInstance().saveStormModel(model);
-            return model;
         }
 
         return model;
@@ -94,9 +93,13 @@ public class Fitness {
                 });
     }
 
-    public void addBooster(FitnessBoosterModel booster) {
-        playerModel.getBoosters().add(booster);
-        StormDatabase.getInstance().saveStormModel(booster);
+    public void addBooster(int amount, long expiresAtMillis) {
+        FitnessBoosterModel boosterModel = new FitnessBoosterModel();
+        boosterModel.setPlayerId(this.playerModel.getId());
+        boosterModel.setAmount(amount);
+        boosterModel.setExpiresAt(expiresAtMillis);
+        playerModel.getBoosters().add(boosterModel);
+        StormDatabase.getInstance().saveStormModel(boosterModel);
     }
 
     public void removeBooster(FitnessBoosterModel booster) {

@@ -15,8 +15,8 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 public class PlayerPreLoginListener implements Listener {
 
     @EventHandler
-    public void onPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
-        PlayerManager.getInstance().getPlayerModels().remove(event.getUniqueId());
+    public void onPlayerPreLogin(final AsyncPlayerPreLoginEvent event) {
+        PlayerManager.getInstance().getOnlinePlayers().remove(event.getUniqueId());
 
         PlayerModule playerModule = OpenMinetopia.getModuleManager().getModule(PlayerModule.class);
 

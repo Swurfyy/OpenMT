@@ -29,37 +29,35 @@ public class BankingFreezeCommand extends BaseCommand {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer((OfflinePlayer) sender);
-
-        if (accountModel == null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
-            return;
-        }
-
-        boolean newState = !accountModel.getFrozen();
-
-        CompletableFuture<Void> updateFuture = StormUtils.updateModelData(BankAccountModel.class,
-                query -> query.where("uuid", Where.EQUAL, accountModel.getUniqueId().toString()),
-                updateModel -> updateModel.setFrozen(newState)
-        );
-
-        updateFuture.whenComplete((v, throwable) -> {
-            if(throwable != null) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("database_update_error"));
+        PlayerManager.getInstance().getMinetopiaPlayerAsync((OfflinePlayer) sender, minetopiaPlayer -> {
+            if (accountModel == null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
                 return;
             }
-            accountModel.setFrozen(newState);
-            accountModel.save();
 
-            if (newState) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_frozen")
+            boolean newState = !accountModel.getFrozen();
+
+            CompletableFuture<Void> updateFuture = StormUtils.updateModelData(BankAccountModel.class,
+                    query -> query.where("uuid", Where.EQUAL, accountModel.getUniqueId().toString()),
+                    updateModel -> updateModel.setFrozen(newState)
+            );
+
+            updateFuture.whenComplete((v, throwable) -> {
+                if(throwable != null) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("database_update_error"));
+                    return;
+                }
+                accountModel.setFrozen(newState);
+                accountModel.save();
+
+                if (newState) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_frozen")
+                            .replace("<account_name>", accountModel.getName()));
+                    return;
+                }
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_unfrozen")
                         .replace("<account_name>", accountModel.getName()));
-                return;
-            }
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_unfrozen")
-                    .replace("<account_name>", accountModel.getName()));
-        });
-
+            });
+        }, Throwable::printStackTrace);
     }
-
 }

@@ -15,9 +15,10 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) {
-            player.kick(MessageConfiguration.component("player_data_not_loaded"));
-        }
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) {
+                player.kick(MessageConfiguration.component("player_data_not_loaded"));
+            }
+        }, Throwable::printStackTrace);
     }
 }

@@ -7,6 +7,7 @@ import com.destroystokyo.paper.profile.PlayerProfile;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.WorldGuardUtils;
@@ -20,30 +21,35 @@ public class PlotOwnersCommand extends BaseCommand {
     @Description("Voegt een speler toe aan een plot.")
     @CommandPermission("openminetopia.plot.addowner")
     @Syntax("<speler>")
-    public void addPlotOwner(Player player, OnlinePlayer onlinePlayer) {
+    public void addPlotOwner(Player player, OfflinePlayer offlinePlayer) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
-        Player target = onlinePlayer.getPlayer();
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
-        
-        if (region == null) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Je staat niet op een geldig plot."));
+        if (offlinePlayer == null) {
+            ChatUtils.sendMessage(player, MessageConfiguration.message("player_not_found"));
             return;
         }
 
-        if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Dit is geen geldig plot."));
-            return;
-        }
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (region.getOwners().contains(target.getUniqueId())) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>" + target.getName() + " is al een eigenaar van dit plot."));
-            return;
-        }
+            if (region == null) {
+                player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Je staat niet op een geldig plot."));
+                return;
+            }
 
-        region.getOwners().addPlayer(target.getUniqueId());
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Je hebt <aqua>" + target.getName() + " <dark_aqua>toegevoegd aan het plot."));
+            if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
+                player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Dit is geen geldig plot."));
+                return;
+            }
+
+            if (region.getOwners().contains(offlinePlayer.getUniqueId())) {
+                player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>" + offlinePlayer.getName() + " is al een eigenaar van dit plot."));
+                return;
+            }
+
+            region.getOwners().addPlayer(offlinePlayer.getUniqueId());
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Je hebt <aqua>" + offlinePlayer.getName() + " <dark_aqua>toegevoegd aan het plot."));
+        }, Throwable::printStackTrace);
     }
 
     @Subcommand("removeowner")
@@ -54,27 +60,26 @@ public class PlotOwnersCommand extends BaseCommand {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
         PlayerProfile profile = offlinePlayer.getPlayerProfile();
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (region == null) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer,"<red>Je staat niet op een geldig plot."));
-            return;
-        }
+            if (region == null) {
+                player.sendMessage(ChatUtils.format(minetopiaPlayer,"<red>Je staat niet op een geldig plot."));
+                return;
+            }
 
-        if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer,"<red>Dit is geen geldig plot."));
-            return;
-        }
+            if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
+                player.sendMessage(ChatUtils.format(minetopiaPlayer,"<red>Dit is geen geldig plot."));
+                return;
+            }
 
-        if (!region.getOwners().contains(profile.getId())) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer,"<red>" + profile.getName() + " is geen eigenaar van dit plot."));
-            return;
-        }
+            if (!region.getOwners().contains(profile.getId())) {
+                player.sendMessage(ChatUtils.format(minetopiaPlayer,"<red>" + profile.getName() + " is geen eigenaar van dit plot."));
+                return;
+            }
 
-        region.getOwners().removePlayer(profile.getId());
-        player.sendMessage(ChatUtils.format(minetopiaPlayer,"<dark_aqua>Je hebt <aqua>" + profile.getName() + " <dark_aqua>verwijderd van dit plot."));
+            region.getOwners().removePlayer(profile.getId());
+            player.sendMessage(ChatUtils.format(minetopiaPlayer,"<dark_aqua>Je hebt <aqua>" + profile.getName() + " <dark_aqua>verwijderd van dit plot."));
+        }, Throwable::printStackTrace);
     }
-
-
 }

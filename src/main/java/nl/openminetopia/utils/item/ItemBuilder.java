@@ -1,5 +1,6 @@
 package nl.openminetopia.utils.item;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.jazzkuh.inventorylib.utils.PersistentData;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;

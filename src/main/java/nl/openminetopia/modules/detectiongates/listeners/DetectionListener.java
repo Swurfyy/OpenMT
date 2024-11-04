@@ -56,7 +56,7 @@ public class DetectionListener implements Listener {
                 location.getBlock().setType(material);
             });
             cooldown.remove(block);
-        }, 20 * configuration.getDetectionCooldown());
+        }, 20L * configuration.getDetectionCooldown());
 
     }
 

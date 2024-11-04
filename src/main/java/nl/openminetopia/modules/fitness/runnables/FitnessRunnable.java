@@ -4,31 +4,31 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.fitness.utils.FitnessUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class FitnessRunnable extends BukkitRunnable {
 
     private final Fitness fitness;
-    private final Player player;
+    private final OfflinePlayer player;
+    private boolean force = false; // used to force the runnable to run, even if player is offline
 
     public FitnessRunnable(Fitness fitness) {
         this.fitness = fitness;
-        this.player = Bukkit.getPlayer(fitness.getUuid());
+        this.player = Bukkit.getOfflinePlayer(fitness.getUuid());
     }
 
     @Override
     public void run() {
         FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
 
-        if (player == null || !player.isOnline()) {
+        if (player == null || !player.isOnline() && !force) {
             cancel();
             return;
         }
@@ -37,22 +37,35 @@ public class FitnessRunnable extends BukkitRunnable {
             if (booster.isExpired()) fitness.removeBooster(booster);
         });
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
-            FitnessUtils.clearFitnessEffects(player);
-            return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (!force) {
+                if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
+                    FitnessUtils.clearFitnessEffects(player.getPlayer());
+                    return;
+                }
+            }
+
+            updateFitnessStatistic(FitnessStatisticType.WALKING, Statistic.WALK_ONE_CM);
+            updateFitnessStatistic(FitnessStatisticType.CLIMBING, Statistic.CLIMB_ONE_CM);
+            updateFitnessStatistic(FitnessStatisticType.SPRINTING, Statistic.SPRINT_ONE_CM);
+            updateFitnessStatistic(FitnessStatisticType.SWIMMING, Statistic.SWIM_ONE_CM);
+            updateFitnessStatistic(FitnessStatisticType.FLYING, Statistic.AVIATE_ONE_CM);
+            updateEatingFitness();
+
+            int totalFitness = calculateTotalFitness() + calculateFitnessBoost();
+            fitness.setTotalFitness(Math.min(totalFitness, config.getMaxFitnessLevel()));
+            fitness.apply();
+        }, Throwable::printStackTrace);
+
+        if (force) {
+            force = false;
+            cancel();
         }
+    }
 
-        updateFitnessStatistic(FitnessStatisticType.WALKING, Statistic.WALK_ONE_CM);
-        updateFitnessStatistic(FitnessStatisticType.CLIMBING, Statistic.CLIMB_ONE_CM);
-        updateFitnessStatistic(FitnessStatisticType.SPRINTING, Statistic.SPRINT_ONE_CM);
-        updateFitnessStatistic(FitnessStatisticType.SWIMMING, Statistic.SWIM_ONE_CM);
-        updateFitnessStatistic(FitnessStatisticType.FLYING, Statistic.AVIATE_ONE_CM);
-        updateEatingFitness();
-
-        int totalFitness = calculateTotalFitness() + calculateFitnessBoost();
-        fitness.setTotalFitness(Math.min(totalFitness, config.getMaxFitnessLevel()));
-        fitness.apply();
+    public void forceRun() {
+        force = true;
+        run();
     }
 
     private void updateFitnessStatistic(FitnessStatisticType type, Statistic statistic) {

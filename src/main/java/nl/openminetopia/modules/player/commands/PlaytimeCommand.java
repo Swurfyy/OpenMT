@@ -10,35 +10,47 @@ import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-@CommandAlias("time|playtime")
+import java.util.concurrent.CompletableFuture;
+
+@CommandAlias("playtime")
 public class PlaytimeCommand extends BaseCommand {
 
     @Default
     @CommandCompletion("@players")
-    @CommandPermission("openminetopia.playtime")
     @Description("Get your or another player's playtime.")
-    public void onPlaytimeCommand(Player player, @Optional OfflinePlayer target) {
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-
-        if (target != null && player.hasPermission("openminetopia.playtime.others")) {
-            MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(target);
-            if (targetMinetopiaPlayer == null) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+    public void playtime(Player player, @Optional OfflinePlayer target) {
+        // Retrieve the primary player's MinetopiaPlayer asynchronously
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) {
+                ChatUtils.sendMessage(player, MessageConfiguration.message("database_read_error"));
                 return;
             }
 
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_time_other_player")
-                    .replace("<player>", (target.getName() == null ? "null" : target.getName()))
-                    .replace("<playtime>", PlaytimeUtil.formatPlaytime(targetMinetopiaPlayer.getPlaytime())));
-            return;
-        }
+            // If no target is specified or the player lacks permission, display the primary player's playtime
+            if (target == null || !player.hasPermission("openminetopia.playtime.others")) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_time_self")
+                        .replace("<playtime>", PlaytimeUtil.formatPlaytime(minetopiaPlayer.getPlaytime())));
+                return;
+            }
 
-        if (minetopiaPlayer == null) {
+            // Retrieve the target player's MinetopiaPlayer asynchronously
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+                if (targetMinetopiaPlayer == null) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+                    return;
+                }
+
+                // Display the target player's playtime
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_time_other_player")
+                        .replace("<player>", target.getName() == null ? "null" : target.getName())
+                        .replace("<playtime>", PlaytimeUtil.formatPlaytime(targetMinetopiaPlayer.getPlaytime())));
+            }, throwable -> {
+                throwable.printStackTrace();
+                ChatUtils.sendMessage(player, MessageConfiguration.message("database_read_error"));
+            });
+        }, throwable -> {
+            throwable.printStackTrace();
             ChatUtils.sendMessage(player, MessageConfiguration.message("database_read_error"));
-            return;
-        }
-
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_time_self")
-                .replace("<playtime>", PlaytimeUtil.formatPlaytime(minetopiaPlayer.getPlaytime())));
+        });
     }
 }

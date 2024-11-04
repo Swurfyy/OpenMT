@@ -9,6 +9,8 @@ import java.util.List;
 public class ItemUtils {
 
     public boolean isValidItem(ItemStack item, List<String> validItems) {
+        if (item == null) return false;
+
         for (String headItemString : validItems) {
             String[] headItem = headItemString.split(":");
             if (item.getType().name().equalsIgnoreCase(headItem[0])) {

@@ -65,4 +65,7 @@ public class ColorsConfiguration extends ConfigurateConfig {
         return components.containsKey(identifier.toLowerCase());
     }
 
+    public List<ColorComponent> components() {
+        return new ArrayList<>(components.values());
+    }
 }
