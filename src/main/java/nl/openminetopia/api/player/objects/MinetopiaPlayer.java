@@ -87,7 +87,7 @@ public class MinetopiaPlayer {
         if (this.getBukkit().getPlayer() != null && this.getBukkit().isOnline())
             this.getBukkit().getPlayer().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
 
-        this.fitness = new Fitness(uuid, playerModel);
+        this.fitness = new Fitness(this);
         Bukkit.getScheduler().runTaskLaterAsynchronously(OpenMinetopia.getInstance(), () -> fitness.getRunnable().run(), 1L);
 
         this.playtime = this.playerModel.getPlaytime();
@@ -114,7 +114,7 @@ public class MinetopiaPlayer {
         this.activePrefix = prefixModule.getActivePrefixFromPlayer(playerModel)
                 .orElse(new Prefix(-1, configuration.getDefaultPrefix(), -1));
 
-        this.playtimeRunnable = new PlaytimeRunnable(getBukkit().getPlayer());
+        this.playtimeRunnable = new PlaytimeRunnable(this);
         playtimeRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L);
 
         this.levelcheckRunnable = new LevelCheckRunnable(this);

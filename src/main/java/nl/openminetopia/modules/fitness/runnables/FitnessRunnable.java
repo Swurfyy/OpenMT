@@ -4,6 +4,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
@@ -21,7 +22,7 @@ public class FitnessRunnable extends BukkitRunnable {
 
     public FitnessRunnable(Fitness fitness) {
         this.fitness = fitness;
-        this.player = Bukkit.getOfflinePlayer(fitness.getUuid());
+        this.player = fitness.getMinetopiaPlayer().getBukkit();
     }
 
     @Override
@@ -37,25 +38,24 @@ public class FitnessRunnable extends BukkitRunnable {
             if (booster.isExpired()) fitness.removeBooster(booster);
         });
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
-            if (!force) {
-                if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
-                    FitnessUtils.clearFitnessEffects(player.getPlayer());
-                    return;
-                }
+        if (!force) {
+            MinetopiaPlayer minetopiaPlayer = fitness.getMinetopiaPlayer();
+            if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
+                FitnessUtils.clearFitnessEffects(player.getPlayer());
+                return;
             }
+        }
 
-            updateFitnessStatistic(FitnessStatisticType.WALKING, Statistic.WALK_ONE_CM);
-            updateFitnessStatistic(FitnessStatisticType.CLIMBING, Statistic.CLIMB_ONE_CM);
-            updateFitnessStatistic(FitnessStatisticType.SPRINTING, Statistic.SPRINT_ONE_CM);
-            updateFitnessStatistic(FitnessStatisticType.SWIMMING, Statistic.SWIM_ONE_CM);
-            updateFitnessStatistic(FitnessStatisticType.FLYING, Statistic.AVIATE_ONE_CM);
-            updateEatingFitness();
+        updateFitnessStatistic(FitnessStatisticType.WALKING, Statistic.WALK_ONE_CM);
+        updateFitnessStatistic(FitnessStatisticType.CLIMBING, Statistic.CLIMB_ONE_CM);
+        updateFitnessStatistic(FitnessStatisticType.SPRINTING, Statistic.SPRINT_ONE_CM);
+        updateFitnessStatistic(FitnessStatisticType.SWIMMING, Statistic.SWIM_ONE_CM);
+        updateFitnessStatistic(FitnessStatisticType.FLYING, Statistic.AVIATE_ONE_CM);
+        updateEatingFitness();
 
-            int totalFitness = calculateTotalFitness() + calculateFitnessBoost();
-            fitness.setTotalFitness(Math.min(totalFitness, config.getMaxFitnessLevel()));
-            fitness.apply();
-        }, Throwable::printStackTrace);
+        int totalFitness = calculateTotalFitness() + calculateFitnessBoost();
+        fitness.setTotalFitness(Math.min(totalFitness, config.getMaxFitnessLevel()));
+        fitness.apply();
 
         if (force) {
             force = false;

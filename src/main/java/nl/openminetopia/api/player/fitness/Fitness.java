@@ -4,6 +4,7 @@ import com.craftmend.storm.api.enums.Where;
 import lombok.Getter;
 import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.fitness.FitnessModule;
@@ -22,6 +23,7 @@ import java.util.concurrent.CompletableFuture;
 @Getter
 public class Fitness {
 
+    private final MinetopiaPlayer minetopiaPlayer;
     private final UUID uuid;
     private final PlayerModel playerModel;
     private final FitnessRunnable runnable;
@@ -30,9 +32,10 @@ public class Fitness {
 
     private final FitnessModule fitnessModule = OpenMinetopia.getModuleManager().getModule(FitnessModule.class);
 
-    public Fitness(UUID uuid, PlayerModel playerModel) {
-        this.uuid = uuid;
-        this.playerModel = playerModel;
+    public Fitness(MinetopiaPlayer minetopiaPlayer) {
+        this.minetopiaPlayer = minetopiaPlayer;
+        this.uuid = minetopiaPlayer.getUuid();
+        this.playerModel = minetopiaPlayer.getPlayerModel();
         this.runnable = new FitnessRunnable(this);
 
         runnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 60 * 20L);
