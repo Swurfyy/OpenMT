@@ -8,7 +8,6 @@ import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.player.commands.PlaytimeCommand;
-import nl.openminetopia.modules.player.listeners.PlayerJoinListener;
 import nl.openminetopia.modules.player.listeners.PlayerPreLoginListener;
 import nl.openminetopia.modules.player.listeners.PlayerQuitListener;
 import org.bukkit.Bukkit;
@@ -26,7 +25,6 @@ public class PlayerModule extends Module {
     @Override
     public void enable() {
         registerListener(new PlayerPreLoginListener());
-        registerListener(new PlayerJoinListener());
         registerListener(new PlayerQuitListener());
 
         registerCommand(new PlaytimeCommand());

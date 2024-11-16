@@ -22,6 +22,7 @@ public class PlayerInteractEntityListener implements Listener {
         Player source = event.getPlayer();
 
         if (!HandcuffUtils.isHandcuffItem(source.getInventory().getItemInMainHand())) return;
+        if (!event.getPlayer().hasPermission("openminetopia.handcuff")) return;
 
         if (HandcuffManager.getInstance().isHandcuffed(target)) {
             HandcuffedPlayer handcuffedPlayer = HandcuffManager.getInstance().getHandcuffedPlayer(target);

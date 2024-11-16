@@ -5,14 +5,18 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Optional;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("staffchat|staffc|sc")
 public class StaffchatCommand extends BaseCommand {
+
+    private final PoliceModule policeModule = OpenMinetopia.getModuleManager().getModule(PoliceModule.class);
 
     @Default
     @CommandPermission("openminetopia.staffchat")

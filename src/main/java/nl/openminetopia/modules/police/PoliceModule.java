@@ -15,6 +15,9 @@ import nl.openminetopia.modules.police.handcuff.HandcuffManager;
 import nl.openminetopia.modules.police.handcuff.listeners.*;
 import nl.openminetopia.modules.police.handcuff.objects.HandcuffedPlayer;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
+import nl.openminetopia.modules.police.walkietalkie.WalkieTalkieManager;
+import nl.openminetopia.modules.police.walkietalkie.listeners.PlayerChatListener;
+import nl.openminetopia.modules.police.walkietalkie.listeners.PlayerInteractListener;
 import nl.openminetopia.modules.prefix.models.PrefixModel;
 
 import java.util.HashMap;
@@ -24,10 +27,14 @@ import java.util.concurrent.CompletableFuture;
 @Getter
 public class PoliceModule extends Module {
 
-    public HashMap<UUID, Long> emergencyCooldowns = new HashMap<>();
+    private final HashMap<UUID, Long> emergencyCooldowns = new HashMap<>();
+
+    private WalkieTalkieManager walkieTalkieManager;
 
     @Override
     public void enable() {
+        walkieTalkieManager = new WalkieTalkieManager();
+
         registerCommand(new EmergencyCommand());
         registerCommand(new CriminalRecordCommand());
         registerCommand(new BodysearchCommand());
@@ -41,6 +48,8 @@ public class PoliceModule extends Module {
         registerListener(new PlayerPickupItemListener());
         registerListener(new PlayerSlotChangeListener());
         registerListener(new PlayerInventoryClickListener());
+        registerListener(new PlayerChatListener());
+        registerListener(new PlayerInteractListener());
     }
 
     @Override

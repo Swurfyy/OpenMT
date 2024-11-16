@@ -19,6 +19,7 @@ public class PlayerEntityInteractListener implements Listener {
         if (!(event.getRightClicked() instanceof Player target)) return;
         if (item.getType() != Material.NETHER_STAR) return;
         if (PersistentDataUtil.get(item, "openmt.admintool") == null) return;
+        if (!event.getPlayer().hasPermission("openminetopia.admintool")) return;
 
         PlayerManager.getInstance().getMinetopiaPlayerAsync(target, minetopiaPlayer -> {
             if (minetopiaPlayer == null) return;

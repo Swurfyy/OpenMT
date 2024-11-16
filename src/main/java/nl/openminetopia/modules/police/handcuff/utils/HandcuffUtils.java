@@ -23,7 +23,7 @@ public class HandcuffUtils {
 
             PotionEffectType potionEffectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
             if (potionEffectType == null) {
-                System.out.println("Invalid potion effect: " + effectName);
+                OpenMinetopia.getInstance().getLogger().warning("Invalid potion effect: " + effectName);
                 continue;
             }
 
@@ -48,7 +48,7 @@ public class HandcuffUtils {
 
             PotionEffectType potionEffectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
             if (potionEffectType == null) {
-                System.out.println("Invalid potion effect: " + effectName);
+                OpenMinetopia.getInstance().getLogger().warning("Invalid potion effect: " + effectName);
                 continue;
             }
             target.getActivePotionEffects().forEach(activeEffect -> {

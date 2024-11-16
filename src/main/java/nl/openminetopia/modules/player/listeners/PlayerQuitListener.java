@@ -39,7 +39,6 @@ public class PlayerQuitListener implements Listener {
             minetopiaPlayer.getLevelcheckRunnable().cancel();
 
             PlayerManager.getInstance().getOnlinePlayers().remove(player.getUniqueId());
-            //PlayerManager.getInstance().getPlayerModels().remove(player.getUniqueId());
         }, Throwable::printStackTrace);
     }
 }

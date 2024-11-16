@@ -7,6 +7,7 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.chat.utils.SpyUtils;
+import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.modules.police.balaclava.utils.BalaclavaUtils;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
@@ -21,13 +22,17 @@ import java.util.List;
 public class PlayerChatListener implements Listener {
 
     @EventHandler
-    public void onPlayerChat(AsyncChatEvent event) {
+    public void playerChat(AsyncChatEvent event) {
         Player source = event.getPlayer();
         PlayerManager.getInstance().getMinetopiaPlayerAsync(source, minetopiaPlayer -> {
             if (minetopiaPlayer == null) return;
 
             if (!minetopiaPlayer.isInPlace()) return;
             if (minetopiaPlayer.isStaffchatEnabled()) return;
+
+            PoliceModule policeModule = OpenMinetopia.getModuleManager().getModule(PoliceModule.class);
+            if (policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)
+                    || policeModule.getWalkieTalkieManager().isComposingMessage(source)) return;
 
             List<Player> recipients = new ArrayList<>();
 
@@ -78,8 +83,8 @@ public class PlayerChatListener implements Listener {
                 }
 
                 // Send the formatted message to the player
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, finalMessage);
-                Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage.replace("<display_name>", player.getName()))); // Log the message without potential scrambled name
+                player.sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage));
+                Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage)); // Log the message without potential scrambled name
             });
         }, Throwable::printStackTrace);
     }

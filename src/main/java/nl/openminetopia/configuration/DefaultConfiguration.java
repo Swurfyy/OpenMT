@@ -112,6 +112,13 @@ public class DefaultConfiguration extends ConfigurateConfig {
      */
     private final int bodysearchRange;
 
+    /**
+     * Walkie-talkie configuration
+     */
+    private final List<String> walkieTalkieItems;
+    private final boolean walkieTalkieEmergencyCooldownEnabled;
+    private final int walkieTalkieEmergencyCooldownSeconds;
+
     @SneakyThrows
     public DefaultConfiguration(File file) {
         super(file, "config.yml", "");
@@ -334,6 +341,15 @@ public class DefaultConfiguration extends ConfigurateConfig {
          * Bodysearch configuration
          */
         this.bodysearchRange = rootNode.node("bodysearch", "range").getInt(10);
+
+        /*
+         * Walkie-talkie configuration
+         */
+        this.walkieTalkieItems = rootNode.node("walkietalkie", "items").getList(String.class, List.of(
+                "PINK_DYE"
+        ));
+        this.walkieTalkieEmergencyCooldownEnabled = rootNode.node("walkietalkie", "emergency-button", "cooldown-enabled").getBoolean(true);
+        this.walkieTalkieEmergencyCooldownSeconds = rootNode.node("walkietalkie", "emergency-button", "cooldown-seconds").getInt(60);
     }
 
     @SneakyThrows
