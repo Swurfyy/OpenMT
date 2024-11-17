@@ -53,7 +53,7 @@ public class FitnessRunnable extends BukkitRunnable {
 
         int totalFitness = calculateTotalFitness() + calculateFitnessBoost();
         fitness.setTotalFitness(Math.min(totalFitness, config.getMaxFitnessLevel()));
-        fitness.apply();
+        if (player.isOnline()) fitness.apply();
 
         if (force) {
             force = false;

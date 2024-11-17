@@ -17,46 +17,13 @@ public class HandcuffUtils {
     public void applyHandcuffEffects(Player target) {
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
 
-        for (String effectString : configuration.getHandcuffEffects()) {
-            String[] effect = effectString.split(":");
-            String effectName = effect[0].toLowerCase();
-
-            PotionEffectType potionEffectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
-            if (potionEffectType == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Invalid potion effect: " + effectName);
-                continue;
-            }
-
-            if (effect.length == 1) {
-                PotionEffect potionEffect = new PotionEffect(potionEffectType, PotionEffect.INFINITE_DURATION, 0);
-                target.addPotionEffect(potionEffect);
-                continue;
-            }
-
-            int amplifier = Integer.parseInt(effect[1]);
-            PotionEffect potionEffect = new PotionEffect(potionEffectType, PotionEffect.INFINITE_DURATION, amplifier);
-            target.addPotionEffect(potionEffect);
-        }
+        ItemUtils.applyEffects(target, configuration.getHandcuffEffects(), PotionEffect.INFINITE_DURATION);
     }
 
     public void clearHandcuffEffects(Player target) {
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
 
-        for (String effectString : configuration.getHandcuffEffects()) {
-            String[] effect = effectString.split(":");
-            String effectName = effect[0].toLowerCase();
-
-            PotionEffectType potionEffectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
-            if (potionEffectType == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Invalid potion effect: " + effectName);
-                continue;
-            }
-            target.getActivePotionEffects().forEach(activeEffect -> {
-                if (activeEffect.getType().equals(potionEffectType)) {
-                    target.removePotionEffect(potionEffectType);
-                }
-            });
-        }
+        ItemUtils.clearEffects(target, configuration.getHandcuffEffects());
     }
 
     public boolean isHandcuffItem(ItemStack item) {

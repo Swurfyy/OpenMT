@@ -103,6 +103,13 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final boolean handcuffShowTitle;
 
     /**
+     * Pepperspray configuration
+     */
+    private final List<String> peppersprayItems;
+    private final int peppersprayEffectsDuration;
+    private final List<String> peppersprayEffects;
+
+    /**
      * Head configuration
      */
     private final List<String> headWhitelist;
@@ -288,6 +295,9 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "CLAY_BALL")
         );
 
+        /*
+         * Handcuff configuration
+         */
         this.handcuffItems = rootNode.node("handcuffs", "items").getList(String.class, List.of(
                 "GRAY_DYE")
         );
@@ -296,13 +306,24 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "MINING_FATIGUE:1",
                 "SLOWNESS:4"
         ));
-        this.handcuffCanDropItems = rootNode.node("handcuffs", "canDropItems").getBoolean(false);
-        this.handcuffCanPickupItems = rootNode.node("handcuffs", "canPickupItems").getBoolean(false);
-        this.handcuffCanOpenInventory = rootNode.node("handcuffs", "canOpenInventory").getBoolean(false);
-        this.handcuffCanRunAway = rootNode.node("handcuffs", "canRunAway").getBoolean(false);
-        this.handcuffCanPvP = rootNode.node("handcuffs", "canPvP").getBoolean(false);
-        this.handcuffCanChangeSlots = rootNode.node("handcuffs", "canChangeSlots").getBoolean(false);
-        this.handcuffShowTitle = rootNode.node("handcuffs", "showTitle").getBoolean(true);
+        this.handcuffCanDropItems = rootNode.node("handcuffs", "can-drop-items").getBoolean(false);
+        this.handcuffCanPickupItems = rootNode.node("handcuffs", "can-pickup-items").getBoolean(false);
+        this.handcuffCanOpenInventory = rootNode.node("handcuffs", "can-open-inventory").getBoolean(false);
+        this.handcuffCanRunAway = rootNode.node("handcuffs", "can-run-away").getBoolean(false);
+        this.handcuffCanPvP = rootNode.node("handcuffs", "can-pvp").getBoolean(false);
+        this.handcuffCanChangeSlots = rootNode.node("handcuffs", "can-change-slots").getBoolean(false);
+        this.handcuffShowTitle = rootNode.node("handcuffs", "show-title").getBoolean(true);
+
+        /*
+         * Pepperspray configuration
+         */
+        this.peppersprayItems = rootNode.node("pepperspray", "items").getList(String.class, List.of(
+                "WHITE_DYE")
+        );
+        this.peppersprayEffectsDuration = rootNode.node("pepperspray", "effects-duration").getInt(5);
+        this.peppersprayEffects = rootNode.node("pepperspray", "effects").getList(String.class, List.of(
+                "BLINDNESS"
+        ));
 
         /*
          * Head configuration

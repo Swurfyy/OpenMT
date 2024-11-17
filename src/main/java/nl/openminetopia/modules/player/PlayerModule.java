@@ -29,20 +29,6 @@ public class PlayerModule extends Module {
 
         registerCommand(new PlaytimeCommand());
 
-//        // fetch all players from the database and load them into the cache
-//        StormDatabase.getExecutorService().submit(() -> {
-//            Collection<PlayerModel> playerModels = new ArrayList<>();
-//            try {
-//                playerModels = StormDatabase.getInstance().getStorm().buildQuery(PlayerModel.class).execute().join();
-//            } catch (Exception e) {
-//                OpenMinetopia.getInstance().getLogger().severe("Failed to load player models from the database: " + e.getMessage());
-//            }
-//
-//            for (PlayerModel playerModel : playerModels) {
-//                PlayerManager.getInstance().getPlayerModels().put(playerModel.getUniqueId(), playerModel);
-//            }
-//        });
-
         Bukkit.getScheduler().runTaskTimerAsynchronously(OpenMinetopia.getInstance(), () -> {
             for (MinetopiaPlayer minetopiaPlayer : PlayerManager.getInstance().getOnlinePlayers().values()) {
                 if (!(minetopiaPlayer instanceof MinetopiaPlayer onlineMinetopiaPlayer)) continue;

@@ -21,10 +21,11 @@ public class AdminToolOpenCommand extends BaseCommand {
     @CommandCompletion("@players")
     @CommandPermission("openminetopia.admintool.open")
     public void open(Player player, OfflinePlayer offlinePlayer) {
-        if (!offlinePlayer.hasPlayedBefore()) {
+        if (offlinePlayer == null || !offlinePlayer.hasPlayedBefore()) {
             player.sendMessage(ChatUtils.color("<red>Deze speler heeft nog nooit gespeeld."));
             return;
         }
+
         PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer, minetopiaPlayer -> {
             if (minetopiaPlayer == null) return;
             if (!offlinePlayer.isOnline()) minetopiaPlayer.getFitness().getRunnable().forceRun();

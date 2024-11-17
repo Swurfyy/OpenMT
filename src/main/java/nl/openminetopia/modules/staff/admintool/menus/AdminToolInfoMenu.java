@@ -138,7 +138,7 @@ public class AdminToolInfoMenu extends Menu {
                     .setName("<gold>Banksaldo")
                     .addLoreLine("<red>Deze speler heeft geen bankrekening.");
 
-            targetBankIcon = new Icon(16, bankItemBuilder.toItemStack(), event -> {
+            targetBankIcon = new Icon(15, bankItemBuilder.toItemStack(), event -> {
                 event.setCancelled(true);
                 player.sendMessage(ChatUtils.color("<red>Deze speler zijn bankrekening is niet ingeladen. (Soon)"));
             });

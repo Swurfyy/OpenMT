@@ -2,7 +2,6 @@ package nl.openminetopia.modules.police;
 
 import com.craftmend.storm.api.enums.Where;
 import lombok.Getter;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
@@ -15,10 +14,10 @@ import nl.openminetopia.modules.police.handcuff.HandcuffManager;
 import nl.openminetopia.modules.police.handcuff.listeners.*;
 import nl.openminetopia.modules.police.handcuff.objects.HandcuffedPlayer;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
+import nl.openminetopia.modules.police.pepperspray.listeners.PlayerPeppersprayListener;
 import nl.openminetopia.modules.police.walkietalkie.WalkieTalkieManager;
 import nl.openminetopia.modules.police.walkietalkie.listeners.PlayerChatListener;
 import nl.openminetopia.modules.police.walkietalkie.listeners.PlayerInteractListener;
-import nl.openminetopia.modules.prefix.models.PrefixModel;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -40,7 +39,8 @@ public class PoliceModule extends Module {
         registerCommand(new BodysearchCommand());
         registerListener(new PlayerArmorChangeListener());
 
-        registerListener(new PlayerInteractEntityListener());
+        /* ---- Handcuff ---- */
+        registerListener(new PlayerHandcuffListener());
         registerListener(new PlayerMoveListener());
         registerListener(new PlayerDropItemListener());
         registerListener(new PlayerEntityDamageListener());
@@ -48,8 +48,13 @@ public class PoliceModule extends Module {
         registerListener(new PlayerPickupItemListener());
         registerListener(new PlayerSlotChangeListener());
         registerListener(new PlayerInventoryClickListener());
+
+        /* ---- Walkie-talkie ---- */
         registerListener(new PlayerChatListener());
         registerListener(new PlayerInteractListener());
+
+        /* ---- Pepperspray ---- */
+        registerListener(new PlayerPeppersprayListener());
     }
 
     @Override
