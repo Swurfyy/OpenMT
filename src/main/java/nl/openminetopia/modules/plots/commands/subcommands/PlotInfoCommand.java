@@ -7,7 +7,6 @@ import co.aikar.commands.annotation.Description;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.kyori.adventure.text.Component;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.utils.ChatUtils;

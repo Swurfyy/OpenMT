@@ -7,7 +7,6 @@ import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
-import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

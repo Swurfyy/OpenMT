@@ -10,7 +10,6 @@ import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.annotation.Syntax;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.utils.ChatUtils;

@@ -4,7 +4,6 @@ import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;

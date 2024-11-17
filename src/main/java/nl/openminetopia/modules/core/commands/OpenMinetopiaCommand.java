@@ -7,7 +7,11 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Subcommand;
 import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.configuration.*;
+import nl.openminetopia.configuration.ColorsConfiguration;
+import nl.openminetopia.configuration.DefaultConfiguration;
+import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.configuration.LevelCheckConfiguration;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 

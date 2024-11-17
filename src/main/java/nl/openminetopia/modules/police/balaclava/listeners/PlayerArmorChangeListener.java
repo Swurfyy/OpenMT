@@ -1,8 +1,6 @@
 package nl.openminetopia.modules.police.balaclava.listeners;
 
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
-import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.balaclava.utils.BalaclavaUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

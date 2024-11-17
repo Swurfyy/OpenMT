@@ -1,9 +1,7 @@
 package nl.openminetopia.modules.player.utils;
 
 import lombok.experimental.UtilityClass;
-import net.kyori.adventure.text.Component;
 import nl.openminetopia.configuration.MessageConfiguration;
-import nl.openminetopia.utils.ChatUtils;
 
 @UtilityClass
 public class PlaytimeUtil {

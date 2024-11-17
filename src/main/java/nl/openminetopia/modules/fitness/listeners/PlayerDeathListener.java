@@ -2,7 +2,6 @@ package nl.openminetopia.modules.fitness.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.FitnessConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

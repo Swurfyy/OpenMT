@@ -3,7 +3,6 @@ package nl.openminetopia.modules.data.storm.adapters;
 import com.craftmend.storm.Storm;
 import com.craftmend.storm.parser.objects.ParsedField;
 import com.craftmend.storm.parser.types.objects.StormTypeAdapter;
-import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 
 public class OwnableColorTypeAdapter extends StormTypeAdapter<OwnableColorType> {

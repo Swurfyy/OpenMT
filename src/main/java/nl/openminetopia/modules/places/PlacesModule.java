@@ -6,8 +6,6 @@ import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.data.storm.StormDatabase;
-import nl.openminetopia.modules.places.models.CityModel;
-import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.places.commands.mtcity.MTCityCommand;
 import nl.openminetopia.modules.places.commands.mtcity.subcommands.MTCityCreateCommand;
@@ -20,6 +18,8 @@ import nl.openminetopia.modules.places.commands.mtworld.subcommands.MTWorldSetti
 import nl.openminetopia.modules.places.listeners.PlayerJoinListener;
 import nl.openminetopia.modules.places.listeners.PlayerMoveListener;
 import nl.openminetopia.modules.places.listeners.PlayerTeleportListener;
+import nl.openminetopia.modules.places.models.CityModel;
+import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

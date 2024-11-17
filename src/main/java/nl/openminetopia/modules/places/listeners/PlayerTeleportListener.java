@@ -4,7 +4,6 @@ import net.kyori.adventure.title.Title;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

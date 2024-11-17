@@ -11,15 +11,22 @@ import nl.openminetopia.modules.color.commands.subcommands.ColorAddCommand;
 import nl.openminetopia.modules.color.commands.subcommands.ColorCreateCommand;
 import nl.openminetopia.modules.color.commands.subcommands.ColorRemoveCommand;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
-import nl.openminetopia.modules.color.objects.*;
-import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.color.models.ColorModel;
-import nl.openminetopia.modules.player.models.PlayerModel;
+import nl.openminetopia.modules.color.objects.ChatColor;
+import nl.openminetopia.modules.color.objects.LevelColor;
+import nl.openminetopia.modules.color.objects.NameColor;
+import nl.openminetopia.modules.color.objects.OwnableColor;
+import nl.openminetopia.modules.color.objects.PrefixColor;
+import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
-import nl.openminetopia.modules.prefix.objects.Prefix;
+import nl.openminetopia.modules.player.models.PlayerModel;
 import org.bukkit.Bukkit;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 

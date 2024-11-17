@@ -3,7 +3,11 @@ package nl.openminetopia.modules.color.enums;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
-import nl.openminetopia.modules.color.objects.*;
+import nl.openminetopia.modules.color.objects.ChatColor;
+import nl.openminetopia.modules.color.objects.LevelColor;
+import nl.openminetopia.modules.color.objects.NameColor;
+import nl.openminetopia.modules.color.objects.OwnableColor;
+import nl.openminetopia.modules.color.objects.PrefixColor;
 
 @Getter
 public enum OwnableColorType {

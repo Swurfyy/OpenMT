@@ -5,7 +5,6 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.models.PlayerModel;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 import java.util.Map;

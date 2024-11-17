@@ -4,25 +4,22 @@ import com.jazzkuh.inventorylib.objects.Menu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.menu.BankContentsMenu;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.menus.ColorTypeMenu;
-import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.player.utils.PlaytimeUtil;
 import nl.openminetopia.modules.prefix.menu.PrefixMenu;
 import nl.openminetopia.modules.staff.admintool.menus.fitness.AdminToolFitnessMenu;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 
 @Getter
 public class AdminToolInfoMenu extends Menu {

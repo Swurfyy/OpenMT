@@ -3,7 +3,6 @@ package nl.openminetopia.modules.chat.listeners;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.chat.utils.SpyUtils;

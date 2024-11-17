@@ -6,7 +6,6 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import org.bukkit.entity.Player;
 
 @CommandAlias("fitness|fitheid")

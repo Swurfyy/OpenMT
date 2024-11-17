@@ -13,7 +13,6 @@ import nl.openminetopia.modules.staff.mod.commands.ModCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModChatSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCommandSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModSetLevelCommand;
-import org.bukkit.Bukkit;
 
 public class StaffModule extends Module {
     @Override

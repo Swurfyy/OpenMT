@@ -3,7 +3,6 @@ package nl.openminetopia.modules.color.menus;
 import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
-import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.color.enums.OwnableColorType;

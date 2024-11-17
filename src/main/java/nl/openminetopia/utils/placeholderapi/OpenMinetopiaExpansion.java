@@ -3,7 +3,6 @@ package nl.openminetopia.utils.placeholderapi;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import org.bukkit.OfflinePlayer;

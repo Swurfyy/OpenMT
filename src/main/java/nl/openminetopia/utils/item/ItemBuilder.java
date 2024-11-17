@@ -1,6 +1,5 @@
 package nl.openminetopia.utils.item;
 
-import com.destroystokyo.paper.profile.PlayerProfile;
 import com.jazzkuh.inventorylib.utils.PersistentData;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
@@ -21,7 +20,11 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Easily create itemstacks, without messing your hands. <i>Note that if you do

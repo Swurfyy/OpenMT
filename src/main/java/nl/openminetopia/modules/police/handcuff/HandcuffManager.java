@@ -5,7 +5,8 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.handcuff.objects.HandcuffedPlayer;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HandcuffManager {
 

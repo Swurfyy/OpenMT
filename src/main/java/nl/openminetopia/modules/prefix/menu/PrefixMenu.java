@@ -3,7 +3,6 @@ package nl.openminetopia.modules.prefix.menu;
 import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;

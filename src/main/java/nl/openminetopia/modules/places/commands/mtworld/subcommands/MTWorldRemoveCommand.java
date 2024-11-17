@@ -5,8 +5,8 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.places.PlacesModule;
+import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 

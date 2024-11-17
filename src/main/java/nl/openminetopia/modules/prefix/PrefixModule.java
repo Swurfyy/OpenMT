@@ -6,13 +6,13 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.data.storm.StormDatabase;
-import nl.openminetopia.modules.player.models.PlayerModel;
-import nl.openminetopia.modules.prefix.models.PrefixModel;
 import nl.openminetopia.modules.data.utils.StormUtils;
+import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.prefix.commands.PrefixCommand;
 import nl.openminetopia.modules.prefix.commands.subcommands.PrefixAddCommand;
 import nl.openminetopia.modules.prefix.commands.subcommands.PrefixMenuCommand;
 import nl.openminetopia.modules.prefix.commands.subcommands.PrefixRemoveCommand;
+import nl.openminetopia.modules.prefix.models.PrefixModel;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import org.bukkit.Bukkit;
 
