@@ -22,23 +22,23 @@ public class PlayerQuitListener implements Listener {
         bankingModule.getBankAccountModels().remove(accountModel);
         accountModel.getSavingTask().saveAndCancel();
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        minetopiaPlayer.save().whenComplete((unused, throwable) -> {
-            if (throwable != null) {
-                throwable.printStackTrace();
-                return;
-            }
-            OpenMinetopia.getInstance().getLogger().info("Saved player data for " + player.getName());
-        });
+            minetopiaPlayer.save().whenComplete((unused, throwable) -> {
+                if (throwable != null) {
+                    throwable.printStackTrace();
+                    return;
+                }
+                OpenMinetopia.getInstance().getLogger().info("Saved player data for " + player.getName());
+            });
 
-        minetopiaPlayer.getFitness().getRunnable().cancel();
-        minetopiaPlayer.getPlaytimeRunnable().cancel();
-        minetopiaPlayer.getHealthStatisticRunnable().cancel();
-        minetopiaPlayer.getLevelcheckRunnable().cancel();
+            minetopiaPlayer.getFitness().getRunnable().cancel();
+            minetopiaPlayer.getPlaytimeRunnable().cancel();
+            minetopiaPlayer.getHealthStatisticRunnable().cancel();
+            minetopiaPlayer.getLevelcheckRunnable().cancel();
 
-        PlayerManager.getInstance().getMinetopiaPlayers().remove(player.getUniqueId());
-        PlayerManager.getInstance().getPlayerModels().remove(player.getUniqueId());
+            PlayerManager.getInstance().getOnlinePlayers().remove(player.getUniqueId());
+        }, Throwable::printStackTrace);
     }
 }

@@ -7,7 +7,6 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
-import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
@@ -24,23 +23,22 @@ public class BankingDeleteCommand extends BaseCommand {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer((OfflinePlayer) sender);
-
-        if (accountModel == null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
-            return;
-        }
-
-        bankingModule.deleteBankAccount(accountModel.getUniqueId()).whenComplete((v, throwable) -> {
-            if (throwable != null) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_deletion_error"));
+        PlayerManager.getInstance().getMinetopiaPlayerAsync((OfflinePlayer) sender, minetopiaPlayer -> {
+            if (accountModel == null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
                 return;
             }
 
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_deleted")
-                    .replace("<account_name>", accountModel.getName()));
-            bankingModule.getBankAccountModels().remove(accountModel);
-        });
-    }
+            bankingModule.deleteBankAccount(accountModel.getUniqueId()).whenComplete((v, throwable) -> {
+                if (throwable != null) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_deletion_error"));
+                    return;
+                }
 
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_deleted")
+                        .replace("<account_name>", accountModel.getName()));
+                bankingModule.getBankAccountModels().remove(accountModel);
+            });
+        }, Throwable::printStackTrace);
+    }
 }

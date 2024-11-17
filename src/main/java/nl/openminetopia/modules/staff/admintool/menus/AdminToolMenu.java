@@ -3,22 +3,29 @@ package nl.openminetopia.modules.staff.admintool.menus;
 import com.jazzkuh.inventorylib.objects.Menu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
+import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
 
 @Getter
 public class AdminToolMenu extends Menu {
 
     private final OfflinePlayer offlinePlayer;
     private final Player player;
+    private final MinetopiaPlayer minetopiaPlayer;
 
-    public AdminToolMenu(Player player, OfflinePlayer offlinePlayer) {
+    public AdminToolMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer) {
         super(ChatUtils.color("<gold>Beheerscherm <yellow>" + offlinePlayer.getPlayerProfile().getName()), 3);
-        this.offlinePlayer = offlinePlayer;
         this.player = player;
+        this.offlinePlayer = offlinePlayer;
+        this.minetopiaPlayer = minetopiaPlayer;
 
         ItemBuilder skullBuilder = new ItemBuilder(Material.PLAYER_HEAD)
                 .setName("<gold>Minetopia Informatie")
@@ -28,7 +35,8 @@ public class AdminToolMenu extends Menu {
                 .setSkullOwner(offlinePlayer);
 
         Icon targetSkullIcon = new Icon(10, skullBuilder.toItemStack(), event -> {
-            new AdminToolInfoMenu(player, offlinePlayer).open((Player) event.getWhoClicked());
+            Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () ->
+                    new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer).open((Player) event.getWhoClicked()));
         });
         this.addItem(targetSkullIcon);
 

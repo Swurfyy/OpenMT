@@ -20,28 +20,28 @@ public class PlotDescriptionCommand extends BaseCommand {
     public void plotDescription(Player player, String description) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (region == null) {
-            player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
-            return;
-        }
+            if (region == null) {
+                player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
+                return;
+            }
 
-        if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
-            player.sendMessage(MessageConfiguration.component("plot_not_valid"));
-            return;
-        }
+            if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
+                player.sendMessage(MessageConfiguration.component("plot_not_valid"));
+                return;
+            }
 
-        if (description.isBlank() || description.equalsIgnoreCase("remove") ||
-                description.equalsIgnoreCase("delete") || description.equalsIgnoreCase("null")) {
-            region.setFlag(PlotModule.PLOT_DESCRIPTION, null);
-            player.sendMessage(MessageConfiguration.component("plot_description_removed"));
-            return;
-        }
+            if (description.isBlank() || description.equalsIgnoreCase("remove") ||
+                    description.equalsIgnoreCase("delete") || description.equalsIgnoreCase("null")) {
+                region.setFlag(PlotModule.PLOT_DESCRIPTION, null);
+                player.sendMessage(MessageConfiguration.component("plot_description_removed"));
+                return;
+            }
 
-        region.setFlag(PlotModule.PLOT_DESCRIPTION, description);
-        player.sendMessage(MessageConfiguration.component("plot_description_updated"));
+            region.setFlag(PlotModule.PLOT_DESCRIPTION, description);
+            player.sendMessage(MessageConfiguration.component("plot_description_updated"));
+        }, Throwable::printStackTrace);
     }
-
 }

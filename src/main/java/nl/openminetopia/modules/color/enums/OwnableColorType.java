@@ -1,20 +1,23 @@
 package nl.openminetopia.modules.color.enums;
 
 import lombok.Getter;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.color.objects.*;
 
 @Getter
 public enum OwnableColorType {
-    PREFIX(MessageConfiguration.message("color_prefix_display_name")),
-    CHAT(MessageConfiguration.message("color_chat_display_name")),
-    NAME(MessageConfiguration.message("color_name_display_name")),
-    LEVEL(MessageConfiguration.message("color_level_display_name")),;
+    PREFIX(MessageConfiguration.message("color_prefix_display_name"), OpenMinetopia.getDefaultConfiguration().getDefaultPrefixColor()),
+    CHAT(MessageConfiguration.message("color_chat_display_name"), OpenMinetopia.getDefaultConfiguration().getDefaultChatColor()),
+    NAME(MessageConfiguration.message("color_name_display_name"), OpenMinetopia.getDefaultConfiguration().getDefaultNameColor()),
+    LEVEL(MessageConfiguration.message("color_level_display_name"),OpenMinetopia.getDefaultConfiguration().getDefaultLevelColor());
 
     private final String displayName;
+    private final String defaultColor;
 
-    OwnableColorType(String displayName) {
+    OwnableColorType(String displayName, String defaultColor) {
         this.displayName = displayName;
+        this.defaultColor = defaultColor;
     }
 
     public Class<? extends OwnableColor> correspondingClass() {

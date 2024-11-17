@@ -1,6 +1,5 @@
 package nl.openminetopia.modules.player.runnables;
 
-import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -8,9 +7,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class PlaytimeRunnable extends BukkitRunnable {
 
     private final Player player;
+    private final MinetopiaPlayer minetopiaPlayer;
 
-    public PlaytimeRunnable(Player player) {
-        this.player = player;
+    public PlaytimeRunnable(MinetopiaPlayer minetopiaPlayer) {
+        this.minetopiaPlayer = minetopiaPlayer;
+        this.player = minetopiaPlayer.getBukkit().getPlayer();
     }
 
     @Override
@@ -20,7 +21,6 @@ public class PlaytimeRunnable extends BukkitRunnable {
             return;
         }
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
         int newPlaytime = minetopiaPlayer.getPlaytime() + 1;

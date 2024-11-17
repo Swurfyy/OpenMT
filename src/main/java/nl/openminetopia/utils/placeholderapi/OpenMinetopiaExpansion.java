@@ -31,49 +31,37 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, @NotNull String params) {
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return null;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (params.equalsIgnoreCase("prefix")) {
-            return minetopiaPlayer.getActivePrefix().getPrefix();
-        }
+            String result = switch (params.toLowerCase()) {
+                case "prefix" -> minetopiaPlayer.getActivePrefix().getPrefix();
+                case "level" -> String.valueOf(minetopiaPlayer.getLevel());
+                case "city" -> minetopiaPlayer.getPlace().getName();
+                case "world" -> minetopiaPlayer.getWorld().getName();
+                case "temperature" -> String.valueOf(minetopiaPlayer.getPlace().getTemperature());
+                case "balance", "balance_formatted" -> {
+                    BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
+                    BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
+                    if (accountModel != null) {
+                        yield params.equalsIgnoreCase("balance_formatted")
+                                ? bankingModule.format(accountModel.getBalance())
+                                : String.valueOf(accountModel.getBalance());
+                    }
+                    yield null;
+                }
+                case "fitness" -> String.valueOf(minetopiaPlayer.getFitness().getTotalFitness());
+                case "max_fitness" -> String.valueOf(OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel());
+                default -> null;
+            };
 
-        if (params.equalsIgnoreCase("level")) {
-            return minetopiaPlayer.getLevel() + "";
-        }
-
-        if (params.equalsIgnoreCase("city")) {
-            return minetopiaPlayer.getPlace().getName();
-        }
-
-        if (params.equalsIgnoreCase("world")) {
-            return minetopiaPlayer.getWorld().getName();
-        }
-
-        if (params.equalsIgnoreCase("temperature")) {
-            return minetopiaPlayer.getPlace().getTemperature() + "";
-        }
-
-        if (params.startsWith("balance")) {
-            BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
-            BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
-            if(accountModel == null) return null;
-
-            if(params.equalsIgnoreCase("balance_formatted")) {
-                return bankingModule.format(accountModel.getBalance());
+            // Send the result asynchronously to the player if needed
+            if (player.isOnline() && player.getPlayer() != null && result != null) {
+                player.getPlayer().sendMessage(result);
             }
+        }, Throwable::printStackTrace);
 
-            return String.valueOf(accountModel.getBalance());
-        }
-
-        if (params.equalsIgnoreCase("fitness")) {
-            return minetopiaPlayer.getFitness().getTotalFitness() + "";
-        }
-
-        if (params.equalsIgnoreCase("max_fitness")) {
-            return OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel() + "";
-        }
-
-        return null; //
+        // Return a placeholder or default value immediately
+        return "Loading...";
     }
 }

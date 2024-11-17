@@ -26,3 +26,7 @@ colors:
   yellow_bold:
     display_name: "<bold><yellow>Geel (Bold)"
     color_prefix: "<bold><yellow>"
+
+  ganzenpoep:
+    color_prefix: "<#999400>"
+    display_name: "<#999400>Caca d'oie (Ganzenpoep)"

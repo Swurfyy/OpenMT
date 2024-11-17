@@ -16,17 +16,18 @@ public class PlayerTeleportListener implements Listener {
     @EventHandler
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (!minetopiaPlayer.isInPlace() || minetopiaPlayer.getPlace() == null) return;
+            if (!minetopiaPlayer.isInPlace() || minetopiaPlayer.getPlace() == null) return;
 
-        MTPlace from = MTPlaceManager.getInstance().getPlace(event.getFrom());
-        MTPlace to = minetopiaPlayer.getPlace();
+            MTPlace from = MTPlaceManager.getInstance().getPlace(event.getFrom());
+            MTPlace to = minetopiaPlayer.getPlace();
 
-        if (from.equals(to)) return;
+            if (from.equals(to)) return;
 
-        Title title = Title.title(ChatUtils.format(minetopiaPlayer, "Welkom in"), ChatUtils.format(minetopiaPlayer, "<city_title>"));
-        player.showTitle(title);
+            Title title = Title.title(ChatUtils.format(minetopiaPlayer, "Welkom in"), ChatUtils.format(minetopiaPlayer, "<city_title>"));
+            player.showTitle(title);
+        }, Throwable::printStackTrace);
     }
 }

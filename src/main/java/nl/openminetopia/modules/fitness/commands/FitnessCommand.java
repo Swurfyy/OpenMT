@@ -9,7 +9,7 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import org.bukkit.entity.Player;
 
-@CommandAlias("fitness")
+@CommandAlias("fitness|fitheid")
 public class FitnessCommand extends BaseCommand {
 
     @HelpCommand
@@ -19,9 +19,10 @@ public class FitnessCommand extends BaseCommand {
 
     @Subcommand("trigger")
     public void trigger(Player player) {
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        minetopiaPlayer.getFitness().getRunnable().run();
+            minetopiaPlayer.getFitness().getRunnable().run();
+        }, Throwable::printStackTrace);
     }
 }

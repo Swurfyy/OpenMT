@@ -22,13 +22,14 @@ public class AdminToolFitnessMenu extends Menu {
 
     private final Player player;
     private final OfflinePlayer offlinePlayer;
+    private final MinetopiaPlayer minetopiaPlayer;
 
-    public AdminToolFitnessMenu(Player player, OfflinePlayer offlinePlayer) {
+    public AdminToolFitnessMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer) {
         super(ChatUtils.color("<gold>Fitheid <yellow>" + offlinePlayer.getPlayerProfile().getName()), 3);
         this.player = player;
         this.offlinePlayer = offlinePlayer;
+        this.minetopiaPlayer = minetopiaPlayer;
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer);
         if (minetopiaPlayer == null) return;
 
         FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
@@ -168,7 +169,7 @@ public class AdminToolFitnessMenu extends Menu {
                 .setName("<gray>Terug");
 
         Icon backIcon = new Icon(22, backItemBuilder.toItemStack(), event -> {
-            new AdminToolInfoMenu(player, offlinePlayer).open((Player) event.getWhoClicked());
+            new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer).open((Player) event.getWhoClicked());
         });
         this.addItem(backIcon);
     }

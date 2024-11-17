@@ -4,6 +4,7 @@ import com.craftmend.storm.api.enums.Where;
 import lombok.Getter;
 import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.fitness.FitnessModule;
@@ -22,6 +23,7 @@ import java.util.concurrent.CompletableFuture;
 @Getter
 public class Fitness {
 
+    private final MinetopiaPlayer minetopiaPlayer;
     private final UUID uuid;
     private final PlayerModel playerModel;
     private final FitnessRunnable runnable;
@@ -30,9 +32,10 @@ public class Fitness {
 
     private final FitnessModule fitnessModule = OpenMinetopia.getModuleManager().getModule(FitnessModule.class);
 
-    public Fitness(UUID uuid, PlayerModel playerModel) {
-        this.uuid = uuid;
-        this.playerModel = playerModel;
+    public Fitness(MinetopiaPlayer minetopiaPlayer) {
+        this.minetopiaPlayer = minetopiaPlayer;
+        this.uuid = minetopiaPlayer.getUuid();
+        this.playerModel = minetopiaPlayer.getPlayerModel();
         this.runnable = new FitnessRunnable(this);
 
         runnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 60 * 20L);
@@ -76,7 +79,6 @@ public class Fitness {
             model.setTertiaryPoints(0.0);
             playerModel.getStatistics().add(model);
             StormDatabase.getInstance().saveStormModel(model);
-            return model;
         }
 
         return model;
@@ -94,17 +96,19 @@ public class Fitness {
                 });
     }
 
-    public void addBooster(FitnessBoosterModel booster) {
-        playerModel.getBoosters().add(booster);
-        StormDatabase.getInstance().saveStormModel(booster);
-        StormDatabase.getInstance().saveStormModel(playerModel);
+    public void addBooster(int amount, long expiresAtMillis) {
+        FitnessBoosterModel boosterModel = new FitnessBoosterModel();
+        boosterModel.setPlayerId(this.playerModel.getId());
+        boosterModel.setAmount(amount);
+        boosterModel.setExpiresAt(expiresAtMillis);
+        playerModel.getBoosters().add(boosterModel);
+        StormDatabase.getInstance().saveStormModel(boosterModel);
     }
 
     public void removeBooster(FitnessBoosterModel booster) {
         playerModel.getBoosters().remove(booster);
         StormUtils.deleteModelData(FitnessBoosterModel.class, query ->
                 query.where("id", Where.EQUAL, booster.getId()));
-        StormDatabase.getInstance().saveStormModel(playerModel);
     }
 
     public List<FitnessStatisticModel> getStatistics() {

@@ -28,25 +28,26 @@ public class PlotDeleteCommand extends BaseCommand {
         RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionManager regionManager = regionContainer.get(world);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (regionManager == null) {
-            player.sendMessage(MessageConfiguration.component("plot_region_retrieval_error"));
-            return;
-        }
+            if (regionManager == null) {
+                player.sendMessage(MessageConfiguration.component("plot_region_retrieval_error"));
+                return;
+            }
 
-        ProtectedRegion region = regionManager.getRegion(name);
+            ProtectedRegion region = regionManager.getRegion(name);
 
-        if (region == null) {
-            player.sendMessage(MessageConfiguration.component("plot_not_found"));
-            return;
-        }
+            if (region == null) {
+                player.sendMessage(MessageConfiguration.component("plot_not_found"));
+                return;
+            }
 
-        PlotCreateEvent event = new PlotCreateEvent(player, region);
-        Bukkit.getPluginManager().callEvent(event);
+            PlotCreateEvent event = new PlotCreateEvent(player, region);
+            Bukkit.getPluginManager().callEvent(event);
 
-        player.sendMessage(MessageConfiguration.component("plot_deletion_success"));
-        regionManager.removeRegion(region.getId());
+            player.sendMessage(MessageConfiguration.component("plot_deletion_success"));
+            regionManager.removeRegion(region.getId());
+        }, Throwable::printStackTrace);
     }
 }

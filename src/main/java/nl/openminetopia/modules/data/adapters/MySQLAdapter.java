@@ -18,14 +18,15 @@ import nl.openminetopia.modules.color.models.ColorModel;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.storm.adapters.AccountPermissionAdapter;
 import nl.openminetopia.modules.data.storm.adapters.AccountTypeAdapter;
-import nl.openminetopia.modules.data.storm.adapters.FixedBooleanAdapter;
 import nl.openminetopia.modules.data.storm.adapters.FitnessStatisticTypeAdapter;
+import nl.openminetopia.modules.data.storm.adapters.FixedBooleanAdapter;
 import nl.openminetopia.modules.data.storm.adapters.OwnableColorTypeAdapter;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.places.models.CityModel;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.player.models.PlayerModel;
+import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.prefix.models.PrefixModel;
 
 public class MySQLAdapter implements DatabaseAdapter{
@@ -73,6 +74,7 @@ public class MySQLAdapter implements DatabaseAdapter{
         registerStormModel(new ColorModel());
         registerStormModel(new WorldModel());
         registerStormModel(new CityModel());
+        registerStormModel(new CriminalRecordModel());
     }
 
     @SneakyThrows

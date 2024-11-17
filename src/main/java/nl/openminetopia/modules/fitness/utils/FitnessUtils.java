@@ -6,7 +6,6 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.FitnessConfiguration;
-import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.fitness.objects.FitnessLevelEffect;
 import org.bukkit.Bukkit;
@@ -24,27 +23,28 @@ import java.util.Objects;
 public class FitnessUtils {
 
     public static void applyFitness(Player player) {
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
-            clearFitnessEffects(player);
-            return;
-        }
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
+                clearFitnessEffects(player);
+                return;
+            }
 
-        FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
-        int totalFitness = minetopiaPlayer.getFitness().getTotalFitness();
+            FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
+            int totalFitness = minetopiaPlayer.getFitness().getTotalFitness();
 
-        // Get the closest matching fitness level effect
-        FitnessLevelEffect effectLevel = config.getLevelEffects().entrySet().stream()
-                .filter(entry -> totalFitness >= entry.getKey())
-                .map(Map.Entry::getValue)
-                .reduce((first, second) -> second) // Get the last (highest) matching effect
-                .orElse(null);
+            // Get the closest matching fitness level effect
+            FitnessLevelEffect effectLevel = config.getLevelEffects().entrySet().stream()
+                    .filter(entry -> totalFitness >= entry.getKey())
+                    .map(Map.Entry::getValue)
+                    .reduce((first, second) -> second) // Get the last (highest) matching effect
+                    .orElse(null);
 
-        if (effectLevel == null) return; // No effect level applies
+            if (effectLevel == null) return; // No effect level applies
 
-        // Apply walk speed and potion effects
-        applyPlayerWalkSpeed(player, config, (float) effectLevel.getWalkSpeed());
-        applyPotionEffects(player, effectLevel);
+            // Apply walk speed and potion effects
+            applyPlayerWalkSpeed(player, config, (float) effectLevel.getWalkSpeed());
+            applyPotionEffects(player, effectLevel);
+        }, Throwable::printStackTrace);
     }
 
     private static void applyPlayerWalkSpeed(Player player, FitnessConfiguration config, float walkSpeed) {

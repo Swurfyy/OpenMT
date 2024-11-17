@@ -3,17 +3,16 @@ package nl.openminetopia.api.player;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.models.PlayerModel;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 @Getter
 public class PlayerManager {
@@ -28,58 +27,95 @@ public class PlayerManager {
     }
 
     private final PlayerModule playerModule = OpenMinetopia.getModuleManager().getModule(PlayerModule.class);
-    private final HashMap<UUID, PlayerModel> playerModels = new HashMap<>();
-    private final HashMap<UUID, MinetopiaPlayer> minetopiaPlayers = new HashMap<>();
+    private final Map<UUID, MinetopiaPlayer> onlinePlayers = new ConcurrentHashMap<>();
 
-    public @Nullable MinetopiaPlayer getMinetopiaPlayer(@NotNull OfflinePlayer player) {
+    /**
+     * Fetches a MinetopiaPlayer asynchronously. If the player is online, retrieve it from the map.
+     * Otherwise, query the database.
+     *
+     * @param player The OfflinePlayer to retrieve the MinetopiaPlayer for.
+     * @param callback The action to perform if the MinetopiaPlayer is retrieved successfully.
+     * @param errorCallback The action to perform if there is an error during retrieval.
+     */
+    public void getMinetopiaPlayerAsync(OfflinePlayer player,
+                                        Consumer<MinetopiaPlayer> callback,
+                                        Consumer<Throwable> errorCallback) {
         UUID playerId = player.getUniqueId();
 
-        // Check if the MinetopiaPlayer is already loaded
-        MinetopiaPlayer minetopiaPlayer = minetopiaPlayers.get(playerId);
-        if (minetopiaPlayer != null) {
-            return minetopiaPlayer;
+        // Check if player is online and already loaded
+        if (onlinePlayers.containsKey(playerId)) {
+            callback.accept(onlinePlayers.get(playerId));
+            return;
         }
 
-        // If the PlayerModel is not loaded, load it asynchronously
-        if (!playerModels.containsKey(playerId)) {
-            loadPlayerModel(player, playerId);
-            return null; // Return null while loading
-        }
-
-        // Create a new MinetopiaPlayer instance
-        minetopiaPlayer = new MinetopiaPlayer(playerId, playerModels.get(playerId));
-        loadMinetopiaPlayer(minetopiaPlayer, player);
-        return minetopiaPlayer;
-    }
-
-    private void loadPlayerModel(OfflinePlayer player, UUID playerId) {
-        this.playerModule.loadPlayer(playerId).whenComplete((playerModel, throwable) -> {
+        // Load player if offline or not in the map
+        loadPlayerModel(player).whenComplete((playerModel, throwable) -> {
             if (throwable != null) {
-                throwable.printStackTrace();
+                errorCallback.accept(throwable);
                 return;
             }
             if (playerModel == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Failed to load player data for " + player.getName());
+                callback.accept(null);
                 return;
             }
 
-            playerModels.put(playerId, playerModel);
-            // Attempt to retrieve MinetopiaPlayer again after loading
-            getMinetopiaPlayer(player);
+            // Create a new MinetopiaPlayer
+            MinetopiaPlayer newMinetopiaPlayer = new MinetopiaPlayer(playerId, playerModel);
+            loadMinetopiaPlayer(newMinetopiaPlayer).whenComplete((loadedMinetopiaPlayer, loadThrowable) -> {
+                if (loadThrowable != null) {
+                    errorCallback.accept(loadThrowable);
+                    return;
+                }
+                if (player.isOnline()) {
+                    onlinePlayers.put(playerId, loadedMinetopiaPlayer);
+                } else {
+                    loadedMinetopiaPlayer.load();
+                }
+                callback.accept(loadedMinetopiaPlayer);
+            });
         });
     }
 
-    private void loadMinetopiaPlayer(MinetopiaPlayer minetopiaPlayer, OfflinePlayer player) {
-        minetopiaPlayer.load().whenComplete((unused, throwable) -> {
+    /**
+     * Synchronously gets a MinetopiaPlayer if there's an ongoing async operation or if the player is online.
+     *
+     * @param player The player to retrieve.
+     * @return The MinetopiaPlayer object.
+     */
+    public MinetopiaPlayer getMinetopiaPlayerSync(OfflinePlayer player) {
+        UUID playerId = player.getUniqueId();
+        if (onlinePlayers.containsKey(playerId)) {
+            return onlinePlayers.get(playerId);
+        }
+
+        // Perform synchronous retrieval if needed (not recommended if complex)
+        CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
+        getMinetopiaPlayerAsync(player, future::complete, future::completeExceptionally);
+        return future.join();
+    }
+
+    private CompletableFuture<PlayerModel> loadPlayerModel(OfflinePlayer player) {
+        UUID playerId = player.getUniqueId();
+        CompletableFuture<PlayerModel> future = new CompletableFuture<>();
+        this.playerModule.loadPlayer(playerId).whenComplete((playerModel, throwable) -> {
             if (throwable != null) {
-                throwable.printStackTrace();
+                future.completeExceptionally(throwable);
                 return;
             }
-            OpenMinetopia.getInstance().getLogger().info("Loaded player data for " + player.getName());
-            if (player.isOnline() && player.getPlayer() != null) {
-                player.getPlayer().sendMessage(MessageConfiguration.component("player_data_loaded"));
-            }
+            future.complete(playerModel);
         });
-        minetopiaPlayers.put(minetopiaPlayer.getUuid(), minetopiaPlayer);
+        return future;
+    }
+
+    private CompletableFuture<MinetopiaPlayer> loadMinetopiaPlayer(MinetopiaPlayer minetopiaPlayer) {
+        CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
+        minetopiaPlayer.load().whenComplete((unused, throwable) -> {
+            if (throwable != null) {
+                future.completeExceptionally(throwable);
+                return;
+            }
+            future.complete(minetopiaPlayer);
+        });
+        return future;
     }
 }

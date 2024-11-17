@@ -2,6 +2,7 @@ package nl.openminetopia.modules.prefix.commands.subcommands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.prefix.menu.PrefixMenu;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -18,7 +19,10 @@ public class PrefixMenuCommand extends BaseCommand {
         }
 
         // Open het prefix menu
-        PrefixMenu menu = new PrefixMenu(player, target);
-        menu.open(player);
+        OfflinePlayer finalTarget = target;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(target, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
+            new PrefixMenu(player, finalTarget, minetopiaPlayer).open(player);
+        }, Throwable::printStackTrace);
     }
 }

@@ -4,6 +4,7 @@ import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.staff.admintool.commands.AdminToolCommand;
 import nl.openminetopia.modules.staff.admintool.commands.subcommands.AdminToolGetCommand;
 import nl.openminetopia.modules.staff.admintool.commands.subcommands.AdminToolOpenCommand;
+import nl.openminetopia.modules.staff.admintool.listeners.PlayerDropItemListener;
 import nl.openminetopia.modules.staff.admintool.listeners.PlayerEntityInteractListener;
 import nl.openminetopia.modules.staff.admintool.listeners.PlayerInteractListener;
 import nl.openminetopia.modules.staff.chat.commands.StaffchatCommand;
@@ -12,6 +13,7 @@ import nl.openminetopia.modules.staff.mod.commands.ModCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModChatSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCommandSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModSetLevelCommand;
+import org.bukkit.Bukkit;
 
 public class StaffModule extends Module {
     @Override
@@ -28,6 +30,7 @@ public class StaffModule extends Module {
         registerCommand(new StaffchatCommand());
         registerListener(new PlayerChatListener());
 
+        registerListener(new PlayerDropItemListener());
         registerListener(new PlayerInteractListener());
         registerListener(new PlayerEntityInteractListener());
     }

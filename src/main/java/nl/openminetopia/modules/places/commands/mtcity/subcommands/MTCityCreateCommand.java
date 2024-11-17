@@ -20,44 +20,45 @@ public class MTCityCreateCommand extends BaseCommand {
 
     @Subcommand("create")
     @CommandPermission("openminetopia.city.create")
-    public void onCreate(Player player, String name, String loadingName) {
+    public void create(Player player, String name, String loadingName) {
 
         PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        WorldModel world = minetopiaPlayer.getWorld();
-        if (world == null) {
-            player.sendMessage(ChatUtils.color("<red>You are not in a world!"));
-            return;
-        }
-
-        for (CityModel city : placesModule.getCityModels()) {
-            if (city.getName().equalsIgnoreCase(name)) {
-                player.sendMessage(ChatUtils.color("<red>City <white>" + name + " <red>already exists!"));
+            WorldModel world = minetopiaPlayer.getWorld();
+            if (world == null) {
+                player.sendMessage(ChatUtils.color("<red>You are not in a world!"));
                 return;
             }
-        }
 
-        // check if region exists
-        for (ProtectedRegion region : WorldGuardUtils.getProtectedRegions(player.getWorld(), priority -> priority >= 0)) {
-            if (!region.getId().equalsIgnoreCase(name)) continue;
+            for (CityModel city : placesModule.getCityModels()) {
+                if (city.getName().equalsIgnoreCase(name)) {
+                    player.sendMessage(ChatUtils.color("<red>City <white>" + name + " <red>already exists!"));
+                    return;
+                }
+            }
 
-            String title = "<bold>" + loadingName.toUpperCase();
-            placesModule.createCity(name, title, "<gold>", 21.64, loadingName)
-                    .whenComplete((cityModel, throwable) -> {
-                        if (throwable != null) {
-                            player.sendMessage(ChatUtils.color("<red>Failed to create city: " + throwable.getMessage()));
-                            return;
-                        }
-                        placesModule.getCityModels().add(cityModel);
-                    });
+            // check if region exists
+            for (ProtectedRegion region : WorldGuardUtils.getProtectedRegions(player.getWorld(), priority -> priority >= 0)) {
+                if (!region.getId().equalsIgnoreCase(name)) continue;
 
-            player.sendMessage(ChatUtils.color("<green>City <white>" + loadingName + " <green>has been created!"));
-            return;
-        }
+                String title = "<bold>" + loadingName.toUpperCase();
+                placesModule.createCity(name, title, "<gold>", 21.64, loadingName)
+                        .whenComplete((cityModel, throwable) -> {
+                            if (throwable != null) {
+                                player.sendMessage(ChatUtils.color("<red>Failed to create city: " + throwable.getMessage()));
+                                return;
+                            }
+                            placesModule.getCityModels().add(cityModel);
+                        });
 
-        player.sendMessage(ChatUtils.color("<red>Region <white>" + name + " <red>does not exist!"));
+                player.sendMessage(ChatUtils.color("<green>City <white>" + loadingName + " <green>has been created!"));
+                return;
+            }
+
+            player.sendMessage(ChatUtils.color("<red>Region <white>" + name + " <red>does not exist!"));
+        }, Throwable::printStackTrace);
     }
 }

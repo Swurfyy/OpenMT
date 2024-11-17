@@ -6,6 +6,8 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.types.DatabaseType;
 import nl.openminetopia.utils.ConfigurateConfig;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.spongepowered.configurate.ConfigurationNode;
 
 import java.io.File;
@@ -68,7 +70,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final int detectionCooldown;
     private final Material detectionPressurePlate;
     private final Material detectionActivationBlock;
-    private final List<Material> detectionMaterials;
+    private final List<ItemStack> detectionMaterials;
     private final Map<Material, Material> detectionSafeBlocks;
     private final Map<Material, Material> detectionFlaggedBlocks;
 
@@ -76,6 +78,74 @@ public class DefaultConfiguration extends ConfigurateConfig {
      * Plot configuration
      */
     private final List<String> commandsOnPlotCreate;
+
+    /**
+     * Emergency command configuration
+     */
+    private final int emergencyCooldown;
+
+    /**
+     * Balaclava configuration
+     */
+    private final List<String> balaclavaItems;
+
+    /**
+     * Handcuff configuration
+     */
+    private final List<String> handcuffItems;
+    private final List<String> handcuffEffects;
+    private final boolean handcuffCanDropItems;
+    private final boolean handcuffCanPickupItems;
+    private final boolean handcuffCanOpenInventory;
+    private final boolean handcuffCanRunAway;
+    private final boolean handcuffCanPvP;
+    private final boolean handcuffCanChangeSlots;
+    private final boolean handcuffShowTitle;
+
+    /**
+     * Pepperspray configuration
+     */
+    private final List<String> peppersprayItems;
+    private final boolean peppersprayUsagesEnabled;
+    private final int peppersprayMaxUsages;
+    private final int peppersprayEffectsDuration;
+    private final List<String> peppersprayEffects;
+
+    /**
+     * Nightvision goggles configuration
+     */
+    private final List<String> nightvisionItems;
+    private final List<String> nightvisionEffects;
+
+
+    /**
+     * Taser configuration
+     */
+    private final List<String> taserItems;
+    private final boolean taserUsagesEnabled;
+    private final int taserMaxUsages;
+    private final int taserCooldown;
+    private final boolean taserFreezeEnabled;
+    private final int taserFreezeDuration;
+    private final int taserEffectsDuration;
+    private final List<String> taserEffects;
+    
+    /**
+     * Head configuration
+     */
+    private final List<String> headWhitelist;
+
+    /**
+     * Bodysearch configuration
+     */
+    private final int bodysearchRange;
+
+    /**
+     * Walkie-talkie configuration
+     */
+    private final List<String> walkieTalkieItems;
+    private final boolean walkieTalkieEmergencyCooldownEnabled;
+    private final int walkieTalkieEmergencyCooldownSeconds;
 
     @SneakyThrows
     public DefaultConfiguration(File file) {
@@ -110,7 +180,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Chat configuration
          */
-        this.chatFormat = rootNode.node("chat", "format").getString("<dark_gray>[<level_color>Level <level><dark_gray>] <dark_gray>[<prefix_color><prefix><dark_gray>] <name_color><name>: <chat_color><message>");
+        this.chatFormat = rootNode.node("chat", "format").getString("<dark_gray>[<level_color>Level <level><reset><dark_gray>] <dark_gray>[<prefix_color><prefix><reset><dark_gray>] <name_color><player><reset>: <chat_color><message>");
         this.chatEnabled = rootNode.node("chat", "enabled").getBoolean(true);
         this.chatRadiusEnabled = rootNode.node("chat", "radius", "enabled").getBoolean(true);
         this.chatRadiusRange = rootNode.node("chat", "radius", "range").getInt(20);
@@ -163,9 +233,20 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 Material.STONE_HOE.toString(),
                 Material.POISONOUS_POTATO.toString()
         )).forEach(materialString -> {
-            Material material = Material.matchMaterial(materialString);
+            String[] parts = materialString.split(":");
+
+            Material material = Material.matchMaterial(parts[0]);
+            int customModelData = materialString.split(":").length > 1 ? Integer.parseInt(parts[1]) : 0;
             if (material != null) {
-                this.detectionMaterials.add(material);
+                ItemStack itemStack = new ItemStack(material);
+                if (customModelData != 0) {
+                    ItemMeta itemMeta = itemStack.getItemMeta();
+                    if (itemMeta != null) {
+                        itemMeta.setCustomModelData(customModelData);
+                        itemStack.setItemMeta(itemMeta);
+                    }
+                }
+                this.detectionMaterials.add(itemStack);
             }
         });
 
@@ -185,7 +266,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.detectionSafeBlocks = new HashMap<>();
         safeBlocksNode.childrenMap().forEach((key, val) -> {
             Material keyMaterial = Material.matchMaterial(key.toString());
-            Material valueMaterial = Material.matchMaterial(val.getString().toString());
+            Material valueMaterial = Material.matchMaterial(val.getString());
             if (keyMaterial != null && valueMaterial != null) {
                 this.detectionSafeBlocks.put(keyMaterial, valueMaterial);
             }
@@ -206,7 +287,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.detectionFlaggedBlocks = new HashMap<>();
         flaggedBlocksNode.childrenMap().forEach((key, val) -> {
             Material keyMaterial = Material.matchMaterial(key.toString());
-            Material valueMaterial = Material.matchMaterial(val.getString().toString());
+            Material valueMaterial = Material.matchMaterial(val.getString());
             if (keyMaterial != null && valueMaterial != null) {
                 this.detectionFlaggedBlocks.put(keyMaterial, valueMaterial);
             }
@@ -222,5 +303,137 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "rg flag <plot> -w <world> INTERACT -g MEMBERS ALLOW",
                 "rg flag <plot> -w <world> PVP ALLOW"
         ));
+
+        /*
+         * Emergency command configuration
+         */
+        this.emergencyCooldown = rootNode.node("emergency", "cooldown").getInt(300);
+
+        /*
+         * Balaclava configuration
+         */
+        this.balaclavaItems = rootNode.node("bivak", "items").getList(String.class, List.of(
+                "CLAY_BALL")
+        );
+
+        /*
+         * Handcuff configuration
+         */
+        this.handcuffItems = rootNode.node("handcuffs", "items").getList(String.class, List.of(
+                "GRAY_DYE")
+        );
+        this.handcuffEffects = rootNode.node("handcuffs", "effects").getList(String.class, List.of(
+                "BLINDNESS:2",
+                "MINING_FATIGUE:1",
+                "SLOWNESS:4"
+        ));
+        this.handcuffCanDropItems = rootNode.node("handcuffs", "can-drop-items").getBoolean(false);
+        this.handcuffCanPickupItems = rootNode.node("handcuffs", "can-pickup-items").getBoolean(false);
+        this.handcuffCanOpenInventory = rootNode.node("handcuffs", "can-open-inventory").getBoolean(false);
+        this.handcuffCanRunAway = rootNode.node("handcuffs", "can-run-away").getBoolean(false);
+        this.handcuffCanPvP = rootNode.node("handcuffs", "can-pvp").getBoolean(false);
+        this.handcuffCanChangeSlots = rootNode.node("handcuffs", "can-change-slots").getBoolean(false);
+        this.handcuffShowTitle = rootNode.node("handcuffs", "show-title").getBoolean(true);
+
+        /*
+         * Pepperspray configuration
+         */
+        this.peppersprayItems = rootNode.node("pepperspray", "items").getList(String.class, List.of(
+                "WHITE_DYE")
+        );
+        this.peppersprayUsagesEnabled = rootNode.node("pepperspray", "usages-enabled").getBoolean(true);
+        this.peppersprayMaxUsages = rootNode.node("pepperspray", "max-usages").getInt(10);
+        this.peppersprayEffectsDuration = rootNode.node("pepperspray", "effects-duration").getInt(5);
+        this.peppersprayEffects = rootNode.node("pepperspray", "effects").getList(String.class, List.of(
+                "BLINDNESS"
+        ));
+
+        /*
+         * Nightvision goggles configuration
+         */
+        this.nightvisionItems = rootNode.node("nightvision", "items").getList(String.class, List.of(
+                "GREEN_DYE")
+        );
+        this.nightvisionEffects = rootNode.node("nightvision", "effects").getList(String.class, List.of(
+                "NIGHT_VISION"
+        ));
+
+        /*
+         * Taser configuration
+         */
+        this.taserItems = rootNode.node("taser", "items").getList(String.class, List.of(
+                "LIGHT_BLUE_DYE")
+        );
+        this.taserUsagesEnabled = rootNode.node("taser", "usages-enabled").getBoolean(true);
+        this.taserMaxUsages = rootNode.node("taser", "max-usages").getInt(10);
+        this.taserCooldown = rootNode.node("taser", "cooldown").getInt(3);
+        this.taserFreezeEnabled = rootNode.node("taser", "freeze", "enabled").getBoolean(true);
+        this.taserFreezeDuration = rootNode.node("taser", "freeze", "duration").getInt(3);
+        this.taserEffectsDuration = rootNode.node("taser", "effects-duration").getInt(5);
+        this.taserEffects = rootNode.node("taser", "effects").getList(String.class, List.of(
+                "BLINDNESS",
+                "SLOWNESS"
+        ));
+
+        /*
+         * Head configuration
+         */
+        this.headWhitelist = rootNode.node("head", "whitelist").getList(String.class, List.of(
+                "CLAY_BALL",
+                "BEDROCK",
+                "SPONGE",
+                "IRON_ORE",
+                "COAL_ORE",
+                "LAPIS_ORE",
+                "DIAMOND_ORE",
+                "REDSTONE_ORE",
+                "SOUL_SAND",
+                "NETHERRACK",
+                "NETHER_BRICK",
+                "END_STONE",
+                "NETHER_QUARTZ_ORE",
+                "EMERALD_ORE",
+                "PRISMARINE",
+                "RED_SANDSTONE",
+                "INK_SAC",
+                "MAGMA_CREAM",
+                "NETHER_WART",
+                "PRISMARINE_SHARD",
+                "PRISMARINE_CRYSTALS",
+                "CARROT_ON_A_STICK",
+                "SHEARS",
+                "GLASS",
+                "STAINED_GLASS",
+                "DIAMOND_HOE:89",
+                "GREEN_DYE"
+        ));
+
+        /*
+         * Bodysearch configuration
+         */
+        this.bodysearchRange = rootNode.node("bodysearch", "range").getInt(10);
+
+        /*
+         * Walkie-talkie configuration
+         */
+        this.walkieTalkieItems = rootNode.node("walkietalkie", "items").getList(String.class, List.of(
+                "PINK_DYE"
+        ));
+        this.walkieTalkieEmergencyCooldownEnabled = rootNode.node("walkietalkie", "emergency-button", "cooldown-enabled").getBoolean(true);
+        this.walkieTalkieEmergencyCooldownSeconds = rootNode.node("walkietalkie", "emergency-button", "cooldown-seconds").getInt(60);
+    }
+
+    @SneakyThrows
+    public void addToHeadWhitelist(String item) {
+        this.headWhitelist.add(item);
+        rootNode.node("head", "whitelist").set(headWhitelist);
+        saveConfiguration();
+    }
+
+    @SneakyThrows
+    public void removeFromHeadWhitelist(String item) {
+        this.headWhitelist.remove(item);
+        rootNode.node("head", "whitelist").set(headWhitelist);
+        saveConfiguration();
     }
 }

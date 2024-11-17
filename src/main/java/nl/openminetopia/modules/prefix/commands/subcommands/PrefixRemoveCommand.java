@@ -19,28 +19,33 @@ public class PrefixRemoveCommand extends BaseCommand {
     @CommandCompletion("@players @playerPrefixes")
     @Description("Remove a prefix from a player.")
     public void removePrefix(Player player, OfflinePlayer offlinePlayer, String prefixName) {
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (offlinePlayer.getPlayer() == null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
-            return;
-        }
-
-        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer);
-        if (targetMinetopiaPlayer == null) return;
-
-        for (Prefix prefix : targetMinetopiaPlayer.getPrefixes()) {
-            if (prefix.getPrefix().equalsIgnoreCase(prefixName)) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_removed")
-                        .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
-                        .replace("<prefix>", prefix.getPrefix()));
-                targetMinetopiaPlayer.removePrefix(prefix);
+            if (offlinePlayer == null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                 return;
             }
-        }
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_not_found")
-                .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
-                .replace("<prefix>", prefixName));
+
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer, targetMinetopiaPlayer -> {
+                if (targetMinetopiaPlayer == null) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+                    return;
+                }
+
+                for (Prefix prefix : targetMinetopiaPlayer.getPrefixes()) {
+                    if (prefix.getPrefix().equalsIgnoreCase(prefixName)) {
+                        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_removed")
+                                .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
+                                .replace("<prefix>", prefix.getPrefix()));
+                        targetMinetopiaPlayer.removePrefix(prefix);
+                        return;
+                    }
+                }
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_not_found")
+                        .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
+                        .replace("<prefix>", prefixName));
+            }, Throwable::printStackTrace);
+        }, Throwable::printStackTrace);
     }
 }

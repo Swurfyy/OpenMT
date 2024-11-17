@@ -15,7 +15,7 @@ public class AdminToolGetCommand extends BaseCommand {
 
     @Subcommand("krijg")
     @CommandPermission("openminetopia.admintool.get")
-    public void onGet(Player player) {
+    public void admintoolGet(Player player) {
         ItemBuilder item = new ItemBuilder(Material.NETHER_STAR)
                 .setName("<dark_red>Admin<red>Tool")
                 .addLoreLine("<yellow>Linkermuisknop <gold>om je eigen menu te openen")

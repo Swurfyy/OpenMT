@@ -22,22 +22,23 @@ public class PlotClearCommand extends BaseCommand {
     public void plotClear(Player player) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (region == null) {
-            player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
-            return;
-        }
+            if (region == null) {
+                player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
+                return;
+            }
 
-        if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
-            player.sendMessage(MessageConfiguration.component("plot_invalid"));
-            return;
-        }
+            if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
+                player.sendMessage(MessageConfiguration.component("plot_invalid"));
+                return;
+            }
 
-        region.getOwners().clear();
-        region.getMembers().clear();
+            region.getOwners().clear();
+            region.getMembers().clear();
 
-        player.sendMessage(MessageConfiguration.component("plot_clear_success"));
+            player.sendMessage(MessageConfiguration.component("plot_clear_success"));
+        }, Throwable::printStackTrace);
     }
 }

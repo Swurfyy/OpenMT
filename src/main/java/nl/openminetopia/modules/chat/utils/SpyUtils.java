@@ -1,7 +1,6 @@
 package nl.openminetopia.modules.chat.utils;
 
 import lombok.experimental.UtilityClass;
-import net.kyori.adventure.text.Component;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -11,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @UtilityClass
 public class SpyUtils {
@@ -24,11 +24,11 @@ public class SpyUtils {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
             if (ignore.contains(onlinePlayer)) continue;
 
-            Optional<MinetopiaPlayer> optional = obtainPlayer(onlinePlayer);
-            if (optional.isEmpty()) continue;
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(onlinePlayer, minetopiaPlayer -> {
+                if (minetopiaPlayer == null) return;
 
-            MinetopiaPlayer mPlayer = optional.get();
-            if (mPlayer.isChatSpyEnabled()) ChatUtils.sendFormattedMessage(mPlayer, spiedMessage);
+                if (minetopiaPlayer.isChatSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
+            }, Throwable::printStackTrace);
         }
     }
 
@@ -40,17 +40,11 @@ public class SpyUtils {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
 
-            Optional<MinetopiaPlayer> optional = obtainPlayer(onlinePlayer);
-            if (optional.isEmpty()) continue;
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(onlinePlayer, minetopiaPlayer -> {
+                if (minetopiaPlayer == null) return;
 
-            MinetopiaPlayer mPlayer = optional.get();
-            if (mPlayer.isCommandSpyEnabled()) ChatUtils.sendFormattedMessage(mPlayer, spiedMessage);
+                if (minetopiaPlayer.isCommandSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
+            }, Throwable::printStackTrace);
         }
     }
-
-    public Optional<MinetopiaPlayer> obtainPlayer(Player player) {
-        MinetopiaPlayer mPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        return Optional.ofNullable(mPlayer);
-    }
-
 }

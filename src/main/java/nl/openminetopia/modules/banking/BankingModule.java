@@ -11,6 +11,7 @@ import nl.openminetopia.modules.banking.commands.subcommands.*;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.listeners.BankingInteractionListener;
+import nl.openminetopia.modules.banking.listeners.PlayerPreLoginListener;
 import nl.openminetopia.modules.banking.vault.VaultEconomyHandler;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
@@ -92,6 +93,7 @@ public class BankingModule extends Module {
         registerCommand(new BankingBalanceCommand());
         registerCommand(new BankingListCommand());
 
+        registerListener(new PlayerPreLoginListener());
         registerListener(new BankingInteractionListener());
 
         if (Bukkit.getPluginManager().isPluginEnabled("Vault")) {

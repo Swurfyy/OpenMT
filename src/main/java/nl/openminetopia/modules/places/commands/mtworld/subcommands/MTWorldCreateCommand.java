@@ -40,10 +40,11 @@ public class MTWorldCreateCommand extends BaseCommand {
         player.sendMessage(ChatUtils.color("<green>World <white>" + loadingName + " <green>has been created!"));
 
         for (Player worldPlayer : player.getWorld().getPlayers()) {
-            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(worldPlayer);
-            if (minetopiaPlayer == null) return;
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(worldPlayer, minetopiaPlayer -> {
+                if (minetopiaPlayer == null) return;
 
-            minetopiaPlayer.getFitness().getRunnable().run();
+                minetopiaPlayer.getFitness().getRunnable().run();
+            }, Throwable::printStackTrace);
         }
     }
 }

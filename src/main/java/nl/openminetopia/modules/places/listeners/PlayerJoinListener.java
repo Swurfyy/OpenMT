@@ -15,13 +15,15 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (!minetopiaPlayer.isInPlace() || minetopiaPlayer.getPlace() == null) return;
+            if (!minetopiaPlayer.isInPlace() || minetopiaPlayer.getPlace() == null) return;
 
-        Title title = Title.title(ChatUtils.format(minetopiaPlayer, "Welkom in"), ChatUtils.format(minetopiaPlayer, minetopiaPlayer.getPlace().getLoadingName()));
-        player.showTitle(title);
+            Title title = Title.title(ChatUtils.format(minetopiaPlayer, "Welkom in"),
+                    ChatUtils.format(minetopiaPlayer, minetopiaPlayer.getPlace().getLoadingName()));
+            player.showTitle(title);
+        }, Throwable::printStackTrace);
     }
 }
 

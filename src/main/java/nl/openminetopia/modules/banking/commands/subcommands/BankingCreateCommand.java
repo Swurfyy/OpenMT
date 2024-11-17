@@ -15,6 +15,7 @@ import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -27,49 +28,47 @@ public class BankingCreateCommand extends BaseCommand {
     @Subcommand("create")
     @Syntax("<type> <name>")
     @CommandPermission("openminetopia.banking.create")
-    public void createAccount(CommandSender sender, AccountType type, String name) {
+    public void createAccount(Player player, AccountType type, String name) {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer((OfflinePlayer) sender);
-        
-        if (type == AccountType.PRIVATE) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_unique_private_account"));
-            return;
-        }
-
-        if (name.contains(" ")) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_name_no_spaces"));
-            return;
-        }
-
-        if (name.length() < 3 || name.length() > 24) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_name_length"));
-            return;
-        }
-
-        if (bankingModule.getAccountByName(name) != null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_name_exists"));
-            return;
-        }
-
-        if (!namePattern.matcher(name).matches()) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_name_invalid"));
-            return;
-        }
-
-        UUID accountId = UUID.randomUUID();
-        bankingModule.createBankAccount(accountId, type, 0L, name, false).whenComplete(((accountModel, throwable) -> {
-            if (throwable != null) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_creation_error"));
-                OpenMinetopia.getInstance().getLogger().severe("Something went wrong while trying to create an account: " + throwable.getMessage());
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (type == AccountType.PRIVATE) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_unique_private_account"));
+                return;
             }
 
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_created")
-                    .replace("<account_name>", name));
-            bankingModule.getBankAccountModels().add(accountModel);
-            accountModel.initSavingTask();
-        }));
+            if (name.contains(" ")) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_name_no_spaces"));
+                return;
+            }
 
+            if (name.length() < 3 || name.length() > 24) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_name_length"));
+                return;
+            }
+
+            if (bankingModule.getAccountByName(name) != null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_name_exists"));
+                return;
+            }
+
+            if (!namePattern.matcher(name).matches()) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_name_invalid"));
+                return;
+            }
+
+            UUID accountId = UUID.randomUUID();
+            bankingModule.createBankAccount(accountId, type, 0L, name, false).whenComplete(((accountModel, createThrowable) -> {
+                if (createThrowable != null) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_creation_error"));
+                    OpenMinetopia.getInstance().getLogger().severe("Something went wrong while trying to create an account: " + createThrowable.getMessage());
+                }
+
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_created")
+                        .replace("<account_name>", name));
+                bankingModule.getBankAccountModels().add(accountModel);
+                accountModel.initSavingTask();
+            }));
+        }, Throwable::printStackTrace);
     }
-
 }

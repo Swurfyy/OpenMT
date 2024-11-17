@@ -7,9 +7,7 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.player.models.PlayerModel;
-import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.player.commands.PlaytimeCommand;
-import nl.openminetopia.modules.player.listeners.PlayerJoinListener;
 import nl.openminetopia.modules.player.listeners.PlayerPreLoginListener;
 import nl.openminetopia.modules.player.listeners.PlayerQuitListener;
 import org.bukkit.Bukkit;
@@ -27,13 +25,12 @@ public class PlayerModule extends Module {
     @Override
     public void enable() {
         registerListener(new PlayerPreLoginListener());
-        registerListener(new PlayerJoinListener());
         registerListener(new PlayerQuitListener());
 
         registerCommand(new PlaytimeCommand());
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(OpenMinetopia.getInstance(), () -> {
-            for (MinetopiaPlayer minetopiaPlayer : PlayerManager.getInstance().getMinetopiaPlayers().values()) {
+            for (MinetopiaPlayer minetopiaPlayer : PlayerManager.getInstance().getOnlinePlayers().values()) {
                 if (!(minetopiaPlayer instanceof MinetopiaPlayer onlineMinetopiaPlayer)) continue;
                 onlineMinetopiaPlayer.save().whenComplete((unused, throwable) -> {
                     if (throwable != null) throwable.printStackTrace();
@@ -45,11 +42,12 @@ public class PlayerModule extends Module {
     @Override
     public void disable() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            MinetopiaPlayer minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(player);
-            if (minetopiaPlayer == null) continue;
-            minetopiaPlayer.save().whenComplete((unused, throwable) -> {
-                if (throwable != null) throwable.printStackTrace();
-            });
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+                if (minetopiaPlayer == null) return;
+                minetopiaPlayer.save().whenComplete((unused, throwable) -> {
+                    if (throwable != null) throwable.printStackTrace();
+                });
+            }, Throwable::printStackTrace);
         }
     }
 
@@ -70,7 +68,7 @@ public class PlayerModule extends Module {
     public CompletableFuture<PlayerModel> loadPlayer(UUID uuid) {
         CompletableFuture<PlayerModel> completableFuture = new CompletableFuture<>();
         findPlayerModel(uuid).thenAccept(playerModel -> {
-            PlayerManager.getInstance().getPlayerModels().remove(uuid);
+            //PlayerManager.getInstance().getPlayerModels().remove(uuid);
 
             if (playerModel.isEmpty()) {
                 PlayerModel createdModel = new PlayerModel();
@@ -88,14 +86,14 @@ public class PlayerModule extends Module {
                 createdModel.setPrefixes(new ArrayList<>());
                 createdModel.setColors(new ArrayList<>());
 
-                PlayerManager.getInstance().getPlayerModels().put(uuid, createdModel);
+                //PlayerManager.getInstance().getPlayerModels().put(uuid, createdModel);
                 completableFuture.complete(createdModel);
 
                 StormDatabase.getInstance().saveStormModel(createdModel);
                 return;
             }
 
-            PlayerManager.getInstance().getPlayerModels().put(uuid, playerModel.get());
+            //PlayerManager.getInstance().getPlayerModels().put(uuid, playerModel.get());
             completableFuture.complete(playerModel.get());
         });
 

@@ -1,8 +1,11 @@
 package nl.openminetopia.modules.staff.chat.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -17,23 +20,35 @@ public class PlayerChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncChatEvent event) {
         Player source = event.getPlayer();
-        MinetopiaPlayer minetopiaPlayer = (MinetopiaPlayer) PlayerManager.getInstance().getMinetopiaPlayer(source);
-        if (minetopiaPlayer == null) return;
 
-        if (!source.hasPermission("openminetopia.staffchat") || !minetopiaPlayer.isStaffchatEnabled()) return;
+        PoliceModule policeModule = OpenMinetopia.getModuleManager().getModule(PoliceModule.class);
+        if (policeModule.getWalkieTalkieManager().isComposingMessage(source)
+        || policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)) return;
 
-        event.setCancelled(true);
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(source, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        List<Player> recipients = new ArrayList<>();
+            if (!source.hasPermission("openminetopia.staffchat") || !minetopiaPlayer.isStaffchatEnabled()) return;
 
-        Bukkit.getServer().getOnlinePlayers().forEach(target -> {
-            if (target.hasPermission("openminetopia.staffchat")) recipients.add(target);
-        });
+            event.setCancelled(true);
 
-        // Iterate over recipients
-        recipients.forEach(player -> {
-            // Send the formatted message to the player
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b>" + player.getWorld().getName() + "</b><dark_gray>) <green>" + source.getName() + "<white>: " + ChatUtils.stripMiniMessage(event.message())));
-        });
+            List<Player> recipients = new ArrayList<>();
+
+            Bukkit.getServer().getOnlinePlayers().forEach(target -> {
+                if (target.hasPermission("openminetopia.staffchat")) recipients.add(target);
+            });
+
+            String formattedMessage = MessageConfiguration.message("staff_chat_format")
+                    .replace("<player>", source.getName())
+                    .replace("<world_name>", source.getWorld().getName())
+                    .replace("<message>", ChatUtils.stripMiniMessage(event.message()));
+
+            // Iterate over recipients
+            recipients.forEach(player -> {
+                // Send the formatted message to the player
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, formattedMessage);
+            });
+            Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, formattedMessage));
+        }, Throwable::printStackTrace);
     }
 }

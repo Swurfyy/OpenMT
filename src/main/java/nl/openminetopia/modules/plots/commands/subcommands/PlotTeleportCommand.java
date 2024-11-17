@@ -29,24 +29,25 @@ public class PlotTeleportCommand extends BaseCommand {
         RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionManager regionManager = regionContainer.get(world);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        if (regionManager == null) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Kon geen regio's ophalen voor deze wereld."));
-            return;
-        }
+            if (regionManager == null) {
+                player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Kon geen regio's ophalen voor deze wereld."));
+                return;
+            }
 
-        ProtectedRegion region = regionManager.getRegion(name);
+            ProtectedRegion region = regionManager.getRegion(name);
 
-        if (region == null) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Geen region gevonden met de naam " + name + "."));
-            return;
-        }
+            if (region == null) {
+                player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Geen region gevonden met de naam " + name + "."));
+                return;
+            }
 
-        BlockVector3 center = region.getMaximumPoint().subtract(region.getMinimumPoint()).divide(2).add(region.getMinimumPoint());
-        Location location = new Location(player.getWorld(), center.x(), center.y(), center.z());
-        player.teleport(location);
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Je bent naar plot <aqua>" + region.getId() + " <dark_aqua>geteleporteerd."));
+            BlockVector3 center = region.getMaximumPoint().subtract(region.getMinimumPoint()).divide(2).add(region.getMinimumPoint());
+            Location location = new Location(player.getWorld(), center.x(), center.y(), center.z());
+            player.teleport(location);
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Je bent naar plot <aqua>" + region.getId() + " <dark_aqua>geteleporteerd."));
+        }, Throwable::printStackTrace);
     }
 }

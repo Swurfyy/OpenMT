@@ -49,9 +49,17 @@ public class PrefixModule extends Module {
         }, 20L);
 
         OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("playerPrefixes", context -> {
-            var player = PlayerManager.getInstance().getMinetopiaPlayer(context.getPlayer());
-            if (player == null) return List.of();
-            return player.getPrefixes().stream().map(Prefix::getPrefix).toList();
+            List<String> prefixes = new ArrayList<>();
+
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(context.getPlayer(), minetopiaPlayer -> {
+                if (minetopiaPlayer == null) return;
+
+                prefixes.addAll(minetopiaPlayer.getPrefixes().stream()
+                        .map(Prefix::getPrefix)
+                        .toList());
+                }, Throwable::printStackTrace);
+
+            return prefixes;
         });
     }
 

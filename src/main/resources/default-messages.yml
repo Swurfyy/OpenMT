@@ -57,14 +57,14 @@ prefix_already_exists: "<red>Deze speler heeft deze prefix al."
 
 # Color
 color_not_found: "<red>Deze kleur bestaat niet."
-color_prefix_exists: "<red>Deze kleur bestaat al."
+color_prefix_exists: "<red>Deze prefixkleur bestaat al."
 color_chat_exists: "<red>Deze chatkleur bestaat al."
 color_name_exists: "<red>Deze naamkleur bestaat al."
 color_level_exists: "<red>Deze levelkleur bestaat al."
-color_prefix_added: "<gold>Je hebt de %color% kleur <gold>toegevoegd."
-color_chat_added: "<gold>Je hebt de %color% chatkleur <gold>toegevoegd."
-color_name_added: "<gold>Je hebt de %color% naamkleur <gold>toegevoegd."
-color_level_added: "<gold>Je hebt de %color% levelkleur <gold>toegevoegd."
+color_prefix_added: "<gold>Je hebt de <color> kleur <gold>toegevoegd."
+color_chat_added: "<gold>Je hebt de <color> chatkleur <gold>toegevoegd."
+color_name_added: "<gold>Je hebt de <color> naamkleur <gold>toegevoegd."
+color_level_added: "<gold>Je hebt de <color> levelkleur <gold>toegevoegd."
 color_created: "<green>Succesvol toegevoegd, kleur: <color> <identifier>"
 color_prefix_not_found: "&cDeze prefixkleur heeft de speler niet."
 color_prefix_removed: "<gold>Je hebt de <color> kleur <gold>verwijderd."  
@@ -140,3 +140,34 @@ plot_not_owner: "<red>Je bent geen eigenaar van dit plot."
 plot_member_already: "<red><player> is al een member van dit plot."
 plot_member_added: "<dark_aqua>Je hebt <aqua><player><dark_aqua>toegevoegd aan het plot."
 plot_member_not_added: "<red><player> is geen member van dit plot."
+
+# Emergency command
+emergency_too_soon: "<red><b>112</b></red> <dark_gray>| <gray>Je kan niet zo snel achter elkaar een melding maken."
+emergency_cooldown: "<red><b>112</b></red> <dark_gray>| <gray>Probeer het over <white><time> <gray> nog eens."
+emergency_format: "<red><b>112</b></red> <dark_gray>| <gray><sender>: <white><message>"
+
+# Criminal records
+police_criminal_record_date_format: "dd-MM-yyyy HH:mm:ss"
+police_criminal_record_none: "<yellow><player> <gold>heeft geen strafblad."
+police_criminal_record_not_found: "<dark_red><player> <red>heeft geen strafblad gevonden met dit ID."
+police_criminal_record_added: "<gold>Succesvol <yellow><description> <gold>toegevoegd aan het strafblad van <yellow><player><gold>."
+police_criminal_record_removed: "<gold>Succesvol <yellow><description> <gold>verwijderd van het strafblad van <yellow><player><gold>."
+police_criminal_record_info_entry: "<yellow><id>. <gold>- <yellow><description> <gold>op <yellow><date> <gold>door <yellow><officer>."
+
+# Bodysearch
+police_bodysearch_self: "<red>Je kunt jezelf <dark_red>niet <red>fouilleren!"
+police_bodysearch_too_far: "<red>Deze speler is te ver weg om te kunnen <dark_red>fouilleren<red>!"
+police_bodysearch_executor: "<gold>Je bent <yellow><player> <gold>aan het fouilleren."
+police_bodysearch_target: "<gold>Je wordt gefouilleerd door <yellow><player><gold>."
+
+# Walkie-talkie
+police_walkietalkie_type_your_message: "<gold>Typ nu jouw bericht om naar <yellow><player> <gold>te verzenden."
+police_walkietalkie_private_format: "<gold>[<yellow>Privebericht<gold>] <gray><player> <dark_gray>-> <gray><target>: <message>"
+police_walkietalkie_format: "<gold>[<yellow>Politie<gold>] <gray><player>: <message>"
+police_walkietalkie_enabled: "<gold>Je zit nu in de <yellow>politiechat"
+police_walkietalkie_disabled: "<gold>Je zit nu niet meer in de <yellow>politiechat"
+police_walkietalkie_emergency_cooldown: "<red>Je moet nog even wachten voordat je weer op de <dark_red>noodkoop <red>kan drukken."
+police_walkietalkie_emergency_format: "<dark_red>[<red>NOODKNOP<dark_red>] <gray><player> <dark_red>(<red><world_name>, <x>, <y>, <z><dark_red>) <gray>heeft op de noodknop gedrukt!"
+
+# Staffchat
+staff_chat_format: "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b><world_name></b><dark_gray>) <green><player><white>: <message>"

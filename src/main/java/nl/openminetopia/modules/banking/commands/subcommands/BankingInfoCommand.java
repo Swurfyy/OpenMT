@@ -25,18 +25,18 @@ public class BankingInfoCommand extends BaseCommand {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer((OfflinePlayer) sender);
+        PlayerManager.getInstance().getMinetopiaPlayerAsync((OfflinePlayer) sender, minetopiaPlayer -> {
+            if (accountModel == null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
+                return;
+            }
 
-        if (accountModel == null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
-            return;
-        }
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line1"), accountModel));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line2"), accountModel));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line3"), accountModel));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line4"), accountModel));
 
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line1"), accountModel));
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line2"), accountModel));
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line3"), accountModel));
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line4"), accountModel));
-
+        }, Throwable::printStackTrace);
     }
 
     private String replacePlaceholders(String message, BankAccountModel accountModel) {

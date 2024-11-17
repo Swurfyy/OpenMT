@@ -8,20 +8,25 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class LevelCheckRunnable extends BukkitRunnable {
 
-    private final MinetopiaPlayer player;
+    private final MinetopiaPlayer minetopiaPlayer;
 
-    public LevelCheckRunnable(MinetopiaPlayer player) {
-        this.player = player;
+    public LevelCheckRunnable(MinetopiaPlayer minetopiaPlayer) {
+        this.minetopiaPlayer = minetopiaPlayer;
     }
 
     @Override
     public void run() {
-        LevelCheckConfiguration configuration = OpenMinetopia.getLevelcheckConfiguration();
-        if (!player.isInPlace()) return;
-        int calculatedLevel = LevelUtil.calculateLevel(player);
-        if (configuration.isAutoLevelUp()) {
-            player.setLevel(calculatedLevel);
+        if (minetopiaPlayer == null || !minetopiaPlayer.getBukkit().isOnline()) {
+            cancel();
+            return;
         }
-        player.setCalculatedLevel(calculatedLevel);
+
+        LevelCheckConfiguration configuration = OpenMinetopia.getLevelcheckConfiguration();
+        if (!minetopiaPlayer.isInPlace()) return;
+        int calculatedLevel = LevelUtil.calculateLevel(minetopiaPlayer);
+        if (configuration.isAutoLevelUp()) {
+            minetopiaPlayer.setLevel(calculatedLevel);
+        }
+        minetopiaPlayer.setCalculatedLevel(calculatedLevel);
     }
 }

@@ -9,11 +9,13 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Getter
 public class DetectionModule extends Module {
@@ -34,9 +36,20 @@ public class DetectionModule extends Module {
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
 
         return Arrays.stream(player.getInventory().getContents())
-                .filter(item -> item != null)
+                .filter(Objects::nonNull)
                 .filter(item -> !item.getType().isAir())
-                .filter(item -> configuration.getDetectionMaterials().contains(item.getType()))
+                .filter(item -> configuration.getDetectionMaterials().stream().anyMatch(flaggedItem -> {
+                    if (flaggedItem.getType() != item.getType()) {
+                        return false;
+                    }
+                    ItemMeta itemMeta = item.getItemMeta();
+                    ItemMeta flaggedMeta = flaggedItem.getItemMeta();
+                    if (flaggedMeta != null && flaggedMeta.hasCustomModelData()) {
+                        return itemMeta != null && itemMeta.hasCustomModelData() &&
+                                itemMeta.getCustomModelData() == flaggedMeta.getCustomModelData();
+                    }
+                    return true;
+                }))
                 .toList();
     }
 

@@ -26,34 +26,35 @@ public class AdminToolFitnessBoostersMenu extends PaginatedMenu {
 
         this.registerPageSlotsBetween(0, 17);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer);
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer, minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        for (FitnessBoosterModel booster : minetopiaPlayer.getFitness().getBoosters()) {
-            ItemBuilder icon = new ItemBuilder(Material.POTION)
-                    .setName("<gold>Booster")
-                    .addLoreLine(" ")
-                    .addLoreLine("<gold>Boost: <yellow>" + booster.getAmount());
+            for (FitnessBoosterModel booster : minetopiaPlayer.getFitness().getBoosters()) {
+                ItemBuilder icon = new ItemBuilder(Material.POTION)
+                        .setName("<gold>Booster")
+                        .addLoreLine(" ")
+                        .addLoreLine("<gold>Boost: <yellow>" + booster.getAmount());
 
-            if (booster.getExpiresAt() != -1 && booster.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine("<gold>Deze booster vervalt over <yellow>" + millisToTime(booster.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
-            if (booster.getExpiresAt() == -1) icon.addLoreLine("<gold>Deze booster vervalt <yellow>nooit<gold>.");
+                if (booster.getExpiresAt() != -1 && booster.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine("<gold>Deze booster vervalt over <yellow>" + millisToTime(booster.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
+                if (booster.getExpiresAt() == -1) icon.addLoreLine("<gold>Deze booster vervalt <yellow>nooit<gold>.");
 
-            icon.addLoreLine(" ").addLoreLine("<gold>Klik om deze booster te verwijderen.");
+                icon.addLoreLine(" ").addLoreLine("<gold>Klik om deze booster te verwijderen.");
 
-            Icon boosterIcon = new Icon(icon.toItemStack(), event -> {
-                minetopiaPlayer.getFitness().removeBooster(booster);
-                new AdminToolFitnessBoostersMenu(player, offlinePlayer).open((Player) event.getWhoClicked());
+                Icon boosterIcon = new Icon(icon.toItemStack(), event -> {
+                    minetopiaPlayer.getFitness().removeBooster(booster);
+                    new AdminToolFitnessBoostersMenu(player, offlinePlayer).open((Player) event.getWhoClicked());
+                });
+                this.addItem(boosterIcon);
+            }
+
+            ItemBuilder backItemBuilder = new ItemBuilder(Material.OAK_DOOR)
+                    .setName("<gray>Terug");
+
+            Icon backIcon = new Icon(22, backItemBuilder.toItemStack(), event -> {
+                new AdminToolFitnessMenu(player, offlinePlayer, minetopiaPlayer).open((Player) event.getWhoClicked());
             });
-            this.addItem(boosterIcon);
-        }
-
-        ItemBuilder backItemBuilder = new ItemBuilder(Material.OAK_DOOR)
-                .setName("<gray>Terug");
-
-        Icon backIcon = new Icon(22, backItemBuilder.toItemStack(), event -> {
-            new AdminToolFitnessMenu(player, offlinePlayer).open((Player) event.getWhoClicked());
-        });
-        this.addSpecialIcon(backIcon);
+            this.addSpecialIcon(backIcon);
+        }, Throwable::printStackTrace);
     }
 
     @Override

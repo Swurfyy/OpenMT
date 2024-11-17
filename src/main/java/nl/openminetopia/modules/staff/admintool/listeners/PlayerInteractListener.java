@@ -1,5 +1,6 @@
 package nl.openminetopia.modules.staff.admintool.listeners;
 
+import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.staff.admintool.menus.AdminToolMenu;
 import nl.openminetopia.utils.PersistentDataUtil;
 import org.bukkit.Material;
@@ -18,8 +19,11 @@ public class PlayerInteractListener implements Listener {
         if (item.getType() != Material.NETHER_STAR) return;
         if (event.getAction().isRightClick()) return;
         if (PersistentDataUtil.get(item, "openmt.admintool") == null) return;
+        if (!event.getPlayer().hasPermission("openminetopia.admintool")) return;
 
-        AdminToolMenu adminMenu = new AdminToolMenu(event.getPlayer(), event.getPlayer());
-        adminMenu.open(event.getPlayer());
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(event.getPlayer(), minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
+            new AdminToolMenu(event.getPlayer(), event.getPlayer(), minetopiaPlayer).open(event.getPlayer());
+        }, Throwable::printStackTrace);
     }
 }

@@ -4,6 +4,7 @@ import com.craftmend.storm.api.enums.Where;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.components.ColorComponent;
 import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.color.commands.ColorCommand;
 import nl.openminetopia.modules.color.commands.subcommands.ColorAddCommand;
@@ -15,6 +16,7 @@ import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.color.models.ColorModel;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.data.utils.StormUtils;
+import nl.openminetopia.modules.prefix.objects.Prefix;
 import org.bukkit.Bukkit;
 
 import java.util.*;
@@ -49,10 +51,23 @@ public class ColorModule extends Module {
         OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("colorTypes", context ->
                 Arrays.stream(OwnableColorType.values()).map(OwnableColorType::name).toList());
 
+        OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("colorIds", context ->
+                OpenMinetopia.getColorsConfiguration().components().stream()
+                .map(ColorComponent::identifier)
+                .toList());
+
         OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("playerColors", context -> {
-            var player = PlayerManager.getInstance().getMinetopiaPlayer(context.getPlayer());
-            if (player == null) return List.of();
-            return player.getColors().stream().map(OwnableColor::getColorId).toList();
+            List<String> colors = new ArrayList<>();
+
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(context.getPlayer(), minetopiaPlayer -> {
+                if (minetopiaPlayer == null) return;
+
+                colors.addAll(minetopiaPlayer.getColors().stream()
+                        .map(OwnableColor::getColorId)
+                        .toList());
+            }, Throwable::printStackTrace);
+
+            return colors;
         });
     }
 

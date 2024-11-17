@@ -8,6 +8,8 @@ import net.kyori.adventure.title.Title;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
+import nl.openminetopia.modules.police.balaclava.utils.BalaclavaUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;
@@ -27,7 +29,7 @@ public class ChatUtils {
         int levelUps = minetopiaPlayer.getCalculatedLevel() - minetopiaPlayer.getLevel();
 
         message = message
-                .replace("<player>", player.getName())
+                .replace("<player>", BalaclavaUtils.isWearingBalaclava(player) ? "<obf>Balaclava</obf><reset>" : player.getName())
                 .replace("<level_color>", minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).color())
                 .replace("<level>", minetopiaPlayer.getLevel() + "")
                 .replace("<calculated_level>", minetopiaPlayer.getCalculatedLevel() + "")
@@ -35,7 +37,7 @@ public class ChatUtils {
                 .replace("<prefix_color>", minetopiaPlayer.getActiveColor(OwnableColorType.PREFIX).color())
                 .replace("<prefix>", minetopiaPlayer.getActivePrefix().getPrefix())
                 .replace("<name_color>", minetopiaPlayer.getActiveColor(OwnableColorType.NAME).color())
-                .replace("<name>", player.getName())
+                .replace("<display_name>", BalaclavaUtils.isWearingBalaclava(player) ? "<obf>Balaclava</obf><reset>" : ChatUtils.stripMiniMessage(player.displayName()))
                 .replace("<chat_color>", minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).color())
                 .replace("<date>", new SimpleDateFormat("dd-MM-yyyy").format(new Date()))
                 .replace("<time>", new SimpleDateFormat("HH:mm").format(new Date()));
@@ -81,6 +83,11 @@ public class ChatUtils {
 
     public String stripMiniMessage(Component component) {
         return MiniMessage.miniMessage().serialize(component);
+    }
+
+    public String rawMiniMessage(Component component) {
+        String message = stripMiniMessage(component);
+        return MiniMessage.miniMessage().stripTags(message);
     }
 
     private void decideMessage(Player player, Component component, String message) {

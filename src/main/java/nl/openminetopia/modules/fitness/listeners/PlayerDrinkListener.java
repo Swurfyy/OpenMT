@@ -23,45 +23,46 @@ public class PlayerDrinkListener implements Listener {
 
         PotionMeta meta = (PotionMeta) item.getItemMeta();
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(event.getPlayer());
-        if (minetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(event.getPlayer(), minetopiaPlayer -> {
+            if (minetopiaPlayer == null) return;
 
-        FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
+            FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
 
-        // check if player drank water less than 5 minutes ago
+            // check if player drank water less than 5 minutes ago
 
-        // get drinking cooldown from minutes in millis
-        long drinkingCooldown = configuration.getDrinkingCooldown() * 60000L;
-        if (minetopiaPlayer.getFitness().getLastDrinkingTime() + drinkingCooldown > System.currentTimeMillis()) {
-            event.setCancelled(true);
-            event.getPlayer().sendMessage(MessageConfiguration.component("fitness_drinking_cooldown"));
-            return;
-        }
+            // get drinking cooldown from minutes in millis
+            long drinkingCooldown = configuration.getDrinkingCooldown() * 60000L;
+            if (minetopiaPlayer.getFitness().getLastDrinkingTime() + drinkingCooldown > System.currentTimeMillis()) {
+                event.setCancelled(true);
+                event.getPlayer().sendMessage(MessageConfiguration.component("fitness_drinking_cooldown"));
+                return;
+            }
 
-        FitnessStatisticModel drinkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
+            FitnessStatisticModel drinkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
 
-        double currentDrinkingPoints = drinkingStatistic.getPoints(); // Huidige drink punten
-        double drinkingPointsPerBottle = configuration.getDrinkingPointsPerWaterBottle();
+            double currentDrinkingPoints = drinkingStatistic.getPoints(); // Huidige drink punten
+            double drinkingPointsPerBottle = configuration.getDrinkingPointsPerWaterBottle();
 
-        switch (meta.getBasePotionType()) {
-            case WATER:
-                event.getPlayer().sendMessage(MessageConfiguration.component("fitness_drinking_water"));
-                drinkingStatistic.setPoints(currentDrinkingPoints + drinkingPointsPerBottle);
-                minetopiaPlayer.getFitness().setLastDrinkingTime(System.currentTimeMillis());
-                break;
-            case null:
-            default:
-                double drinkingPointsPerPotion = configuration.getDrinkingPointsPerPotion();
-                event.getPlayer().sendMessage(MessageConfiguration.component("fitness_drinking_water"));
-                drinkingStatistic.setPoints(currentDrinkingPoints + drinkingPointsPerPotion);
-                minetopiaPlayer.getFitness().setLastDrinkingTime(System.currentTimeMillis());
-        }
+            switch (meta.getBasePotionType()) {
+                case WATER:
+                    event.getPlayer().sendMessage(MessageConfiguration.component("fitness_drinking_water"));
+                    drinkingStatistic.setPoints(currentDrinkingPoints + drinkingPointsPerBottle);
+                    minetopiaPlayer.getFitness().setLastDrinkingTime(System.currentTimeMillis());
+                    break;
+                case null:
+                default:
+                    double drinkingPointsPerPotion = configuration.getDrinkingPointsPerPotion();
+                    event.getPlayer().sendMessage(MessageConfiguration.component("fitness_drinking_water"));
+                    drinkingStatistic.setPoints(currentDrinkingPoints + drinkingPointsPerPotion);
+                    minetopiaPlayer.getFitness().setLastDrinkingTime(System.currentTimeMillis());
+            }
 
-        if (drinkingStatistic.getPoints() >= 1 && drinkingStatistic.getFitnessGained() <= configuration.getMaxFitnessByDrinking()) {
-            drinkingStatistic.setFitnessGained(drinkingStatistic.getFitnessGained() + 1);
-            drinkingStatistic.setPoints(0.0);
-        }
+            if (drinkingStatistic.getPoints() >= 1 && drinkingStatistic.getFitnessGained() <= configuration.getMaxFitnessByDrinking()) {
+                drinkingStatistic.setFitnessGained(drinkingStatistic.getFitnessGained() + 1);
+                drinkingStatistic.setPoints(0.0);
+            }
 
-        minetopiaPlayer.getFitness().setStatistic(FitnessStatisticType.DRINKING, drinkingStatistic);
+            minetopiaPlayer.getFitness().setStatistic(FitnessStatisticType.DRINKING, drinkingStatistic);
+        }, Throwable::printStackTrace);
     }
 }
