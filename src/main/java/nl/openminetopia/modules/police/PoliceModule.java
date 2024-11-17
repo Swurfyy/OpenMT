@@ -15,6 +15,8 @@ import nl.openminetopia.modules.police.handcuff.listeners.*;
 import nl.openminetopia.modules.police.handcuff.objects.HandcuffedPlayer;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.police.pepperspray.listeners.PlayerPeppersprayListener;
+import nl.openminetopia.modules.police.taser.TaserManager;
+import nl.openminetopia.modules.police.taser.listeners.PlayerTaserListener;
 import nl.openminetopia.modules.police.walkietalkie.WalkieTalkieManager;
 import nl.openminetopia.modules.police.walkietalkie.listeners.PlayerChatListener;
 import nl.openminetopia.modules.police.walkietalkie.listeners.PlayerInteractListener;
@@ -29,10 +31,12 @@ public class PoliceModule extends Module {
     private final HashMap<UUID, Long> emergencyCooldowns = new HashMap<>();
 
     private WalkieTalkieManager walkieTalkieManager;
+    private TaserManager taserManager;
 
     @Override
     public void enable() {
         walkieTalkieManager = new WalkieTalkieManager();
+        taserManager = new TaserManager();
 
         registerCommand(new EmergencyCommand());
         registerCommand(new CriminalRecordCommand());
@@ -55,6 +59,9 @@ public class PoliceModule extends Module {
 
         /* ---- Pepperspray ---- */
         registerListener(new PlayerPeppersprayListener());
+
+        /* ---- Taser ---- */
+        registerListener(new PlayerTaserListener());
     }
 
     @Override

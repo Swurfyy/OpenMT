@@ -101,6 +101,13 @@ public class PersistentDataUtil {
         return getData(data, createNamespacedKey(key), PersistentDataType.DOUBLE);
     }
 
+    @Nullable
+    public static Long getLong(ItemStack itemStack, String key) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        PersistentDataContainer data = itemMeta.getPersistentDataContainer();
+        return getData(data, createNamespacedKey(key), PersistentDataType.LONG);
+    }
+
     @NotNull
     private static NamespacedKey createNamespacedKey(String key) {
         return NamespacedKey.minecraft(key);

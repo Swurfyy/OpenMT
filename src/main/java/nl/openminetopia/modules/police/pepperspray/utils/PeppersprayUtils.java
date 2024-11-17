@@ -1,15 +1,11 @@
-package nl.openminetopia.modules.police.pepperspray;
+package nl.openminetopia.modules.police.pepperspray.utils;
 
 import lombok.experimental.UtilityClass;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.utils.item.ItemUtils;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 @UtilityClass
 public class PeppersprayUtils {

@@ -112,6 +112,18 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final List<String> peppersprayEffects;
 
     /**
+     * Taser configuration
+     */
+    private final List<String> taserItems;
+    private final boolean taserUsagesEnabled;
+    private final int taserMaxUsages;
+    private final int taserCooldown;
+    private final boolean taserFreezeEnabled;
+    private final int taserFreezeDuration;
+    private final int taserEffectsDuration;
+    private final List<String> taserEffects;
+    
+    /**
      * Head configuration
      */
     private final List<String> headWhitelist;
@@ -327,6 +339,23 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.peppersprayEffectsDuration = rootNode.node("pepperspray", "effects-duration").getInt(5);
         this.peppersprayEffects = rootNode.node("pepperspray", "effects").getList(String.class, List.of(
                 "BLINDNESS"
+        ));
+
+        /*
+         * Taser configuration
+         */
+        this.taserItems = rootNode.node("taser", "items").getList(String.class, List.of(
+                "LIGHT_BLUE_DYE")
+        );
+        this.taserUsagesEnabled = rootNode.node("taser", "usages-enabled").getBoolean(true);
+        this.taserMaxUsages = rootNode.node("taser", "max-usages").getInt(10);
+        this.taserCooldown = rootNode.node("taser", "cooldown").getInt(3);
+        this.taserFreezeEnabled = rootNode.node("taser", "freeze", "enabled").getBoolean(true);
+        this.taserFreezeDuration = rootNode.node("taser", "freeze", "duration").getInt(3);
+        this.taserEffectsDuration = rootNode.node("taser", "effects-duration").getInt(5);
+        this.taserEffects = rootNode.node("taser", "effects").getList(String.class, List.of(
+                "BLINDNESS",
+                "SLOWNESS"
         ));
 
         /*
