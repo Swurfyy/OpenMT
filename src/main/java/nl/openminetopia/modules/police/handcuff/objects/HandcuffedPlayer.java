@@ -2,7 +2,7 @@ package nl.openminetopia.modules.police.handcuff.objects;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import nl.openminetopia.modules.police.handcuff.utils.HandcuffUtils;
+import nl.openminetopia.modules.police.utils.HandcuffUtils;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 

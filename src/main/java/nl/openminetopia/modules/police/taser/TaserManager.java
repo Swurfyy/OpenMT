@@ -3,7 +3,7 @@ package nl.openminetopia.modules.police.taser;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.modules.police.taser.utils.TaserUtils;
+import nl.openminetopia.modules.police.utils.TaserUtils;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

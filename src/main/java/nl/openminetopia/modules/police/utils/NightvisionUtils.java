@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.police.nightvision.utils;
+package nl.openminetopia.modules.police.utils;
 
 import lombok.experimental.UtilityClass;
 import nl.openminetopia.OpenMinetopia;

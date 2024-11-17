@@ -3,7 +3,7 @@ package nl.openminetopia.modules.police.handcuff.listeners;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.police.handcuff.HandcuffManager;
 import nl.openminetopia.modules.police.handcuff.objects.HandcuffedPlayer;
-import nl.openminetopia.modules.police.handcuff.utils.HandcuffUtils;
+import nl.openminetopia.modules.police.utils.HandcuffUtils;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

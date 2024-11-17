@@ -1,11 +1,12 @@
-package nl.openminetopia.modules.police.taser.listeners;
+package nl.openminetopia.modules.police.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.police.PoliceModule;
-import nl.openminetopia.modules.police.taser.utils.TaserUtils;
+import nl.openminetopia.modules.police.utils.TaserUtils;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.PersistentDataUtil;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -75,6 +76,12 @@ public class PlayerTaserListener implements Listener {
         PoliceModule policeModule = OpenMinetopia.getModuleManager().getModule(PoliceModule.class);
         if (!policeModule.getTaserManager().isTasered(event.getPlayer())) return;
 
-        event.setCancelled(true);
+        Location from = event.getFrom();
+        Location to = event.getTo();
+
+        if (from.y() > to.y()) return;
+        if (from.x() != to.x() || from.z() != to.z()) {
+            event.setCancelled(true);
+        }
     }
 }

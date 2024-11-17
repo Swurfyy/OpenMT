@@ -6,7 +6,7 @@ import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.player.models.PlayerModel;
-import nl.openminetopia.modules.police.balaclava.listeners.PlayerArmorChangeListener;
+import nl.openminetopia.modules.police.listeners.PlayerArmorChangeListener;
 import nl.openminetopia.modules.police.commands.BodysearchCommand;
 import nl.openminetopia.modules.police.commands.CriminalRecordCommand;
 import nl.openminetopia.modules.police.commands.EmergencyCommand;
@@ -21,10 +21,9 @@ import nl.openminetopia.modules.police.handcuff.listeners.PlayerPickupItemListen
 import nl.openminetopia.modules.police.handcuff.listeners.PlayerSlotChangeListener;
 import nl.openminetopia.modules.police.handcuff.objects.HandcuffedPlayer;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
-import nl.openminetopia.modules.police.nightvision.listeners.PlayerEquipNightvisionListener;
-import nl.openminetopia.modules.police.pepperspray.listeners.PlayerPeppersprayListener;
+import nl.openminetopia.modules.police.listeners.PlayerPeppersprayListener;
 import nl.openminetopia.modules.police.taser.TaserManager;
-import nl.openminetopia.modules.police.taser.listeners.PlayerTaserListener;
+import nl.openminetopia.modules.police.listeners.PlayerTaserListener;
 import nl.openminetopia.modules.police.walkietalkie.WalkieTalkieManager;
 import nl.openminetopia.modules.police.walkietalkie.listeners.PlayerChatListener;
 import nl.openminetopia.modules.police.walkietalkie.listeners.PlayerInteractListener;
@@ -70,9 +69,6 @@ public class PoliceModule extends Module {
 
         /* ---- Taser ---- */
         registerListener(new PlayerTaserListener());
-
-        /* ---- Nightvision ---- */
-        registerListener(new PlayerEquipNightvisionListener());
     }
 
     @Override

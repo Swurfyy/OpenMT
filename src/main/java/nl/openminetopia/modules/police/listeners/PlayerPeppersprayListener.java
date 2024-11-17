@@ -1,8 +1,8 @@
-package nl.openminetopia.modules.police.pepperspray.listeners;
+package nl.openminetopia.modules.police.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.modules.police.pepperspray.utils.PeppersprayUtils;
+import nl.openminetopia.modules.police.utils.PeppersprayUtils;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.PersistentDataUtil;
 import org.bukkit.entity.Player;

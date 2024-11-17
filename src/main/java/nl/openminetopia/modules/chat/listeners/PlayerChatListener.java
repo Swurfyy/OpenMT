@@ -7,7 +7,7 @@ import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.chat.utils.SpyUtils;
 import nl.openminetopia.modules.police.PoliceModule;
-import nl.openminetopia.modules.police.balaclava.utils.BalaclavaUtils;
+import nl.openminetopia.modules.police.utils.BalaclavaUtils;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;

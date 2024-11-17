@@ -8,7 +8,7 @@ import net.kyori.adventure.title.Title;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
-import nl.openminetopia.modules.police.balaclava.utils.BalaclavaUtils;
+import nl.openminetopia.modules.police.utils.BalaclavaUtils;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;

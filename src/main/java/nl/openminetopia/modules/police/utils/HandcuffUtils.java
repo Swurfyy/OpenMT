@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.police.handcuff.utils;
+package nl.openminetopia.modules.police.utils;
 
 import lombok.experimental.UtilityClass;
 import nl.openminetopia.OpenMinetopia;

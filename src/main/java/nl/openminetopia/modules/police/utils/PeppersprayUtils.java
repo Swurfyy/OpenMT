@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.police.pepperspray.utils;
+package nl.openminetopia.modules.police.utils;
 
 import lombok.experimental.UtilityClass;
 import nl.openminetopia.OpenMinetopia;
