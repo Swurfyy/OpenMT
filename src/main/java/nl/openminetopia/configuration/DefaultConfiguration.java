@@ -106,6 +106,8 @@ public class DefaultConfiguration extends ConfigurateConfig {
      * Pepperspray configuration
      */
     private final List<String> peppersprayItems;
+    private final boolean peppersprayUsagesEnabled;
+    private final int peppersprayMaxUsages;
     private final int peppersprayEffectsDuration;
     private final List<String> peppersprayEffects;
 
@@ -320,6 +322,8 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.peppersprayItems = rootNode.node("pepperspray", "items").getList(String.class, List.of(
                 "WHITE_DYE")
         );
+        this.peppersprayUsagesEnabled = rootNode.node("pepperspray", "usages-enabled").getBoolean(true);
+        this.peppersprayMaxUsages = rootNode.node("pepperspray", "max-usages").getInt(10);
         this.peppersprayEffectsDuration = rootNode.node("pepperspray", "effects-duration").getInt(5);
         this.peppersprayEffects = rootNode.node("pepperspray", "effects").getList(String.class, List.of(
                 "BLINDNESS"
