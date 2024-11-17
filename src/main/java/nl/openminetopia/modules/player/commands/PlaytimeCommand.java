@@ -20,28 +20,25 @@ public class PlaytimeCommand extends BaseCommand {
     @CommandCompletion("@players")
     @Description("Get your or another player's playtime.")
     public void playtime(Player player, @Optional OfflinePlayer target) {
-        // Retrieve the primary player's MinetopiaPlayer asynchronously
+
         PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
             if (minetopiaPlayer == null) {
                 ChatUtils.sendMessage(player, MessageConfiguration.message("database_read_error"));
                 return;
             }
 
-            // If no target is specified or the player lacks permission, display the primary player's playtime
             if (target == null || !player.hasPermission("openminetopia.playtime.others")) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_time_self")
                         .replace("<playtime>", PlaytimeUtil.formatPlaytime(minetopiaPlayer.getPlaytime())));
                 return;
             }
 
-            // Retrieve the target player's MinetopiaPlayer asynchronously
             PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
                 if (targetMinetopiaPlayer == null) {
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                     return;
                 }
 
-                // Display the target player's playtime
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_time_other_player")
                         .replace("<player>", target.getName() == null ? "null" : target.getName())
                         .replace("<playtime>", PlaytimeUtil.formatPlaytime(targetMinetopiaPlayer.getPlaytime())));

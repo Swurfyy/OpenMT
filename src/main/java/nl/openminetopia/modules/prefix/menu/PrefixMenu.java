@@ -16,14 +16,9 @@ import java.util.List;
 
 public class PrefixMenu extends PaginatedMenu {
 
-    private final OfflinePlayer offlinePlayer;
-    private final Player player;
-
     public PrefixMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer) {
         super(ChatUtils.color("<black>Kies een prefix"), 2);
         this.registerPageSlotsBetween(0, 9);
-        this.offlinePlayer = offlinePlayer;
-        this.player = player;
 
         if (minetopiaPlayer == null) return;
 

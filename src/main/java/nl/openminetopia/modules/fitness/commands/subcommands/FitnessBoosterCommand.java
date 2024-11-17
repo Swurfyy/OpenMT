@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.annotation.Subcommand;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
@@ -22,17 +23,23 @@ public class FitnessBoosterCommand extends BaseCommand {
 
         if (offlinePlayer.getPlayer() == null) return;
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer.getPlayer(), minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
             if (minetopiaPlayer == null) return;
+            PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer.getPlayer(), targetMinetopiaPlayer -> {
+                if (targetMinetopiaPlayer == null) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+                    return;
+                }
 
-            int expiry = expiresAt == null || expiresAt <= 0 ? -1 : expiresAt;
-            long expiresAtMillis = expiry == -1 ? -1 : System.currentTimeMillis() + (expiry * 1000L);
+                int expiry = expiresAt == null || expiresAt <= 0 ? -1 : expiresAt;
+                long expiresAtMillis = expiry == -1 ? -1 : System.currentTimeMillis() + (expiry * 1000L);
 
-            minetopiaPlayer.getFitness().addBooster(amount, expiresAtMillis);
+                targetMinetopiaPlayer.getFitness().addBooster(amount, expiresAtMillis);
 
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("fitness_booster_added_to")
-                    .replace("<playername>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName())));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("fitness_booster_added_to")
+                        .replace("<playername>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName())));
 
+            }, Throwable::printStackTrace);
         }, Throwable::printStackTrace);
     }
 }

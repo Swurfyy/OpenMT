@@ -11,5 +11,4 @@ public class PlayerCommandListener implements Listener {
     public void preCommand(final PlayerCommandPreprocessEvent event) {
         SpyUtils.commandSpy(event.getPlayer(), event.getMessage());
     }
-
 }
