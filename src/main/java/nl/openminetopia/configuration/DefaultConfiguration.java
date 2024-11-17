@@ -112,6 +112,13 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final List<String> peppersprayEffects;
 
     /**
+     * Nightvision goggles configuration
+     */
+    private final List<String> nightvisionItems;
+    private final List<String> nightvisionEffects;
+
+
+    /**
      * Taser configuration
      */
     private final List<String> taserItems;
@@ -339,6 +346,16 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.peppersprayEffectsDuration = rootNode.node("pepperspray", "effects-duration").getInt(5);
         this.peppersprayEffects = rootNode.node("pepperspray", "effects").getList(String.class, List.of(
                 "BLINDNESS"
+        ));
+
+        /*
+         * Nightvision goggles configuration
+         */
+        this.nightvisionItems = rootNode.node("nightvision", "items").getList(String.class, List.of(
+                "GREEN_DYE")
+        );
+        this.nightvisionEffects = rootNode.node("nightvision", "effects").getList(String.class, List.of(
+                "NIGHT_VISION"
         ));
 
         /*

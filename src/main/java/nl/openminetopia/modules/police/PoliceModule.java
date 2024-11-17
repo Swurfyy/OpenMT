@@ -14,6 +14,7 @@ import nl.openminetopia.modules.police.handcuff.HandcuffManager;
 import nl.openminetopia.modules.police.handcuff.listeners.*;
 import nl.openminetopia.modules.police.handcuff.objects.HandcuffedPlayer;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
+import nl.openminetopia.modules.police.nightvision.listeners.PlayerEquipNightvisionListener;
 import nl.openminetopia.modules.police.pepperspray.listeners.PlayerPeppersprayListener;
 import nl.openminetopia.modules.police.taser.TaserManager;
 import nl.openminetopia.modules.police.taser.listeners.PlayerTaserListener;
@@ -62,6 +63,9 @@ public class PoliceModule extends Module {
 
         /* ---- Taser ---- */
         registerListener(new PlayerTaserListener());
+
+        /* ---- Nightvision ---- */
+        registerListener(new PlayerEquipNightvisionListener());
     }
 
     @Override
