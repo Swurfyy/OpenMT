@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Optional;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
@@ -29,11 +30,14 @@ public class StaffchatCommand extends BaseCommand {
                 return;
             }
 
-            for (Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()) {
-                if (onlinePlayer.hasPermission("openminetopia.staffchat")) {
-                    onlinePlayer.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b>" + minetopiaPlayer.getWorld().getName() + "</b><dark_gray>) <green>" + player.getName() + "<white>: " + message));
-                }
-            }
+            String formattedMessage = MessageConfiguration.message("staff_chat_format")
+                    .replace("<player>", player.getName())
+                    .replace("<world_name>", player.getWorld().getName())
+                    .replace("<message>", message);
+
+            Bukkit.getServer().getOnlinePlayers().forEach(target -> {
+                if (target.hasPermission("openminetopia.staffchat")) ChatUtils.sendFormattedMessage(minetopiaPlayer, formattedMessage);
+            });
         }, Throwable::printStackTrace);
     }
 }
