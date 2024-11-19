@@ -31,22 +31,17 @@ public class PlayerChatListener implements Listener {
 
             event.setCancelled(true);
 
-            List<Player> recipients = new ArrayList<>();
-
-            Bukkit.getServer().getOnlinePlayers().forEach(target -> {
-                if (target.hasPermission("openminetopia.staffchat")) recipients.add(target);
-            });
-
             String formattedMessage = MessageConfiguration.message("staff_chat_format")
                     .replace("<player>", source.getName())
                     .replace("<world_name>", source.getWorld().getName())
                     .replace("<message>", ChatUtils.stripMiniMessage(event.message()));
 
-            // Iterate over recipients
-            recipients.forEach(player -> {
-                // Send the formatted message to the player
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, formattedMessage);
+            Bukkit.getServer().getOnlinePlayers().forEach(target -> {
+                if (target.hasPermission("openminetopia.staffchat")) {
+                    target.sendMessage(ChatUtils.format(minetopiaPlayer, formattedMessage));
+                }
             });
+
             Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, formattedMessage));
         }, Throwable::printStackTrace);
     }
