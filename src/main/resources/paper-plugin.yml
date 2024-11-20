@@ -1,5 +1,5 @@
 name: OpenMinetopia
-version: '1.2'
+version: '1.2.1'
 main: nl.openminetopia.OpenMinetopia
 api-version: '1.21'
 loader: nl.openminetopia.OpenMinetopiaLoader
