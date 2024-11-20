@@ -7,6 +7,8 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.modules.banking.BankingModule;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.police.utils.BalaclavaUtils;
 import org.bukkit.entity.Player;
@@ -56,6 +58,14 @@ public class ChatUtils {
         if (minetopiaPlayer.getFitness().getStatistics() != null && !minetopiaPlayer.getFitness().getStatistics().isEmpty()) {
             message = message.replace("<fitness>", minetopiaPlayer.getFitness().getTotalFitness() + "")
                     .replace("<max_fitness>", OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel() + "");
+        }
+
+        BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
+        BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
+        if (accountModel != null) {
+            message = message
+                    .replace("<balance_formatted>", bankingModule.format(accountModel.getBalance())
+                    .replace("<balance>", String.valueOf(accountModel.getBalance())));
         }
 
         if (OpenMinetopia.getInstance().getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
