@@ -103,12 +103,16 @@ public class Fitness {
         boosterModel.setExpiresAt(expiresAtMillis);
         playerModel.getBoosters().add(boosterModel);
         StormDatabase.getInstance().saveStormModel(boosterModel);
+
+        runnable.run();
     }
 
     public void removeBooster(FitnessBoosterModel booster) {
         playerModel.getBoosters().remove(booster);
         StormUtils.deleteModelData(FitnessBoosterModel.class, query ->
                 query.where("id", Where.EQUAL, booster.getId()));
+
+        runnable.run();
     }
 
     public List<FitnessStatisticModel> getStatistics() {

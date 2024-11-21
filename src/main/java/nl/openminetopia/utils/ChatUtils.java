@@ -44,7 +44,8 @@ public class ChatUtils {
                 .replace("<time>", new SimpleDateFormat("HH:mm").format(new Date()));
 
         if (minetopiaPlayer.isInPlace()) {
-            message = message.replace("<world_title>", minetopiaPlayer.getWorld().getTitle())
+            message = message
+                    .replace("<world_title>", minetopiaPlayer.getWorld().getTitle())
                     .replace("<world_loadingname>", minetopiaPlayer.getWorld().getLoadingName())
                     .replace("<world_name>", minetopiaPlayer.getWorld().getName())
                     .replace("<world_color>", minetopiaPlayer.getWorld().getColor())
@@ -56,7 +57,8 @@ public class ChatUtils {
         }
 
         if (minetopiaPlayer.getFitness().getStatistics() != null && !minetopiaPlayer.getFitness().getStatistics().isEmpty()) {
-            message = message.replace("<fitness>", minetopiaPlayer.getFitness().getTotalFitness() + "")
+            message = message
+                    .replace("<fitness>", minetopiaPlayer.getFitness().getTotalFitness() + "")
                     .replace("<max_fitness>", OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel() + "");
         }
 
