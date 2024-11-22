@@ -37,7 +37,7 @@ public class FitnessBoosterCommand extends BaseCommand {
                 targetMinetopiaPlayer.getFitness().addBooster(amount, expiresAtMillis);
 
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("fitness_booster_added_to")
-                        .replace("<playername>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName())));
+                        .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName())));
                 }, Throwable::printStackTrace);
         }, Throwable::printStackTrace);
     }

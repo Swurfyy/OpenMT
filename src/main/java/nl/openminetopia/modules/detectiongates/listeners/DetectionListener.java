@@ -31,8 +31,10 @@ public class DetectionListener implements Listener {
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
         if(!configuration.isDetectionGateEnabled()) return;
         Block block = event.getClickedBlock();
+        if (block == null) return;
         if (block.getType() != configuration.getDetectionPressurePlate()) return;
         if (block.getRelative(BlockFace.DOWN).getType() != configuration.getDetectionActivationBlock()) return;
+        if (cooldown.contains(block)) return;
 
         DetectionModule detectionModule = OpenMinetopia.getModuleManager().getModule(DetectionModule.class);
         List<ItemStack> flaggedItems = detectionModule.getFlaggedItems(player);
