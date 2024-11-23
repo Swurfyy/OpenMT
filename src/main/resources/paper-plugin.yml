@@ -13,7 +13,7 @@ dependencies:
       load: BEFORE
       required: true
     WorldGuard:
-      load: AFTER
+      load: BEFORE
       required: true
     Vault:
       required: false

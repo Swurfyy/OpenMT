@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.annotation.Syntax;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
@@ -31,19 +32,19 @@ public class PlotDescriptionCommand extends BaseCommand {
                 return;
             }
 
-            if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
+            if (region.getFlag(OpenMinetopia.PLOT_FLAG) == null) {
                 player.sendMessage(MessageConfiguration.component("plot_not_valid"));
                 return;
             }
 
             if (description.isBlank() || description.equalsIgnoreCase("remove") ||
                     description.equalsIgnoreCase("delete") || description.equalsIgnoreCase("null")) {
-                region.setFlag(PlotModule.PLOT_DESCRIPTION, null);
+                region.setFlag(OpenMinetopia.PLOT_DESCRIPTION, null);
                 player.sendMessage(MessageConfiguration.component("plot_description_removed"));
                 return;
             }
 
-            region.setFlag(PlotModule.PLOT_DESCRIPTION, description);
+            region.setFlag(OpenMinetopia.PLOT_DESCRIPTION, description);
             player.sendMessage(MessageConfiguration.component("plot_description_updated"));
         }, Throwable::printStackTrace);
     }

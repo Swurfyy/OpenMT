@@ -22,9 +22,6 @@ import nl.openminetopia.utils.WorldGuardUtils;
 
 public class PlotModule extends Module {
 
-    public static StateFlag PLOT_FLAG = new StateFlag("openmt-plot", true);
-    public static StringFlag PLOT_DESCRIPTION = new StringFlag("openmt-description");
-
     @Override
     public void enable() {
         registerCommand(new PlotInfoCommand());
@@ -41,10 +38,8 @@ public class PlotModule extends Module {
 
         OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("plotName", context ->
                 WorldGuardUtils.getProtectedRegions(priority -> priority >= 0).stream()
-                        .filter(region -> region.getFlag(PLOT_FLAG) != null)
+                        .filter(region -> region.getFlag(OpenMinetopia.PLOT_FLAG) != null)
                         .map(ProtectedRegion::getId).toList());
-
-        loadFlags();
     }
 
     @Override
@@ -52,14 +47,5 @@ public class PlotModule extends Module {
 
     }
 
-    public void loadFlags() {
-        FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
-        try {
-            registry.register(PLOT_FLAG);
-            registry.register(PLOT_DESCRIPTION);
-        } catch (FlagConflictException e) {
-            PLOT_FLAG = (StateFlag) registry.get("openmt-plot");
-            PLOT_DESCRIPTION = (StringFlag) registry.get("openmt-description");
-        }
-    }
+
 }

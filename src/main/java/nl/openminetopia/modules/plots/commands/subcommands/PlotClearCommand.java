@@ -6,6 +6,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
@@ -29,7 +30,7 @@ public class PlotClearCommand extends BaseCommand {
                 return;
             }
 
-            if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
+            if (region.getFlag(OpenMinetopia.PLOT_FLAG) == null) {
                 player.sendMessage(MessageConfiguration.component("plot_invalid"));
                 return;
             }

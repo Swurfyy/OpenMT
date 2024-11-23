@@ -5,6 +5,11 @@ import co.aikar.commands.PaperCommandManager;
 import com.jazzkuh.inventorylib.loader.InventoryLoader;
 import com.jazzkuh.inventorylib.objects.Menu;
 import com.jeff_media.customblockdata.CustomBlockData;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.flags.StringFlag;
+import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
+import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import lombok.Getter;
 import lombok.Setter;
 import nl.openminetopia.configuration.BankingConfiguration;
@@ -143,5 +148,24 @@ public final class OpenMinetopia extends JavaPlugin {
     @Override
     public void onDisable() {
         moduleManager.disable();
+    }
+
+    @Override
+    public void onLoad() {
+        loadFlags();
+    }
+
+    public static StateFlag PLOT_FLAG = new StateFlag("openmt-plot", true);
+    public static StringFlag PLOT_DESCRIPTION = new StringFlag("openmt-description");
+
+    public void loadFlags() {
+        FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
+        try {
+            registry.register(PLOT_FLAG);
+            registry.register(PLOT_DESCRIPTION);
+        } catch (FlagConflictException e) {
+            PLOT_FLAG = (StateFlag) registry.get("openmt-plot");
+            PLOT_DESCRIPTION = (StringFlag) registry.get("openmt-description");
+        }
     }
 }
