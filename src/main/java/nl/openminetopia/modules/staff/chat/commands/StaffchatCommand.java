@@ -36,7 +36,11 @@ public class StaffchatCommand extends BaseCommand {
                     .replace("<message>", message);
 
             Bukkit.getServer().getOnlinePlayers().forEach(target -> {
-                if (target.hasPermission("openminetopia.staffchat")) ChatUtils.sendFormattedMessage(minetopiaPlayer, formattedMessage);
+                PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+                    if (targetMinetopiaPlayer == null) return;
+
+                    if (targetMinetopiaPlayer.isStaffchatEnabled()) ChatUtils.sendFormattedMessage(targetMinetopiaPlayer, formattedMessage);
+                }, Throwable::printStackTrace);
             });
         }, Throwable::printStackTrace);
     }
