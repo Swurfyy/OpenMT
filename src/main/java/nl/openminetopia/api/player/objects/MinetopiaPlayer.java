@@ -162,6 +162,7 @@ public class MinetopiaPlayer {
     }
 
     /* ---------- Places ---------- */
+
     public boolean isInPlace() {
         return getPlace() != null;
     }

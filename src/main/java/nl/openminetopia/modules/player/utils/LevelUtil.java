@@ -5,6 +5,8 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.LevelCheckConfiguration;
+import nl.openminetopia.modules.banking.BankingModule;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.entity.Player;
 
@@ -16,7 +18,22 @@ public class LevelUtil {
         double points = 0;
 
         // TODO: Add points per vehicle
-        // TODO: Add points per 5k balance
+
+        // Points per 5k balance
+        BankAccountModel accountModel = OpenMinetopia.getModuleManager().getModule(BankingModule.class).getAccountById(minetopiaPlayer.getUuid());
+
+        double balance;
+        if (accountModel == null) {
+            balance = 0;
+        } else {
+            balance = accountModel.getBalance();
+        }
+
+        if (balance >= 5000) {
+            for (double tempBalance = balance; tempBalance >= 5000; tempBalance -= 5000) {
+                points += configuration.getPointsPer5KBalance();
+            }
+        }
 
         // Points for having a prefix
         if (minetopiaPlayer.getPrefixes() != null && !minetopiaPlayer.getPrefixes().isEmpty()) {
