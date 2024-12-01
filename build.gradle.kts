@@ -4,7 +4,7 @@ plugins {
     java
     id("io.freefair.lombok") version "8.11"
     id("com.gradleup.shadow") version "8.3.5"
-    id("io.papermc.paperweight.userdev") version "1.7.4"
+    id("io.papermc.paperweight.userdev") version "1.7.5"
 }
 
 group = "nl.openminetopia"
@@ -49,10 +49,10 @@ dependencies {
     compileOnly("org.spongepowered:configurate-core:4.1.2")
 
     /* Database */
-    compileOnly("com.zaxxer:HikariCP:6.2.0")
+    compileOnly("com.zaxxer:HikariCP:6.2.1")
     compileOnly("mysql:mysql-connector-java:8.0.33")
-    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.5.0")
-    compileOnly("org.xerial:sqlite-jdbc:3.47.0.0")
+    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.5.1")
+    compileOnly("org.xerial:sqlite-jdbc:3.47.1.0")
     implementation("com.github.Mindgamesnl:storm:e1f961b480")
 
     /* Command Framework */
