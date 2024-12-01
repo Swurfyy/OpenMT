@@ -2,6 +2,7 @@ package nl.openminetopia.modules.places.listeners;
 
 import net.kyori.adventure.title.Title;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,8 +20,10 @@ public class PlayerJoinListener implements Listener {
 
             if (!minetopiaPlayer.isInPlace() || minetopiaPlayer.getPlace() == null) return;
 
-            Title title = Title.title(ChatUtils.format(minetopiaPlayer, "Welkom in"),
-                    ChatUtils.format(minetopiaPlayer, minetopiaPlayer.getPlace().getLoadingName()));
+            Title title = Title.title(
+                    ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("place_enter_title")),
+                    ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("place_enter_subtitle"))
+            );
             player.showTitle(title);
         }, Throwable::printStackTrace);
     }

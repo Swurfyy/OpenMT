@@ -41,7 +41,8 @@ public class ChatUtils {
                 .replace("<display_name>", BalaclavaUtils.isWearingBalaclava(player) ? "<obf>Balaclava</obf><reset>" : ChatUtils.stripMiniMessage(player.displayName()))
                 .replace("<chat_color>", minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).color())
                 .replace("<date>", new SimpleDateFormat("dd-MM-yyyy").format(new Date()))
-                .replace("<time>", new SimpleDateFormat("HH:mm").format(new Date()));
+                .replace("<time>", new SimpleDateFormat("HH:mm").format(new Date()))
+                .replace("<new_line>", "\n");
 
         if (minetopiaPlayer.isInPlace()) {
             message = message
@@ -67,7 +68,7 @@ public class ChatUtils {
         if (accountModel != null) {
             message = message
                     .replace("<balance_formatted>", bankingModule.format(accountModel.getBalance())
-                    .replace("<balance>", String.valueOf(accountModel.getBalance())));
+                            .replace("<balance>", String.valueOf(accountModel.getBalance())));
         }
 
         if (OpenMinetopia.getInstance().getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {

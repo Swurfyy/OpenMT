@@ -6,7 +6,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.HelpCommand;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.modules.prefix.menu.PrefixMenu;
+import nl.openminetopia.modules.prefix.menus.PrefixMenu;
 import org.bukkit.entity.Player;
 
 @CommandAlias("prefix")

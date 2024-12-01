@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.banking.menu;
+package nl.openminetopia.modules.banking.menus;
 
 import com.jazzkuh.inventorylib.objects.Menu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;

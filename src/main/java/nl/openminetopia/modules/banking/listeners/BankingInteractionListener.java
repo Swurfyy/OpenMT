@@ -2,7 +2,7 @@ package nl.openminetopia.modules.banking.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.BankingConfiguration;
-import nl.openminetopia.modules.banking.menu.BankTypeSelectionMenu;
+import nl.openminetopia.modules.banking.menus.BankTypeSelectionMenu;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

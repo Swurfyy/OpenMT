@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.modules.banking.menu.BankTypeSelectionMenu;
+import nl.openminetopia.modules.banking.menus.BankTypeSelectionMenu;
 import org.bukkit.entity.Player;
 
 @CommandAlias("accounts|account|rekening")

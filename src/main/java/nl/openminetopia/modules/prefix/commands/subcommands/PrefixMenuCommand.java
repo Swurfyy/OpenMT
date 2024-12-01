@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Optional;
 import co.aikar.commands.annotation.Subcommand;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.modules.prefix.menu.PrefixMenu;
+import nl.openminetopia.modules.prefix.menus.PrefixMenu;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 

@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.prefix.menu;
+package nl.openminetopia.modules.prefix.menus;
 
 import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;

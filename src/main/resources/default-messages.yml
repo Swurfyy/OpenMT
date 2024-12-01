@@ -171,3 +171,11 @@ police_walkietalkie_emergency_format: "<dark_red>[<red>NOODKNOP<dark_red>] <gray
 
 # Staffchat
 staff_chat_format: "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b><world_name></b><dark_gray>) <green><player><white>: <message>"
+
+# Trashcan
+trashcan_title: "<dark_red>PRULLENBAK"
+trashcan_message: "<gold>Je hebt de prullenbak geopend.<new_line><red>WAARSCHUWING: Alles wat je hier in stopt, gaat voor ALTIJD weg."
+
+# Places (Cities/Worlds)
+place_enter_title: "<city_color>Welkom in"
+place_enter_subtitle: "<city_color><city_loadingname>"

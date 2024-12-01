@@ -5,6 +5,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -29,7 +30,10 @@ public class PlayerMoveListener implements Listener {
 
                 if (from.equals(to)) return;
 
-                Title title = Title.title(ChatUtils.format(minetopiaPlayer, "Welkom in"), ChatUtils.format(minetopiaPlayer, to.getLoadingName()));
+                Title title = Title.title(
+                        ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("place_enter_title")),
+                        ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("place_enter_subtitle"))
+                );
                 player.showTitle(title);
 
             }, Throwable::printStackTrace);

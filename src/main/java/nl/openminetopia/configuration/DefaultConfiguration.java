@@ -150,6 +150,13 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final boolean walkieTalkieEmergencyCooldownEnabled;
     private final int walkieTalkieEmergencyCooldownSeconds;
 
+    /**
+     * Trashcan configuration
+     */
+    private final boolean trashcanEnabled;
+    private final List<Material> trashcanBlocks;
+    private final boolean trashcanUseDropperInventory;
+
     @SneakyThrows
     public DefaultConfiguration(File file) {
         super(file, "config.yml", "");
@@ -187,7 +194,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.chatEnabled = rootNode.node("chat", "enabled").getBoolean(true);
         this.chatRadiusEnabled = rootNode.node("chat", "radius", "enabled").getBoolean(true);
         this.chatRadiusRange = rootNode.node("chat", "radius", "range").getInt(20);
-        this.notifyWhenNobodyInRange = rootNode.node("chat", "radius", "notifyWhenNobodyInRange").getBoolean(false);
+        this.notifyWhenNobodyInRange = rootNode.node("chat", "radius", "notify-when-nobody-in-range").getBoolean(false);
 
         /*
          * Scoreboard configuration
@@ -299,7 +306,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Plot configuration
          */
-        this.commandsOnPlotCreate = rootNode.node("plot", "commandsOnCreate").getList(String.class, List.of(
+        this.commandsOnPlotCreate = rootNode.node("plot", "commands-on-create").getList(String.class, List.of(
                 "rg flag <plot> -w <world> interact -g NON_MEMBERS DENY",
                 "rg flag <plot> -w <world> chest-access -g NON_MEMBERS DENY",
                 "rg flag <plot> -w <world> USE -g MEMBERS ALLOW",
@@ -424,6 +431,15 @@ public class DefaultConfiguration extends ConfigurateConfig {
         ));
         this.walkieTalkieEmergencyCooldownEnabled = rootNode.node("walkietalkie", "emergency-button", "cooldown-enabled").getBoolean(true);
         this.walkieTalkieEmergencyCooldownSeconds = rootNode.node("walkietalkie", "emergency-button", "cooldown-seconds").getInt(60);
+
+        /*
+         * Trashcan configuration
+         */
+        this.trashcanEnabled = rootNode.node("trashcan", "enabled").getBoolean(true);
+        this.trashcanBlocks = rootNode.node("trashcan", "blocks").getList(String.class, List.of(
+                "DROPPER"
+        )).stream().map(Material::matchMaterial).toList();
+        this.trashcanUseDropperInventory = rootNode.node("trashcan", "use-dropper-inventory").getBoolean(false);
     }
 
     @SneakyThrows
