@@ -35,6 +35,13 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final String password;
 
     /**
+     * Portal configuration
+     */
+    private final boolean portalEnabled;
+    private final String portalUrl;
+    private final String portalApiKey;
+
+    /**
      * Chat configuration
      */
     private final String chatFormat;
@@ -175,6 +182,12 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.username = rootNode.node("database", "username").getString("root");
         this.password = rootNode.node("database", "password").getString("password");
 
+        /*
+         * Portal configuration
+         */
+        this.portalEnabled = rootNode.node("portal", "enabled").getBoolean(false);
+        this.portalUrl = rootNode.node("portal", "url").getString("portal.openminetopia.nl");
+        this.portalApiKey = rootNode.node("portal", "api-key").getString("CHANGE-ME");
 
         /*
          * Default settings configuration

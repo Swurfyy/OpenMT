@@ -84,6 +84,9 @@ dependencies {
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1") {
         exclude(group = "org.bukkit", module = "bukkit")
     }
+
+    /* HTTP Requests */
+    compileOnly("org.asynchttpclient:async-http-client:3.0.1")
 }
 
 val targetJavaVersion = 21
