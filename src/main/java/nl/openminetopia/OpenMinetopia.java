@@ -33,6 +33,7 @@ import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.modules.portal.PortalModule;
 import nl.openminetopia.modules.prefix.PrefixModule;
+import nl.openminetopia.modules.restapi.RestAPIModule;
 import nl.openminetopia.modules.scoreboard.ScoreboardModule;
 import nl.openminetopia.modules.staff.StaffModule;
 import nl.openminetopia.modules.teleporter.TeleporterModule;
@@ -130,6 +131,7 @@ public final class OpenMinetopia extends JavaPlugin {
                 new TeleporterModule(),
                 new PoliceModule(),
                 new MiscModule(),
+                new RestAPIModule(),
                 new PortalModule()
         );
 

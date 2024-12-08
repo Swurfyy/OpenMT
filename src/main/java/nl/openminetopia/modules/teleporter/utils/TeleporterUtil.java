@@ -99,7 +99,7 @@ public final class TeleporterUtil {
 
     private Component displayText(Location location) {
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
-        String text = StringUtils.join(configuration.getDisplayLines(), "\n<reset>");
+        String text = StringUtils.join(configuration.getTeleporterDisplayLines(), "\n<reset>");
 
         text = text
                 .replace("<x>", String.valueOf((int) location.x()))

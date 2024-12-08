@@ -33,11 +33,11 @@ public class MySQLAdapter implements DatabaseAdapter{
 
     public void connect() {
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
-        String host = configuration.getHost();
-        int port = configuration.getPort();
+        String host = configuration.getDatabaseHost();
+        int port = configuration.getDatabasePort();
         String name = configuration.getDatabaseName();
-        String username = configuration.getUsername();
-        String password = configuration.getPassword();
+        String username = configuration.getDatabaseUsername();
+        String password = configuration.getDatabasePassword();
 
         try {
             HikariConfig config = new HikariConfig();

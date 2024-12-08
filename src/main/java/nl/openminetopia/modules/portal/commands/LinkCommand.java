@@ -11,8 +11,8 @@ import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 
-@CommandAlias("koppel")
-public class VerifyCommand extends BaseCommand {
+@CommandAlias("koppel|link")
+public class LinkCommand extends BaseCommand {
 
     @Default
     public void verify(Player player, String token) {
@@ -31,7 +31,7 @@ public class VerifyCommand extends BaseCommand {
         try (AsyncHttpClient client = new DefaultAsyncHttpClient()) {
             client.preparePost(portalModule.getPortalApiUrl() + "/minecraft/verify")
                     .setHeader("Content-Type", "application/json")
-                    .setHeader("X-API-Key", portalModule.getApiKey())
+                    .setHeader("X-API-Key", OpenMinetopia.getDefaultConfiguration().getRestApiKey())
                     .setBody(requestBody.toString())
                     .execute()
                     .toCompletableFuture()
