@@ -10,6 +10,7 @@ import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.restapi.base.VerticleManager;
 import nl.openminetopia.modules.restapi.verticles.MainVerticle;
 import nl.openminetopia.modules.restapi.verticles.PlayerVerticle;
+import nl.openminetopia.modules.restapi.verticles.PrefixVerticle;
 
 public class RestAPIModule extends Module {
 
@@ -28,7 +29,8 @@ public class RestAPIModule extends Module {
             verticleManager = new VerticleManager(vertx, context, router);
             verticleManager.register(
                     new MainVerticle(),
-                    new PlayerVerticle()
+                    new PlayerVerticle(),
+                    new PrefixVerticle()
             );
         }
     }
@@ -36,14 +38,5 @@ public class RestAPIModule extends Module {
     @Override
     public void disable() {
 
-    }
-
-    private void validateApiKey(RoutingContext context) {
-        String apiKey = context.request().getHeader("X-API-Key");
-        if (apiKey == null || !apiKey.equals(OpenMinetopia.getDefaultConfiguration().getRestApiKey())) {
-            context.response().setStatusCode(401).end("Unauthorized request");
-        } else {
-            context.next();
-        }
     }
 }
