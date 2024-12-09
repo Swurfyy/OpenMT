@@ -50,6 +50,10 @@ public class PlotOwnersCommand extends BaseCommand {
                 return;
             }
 
+            if (region.getMembers().contains(offlinePlayer.getUniqueId())) {
+                region.getMembers().removePlayer(offlinePlayer.getUniqueId());
+            }
+
             region.getOwners().addPlayer(offlinePlayer.getUniqueId());
             player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Je hebt <aqua>" + offlinePlayer.getName() + " <dark_aqua>toegevoegd aan het plot."));
         }, Throwable::printStackTrace);

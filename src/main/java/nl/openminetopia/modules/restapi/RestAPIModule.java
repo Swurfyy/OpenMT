@@ -14,6 +14,7 @@ import nl.openminetopia.modules.restapi.verticles.banking.BankAccountsVerticle;
 import nl.openminetopia.modules.restapi.verticles.player.ColorsVerticle;
 import nl.openminetopia.modules.restapi.verticles.player.CriminalRecordsVerticle;
 import nl.openminetopia.modules.restapi.verticles.player.PlayerBankAccountsVerticle;
+import nl.openminetopia.modules.restapi.verticles.player.PlayerPlotsVerticle;
 import nl.openminetopia.modules.restapi.verticles.player.PlayerVerticle;
 import nl.openminetopia.modules.restapi.verticles.player.PrefixesVerticle;
 import nl.openminetopia.modules.restapi.verticles.plots.PlotsVerticle;
@@ -43,6 +44,7 @@ public class RestAPIModule extends Module {
                     new BankAccountUsersVerticle(),
                     new PlayerBankAccountsVerticle(),
                     new CriminalRecordsVerticle(),
+                    new PlayerPlotsVerticle(),
                     new PlotsVerticle()
             );
         }

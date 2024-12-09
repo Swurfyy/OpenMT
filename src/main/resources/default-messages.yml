@@ -138,7 +138,7 @@ plot_info_description: "<dark_aqua>Beschrijving: <aqua><description>"
 plot_info_footer: "<dark_aqua><st>----------------------------------------------"
 plot_not_owner: "<red>Je bent geen eigenaar van dit plot."
 plot_member_already: "<red><player> is al een member van dit plot."
-plot_member_added: "<dark_aqua>Je hebt <aqua><player><dark_aqua>toegevoegd aan het plot."
+plot_member_added: "<dark_aqua>Je hebt <aqua><player> <dark_aqua>toegevoegd aan het plot."
 plot_member_not_added: "<red><player> is geen member van dit plot."
 
 # Emergency command

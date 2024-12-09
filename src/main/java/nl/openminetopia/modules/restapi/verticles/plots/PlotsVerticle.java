@@ -25,7 +25,6 @@ public class PlotsVerticle extends BaseVerticle {
         try {
             JSONObject jsonObject = new JSONObject();
 
-
             jsonObject.put("success", true);
             JSONObject plotsObject = new JSONObject();
 

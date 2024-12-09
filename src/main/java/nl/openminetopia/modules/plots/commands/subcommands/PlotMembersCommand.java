@@ -48,7 +48,7 @@ public class PlotMembersCommand extends BaseCommand {
                 return;
             }
 
-            if (region.getMembers().contains(offlinePlayer.getUniqueId())) {
+            if (region.getMembers().contains(offlinePlayer.getUniqueId()) || region.getOwners().contains(offlinePlayer.getUniqueId())) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_member_already"));
                 return;
             }

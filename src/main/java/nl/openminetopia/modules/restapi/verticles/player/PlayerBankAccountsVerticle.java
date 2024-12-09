@@ -4,6 +4,7 @@ import io.vertx.core.Promise;
 import io.vertx.ext.web.RoutingContext;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.banking.BankingModule;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -46,6 +47,26 @@ public class PlayerBankAccountsVerticle extends BaseVerticle {
                 accountObject.put("balance", account.getBalance());
                 accountsObject.put(account.getUniqueId().toString(), accountObject);
             });
+
+            bankingModule.getAccountByIdAsync(playerUuid).whenComplete((bankAccountModel, throwable) -> {
+                if (throwable != null) {
+                    throwable.printStackTrace();
+                    jsonObject.put("success", false);
+                }
+
+                if (bankAccountModel == null) {
+                    jsonObject.put("success", false);
+                } else {
+                    jsonObject.put("success", true);
+
+                    JSONObject accountObject = new JSONObject();
+                    accountObject.put("type", bankAccountModel.getType().name());
+                    accountObject.put("name", bankAccountModel.getName());
+                    accountObject.put("frozen", bankAccountModel.getFrozen());
+                    accountObject.put("balance", bankAccountModel.getBalance());
+                    accountsObject.put(bankAccountModel.getUniqueId().toString(), accountObject);
+                }
+            }).join();
 
             jsonObject.put("accounts", accountsObject);
             context.response().end(jsonObject.toJSONString());
