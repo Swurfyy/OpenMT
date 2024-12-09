@@ -45,7 +45,7 @@ public class CriminalRecordCommand extends BaseCommand {
             PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
                 if (targetMinetopiaPlayer == null) return;
 
-                targetMinetopiaPlayer.addCriminalRecord(description, target.getUniqueId(), System.currentTimeMillis());
+                targetMinetopiaPlayer.addCriminalRecord(description, player.getUniqueId(), System.currentTimeMillis());
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_added")
                         .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName()))
                         .replace("<description>", description));
