@@ -288,6 +288,10 @@ public class MinetopiaPlayer {
     }
 
     public void setActiveColor(OwnableColor color, OwnableColorType type) {
+        if (color == null || color.getId() == 0) {
+            color = getDefaultColor(type);
+        }
+
         switch (type) {
             case PREFIX:
                 this.activePrefixColor = (PrefixColor) color;

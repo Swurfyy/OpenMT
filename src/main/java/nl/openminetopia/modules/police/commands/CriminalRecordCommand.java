@@ -45,8 +45,9 @@ public class CriminalRecordCommand extends BaseCommand {
             PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
                 if (targetMinetopiaPlayer == null) return;
 
-                targetMinetopiaPlayer.addCriminalRecord(description, player.getUniqueId(), System.currentTimeMillis());
+                targetMinetopiaPlayer.addCriminalRecord(description, target.getUniqueId(), System.currentTimeMillis());
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_added")
+                        .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName()))
                         .replace("<description>", description));
             }, Throwable::printStackTrace);
         }, Throwable::printStackTrace);
@@ -77,6 +78,7 @@ public class CriminalRecordCommand extends BaseCommand {
                     if (criminalRecord.getId() == id) {
                         targetMinetopiaPlayer.removeCriminalRecord(criminalRecord);
                         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_removed")
+                                .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName()))
                                 .replace("<description>", criminalRecord.getDescription())
                                 .replace("<id>", String.valueOf(id)));
                         return;

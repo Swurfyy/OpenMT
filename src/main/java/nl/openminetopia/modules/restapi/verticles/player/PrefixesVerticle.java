@@ -22,8 +22,8 @@ public class PrefixesVerticle extends BaseVerticle {
     @SuppressWarnings("unchecked")
     private void handleGetPrefixes(RoutingContext context) {
         try {
-            UUID playerName = UUID.fromString(context.pathParam("uuid"));
-            OfflinePlayer player = Bukkit.getOfflinePlayer(playerName);
+            UUID playerUuid = UUID.fromString(context.pathParam("uuid"));
+            OfflinePlayer player = Bukkit.getOfflinePlayer(playerUuid);
 
             JSONObject jsonObject = new JSONObject();
 
