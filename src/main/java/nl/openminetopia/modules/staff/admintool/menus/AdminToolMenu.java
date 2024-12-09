@@ -5,6 +5,7 @@ import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
@@ -18,12 +19,14 @@ public class AdminToolMenu extends Menu {
     private final OfflinePlayer offlinePlayer;
     private final Player player;
     private final MinetopiaPlayer minetopiaPlayer;
+    private final BankAccountModel bankAccountModel;
 
-    public AdminToolMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer) {
+    public AdminToolMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer, BankAccountModel bankAccountModel) {
         super(ChatUtils.color("<gold>Beheerscherm <yellow>" + offlinePlayer.getPlayerProfile().getName()), 3);
         this.player = player;
         this.offlinePlayer = offlinePlayer;
         this.minetopiaPlayer = minetopiaPlayer;
+        this.bankAccountModel = bankAccountModel;
 
         ItemBuilder skullBuilder = new ItemBuilder(Material.PLAYER_HEAD)
                 .setName("<gold>Minetopia Informatie")
@@ -34,7 +37,7 @@ public class AdminToolMenu extends Menu {
 
         Icon targetSkullIcon = new Icon(10, skullBuilder.toItemStack(), event -> {
             Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () ->
-                    new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer).open((Player) event.getWhoClicked()));
+                    new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open((Player) event.getWhoClicked()));
         });
         this.addItem(targetSkullIcon);
 

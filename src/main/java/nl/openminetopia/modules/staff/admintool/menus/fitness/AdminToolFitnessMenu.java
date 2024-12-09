@@ -7,6 +7,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.staff.admintool.menus.AdminToolInfoMenu;
 import nl.openminetopia.utils.ChatUtils;
@@ -22,12 +23,14 @@ public class AdminToolFitnessMenu extends Menu {
     private final Player player;
     private final OfflinePlayer offlinePlayer;
     private final MinetopiaPlayer minetopiaPlayer;
+    private final BankAccountModel bankAccountModel;
 
-    public AdminToolFitnessMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer) {
+    public AdminToolFitnessMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer, BankAccountModel bankAccountModel) {
         super(ChatUtils.color("<gold>Fitheid <yellow>" + offlinePlayer.getPlayerProfile().getName()), 3);
         this.player = player;
         this.offlinePlayer = offlinePlayer;
         this.minetopiaPlayer = minetopiaPlayer;
+        this.bankAccountModel = bankAccountModel;
 
         if (minetopiaPlayer == null) return;
 
@@ -160,7 +163,7 @@ public class AdminToolFitnessMenu extends Menu {
 
         Icon targetTotalIcon = new Icon(17, totalItemBuilder.toItemStack(), event -> {
             event.setCancelled(true);
-            new AdminToolFitnessBoostersMenu(player, offlinePlayer).open((Player) event.getWhoClicked());
+            new AdminToolFitnessBoostersMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open((Player) event.getWhoClicked());
         });
         this.addItem(targetTotalIcon);
 
@@ -168,7 +171,7 @@ public class AdminToolFitnessMenu extends Menu {
                 .setName("<gray>Terug");
 
         Icon backIcon = new Icon(22, backItemBuilder.toItemStack(), event -> {
-            new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer).open((Player) event.getWhoClicked());
+            new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open((Player) event.getWhoClicked());
         });
         this.addItem(backIcon);
     }

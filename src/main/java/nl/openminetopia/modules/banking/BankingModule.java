@@ -133,6 +133,28 @@ public class BankingModule extends Module {
         return bankAccountModels.stream().filter(account -> account.getUniqueId().equals(uuid)).findAny().orElse(null);
     }
 
+    public CompletableFuture<BankAccountModel> getAccountByIdAsync(UUID uuid) {
+        CompletableFuture<BankAccountModel> completableFuture = new CompletableFuture<>();
+
+        if (this.getAccountById(uuid) != null) {
+            completableFuture.complete(this.getAccountById(uuid));
+            return completableFuture;
+        }
+
+        StormDatabase.getExecutorService().submit(() -> {
+            try {
+                Collection<BankAccountModel> accountModels = StormDatabase.getInstance().getStorm().buildQuery(BankAccountModel.class)
+                        .where("uuid", Where.EQUAL, uuid.toString())
+                        .execute().join();
+                completableFuture.complete(accountModels.stream().findFirst().orElse(null));
+            } catch (Exception e) {
+                completableFuture.completeExceptionally(e);
+            }
+        });
+
+        return completableFuture;
+    }
+
     public CompletableFuture<Collection<BankAccountModel>> getBankAccounts() {
         CompletableFuture<Collection<BankAccountModel>> completableFuture = new CompletableFuture<>();
 

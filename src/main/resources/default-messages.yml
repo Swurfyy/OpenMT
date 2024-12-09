@@ -1,7 +1,7 @@
 yes: "<green>Ja"
 no: "<red>Nee"
 geen: "Geen."
-go_back: "Ga terug."
+go_back: "Terug"
 next_page: "Volgende Pagina"
 previous_page: "Vorige Pagina" 
 
