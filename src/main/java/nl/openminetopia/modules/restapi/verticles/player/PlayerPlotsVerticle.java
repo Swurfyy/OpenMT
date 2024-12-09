@@ -48,7 +48,7 @@ public class PlayerPlotsVerticle extends BaseVerticle {
 
                         JSONObject flagsObject = new JSONObject();
                         protectedRegion.getFlags().forEach((flag, value) -> {
-                            flagsObject.put(flag.getName(), value);
+                            flagsObject.put(flag.getName(), value.toString());
                         });
                         plotObject.put("flags", flagsObject);
 

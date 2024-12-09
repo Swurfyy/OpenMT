@@ -11,6 +11,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
+import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.entity.Player;
 
@@ -40,12 +41,15 @@ public class PlotDescriptionCommand extends BaseCommand {
             if (description.isBlank() || description.equalsIgnoreCase("remove") ||
                     description.equalsIgnoreCase("delete") || description.equalsIgnoreCase("null")) {
                 region.setFlag(OpenMinetopia.PLOT_DESCRIPTION, null);
-                player.sendMessage(MessageConfiguration.component("plot_description_removed"));
+                ChatUtils.sendMessage(player, MessageConfiguration.message("plot_description_removed")
+                        .replace("<plot_id>", region.getId()));
                 return;
             }
 
             region.setFlag(OpenMinetopia.PLOT_DESCRIPTION, description);
-            player.sendMessage(MessageConfiguration.component("plot_description_updated"));
+            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_description_updated")
+                    .replace("<description>", description)
+                    .replace("<plot_id>", region.getId()));
         }, Throwable::printStackTrace);
     }
 }
