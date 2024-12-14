@@ -17,6 +17,7 @@ public class PlayerVerticle extends BaseVerticle {
     @Override
     public void start(Promise<Void> startPromise) {
         router.get("/api/player/:uuid").handler(this::handleGetPlayer);
+        startPromise.complete();
     }
 
     @SuppressWarnings("unchecked")

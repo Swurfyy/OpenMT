@@ -17,6 +17,7 @@ public class CriminalRecordsVerticle extends BaseVerticle {
     @Override
     public void start(Promise<Void> startPromise) {
         router.get("/api/player/:uuid/criminalrecords").handler(this::handleGetCriminalRecords);
+        startPromise.complete();
     }
 
     @SuppressWarnings("unchecked")

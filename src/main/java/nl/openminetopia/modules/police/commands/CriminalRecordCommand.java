@@ -131,7 +131,9 @@ public class CriminalRecordCommand extends BaseCommand {
         }, Throwable::printStackTrace);
     }
 
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat(MessageConfiguration.message("police_criminal_record_date_format"));
+
     private String formatDate(long date) {
-        return new SimpleDateFormat(MessageConfiguration.message("police_criminal_record_date_format")).format(new Date(date));
+        return dateFormat.format(new Date(date));
     }
 }

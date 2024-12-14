@@ -4,7 +4,6 @@ import io.vertx.core.Promise;
 import io.vertx.ext.web.RoutingContext;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -17,6 +16,7 @@ public class FitnessStatisticsVerticle extends BaseVerticle {
     @Override
     public void start(Promise<Void> startPromise) {
         router.get("/api/player/:uuid/fitness").handler(this::handleGetPrefixes);
+        startPromise.complete();
     }
 
     @SuppressWarnings("unchecked")

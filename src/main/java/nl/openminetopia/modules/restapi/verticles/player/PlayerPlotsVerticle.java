@@ -18,6 +18,7 @@ public class PlayerPlotsVerticle extends BaseVerticle {
     @Override
     public void start(Promise<Void> startPromise) {
         router.get("/api/player/:uuid/plots").handler(this::handleGetPlots);
+        startPromise.complete();
     }
 
     @SuppressWarnings("unchecked")

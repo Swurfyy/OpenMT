@@ -46,6 +46,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
      */
     private final boolean portalEnabled;
     private final String portalUrl;
+    private final String portalToken;
 
     /**
      * Chat configuration
@@ -200,6 +201,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
          */
         this.portalEnabled = rootNode.node("portal", "enabled").getBoolean(false);
         this.portalUrl = rootNode.node("portal", "url").getString("portal.openminetopia.nl");
+        this.portalToken = rootNode.node("portal", "token").getString("CHANGE-ME");
 
         /*
          * Default settings configuration

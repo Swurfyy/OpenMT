@@ -4,8 +4,6 @@ import io.vertx.core.Promise;
 import io.vertx.ext.web.RoutingContext;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.modules.color.enums.OwnableColorType;
-import nl.openminetopia.modules.color.objects.OwnableColor;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
@@ -19,6 +17,7 @@ public class ColorsVerticle extends BaseVerticle {
     @Override
     public void start(Promise<Void> startPromise) {
         router.get("/api/player/:uuid/colors").handler(this::handleGetColors);
+        startPromise.complete();
     }
 
     @SuppressWarnings("unchecked")

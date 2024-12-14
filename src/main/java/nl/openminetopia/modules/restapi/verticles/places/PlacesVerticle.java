@@ -16,6 +16,7 @@ public class PlacesVerticle extends BaseVerticle {
     public void start(Promise<Void> startPromise) {
         router.get("/api/places/worlds").handler(this::handleGetWorlds);
         router.get("/api/places/cities").handler(this::handleGetCities);
+        startPromise.complete();
     }
 
     @SuppressWarnings("unchecked")

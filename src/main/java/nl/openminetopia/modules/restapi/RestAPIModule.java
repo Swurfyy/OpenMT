@@ -8,6 +8,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.restapi.base.VerticleManager;
 import nl.openminetopia.modules.restapi.verticles.MainVerticle;
+import nl.openminetopia.modules.restapi.verticles.banking.BankAccountTransactionVerticle;
 import nl.openminetopia.modules.restapi.verticles.banking.BankAccountUsersVerticle;
 import nl.openminetopia.modules.restapi.verticles.banking.BankAccountVerticle;
 import nl.openminetopia.modules.restapi.verticles.banking.BankAccountsVerticle;
@@ -37,6 +38,7 @@ public class RestAPIModule extends Module {
 
             verticleManager = new VerticleManager(vertx, context, router);
             verticleManager.register(
+                    /* GET */
                     new MainVerticle(),
                     new PlayerVerticle(),
                     new PrefixesVerticle(),
@@ -49,7 +51,10 @@ public class RestAPIModule extends Module {
                     new CriminalRecordsVerticle(),
                     new PlayerPlotsVerticle(),
                     new PlotsVerticle(),
-                    new PlacesVerticle()
+                    new PlacesVerticle(),
+
+                    /* POST */
+                    new BankAccountTransactionVerticle()
             );
         }
     }

@@ -31,7 +31,7 @@ public class LinkCommand extends BaseCommand {
         try (AsyncHttpClient client = new DefaultAsyncHttpClient()) {
             client.preparePost(portalModule.getPortalApiUrl() + "/minecraft/verify")
                     .setHeader("Content-Type", "application/json")
-                    .setHeader("X-API-Key", OpenMinetopia.getDefaultConfiguration().getRestApiKey())
+                    .setHeader("X-API-Key", OpenMinetopia.getDefaultConfiguration().getPortalToken())
                     .setBody(requestBody.toString())
                     .execute()
                     .toCompletableFuture()

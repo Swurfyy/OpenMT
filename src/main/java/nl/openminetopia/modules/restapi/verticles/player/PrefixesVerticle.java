@@ -17,6 +17,7 @@ public class PrefixesVerticle extends BaseVerticle {
     @Override
     public void start(Promise<Void> startPromise) {
         router.get("/api/player/:uuid/prefixes").handler(this::handleGetPrefixes);
+        startPromise.complete();
     }
 
     @SuppressWarnings("unchecked")

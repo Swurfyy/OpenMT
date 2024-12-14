@@ -36,7 +36,6 @@ public class ColorSelectMenu extends PaginatedMenu {
                 .filter(color -> color.getClass().equals(type.correspondingClass()))
                 .toList();
 
-
         ItemBuilder defaultIcon = new ItemBuilder(Material.IRON_INGOT)
                 .addLoreLine("")
                 .addLoreLine("<gold>Deze kleur vervalt <yellow>nooit<gold>.")

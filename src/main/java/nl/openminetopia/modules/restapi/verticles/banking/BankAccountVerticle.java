@@ -14,6 +14,7 @@ public class BankAccountVerticle extends BaseVerticle {
     @Override
     public void start(Promise<Void> startPromise) {
         router.get("/api/bankaccount/:uuid").handler(this::handleGetBankAccount);
+        startPromise.complete();
     }
 
     @SuppressWarnings("unchecked")

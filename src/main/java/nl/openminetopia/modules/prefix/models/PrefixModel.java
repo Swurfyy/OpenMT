@@ -24,4 +24,8 @@ public class PrefixModel extends StormModel {
 
     @Column(name = "expires_at")
     private Long expiresAt;
+
+    public boolean isExpired() {
+        return expiresAt != -1 && System.currentTimeMillis() >= expiresAt;
+    }
 }

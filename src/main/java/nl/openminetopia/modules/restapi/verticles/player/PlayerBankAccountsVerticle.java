@@ -4,7 +4,6 @@ import io.vertx.core.Promise;
 import io.vertx.ext.web.RoutingContext;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.banking.BankingModule;
-import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -17,6 +16,7 @@ public class PlayerBankAccountsVerticle extends BaseVerticle {
     @Override
     public void start(Promise<Void> startPromise) {
         router.get("/api/player/:uuid/bankaccounts").handler(this::handleGetBankAccounts);
+        startPromise.complete();
     }
 
     @SuppressWarnings("unchecked")

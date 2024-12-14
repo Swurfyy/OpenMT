@@ -58,33 +58,35 @@ public class PlayerChatListener implements Listener {
 
             SpyUtils.chatSpy(source, originalMessage, recipients);
 
-            // Iterate over recipients
-            recipients.forEach(player -> {
-                // Replace <message> placeholder with original message
-                String finalMessage = formattedMessage.replace("<message>", originalMessage);
+            // Replace <message> placeholder with original message
+            String finalMessage = formattedMessage.replace("<message>", originalMessage);
 
-                if (BalaclavaUtils.isBalaclavaItem(source.getInventory().getHelmet())) {
-                    finalMessage = finalMessage.replace("<level>", configuration.getDefaultLevel() + "")
-                            .replace("<prefix>", configuration.getDefaultPrefix())
-                            .replace("<name_color>", configuration.getDefaultNameColor())
-                            .replace("<level_color>", configuration.getDefaultLevelColor())
-                            .replace("<prefix_color>", configuration.getDefaultPrefixColor())
-                            .replace("<chat_color>", configuration.getDefaultChatColor());
-                }
+            // Check if the player is wearing a balaclava and replace placeholders with default values
+            if (BalaclavaUtils.isBalaclavaItem(source.getInventory().getHelmet())) {
+                finalMessage = finalMessage
+                        .replace("<level>", configuration.getDefaultLevel() + "")
+                        .replace("<prefix>", configuration.getDefaultPrefix())
+                        .replace("<name_color>", configuration.getDefaultNameColor())
+                        .replace("<level_color>", configuration.getDefaultLevelColor())
+                        .replace("<prefix_color>", configuration.getDefaultPrefixColor())
+                        .replace("<chat_color>", configuration.getDefaultChatColor());
+            }
 
-                // Check if the player's name is in the original message and highlight it
-                if (originalMessage.contains(player.getName())) {
-                    String highlightedMessage = originalMessage.replace(player.getName(), "<green>" + player.getName() + "<white>");
+            Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage)); // Log the message without potential scrambled name
+
+            for (Player target : recipients) {
+                // Check if the target's name is in the original message and highlight it
+                if (originalMessage.contains(target.getName())) {
+                    String highlightedMessage = originalMessage.replace(target.getName(), "<green>" + target.getName() + "<white>");
                     finalMessage = formattedMessage.replace("<message>", highlightedMessage);
 
-                    // Play sound for the mentioned player
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                    // Play sound for the mentioned target
+                    target.playSound(target.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                 }
 
-                // Send the formatted message to the player
-                player.sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage));
-                Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage)); // Log the message without potential scrambled name
-            });
+                // Send the formatted message to the target
+                target.sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage));
+            }
         }, Throwable::printStackTrace);
     }
 }
