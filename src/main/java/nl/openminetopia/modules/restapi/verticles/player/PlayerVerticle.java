@@ -57,6 +57,7 @@ public class PlayerVerticle extends BaseVerticle {
                     jsonObject.put("active_level_color", minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).displayName());
                     jsonObject.put("active_chat_color", minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).displayName());
                     jsonObject.put("playtimeSeconds", minetopiaPlayer.getPlaytime());
+                    jsonObject.put("online", player.isOnline());
                 }
                 context.response().end(jsonObject.toJSONString());
             }).join();
