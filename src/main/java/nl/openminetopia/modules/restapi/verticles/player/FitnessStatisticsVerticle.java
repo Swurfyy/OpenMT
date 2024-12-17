@@ -27,8 +27,9 @@ public class FitnessStatisticsVerticle extends BaseVerticle {
 
             JSONObject jsonObject = new JSONObject();
 
-            if (!player.hasPlayedBefore()) {
+            if (!player.isOnline() && !player.hasPlayedBefore()) {
                 jsonObject.put("success", false);
+                jsonObject.put("error", "Player has not played before.");
                 context.response().end(jsonObject.toJSONString());
                 return;
             }
@@ -37,10 +38,12 @@ public class FitnessStatisticsVerticle extends BaseVerticle {
                 if (throwable != null) {
                     throwable.printStackTrace();
                     jsonObject.put("success", false);
+                    jsonObject.put("error", throwable.getMessage());
                 }
 
                 if (minetopiaPlayer == null) {
                     jsonObject.put("success", false);
+                    jsonObject.put("error", "MinetopiaPlayer has not loaded.");
                 } else {
                     jsonObject.put("success", true);
 
@@ -67,6 +70,7 @@ public class FitnessStatisticsVerticle extends BaseVerticle {
         } catch (Exception e) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("success", false);
+            jsonObject.put("error", e.getMessage());
             context.response().end(jsonObject.toJSONString());
             OpenMinetopia.getInstance().getLogger().severe("An error occurred while handling a request: " + e.getMessage());
         }

@@ -29,8 +29,9 @@ public class PlayerPlotsVerticle extends BaseVerticle {
 
             JSONObject jsonObject = new JSONObject();
 
-            if (!player.hasPlayedBefore()) {
+            if (!player.isOnline() && !player.hasPlayedBefore()) {
                 jsonObject.put("success", false);
+                jsonObject.put("error", "Player has not played before.");
                 context.response().end(jsonObject.toJSONString());
                 return;
             }
@@ -91,6 +92,7 @@ public class PlayerPlotsVerticle extends BaseVerticle {
         } catch (Exception e) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("success", false);
+            jsonObject.put("error", e.getMessage());
             context.response().end(jsonObject.toJSONString());
             OpenMinetopia.getInstance().getLogger().severe("An error occurred while handling a request: " + e.getMessage());
         }

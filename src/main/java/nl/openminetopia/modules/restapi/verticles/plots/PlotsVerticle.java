@@ -144,6 +144,7 @@ public class PlotsVerticle extends BaseVerticle {
         } catch (Exception e) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("success", false);
+            jsonObject.put("error", e.getMessage());
             context.response().end(jsonObject.toJSONString());
             OpenMinetopia.getInstance().getLogger().severe("An error occurred while handling a request: " + e.getMessage());
         }
