@@ -29,7 +29,7 @@ public class RestAPIModule extends Module {
     @Override
     public void enable() {
         if (OpenMinetopia.getDefaultConfiguration().isRestApiEnabled()) {
-            Vertx vertx = Vertx.vertx();
+            Vertx vertx = OpenMinetopia.getInstance().getOrCreateVertx();
 
             Context context = vertx.getOrCreateContext();
 

@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 
 import java.util.UUID;
 
+@SuppressWarnings("unchecked")
 public class BankAccountTransactionVerticle extends BaseVerticle {
 
     @Override
@@ -19,29 +20,25 @@ public class BankAccountTransactionVerticle extends BaseVerticle {
         startPromise.complete();
     }
 
-    @SuppressWarnings("unchecked")
     private void handleWithdraw(RoutingContext context) {
+        processTransaction(context, TransactionType.WITHDRAW);
+    }
+
+    private void handleDeposit(RoutingContext context) {
+        processTransaction(context, TransactionType.DEPOSIT);
+    }
+
+    private void processTransaction(RoutingContext context, TransactionType type) {
         JSONObject responseJson = new JSONObject();
 
-        UUID accountUuid;
-        try {
-            accountUuid = UUID.fromString(context.pathParam("uuid"));
-        } catch (IllegalArgumentException e) {
-            responseJson.put("success", false);
-            responseJson.put("error", "Invalid UUID format.");
+        UUID accountUuid = parseUuid(context, responseJson);
+        if (accountUuid == null) {
             context.response().setStatusCode(400).end(responseJson.toJSONString());
             return;
         }
 
-        double amount;
-        try {
-            amount = Double.parseDouble(context.body().asJsonObject().getString("amount"));
-            if (amount <= 0) {
-                throw new IllegalArgumentException("Amount must be positive.");
-            }
-        } catch (Exception e) {
-            responseJson.put("success", false);
-            responseJson.put("error", "Invalid amount.");
+        Double amount = parseAmount(context, responseJson);
+        if (amount == null) {
             context.response().setStatusCode(400).end(responseJson.toJSONString());
             return;
         }
@@ -50,86 +47,64 @@ public class BankAccountTransactionVerticle extends BaseVerticle {
 
         bankingModule.getAccountByIdAsync(accountUuid).whenComplete((account, throwable) -> {
             if (throwable != null) {
-                throwable.printStackTrace();
-                responseJson.put("success", false);
-                responseJson.put("error", "Internal server error.");
-                context.response().setStatusCode(500).end(responseJson.toJSONString());
+                handleError(context, responseJson, "Internal server error.", 500);
                 return;
             }
 
             if (account == null) {
-                responseJson.put("success", false);
-                responseJson.put("error", "Account not found.");
-                context.response().setStatusCode(404).end(responseJson.toJSONString());
+                handleError(context, responseJson, "Account not found.", 404);
                 return;
             }
 
-            double currentBalance = account.getBalance();
-            if (currentBalance < amount) {
-                responseJson.put("success", false);
-                responseJson.put("error", "Insufficient balance.");
-                context.response().setStatusCode(400).end(responseJson.toJSONString());
-            } else {
-                account.setBalance(currentBalance - amount);
-                responseJson.put("success", true);
-                responseJson.put("newBalance", account.getBalance());
-                StormDatabase.getInstance().saveStormModel(account);
-                context.response().setStatusCode(200).end(responseJson.toJSONString());
+            if (type == TransactionType.WITHDRAW && account.getBalance() < amount) {
+                handleError(context, responseJson, "Insufficient balance.", 400);
+                return;
             }
+
+            double updatedBalance = (type == TransactionType.WITHDRAW)
+                    ? account.getBalance() - amount
+                    : account.getBalance() + amount;
+
+            account.setBalance(updatedBalance);
+            StormDatabase.getInstance().saveStormModel(account);
+
+            responseJson.put("success", true);
+            responseJson.put("newBalance", updatedBalance);
+            context.response().setStatusCode(200).end(responseJson.toJSONString());
         });
     }
 
-    @SuppressWarnings("unchecked")
-    private void handleDeposit(RoutingContext context) {
-        JSONObject responseJson = new JSONObject();
-
-        UUID accountUuid;
+    private UUID parseUuid(RoutingContext context, JSONObject responseJson) {
         try {
-            accountUuid = UUID.fromString(context.pathParam("uuid"));
+            return UUID.fromString(context.pathParam("uuid"));
         } catch (IllegalArgumentException e) {
             responseJson.put("success", false);
             responseJson.put("error", "Invalid UUID format.");
-            context.response().setStatusCode(400).end(responseJson.toJSONString());
-            return;
+            return null;
         }
+    }
 
-        double amount;
+    private Double parseAmount(RoutingContext context, JSONObject responseJson) {
         try {
-            amount = Double.parseDouble(context.body().asJsonObject().getString("amount"));
+            double amount = Double.parseDouble(context.body().asJsonObject().getString("amount"));
             if (amount <= 0) {
                 throw new IllegalArgumentException("Amount must be positive.");
             }
+            return amount;
         } catch (Exception e) {
             responseJson.put("success", false);
             responseJson.put("error", "Invalid amount.");
-            context.response().setStatusCode(400).end(responseJson.toJSONString());
-            return;
+            return null;
         }
+    }
 
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
+    private void handleError(RoutingContext context, JSONObject responseJson, String errorMessage, int statusCode) {
+        responseJson.put("success", false);
+        responseJson.put("error", errorMessage);
+        context.response().setStatusCode(statusCode).end(responseJson.toJSONString());
+    }
 
-        bankingModule.getAccountByIdAsync(accountUuid).whenComplete((account, throwable) -> {
-            if (throwable != null) {
-                throwable.printStackTrace();
-                responseJson.put("success", false);
-                responseJson.put("error", "Internal server error.");
-                context.response().setStatusCode(500).end(responseJson.toJSONString());
-                return;
-            }
-
-            if (account == null) {
-                responseJson.put("success", false);
-                responseJson.put("error", "Account not found.");
-                context.response().setStatusCode(404).end(responseJson.toJSONString());
-                return;
-            }
-
-            double currentBalance = account.getBalance();
-            account.setBalance(currentBalance + amount); // Add the amount to the account balance
-            responseJson.put("success", true);
-            responseJson.put("newBalance", account.getBalance());
-            StormDatabase.getInstance().saveStormModel(account); // Save the updated account
-            context.response().setStatusCode(200).end(responseJson.toJSONString());
-        });
+    private enum TransactionType {
+        WITHDRAW, DEPOSIT
     }
 }

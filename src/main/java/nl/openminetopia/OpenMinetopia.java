@@ -10,6 +10,7 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.StringFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
+import io.vertx.core.Vertx;
 import lombok.Getter;
 import lombok.Setter;
 import nl.openminetopia.configuration.BankingConfiguration;
@@ -80,6 +81,8 @@ public final class OpenMinetopia extends JavaPlugin {
     @Getter
     @Setter
     private static FitnessConfiguration fitnessConfiguration;
+
+    private Vertx vertx;
 
     @Override
     public void onEnable() {
@@ -157,6 +160,13 @@ public final class OpenMinetopia extends JavaPlugin {
     @Override
     public void onLoad() {
         loadFlags();
+    }
+
+    public Vertx getOrCreateVertx() {
+        if (vertx == null) {
+            vertx = Vertx.vertx();
+        }
+        return vertx;
     }
 
     public static StateFlag PLOT_FLAG = new StateFlag("openmt-plot", true);

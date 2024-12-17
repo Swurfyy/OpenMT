@@ -46,6 +46,7 @@ public class FitnessStatisticsVerticle extends BaseVerticle {
 
                     JSONObject statisticsObject = new JSONObject();
 
+                    minetopiaPlayer.getFitness().getRunnable().forceRun();
                     minetopiaPlayer.getFitness().getStatistics().forEach(statistic -> {
                         JSONObject statisticObject = new JSONObject();
                         statisticObject.put("gained", statistic.getFitnessGained());

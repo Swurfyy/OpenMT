@@ -207,12 +207,12 @@ public class DefaultConfiguration extends ConfigurateConfig {
          * Default settings configuration
          */
         this.defaultPrefix = rootNode.node("default", "prefix").getString("Zwerver");
-        this.defaultPrefixColor = rootNode.node("default", "prefixColor").getString("<gray>");
+        this.defaultPrefixColor = rootNode.node("default", "prefix-color").getString("<gray>");
         this.defaultLevel = rootNode.node("default", "level").getInt(1);
-        this.defaultLevelColor = rootNode.node("default", "levelColor").getString("<gray>");
+        this.defaultLevelColor = rootNode.node("default", "level-color").getString("<gray>");
 
-        this.defaultNameColor = rootNode.node("default", "nameColor").getString("<white>");
-        this.defaultChatColor = rootNode.node("default", "chatColor").getString("<white>");
+        this.defaultNameColor = rootNode.node("default", "name-color").getString("<white>");
+        this.defaultChatColor = rootNode.node("default", "chat-color").getString("<white>");
 
         /*
          * Chat configuration

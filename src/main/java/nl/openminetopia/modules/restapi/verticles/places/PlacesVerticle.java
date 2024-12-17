@@ -6,10 +6,12 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.Optional;
 
+@SuppressWarnings("unchecked")
 public class PlacesVerticle extends BaseVerticle {
 
     @Override
@@ -19,17 +21,12 @@ public class PlacesVerticle extends BaseVerticle {
         startPromise.complete();
     }
 
-    @SuppressWarnings("unchecked")
     private void handleGetWorlds(RoutingContext context) {
+        JSONObject responseJson = new JSONObject();
         try {
-            JSONObject jsonObject = new JSONObject();
-
-            jsonObject.put("success", true);
-
-            JSONObject worldsObject = new JSONObject();
-
             PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
 
+            JSONArray worldsArray = new JSONArray();
             placesModule.getWorldModels().forEach(worldModel -> {
                 JSONObject worldObject = new JSONObject();
                 worldObject.put("name", worldModel.getName());
@@ -37,32 +34,23 @@ public class PlacesVerticle extends BaseVerticle {
                 worldObject.put("title", worldModel.getTitle());
                 worldObject.put("loading_name", worldModel.getLoadingName());
                 worldObject.put("temperature", worldModel.getTemperature());
-
-                worldsObject.put(worldModel.getId(), worldObject);
+                worldsArray.add(worldObject);
             });
 
-            jsonObject.put("worlds", worldsObject);
-            context.response().end(jsonObject.toJSONString());
-
+            responseJson.put("success", true);
+            responseJson.put("worlds", worldsArray);
+            context.response().setStatusCode(200).end(responseJson.toJSONString());
         } catch (Exception e) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("success", false);
-            context.response().end(jsonObject.toJSONString());
-            OpenMinetopia.getInstance().getLogger().severe("An error occurred while handling a request: " + e.getMessage());
+            handleError(context, responseJson, "Failed to retrieve worlds.", 500, e);
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void handleGetCities(RoutingContext context) {
+        JSONObject responseJson = new JSONObject();
         try {
-            JSONObject jsonObject = new JSONObject();
-
-            jsonObject.put("success", true);
-
-            JSONObject citiesObject = new JSONObject();
-
             PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
 
+            JSONArray citiesArray = new JSONArray();
             placesModule.getCityModels().forEach(cityModel -> {
                 JSONObject cityObject = new JSONObject();
                 cityObject.put("name", cityModel.getName());
@@ -75,19 +63,23 @@ public class PlacesVerticle extends BaseVerticle {
                         .filter(world -> world.getId().equals(cityModel.getWorldId()))
                         .findFirst();
 
-                cityObject.put("world", worldModel.isPresent() ? worldModel.get().getName() : "Unknown");
+                cityObject.put("world", worldModel.map(WorldModel::getName).orElse("Unknown"));
 
-                citiesObject.put(cityModel.getId(), cityObject);
+                citiesArray.add(cityObject);
             });
 
-            jsonObject.put("cities", citiesObject);
-            context.response().end(jsonObject.toJSONString());
-
+            responseJson.put("success", true);
+            responseJson.put("cities", citiesArray);
+            context.response().setStatusCode(200).end(responseJson.toJSONString());
         } catch (Exception e) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("success", false);
-            context.response().end(jsonObject.toJSONString());
-            OpenMinetopia.getInstance().getLogger().severe("An error occurred while handling a request: " + e.getMessage());
+            handleError(context, responseJson, "Failed to retrieve cities.", 500, e);
         }
+    }
+
+    private void handleError(RoutingContext context, JSONObject responseJson, String errorMessage, int statusCode, Exception e) {
+        responseJson.put("success", false);
+        responseJson.put("error", errorMessage);
+        context.response().setStatusCode(statusCode).end(responseJson.toJSONString());
+        OpenMinetopia.getInstance().getLogger().severe("Error: " + errorMessage + " - " + e.getMessage());
     }
 }

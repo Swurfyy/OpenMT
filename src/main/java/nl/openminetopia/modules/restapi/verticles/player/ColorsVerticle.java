@@ -46,7 +46,6 @@ public class ColorsVerticle extends BaseVerticle {
                     jsonObject.put("success", true);
                     JSONObject colorsObject = new JSONObject();
 
-
                     minetopiaPlayer.getColors().forEach(color -> {
                         JSONObject colorObject = new JSONObject();
                         colorObject.put("display_name", color.displayName());

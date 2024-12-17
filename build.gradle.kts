@@ -86,10 +86,9 @@ dependencies {
     }
 
     /* Rest API & Portal dependencies */
-    compileOnly("org.asynchttpclient:async-http-client:3.0.1")
     compileOnly("io.vertx:vertx-core:4.5.11")
     compileOnly("io.vertx:vertx-web:4.5.11")
-
+    compileOnly("io.vertx:vertx-web-client:4.5.11")
 }
 
 val targetJavaVersion = 21
