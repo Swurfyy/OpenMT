@@ -97,9 +97,17 @@ public class ColorModule extends Module {
     }
 
     public Optional<OwnableColor> getActiveColorFromPlayer(PlayerModel playerModel, OwnableColorType type) {
-        return this.getColorsFromPlayer(playerModel).stream()
-                .filter(color -> color.getType() == type)
-                .findFirst();
+        int activeId = switch (type) {
+            case PREFIX -> playerModel.getActivePrefixColorId();
+            case CHAT -> playerModel.getActiveChatColorId();
+            case NAME -> playerModel.getActiveNameColorId();
+            case LEVEL -> playerModel.getActiveLevelColorId();
+        };
+
+        return getColorsFromPlayer(playerModel).stream()
+                .filter(color -> color.getType() == type && color.getId() == activeId)
+                .findFirst()
+                .or(() -> Optional.of(type.defaultColor()));
     }
 
     public CompletableFuture<Integer> addColor(MinetopiaPlayer player, OwnableColor color) {

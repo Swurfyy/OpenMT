@@ -10,6 +10,7 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.StringFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
+import io.vertx.core.Vertx;
 import lombok.Getter;
 import lombok.Setter;
 import nl.openminetopia.configuration.BankingConfiguration;
@@ -31,7 +32,9 @@ import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.modules.police.PoliceModule;
+import nl.openminetopia.modules.portal.PortalModule;
 import nl.openminetopia.modules.prefix.PrefixModule;
+import nl.openminetopia.modules.restapi.RestAPIModule;
 import nl.openminetopia.modules.scoreboard.ScoreboardModule;
 import nl.openminetopia.modules.staff.StaffModule;
 import nl.openminetopia.modules.teleporter.TeleporterModule;
@@ -78,6 +81,8 @@ public final class OpenMinetopia extends JavaPlugin {
     @Getter
     @Setter
     private static FitnessConfiguration fitnessConfiguration;
+
+    private Vertx vertx;
 
     @Override
     public void onEnable() {
@@ -128,7 +133,9 @@ public final class OpenMinetopia extends JavaPlugin {
                 new DetectionModule(),
                 new TeleporterModule(),
                 new PoliceModule(),
-                new MiscModule()
+                new MiscModule(),
+                new RestAPIModule(),
+                new PortalModule()
         );
 
         commandManager.enableUnstableAPI("help");
@@ -153,6 +160,13 @@ public final class OpenMinetopia extends JavaPlugin {
     @Override
     public void onLoad() {
         loadFlags();
+    }
+
+    public Vertx getOrCreateVertx() {
+        if (vertx == null) {
+            vertx = Vertx.vertx();
+        }
+        return vertx;
     }
 
     public static StateFlag PLOT_FLAG = new StateFlag("openmt-plot", true);

@@ -75,8 +75,8 @@ public class PrefixModule extends Module {
     }
 
     public Optional<Prefix> getActivePrefixFromPlayer(PlayerModel playerModel) {
-        return playerModel.getPrefixes().stream().filter(prefixModel -> prefixModel.getExpiresAt() == null
-                || prefixModel.getExpiresAt() > System.currentTimeMillis()
+        return playerModel.getPrefixes().stream().filter(prefixModel ->
+                prefixModel.getId().equals(playerModel.getActivePrefixId()) && !prefixModel.isExpired()
         ).map(prefixModel -> new Prefix(prefixModel.getId(), prefixModel.getPrefix(), prefixModel.getExpiresAt())
         ).findFirst();
     }

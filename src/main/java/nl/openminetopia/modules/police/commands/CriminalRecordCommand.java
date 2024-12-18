@@ -47,6 +47,7 @@ public class CriminalRecordCommand extends BaseCommand {
 
                 targetMinetopiaPlayer.addCriminalRecord(description, player.getUniqueId(), System.currentTimeMillis());
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_added")
+                        .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName()))
                         .replace("<description>", description));
             }, Throwable::printStackTrace);
         }, Throwable::printStackTrace);
@@ -77,6 +78,7 @@ public class CriminalRecordCommand extends BaseCommand {
                     if (criminalRecord.getId() == id) {
                         targetMinetopiaPlayer.removeCriminalRecord(criminalRecord);
                         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_removed")
+                                .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName()))
                                 .replace("<description>", criminalRecord.getDescription())
                                 .replace("<id>", String.valueOf(id)));
                         return;
@@ -129,7 +131,9 @@ public class CriminalRecordCommand extends BaseCommand {
         }, Throwable::printStackTrace);
     }
 
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat(MessageConfiguration.message("police_criminal_record_date_format"));
+
     private String formatDate(long date) {
-        return new SimpleDateFormat(MessageConfiguration.message("police_criminal_record_date_format")).format(new Date(date));
+        return dateFormat.format(new Date(date));
     }
 }

@@ -59,7 +59,7 @@ dependencies {
     implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
 
     /* Scoreboard */
-    val scoreboardLibraryVersion = "2.2.1"
+    val scoreboardLibraryVersion = "2.2.2"
     implementation("net.megavex:scoreboard-library-api:$scoreboardLibraryVersion")
     runtimeOnly("net.megavex:scoreboard-library-implementation:$scoreboardLibraryVersion")
     runtimeOnly("net.megavex:scoreboard-library-modern:$scoreboardLibraryVersion:mojmap")
@@ -84,6 +84,11 @@ dependencies {
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1") {
         exclude(group = "org.bukkit", module = "bukkit")
     }
+
+    /* Rest API & Portal dependencies */
+    compileOnly("io.vertx:vertx-core:4.5.11")
+    compileOnly("io.vertx:vertx-web:4.5.11")
+    compileOnly("io.vertx:vertx-web-client:4.5.11")
 }
 
 val targetJavaVersion = 21

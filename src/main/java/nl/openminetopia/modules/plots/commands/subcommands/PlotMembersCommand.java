@@ -26,36 +26,38 @@ public class PlotMembersCommand extends BaseCommand {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
 
         if (offlinePlayer == null) {
-            player.sendMessage(MessageConfiguration.component("player_not_found"));
+            ChatUtils.sendMessage(player, MessageConfiguration.message("player_not_found")
+                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
             return;
         }
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
-            if (minetopiaPlayer == null) return;
+        if (region == null) {
+            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_invalid_location")
+                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
+            return;
+        }
 
-            if (region == null) {
-                player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
-                return;
-            }
+        if (region.getFlag(OpenMinetopia.PLOT_FLAG) == null) {
+            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_not_valid")
+                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
+            return;
+        }
 
-            if (region.getFlag(OpenMinetopia.PLOT_FLAG) == null) {
-                player.sendMessage(MessageConfiguration.component("plot_not_valid"));
-                return;
-            }
+        if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("openminetopia.plot.removemember")) {
+            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_not_owner")
+                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
+            return;
+        }
 
-            if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("openminetopia.plot.removemember")) {
-                player.sendMessage(MessageConfiguration.component("plot_not_owner"));
-                return;
-            }
+        if (region.getMembers().contains(offlinePlayer.getUniqueId()) || region.getOwners().contains(offlinePlayer.getUniqueId())) {
+            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_member_already")
+                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
+            return;
+        }
 
-            if (region.getMembers().contains(offlinePlayer.getUniqueId())) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_member_already"));
-                return;
-            }
-
-            region.getMembers().addPlayer(offlinePlayer.getUniqueId());
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_member_added"));
-        }, Throwable::printStackTrace);
+        region.getMembers().addPlayer(offlinePlayer.getUniqueId());
+        ChatUtils.sendMessage(player, MessageConfiguration.message("plot_member_added")
+                .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
     }
 
     @Subcommand("removemember")
@@ -65,31 +67,32 @@ public class PlotMembersCommand extends BaseCommand {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
         PlayerProfile profile = offlinePlayer.getPlayerProfile();
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
-            if (minetopiaPlayer == null) return;
+        if (region == null) {
+            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_invalid_location")
+                    .replace("<player>", profile.getName() != null ? profile.getName() : "Onbekend"));
+            return;
+        }
 
-            if (region == null) {
-                player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
-                return;
-            }
+        if (region.getFlag(OpenMinetopia.PLOT_FLAG) == null) {
+            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_not_valid")
+                    .replace("<player>", profile.getName() != null ? profile.getName() : "Onbekend"));
+            return;
+        }
 
-            if (region.getFlag(OpenMinetopia.PLOT_FLAG) == null) {
-                player.sendMessage(MessageConfiguration.component("plot_not_valid"));
-                return;
-            }
+        if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("openminetopia.plot.removemember")) {
+            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_not_owner")
+                    .replace("<player>", profile.getName() != null ? profile.getName() : "Onbekend"));
+            return;
+        }
 
-            if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("openminetopia.plot.removemember")) {
-                player.sendMessage(MessageConfiguration.component("plot_not_owner"));
-                return;
-            }
+        if (!region.getMembers().contains(profile.getId())) {
+            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_member_not_added")
+                    .replace("<player>", profile.getName() != null ? profile.getName() : "Onbekend"));
+            return;
+        }
 
-            if (!region.getMembers().contains(profile.getId())) {
-                player.sendMessage(MessageConfiguration.component("plot_member_not_added"));
-                return;
-            }
-
-            region.getMembers().removePlayer(profile.getId());
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Je hebt <aqua>" + profile.getName() + " <dark_aqua>verwijderd van dit plot."));
-        }, Throwable::printStackTrace);
+        region.getMembers().removePlayer(profile.getId());
+        ChatUtils.sendMessage(player, MessageConfiguration.message("plot_member_removed")
+                .replace("<player>", profile.getName() != null ? profile.getName() : "Onbekend"));
     }
 }

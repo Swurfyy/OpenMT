@@ -27,12 +27,14 @@ public class AdminToolInfoMenu extends Menu {
     private final Player player;
     private final OfflinePlayer offlinePlayer;
     private final MinetopiaPlayer minetopiaPlayer;
+    private final BankAccountModel bankAccountModel;
 
-    public AdminToolInfoMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer) {
+    public AdminToolInfoMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer, BankAccountModel bankAccountModel) {
         super(ChatUtils.color("<gold>Beheerscherm <yellow>" + offlinePlayer.getPlayerProfile().getName()), 3);
         this.player = player;
         this.offlinePlayer = offlinePlayer;
         this.minetopiaPlayer = minetopiaPlayer;
+        this.bankAccountModel = bankAccountModel;
 
         if (minetopiaPlayer == null) {
             player.sendMessage(ChatUtils.color("<red>Er is een fout opgetreden bij het ophalen van de spelergegevens."));
@@ -92,7 +94,7 @@ public class AdminToolInfoMenu extends Menu {
         Icon targetLevelIcon = new Icon(13, levelItemBuilder.toItemStack(), event -> {
             minetopiaPlayer.setLevel(event.isRightClick() ? minetopiaPlayer.getLevel() + 1 : minetopiaPlayer.getLevel() - 1);
             player.sendMessage(ChatUtils.color("<gold>Je hebt het level van <yellow>" + offlinePlayer.getName() + " <gold>aangepast naar <yellow>" + minetopiaPlayer.getLevel() + "<gold>."));
-            new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer).open(player);
+            new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open(player);
         });
         this.addItem(targetLevelIcon);
 
@@ -108,27 +110,24 @@ public class AdminToolInfoMenu extends Menu {
 
 
         Icon targetFitnessIcon = new Icon(14, fitnessItemBuilder.toItemStack(), event -> {
-            new AdminToolFitnessMenu(player, offlinePlayer, minetopiaPlayer).open(player);
+            new AdminToolFitnessMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open(player);
         });
         this.addItem(targetFitnessIcon);
 
         /* -------- Banking -------- */
 
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
-        BankAccountModel accountModel = bankingModule.getAccountsFromPlayer(offlinePlayer.getUniqueId())
-                .stream().filter(account -> account.getType() == AccountType.PRIVATE)
-                .findFirst().orElse(null);
 
         ItemBuilder bankItemBuilder;
         Icon targetBankIcon;
-        if (accountModel != null) {
+        if (bankAccountModel != null) {
             bankItemBuilder = new ItemBuilder(Material.GOLD_INGOT)
                     .setName("<gold>Banksaldo")
-                    .addLoreLine("<gold>Banksaldo: " + bankingModule.format(accountModel.getBalance()))
+                    .addLoreLine("<gold>Banksaldo: " + bankingModule.format(bankAccountModel.getBalance()))
                     .addLoreLine("")
                     .addLoreLine("<gold>Klik <yellow>hier <gold>om de <yellow>bank <gold>van de speler te openen.");
             targetBankIcon = new Icon(15, bankItemBuilder.toItemStack(), event -> {
-                new BankContentsMenu(player, accountModel, true).open(player);
+                new BankContentsMenu(player, bankAccountModel, true).open(player);
             });
         } else {
             bankItemBuilder = new ItemBuilder(Material.BARRIER)
@@ -148,7 +147,7 @@ public class AdminToolInfoMenu extends Menu {
                 .setName("<gray>Terug");
 
         Icon backIcon = new Icon(22, backItemBuilder.toItemStack(), event -> {
-            new AdminToolMenu(player, offlinePlayer, minetopiaPlayer).open(player);
+            new AdminToolMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open(player);
         });
         this.addItem(backIcon);
     }

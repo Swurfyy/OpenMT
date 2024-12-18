@@ -100,16 +100,16 @@ public class MinetopiaPlayer {
 
         this.colors = colorModule.getColorsFromPlayer(this.playerModel);
         this.activeChatColor = (ChatColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.CHAT)
-                .orElse(this.getDefaultColor(OwnableColorType.CHAT));
+                .orElse(OwnableColorType.CHAT.defaultColor());
 
         this.activeNameColor = (NameColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.NAME)
-                .orElse(this.getDefaultColor(OwnableColorType.NAME));
+                .orElse(OwnableColorType.NAME.defaultColor());
 
         this.activePrefixColor = (PrefixColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.PREFIX)
-                .orElse(this.getDefaultColor(OwnableColorType.PREFIX));
+                .orElse(OwnableColorType.PREFIX.defaultColor());
 
         this.activeLevelColor = (LevelColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.LEVEL)
-                .orElse(this.getDefaultColor(OwnableColorType.LEVEL));
+                .orElse(OwnableColorType.LEVEL.defaultColor());
 
         this.prefixes = prefixModule.getPrefixesFromPlayer(this.playerModel);
         this.activePrefix = prefixModule.getActivePrefixFromPlayer(playerModel)
@@ -288,6 +288,10 @@ public class MinetopiaPlayer {
     }
 
     public void setActiveColor(OwnableColor color, OwnableColorType type) {
+        if (color == null || color.getId() == 0) {
+            color = type.defaultColor();
+        }
+
         switch (type) {
             case PREFIX:
                 this.activePrefixColor = (PrefixColor) color;
@@ -318,7 +322,7 @@ public class MinetopiaPlayer {
         };
 
         if (color == null || color.getId() == 0) {
-            color = getDefaultColor(type);
+            color = type.defaultColor();
         }
 
         if (color.isExpired()) {
@@ -326,19 +330,9 @@ public class MinetopiaPlayer {
             if (player != null && player.isOnline())
                 player.sendMessage(ChatUtils.color("<red>Je " + type.name().toLowerCase() + " kleur <dark_red>" + color.getColorId() + " is verlopen!"));
             removeColor(color);
-            setActiveColor(getDefaultColor(type), type);
+            setActiveColor(type.defaultColor(), type);
         }
         return color;
-    }
-
-    private OwnableColor getDefaultColor(OwnableColorType type) {
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
-        return switch (type) {
-            case PREFIX -> new PrefixColor(-1, configuration.getDefaultPrefixColor(), -1);
-            case NAME -> new NameColor(-1, configuration.getDefaultNameColor(), -1);
-            case CHAT -> new ChatColor(-1, configuration.getDefaultChatColor(), -1);
-            case LEVEL -> new LevelColor(-1, configuration.getDefaultLevelColor(), -1);
-        };
     }
 
     /* ---------- Criminal record ---------- */

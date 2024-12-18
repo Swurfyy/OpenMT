@@ -28,11 +28,25 @@ public class DefaultConfiguration extends ConfigurateConfig {
      * Database configuration
      */
     private final DatabaseType databaseType;
-    private final String host;
-    private final int port;
+    private final String databaseHost;
+    private final int databasePort;
     private final String databaseName;
-    private final String username;
-    private final String password;
+    private final String databaseUsername;
+    private final String databasePassword;
+
+    /**
+     * Rest API configuration
+     */
+    private final boolean restApiEnabled;
+    private final int restApiPort;
+    private final String restApiKey;
+
+    /**
+     * Portal configuration
+     */
+    private final boolean portalEnabled;
+    private final String portalUrl;
+    private final String portalToken;
 
     /**
      * Chat configuration
@@ -63,7 +77,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
     /**
      * Teleporter configuration
      */
-    private final List<String> displayLines;
+    private final List<String> teleporterDisplayLines;
 
     /**
      * Detection Gate configuration
@@ -80,7 +94,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
     /**
      * Plot configuration
      */
-    private final List<String> commandsOnPlotCreate;
+    private final List<String> plotCommandsOnCreate;
 
     /**
      * Emergency command configuration
@@ -169,23 +183,36 @@ public class DefaultConfiguration extends ConfigurateConfig {
          * Database configuration
          */
         this.databaseType = DatabaseType.valueOf(rootNode.node("database", "type").getString("sqlite").toUpperCase());
-        this.host = rootNode.node("database", "host").getString("localhost");
-        this.port = rootNode.node("database", "port").getInt(3306);
+        this.databaseHost = rootNode.node("database", "host").getString("localhost");
+        this.databasePort = rootNode.node("database", "port").getInt(3306);
         this.databaseName = rootNode.node("database", "name").getString("openminetopia");
-        this.username = rootNode.node("database", "username").getString("root");
-        this.password = rootNode.node("database", "password").getString("password");
+        this.databaseUsername = rootNode.node("database", "username").getString("root");
+        this.databasePassword = rootNode.node("database", "password").getString("password");
 
+        /*
+         * Rest API configuration
+         */
+        this.restApiEnabled = rootNode.node("rest-api", "enabled").getBoolean(false);
+        this.restApiPort = rootNode.node("rest-api", "port").getInt(4567);
+        this.restApiKey = rootNode.node("rest-api", "api-key").getString("CHANGE-ME");
+
+        /*
+         * Portal configuration
+         */
+        this.portalEnabled = rootNode.node("portal", "enabled").getBoolean(false);
+        this.portalUrl = rootNode.node("portal", "url").getString("portal.openminetopia.nl");
+        this.portalToken = rootNode.node("portal", "token").getString("CHANGE-ME");
 
         /*
          * Default settings configuration
          */
         this.defaultPrefix = rootNode.node("default", "prefix").getString("Zwerver");
-        this.defaultPrefixColor = rootNode.node("default", "prefixColor").getString("<gray>");
+        this.defaultPrefixColor = rootNode.node("default", "prefix-color").getString("<gray>");
         this.defaultLevel = rootNode.node("default", "level").getInt(1);
-        this.defaultLevelColor = rootNode.node("default", "levelColor").getString("<gray>");
+        this.defaultLevelColor = rootNode.node("default", "level-color").getString("<gray>");
 
-        this.defaultNameColor = rootNode.node("default", "nameColor").getString("<white>");
-        this.defaultChatColor = rootNode.node("default", "chatColor").getString("<white>");
+        this.defaultNameColor = rootNode.node("default", "name-color").getString("<white>");
+        this.defaultChatColor = rootNode.node("default", "chat-color").getString("<white>");
 
         /*
          * Chat configuration
@@ -215,7 +242,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Teleporter configuration
          */
-        this.displayLines = rootNode.node("teleporter", "lines").getList(String.class, List.of(
+        this.teleporterDisplayLines = rootNode.node("teleporter", "lines").getList(String.class, List.of(
                 "<gold>Teleporter",
                 "<grey><x>;<y>;<z>;<world>"
         ));
@@ -306,7 +333,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Plot configuration
          */
-        this.commandsOnPlotCreate = rootNode.node("plot", "commands-on-create").getList(String.class, List.of(
+        this.plotCommandsOnCreate = rootNode.node("plot", "commands-on-create").getList(String.class, List.of(
                 "rg flag <plot> -w <world> interact -g NON_MEMBERS DENY",
                 "rg flag <plot> -w <world> chest-access -g NON_MEMBERS DENY",
                 "rg flag <plot> -w <world> USE -g MEMBERS ALLOW",

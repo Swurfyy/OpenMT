@@ -4,6 +4,8 @@ import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
@@ -16,44 +18,47 @@ public class AdminToolFitnessBoostersMenu extends PaginatedMenu {
 
     private final Player player;
     private final OfflinePlayer offlinePlayer;
+    private final MinetopiaPlayer minetopiaPlayer;
+    private final BankAccountModel bankAccountModel;
 
-
-    public AdminToolFitnessBoostersMenu(Player player, OfflinePlayer offlinePlayer) {
+    public AdminToolFitnessBoostersMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer, BankAccountModel bankAccountModel) {
         super(ChatUtils.color("<gold>Fitheid Boosters <yellow>" + offlinePlayer.getPlayerProfile().getName()), 3);
         this.player = player;
         this.offlinePlayer = offlinePlayer;
+        this.minetopiaPlayer = minetopiaPlayer;
+        this.bankAccountModel = bankAccountModel;
 
         this.registerPageSlotsBetween(0, 17);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer, minetopiaPlayer -> {
-            if (minetopiaPlayer == null) return;
+        if (minetopiaPlayer == null) return;
 
-            for (FitnessBoosterModel booster : minetopiaPlayer.getFitness().getBoosters()) {
-                ItemBuilder icon = new ItemBuilder(Material.POTION)
-                        .setName("<gold>Booster")
-                        .addLoreLine(" ")
-                        .addLoreLine("<gold>Boost: <yellow>" + booster.getAmount());
+        for (FitnessBoosterModel booster : minetopiaPlayer.getFitness().getBoosters()) {
+            ItemBuilder icon = new ItemBuilder(Material.POTION)
+                    .setName("<gold>Booster")
+                    .addLoreLine(" ")
+                    .addLoreLine("<gold>Boost: <yellow>" + booster.getAmount());
 
-                if (booster.getExpiresAt() != -1 && booster.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine("<gold>Deze booster vervalt over <yellow>" + millisToTime(booster.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
-                if (booster.getExpiresAt() == -1) icon.addLoreLine("<gold>Deze booster vervalt <yellow>nooit<gold>.");
+            if (booster.getExpiresAt() != -1 && booster.getExpiresAt() - System.currentTimeMillis() > -1)
+                icon.addLoreLine("<gold>Deze booster vervalt over <yellow>" + millisToTime(booster.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
+            if (booster.getExpiresAt() == -1) icon.addLoreLine("<gold>Deze booster vervalt <yellow>nooit<gold>.");
 
-                icon.addLoreLine(" ").addLoreLine("<gold>Klik om deze booster te verwijderen.");
+            icon.addLoreLine(" ").addLoreLine("<gold>Klik om deze booster te verwijderen.");
 
-                Icon boosterIcon = new Icon(icon.toItemStack(), event -> {
-                    minetopiaPlayer.getFitness().removeBooster(booster);
-                    new AdminToolFitnessBoostersMenu(player, offlinePlayer).open((Player) event.getWhoClicked());
-                });
-                this.addItem(boosterIcon);
-            }
+            Icon boosterIcon = new Icon(icon.toItemStack(), event -> {
+                minetopiaPlayer.getFitness().removeBooster(booster);
+                new AdminToolFitnessBoostersMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open((Player) event.getWhoClicked());
+            });
+            this.addItem(boosterIcon);
+
 
             ItemBuilder backItemBuilder = new ItemBuilder(Material.OAK_DOOR)
                     .setName("<gray>Terug");
 
             Icon backIcon = new Icon(22, backItemBuilder.toItemStack(), event -> {
-                new AdminToolFitnessMenu(player, offlinePlayer, minetopiaPlayer).open((Player) event.getWhoClicked());
+                new AdminToolFitnessMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open((Player) event.getWhoClicked());
             });
             this.addSpecialIcon(backIcon);
-        }, Throwable::printStackTrace);
+        }
     }
 
     @Override
