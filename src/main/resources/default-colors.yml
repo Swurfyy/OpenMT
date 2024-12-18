@@ -1,10 +1,66 @@
 colors:
-  red:
-    display_name: "<red>Rood"
-    color_prefix: "<red>"
-  red_bold:
-    display_name: "<bold><red>Rood (Bold)"
-    color_prefix: "<bold><red>"
+  black:
+    display_name: "<black>Zwart"
+    color_prefix: "<black>"
+  black_bold:
+    display_name: "<bold><black>Zwart (Bold)"
+    color_prefix: "<bold><black>"
+
+  dark_blue:
+    display_name: "<dark_blue>Donker Blauw"
+    color_prefix: "<dark_blue>"
+  dark_blue_bold:
+    display_name: "<bold><dark_blue>Donker Blauw (Bold)"
+    color_prefix: "<bold><dark_blue>"
+
+  dark_green:
+    display_name: "<dark_green>Donker Groen"
+    color_prefix: "<dark_green>"
+  dark_green_bold:
+    display_name: "<bold><dark_green>Donker Groen (Bold)"
+    color_prefix: "<bold><dark_green>"
+
+  dark_aqua:
+    display_name: "<dark_aqua>Donker Aqua"
+    color_prefix: "<dark_aqua>"
+  dark_aqua_bold:
+    display_name: "<bold><dark_aqua>Donker Aqua (Bold)"
+    color_prefix: "<bold><dark_aqua>"
+
+  dark_red:
+    display_name: "<dark_red>Donker Rood"
+    color_prefix: "<dark_red>"
+  dark_red_bold:
+    display_name: "<bold><dark_red>Donker Rood (Bold)"
+    color_prefix: "<bold><dark_red>"
+
+  dark_purple:
+    display_name: "<dark_purple>Donker Paars"
+    color_prefix: "<dark_purple>"
+  dark_purple_bold:
+    display_name: "<bold><dark_purple>Donker Paars (Bold)"
+    color_prefix: "<bold><dark_purple>"
+
+  gold:
+    display_name: "<gold>Goud"
+    color_prefix: "<gold>"
+  gold_bold:
+    display_name: "<bold><gold>Goud (Bold)"
+    color_prefix: "<bold><gold>"
+
+  gray:
+    display_name: "<gray>Grijs"
+    color_prefix: "<gray>"
+  gray_bold:
+    display_name: "<bold><gray>Grijs (Bold)"
+    color_prefix: "<bold><gray>"
+
+  dark_gray:
+    display_name: "<dark_gray>Donker Grijs"
+    color_prefix: "<dark_gray>"
+  dark_gray_bold:
+    display_name: "<bold><dark_gray>Donker Grijs (Bold)"
+    color_prefix: "<bold><dark_gray>"
 
   blue:
     display_name: "<blue>Blauw"
@@ -20,6 +76,27 @@ colors:
     display_name: "<bold><green>Groen (Bold)"
     color_prefix: "<bold><green>"
 
+  aqua:
+    display_name: "<aqua>Aqua"
+    color_prefix: "<aqua>"
+  aqua_bold:
+    display_name: "<bold><aqua>Aqua (Bold)"
+    color_prefix: "<bold><aqua>"
+
+  red:
+    display_name: "<red>Rood"
+    color_prefix: "<red>"
+  red_bold:
+    display_name: "<bold><red>Rood (Bold)"
+    color_prefix: "<bold><red>"
+
+  light_purple:
+    display_name: "<light_purple>Licht Paars"
+    color_prefix: "<light_purple>"
+  light_purple_bold:
+    display_name: "<bold><light_purple>Licht Paars (Bold)"
+    color_prefix: "<bold><light_purple>"
+
   yellow:
     display_name: "<yellow>Geel"
     color_prefix: "<yellow>"
@@ -27,6 +104,16 @@ colors:
     display_name: "<bold><yellow>Geel (Bold)"
     color_prefix: "<bold><yellow>"
 
-  ganzenpoep:
-    color_prefix: "<#999400>"
-    display_name: "<#999400>Caca d'oie (Ganzenpoep)"
+  white:
+    display_name: "<white>Wit"
+    color_prefix: "<white>"
+  white_bold:
+    display_name: "<bold><white>Wit (Bold)"
+    color_prefix: "<bold><white>"
+
+  rainbow:
+    display_name: "<rainbow>Rainbow"
+    color_prefix: "<rainbow>"
+  rainbow_bold:
+    display_name: "<bold><rainbow>Rainbow (Bold)"
+    color_prefix: "<bold><rainbow>"

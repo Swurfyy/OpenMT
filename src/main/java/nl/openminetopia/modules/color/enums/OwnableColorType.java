@@ -2,6 +2,7 @@ package nl.openminetopia.modules.color.enums;
 
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.color.objects.ChatColor;
 import nl.openminetopia.modules.color.objects.LevelColor;
@@ -33,4 +34,13 @@ public enum OwnableColorType {
         };
     }
 
+    public OwnableColor defaultColor() {
+        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        return switch (this) {
+            case PREFIX -> new PrefixColor(-1, configuration.getDefaultPrefixColor(), -1);
+            case NAME -> new NameColor(-1, configuration.getDefaultNameColor(), -1);
+            case CHAT -> new ChatColor(-1, configuration.getDefaultChatColor(), -1);
+            case LEVEL -> new LevelColor(-1, configuration.getDefaultLevelColor(), -1);
+        };
+    }
 }

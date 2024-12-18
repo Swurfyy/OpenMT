@@ -3,6 +3,7 @@ package nl.openminetopia.utils;
 import lombok.experimental.UtilityClass;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
 import nl.openminetopia.OpenMinetopia;
@@ -112,4 +113,10 @@ public class ChatUtils {
         }
     }
 
+    public String componentToHex(Component component) {
+        TextColor color = component.color();
+        if (color == null) return "#FFFFFF";
+
+        return color.asHexString();
+    }
 }

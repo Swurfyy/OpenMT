@@ -28,6 +28,13 @@ public class PlayerManager {
     private final PlayerModule playerModule = OpenMinetopia.getModuleManager().getModule(PlayerModule.class);
     private final Map<UUID, MinetopiaPlayer> onlinePlayers = new ConcurrentHashMap<>();
 
+
+    public CompletableFuture<MinetopiaPlayer> getMinetopiaPlayer(OfflinePlayer player) {
+        CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
+        getMinetopiaPlayerAsync(player, future::complete, future::completeExceptionally);
+        return future;
+    }
+
     /**
      * Fetches a MinetopiaPlayer asynchronously. If the player is online, retrieve it from the map.
      * Otherwise, query the database.

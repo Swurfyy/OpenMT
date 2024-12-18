@@ -84,6 +84,11 @@ dependencies {
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1") {
         exclude(group = "org.bukkit", module = "bukkit")
     }
+
+    /* Rest API & Portal dependencies */
+    compileOnly("io.vertx:vertx-core:4.5.11")
+    compileOnly("io.vertx:vertx-web:4.5.11")
+    compileOnly("io.vertx:vertx-web-client:4.5.11")
 }
 
 val targetJavaVersion = 21

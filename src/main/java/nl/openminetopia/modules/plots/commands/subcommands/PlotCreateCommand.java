@@ -23,7 +23,6 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.plots.events.PlotCreateEvent;
 import nl.openminetopia.configuration.MessageConfiguration;
-import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -68,7 +67,7 @@ public class PlotCreateCommand extends BaseCommand {
 
                 manager.addRegion(wgRegion);
 
-                for (String command : OpenMinetopia.getDefaultConfiguration().getCommandsOnPlotCreate()) {
+                for (String command : OpenMinetopia.getDefaultConfiguration().getPlotCommandsOnCreate()) {
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command
                             .replace("<world>", bukkitWorld.getName())
                             .replace("<plot>", name)
