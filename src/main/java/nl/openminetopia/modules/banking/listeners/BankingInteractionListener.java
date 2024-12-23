@@ -24,7 +24,7 @@ public class BankingInteractionListener implements Listener {
         Material material = block.getType();
 
         BankingConfiguration bankingConfiguration = OpenMinetopia.getBankingConfiguration();
-        if(bankingConfiguration.getAtmMaterial() != material) return;
+        if(!bankingConfiguration.getAtmMaterials().contains(material)) return;
         new BankTypeSelectionMenu(player).open(player);
     }
 
