@@ -2,6 +2,7 @@ package nl.openminetopia.modules.plots.commands.subcommands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
@@ -33,13 +34,13 @@ public class PlotTransferCommand extends BaseCommand {
             }
 
             if (!transferable) {
-                region.setFlag(OpenMinetopia.PLOT_TRANSFER, false);
+                region.setFlag(OpenMinetopia.PLOT_TRANSFER, StateFlag.State.ALLOW);
                 ChatUtils.sendMessage(player, MessageConfiguration.message("plot_set_untranferable")
                         .replace("<plot_id>", region.getId()));
                 return;
             }
 
-            region.setFlag(OpenMinetopia.PLOT_TRANSFER, true);
+            region.setFlag(OpenMinetopia.PLOT_TRANSFER, StateFlag.State.ALLOW);
             ChatUtils.sendMessage(player, MessageConfiguration.message("plot_set_tranferable")
                     .replace("<plot_id>", region.getId()));
         }, Throwable::printStackTrace);

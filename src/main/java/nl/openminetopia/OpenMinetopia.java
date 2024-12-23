@@ -172,7 +172,7 @@ public final class OpenMinetopia extends JavaPlugin {
 
     public static StateFlag PLOT_FLAG = new StateFlag("openmt-plot", true);
     public static StringFlag PLOT_DESCRIPTION = new StringFlag("openmt-description");
-    public static BooleanFlag PLOT_TRANSFER = new BooleanFlag("openmt-transfer");
+    public static StateFlag PLOT_TRANSFER = new StateFlag("openmt-transfer", true);
 
     public void loadFlags() {
         FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
@@ -183,7 +183,7 @@ public final class OpenMinetopia extends JavaPlugin {
         } catch (FlagConflictException e) {
             PLOT_FLAG = (StateFlag) registry.get("openmt-plot");
             PLOT_DESCRIPTION = (StringFlag) registry.get("openmt-description");
-            PLOT_TRANSFER = (BooleanFlag) registry.get("openmt-transfer");
+            PLOT_TRANSFER = (StateFlag) registry.get("openmt-transfer");
         }
     }
 }
