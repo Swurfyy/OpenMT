@@ -9,15 +9,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.Module;
 import nl.openminetopia.modules.plots.commands.PlotCommand;
-import nl.openminetopia.modules.plots.commands.subcommands.PlotClearCommand;
-import nl.openminetopia.modules.plots.commands.subcommands.PlotCreateCommand;
-import nl.openminetopia.modules.plots.commands.subcommands.PlotDeleteCommand;
-import nl.openminetopia.modules.plots.commands.subcommands.PlotDescriptionCommand;
-import nl.openminetopia.modules.plots.commands.subcommands.PlotInfoCommand;
-import nl.openminetopia.modules.plots.commands.subcommands.PlotListCommand;
-import nl.openminetopia.modules.plots.commands.subcommands.PlotMembersCommand;
-import nl.openminetopia.modules.plots.commands.subcommands.PlotOwnersCommand;
-import nl.openminetopia.modules.plots.commands.subcommands.PlotTeleportCommand;
+import nl.openminetopia.modules.plots.commands.subcommands.*;
 import nl.openminetopia.utils.WorldGuardUtils;
 
 public class PlotModule extends Module {
@@ -35,6 +27,7 @@ public class PlotModule extends Module {
         registerCommand(new PlotDescriptionCommand());
         registerCommand(new PlotListCommand());
         registerCommand(new PlotTeleportCommand());
+        registerCommand(new PlotTransferCommand());
 
         OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("plotName", context ->
                 WorldGuardUtils.getProtectedRegions(priority -> priority >= 0).stream()
@@ -46,6 +39,4 @@ public class PlotModule extends Module {
     public void disable() {
 
     }
-
-
 }

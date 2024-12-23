@@ -145,6 +145,8 @@ plot_owner_already: "<red><player> is al een eigenaar van dit plot."
 plot_owner_added: "<gold>Je hebt <yellow><player> <gold>toegevoegd als eigenaar van dit plot."
 plot_owner_not_added: "<red><player> is geen eigenaar van dit plot."
 plot_owner_removed: "<gold>Je hebt <yellow><player> <gold>verwijderd als eigenaar van dit plot."
+plot_set_tranferable: "<gold>Je hebt plot <yellow><plot_id> <gold>overdraagbaar gemaakt."
+plot_set_untranferable: "<gold>Je hebt plot <yellow><plot_id> <gold>onoverdraagbaar gemaakt."
 
 # Emergency command
 emergency_too_soon: "<red><b>112</b></red> <dark_gray>| <gray>Je kan niet zo snel achter elkaar een melding maken."

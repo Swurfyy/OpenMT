@@ -6,6 +6,7 @@ import com.jazzkuh.inventorylib.loader.InventoryLoader;
 import com.jazzkuh.inventorylib.objects.Menu;
 import com.jeff_media.customblockdata.CustomBlockData;
 import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.flags.BooleanFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.StringFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
@@ -171,15 +172,18 @@ public final class OpenMinetopia extends JavaPlugin {
 
     public static StateFlag PLOT_FLAG = new StateFlag("openmt-plot", true);
     public static StringFlag PLOT_DESCRIPTION = new StringFlag("openmt-description");
+    public static BooleanFlag PLOT_TRANSFER = new BooleanFlag("openmt-transfer");
 
     public void loadFlags() {
         FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
         try {
             registry.register(PLOT_FLAG);
             registry.register(PLOT_DESCRIPTION);
+            registry.register(PLOT_TRANSFER);
         } catch (FlagConflictException e) {
             PLOT_FLAG = (StateFlag) registry.get("openmt-plot");
             PLOT_DESCRIPTION = (StringFlag) registry.get("openmt-description");
+            PLOT_TRANSFER = (BooleanFlag) registry.get("openmt-transfer");
         }
     }
 }
