@@ -12,6 +12,7 @@ import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.police.utils.BalaclavaUtils;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;
@@ -82,6 +83,11 @@ public class ChatUtils {
     public void sendMessage(Player player, String message) {
         Component component = color(message.replaceFirst("\\[(title|action)]", ""));
         decideMessage(player, component, message);
+    }
+
+    public void sendMessage(CommandSender sender, String message) {
+        Component component = color(message.replaceFirst("\\[(title|action)]", ""));
+        sender.sendMessage(component);
     }
 
     public void sendFormattedMessage(MinetopiaPlayer minetopiaPlayer, String message) {

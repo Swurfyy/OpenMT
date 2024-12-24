@@ -51,5 +51,4 @@ public class BankAccountModel extends StormModel {
     public void save() {
         this.savingTask.run();
     }
-
 }

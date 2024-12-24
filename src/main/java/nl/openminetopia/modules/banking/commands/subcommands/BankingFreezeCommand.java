@@ -5,13 +5,12 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import com.craftmend.storm.api.enums.Where;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
-import nl.openminetopia.modules.data.utils.StormUtils;
+import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -28,35 +27,29 @@ public class BankingFreezeCommand extends BaseCommand {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync((OfflinePlayer) sender, minetopiaPlayer -> {
-            if (accountModel == null) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
+        if (accountModel == null) {
+            ChatUtils.sendMessage(sender, MessageConfiguration.message("banking_account_not_found"));
+            return;
+        }
+
+        boolean newState = !accountModel.getFrozen();
+
+        accountModel.setFrozen(newState);
+        CompletableFuture<Integer> updateFuture = StormDatabase.getInstance().saveStormModel(accountModel);
+
+        updateFuture.whenComplete((v, throwable) -> {
+            if (throwable != null) {
+                ChatUtils.sendMessage(sender, MessageConfiguration.message("database_update_error"));
                 return;
             }
 
-            boolean newState = !accountModel.getFrozen();
-
-            CompletableFuture<Void> updateFuture = StormUtils.updateModelData(BankAccountModel.class,
-                    query -> query.where("uuid", Where.EQUAL, accountModel.getUniqueId().toString()),
-                    updateModel -> updateModel.setFrozen(newState)
-            );
-
-            updateFuture.whenComplete((v, throwable) -> {
-                if(throwable != null) {
-                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("database_update_error"));
-                    return;
-                }
-                accountModel.setFrozen(newState);
-                accountModel.save();
-
-                if (newState) {
-                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_frozen")
-                            .replace("<account_name>", accountModel.getName()));
-                    return;
-                }
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_unfrozen")
+            if (newState) {
+                ChatUtils.sendMessage(sender, MessageConfiguration.message("banking_account_frozen")
                         .replace("<account_name>", accountModel.getName()));
-            });
-        }, Throwable::printStackTrace);
+                return;
+            }
+            ChatUtils.sendMessage(sender, MessageConfiguration.message("banking_account_unfrozen")
+                    .replace("<account_name>", accountModel.getName()));
+        });
     }
 }
