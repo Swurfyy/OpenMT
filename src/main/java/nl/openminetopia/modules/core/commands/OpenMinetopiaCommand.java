@@ -7,11 +7,7 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Subcommand;
 import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.configuration.ColorsConfiguration;
-import nl.openminetopia.configuration.DefaultConfiguration;
-import nl.openminetopia.configuration.FitnessConfiguration;
-import nl.openminetopia.configuration.LevelCheckConfiguration;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.*;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 
@@ -40,6 +36,9 @@ public class OpenMinetopiaCommand extends BaseCommand {
 
         OpenMinetopia.setFitnessConfiguration(new FitnessConfiguration(dataFolder));
         OpenMinetopia.getFitnessConfiguration().saveConfiguration();
+
+        OpenMinetopia.setBankingConfiguration(new BankingConfiguration(dataFolder));
+        OpenMinetopia.getBankingConfiguration().saveConfiguration();
 
         player.sendMessage(ChatUtils.color("<gold>De configuratiebestanden zijn succesvol herladen!"));
     }

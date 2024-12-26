@@ -39,7 +39,7 @@ public class BankingConfiguration extends ConfigurateConfig {
             this.atmMaterials.add(material);
         });
 
-        this.typeSelectionTitle = rootNode.node("banking", "inventories", "select-type-title").getString("<gray>Select het rekeningtype:");
+        this.typeSelectionTitle = rootNode.node("banking", "inventories", "select-type-title").getString("<gray>Selecteer het rekeningtype:");
         this.accountSelectionTitle = rootNode.node("banking", "inventories", "select-account-title").getString("<type_color><type_name>");
         this.accountContentsTitle = rootNode.node("banking", "inventories", "account-contents-title").getString("<type_color><account_name> <reset>| <gold><account_balance>");
     }

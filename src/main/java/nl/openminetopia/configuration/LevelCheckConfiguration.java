@@ -56,8 +56,4 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
         return levelsNode.node(level, "wage").getInt(0);
     }
 
-    public boolean isAutoLevelUp() {
-        return autoLevelUp;
-    }
-
 }
