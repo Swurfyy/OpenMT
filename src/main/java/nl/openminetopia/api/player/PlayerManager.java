@@ -29,6 +29,10 @@ public class PlayerManager {
     private final Map<UUID, MinetopiaPlayer> onlinePlayers = new ConcurrentHashMap<>();
 
 
+    public MinetopiaPlayer getOnlineMinetopiaPlayer(UUID uuid) {
+        return onlinePlayers.get(uuid);
+    }
+
     public CompletableFuture<MinetopiaPlayer> getMinetopiaPlayer(OfflinePlayer player) {
         CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
         getMinetopiaPlayerAsync(player, future::complete, future::completeExceptionally);
