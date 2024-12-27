@@ -29,6 +29,14 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
+    - name: Rename JAR file with version and commit hash
+      run: |
+        COMMIT_HASH=$(git rev-parse --short HEAD)
+        for file in ./build/libs/OpenMinetopia-*.jar; do
+          VERSION=$(basename "$file" | sed -E 's/OpenMinetopia-(.*)\.jar/\1/')
+          mv "$file" "./build/libs/OpenMinetopia-${VERSION}-${COMMIT_HASH}.jar"
+        done
+
     - name: Upload a Build Artifact
       if: github.event_name == 'push'
       uses: actions/upload-artifact@v4
