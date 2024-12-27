@@ -1,5 +1,8 @@
 package nl.openminetopia.modules;
 
+import nl.openminetopia.OpenMinetopia;
+
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -11,7 +14,12 @@ public class ModuleManager {
     private final Map<Class<? extends Module>, Module> modules = new LinkedHashMap<>();
 
     public void register(Module... module) {
+        // check if the module is already registered
         for (Module modules : module) {
+            if (this.modules.containsKey(modules.getClass())) {
+                OpenMinetopia.getInstance().getLogger().warning("Module " + modules.getClass().getSimpleName() + " is already registered.");
+                continue;
+            }
             this.modules.put(modules.getClass(), modules);
             modules.enable();
         }
