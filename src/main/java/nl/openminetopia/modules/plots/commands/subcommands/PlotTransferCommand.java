@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 @CommandAlias("plot|p")
 public class PlotTransferCommand extends BaseCommand {
 
-    @Subcommand("description")
+    @Subcommand("transfer")
     @CommandPermission("openminetopia.plot.tranfer")
     @Description("Zet de mogelijkheid om een plot over te dragen uit (portal related).")
     public void plotTransfer(Player player, Boolean transferable) {

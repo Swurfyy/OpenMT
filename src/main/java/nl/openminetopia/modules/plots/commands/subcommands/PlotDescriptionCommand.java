@@ -21,7 +21,7 @@ public class PlotDescriptionCommand extends BaseCommand {
     @Subcommand("description")
     @CommandPermission("openminetopia.plot.description")
     @Syntax("<beschrijving>")
-    @Description("Set een beschrijving van een plot.")
+    @Description("Zet een beschrijving van een plot.")
     public void plotDescription(Player player, String description) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
 
