@@ -34,7 +34,7 @@ public class PlotTransferCommand extends BaseCommand {
             }
 
             if (!transferable) {
-                region.setFlag(OpenMinetopia.PLOT_TRANSFER, StateFlag.State.ALLOW);
+                region.setFlag(OpenMinetopia.PLOT_TRANSFER, StateFlag.State.DENY);
                 ChatUtils.sendMessage(player, MessageConfiguration.message("plot_set_untranferable")
                         .replace("<plot_id>", region.getId()));
                 return;
