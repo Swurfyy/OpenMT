@@ -2,9 +2,7 @@ package nl.openminetopia.modules.fitness.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.HelpCommand;
-import co.aikar.commands.annotation.Subcommand;
+import co.aikar.commands.annotation.*;
 import nl.openminetopia.api.player.PlayerManager;
 import org.bukkit.entity.Player;
 
@@ -17,11 +15,18 @@ public class FitnessCommand extends BaseCommand {
     }
 
     @Subcommand("trigger")
+    @CommandPermission("openminetopia.fitness.trigger")
+    @Description("Trigger de fitheid runnable voor een speler (update de fitheid)")
     public void trigger(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
+            if (throwable != null) {
+                throwable.printStackTrace();
+                return;
+            }
+
             if (minetopiaPlayer == null) return;
 
             minetopiaPlayer.getFitness().getRunnable().run();
-        }, Throwable::printStackTrace);
+        });
     }
 }

@@ -4,6 +4,7 @@ geen: "Geen."
 go_back: "Terug"
 next_page: "Volgende Pagina"
 previous_page: "Vorige Pagina" 
+no_player_provided: "<red>Je moet een speler opgeven."
 
 # Database
 database_update_error: "<red>Er ging iets mis met het updaten van de database informatie."
@@ -105,6 +106,10 @@ fitness_total_fitness: "<gold>Totaal fitness: <yellow><fitness><gold>/<yellow><m
 fitness_drinking_cooldown: "<red>Je moet nog even wachten voor je weer kunt drinken."
 fitness_drinking_water: "<gold>Je hebt water gedronken!"
 fitness_drinking_potion: "<gold>Je hebt een potion gedronken!"
+fitness_no_reset: "<red>Je hebt geen fitheidreset!"
+fitness_reset_enabled: "<gold>Succesvol <yellow><player> <gold>een fitheidreset gegeven."
+fitness_reset_disabled: "<gold>Succesvol de fitheidreset van <yellow><player> <gold>afgenomen."
+fitness_reset: "<gold>Jouw fitheid is succesvol <yellow>gereset<gold>."
 
 # Places
 

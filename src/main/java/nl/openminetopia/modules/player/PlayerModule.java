@@ -1,6 +1,7 @@
 package nl.openminetopia.modules.player;
 
 import com.craftmend.storm.api.enums.Where;
+import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
@@ -20,6 +21,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
+@Getter
 public class PlayerModule extends Module {
 
     @Override
@@ -55,7 +57,10 @@ public class PlayerModule extends Module {
         CompletableFuture<Optional<PlayerModel>> completableFuture = new CompletableFuture<>();
         StormDatabase.getExecutorService().submit(() -> {
             try {
-                Collection<PlayerModel> playerModel = StormDatabase.getInstance().getStorm().buildQuery(PlayerModel.class).where("uuid", Where.EQUAL, uuid.toString()).limit(1).execute().join();
+                Collection<PlayerModel> playerModel = StormDatabase.getInstance().getStorm().buildQuery(PlayerModel.class)
+                        .where("uuid", Where.EQUAL, uuid.toString())
+                        .limit(1).execute().join();
+
                 Bukkit.getScheduler().runTaskLaterAsynchronously(OpenMinetopia.getInstance(), () -> completableFuture.complete(playerModel.stream().findFirst()), 1L);
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -65,11 +70,9 @@ public class PlayerModule extends Module {
         return completableFuture;
     }
 
+    public CompletableFuture<PlayerModel> playerLoadFuture = new CompletableFuture<>();
     public CompletableFuture<PlayerModel> loadPlayer(UUID uuid) {
-        CompletableFuture<PlayerModel> completableFuture = new CompletableFuture<>();
         findPlayerModel(uuid).thenAccept(playerModel -> {
-            //PlayerManager.getInstance().getPlayerModels().remove(uuid);
-
             if (playerModel.isEmpty()) {
                 PlayerModel createdModel = new PlayerModel();
                 createdModel.setUniqueId(uuid);
@@ -85,18 +88,16 @@ public class PlayerModule extends Module {
                 createdModel.setChatSpyEnabled(false);
                 createdModel.setPrefixes(new ArrayList<>());
                 createdModel.setColors(new ArrayList<>());
-
-                //PlayerManager.getInstance().getPlayerModels().put(uuid, createdModel);
-                completableFuture.complete(createdModel);
+                createdModel.setFitnessReset(false);
+                playerLoadFuture.complete(createdModel);
 
                 StormDatabase.getInstance().saveStormModel(createdModel);
                 return;
             }
 
-            //PlayerManager.getInstance().getPlayerModels().put(uuid, playerModel.get());
-            completableFuture.complete(playerModel.get());
+            playerLoadFuture.complete(playerModel.get());
         });
 
-        return completableFuture;
+        return playerLoadFuture;
     }
 }

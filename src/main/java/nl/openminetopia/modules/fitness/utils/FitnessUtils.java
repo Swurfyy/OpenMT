@@ -89,6 +89,8 @@ public class FitnessUtils {
                 .filter(Objects::nonNull)
                 .toList();
 
+        effectsToRemove.forEach(effect -> OpenMinetopia.getInstance().getLogger().info(String.valueOf(effect.getKey())));
+
         Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
             effectsToRemove.forEach(player::removePotionEffect);
             player.setWalkSpeed(0.2f); // Reset walk speed to default

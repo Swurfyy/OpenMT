@@ -15,12 +15,12 @@ public class FitnessStatisticsVerticle extends BaseVerticle {
 
     @Override
     public void start(Promise<Void> startPromise) {
-        router.get("/api/player/:uuid/fitness").handler(this::handleGetPrefixes);
+        router.get("/api/player/:uuid/fitness").handler(this::handleGetFitness);
         startPromise.complete();
     }
 
     @SuppressWarnings("unchecked")
-    private void handleGetPrefixes(RoutingContext context) {
+    private void handleGetFitness(RoutingContext context) {
         try {
             UUID playerUuid = UUID.fromString(context.pathParam("uuid"));
             OfflinePlayer player = Bukkit.getOfflinePlayer(playerUuid);
@@ -49,7 +49,12 @@ public class FitnessStatisticsVerticle extends BaseVerticle {
 
                     JSONObject statisticsObject = new JSONObject();
 
-                    minetopiaPlayer.getFitness().getRunnable().forceRun();
+                    if (player.isOnline()) {
+                        minetopiaPlayer.getFitness().getRunnable().run();
+                    } else {
+                        minetopiaPlayer.getFitness().getRunnable().forceRun();
+                    }
+
                     minetopiaPlayer.getFitness().getStatistics().forEach(statistic -> {
                         JSONObject statisticObject = new JSONObject();
                         statisticObject.put("gained", statistic.getFitnessGained());

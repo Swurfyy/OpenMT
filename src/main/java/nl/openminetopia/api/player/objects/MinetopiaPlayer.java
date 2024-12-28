@@ -5,6 +5,7 @@ import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
+import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
@@ -47,8 +48,6 @@ public class MinetopiaPlayer {
     private int playtime;
     private PlaytimeRunnable playtimeRunnable;
 
-    private HealthStatisticRunnable healthStatisticRunnable;
-
     private int level;
     private @Setter int calculatedLevel;
     private LevelCheckRunnable levelcheckRunnable;
@@ -83,48 +82,52 @@ public class MinetopiaPlayer {
     public CompletableFuture<Void> load() {
         CompletableFuture<Void> loadFuture = new CompletableFuture<>();
 
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        playerModule.getPlayerLoadFuture().whenComplete((unused, throwable) -> {
+            if (throwable != null) {
+                OpenMinetopia.getInstance().getLogger().severe("Failed to load player: " + throwable.getMessage());
+                return;
+            }
 
-        if (this.getBukkit().getPlayer() != null && this.getBukkit().isOnline())
-            this.getBukkit().getPlayer().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
+            DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
 
-        this.fitness = new Fitness(this);
-        Bukkit.getScheduler().runTaskLaterAsynchronously(OpenMinetopia.getInstance(), () -> fitness.getRunnable().run(), 1L);
+            if (this.getBukkit().getPlayer() != null && this.getBukkit().isOnline())
+                this.getBukkit().getPlayer().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
 
-        this.playtime = this.playerModel.getPlaytime();
-        this.level = this.playerModel.getLevel();
-        this.calculatedLevel = configuration.getDefaultLevel();
-        this.staffchatEnabled = this.playerModel.getStaffchatEnabled();
-        this.commandSpyEnabled = this.playerModel.getCommandSpyEnabled();
-        this.chatSpyEnabled = this.playerModel.getChatSpyEnabled();
+            this.fitness = new Fitness(this);
 
-        this.colors = colorModule.getColorsFromPlayer(this.playerModel);
-        this.activeChatColor = (ChatColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.CHAT)
-                .orElse(OwnableColorType.CHAT.defaultColor());
+            this.playtime = this.playerModel.getPlaytime();
+            this.level = this.playerModel.getLevel();
+            this.calculatedLevel = configuration.getDefaultLevel();
+            this.staffchatEnabled = this.playerModel.getStaffchatEnabled();
+            this.commandSpyEnabled = this.playerModel.getCommandSpyEnabled();
+            this.chatSpyEnabled = this.playerModel.getChatSpyEnabled();
 
-        this.activeNameColor = (NameColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.NAME)
-                .orElse(OwnableColorType.NAME.defaultColor());
+            this.colors = colorModule.getColorsFromPlayer(this.playerModel);
+            this.activeChatColor = (ChatColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.CHAT)
+                    .orElse(OwnableColorType.CHAT.defaultColor());
 
-        this.activePrefixColor = (PrefixColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.PREFIX)
-                .orElse(OwnableColorType.PREFIX.defaultColor());
+            this.activeNameColor = (NameColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.NAME)
+                    .orElse(OwnableColorType.NAME.defaultColor());
 
-        this.activeLevelColor = (LevelColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.LEVEL)
-                .orElse(OwnableColorType.LEVEL.defaultColor());
+            this.activePrefixColor = (PrefixColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.PREFIX)
+                    .orElse(OwnableColorType.PREFIX.defaultColor());
 
-        this.prefixes = prefixModule.getPrefixesFromPlayer(this.playerModel);
-        this.activePrefix = prefixModule.getActivePrefixFromPlayer(playerModel)
-                .orElse(new Prefix(-1, configuration.getDefaultPrefix(), -1));
+            this.activeLevelColor = (LevelColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.LEVEL)
+                    .orElse(OwnableColorType.LEVEL.defaultColor());
 
-        this.playtimeRunnable = new PlaytimeRunnable(this);
-        playtimeRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L);
+            this.prefixes = prefixModule.getPrefixesFromPlayer(this.playerModel);
+            this.activePrefix = prefixModule.getActivePrefixFromPlayer(playerModel)
+                    .orElse(new Prefix(-1, configuration.getDefaultPrefix(), -1));
 
-        this.levelcheckRunnable = new LevelCheckRunnable(this);
-        levelcheckRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L * 30);
+            this.playtimeRunnable = new PlaytimeRunnable(this);
+            playtimeRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L);
 
-        this.healthStatisticRunnable = new HealthStatisticRunnable(this);
-        healthStatisticRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L);
+            this.levelcheckRunnable = new LevelCheckRunnable(this);
+            levelcheckRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L * 30);
 
-        loadFuture.complete(null);
+            loadFuture.complete(null);
+        });
+
         return loadFuture;
     }
 

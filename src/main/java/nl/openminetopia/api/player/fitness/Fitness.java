@@ -3,6 +3,7 @@ package nl.openminetopia.api.player.fitness;
 import com.craftmend.storm.api.enums.Where;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.storm.StormDatabase;
@@ -11,11 +12,14 @@ import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.fitness.runnables.FitnessRunnable;
+import nl.openminetopia.modules.fitness.runnables.HealthStatisticRunnable;
 import nl.openminetopia.modules.fitness.utils.FitnessUtils;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import org.bukkit.Bukkit;
+import org.bukkit.Statistic;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -27,6 +31,8 @@ public class Fitness {
     private final UUID uuid;
     private final PlayerModel playerModel;
     private final FitnessRunnable runnable;
+    private final HealthStatisticRunnable healthStatisticRunnable;
+    private boolean fitnessReset;
 
     private @Setter int totalFitness;
 
@@ -37,8 +43,11 @@ public class Fitness {
         this.uuid = minetopiaPlayer.getUuid();
         this.playerModel = minetopiaPlayer.getPlayerModel();
         this.runnable = new FitnessRunnable(this);
+        this.fitnessReset = playerModel.getFitnessReset();
+        this.healthStatisticRunnable = new HealthStatisticRunnable(minetopiaPlayer);
 
-        runnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 60 * 20L);
+        runnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 60 * 20L);
+        healthStatisticRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L);
     }
 
     public CompletableFuture<Void> save() {
@@ -66,7 +75,9 @@ public class Fitness {
 
     @NotNull
     public FitnessStatisticModel getStatistic(FitnessStatisticType type) {
-        FitnessStatisticModel model = playerModel.getStatistics().stream().filter(statistic -> statistic.getType().equals(type)).findFirst()
+        FitnessStatisticModel model = playerModel.getStatistics().stream()
+                .filter(statistic -> statistic.getType().equals(type))
+                .findFirst()
                 .orElse(null);
 
         if (model == null) {
@@ -80,7 +91,6 @@ public class Fitness {
             playerModel.getStatistics().add(model);
             StormDatabase.getInstance().saveStormModel(model);
         }
-
         return model;
     }
 
@@ -107,10 +117,10 @@ public class Fitness {
         runnable.run();
     }
 
+    @SneakyThrows
     public void removeBooster(FitnessBoosterModel booster) {
         playerModel.getBoosters().remove(booster);
-        StormUtils.deleteModelData(FitnessBoosterModel.class, query ->
-                query.where("id", Where.EQUAL, booster.getId()));
+        StormDatabase.getInstance().getStorm().delete(booster);
 
         runnable.run();
     }
@@ -121,5 +131,48 @@ public class Fitness {
 
     public List<FitnessBoosterModel> getBoosters() {
         return playerModel.getBoosters();
+    }
+
+    public void setFitnessReset(boolean enabled) {
+        this.fitnessReset = enabled;
+        playerModel.setFitnessReset(enabled);
+        StormDatabase.getInstance().saveStormModel(playerModel);
+    }
+
+    @SneakyThrows
+    public void reset() {
+        setFitnessReset(false);
+
+        minetopiaPlayer.getBukkit().setStatistic(Statistic.WALK_ONE_CM, 0);
+        minetopiaPlayer.getBukkit().setStatistic(Statistic.CLIMB_ONE_CM, 0);
+        minetopiaPlayer.getBukkit().setStatistic(Statistic.SPRINT_ONE_CM, 0);
+        minetopiaPlayer.getBukkit().setStatistic(Statistic.SWIM_ONE_CM, 0);
+        minetopiaPlayer.getBukkit().setStatistic(Statistic.AVIATE_ONE_CM, 0);
+
+        List<FitnessStatisticModel> statistics = playerModel.getStatistics();
+        statistics.forEach(statistic -> {
+            statistic.setFitnessGained(0);
+            statistic.setPoints(0.0);
+            statistic.setSecondaryPoints(0.0);
+            statistic.setTertiaryPoints(0.0);
+            StormDatabase.getInstance().saveStormModel(statistic);
+        });
+
+        List<FitnessBoosterModel> boosters = playerModel.getBoosters();
+        boosters.forEach(booster -> {
+            try {
+                StormDatabase.getInstance().getStorm().delete(booster);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        playerModel.getBoosters().clear();
+
+        this.totalFitness = OpenMinetopia.getFitnessConfiguration().getDefaultFitnessLevel();
+
+        FitnessUtils.clearFitnessEffects(minetopiaPlayer.getBukkit().getPlayer());
+
+        save();
+        runnable.run();
     }
 }

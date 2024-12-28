@@ -6,6 +6,7 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 import java.util.Map;
 import java.util.UUID;
@@ -29,8 +30,8 @@ public class PlayerManager {
     private final Map<UUID, MinetopiaPlayer> onlinePlayers = new ConcurrentHashMap<>();
 
 
-    public MinetopiaPlayer getOnlineMinetopiaPlayer(UUID uuid) {
-        return onlinePlayers.get(uuid);
+    public MinetopiaPlayer getOnlineMinetopiaPlayer(Player player) {
+        return onlinePlayers.get(player.getUniqueId());
     }
 
     public CompletableFuture<MinetopiaPlayer> getMinetopiaPlayer(OfflinePlayer player) {
@@ -46,7 +47,10 @@ public class PlayerManager {
      * @param player The OfflinePlayer to retrieve the MinetopiaPlayer for.
      * @param callback The action to perform if the MinetopiaPlayer is retrieved successfully.
      * @param errorCallback The action to perform if there is an error during retrieval.
+     *
+     * @deprecated Use {@link #getMinetopiaPlayer(OfflinePlayer)} instead.
      */
+    @Deprecated
     public void getMinetopiaPlayerAsync(OfflinePlayer player,
                                         Consumer<MinetopiaPlayer> callback,
                                         Consumer<Throwable> errorCallback) {

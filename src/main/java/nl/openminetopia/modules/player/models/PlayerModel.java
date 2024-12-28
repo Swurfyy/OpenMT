@@ -87,4 +87,7 @@ public class PlayerModel extends StormModel {
             matchTo = "player_id"
     )
     private List<CriminalRecordModel> criminalRecords = new ArrayList<>();
+
+    @Column(name = "fitness_reset", defaultValue = "false")
+    private Boolean fitnessReset;
 }
