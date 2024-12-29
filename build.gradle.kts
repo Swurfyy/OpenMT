@@ -5,6 +5,7 @@ plugins {
     id("io.freefair.lombok") version "8.11"
     id("com.gradleup.shadow") version "8.3.5"
     id("io.papermc.paperweight.userdev") version "1.7.7"
+    id("maven-publish")
 }
 
 group = "nl.openminetopia"
@@ -138,4 +139,16 @@ tasks.named<ShadowJar>("shadowJar") {
 
 tasks.build {
     dependsOn(tasks.named("shadowJar"))
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = group.toString()
+            artifactId = project.name
+            version = version.toString()
+
+            from(components["java"])
+        }
+    }
 }
