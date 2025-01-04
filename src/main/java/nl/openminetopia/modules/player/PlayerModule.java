@@ -61,9 +61,6 @@ public class PlayerModule extends Module {
                         .where("uuid", Where.EQUAL, uuid.toString())
                         .limit(1).execute().join();
 
-                System.out.println("Found " + playerModel.size() + " player models for " + uuid);
-                System.out.println("Found player model: " + playerModel.stream().findFirst().get().getUniqueId());
-
                 Bukkit.getScheduler().runTaskLaterAsynchronously(OpenMinetopia.getInstance(), () -> completableFuture.complete(playerModel.stream().findFirst()), 1L);
             } catch (Exception exception) {
                 exception.printStackTrace();
