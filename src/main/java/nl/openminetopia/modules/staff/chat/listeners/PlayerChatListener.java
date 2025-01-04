@@ -24,7 +24,7 @@ public class PlayerChatListener implements Listener {
         if (policeModule.getWalkieTalkieManager().isComposingMessage(source)
         || policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)) return;
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(source, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(source).whenComplete((minetopiaPlayer, throwable1) -> {
             if (minetopiaPlayer == null) return;
 
             if (!source.hasPermission("openminetopia.staffchat") || !minetopiaPlayer.isStaffchatEnabled()) return;
@@ -43,6 +43,6 @@ public class PlayerChatListener implements Listener {
             });
 
             Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, formattedMessage));
-        }, Throwable::printStackTrace);
+        });
     }
 }

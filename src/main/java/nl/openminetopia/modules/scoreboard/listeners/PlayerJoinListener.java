@@ -16,7 +16,7 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) {
                 player.kick(ChatUtils.color("<red>Er is een fout opgetreden bij het laden van je gegevens! Probeer het later opnieuw."));
                 return;
@@ -32,6 +32,6 @@ public class PlayerJoinListener implements Listener {
                 }
                 ScoreboardManager.getInstance().updateBoard(minetopiaPlayer);
             }, 0, 20);
-        }, Throwable::printStackTrace);
+        });
     }
 }

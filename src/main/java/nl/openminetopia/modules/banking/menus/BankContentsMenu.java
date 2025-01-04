@@ -99,7 +99,7 @@ public class BankContentsMenu extends Menu {
         if (!PersistentDataUtil.contains(item, "bank_note_value")) return;
         if (PersistentDataUtil.getDouble(item, "bank_note_value") == null) return;
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if(!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.DEPOSIT)) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_deposit_permission"));
                 return;
@@ -113,14 +113,14 @@ public class BankContentsMenu extends Menu {
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
                     .replace("<deposit_value>", bankingModule.format(totalValue)));
             new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
-        }, Throwable::printStackTrace);
+        });
     }
 
     private void withdrawMoney(BankNote note, int amount) {
         double balance = accountModel.getBalance();
         double totalValue = note.getValue() * amount;
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (balance < totalValue) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_not_enough_money"));
                 return;
@@ -137,7 +137,7 @@ public class BankContentsMenu extends Menu {
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_withdraw_message")
                     .replace("<withdraw_value>", bankingModule.format(totalValue)));
             new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
-        }, Throwable::printStackTrace);
+        });
     }
 
     @Getter

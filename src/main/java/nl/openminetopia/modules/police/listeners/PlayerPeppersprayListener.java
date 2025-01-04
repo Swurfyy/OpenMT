@@ -47,11 +47,11 @@ public class PlayerPeppersprayListener implements Listener {
         source.sendMessage(ChatUtils.color("<red>Je hebt <dark_red>" + target.getName() + " <red>gepeppersprayed."));
 
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(source, sourceMinetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(source).whenComplete((sourceMinetopiaPlayer, throwable) -> {
             if (sourceMinetopiaPlayer == null) return;
 
             target.sendMessage(ChatUtils.format(sourceMinetopiaPlayer, "<red>Je bent gepeppersprayed!"));
             PeppersprayUtils.applyPeppersprayEffects(target);
-        }, Throwable::printStackTrace);
+        });
     }
 }

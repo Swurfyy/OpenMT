@@ -44,12 +44,12 @@ public class PlayerModule extends Module {
     @Override
     public void disable() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
                 if (minetopiaPlayer == null) return;
-                minetopiaPlayer.save().whenComplete((unused, throwable) -> {
+                minetopiaPlayer.save().whenComplete((unused, throwable1) -> {
                     if (throwable != null) throwable.printStackTrace();
                 });
-            }, Throwable::printStackTrace);
+            });
         }
     }
 
@@ -61,6 +61,9 @@ public class PlayerModule extends Module {
                         .where("uuid", Where.EQUAL, uuid.toString())
                         .limit(1).execute().join();
 
+                System.out.println("Found " + playerModel.size() + " player models for " + uuid);
+                System.out.println("Found player model: " + playerModel.stream().findFirst().get().getUniqueId());
+
                 Bukkit.getScheduler().runTaskLaterAsynchronously(OpenMinetopia.getInstance(), () -> completableFuture.complete(playerModel.stream().findFirst()), 1L);
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -70,8 +73,9 @@ public class PlayerModule extends Module {
         return completableFuture;
     }
 
-    public CompletableFuture<PlayerModel> playerLoadFuture = new CompletableFuture<>();
-    public CompletableFuture<PlayerModel> loadPlayer(UUID uuid) {
+    public CompletableFuture<PlayerModel> getPlayerModel(UUID uuid) {
+        CompletableFuture<PlayerModel> future = new CompletableFuture<>();
+
         findPlayerModel(uuid).thenAccept(playerModel -> {
             if (playerModel.isEmpty()) {
                 PlayerModel createdModel = new PlayerModel();
@@ -89,15 +93,15 @@ public class PlayerModule extends Module {
                 createdModel.setPrefixes(new ArrayList<>());
                 createdModel.setColors(new ArrayList<>());
                 createdModel.setFitnessReset(false);
-                playerLoadFuture.complete(createdModel);
+                future.complete(createdModel);
 
                 StormDatabase.getInstance().saveStormModel(createdModel);
                 return;
             }
 
-            playerLoadFuture.complete(playerModel.get());
+            future.complete(playerModel.get());
         });
 
-        return playerLoadFuture;
+        return future;
     }
 }

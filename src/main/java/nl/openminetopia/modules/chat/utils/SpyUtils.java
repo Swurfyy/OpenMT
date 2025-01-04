@@ -21,11 +21,11 @@ public class SpyUtils {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
             if (ignore.contains(onlinePlayer)) continue;
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(onlinePlayer, minetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(onlinePlayer).whenComplete((minetopiaPlayer, throwable1) -> {
                 if (minetopiaPlayer == null) return;
 
                 if (minetopiaPlayer.isChatSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
-            }, Throwable::printStackTrace);
+            });
         }
     }
 
@@ -37,11 +37,11 @@ public class SpyUtils {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(onlinePlayer, minetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(onlinePlayer).whenComplete((minetopiaPlayer, throwable1) -> {
                 if (minetopiaPlayer == null) return;
 
                 if (minetopiaPlayer.isCommandSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
-            }, Throwable::printStackTrace);
+            });
         }
     }
 }

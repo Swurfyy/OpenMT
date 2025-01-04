@@ -27,7 +27,7 @@ public class BankingUsersCommand extends BaseCommand {
     public void addUser(CommandSender sender, OfflinePlayer target, String accountName, AccountPermission permission) {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
-        PlayerManager.getInstance().getMinetopiaPlayerAsync((Player) sender, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer((Player) sender).whenComplete((minetopiaPlayer, throwable1) -> {
             if (accountModel == null) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
                 return;
@@ -51,7 +51,7 @@ public class BankingUsersCommand extends BaseCommand {
                         .replace("<account_name>", accountModel.getName())
                         .replace("<permission>", permission.name()));
             }));
-        }, Throwable::printStackTrace);
+        });
     }
 
     @Subcommand("removeuser")
@@ -62,7 +62,7 @@ public class BankingUsersCommand extends BaseCommand {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync((Player) sender, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer((Player) sender).whenComplete((minetopiaPlayer, throwable1) -> {
             if (accountModel == null) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
                 return;
@@ -79,6 +79,6 @@ public class BankingUsersCommand extends BaseCommand {
                         .replace("<player>", (target.getName() == null ? "null" : target.getName()))
                         .replace("<account_name>", accountModel.getName()));
             });
-        }, Throwable::printStackTrace);
+        });
     }
 }

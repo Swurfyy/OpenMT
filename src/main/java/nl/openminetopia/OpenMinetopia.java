@@ -28,6 +28,7 @@ import nl.openminetopia.modules.core.CoreModule;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.detectiongates.DetectionModule;
 import nl.openminetopia.modules.fitness.FitnessModule;
+import nl.openminetopia.modules.migrator.MigratorModule;
 import nl.openminetopia.modules.misc.MiscModule;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.player.PlayerModule;

@@ -20,7 +20,7 @@ public class PlotTransferCommand extends BaseCommand {
     public void plotTransfer(Player player, Boolean transferable) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (region == null) {
@@ -43,6 +43,6 @@ public class PlotTransferCommand extends BaseCommand {
             region.setFlag(OpenMinetopia.PLOT_TRANSFER, StateFlag.State.ALLOW);
             ChatUtils.sendMessage(player, MessageConfiguration.message("plot_set_tranferable")
                     .replace("<plot_id>", region.getId()));
-        }, Throwable::printStackTrace);
+        });
     }
 }

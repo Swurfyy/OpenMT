@@ -20,7 +20,7 @@ public class PlayerEatListener implements Listener {
         if (!configuration.getCheapFood().contains(event.getItem().getType().name()) && !configuration.getLuxuryFood().contains(event.getItem().getType().name()))
             return;
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(event.getPlayer(), minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(event.getPlayer()).whenComplete((minetopiaPlayer, throwable1) -> {
             if (minetopiaPlayer == null) return;
 
             FitnessStatisticModel eatingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
@@ -44,6 +44,6 @@ public class PlayerEatListener implements Listener {
                 eatingStatistic.setPoints(0.0);
             }
             minetopiaPlayer.getFitness().setStatistic(FitnessStatisticType.EATING, eatingStatistic);
-        }, Throwable::printStackTrace);
+        });
     }
 }

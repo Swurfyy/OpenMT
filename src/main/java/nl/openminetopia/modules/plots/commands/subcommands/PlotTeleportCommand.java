@@ -33,7 +33,7 @@ public class PlotTeleportCommand extends BaseCommand {
         RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionManager regionManager = regionContainer.get(world);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (regionManager == null) {
@@ -52,6 +52,6 @@ public class PlotTeleportCommand extends BaseCommand {
             Location location = new Location(player.getWorld(), center.x(), center.y(), center.z());
             player.teleport(location);
             player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Je bent naar plot <aqua>" + region.getId() + " <dark_aqua>geteleporteerd."));
-        }, Throwable::printStackTrace);
+        });
     }
 }

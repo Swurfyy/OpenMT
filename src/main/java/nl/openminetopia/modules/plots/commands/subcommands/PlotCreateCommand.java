@@ -39,7 +39,7 @@ public class PlotCreateCommand extends BaseCommand {
         BukkitPlayer bukkitPlayer = BukkitAdapter.adapt(player);
         World bukkitWorld = player.getWorld();
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             boolean doTopToDown = topToDown == null || topToDown;
@@ -83,6 +83,6 @@ public class PlotCreateCommand extends BaseCommand {
             } catch (IncompleteRegionException e) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_no_selection"));
             }
-        }, Throwable::printStackTrace);
+        });
     }
 }

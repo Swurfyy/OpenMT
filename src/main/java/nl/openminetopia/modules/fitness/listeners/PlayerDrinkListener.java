@@ -22,7 +22,7 @@ public class PlayerDrinkListener implements Listener {
 
         PotionMeta meta = (PotionMeta) item.getItemMeta();
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(event.getPlayer(), minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(event.getPlayer()).whenComplete((minetopiaPlayer, throwable1) -> {
             if (minetopiaPlayer == null) return;
 
             FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
@@ -62,6 +62,6 @@ public class PlayerDrinkListener implements Listener {
             }
 
             minetopiaPlayer.getFitness().setStatistic(FitnessStatisticType.DRINKING, drinkingStatistic);
-        }, Throwable::printStackTrace);
+        });
     }
 }

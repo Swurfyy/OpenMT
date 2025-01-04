@@ -29,7 +29,7 @@ public class PrefixAddCommand extends BaseCommand {
     @CommandPermission("openminetopia.prefix.add")
     @Description("Add a prefix to a player.")
     public void addPrefix(Player player, OfflinePlayer offlinePlayer, Integer expiresAt, String prefix) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (offlinePlayer == null) {
@@ -37,7 +37,7 @@ public class PrefixAddCommand extends BaseCommand {
                 return;
             }
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer, targetMinetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer).whenComplete((targetMinetopiaPlayer, throwable1) -> {
                 if (targetMinetopiaPlayer == null) {
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                     return;
@@ -63,8 +63,8 @@ public class PrefixAddCommand extends BaseCommand {
                         .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
                         .replace("<prefix>", prefix)
                         .replace("<time>", expiresAt == -1 ? "nooit" : PlaytimeUtil.formatPlaytime(minutesToMillis(expiresAt))));
-            }, Throwable::printStackTrace);
-        }, Throwable::printStackTrace);
+            });
+        });
     }
 
     private int minutesToMillis(int minutes) {

@@ -23,7 +23,7 @@ public class PlayerChatListener implements Listener {
     @EventHandler
     public void playerChat(AsyncChatEvent event) {
         Player source = event.getPlayer();
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(source, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(source).whenComplete((minetopiaPlayer, throwable1) -> {
             if (minetopiaPlayer == null) return;
 
             if (!minetopiaPlayer.isInPlace()) return;
@@ -87,6 +87,6 @@ public class PlayerChatListener implements Listener {
                 // Send the formatted message to the target
                 target.sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage));
             }
-        }, Throwable::printStackTrace);
+        });
     }
 }

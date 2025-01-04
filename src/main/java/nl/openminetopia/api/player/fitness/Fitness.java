@@ -111,15 +111,17 @@ public class Fitness {
         boosterModel.setPlayerId(this.playerModel.getId());
         boosterModel.setAmount(amount);
         boosterModel.setExpiresAt(expiresAtMillis);
-        playerModel.getBoosters().add(boosterModel);
+        this.playerModel.getBoosters().add(boosterModel);
         StormDatabase.getInstance().saveStormModel(boosterModel);
+
+        System.out.println(playerModel.getUniqueId());
 
         runnable.run();
     }
 
     @SneakyThrows
     public void removeBooster(FitnessBoosterModel booster) {
-        playerModel.getBoosters().remove(booster);
+        this.playerModel.getBoosters().remove(booster);
         StormDatabase.getInstance().getStorm().delete(booster);
 
         runnable.run();

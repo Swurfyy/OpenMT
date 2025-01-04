@@ -32,7 +32,7 @@ public class PlotDeleteCommand extends BaseCommand {
         RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionManager regionManager = regionContainer.get(world);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (regionManager == null) {
@@ -52,6 +52,6 @@ public class PlotDeleteCommand extends BaseCommand {
 
             player.sendMessage(MessageConfiguration.component("plot_deletion_success"));
             regionManager.removeRegion(region.getId());
-        }, Throwable::printStackTrace);
+        });
     }
 }

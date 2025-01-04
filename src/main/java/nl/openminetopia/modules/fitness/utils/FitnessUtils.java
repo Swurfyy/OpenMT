@@ -23,7 +23,7 @@ import java.util.Objects;
 public class FitnessUtils {
 
     public static void applyFitness(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
                 clearFitnessEffects(player);
                 return;
@@ -44,7 +44,7 @@ public class FitnessUtils {
             // Apply walk speed and potion effects
             applyPlayerWalkSpeed(player, config, (float) effectLevel.getWalkSpeed());
             applyPotionEffects(player, effectLevel);
-        }, Throwable::printStackTrace);
+        });
     }
 
     private static void applyPlayerWalkSpeed(Player player, FitnessConfiguration config, float walkSpeed) {

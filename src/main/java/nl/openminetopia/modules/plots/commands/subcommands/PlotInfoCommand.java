@@ -25,7 +25,7 @@ public class PlotInfoCommand extends BaseCommand {
     public void plotInfo(Player player) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (region == null) {
@@ -63,6 +63,6 @@ public class PlotInfoCommand extends BaseCommand {
             }
 
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_footer"));
-        }, Throwable::printStackTrace);
+        });
     }
 }

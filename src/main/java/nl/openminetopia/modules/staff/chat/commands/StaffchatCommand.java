@@ -21,7 +21,7 @@ public class StaffchatCommand extends BaseCommand {
     @Default
     @CommandPermission("openminetopia.staffchat")
     public void staffchat(Player player, @Optional String message) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (message == null) {
@@ -36,12 +36,12 @@ public class StaffchatCommand extends BaseCommand {
                     .replace("<message>", message);
 
             Bukkit.getServer().getOnlinePlayers().forEach(target -> {
-                PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+                PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
                     if (targetMinetopiaPlayer == null) return;
 
                     if (targetMinetopiaPlayer.isStaffchatEnabled()) ChatUtils.sendFormattedMessage(targetMinetopiaPlayer, formattedMessage);
-                }, Throwable::printStackTrace);
+                });
             });
-        }, Throwable::printStackTrace);
+        });
     }
 }
