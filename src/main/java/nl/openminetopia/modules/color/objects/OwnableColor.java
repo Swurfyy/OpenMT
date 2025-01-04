@@ -35,14 +35,14 @@ public abstract class OwnableColor {
 
     public String displayName() {
         ColorComponent component = config().color(colorId);
-        if (component == null) component = new ColorComponent(null, "<gray>Default", "<gray>");
+        if (component == null) component = new ColorComponent(null, "<gray>Default", type.getDefaultColor());
 
         return component.displayName();
     }
 
     public String color() {
         ColorComponent component = config().color(colorId);
-        if (component == null) component = new ColorComponent(null, "<gray>Default", "<gray>");
+        if (component == null) component = new ColorComponent(null, "<gray>Default", type.getDefaultColor());
 
         return component.colorPrefix();
     }

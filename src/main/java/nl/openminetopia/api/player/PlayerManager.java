@@ -29,11 +29,38 @@ public class PlayerManager {
     private final PlayerModule playerModule = OpenMinetopia.getModuleManager().getModule(PlayerModule.class);
     private final Map<UUID, MinetopiaPlayer> onlinePlayers = new ConcurrentHashMap<>();
 
-
+    /**
+     * Retrieves a {@link MinetopiaPlayer} object for an online player.
+     * <p>
+     * This method checks the {@code onlinePlayers} map to find the {@link MinetopiaPlayer} associated with the given {@link Player}.
+     * </p>
+     * <ul>
+     *   <li>If the player is not online or not in the map, this method returns {@code null}.</li>
+     *   <li>For offline players, use {@link #getMinetopiaPlayer(OfflinePlayer)} to load the player data asynchronously.</li>
+     * </ul>
+     *
+     * @param player The {@link Player} whose {@link MinetopiaPlayer} object should be retrieved.
+     * @return The {@link MinetopiaPlayer} object if the player is online; {@code null} otherwise.
+     */
     public MinetopiaPlayer getOnlineMinetopiaPlayer(Player player) {
         return onlinePlayers.get(player.getUniqueId());
     }
 
+    /**
+     * Retrieves a {@link MinetopiaPlayer} object for the given player.
+     * <ul>
+     *   <li>If the player is online, the object will be retrieved from the onlinePlayers map.</li>
+     *   <li>If the player is offline, the object will be loaded from the database.</li>
+     *   <li>If the player is not found in the database, a new {@link MinetopiaPlayer} object will be created.</li>
+     * </ul>
+     * <p>
+     * Note: Use {@link #getOnlineMinetopiaPlayer(Player)} if you are certain the player is online.
+     * </p>
+     *
+     * @param player The {@link OfflinePlayer} for whom the {@link MinetopiaPlayer} object should be retrieved.
+     * @return A {@link CompletableFuture} containing the {@link MinetopiaPlayer} object.
+     * @since 1.3.0
+     */
     public CompletableFuture<MinetopiaPlayer> getMinetopiaPlayer(OfflinePlayer player) {
         CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
 

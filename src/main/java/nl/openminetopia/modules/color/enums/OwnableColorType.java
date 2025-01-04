@@ -15,7 +15,7 @@ public enum OwnableColorType {
     PREFIX(MessageConfiguration.message("color_prefix_display_name"), OpenMinetopia.getDefaultConfiguration().getDefaultPrefixColor()),
     CHAT(MessageConfiguration.message("color_chat_display_name"), OpenMinetopia.getDefaultConfiguration().getDefaultChatColor()),
     NAME(MessageConfiguration.message("color_name_display_name"), OpenMinetopia.getDefaultConfiguration().getDefaultNameColor()),
-    LEVEL(MessageConfiguration.message("color_level_display_name"),OpenMinetopia.getDefaultConfiguration().getDefaultLevelColor());
+    LEVEL(MessageConfiguration.message("color_level_display_name"), OpenMinetopia.getDefaultConfiguration().getDefaultLevelColor());
 
     private final String displayName;
     private final String defaultColor;
