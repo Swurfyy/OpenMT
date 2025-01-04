@@ -17,11 +17,11 @@ public class ModChatSpyCommand extends BaseCommand {
     @Description("Enables or disables ChatSpy")
     public void chatSpy(Player player) {
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             minetopiaPlayer.setChatSpyEnabled(!minetopiaPlayer.isChatSpyEnabled());
             player.sendMessage(ChatUtils.color("<gold>Je hebt <yellow>ChatSpy <gold>" + (minetopiaPlayer.isChatSpyEnabled() ? "aangezet" : "uitgezet") + "!"));
-        }, Throwable::printStackTrace);
+        });
     }
 }

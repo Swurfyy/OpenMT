@@ -29,8 +29,9 @@ import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.prefix.models.PrefixModel;
 
-public class MySQLAdapter implements DatabaseAdapter{
+public class MySQLAdapter implements DatabaseAdapter {
 
+    @Override
     public void connect() {
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
         String host = configuration.getDatabaseHost();

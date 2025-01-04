@@ -19,9 +19,9 @@ public class PlayerInteractListener implements Listener {
         if (!ItemUtils.isValidItem(item, OpenMinetopia.getDefaultConfiguration().getWalkieTalkieItems())) return;
         if (!event.getPlayer().hasPermission("openminetopia.walkietalkie")) return;
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(event.getPlayer(), minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(event.getPlayer()).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
             new WalkieTalkieMenu(event.getPlayer()).open(event.getPlayer());
-        }, Throwable::printStackTrace);
+        });
     }
 }

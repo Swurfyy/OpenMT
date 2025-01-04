@@ -6,7 +6,6 @@ import com.jazzkuh.inventorylib.loader.InventoryLoader;
 import com.jazzkuh.inventorylib.objects.Menu;
 import com.jeff_media.customblockdata.CustomBlockData;
 import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.protection.flags.BooleanFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.StringFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;

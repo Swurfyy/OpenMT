@@ -21,7 +21,7 @@ public class PlaytimeCommand extends BaseCommand {
     @Description("Get your or another player's playtime.")
     public void playtime(Player player, @Optional OfflinePlayer target) {
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) {
                 ChatUtils.sendMessage(player, MessageConfiguration.message("database_read_error"));
                 return;
@@ -33,7 +33,7 @@ public class PlaytimeCommand extends BaseCommand {
                 return;
             }
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
                 if (targetMinetopiaPlayer == null) {
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                     return;
@@ -42,13 +42,7 @@ public class PlaytimeCommand extends BaseCommand {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_time_other_player")
                         .replace("<player>", target.getName() == null ? "null" : target.getName())
                         .replace("<playtime>", PlaytimeUtil.formatPlaytime(targetMinetopiaPlayer.getPlaytime())));
-            }, throwable -> {
-                throwable.printStackTrace();
-                ChatUtils.sendMessage(player, MessageConfiguration.message("database_read_error"));
             });
-        }, throwable -> {
-            throwable.printStackTrace();
-            ChatUtils.sendMessage(player, MessageConfiguration.message("database_read_error"));
         });
     }
 }

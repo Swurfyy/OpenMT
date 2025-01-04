@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.staff.admintool.menus.AdminToolMenu;
@@ -14,6 +15,8 @@ import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+
+import java.util.concurrent.CompletableFuture;
 
 @CommandAlias("admintool")
 public class AdminToolOpenCommand extends BaseCommand {
@@ -27,9 +30,20 @@ public class AdminToolOpenCommand extends BaseCommand {
             return;
         }
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer, minetopiaPlayer -> {
+        CompletableFuture<MinetopiaPlayer> future = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer);
+
+        future.whenComplete((minetopiaPlayer, throwable) -> {
+            if (throwable != null) {
+                player.sendMessage(ChatUtils.color("<red>Er is een fout opgetreden bij het openen van de AdminTool."));
+                throwable.printStackTrace();
+                return;
+            }
+
             if (minetopiaPlayer == null) return;
             if (!offlinePlayer.isOnline()) minetopiaPlayer.getFitness().getRunnable().forceRun();
+
+            System.out.println(minetopiaPlayer.getPlayerModel().getUniqueId());
+            System.out.println(minetopiaPlayer.getFitness().getUuid());
 
             BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
             BankAccountModel bankAccountModel = bankingModule.getAccountByIdAsync(offlinePlayer.getUniqueId()).join();
@@ -37,6 +51,6 @@ public class AdminToolOpenCommand extends BaseCommand {
             Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
                 new AdminToolMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open(player);
             });
-        }, Throwable::printStackTrace);
+        });
     }
 }

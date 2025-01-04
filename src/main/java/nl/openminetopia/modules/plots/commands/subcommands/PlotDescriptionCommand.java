@@ -25,7 +25,7 @@ public class PlotDescriptionCommand extends BaseCommand {
     public void plotDescription(Player player, String description) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (region == null) {
@@ -50,6 +50,6 @@ public class PlotDescriptionCommand extends BaseCommand {
             ChatUtils.sendMessage(player, MessageConfiguration.message("plot_description_updated")
                     .replace("<description>", description)
                     .replace("<plot_id>", region.getId()));
-        }, Throwable::printStackTrace);
+        });
     }
 }

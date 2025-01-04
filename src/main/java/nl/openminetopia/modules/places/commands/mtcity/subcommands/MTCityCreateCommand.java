@@ -23,7 +23,7 @@ public class MTCityCreateCommand extends BaseCommand {
 
         PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             WorldModel world = minetopiaPlayer.getWorld();
@@ -45,7 +45,7 @@ public class MTCityCreateCommand extends BaseCommand {
 
                 String title = "<bold>" + loadingName.toUpperCase();
                 placesModule.createCity(name, title, "<gold>", 21.64, loadingName)
-                        .whenComplete((cityModel, throwable) -> {
+                        .whenComplete((cityModel, throwable1) -> {
                             if (throwable != null) {
                                 player.sendMessage(ChatUtils.color("<red>Failed to create city: " + throwable.getMessage()));
                                 return;
@@ -58,6 +58,6 @@ public class MTCityCreateCommand extends BaseCommand {
             }
 
             player.sendMessage(ChatUtils.color("<red>Region <white>" + name + " <red>does not exist!"));
-        }, Throwable::printStackTrace);
+        });
     }
 }

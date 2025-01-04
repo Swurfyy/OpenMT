@@ -27,7 +27,7 @@ public class ModSetLevelCommand extends BaseCommand {
             return;
         }
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer.getPlayer(), minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer.getPlayer()).whenComplete((minetopiaPlayer, throwable1) -> {
             if (minetopiaPlayer == null) return;
             int oldLevel = minetopiaPlayer.getLevel();
             minetopiaPlayer.setLevel(newLevel);
@@ -35,6 +35,6 @@ public class ModSetLevelCommand extends BaseCommand {
             player.sendMessage("Set the level of the player to " + newLevel + ".");
 
             Bukkit.getServer().getPluginManager().callEvent(new PlayerLevelChangeEvent(offlinePlayer.getPlayer(), oldLevel, newLevel));
-        }, Throwable::printStackTrace);
+        });
     }
 }

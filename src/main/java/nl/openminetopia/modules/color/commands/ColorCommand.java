@@ -21,42 +21,42 @@ public class ColorCommand extends BaseCommand {
 
     @Default
     public void onDefault(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
             new ColorTypeMenu(player, player, minetopiaPlayer).open(player);
-        }, Throwable::printStackTrace);
+        });
     }
 
 
     @CommandAlias("prefixcolor|prefixkleur")
     public void onPrefixColor(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
             new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.PREFIX).open(player);
-        }, Throwable::printStackTrace);
+        });
     }
 
     @CommandAlias("chatcolor|chatkleur")
     public void onChatColor(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
             new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.CHAT).open(player);
-        }, Throwable::printStackTrace);
+        });
     }
 
     @CommandAlias("namecolor|naamkleur")
     public void onNameColor(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
             new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.NAME).open(player);
-        }, Throwable::printStackTrace);
+        });
     }
 
     @CommandAlias("levelcolor|levelkleur")
     public void onLevelColor(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
             new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.LEVEL).open(player);
-        }, Throwable::printStackTrace);
+        });
     }
 }

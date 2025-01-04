@@ -20,7 +20,7 @@ public class PlayerMoveListener implements Listener {
         Bukkit.getScheduler().runTaskAsynchronously(OpenMinetopia.getInstance(), () -> {
             Player player = event.getPlayer();
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
                 if (minetopiaPlayer == null) return;
 
                 if (!minetopiaPlayer.isInPlace() || minetopiaPlayer.getPlace() == null) return;
@@ -36,7 +36,7 @@ public class PlayerMoveListener implements Listener {
                 );
                 player.showTitle(title);
 
-            }, Throwable::printStackTrace);
+            });
 
         });
     }

@@ -22,13 +22,13 @@ public class BodysearchCommand extends BaseCommand {
     @CommandPermission("openminetopia.bodysearch")
     public void bodysearch(Player player, OnlinePlayer onlineTarget) {
         Player target = onlineTarget.getPlayer();
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (player == target) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_bodysearch_self"));
                 return;
             }
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(target, minetopiaTarget -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((minetopiaTarget, throwable1) -> {
                 if (minetopiaTarget == null) {
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                     return;
@@ -49,7 +49,7 @@ public class BodysearchCommand extends BaseCommand {
                             .replace("<player>", player.getName()));
 
                 player.openInventory(target.getInventory());
-            }, Throwable::printStackTrace);
-        }, Throwable::printStackTrace);
+            });
+        });
     }
 }

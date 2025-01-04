@@ -23,7 +23,7 @@ public class PrefixRemoveCommand extends BaseCommand {
     @CommandCompletion("@players @playerPrefixes")
     @Description("Remove a prefix from a player.")
     public void removePrefix(Player player, OfflinePlayer offlinePlayer, String prefixName) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (offlinePlayer == null) {
@@ -31,7 +31,7 @@ public class PrefixRemoveCommand extends BaseCommand {
                 return;
             }
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer, targetMinetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer).whenComplete((targetMinetopiaPlayer, throwable1) -> {
                 if (targetMinetopiaPlayer == null) {
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                     return;
@@ -49,7 +49,7 @@ public class PrefixRemoveCommand extends BaseCommand {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_not_found")
                         .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
                         .replace("<prefix>", prefixName));
-            }, Throwable::printStackTrace);
-        }, Throwable::printStackTrace);
+            });
+        });
     }
 }

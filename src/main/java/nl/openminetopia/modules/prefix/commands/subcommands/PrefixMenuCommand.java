@@ -24,9 +24,9 @@ public class PrefixMenuCommand extends BaseCommand {
 
         // Open het prefix menu
         OfflinePlayer finalTarget = target;
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(target, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((minetopiaPlayer, throwable1) -> {
             if (minetopiaPlayer == null) return;
             new PrefixMenu(player, finalTarget, minetopiaPlayer).open(player);
-        }, Throwable::printStackTrace);
+        });
     }
 }

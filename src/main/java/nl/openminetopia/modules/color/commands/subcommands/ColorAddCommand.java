@@ -40,9 +40,9 @@ public class ColorAddCommand extends BaseCommand {
             return;
         }
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer, targetMinetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer).whenComplete((targetMinetopiaPlayer, throwable1) -> {
                 if (targetMinetopiaPlayer == null) {
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                     return;
@@ -96,7 +96,7 @@ public class ColorAddCommand extends BaseCommand {
 
                         break;
                 }
-            }, Throwable::printStackTrace);
-        }, Throwable::printStackTrace);
+            });
+        });
     }
 }

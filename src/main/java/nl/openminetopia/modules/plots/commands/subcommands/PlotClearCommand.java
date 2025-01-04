@@ -22,7 +22,7 @@ public class PlotClearCommand extends BaseCommand {
     public void plotClear(Player player) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (region == null) {
@@ -39,6 +39,6 @@ public class PlotClearCommand extends BaseCommand {
             region.getMembers().clear();
 
             player.sendMessage(MessageConfiguration.component("plot_clear_success"));
-        }, Throwable::printStackTrace);
+        });
     }
 }

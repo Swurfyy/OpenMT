@@ -34,7 +34,7 @@ public class CriminalRecordCommand extends BaseCommand {
     @CommandCompletion("@players")
     @CommandPermission("openminetopia.criminalrecord.add")
     public void add(Player player, OfflinePlayer target, String description) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (target == null) {
@@ -42,15 +42,15 @@ public class CriminalRecordCommand extends BaseCommand {
                 return;
             }
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
                 if (targetMinetopiaPlayer == null) return;
 
                 targetMinetopiaPlayer.addCriminalRecord(description, player.getUniqueId(), System.currentTimeMillis());
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_added")
                         .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName()))
                         .replace("<description>", description));
-            }, Throwable::printStackTrace);
-        }, Throwable::printStackTrace);
+            });
+        });
     }
 
     @Subcommand("remove")
@@ -60,7 +60,7 @@ public class CriminalRecordCommand extends BaseCommand {
     @CommandPermission("openminetopia.criminalrecord.remove")
     public void remove(Player player, OfflinePlayer target, int id) {
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (target == null) {
@@ -68,7 +68,7 @@ public class CriminalRecordCommand extends BaseCommand {
                 return;
             }
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
                 if (targetMinetopiaPlayer == null) {
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                     return;
@@ -86,8 +86,8 @@ public class CriminalRecordCommand extends BaseCommand {
                 }
 
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_not_found"));
-            }, Throwable::printStackTrace);
-        }, Throwable::printStackTrace);
+            });
+        });
     }
 
     @Subcommand("info")
@@ -97,7 +97,7 @@ public class CriminalRecordCommand extends BaseCommand {
     @CommandPermission("openminetopia.criminalrecord.info")
     public void info(Player player, OfflinePlayer target) {
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (target == null) {
@@ -105,7 +105,7 @@ public class CriminalRecordCommand extends BaseCommand {
                 return;
             }
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
                 if (targetMinetopiaPlayer == null) {
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                     return;
@@ -127,8 +127,8 @@ public class CriminalRecordCommand extends BaseCommand {
                             .replace("<officer>", (officer.getName() == null ? "Onbekend" : officer.getName()))
                             .replace("<date>", formatDate(criminalRecord.getDate())));
                 });
-            }, Throwable::printStackTrace);
-        }, Throwable::printStackTrace);
+            });
+        });
     }
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat(MessageConfiguration.message("police_criminal_record_date_format"));

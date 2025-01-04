@@ -20,11 +20,11 @@ public class ColorCreateCommand extends BaseCommand {
     @CommandPermission("openminetopia.color.create")
     @Description("Add a new color to the configuration.")
     public void create(Player player, String identifier, String displayName, String prefixColor) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             OpenMinetopia.getColorsConfiguration().createColor(identifier, displayName, prefixColor);
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_created")
                     .replace("<color>", displayName)
                     .replace("<identifier>", identifier));
-        }, Throwable::printStackTrace);
+        });
     }
 }

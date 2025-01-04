@@ -19,9 +19,9 @@ public class PrefixCommand extends BaseCommand {
 
     @Default
     public void prefixCommand(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
             new PrefixMenu(player, player, minetopiaPlayer).open(player);
-        }, Throwable::printStackTrace);
+        });
     }
 }

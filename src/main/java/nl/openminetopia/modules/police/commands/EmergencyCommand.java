@@ -17,23 +17,23 @@ public class EmergencyCommand extends BaseCommand {
     @Default
     public void emergency(Player player, String message) {
         if (hasCooldown(player)) {
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
                 long cooldown = OpenMinetopia.getModuleManager().getModule(PoliceModule.class).getEmergencyCooldowns().get(player.getUniqueId());
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_too_soon"));
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_cooldown")
                         .replace("<time>", cooldownToTime(cooldown)));
-            }, Throwable::printStackTrace);
+            });
             return;
         }
 
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (!onlinePlayer.hasPermission("openminetopia.police")) return;
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(onlinePlayer, minetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(onlinePlayer).whenComplete((minetopiaPlayer, throwable1) -> {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_format")
                         .replace("<sender>", player.getName())
                         .replace("<message>", message));
-            }, Throwable::printStackTrace);
+            });
         }
 
         OpenMinetopia.getModuleManager().getModule(PoliceModule.class).getEmergencyCooldowns().put(player.getUniqueId(), System.currentTimeMillis());

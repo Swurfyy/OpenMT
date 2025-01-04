@@ -34,7 +34,7 @@ public class PlotListCommand extends BaseCommand {
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionManager manager = container.get(world);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (manager == null) {
@@ -64,6 +64,6 @@ public class PlotListCommand extends BaseCommand {
             }
 
             player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Pagina <aqua>" + finalPage + "<dark_aqua>/<aqua>" + totalPages + "<dark_aqua>. Totaal: <aqua>" + regionNames.size() + " <dark_aqua>regio's."));
-        }, Throwable::printStackTrace);
+        });
     }
 }

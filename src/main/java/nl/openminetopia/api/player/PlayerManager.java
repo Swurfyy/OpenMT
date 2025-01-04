@@ -36,100 +36,32 @@ public class PlayerManager {
 
     public CompletableFuture<MinetopiaPlayer> getMinetopiaPlayer(OfflinePlayer player) {
         CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
-        getMinetopiaPlayerAsync(player, future::complete, future::completeExceptionally);
-        return future;
-    }
 
-    /**
-     * Fetches a MinetopiaPlayer asynchronously. If the player is online, retrieve it from the map.
-     * Otherwise, query the database.
-     *
-     * @param player The OfflinePlayer to retrieve the MinetopiaPlayer for.
-     * @param callback The action to perform if the MinetopiaPlayer is retrieved successfully.
-     * @param errorCallback The action to perform if there is an error during retrieval.
-     *
-     * @deprecated Use {@link #getMinetopiaPlayer(OfflinePlayer)} instead.
-     */
-    @Deprecated
-    public void getMinetopiaPlayerAsync(OfflinePlayer player,
-                                        Consumer<MinetopiaPlayer> callback,
-                                        Consumer<Throwable> errorCallback) {
-        UUID playerId = player.getUniqueId();
-
-        // Check if player is online and already loaded
-        if (onlinePlayers.containsKey(playerId)) {
-            callback.accept(onlinePlayers.get(playerId));
-            return;
+        if (onlinePlayers.containsKey(player.getUniqueId())) {
+            future.complete(onlinePlayers.get(player.getUniqueId()));
+            return future;
         }
 
-        // Load player if offline or not in the map
-        loadPlayerModel(player).whenComplete((playerModel, throwable) -> {
+        this.playerModule.getPlayerModel(player.getUniqueId()).whenComplete((playerModel, throwable) -> {
             if (throwable != null) {
-                errorCallback.accept(throwable);
-                return;
-            }
-            if (playerModel == null) {
-                callback.accept(null);
+                future.completeExceptionally(throwable);
                 return;
             }
 
-            // Create a new MinetopiaPlayer
-            MinetopiaPlayer newMinetopiaPlayer = new MinetopiaPlayer(playerId, playerModel);
-            loadMinetopiaPlayer(newMinetopiaPlayer).whenComplete((loadedMinetopiaPlayer, loadThrowable) -> {
-                if (loadThrowable != null) {
-                    errorCallback.accept(loadThrowable);
-                    return;
-                }
+            MinetopiaPlayer minetopiaPlayer = new MinetopiaPlayer(player.getUniqueId(), playerModel);
+
+            minetopiaPlayer.load().thenAccept(unused -> {
                 if (player.isOnline()) {
-                    onlinePlayers.put(playerId, loadedMinetopiaPlayer);
-                } else {
-                    loadedMinetopiaPlayer.load();
+                    onlinePlayers.put(player.getUniqueId(), minetopiaPlayer);
                 }
-                callback.accept(loadedMinetopiaPlayer);
+
+                future.complete(minetopiaPlayer);
+            }).exceptionally(throwable2 -> {
+                future.completeExceptionally(throwable2);
+                return null;
             });
         });
-    }
 
-    /**
-     * Synchronously gets a MinetopiaPlayer if there's an ongoing async operation or if the player is online.
-     *
-     * @param player The player to retrieve.
-     * @return The MinetopiaPlayer object.
-     */
-    public MinetopiaPlayer getMinetopiaPlayerSync(OfflinePlayer player) {
-        UUID playerId = player.getUniqueId();
-        if (onlinePlayers.containsKey(playerId)) {
-            return onlinePlayers.get(playerId);
-        }
-
-        // Perform synchronous retrieval if needed (not recommended if complex)
-        CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
-        getMinetopiaPlayerAsync(player, future::complete, future::completeExceptionally);
-        return future.join();
-    }
-
-    private CompletableFuture<PlayerModel> loadPlayerModel(OfflinePlayer player) {
-        UUID playerId = player.getUniqueId();
-        CompletableFuture<PlayerModel> future = new CompletableFuture<>();
-        this.playerModule.loadPlayer(playerId).whenComplete((playerModel, throwable) -> {
-            if (throwable != null) {
-                future.completeExceptionally(throwable);
-                return;
-            }
-            future.complete(playerModel);
-        });
-        return future;
-    }
-
-    private CompletableFuture<MinetopiaPlayer> loadMinetopiaPlayer(MinetopiaPlayer minetopiaPlayer) {
-        CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
-        minetopiaPlayer.load().whenComplete((unused, throwable) -> {
-            if (throwable != null) {
-                future.completeExceptionally(throwable);
-                return;
-            }
-            future.complete(minetopiaPlayer);
-        });
         return future;
     }
 }

@@ -27,7 +27,7 @@ public class BankingCreateCommand extends BaseCommand {
     public void createAccount(Player player, AccountType type, String name) {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (type == AccountType.PRIVATE) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_unique_private_account"));
                 return;
@@ -65,6 +65,6 @@ public class BankingCreateCommand extends BaseCommand {
                 bankingModule.getBankAccountModels().add(accountModel);
                 accountModel.initSavingTask();
             }));
-        }, Throwable::printStackTrace);
+        });
     }
 }

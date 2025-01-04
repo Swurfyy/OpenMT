@@ -38,15 +38,15 @@ public class PlayerHandcuffListener implements Listener {
 
         source.sendMessage(ChatUtils.color("<red>Je hebt <dark_red>" + target.getName() + " <red>in de boeien geslagen!"));
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(target, targetMinetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
             if (targetMinetopiaPlayer == null) return;
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(source,sourceMinetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(source).whenComplete((sourceMinetopiaPlayer, throwable) -> {
                 if (sourceMinetopiaPlayer == null) return;
 
                 HandcuffManager.getInstance().handcuff(targetMinetopiaPlayer, sourceMinetopiaPlayer);
-            }, Throwable::printStackTrace);
-        }, Throwable::printStackTrace);
+            });
+        });
 
     }
 }

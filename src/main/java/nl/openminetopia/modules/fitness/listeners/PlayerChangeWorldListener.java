@@ -13,9 +13,9 @@ public class PlayerChangeWorldListener implements Listener {
     public void worldChange(final PlayerChangedWorldEvent event) {
         PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
         if (placesModule.getWorld(event.getFrom().getSpawnLocation()) != null) return;
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(event.getPlayer(), minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(event.getPlayer()).whenComplete((minetopiaPlayer, throwable1) -> {
             if (minetopiaPlayer == null) return;
             minetopiaPlayer.getFitness().getRunnable().run();
-        }, Throwable::printStackTrace);
+        });
     }
 }

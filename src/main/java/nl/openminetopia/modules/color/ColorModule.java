@@ -66,13 +66,13 @@ public class ColorModule extends Module {
         OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("playerColors", context -> {
             List<String> colors = new ArrayList<>();
 
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(context.getPlayer(), minetopiaPlayer -> {
+            PlayerManager.getInstance().getMinetopiaPlayer(context.getPlayer()).whenComplete((minetopiaPlayer, throwable1) -> {
                 if (minetopiaPlayer == null) return;
 
                 colors.addAll(minetopiaPlayer.getColors().stream()
                         .map(OwnableColor::getColorId)
                         .toList());
-            }, Throwable::printStackTrace);
+            });
 
             return colors;
         });

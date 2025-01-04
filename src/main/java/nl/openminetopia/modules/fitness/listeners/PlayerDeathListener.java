@@ -17,7 +17,7 @@ public class PlayerDeathListener implements Listener {
         if (!configuration.isFitnessDeathPunishmentEnabled()) return;
 
         Player player = event.getEntity();
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             int punishmentInMillis = configuration.getFitnessDeathPunishmentDuration() * 60 * 1000;
@@ -29,6 +29,6 @@ public class PlayerDeathListener implements Listener {
 
             minetopiaPlayer.getFitness().addBooster(amount, expiry);
             minetopiaPlayer.getFitness().getRunnable().run();
-        }, Throwable::printStackTrace);
+        });
     }
 }

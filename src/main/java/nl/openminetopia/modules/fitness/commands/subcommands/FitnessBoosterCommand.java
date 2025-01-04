@@ -13,6 +13,8 @@ import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.util.concurrent.CompletableFuture;
+
 @CommandAlias("fitness|fitheid")
 public class FitnessBoosterCommand extends BaseCommand {
 
@@ -20,25 +22,33 @@ public class FitnessBoosterCommand extends BaseCommand {
     @CommandPermission("openminetopia.fitness.booster")
     @CommandCompletion("@players")
     public void booster(Player player, OfflinePlayer offlinePlayer, int amount, @Optional Integer expiresAt) {
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
 
-        if (offlinePlayer.getPlayer() == null) return;
+        if (offlinePlayer.getPlayer() == null) {
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+            return;
+        }
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
-            if (minetopiaPlayer == null) return;
-            PlayerManager.getInstance().getMinetopiaPlayerAsync(offlinePlayer.getPlayer(), targetMinetopiaPlayer -> {
-                if (targetMinetopiaPlayer == null) {
-                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
-                    return;
-                }
+        CompletableFuture<MinetopiaPlayer> future = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer.getPlayer());
 
-                int expiry = expiresAt == null || expiresAt <= 0 ? -1 : expiresAt;
-                long expiresAtMillis = expiry == -1 ? -1 : System.currentTimeMillis() + (expiry * 1000L);
+        future.whenComplete((targetMinetopiaPlayer, throwable) -> {
+            if (throwable != null) {
+                throwable.printStackTrace();
+                return;
+            }
 
-                targetMinetopiaPlayer.getFitness().addBooster(amount, expiresAtMillis);
+            if (targetMinetopiaPlayer == null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+                return;
+            }
 
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("fitness_booster_added_to")
-                        .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName())));
-                }, Throwable::printStackTrace);
-        }, Throwable::printStackTrace);
+            int expiry = expiresAt == null || expiresAt <= 0 ? -1 : expiresAt;
+            long expiresAtMillis = expiry == -1 ? -1 : System.currentTimeMillis() + (expiry * 1000L);
+
+            targetMinetopiaPlayer.getFitness().addBooster(amount, expiresAtMillis);
+
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("fitness_booster_added_to")
+                    .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName())));
+        });
     }
 }

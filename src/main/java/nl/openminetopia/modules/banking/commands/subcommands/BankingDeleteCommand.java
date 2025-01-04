@@ -26,7 +26,7 @@ public class BankingDeleteCommand extends BaseCommand {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync((OfflinePlayer) sender, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer((OfflinePlayer) sender).whenComplete((minetopiaPlayer, throwable1) -> {
             if (accountModel == null) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
                 return;
@@ -42,6 +42,6 @@ public class BankingDeleteCommand extends BaseCommand {
                         .replace("<account_name>", accountModel.getName()));
                 bankingModule.getBankAccountModels().remove(accountModel);
             });
-        }, Throwable::printStackTrace);
+        });
     }
 }

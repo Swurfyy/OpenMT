@@ -15,7 +15,7 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        PlayerManager.getInstance().getMinetopiaPlayerAsync(player, minetopiaPlayer -> {
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             if (!minetopiaPlayer.isInPlace() || minetopiaPlayer.getPlace() == null) return;
@@ -25,7 +25,7 @@ public class PlayerJoinListener implements Listener {
                     ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("place_enter_subtitle"))
             );
             player.showTitle(title);
-        }, Throwable::printStackTrace);
+        });
     }
 }
 
