@@ -29,9 +29,9 @@ public class FitnessBoosterCommand extends BaseCommand {
             return;
         }
 
-        CompletableFuture<MinetopiaPlayer> future = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer.getPlayer());
+        CompletableFuture<MinetopiaPlayer> targetFuture = PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer.getPlayer());
 
-        future.whenComplete((targetMinetopiaPlayer, throwable) -> {
+        targetFuture.whenComplete((targetMinetopiaPlayer, throwable) -> {
             if (throwable != null) {
                 throwable.printStackTrace();
                 return;

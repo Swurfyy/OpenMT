@@ -8,6 +8,6 @@ public enum FitnessStatisticType {
     FLYING,
     DRINKING,
     EATING,
-    HEALTH;
+    HEALTH
 
 }
