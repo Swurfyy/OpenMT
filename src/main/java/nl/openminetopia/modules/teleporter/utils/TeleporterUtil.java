@@ -1,6 +1,5 @@
 package nl.openminetopia.modules.teleporter.utils;
 
-import com.jazzkuh.inventorylib.utils.PersistentData;
 import com.jeff_media.customblockdata.CustomBlockData;
 import com.jeff_media.morepersistentdatatypes.DataType;
 import lombok.experimental.UtilityClass;
@@ -9,6 +8,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.teleporter.utils.enums.PressurePlate;
+import nl.openminetopia.utils.PersistentDataUtil;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -52,12 +52,12 @@ public final class TeleporterUtil {
     }
 
     public Location decodeNBT(ItemStack item) {
-        Double x = PersistentData.getDouble(item, "teleporter.x");
-        Double y = PersistentData.getDouble(item, "teleporter.y");
-        Double z = PersistentData.getDouble(item, "teleporter.z");
-        Float yaw = (Float) PersistentData.get(item, "teleporter.yaw");
-        Float pitch = (Float) PersistentData.get(item, "teleporter.pitch");
-        String worldName = PersistentData.getString(item, "teleporter.world");
+        Double x = PersistentDataUtil.getDouble(item, "teleporter.x");
+        Double y = PersistentDataUtil.getDouble(item, "teleporter.y");
+        Double z = PersistentDataUtil.getDouble(item, "teleporter.z");
+        Float yaw = (Float) PersistentDataUtil.get(item, "teleporter.yaw");
+        Float pitch = (Float) PersistentDataUtil.get(item, "teleporter.pitch");
+        String worldName = PersistentDataUtil.getString(item, "teleporter.world");
 
         if (x == null || y == null || z == null || yaw == null || pitch == null || worldName == null) return null;
         return new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
@@ -122,7 +122,7 @@ public final class TeleporterUtil {
 
     public boolean isTeleporterItem(ItemStack item) {
         if (item == null || item.getType().equals(Material.AIR)) return false;
-        return PersistentData.getDouble(item, "teleporter.x") != null;
+        return PersistentDataUtil.getDouble(item, "teleporter.x") != null;
     }
 
     public boolean isTeleporterBlock(Block block) {
