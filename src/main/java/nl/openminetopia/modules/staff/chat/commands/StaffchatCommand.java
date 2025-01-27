@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Optional;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
@@ -21,27 +22,26 @@ public class StaffchatCommand extends BaseCommand {
     @Default
     @CommandPermission("openminetopia.staffchat")
     public void staffchat(Player player, @Optional String message) {
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
 
-            if (message == null) {
-                minetopiaPlayer.setStaffchatEnabled(!minetopiaPlayer.isStaffchatEnabled());
-                player.sendMessage(ChatUtils.color("<gold>Je hebt staffchat nu <yellow>" + (minetopiaPlayer.isStaffchatEnabled() ? "aangezet" : "uitgezet")));
-                return;
-            }
+        if (message == null) {
+            minetopiaPlayer.setStaffchatEnabled(!minetopiaPlayer.isStaffchatEnabled());
+            player.sendMessage(ChatUtils.color("<gold>Je hebt staffchat nu <yellow>" + (minetopiaPlayer.isStaffchatEnabled() ? "aangezet" : "uitgezet")));
+            return;
+        }
 
-            String formattedMessage = MessageConfiguration.message("staff_chat_format")
-                    .replace("<player>", player.getName())
-                    .replace("<world_name>", player.getWorld().getName())
-                    .replace("<message>", message);
+        String formattedMessage = MessageConfiguration.message("staff_chat_format")
+                .replace("<player>", player.getName())
+                .replace("<world_name>", player.getWorld().getName())
+                .replace("<message>", message);
 
-            Bukkit.getServer().getOnlinePlayers().forEach(target -> {
-                PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
-                    if (targetMinetopiaPlayer == null) return;
+        Bukkit.getServer().getOnlinePlayers().forEach(target -> {
+            MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
+            if (targetMinetopiaPlayer == null) return;
 
-                    if (targetMinetopiaPlayer.isStaffchatEnabled()) ChatUtils.sendFormattedMessage(targetMinetopiaPlayer, formattedMessage);
-                });
-            });
+            if (!target.hasPermission("openminetopia.staffchat")) return;
+            ChatUtils.sendFormattedMessage(targetMinetopiaPlayer, formattedMessage);
         });
     }
 }

@@ -4,7 +4,7 @@ plugins {
     java
     id("io.freefair.lombok") version "8.11"
     id("com.gradleup.shadow") version "8.3.5"
-    id("io.papermc.paperweight.userdev") version "1.7.7"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
     id("maven-publish")
 }
 
@@ -43,7 +43,7 @@ repositories {
 
 dependencies {
     /* Paper */
-    paperweight.paperDevBundle("1.21.1-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
 
     /* Configuration */
     compileOnly("org.spongepowered:configurate-yaml:4.1.2")
@@ -69,7 +69,7 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.11.6")
 
     /* WorldGuard */
-    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.12")
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.13-SNAPSHOT")
 
     /* PersistentData addons */
     implementation("com.jeff-media:custom-block-data:2.2.3")

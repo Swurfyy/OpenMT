@@ -68,9 +68,8 @@ public class ChatUtils {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
         if (accountModel != null) {
-            message = message
-                    .replace("<balance_formatted>", bankingModule.format(accountModel.getBalance())
-                            .replace("<balance>", String.valueOf(accountModel.getBalance())));
+            message = message.replace("<balance_formatted>", bankingModule.format(accountModel.getBalance())
+                             .replace("<balance>", String.valueOf(accountModel.getBalance())));
         }
 
         if (OpenMinetopia.getInstance().getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
