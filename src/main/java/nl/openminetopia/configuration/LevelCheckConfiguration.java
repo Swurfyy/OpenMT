@@ -34,7 +34,7 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
         this.pointsNeededForLevelUp = levelCheckNode.node("points-needed-for-level-up").getInt(2500);
 
         this.pointsPerPlot = levelCheckNode.node("points-per-plot").getInt(4000);
-        this.pointsPer5KBalance = levelCheckNode.node("points-per-account-balance").getInt(5000);
+        this.pointsPer5KBalance = levelCheckNode.node("points-per-account-balance").getInt(50);
         this.pointsPerVehicle = levelCheckNode.node("points-per-vehicle").getInt(1200);
         this.pointsForPrefix = levelCheckNode.node("points-for-prefix").getInt(1750);
         this.pointsPerHourPlayed = levelCheckNode.node("points-per-hour-played").getInt(350);

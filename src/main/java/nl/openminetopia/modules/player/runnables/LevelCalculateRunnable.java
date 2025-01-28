@@ -6,11 +6,11 @@ import nl.openminetopia.configuration.LevelCheckConfiguration;
 import nl.openminetopia.modules.player.utils.LevelUtil;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class LevelCheckRunnable extends BukkitRunnable {
+public class LevelCalculateRunnable extends BukkitRunnable {
 
     private final MinetopiaPlayer minetopiaPlayer;
 
-    public LevelCheckRunnable(MinetopiaPlayer minetopiaPlayer) {
+    public LevelCalculateRunnable(MinetopiaPlayer minetopiaPlayer) {
         this.minetopiaPlayer = minetopiaPlayer;
     }
 

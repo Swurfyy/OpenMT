@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 @UtilityClass
 public class LevelUtil {
 
-    public static int calculateLevel(MinetopiaPlayer minetopiaPlayer) {
+    public int calculateLevel(MinetopiaPlayer minetopiaPlayer) {
         LevelCheckConfiguration configuration = OpenMinetopia.getLevelcheckConfiguration();
         double points = 0;
 

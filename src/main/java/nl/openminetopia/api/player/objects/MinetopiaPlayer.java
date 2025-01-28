@@ -5,7 +5,6 @@ import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
-import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
@@ -17,12 +16,11 @@ import nl.openminetopia.modules.color.objects.OwnableColor;
 import nl.openminetopia.modules.color.objects.PrefixColor;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.fitness.FitnessModule;
-import nl.openminetopia.modules.fitness.runnables.HealthStatisticRunnable;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.models.PlayerModel;
-import nl.openminetopia.modules.player.runnables.LevelCheckRunnable;
+import nl.openminetopia.modules.player.runnables.LevelCalculateRunnable;
 import nl.openminetopia.modules.player.runnables.PlaytimeRunnable;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
@@ -50,7 +48,7 @@ public class MinetopiaPlayer {
 
     private int level;
     private @Setter int calculatedLevel;
-    private LevelCheckRunnable levelcheckRunnable;
+    private LevelCalculateRunnable levelcheckRunnable;
 
     private boolean staffchatEnabled;
     private boolean commandSpyEnabled;
@@ -116,7 +114,7 @@ public class MinetopiaPlayer {
         this.playtimeRunnable = new PlaytimeRunnable(this);
         playtimeRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 20L);
 
-        this.levelcheckRunnable = new LevelCheckRunnable(this);
+        this.levelcheckRunnable = new LevelCalculateRunnable(this);
         levelcheckRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 20L * 30);
 
         loadFuture.complete(null);
