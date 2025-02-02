@@ -5,40 +5,57 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandAlias("112|911")
 public class EmergencyCommand extends BaseCommand {
 
     @Default
-    public void emergency(Player player, String message) {
-        if (hasCooldown(player)) {
-            PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-                long cooldown = OpenMinetopia.getModuleManager().getModule(PoliceModule.class).getEmergencyCooldowns().get(player.getUniqueId());
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_too_soon"));
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_cooldown")
-                        .replace("<time>", cooldownToTime(cooldown)));
-            });
+    public void emergency(CommandSender sender, String message) {
+
+        if (!(sender instanceof Player player)) {
+            broadcastEmergency(message, sender);
             return;
         }
 
-        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            if (!onlinePlayer.hasPermission("openminetopia.police")) return;
+        if (hasCooldown(player)) {
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
 
-            PlayerManager.getInstance().getMinetopiaPlayer(onlinePlayer).whenComplete((minetopiaPlayer, throwable1) -> {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_format")
-                        .replace("<sender>", player.getName())
-                        .replace("<message>", message));
-            });
+            long cooldown = OpenMinetopia.getModuleManager().getModule(PoliceModule.class).getEmergencyCooldowns().get(player.getUniqueId());
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_too_soon"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_cooldown")
+                    .replace("<time>", cooldownToTime(cooldown)));
+            return;
         }
 
         OpenMinetopia.getModuleManager().getModule(PoliceModule.class).getEmergencyCooldowns().put(player.getUniqueId(), System.currentTimeMillis());
+        broadcastEmergency(message, sender);
     }
 
+    private void broadcastEmergency(String message, CommandSender sender) {
+        boolean isPlayer = sender instanceof Player;
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            if (!onlinePlayer.hasPermission("openminetopia.police")) return;
+
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(onlinePlayer);
+
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_format")
+                    .replace("<sender>", isPlayer ? sender.getName() : "Anoniem")
+                    .replace("<location>", isPlayer ? getLocation(sender) : "Onbekend")
+                    .replace("<message>", message));
+        }
+    }
+
+    private String getLocation(CommandSender sender) {
+        if (!(sender instanceof Player player)) return "Onbekend";
+        return player.getLocation().x() + ", " + player.getLocation().y() + ", " + player.getLocation().z();
+    }
 
     private boolean hasCooldown(Player player) {
         PoliceModule policeModule = OpenMinetopia.getModuleManager().getModule(PoliceModule.class);

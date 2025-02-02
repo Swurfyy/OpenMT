@@ -21,12 +21,15 @@ public class PlayerLevelChangeEvent extends Event implements Cancellable {
 
     private final LevelChangeReason reason;
 
+    private final int oldLevel;
+
     private final int newLevel;
 
-    public PlayerLevelChangeEvent(MinetopiaPlayer player, LevelChangeReason reason, int newLevel) {
+    public PlayerLevelChangeEvent(MinetopiaPlayer player, LevelChangeReason reason, int oldLevel, int newLevel) {
         super(!Bukkit.getServer().isPrimaryThread());
         this.player = player;
         this.reason = reason;
+        this.oldLevel = oldLevel;
         this.newLevel = newLevel;
     }
 
@@ -34,12 +37,12 @@ public class PlayerLevelChangeEvent extends Event implements Cancellable {
         return handlers;
     }
 
-    public static HandlerList getHandlerList() {
+    public HandlerList getHandlerList() {
         return handlers;
     }
 
-    public static boolean setNewLevel(MinetopiaPlayer target, int newLevel, LevelChangeReason changeReason) {
-        PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(target, changeReason, newLevel);
+    public boolean setNewLevel(MinetopiaPlayer target, int newLevel, LevelChangeReason changeReason) {
+        PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(target, changeReason, target.getLevel(), newLevel);
         Bukkit.getPluginManager().callEvent(event);
         return event.isCancelled();
     }

@@ -23,6 +23,8 @@ public class PlayerChatListener implements Listener {
 
     @EventHandler
     public void playerChat(AsyncChatEvent event) {
+        if (event.isCancelled()) return;
+
         Player source = event.getPlayer();
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(source);
 
