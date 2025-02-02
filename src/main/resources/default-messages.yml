@@ -3,7 +3,7 @@ no: "<red>Nee"
 geen: "Geen."
 go_back: "Terug"
 next_page: "Volgende Pagina"
-previous_page: "Vorige Pagina" 
+previous_page: "Vorige Pagina"
 no_player_provided: "<red>Je moet een speler opgeven."
 
 # Database
@@ -68,7 +68,7 @@ color_name_added: "<gold>Je hebt de <color> naamkleur <gold>toegevoegd."
 color_level_added: "<gold>Je hebt de <color> levelkleur <gold>toegevoegd."
 color_created: "<green>Succesvol toegevoegd, kleur: <color> <identifier>"
 color_prefix_not_found: "&cDeze prefixkleur heeft de speler niet."
-color_prefix_removed: "<gold>Je hebt de <color> kleur <gold>verwijderd."  
+color_prefix_removed: "<gold>Je hebt de <color> kleur <gold>verwijderd."
 color_chat_not_found: "&cDeze chatkleur heeft de speler niet."
 color_chat_removed: "<gold>Je hebt de <color> chatkleur <gold>verwijderd."
 color_name_not_found: "&cDeze naamkleur heeft de speler niet."
@@ -156,7 +156,8 @@ plot_set_untranferable: "<gold>Je hebt plot <yellow><plot_id> <gold>onoverdraagb
 # Emergency command
 emergency_too_soon: "<red><b>112</b></red> <dark_gray>| <gray>Je kan niet zo snel achter elkaar een melding maken."
 emergency_cooldown: "<red><b>112</b></red> <dark_gray>| <gray>Probeer het over <white><time> <gray> nog eens."
-emergency_format: "<red><b>112</b></red> <dark_gray>| <gray><sender>: <white><message>"
+emergency_format: "<red>[<white>112<red>] [<white><world>, <x>, <y>, <z></white><red>] <gray><sender>:</gray> <white><message></white>
+"
 
 # Criminal records
 police_criminal_record_date_format: "dd-MM-yyyy HH:mm:ss"

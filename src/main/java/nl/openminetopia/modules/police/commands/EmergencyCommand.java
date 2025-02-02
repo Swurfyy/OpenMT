@@ -18,7 +18,6 @@ public class EmergencyCommand extends BaseCommand {
 
     @Default
     public void emergency(CommandSender sender, String message) {
-
         if (!(sender instanceof Player player)) {
             broadcastEmergency(message, sender);
             return;
@@ -47,14 +46,32 @@ public class EmergencyCommand extends BaseCommand {
 
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_format")
                     .replace("<sender>", isPlayer ? sender.getName() : "Anoniem")
-                    .replace("<location>", isPlayer ? getLocation(sender) : "Onbekend")
+                    .replace("<x>", isPlayer ? getX(sender) : "")
+                    .replace("<y>", isPlayer ? getY(sender) : "")
+                    .replace("<z>", isPlayer ? getZ(sender) : "")
+                    .replace("<world>", isPlayer ? getWorld(sender) : "Onbekend")
                     .replace("<message>", message));
         }
     }
 
-    private String getLocation(CommandSender sender) {
-        if (!(sender instanceof Player player)) return "Onbekend";
-        return player.getLocation().x() + ", " + player.getLocation().y() + ", " + player.getLocation().z();
+    private String getX(CommandSender sender) {
+        if (!(sender instanceof Player player)) return "";
+        return player.getLocation().getBlockX() + "";
+    }
+
+    private String getY(CommandSender sender) {
+        if (!(sender instanceof Player player)) return "";
+        return player.getLocation().getBlockY() + "";
+    }
+
+    private String getZ(CommandSender sender) {
+        if (!(sender instanceof Player player)) return "";
+        return player.getLocation().getBlockZ() + "";
+    }
+
+    private String getWorld(CommandSender sender) {
+        if (!(sender instanceof Player player)) return "";
+        return player.getWorld().getName();
     }
 
     private boolean hasCooldown(Player player) {
