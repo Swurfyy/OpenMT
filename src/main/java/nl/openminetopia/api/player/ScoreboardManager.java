@@ -36,11 +36,11 @@ public class ScoreboardManager {
 
         if (!minetopiaPlayer.isInPlace()) {
             if (!sidebar.players().contains(player)) return;
-            sidebar.removePlayer(player);
+            removeScoreboard(player);
             return;
         }
         if (minetopiaPlayer.isInPlace() && !sidebar.players().contains(player) && minetopiaPlayer.isScoreboardVisible()) {
-            sidebar.addPlayer(player);
+            addScoreboard(player);
         }
 
         List<String> lines = OpenMinetopia.getDefaultConfiguration().getScoreboardLines();

@@ -16,8 +16,6 @@ public class PlayerPreLoginListener implements Listener {
     public void playerPreLogin(final AsyncPlayerPreLoginEvent event) {
         PlayerManager.getInstance().getOnlinePlayers().remove(event.getUniqueId());
 
-        PlayerModule playerModule = OpenMinetopia.getModuleManager().getModule(PlayerModule.class);
-
         try {
             OfflinePlayer player = Bukkit.getOfflinePlayer(event.getUniqueId());
             PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {

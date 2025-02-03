@@ -30,6 +30,8 @@ public class PlayerJoinListener implements Listener {
                     task.cancel();
                     return;
                 }
+                if (!minetopiaPlayer.isScoreboardVisible()) return;
+
                 ScoreboardManager.getInstance().updateBoard(minetopiaPlayer);
             }, 0, 20);
         });

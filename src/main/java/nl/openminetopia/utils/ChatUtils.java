@@ -25,6 +25,9 @@ public class ChatUtils {
         return MiniMessage.miniMessage().deserialize(message);
     }
 
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
     public Component format(MinetopiaPlayer minetopiaPlayer, String message) {
         Player player = minetopiaPlayer.getBukkit().getPlayer();
         if (player == null) return Component.empty();
@@ -42,8 +45,8 @@ public class ChatUtils {
                 .replace("<name_color>", minetopiaPlayer.getActiveColor(OwnableColorType.NAME).color())
                 .replace("<display_name>", BalaclavaUtils.isWearingBalaclava(player) ? "<obf>Balaclava</obf><reset>" : ChatUtils.stripMiniMessage(player.displayName()))
                 .replace("<chat_color>", minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).color())
-                .replace("<date>", new SimpleDateFormat("dd-MM-yyyy").format(new Date()))
-                .replace("<time>", new SimpleDateFormat("HH:mm").format(new Date()))
+                .replace("<date>", dateFormat.format(new Date()))
+                .replace("<time>", timeFormat.format(new Date()))
                 .replace("<new_line>", "\n");
 
         if (minetopiaPlayer.isInPlace()) {
