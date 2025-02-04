@@ -78,7 +78,7 @@ public class PlotCreateCommand extends BaseCommand {
                 Bukkit.getPluginManager().callEvent(event);
 
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_creation_success")
-                        .replace("<plot>", name)
+                        .replace("<plot_id>", name)
                 );
             } catch (IncompleteRegionException e) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_no_selection"));
