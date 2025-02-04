@@ -14,7 +14,7 @@ import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-@CommandAlias("playtime")
+@CommandAlias("playtime|time|ptime")
 public class PlaytimeCommand extends BaseCommand {
 
     @Default

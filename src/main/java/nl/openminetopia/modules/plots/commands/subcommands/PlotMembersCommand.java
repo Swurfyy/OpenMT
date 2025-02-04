@@ -1,10 +1,7 @@
 package nl.openminetopia.modules.plots.commands.subcommands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.Description;
-import co.aikar.commands.annotation.Subcommand;
-import co.aikar.commands.annotation.Syntax;
+import co.aikar.commands.annotation.*;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import nl.openminetopia.OpenMinetopia;
@@ -21,6 +18,7 @@ public class PlotMembersCommand extends BaseCommand {
 
     @Subcommand("addmember")
     @Description("Voegt een speler toe aan een plot.")
+    @CommandCompletion("@players")
     @Syntax("<speler>")
     public void addPlotMember(Player player, OfflinePlayer offlinePlayer) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
@@ -61,7 +59,7 @@ public class PlotMembersCommand extends BaseCommand {
     }
 
     @Subcommand("removemember")
-    @Description("Verwijderd een speler van een plot.")
+    @Description("Verwijdert een speler van een plot.")
     @Syntax("<speler>")
     public void removePlotMember(Player player, OfflinePlayer offlinePlayer) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);

@@ -1,11 +1,7 @@
 package nl.openminetopia.modules.plots.commands.subcommands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandPermission;
-import co.aikar.commands.annotation.Description;
-import co.aikar.commands.annotation.Subcommand;
-import co.aikar.commands.annotation.Syntax;
+import co.aikar.commands.annotation.*;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import nl.openminetopia.OpenMinetopia;
@@ -23,6 +19,7 @@ public class PlotOwnersCommand extends BaseCommand {
     @Subcommand("addowner")
     @Description("Voegt een speler toe aan een plot.")
     @CommandPermission("openminetopia.plot.addowner")
+    @CommandCompletion("@players")
     @Syntax("<speler>")
     public void addPlotOwner(Player player, OfflinePlayer offlinePlayer) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
@@ -58,7 +55,7 @@ public class PlotOwnersCommand extends BaseCommand {
     }
 
     @Subcommand("removeowner")
-    @Description("Verwijderd een speler van een plot.")
+    @Description("Verwijdert een speler van een plot.")
     @CommandPermission("openminetopia.plot.removeowner")
     @Syntax("<speler>")
     public void removePlotOwner(Player player, OfflinePlayer offlinePlayer) {
