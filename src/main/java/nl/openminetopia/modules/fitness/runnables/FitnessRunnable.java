@@ -12,6 +12,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FitnessRunnable extends BukkitRunnable {
@@ -34,10 +35,7 @@ public class FitnessRunnable extends BukkitRunnable {
             return;
         }
 
-        List<FitnessBoosterModel> boosters = fitness.getBoosters();
-        boosters.forEach(booster -> {
-            if (booster.isExpired()) fitness.removeBooster(booster);
-        });
+        fitness.getBoosters().removeIf(FitnessBoosterModel::isExpired);
 
         if (!force) {
             MinetopiaPlayer minetopiaPlayer = fitness.getMinetopiaPlayer();

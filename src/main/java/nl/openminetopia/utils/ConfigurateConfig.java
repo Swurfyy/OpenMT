@@ -55,5 +55,4 @@ public abstract class ConfigurateConfig {
             FileUtils.copyInputStreamToFile(resourceStream, config);
         }
     }
-
 }
