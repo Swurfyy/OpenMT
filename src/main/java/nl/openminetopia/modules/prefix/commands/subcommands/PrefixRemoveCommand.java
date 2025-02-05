@@ -21,7 +21,7 @@ public class PrefixRemoveCommand extends BaseCommand {
     @Syntax("<player> <prefix>")
     @CommandPermission("openminetopia.prefix.remove")
     @CommandCompletion("@players @playerPrefixes")
-    @Description("Remove a prefix from a player.")
+    @Description("Verwijder een prefix van een speler.")
     public void removePrefix(Player player, OfflinePlayer offlinePlayer, String prefixName) {
         PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
