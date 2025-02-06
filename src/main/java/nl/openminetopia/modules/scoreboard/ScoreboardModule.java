@@ -37,6 +37,6 @@ public class ScoreboardModule extends Module {
 
     @Override
     public void disable() {
-        scoreboardLibrary.close();
+        if (scoreboardLibrary != null) scoreboardLibrary.close();
     }
 }
