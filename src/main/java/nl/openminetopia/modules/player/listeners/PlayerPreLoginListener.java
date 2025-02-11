@@ -27,11 +27,9 @@ public class PlayerPreLoginListener implements Listener {
 
                 if (minetopiaPlayer == null) {
                     event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, MessageConfiguration.component("player_data_not_loaded"));
-                    OpenMinetopia.getInstance().getLogger().warning("Error loading player model: Player not found");
+                    OpenMinetopia.getInstance().getLogger().warning("Error loading player model: MinetopiaPlayer is null");
                     return;
                 }
-
-                OpenMinetopia.getInstance().getLogger().info("Loaded MinetopiaPlayer " + player.getName());
             });
         } catch (Exception e) {
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, MessageConfiguration.component("player_data_not_loaded"));
