@@ -175,6 +175,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
      * Time Configuration
      */
     private final boolean syncTime;
+    private final String syncTimeZone;
 
     @SneakyThrows
     public DefaultConfiguration(File file) {
@@ -477,6 +478,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
          * Timesync configuration
          */
         this.syncTime = rootNode.node("timesync", "enabled").getBoolean(true);
+        this.syncTimeZone = rootNode.node("timesync", "timezone").getString("Europe/Amsterdam");
     }
 
     @SneakyThrows
