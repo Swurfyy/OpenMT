@@ -146,7 +146,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final int taserFreezeDuration;
     private final int taserEffectsDuration;
     private final List<String> taserEffects;
-    
+
     /**
      * Head configuration
      */
@@ -170,6 +170,11 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final boolean trashcanEnabled;
     private final List<Material> trashcanBlocks;
     private final boolean trashcanUseDropperInventory;
+
+    /**
+     * Time Configuration
+     */
+    private final boolean syncTime;
 
     @SneakyThrows
     public DefaultConfiguration(File file) {
@@ -467,6 +472,11 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "DROPPER"
         )).stream().map(Material::matchMaterial).toList();
         this.trashcanUseDropperInventory = rootNode.node("trashcan", "use-dropper-inventory").getBoolean(false);
+
+        /*
+         * Timesync configuration
+         */
+        this.syncTime = rootNode.node("timesync", "enabled").getBoolean(true);
     }
 
     @SneakyThrows
