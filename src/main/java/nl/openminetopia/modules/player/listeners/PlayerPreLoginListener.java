@@ -3,7 +3,6 @@ package nl.openminetopia.modules.player.listeners;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.configuration.MessageConfiguration;
-import nl.openminetopia.modules.player.PlayerModule;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;

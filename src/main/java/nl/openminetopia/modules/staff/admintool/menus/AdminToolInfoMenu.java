@@ -7,7 +7,6 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
-import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.menus.BankContentsMenu;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;

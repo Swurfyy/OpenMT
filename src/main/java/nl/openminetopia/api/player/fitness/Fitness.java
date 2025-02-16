@@ -1,13 +1,11 @@
 package nl.openminetopia.api.player.fitness;
 
-import com.craftmend.storm.api.enums.Where;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.storm.StormDatabase;
-import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;

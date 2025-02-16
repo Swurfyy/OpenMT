@@ -9,7 +9,6 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.configuration.MessageConfiguration;
-import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.entity.Player;
 

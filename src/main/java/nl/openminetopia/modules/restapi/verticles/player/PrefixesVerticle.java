@@ -4,7 +4,6 @@ import io.vertx.core.Promise;
 import io.vertx.ext.web.RoutingContext;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

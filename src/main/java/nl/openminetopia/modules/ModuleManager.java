@@ -2,7 +2,6 @@ package nl.openminetopia.modules;
 
 import nl.openminetopia.OpenMinetopia;
 
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

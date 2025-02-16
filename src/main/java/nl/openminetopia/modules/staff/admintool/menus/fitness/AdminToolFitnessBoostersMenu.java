@@ -3,7 +3,6 @@ package nl.openminetopia.modules.staff.admintool.menus.fitness;
 import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import lombok.Getter;
-import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;

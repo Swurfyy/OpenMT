@@ -13,13 +13,7 @@ import nl.openminetopia.modules.restapi.verticles.banking.BankAccountUsersVertic
 import nl.openminetopia.modules.restapi.verticles.banking.BankAccountVerticle;
 import nl.openminetopia.modules.restapi.verticles.banking.BankAccountsVerticle;
 import nl.openminetopia.modules.restapi.verticles.places.PlacesVerticle;
-import nl.openminetopia.modules.restapi.verticles.player.ColorsVerticle;
-import nl.openminetopia.modules.restapi.verticles.player.CriminalRecordsVerticle;
-import nl.openminetopia.modules.restapi.verticles.player.FitnessStatisticsVerticle;
-import nl.openminetopia.modules.restapi.verticles.player.PlayerBankAccountsVerticle;
-import nl.openminetopia.modules.restapi.verticles.player.PlayerPlotsVerticle;
-import nl.openminetopia.modules.restapi.verticles.player.PlayerVerticle;
-import nl.openminetopia.modules.restapi.verticles.player.PrefixesVerticle;
+import nl.openminetopia.modules.restapi.verticles.player.*;
 import nl.openminetopia.modules.restapi.verticles.plots.PlotsVerticle;
 
 public class RestAPIModule extends Module {

@@ -1,14 +1,12 @@
 package nl.openminetopia.modules.time.tasks;
 
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.WorldModel;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.TimeZone;
 

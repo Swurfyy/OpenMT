@@ -2,10 +2,8 @@ package nl.openminetopia.modules.restapi.base;
 
 import io.vertx.core.Context;
 import io.vertx.core.Promise;
-import io.vertx.core.Verticle;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.handler.BodyHandler;
 import lombok.SneakyThrows;
 
 import java.util.LinkedHashMap;

@@ -2,7 +2,6 @@ package nl.openminetopia.api.player.events;
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.openminetopia.api.enums.LevelChangeReason;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Cancellable;

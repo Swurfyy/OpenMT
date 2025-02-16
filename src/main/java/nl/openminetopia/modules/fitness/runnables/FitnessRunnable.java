@@ -12,9 +12,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FitnessRunnable extends BukkitRunnable {
 
     private final Fitness fitness;

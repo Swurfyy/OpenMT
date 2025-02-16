@@ -5,7 +5,6 @@ import io.vertx.ext.web.RoutingContext;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
-import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.json.simple.JSONObject;

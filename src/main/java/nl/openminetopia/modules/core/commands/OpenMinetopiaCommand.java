@@ -11,7 +11,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.util.Collection;
 import java.util.List;
 
 @CommandAlias("openminetopia|sdb|minetopia|omt")
