@@ -6,6 +6,8 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.ScoreboardManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.utils.ChatUtils;
@@ -29,21 +31,22 @@ public class MTWorldCreateCommand extends BaseCommand {
 
         placesModule.createWorld(player.getWorld().getName(), title, "<gold>", 21.64, loadingName)
                 .whenComplete((worldModel, throwable) -> {
-            if (throwable != null) {
-                player.sendMessage(ChatUtils.color("<red>Failed to create world: " + throwable.getMessage()));
-                return;
-            }
-            placesModule.getWorldModels().add(worldModel);
-        });
+                    if (throwable != null) {
+                        player.sendMessage(ChatUtils.color("<red>Failed to create world: " + throwable.getMessage()));
+                        return;
+                    }
+                    placesModule.getWorldModels().add(worldModel);
+                });
 
         player.sendMessage(ChatUtils.color("<green>World <white>" + loadingName + " <green>has been created!"));
 
         for (Player worldPlayer : player.getWorld().getPlayers()) {
-            PlayerManager.getInstance().getMinetopiaPlayer(worldPlayer).whenComplete((minetopiaPlayer, throwable1) -> {
-                if (minetopiaPlayer == null) return;
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(worldPlayer);
+            if (minetopiaPlayer == null) return;
 
-                minetopiaPlayer.getFitness().getRunnable().run();
-            });
+            minetopiaPlayer.getFitness().getRunnable().run();
+
+            ScoreboardManager.getInstance().addScoreboard(worldPlayer);
         }
     }
 }
