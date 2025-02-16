@@ -24,7 +24,7 @@ import java.util.List;
 @Getter
 public class BankContentsMenu extends Menu {
 
-    private final BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
+    private static final BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
 
     private final Player player;
     private final BankAccountModel accountModel;
@@ -36,16 +36,7 @@ public class BankContentsMenu extends Menu {
         this.accountModel = accountModel;
         this.asAdmin = asAdmin;
 
-        List<BankNote> bankNotes = new LinkedList<>();
-        bankNotes.add(new BankNote(Material.GHAST_TEAR, 500));
-        bankNotes.add(new BankNote(Material.DIAMOND, 200));
-        bankNotes.add(new BankNote(Material.REDSTONE, 100));
-        bankNotes.add(new BankNote(Material.EMERALD, 50));
-        bankNotes.add(new BankNote(Material.COAL, 20));
-        bankNotes.add(new BankNote(Material.IRON_INGOT, 10));
-        bankNotes.add(new BankNote(Material.QUARTZ, 5));
-        bankNotes.add(new BankNote(Material.GOLD_INGOT, 1));
-        bankNotes.add(new BankNote(Material.GOLD_NUGGET, 0.10));
+        List<BankNote> bankNotes = OpenMinetopia.getBankingConfiguration().getBankNotes();
 
         for (int i = 36; i < 45; i++) {
             this.addItem(new Icon(i, new ItemBuilder(Material.PURPLE_STAINED_GLASS_PANE).toItemStack()));
@@ -142,7 +133,7 @@ public class BankContentsMenu extends Menu {
 
     @Getter
     @RequiredArgsConstructor
-    private final class BankNote {
+    public static final class BankNote {
         private final Material material;
         private final double value;
 

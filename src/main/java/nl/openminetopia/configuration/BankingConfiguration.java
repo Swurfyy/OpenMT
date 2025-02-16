@@ -1,16 +1,18 @@
 package nl.openminetopia.configuration;
 
+import io.leangen.geantyref.TypeToken;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.banking.menus.BankContentsMenu;
 import nl.openminetopia.utils.ConfigurateConfig;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 public class BankingConfiguration extends ConfigurateConfig {
@@ -21,6 +23,8 @@ public class BankingConfiguration extends ConfigurateConfig {
     private final String typeSelectionTitle;
     private final String accountSelectionTitle;
     private final String accountContentsTitle;
+
+    private final List<BankContentsMenu.BankNote> bankNotes;
 
     @SneakyThrows
     public BankingConfiguration(File file) {
@@ -42,5 +46,40 @@ public class BankingConfiguration extends ConfigurateConfig {
         this.typeSelectionTitle = rootNode.node("banking", "inventories", "select-type-title").getString("<gray>Selecteer het rekeningtype:");
         this.accountSelectionTitle = rootNode.node("banking", "inventories", "select-account-title").getString("<type_color><type_name>");
         this.accountContentsTitle = rootNode.node("banking", "inventories", "account-contents-title").getString("<type_color><account_name> <reset>| <gold><account_balance>");
+
+        this.bankNotes = new ArrayList<>();
+        List<BankContentsMenu.BankNote> dummyNotes = new ArrayList<>();
+        dummyNotes.add(new BankContentsMenu.BankNote(Material.GHAST_TEAR, 500));
+        dummyNotes.add(new BankContentsMenu.BankNote(Material.DIAMOND, 200));
+        dummyNotes.add(new BankContentsMenu.BankNote(Material.REDSTONE, 100));
+        dummyNotes.add(new BankContentsMenu.BankNote(Material.EMERALD, 50));
+        dummyNotes.add(new BankContentsMenu.BankNote(Material.COAL, 20));
+        dummyNotes.add(new BankContentsMenu.BankNote(Material.IRON_INGOT, 10));
+        dummyNotes.add(new BankContentsMenu.BankNote(Material.QUARTZ, 5));
+        dummyNotes.add(new BankContentsMenu.BankNote(Material.GOLD_INGOT, 1));
+        dummyNotes.add(new BankContentsMenu.BankNote(Material.GOLD_NUGGET, 0.10));
+
+        Map<String, Double> defaultNotes = dummyNotes.stream()
+                .collect(Collectors.toMap(
+                        note -> note.getMaterial().name(),
+                        BankContentsMenu.BankNote::getValue
+                ));
+
+        Map<String, Double> notesMap = rootNode.node("banking", "notes").get(new TypeToken<>() {
+        }, defaultNotes);
+
+        notesMap.entrySet().stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .forEachOrdered(entry -> {
+                    Material material = Material.matchMaterial(entry.getKey());
+
+                    if (material == null) {
+                        OpenMinetopia.getInstance().getLogger().warning("No valid material for bank note: " + entry.getKey());
+                        return;
+                    }
+
+                    bankNotes.add(new BankContentsMenu.BankNote(material, entry.getValue()));
+                });
+
     }
 }
