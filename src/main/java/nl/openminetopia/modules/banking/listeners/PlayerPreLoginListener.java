@@ -34,7 +34,7 @@ public class PlayerPreLoginListener implements Listener {
                     accountModel.initSavingTask();
                     accountModel.getUsers().put(event.getUniqueId(), AccountPermission.ADMIN);
                     bankingModule.getBankAccountModels().add(accountModel);
-                    OpenMinetopia.getInstance().getLogger().info("Loaded account for: " + event.getName() + " (" + accountModel + ")");
+                    OpenMinetopia.getInstance().getLogger().info("Loaded account for: " + event.getName() + " (" + accountModel.getUniqueId() + ")");
                 });
 
                 return;

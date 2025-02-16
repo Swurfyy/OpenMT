@@ -19,8 +19,4 @@ public class AccountSavingTask extends BukkitRunnable {
         StormDatabase.getInstance().saveStormModel(account);
     }
 
-    public void saveAndCancel() {
-        run();
-        cancel();
-    }
 }

@@ -9,6 +9,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.tasks.AccountSavingTask;
+import nl.openminetopia.modules.data.storm.StormDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +50,6 @@ public class BankAccountModel extends StormModel {
     }
 
     public void save() {
-        this.savingTask.run();
+        StormDatabase.getInstance().saveStormModel(this);
     }
 }

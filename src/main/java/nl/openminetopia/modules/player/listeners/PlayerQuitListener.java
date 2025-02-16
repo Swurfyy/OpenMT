@@ -18,15 +18,19 @@ public class PlayerQuitListener implements Listener {
 
         BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
-        bankingModule.getBankAccountModels().remove(accountModel);
-        accountModel.getSavingTask().saveAndCancel();
+
+        if(accountModel != null) {
+            bankingModule.getBankAccountModels().remove(accountModel);
+            accountModel.save();
+            accountModel.getSavingTask().cancel();
+        }
 
         PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;
 
             minetopiaPlayer.save().whenComplete((unused, throwable1) -> {
                 if (throwable1 != null) {
-                    throwable1.printStackTrace();
+                    OpenMinetopia.getInstance().getLogger().severe("Couldn't save Player (" + player.getName() + "): " + throwable1.getMessage());
                     return;
                 }
                 OpenMinetopia.getInstance().getLogger().info("Saved player data for " + player.getName());

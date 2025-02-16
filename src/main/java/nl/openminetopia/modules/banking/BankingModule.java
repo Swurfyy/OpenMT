@@ -116,7 +116,8 @@ public class BankingModule extends Module {
     public void disable() {
         bankAccountModels.forEach(accountModel -> {
             if (accountModel.getSavingTask() != null) {
-                accountModel.getSavingTask().saveAndCancel();
+                accountModel.save();
+                accountModel.getSavingTask().cancel();
             }
         });
     }
