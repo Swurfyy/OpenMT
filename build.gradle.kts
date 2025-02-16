@@ -2,8 +2,8 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     java
-    id("io.freefair.lombok") version "8.12"
-    id("com.gradleup.shadow") version "8.3.5"
+    id("io.freefair.lombok") version "8.12.1"
+    id("com.gradleup.shadow") version "8.3.6"
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
     id("maven-publish")
 }
@@ -53,7 +53,7 @@ dependencies {
     compileOnly("com.zaxxer:HikariCP:6.2.1")
     compileOnly("mysql:mysql-connector-java:8.0.33")
     compileOnly("org.mariadb.jdbc:mariadb-java-client:3.5.1")
-    compileOnly("org.xerial:sqlite-jdbc:3.48.0.0")
+    compileOnly("org.xerial:sqlite-jdbc:3.49.0.0")
     implementation("com.github.Mindgamesnl:storm:e1f961b480")
 
     /* Command Framework */
