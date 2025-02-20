@@ -20,11 +20,11 @@ public class PrefixAddCommand extends BaseCommand {
      * @param expiresAt The time in minutes when the prefix expires. (-1 for never)
      */
     @Subcommand("add")
-    @Syntax("<speler> <prefix> [<minuten>]")
-    @CommandCompletion("@players @range:0-1440")
+    @Syntax("<speler> <minuten> <prefix>")
+    @CommandCompletion("@players @range:0-1440 @nothing")
     @CommandPermission("openminetopia.prefix.add")
     @Description("Voeg een prefix toe aan een speler voor een bepaalde tijd.")
-    public void addPrefix(Player player, OfflinePlayer offlinePlayer, String prefix, @Optional Integer expiresAt) {
+    public void addPrefix(Player player, OfflinePlayer offlinePlayer, Integer expiresAt, String prefix) {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
@@ -32,11 +32,6 @@ public class PrefixAddCommand extends BaseCommand {
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
             return;
         }
-
-        if (expiresAt == null) {
-            expiresAt = -1;
-        }
-        int finalExpiresAt = expiresAt;
 
         PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer).whenComplete((targetMinetopiaPlayer, throwable1) -> {
             if (targetMinetopiaPlayer == null) {
@@ -53,16 +48,16 @@ public class PrefixAddCommand extends BaseCommand {
                 }
             }
 
-            long expiresAtMillis = System.currentTimeMillis() + minutesToMillis(finalExpiresAt);
-            if (finalExpiresAt == -1) expiresAtMillis = -1;
+            long expiresAtMillis = System.currentTimeMillis() + minutesToMillis(expiresAt);
+            if (expiresAt == -1) expiresAtMillis = -1;
 
-            Prefix prefix1 = new Prefix(prefix, expiresAtMillis);
-            targetMinetopiaPlayer.addPrefix(prefix1);
+            Prefix prefixModel = new Prefix(prefix, expiresAtMillis);
+            targetMinetopiaPlayer.addPrefix(prefixModel);
 
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_added")
                     .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))
                     .replace("<prefix>", prefix)
-                    .replace("<time>", finalExpiresAt == -1 ? "nooit" : PlaytimeUtil.formatPlaytime(minutesToMillis(finalExpiresAt))));
+                    .replace("<time>", expiresAt == -1 ? "nooit" : PlaytimeUtil.formatPlaytime(minutesToMillis(expiresAt))));
         });
     }
 
