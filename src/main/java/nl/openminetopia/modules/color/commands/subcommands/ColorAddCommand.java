@@ -23,7 +23,7 @@ public class ColorAddCommand extends BaseCommand {
     @CommandCompletion("@players @colorTypes @colorIds @range:0-1440")
     @CommandPermission("openminetopia.color.add")
     @Description("Add a color to a player.")
-    public void color(Player player, OfflinePlayer offlinePlayer, OwnableColorType type, String draftColor, @Optional Integer expiresAt) {
+    public void color(Player player, OfflinePlayer offlinePlayer, OwnableColorType type, String draftColor, @Optional Long expiresAt) {
         if (offlinePlayer == null) {
             ChatUtils.sendMessage(player, MessageConfiguration.message("player_not_found"));
             return;
@@ -39,9 +39,9 @@ public class ColorAddCommand extends BaseCommand {
         }
 
         if (expiresAt == null) {
-            expiresAt = -1;
+            expiresAt = -1L;
         }
-        int finalExpiresAt = expiresAt;
+        long finalExpiresAt = expiresAt;
 
         PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer).whenComplete((targetMinetopiaPlayer, throwable1) -> {
             if (targetMinetopiaPlayer == null) {
@@ -103,7 +103,7 @@ public class ColorAddCommand extends BaseCommand {
         });
     }
 
-    private int minutesToMillis(int minutes) {
-        return minutes * 60 * 1000;
+    private long minutesToMillis(long minutes) {
+        return minutes * 60 * 1000L;
     }
 }

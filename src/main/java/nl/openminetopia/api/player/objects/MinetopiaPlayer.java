@@ -244,8 +244,11 @@ public class MinetopiaPlayer {
 
         if (activePrefix.isExpired()) {
             Player player = this.getBukkit().getPlayer();
-            if (player != null && player.isOnline())
+            if (player != null && player.isOnline()) {
+                player.sendMessage("3: " + activePrefix.getExpiresAt());
                 player.sendMessage(ChatUtils.color("<red>Je prefix <dark_red>" + activePrefix.getPrefix() + " <red>is verlopen!"));
+            }
+
             this.removePrefix(activePrefix);
             this.setActivePrefix(new Prefix(-1, configuration.getDefaultPrefix(), -1));
         }

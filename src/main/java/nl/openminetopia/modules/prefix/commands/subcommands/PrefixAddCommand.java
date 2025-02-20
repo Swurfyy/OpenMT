@@ -61,7 +61,7 @@ public class PrefixAddCommand extends BaseCommand {
         });
     }
 
-    private int minutesToMillis(int minutes) {
-        return minutes * 60 * 1000;
+    private long minutesToMillis(int minutes) {
+        return minutes * 60 * 1000L;
     }
 }

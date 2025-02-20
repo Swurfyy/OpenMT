@@ -73,26 +73,20 @@ public class ColorSelectMenu extends PaginatedMenu {
     }
 
     private String millisToTime(long millis) {
-        long hours = millisToHours(millis);
-        long minutes = millisToMinutes(millis) - (hours * 60);
-        long seconds = millisToSeconds(millis) - (minutes * 60) - (hours * 60 * 60);
+        long totalSeconds = millis / 1000;
+        long totalMinutes = totalSeconds / 60;
+        long totalHours = totalMinutes / 60;
+
+        long days = totalHours / 24;
+        long hours = totalHours % 24;
+        long minutes = totalMinutes % 60;
+        long seconds = totalSeconds % 60;
 
         return MessageConfiguration.message("color_time_format")
+                .replace("<days>", String.valueOf(days))
                 .replace("<hours>", String.valueOf(hours))
                 .replace("<minutes>", String.valueOf(minutes))
                 .replace("<seconds>", String.valueOf(seconds));
-    }
-
-    private int millisToHours(long millis) {
-        return (int) (millis / 1000 / 60 / 60);
-    }
-
-    private int millisToMinutes(long millis) {
-        return (int) (millis / 1000 / 60);
-    }
-
-    private int millisToSeconds(long millis) {
-        return (int) (millis / 1000);
     }
 
     @Override

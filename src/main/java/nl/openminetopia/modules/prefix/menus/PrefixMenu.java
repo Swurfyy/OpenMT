@@ -64,23 +64,17 @@ public class PrefixMenu extends PaginatedMenu {
     }
 
     private String millisToTime(long millis) {
-        long hours = millisToHours(millis);
-        long minutes = millisToMinutes(millis) - (hours * 60);
-        long seconds = millisToSeconds(millis) - (minutes * 60);
+        long totalSeconds = millis / 1000;
+        long totalMinutes = totalSeconds / 60;
+        long totalHours = totalMinutes / 60;
 
-        return "<yellow>" + hours + " uur, <yellow>" + minutes + " <gold>minuten en <yellow>" + seconds + " <gold>seconden";
-    }
+        long days = totalHours / 24;
+        long hours = totalHours % 24;
+        long minutes = totalMinutes % 60;
+        long seconds = totalSeconds % 60;
 
-    private int millisToHours(long millis) {
-        return (int) (millis / 1000 / 60 / 60);
-    }
-
-    private int millisToMinutes(long millis) {
-        return (int) (millis / 1000 / 60);
-    }
-
-    private int millisToSeconds(long millis) {
-        return (int) (millis / 1000);
+        return "<yellow>" + days + " dagen, <yellow>" + hours + " uur, <yellow>"
+                + minutes + " <gold>minuten en <yellow>" + seconds + " <gold>seconden";
     }
 
     @Override
