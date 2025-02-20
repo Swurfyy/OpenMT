@@ -52,8 +52,8 @@ public class ColorModule extends Module {
 
         OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("colorIds", context ->
                 OpenMinetopia.getColorsConfiguration().components().stream()
-                .map(ColorComponent::identifier)
-                .toList());
+                        .map(ColorComponent::identifier)
+                        .toList());
 
         OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("playerColors", context -> {
             List<String> colors = new ArrayList<>();
@@ -103,19 +103,13 @@ public class ColorModule extends Module {
     }
 
     public CompletableFuture<Integer> addColor(MinetopiaPlayer player, OwnableColor color) {
-        CompletableFuture<Integer> completableFuture = new CompletableFuture<>();
+        ColorModel colorModel = new ColorModel();
+        colorModel.setPlayerId(player.getPlayerModel().getId());
+        colorModel.setColorId(color.getColorId());
+        colorModel.setExpiresAt(color.getExpiresAt());
+        colorModel.setType(color.getType());
 
-        StormDatabase.getExecutorService().submit(() -> {
-            ColorModel colorModel = new ColorModel();
-            colorModel.setPlayerId(player.getPlayerModel().getId());
-            colorModel.setColorId(color.getColorId());
-            colorModel.setExpiresAt(color.getExpiresAt());
-            colorModel.setType(color.getType());
-
-            int id = StormDatabase.getInstance().saveStormModel(colorModel).join();
-            completableFuture.complete(id);
-        });
-        return completableFuture;
+        return StormDatabase.getInstance().saveStormModel(colorModel);
     }
 
     public CompletableFuture<Void> removeColor(OwnableColor color) {

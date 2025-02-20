@@ -111,9 +111,6 @@ public class Fitness {
         boosterModel.setExpiresAt(expiresAtMillis);
         this.playerModel.getBoosters().add(boosterModel);
         StormDatabase.getInstance().saveStormModel(boosterModel);
-
-        System.out.println(playerModel.getUniqueId());
-
         runnable.run();
     }
 

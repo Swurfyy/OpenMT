@@ -57,7 +57,7 @@ public class PrefixModule extends Module {
                 prefixes.addAll(minetopiaPlayer.getPrefixes().stream()
                         .map(Prefix::getPrefix)
                         .toList());
-                });
+            });
 
             return prefixes;
         });
@@ -98,17 +98,12 @@ public class PrefixModule extends Module {
     }
 
     public CompletableFuture<Integer> addPrefix(MinetopiaPlayer player, Prefix prefix) {
-        CompletableFuture<Integer> completableFuture = new CompletableFuture<>();
-        StormDatabase.getExecutorService().submit(() -> {
-            PrefixModel prefixModel = new PrefixModel();
-            prefixModel.setPlayerId(player.getPlayerModel().getId());
-            prefixModel.setPrefix(prefix.getPrefix());
-            prefixModel.setExpiresAt(prefix.getExpiresAt());
+        PrefixModel prefixModel = new PrefixModel();
+        prefixModel.setPlayerId(player.getPlayerModel().getId());
+        prefixModel.setPrefix(prefix.getPrefix());
+        prefixModel.setExpiresAt(prefix.getExpiresAt());
 
-            int id = StormDatabase.getInstance().saveStormModel(prefixModel).join();
-            completableFuture.complete(id);
-        });
-        return completableFuture;
+        return StormDatabase.getInstance().saveStormModel(prefixModel);
     }
 
     public CompletableFuture<Void> removePrefix(Prefix prefix) {
