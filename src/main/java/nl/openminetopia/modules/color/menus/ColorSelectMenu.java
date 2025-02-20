@@ -75,11 +75,12 @@ public class ColorSelectMenu extends PaginatedMenu {
     private String millisToTime(long millis) {
         long hours = millisToHours(millis);
         long minutes = millisToMinutes(millis) - (hours * 60);
+        long seconds = millisToSeconds(millis) - (minutes * 60) - (hours * 60 * 60);
 
         return MessageConfiguration.message("color_time_format")
                 .replace("<hours>", String.valueOf(hours))
                 .replace("<minutes>", String.valueOf(minutes))
-                .replace("<seconds>", String.valueOf(millisToSeconds(millis)));
+                .replace("<seconds>", String.valueOf(seconds));
     }
 
     private int millisToHours(long millis) {

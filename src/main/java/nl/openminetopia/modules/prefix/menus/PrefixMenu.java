@@ -66,8 +66,9 @@ public class PrefixMenu extends PaginatedMenu {
     private String millisToTime(long millis) {
         long hours = millisToHours(millis);
         long minutes = millisToMinutes(millis) - (hours * 60);
+        long seconds = millisToSeconds(millis) - (minutes * 60);
 
-        return "<yellow>" + hours + " uur, <yellow>" + minutes + " <gold>minuten en <yellow>" + millisToSeconds(millis) + " <gold>seconden";
+        return "<yellow>" + hours + " uur, <yellow>" + minutes + " <gold>minuten en <yellow>" + seconds + " <gold>seconden";
     }
 
     private int millisToHours(long millis) {
