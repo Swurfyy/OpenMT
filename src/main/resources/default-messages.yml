@@ -5,6 +5,7 @@ go_back: "Terug"
 next_page: "Volgende Pagina"
 previous_page: "Vorige Pagina"
 no_player_provided: "<red>Je moet een speler opgeven."
+time_format: "<yellow><days> dagen, <yellow><hours> uur, <yellow><minutes> <gold>minuten en <yellow><seconds> <gold>seconden"
 
 # Database
 database_update_error: "<red>Er ging iets mis met het updaten van de database informatie."
@@ -82,7 +83,6 @@ color_level_display_name: "<light_purple>Levelkleur"
 color_expired: "<red>Deze kleur is vervallen"
 color_expires_in: "<gold>Deze kleur vervalt over <yellow><time><gold>."
 color_expires_never: "<gold>Deze kleur vervalt <yellow>nooit<gold>."
-color_time_format: "<yellow><hours> uur, <yellow><minutes> <gold>minuten en <yellow><seconds> <gold>seconden"
 
 # Fitness
 fitness_booster_added_to: "<gold>Fitness booster toegevoegd aan <yellow><player><gold>."

@@ -28,7 +28,7 @@ public class BankingConfiguration extends ConfigurateConfig {
 
     @SneakyThrows
     public BankingConfiguration(File file) {
-        super(file, "banking.yml", "");
+        super(file, "banking.yml", "", false);
 
         this.economyFormat = rootNode.node("banking", "economy-format").getString("#,##0.00");
         this.atmMaterials = new ArrayList<>();

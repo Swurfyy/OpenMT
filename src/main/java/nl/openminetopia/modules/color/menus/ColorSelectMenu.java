@@ -82,7 +82,7 @@ public class ColorSelectMenu extends PaginatedMenu {
         long minutes = totalMinutes % 60;
         long seconds = totalSeconds % 60;
 
-        return MessageConfiguration.message("color_time_format")
+        return MessageConfiguration.message("time_format")
                 .replace("<days>", String.valueOf(days))
                 .replace("<hours>", String.valueOf(hours))
                 .replace("<minutes>", String.valueOf(minutes))

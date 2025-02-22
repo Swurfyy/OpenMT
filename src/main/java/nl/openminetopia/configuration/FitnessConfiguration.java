@@ -64,7 +64,7 @@ public class FitnessConfiguration extends ConfigurateConfig {
 
     @SneakyThrows
     public FitnessConfiguration(File file) {
-        super(file, "fitness.yml", "default-fitness.yml");
+        super(file, "fitness.yml", "default-fitness.yml", false);
 
         this.maxFitnessLevel = rootNode.node("fitness", "max-fitness-level").getInt(225);
         this.defaultFitnessLevel = rootNode.node("fitness", "default-fitness-level").getInt(20);

@@ -25,7 +25,7 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
     private final boolean autoLevelUp;
 
     public LevelCheckConfiguration(File file) {
-        super(file, "levelcheck.yml", "");
+        super(file, "levelcheck.yml", "", false);
 
         ConfigurationNode levelCheckNode = rootNode.node("levelcheck");
 

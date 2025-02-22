@@ -14,7 +14,7 @@ public class MessageConfiguration extends ConfigurateConfig {
     private final Map<String, String> messages = new HashMap<>();
 
     public MessageConfiguration(File file) {
-        super(file, "messages.yml", "default-messages.yml");
+        super(file, "messages.yml", "default-messages.yml", true);
 
         rootNode.childrenMap().forEach((s, node) -> {
             if (!(s instanceof String identifier)) return;

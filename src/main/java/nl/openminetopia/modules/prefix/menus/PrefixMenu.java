@@ -4,6 +4,7 @@ import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
@@ -73,8 +74,11 @@ public class PrefixMenu extends PaginatedMenu {
         long minutes = totalMinutes % 60;
         long seconds = totalSeconds % 60;
 
-        return "<yellow>" + days + " dagen, <yellow>" + hours + " uur, <yellow>"
-                + minutes + " <gold>minuten en <yellow>" + seconds + " <gold>seconden";
+        return MessageConfiguration.message("time_format")
+                .replace("<days>", String.valueOf(days))
+                .replace("<hours>", String.valueOf(hours))
+                .replace("<minutes>", String.valueOf(minutes))
+                .replace("<seconds>", String.valueOf(seconds));
     }
 
     @Override
