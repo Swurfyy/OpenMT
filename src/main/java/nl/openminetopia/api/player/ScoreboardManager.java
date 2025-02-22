@@ -44,13 +44,14 @@ public class ScoreboardManager {
         }
 
         List<String> lines = OpenMinetopia.getDefaultConfiguration().getScoreboardLines();
-        for (int i = 0; i < lines.size(); i++) {
+        int size = Math.min(lines.size(), 16);
+        for (int i = 0; i < size; i++) {
             String line = lines.get(i);
             if (i == 0) {
                 sidebar.title(ChatUtils.format(minetopiaPlayer, line));
                 continue;
             }
-            sidebar.line(i, ChatUtils.format(minetopiaPlayer, line));
+            sidebar.line(i - 1, ChatUtils.format(minetopiaPlayer, line));
         }
     }
 
