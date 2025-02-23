@@ -23,6 +23,7 @@ public class PlayerInteractListener implements Listener {
         Player player = event.getPlayer();
 
         if (!OpenMinetopia.getDefaultConfiguration().getTrashcanBlocks().contains(block.getType())) return;
+        if (!OpenMinetopia.getDefaultConfiguration().isTrashcanEnabled()) return;
         if (event.getAction() == Action.LEFT_CLICK_BLOCK && player.getGameMode() == GameMode.CREATIVE) return;
 
         event.setCancelled(true);
