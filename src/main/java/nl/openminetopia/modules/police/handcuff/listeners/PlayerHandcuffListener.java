@@ -1,6 +1,7 @@
 package nl.openminetopia.modules.police.handcuff.listeners;
 
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.handcuff.HandcuffManager;
 import nl.openminetopia.modules.police.handcuff.objects.HandcuffedPlayer;
 import nl.openminetopia.modules.police.utils.HandcuffUtils;
@@ -26,6 +27,7 @@ public class PlayerHandcuffListener implements Listener {
         if (HandcuffManager.getInstance().isHandcuffed(target)) {
             HandcuffedPlayer handcuffedPlayer = HandcuffManager.getInstance().getHandcuffedPlayer(target);
             HandcuffManager.getInstance().release(handcuffedPlayer);
+            source.sendMessage(ChatUtils.color("<red>Je hebt <dark_red>" + target.getName() + " <red>uit de boeien gehaald!"));
             return;
         }
 
@@ -38,15 +40,12 @@ public class PlayerHandcuffListener implements Listener {
 
         source.sendMessage(ChatUtils.color("<red>Je hebt <dark_red>" + target.getName() + " <red>in de boeien geslagen!"));
 
-        PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
-            if (targetMinetopiaPlayer == null) return;
+        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
+        if (targetMinetopiaPlayer == null) return;
 
-            PlayerManager.getInstance().getMinetopiaPlayer(source).whenComplete((sourceMinetopiaPlayer, throwable) -> {
-                if (sourceMinetopiaPlayer == null) return;
+        MinetopiaPlayer sourceMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(source);
+        if (sourceMinetopiaPlayer == null) return;
 
-                HandcuffManager.getInstance().handcuff(targetMinetopiaPlayer, sourceMinetopiaPlayer);
-            });
-        });
-
+        HandcuffManager.getInstance().handcuff(targetMinetopiaPlayer, sourceMinetopiaPlayer);
     }
 }

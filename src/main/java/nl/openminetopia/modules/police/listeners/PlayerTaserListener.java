@@ -2,6 +2,7 @@ package nl.openminetopia.modules.police.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.modules.police.utils.TaserUtils;
 import nl.openminetopia.utils.ChatUtils;
@@ -54,7 +55,7 @@ public class PlayerTaserListener implements Listener {
 
             Integer currentUsages = PersistentDataUtil.getInteger(itemStack, "openmt.usages");
             if (currentUsages == null || currentUsages <= 0) {
-                source.sendMessage(ChatUtils.color("<red>Jouw tazer is <dark_red>leeg<red>!"));
+                source.sendMessage(ChatUtils.color("<red>Jouw taser is <dark_red>leeg<red>!"));
                 return;
             }
 
@@ -64,11 +65,10 @@ public class PlayerTaserListener implements Listener {
 
         source.sendMessage(ChatUtils.color("<red>Je hebt <dark_red>" + target.getName() + " <red>geraakt met jouw taser!"));
 
-        PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
-            PoliceModule policeModule = OpenMinetopia.getModuleManager().getModule(PoliceModule.class);
-            policeModule.getTaserManager().taser(minetopiaPlayer);
-        });
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(source);
+        if (minetopiaPlayer == null) return;
+        PoliceModule policeModule = OpenMinetopia.getModuleManager().getModule(PoliceModule.class);
+        policeModule.getTaserManager().taser(minetopiaPlayer);
     }
 
     @EventHandler
