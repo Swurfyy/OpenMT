@@ -19,8 +19,9 @@ public class SkriptModule extends Module {
         addon = Skript.registerAddon(OpenMinetopia.getInstance());
         try {
             addon.loadClasses("nl.openminetopia.modules.skript", "expressions");
+            addon.loadClasses("nl.openminetopia.modules.skript", "effects");
         } catch (IOException e) {
-            e.printStackTrace();
+            OpenMinetopia.getInstance().getLogger().severe("Failed to load classes for Skript module");
         }
     }
 
