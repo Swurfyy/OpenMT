@@ -2,9 +2,11 @@ package nl.openminetopia.modules.skript;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
+import com.mysql.cj.x.protobuf.MysqlxCursor;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.Module;
+import org.bukkit.Bukkit;
 
 import java.io.IOException;
 
@@ -16,6 +18,8 @@ public class SkriptModule extends Module {
 
     @Override
     public void enable() {
+        if(!Bukkit.getServer().getPluginManager().isPluginEnabled("Skript")) return;
+
         addon = Skript.registerAddon(OpenMinetopia.getInstance());
         try {
             addon.loadClasses("nl.openminetopia.modules.skript", "expressions");
