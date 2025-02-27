@@ -42,11 +42,9 @@ public class EffRemoveCriminalRecord extends Effect {
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(user);
             if (minetopiaPlayer == null) continue;
             for (CriminalRecordModel criminalRecord : minetopiaPlayer.getCriminalRecords()) {
-                if (criminalRecord.getId() == id.getSingle(event)) {
-                    minetopiaPlayer.removeCriminalRecord(criminalRecord);
-                }
+                if (criminalRecord.getId() != id.getSingle(event)) continue;
+                minetopiaPlayer.removeCriminalRecord(criminalRecord);
             }
-
         }
     }
 }

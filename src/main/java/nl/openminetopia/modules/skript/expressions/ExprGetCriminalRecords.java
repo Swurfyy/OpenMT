@@ -21,7 +21,7 @@ public class ExprGetCriminalRecords extends SimpleExpression<String> {
         Skript.registerExpression(ExprGetCriminalRecords.class, String.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) criminalrecords of %player%");
     }
 
-    private Expression<Player> player;
+    private Expression<Player> exprPlayer;
 
     @Override
     public Class<? extends String> getReturnType() {
@@ -48,15 +48,13 @@ public class ExprGetCriminalRecords extends SimpleExpression<String> {
     @Override
     @Nullable
     protected String[] get(Event event) {
-        Player p = player.getSingle(event);
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(p);
-        if (minetopiaPlayer != null) {
-            List<Prefix> prefixes = minetopiaPlayer.getPrefixes();
+        Player player = exprPlayer.getSingle(event);
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return new String[0];
 
-            return prefixes.stream()
-                           .map(Prefix::getPrefix)
-                           .toArray(String[]::new);
-        }
-        return new String[0];
+        List<Prefix> prefixes = minetopiaPlayer.getPrefixes();
+        return prefixes.stream()
+                .map(Prefix::getPrefix)
+                .toArray(String[]::new);
     }
 }
