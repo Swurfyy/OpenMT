@@ -39,6 +39,10 @@ repositories {
         name = "enginehub"
         url = uri("https://maven.enginehub.org/repo/")
     }
+    maven {
+        name = "skript"
+        url = uri("https://repo.skriptlang.org/releases")
+    }
 }
 
 dependencies {
@@ -85,6 +89,9 @@ dependencies {
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1") {
         exclude(group = "org.bukkit", module = "bukkit")
     }
+
+    /* Skript */
+    compileOnly("com.github.SkriptLang:Skript:2.10.1")
 
     /* Rest API & Portal dependencies */
     compileOnly("io.vertx:vertx-core:4.5.13")
