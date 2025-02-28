@@ -51,7 +51,7 @@ dependencies {
 
     /* Configuration */
     compileOnly("org.spongepowered:configurate-yaml:4.2.0")
-    compileOnly("org.spongepowered:configurate-core:4.1.2")
+    compileOnly("org.spongepowered:configurate-core:4.2.0")
 
     /* Database */
     compileOnly("com.zaxxer:HikariCP:6.2.1")
