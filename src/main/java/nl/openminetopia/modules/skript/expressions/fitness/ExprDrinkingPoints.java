@@ -49,8 +49,8 @@ public class ExprDrinkingPoints extends SimpleExpression<Integer> {
     protected Integer[] get(Event event) {
         Player p = player.getSingle(event);
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(p);
-        FitnessStatisticModel drinkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
         if (minetopiaPlayer == null) return null;
+        FitnessStatisticModel drinkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
         return new Integer[] {drinkingStatistic.getFitnessGained()};
     }
 }

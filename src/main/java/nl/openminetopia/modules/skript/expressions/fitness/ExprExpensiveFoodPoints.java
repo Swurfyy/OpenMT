@@ -49,8 +49,8 @@ public class ExprExpensiveFoodPoints extends SimpleExpression<Double> {
     protected Double[] get(Event event) {
         Player p = player.getSingle(event);
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(p);
-        FitnessStatisticModel eatingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
         if (minetopiaPlayer == null) return null;
+        FitnessStatisticModel eatingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
         return new Double[] {eatingStatistic.getTertiaryPoints()};
     }
 }
