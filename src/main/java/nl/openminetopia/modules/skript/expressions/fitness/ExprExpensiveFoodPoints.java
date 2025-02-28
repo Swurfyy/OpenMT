@@ -14,17 +14,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-public class ExprDrank extends SimpleExpression<Integer> {
+public class ExprExpensiveFoodPoints extends SimpleExpression<Double> {
 
     static {
-        Skript.registerExpression(ExprDrank.class, Integer.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness drank points of %player%");
+        Skript.registerExpression(ExprExpensiveFoodPoints.class, Double.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness luxuryfood points of %player%");
     }
 
     private Expression<Player> player;
 
     @Override
-    public Class<? extends Integer> getReturnType() {
-        return Integer.class;
+    public Class<? extends Double> getReturnType() {
+        return Double.class;
     }
 
     @Override
@@ -46,13 +46,11 @@ public class ExprDrank extends SimpleExpression<Integer> {
 
     @Override
     @Nullable
-    protected Integer[] get(Event event) {
+    protected Double[] get(Event event) {
         Player p = player.getSingle(event);
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(p);
-        FitnessStatisticModel drinkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
-        if (minetopiaPlayer != null) {
-            return new Integer[] {drinkingStatistic.getFitnessGained()};
-        }
-        return null;
+        FitnessStatisticModel eatingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
+        if (minetopiaPlayer == null) return null;
+        return new Double[] {eatingStatistic.getTertiaryPoints()};
     }
 }

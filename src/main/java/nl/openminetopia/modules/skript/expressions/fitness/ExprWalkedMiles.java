@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class ExprWalkedMiles extends SimpleExpression<Integer> {
 
     static {
-        Skript.registerExpression(ExprWalkedMiles.class, Integer.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness walkedmiles of %player%");
+        Skript.registerExpression(ExprWalkedMiles.class, Integer.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness kilometers walked of %player%");
     }
 
     private Expression<Player> player;
@@ -48,9 +48,7 @@ public class ExprWalkedMiles extends SimpleExpression<Integer> {
     protected Integer[] get(Event event) {
         Player p = player.getSingle(event);
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(p);
-        if (minetopiaPlayer != null) {
-            return new Integer[] {(minetopiaPlayer.getBukkit().getStatistic(Statistic.WALK_ONE_CM) / 1000)};
-        }
-        return null;
+        if (minetopiaPlayer == null) return null;
+        return new Integer[] {(minetopiaPlayer.getBukkit().getStatistic(Statistic.WALK_ONE_CM) / 1000)};
     }
 }

@@ -14,10 +14,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-public class ExprTertairyPoints extends SimpleExpression<Double> {
+public class ExprCheapFoodPoints extends SimpleExpression<Double> {
 
     static {
-        Skript.registerExpression(nl.openminetopia.modules.skript.expressions.fitness.ExprTertairyPoints.class, Double.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness luxuryfood points of %player%");
+        Skript.registerExpression(ExprCheapFoodPoints.class, Double.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness cheapfood points of %player%");
     }
 
     private Expression<Player> player;
@@ -50,9 +50,7 @@ public class ExprTertairyPoints extends SimpleExpression<Double> {
         Player p = player.getSingle(event);
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(p);
         FitnessStatisticModel eatingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
-        if (minetopiaPlayer != null) {
-            return new Double[] {eatingStatistic.getTertiaryPoints()};
-        }
-        return null;
+        if (minetopiaPlayer == null) return null;
+        return new Double[] {eatingStatistic.getSecondaryPoints()};
     }
 }

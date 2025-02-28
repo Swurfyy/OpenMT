@@ -48,9 +48,8 @@ public class ExprFlewMiles extends SimpleExpression<Integer> {
     protected Integer[] get(Event event) {
         Player p = player.getSingle(event);
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(p);
-        if (minetopiaPlayer != null) {
-            return new Integer[] {(minetopiaPlayer.getBukkit().getStatistic(Statistic.AVIATE_ONE_CM) / 1000)};
-        }
-        return null;
+        if (minetopiaPlayer == null) return null;
+        return new Integer[] {(minetopiaPlayer.getBukkit().getStatistic(Statistic.AVIATE_ONE_CM) / 1000)};
+
     }
 }
