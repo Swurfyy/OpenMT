@@ -50,7 +50,7 @@ dependencies {
     paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
 
     /* Configuration */
-    compileOnly("org.spongepowered:configurate-yaml:4.1.2")
+    compileOnly("org.spongepowered:configurate-yaml:4.2.0")
     compileOnly("org.spongepowered:configurate-core:4.1.2")
 
     /* Database */
