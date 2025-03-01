@@ -14,7 +14,7 @@ import org.bukkit.event.Event;
 
 import javax.annotation.Nullable;
 
-public class EffAddCriminalRecord extends Effect {
+public class  EffAddCriminalRecord extends Effect {
 
     static {
         Skript.registerEffect(EffAddCriminalRecord.class, "(omt|openminetopia) add criminalrecord to %players% (by reason of|because [of]|on account of|due to|for|with reason) %-string% by %players%");

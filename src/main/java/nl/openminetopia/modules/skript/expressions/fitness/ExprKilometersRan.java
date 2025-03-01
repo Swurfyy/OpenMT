@@ -13,10 +13,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-public class ExprFlewMiles extends SimpleExpression<Integer> {
+public class ExprKilometersRan extends SimpleExpression<Integer> {
 
     static {
-        Skript.registerExpression(ExprFlewMiles.class, Integer.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness kilometers flown of %player%");
+        Skript.registerExpression(ExprKilometersRan.class, Integer.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness kilometers ran of %player%");
     }
 
     private Expression<Player> player;
@@ -49,7 +49,6 @@ public class ExprFlewMiles extends SimpleExpression<Integer> {
         Player p = player.getSingle(event);
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(p);
         if (minetopiaPlayer == null) return null;
-        return new Integer[] {(minetopiaPlayer.getBukkit().getStatistic(Statistic.AVIATE_ONE_CM) / 1000)};
-
+        return new Integer[] {(minetopiaPlayer.getBukkit().getStatistic(Statistic.SPRINT_ONE_CM) / 1000)};
     }
 }

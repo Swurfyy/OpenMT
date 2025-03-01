@@ -13,10 +13,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-public class ExprWalkedMiles extends SimpleExpression<Integer> {
+public class ExprKilometersWalked extends SimpleExpression<Integer> {
 
     static {
-        Skript.registerExpression(ExprWalkedMiles.class, Integer.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness kilometers walked of %player%");
+        Skript.registerExpression(ExprKilometersWalked.class, Integer.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness kilometers walked of %player%");
     }
 
     private Expression<Player> player;
