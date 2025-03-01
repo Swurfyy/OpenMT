@@ -9,11 +9,13 @@ import net.kyori.adventure.text.format.TextDecoration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -80,12 +82,27 @@ public class ItemBuilder {
     }
 
     /**
-     * Change the durability of the item.
+     * Change the damage of the item.
      *
-     * @param dur The durability to set it to.
+     * @param damage The damage to set it to.
      */
-    public ItemBuilder setDurability(short dur) {
-        is.setDurability(dur);
+    public ItemBuilder setDamage(int damage) {
+        Damageable im = (Damageable) is.getItemMeta();
+        im.setDamage(damage);
+        return this;
+    }
+
+    /**
+     * Set the item_model of the item.
+     *
+     * @param itemModel The item_model to set it to.
+     */
+    public ItemBuilder setItemModel(String itemModel) {
+        ItemMeta im = is.getItemMeta();
+        String[] split = itemModel.split(":");
+        NamespacedKey key = new NamespacedKey(split[0], split[1]);
+        im.setItemModel(key);
+        is.setItemMeta(im);
         return this;
     }
 

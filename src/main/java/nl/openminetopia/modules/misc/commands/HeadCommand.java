@@ -40,13 +40,8 @@ public class HeadCommand extends BaseCommand {
             return;
         }
 
-        String headItemString = item.getType().name();
-        if (item.hasItemMeta() && item.getItemMeta().hasCustomModelData()) {
-            headItemString += ":" + item.getItemMeta().getCustomModelData();
-        }
-
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
-        configuration.addToHeadWhitelist(headItemString);
+        configuration.addToHeadWhitelist(item);
 
         player.sendMessage(ChatUtils.color("<green>Je hebt het item toegevoegd aan de head whitelist!"));
     }
@@ -62,13 +57,8 @@ public class HeadCommand extends BaseCommand {
             return;
         }
 
-        String headItemString = item.getType().name();
-        if (item.hasItemMeta() && item.getItemMeta().hasCustomModelData()) {
-            headItemString += ":" + item.getItemMeta().getCustomModelData();
-        }
-
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
-        configuration.removeFromHeadWhitelist(headItemString);
+        configuration.removeFromHeadWhitelist(item);
 
         player.sendMessage(ChatUtils.color("<green>Je hebt het item verwijderd van de head whitelist!"));
     }

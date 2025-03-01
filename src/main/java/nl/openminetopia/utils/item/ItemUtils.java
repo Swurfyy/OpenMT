@@ -6,6 +6,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -14,39 +16,16 @@ import java.util.List;
 @UtilityClass
 public class ItemUtils {
 
-    public void applyEffects(Player target, List<String> effects, int duration) {
-        for (String effectString : effects) {
-            String[] effect = effectString.split(":");
-            String effectName = effect[0].toLowerCase();
-
-            PotionEffectType potionEffectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
-            if (potionEffectType == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Invalid potion effect: " + effectName);
-                continue;
-            }
-
-            if (effect.length == 1) {
-                PotionEffect potionEffect = new PotionEffect(potionEffectType, duration, 0);
-                target.addPotionEffect(potionEffect);
-                continue;
-            }
-
-            int amplifier = Integer.parseInt(effect[1]);
-            PotionEffect potionEffect = new PotionEffect(potionEffectType, duration, amplifier);
+    public void applyEffects(Player target, List<PotionEffect> effects, int duration) {
+        for (PotionEffect effect : effects) {
+            PotionEffect potionEffect = new PotionEffect(effect.getType(), duration, effect.getAmplifier());
             target.addPotionEffect(potionEffect);
         }
     }
 
-    public void clearEffects(Player target, List<String> effects) {
-        for (String effectString : effects) {
-            String[] effect = effectString.split(":");
-            String effectName = effect[0].toLowerCase();
-
-            PotionEffectType potionEffectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
-            if (potionEffectType == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Invalid potion effect: " + effectName);
-                continue;
-            }
+    public void clearEffects(Player target, List<PotionEffect> effects) {
+        for (PotionEffect effect : effects) {
+            PotionEffectType potionEffectType = effect.getType();
             target.getActivePotionEffects().forEach(activeEffect -> {
                 if (activeEffect.getType().equals(potionEffectType)) {
                     target.removePotionEffect(potionEffectType);
@@ -55,19 +34,29 @@ public class ItemUtils {
         }
     }
 
-    public boolean isValidItem(ItemStack item, List<String> validItems) {
+    public boolean isValidItem(ItemStack item, List<ItemStack> validItems) {
         if (item == null) return false;
 
-        for (String headItemString : validItems) {
-            String[] headItem = headItemString.split(":");
-            if (item.getType().name().equalsIgnoreCase(headItem[0])) {
-                if (headItem.length == 1) {
-                    return true;
+        for (ItemStack compare : validItems) {
+            if (item.getType() == compare.getType()) {
+                if (!compare.hasItemMeta() || !item.hasItemMeta()) return true;
+                ItemMeta meta = item.getItemMeta();
+                ItemMeta compareMeta = compare.getItemMeta();
+
+                boolean isSame = true;
+                if (meta.hasItemModel() && compareMeta.hasItemModel()) {
+                    if (meta.getItemModel() != compareMeta.getItemModel()) isSame = false;
                 }
 
-                if (item.getItemMeta().hasCustomModelData() && item.getItemMeta().getCustomModelData() == Integer.parseInt(headItem[1])) {
-                    return true;
+                if (meta.hasCustomModelData() && compareMeta.hasCustomModelData()) {
+                    if (meta.getCustomModelData() != compareMeta.getCustomModelData()) isSame = false;
                 }
+
+                Damageable damageable = (Damageable) meta;
+                Damageable compareDamageable = (Damageable) compareMeta;
+                if (damageable.getDamage() != compareDamageable.getDamage()) isSame = false;
+
+                return isSame;
             }
         }
         return false;
