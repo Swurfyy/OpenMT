@@ -35,9 +35,16 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
 
         if (minetopiaPlayer == null) return null;
 
+        long playtimeInSeconds = minetopiaPlayer.getPlaytime();
+        long days = playtimeInSeconds / 86400;
+        long hours = (playtimeInSeconds % 86400) / 3600;
+        long minutes = ((playtimeInSeconds % 86400) % 3600) / 60;
+        long seconds = ((playtimeInSeconds % 86400) % 3600) % 60;
+
         return switch (params.toLowerCase()) {
             case "prefix" -> minetopiaPlayer.getActivePrefix().getPrefix();
             case "level" -> String.valueOf(minetopiaPlayer.getLevel());
+            case "calculated_level" -> String.valueOf(minetopiaPlayer.getCalculatedLevel());
             case "city" -> minetopiaPlayer.getPlace().getName();
             case "world" -> minetopiaPlayer.getWorld().getName();
             case "temperature" -> String.valueOf(minetopiaPlayer.getPlace().getTemperature());
@@ -53,6 +60,11 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
             }
             case "fitness" -> String.valueOf(minetopiaPlayer.getFitness().getTotalFitness());
             case "max_fitness" -> String.valueOf(OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel());
+            case "playtime_total" -> String.valueOf(playtimeInSeconds);
+            case "playtime_days" -> String.valueOf(days);
+            case "playtime_hours" -> String.valueOf(hours);
+            case "playtime_minutes" -> String.valueOf(minutes);
+            case "playtime_seconds" -> String.valueOf(seconds);
             default -> null;
         };
     }
