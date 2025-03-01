@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.configurate.ConfigurationNode;
 import nl.openminetopia.utils.item.*;
+import org.spongepowered.configurate.serialize.SerializationException;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -474,68 +475,136 @@ public class DefaultConfiguration extends ConfigurateConfig {
 
     @SneakyThrows
     public void addToHeadWhitelist(ItemStack item) {
-        // Check if the item is valid
         if (item == null || item.getType() == Material.AIR) return;
 
-        // Check for item metadata and custom model data
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
-            // Check for custom model data and item damage
+            ConfigurationNode whitelistNode = rootNode.node("head", "whitelist");
+
+            ConfigurationNode itemNode = whitelistNode.appendListNode();
+
+            itemNode.node("type").set(item.getType().name());
+
             int customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : -1;
-            Damageable damageable = (Damageable) meta;
-            int itemDamage = damageable.getDamage();
+            if (customModelData != -1) {
+                itemNode.node("custom-model-data").set(customModelData);
+            }
 
-            // Check if the item is already in the whitelist
-            NamespacedKey itemModel = meta.hasItemModel() ? meta.getItemModel() : null;
+            if (meta instanceof Damageable damageable) {
+                int itemDamage = damageable.getDamage();
+                if (itemDamage != 0) {
+                    itemNode.node("damage").set(itemDamage);
+                }
+            }
 
-            if (customModelData != -1) rootNode.node("head", "whitelist", item.getType().toString(), "custom-model-data").set(customModelData);
-            if (itemDamage != 0) rootNode.node("head", "whitelist", item.getType().toString(), "damage").set(itemDamage);
-            if (itemModel != null) rootNode.node("head", "whitelist", item.getType().toString(), "item-model").set(itemModel);
+            if (meta.hasItemModel()) {
+                NamespacedKey itemModel = meta.getItemModel();
+                if (itemModel != null) {
+                    itemNode.node("item-model").set(itemModel.toString());
+                }
+            }
         }
-        // Add to whitelist and save configuration
+
         this.headWhitelist.add(item);
         saveConfiguration();
     }
 
-
     @SneakyThrows
     public void removeFromHeadWhitelist(ItemStack item) {
-        for (ItemStack itemStack : this.headWhitelist) {
-            if (ItemUtils.isValidItem(item, headWhitelist)) {
-                this.headWhitelist.remove(itemStack);
-                break;
+        ConfigurationNode whitelistNode = rootNode.node("head", "whitelist");
+        for (ConfigurationNode itemNode : whitelistNode.childrenList()) {
+            String itemType = itemNode.node("type").getString();
+            if (itemType == null || !itemType.equals(item.getType().name())) {
+                continue;
             }
+
+            int customModelData = itemNode.node("custom-model-data").getInt(-1);
+            if (customModelData != -1 && item.getItemMeta() != null && item.getItemMeta().hasCustomModelData()) {
+                if (customModelData != item.getItemMeta().getCustomModelData()) continue;
+            }
+
+            int damage = itemNode.node("damage").getInt(-1);
+            if (damage != -1 && item.getItemMeta() instanceof Damageable damageable) {
+                if (damage != damageable.getDamage()) continue;
+            }
+
+            String itemModel = itemNode.node("item-model").getString("");
+            if (!itemModel.isEmpty() && item.getItemMeta() != null && item.getItemMeta().hasItemModel()) {
+                if (item.getItemMeta().getItemModel() == null) continue;
+                if (!itemModel.equals(item.getItemMeta().getItemModel().toString())) continue;
+            }
+
+            itemNode.set(null);
         }
-        rootNode.node("head", "whitelist", item.getType().name()).set(null);
+
+        this.headWhitelist.removeIf(itemStack -> {
+            Material material = itemStack.getType();
+            if (material != item.getType()) return false;
+
+            int customModelData = itemStack.getItemMeta().hasCustomModelData() ? itemStack.getItemMeta().getCustomModelData() : -1;
+            if (customModelData != -1 && item.getItemMeta() != null && item.getItemMeta().hasCustomModelData()) {
+                if (customModelData != item.getItemMeta().getCustomModelData()) return false;
+            }
+
+            int damage = ((Damageable) itemStack.getItemMeta()).getDamage() == 0 ? -1 : ((Damageable) itemStack.getItemMeta()).getDamage();
+            if (damage != -1 && item.getItemMeta() instanceof Damageable damageable) {
+                if (damage != damageable.getDamage()) return false;
+            }
+
+            String itemModel = !itemStack.getItemMeta().hasItemModel() || itemStack.getItemMeta().getItemModel() == null ? "" : itemStack.getItemMeta().getItemModel().toString();
+            if (!itemModel.isEmpty() && item.getItemMeta() != null && item.getItemMeta().hasItemModel()) {
+                if (item.getItemMeta().getItemModel() == null) return false;
+                if (!itemModel.equals(item.getItemMeta().getItemModel().toString())) return false;
+            }
+            return true;
+        });
+
         saveConfiguration();
     }
 
     @SneakyThrows
     private List<ItemStack> loadItemMappings(ConfigurationNode itemsNode, List<ItemStack> defaultItems) {
         if (itemsNode.isNull()) {
-            defaultItems.forEach((itemStack) -> {
-                ConfigurationNode itemNode = itemsNode.node(itemStack.getType().name());
+            // Maak een nieuwe lijst om de items op te slaan
+            List<Map<Object, Object>> itemList = new ArrayList<>();
+
+            for (ItemStack itemStack : defaultItems) {
+                Map<Object, Object> itemMap = new HashMap<>();
                 try {
+                    // Voeg het itemtype toe aan de map
+                    itemMap.put("type", itemStack.getType().name());
+
                     int customModelData = itemStack.getItemMeta().hasCustomModelData() ? itemStack.getItemMeta().getCustomModelData() : -1;
-                    if (customModelData != -1) itemNode.node("custom-model-data").set(customModelData);
+                    itemMap.put("custom-model-data", customModelData);
 
                     Damageable damageable = (Damageable) itemStack.getItemMeta();
                     int damage = damageable.hasDamage() ? damageable.getDamage() : -1;
-                    if (damage != -1) itemNode.node("damage").set(damage);
+                    if (damage != -1) itemMap.put("damage", damage);
 
                     if (itemStack.getItemMeta().hasItemModel() && itemStack.getItemMeta().getItemModel() != null) {
-                        itemNode.node("item-model").set(itemStack.getItemMeta().getItemModel());
+                        itemMap.put("item-model", itemStack.getItemMeta().getItemModel());
                     }
+
+                    // Voeg de itemMap toe aan de lijst
+                    itemList.add(itemMap);
                 } catch (Exception e) {
                     OpenMinetopia.getInstance().getLogger().warning("Failed to load item: " + itemStack.getType().name());
                 }
-            });
+            }
+
+            // Stel de lijst van itemMap in als de waarde van itemsNode
+            itemsNode.set(itemList);
         }
 
         List<ItemStack> itemList = new ArrayList<>();
-        itemsNode.childrenMap().forEach((key, val) -> {
-            Material itemMaterial = Material.matchMaterial(key.toString());
-            if (itemMaterial == null) return;
+        for (ConfigurationNode val : itemsNode.childrenList()) {
+            // Haal het itemtype op uit de node
+            String typeName = val.node("type").getString();
+            if (typeName == null) continue;
+
+            Material itemMaterial = Material.matchMaterial(typeName);
+            if (itemMaterial == null) continue;
+
             int customModelData = val.node("custom-model-data").getInt(-1);
             int damage = val.node("damage").getInt(-1);
             String itemModel = val.node("item-model").getString("");
@@ -547,11 +616,10 @@ public class DefaultConfiguration extends ConfigurateConfig {
             if (!itemModel.isEmpty()) itemBuilder.setItemModel(itemModel);
 
             itemList.add(itemBuilder.toItemStack());
-        });
+        }
 
         return itemList;
     }
-
     @SneakyThrows
     private List<PotionEffect> loadEffectMappings(ConfigurationNode effectsNode, List<PotionEffect> defaultEffects) {
         if (effectsNode.isNull()) {
