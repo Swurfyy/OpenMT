@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class ExprFlewMiles extends SimpleExpression<Integer> {
 
     static {
-        Skript.registerExpression(ExprFlewMiles.class, Integer.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness flewmiles of %player%");
+        Skript.registerExpression(ExprFlewMiles.class, Integer.class, ExpressionType.COMBINED, "[the] (omt|openminetopia) fitness kilometers flown of %player%");
     }
 
     private Expression<Player> player;
