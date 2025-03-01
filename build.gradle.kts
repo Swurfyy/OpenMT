@@ -2,7 +2,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     java
-    id("io.freefair.lombok") version "8.12.1"
+    id("io.freefair.lombok") version "8.12.2"
     id("com.gradleup.shadow") version "8.3.6"
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
     id("maven-publish")
@@ -39,6 +39,10 @@ repositories {
         name = "enginehub"
         url = uri("https://maven.enginehub.org/repo/")
     }
+    maven {
+        name = "skript"
+        url = uri("https://repo.skriptlang.org/releases")
+    }
 }
 
 dependencies {
@@ -46,14 +50,14 @@ dependencies {
     paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
 
     /* Configuration */
-    compileOnly("org.spongepowered:configurate-yaml:4.1.2")
+    compileOnly("org.spongepowered:configurate-yaml:4.2.0")
     compileOnly("org.spongepowered:configurate-core:4.1.2")
 
     /* Database */
     compileOnly("com.zaxxer:HikariCP:6.2.1")
     compileOnly("mysql:mysql-connector-java:8.0.33")
     compileOnly("org.mariadb.jdbc:mariadb-java-client:3.5.2")
-    compileOnly("org.xerial:sqlite-jdbc:3.49.0.0")
+    compileOnly("org.xerial:sqlite-jdbc:3.49.1.0")
     implementation("com.github.Mindgamesnl:storm:e1f961b480")
 
     /* Command Framework */
@@ -69,10 +73,10 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.11.6")
 
     /* WorldGuard */
-    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.13-SNAPSHOT")
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.14-SNAPSHOT")
 
     /* PersistentData addons */
-    implementation("com.jeff-media:custom-block-data:2.2.3")
+    implementation("com.jeff-media:custom-block-data:2.2.4")
     implementation("com.jeff-media:MorePersistentDataTypes:2.4.0")
 
     /* InventoryLib (JAZZZZ) */
@@ -86,9 +90,12 @@ dependencies {
         exclude(group = "org.bukkit", module = "bukkit")
     }
 
+    /* Skript */
+    compileOnly("com.github.SkriptLang:Skript:2.10.1")
+
     /* Rest API & Portal dependencies */
     compileOnly("io.vertx:vertx-core:4.5.13")
-    compileOnly("io.vertx:vertx-web:4.5.12")
+    compileOnly("io.vertx:vertx-web:4.5.13")
     compileOnly("io.vertx:vertx-web-client:4.5.13")
 }
 

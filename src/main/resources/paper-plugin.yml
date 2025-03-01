@@ -17,3 +17,6 @@ dependencies:
       required: true
     Vault:
       required: false
+    Skript:
+      load: BEFORE
+      required: false

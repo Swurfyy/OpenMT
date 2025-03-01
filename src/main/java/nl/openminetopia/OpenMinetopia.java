@@ -31,6 +31,7 @@ import nl.openminetopia.modules.portal.PortalModule;
 import nl.openminetopia.modules.prefix.PrefixModule;
 import nl.openminetopia.modules.restapi.RestAPIModule;
 import nl.openminetopia.modules.scoreboard.ScoreboardModule;
+import nl.openminetopia.modules.skript.SkriptModule;
 import nl.openminetopia.modules.staff.StaffModule;
 import nl.openminetopia.modules.teleporter.TeleporterModule;
 import nl.openminetopia.modules.time.TimeModule;
@@ -131,7 +132,8 @@ public final class OpenMinetopia extends JavaPlugin {
                 new MiscModule(),
                 new RestAPIModule(),
                 new PortalModule(),
-                new TimeModule()
+                new TimeModule(),
+                new SkriptModule()
         );
 
         commandManager.enableUnstableAPI("help");
