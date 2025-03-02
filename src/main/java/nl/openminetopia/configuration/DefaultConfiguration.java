@@ -565,13 +565,11 @@ public class DefaultConfiguration extends ConfigurateConfig {
     @SneakyThrows
     private List<ItemStack> loadItemMappings(ConfigurationNode itemsNode, List<ItemStack> defaultItems) {
         if (itemsNode.isNull()) {
-            // Maak een nieuwe lijst om de items op te slaan
             List<Map<Object, Object>> itemList = new ArrayList<>();
 
             for (ItemStack itemStack : defaultItems) {
                 Map<Object, Object> itemMap = new HashMap<>();
                 try {
-                    // Voeg het itemtype toe aan de map
                     itemMap.put("type", itemStack.getType().name());
 
                     int customModelData = itemStack.getItemMeta().hasCustomModelData() ? itemStack.getItemMeta().getCustomModelData() : -1;
@@ -585,20 +583,17 @@ public class DefaultConfiguration extends ConfigurateConfig {
                         itemMap.put("item-model", itemStack.getItemMeta().getItemModel());
                     }
 
-                    // Voeg de itemMap toe aan de lijst
                     itemList.add(itemMap);
                 } catch (Exception e) {
                     OpenMinetopia.getInstance().getLogger().warning("Failed to load item: " + itemStack.getType().name());
                 }
             }
 
-            // Stel de lijst van itemMap in als de waarde van itemsNode
             itemsNode.set(itemList);
         }
 
         List<ItemStack> itemList = new ArrayList<>();
         for (ConfigurationNode val : itemsNode.childrenList()) {
-            // Haal het itemtype op uit de node
             String typeName = val.node("type").getString();
             if (typeName == null) continue;
 
@@ -620,6 +615,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
 
         return itemList;
     }
+
     @SneakyThrows
     private List<PotionEffect> loadEffectMappings(ConfigurationNode effectsNode, List<PotionEffect> defaultEffects) {
         if (effectsNode.isNull()) {
