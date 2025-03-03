@@ -22,7 +22,7 @@ public class SpyUtils {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
             if (ignore.contains(onlinePlayer)) continue;
 
-            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(onlinePlayer);
             if (minetopiaPlayer == null) return;
 
             if (minetopiaPlayer.isChatSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
@@ -37,7 +37,7 @@ public class SpyUtils {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
 
-            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(onlinePlayer);
             if (minetopiaPlayer == null) return;
 
             if (minetopiaPlayer.isCommandSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
