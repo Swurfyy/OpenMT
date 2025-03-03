@@ -38,7 +38,7 @@ public class PlayerEatListener implements Listener {
 
         double currentEatingPoints = eatingStatistic.getPoints();
 
-        if (eatingStatistic.getPoints() >= 1 && eatingStatistic.getFitnessGained() <= configuration.getMaxFitnessByDrinking()) {
+        if (eatingStatistic.getPoints() >= 1 && eatingStatistic.getFitnessGained() <= configuration.getMaxFitnessByEating()) {
             if (currentEatingPoints % (eatingStatistic.getSecondaryPoints() + eatingStatistic.getTertiaryPoints()) == 0) {
                 minetopiaPlayer.getFitness().setStatistic(FitnessStatisticType.EATING, eatingStatistic);
                 return;
