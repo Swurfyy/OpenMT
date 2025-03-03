@@ -16,6 +16,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.api.plots.events.PlotCreateEvent;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
@@ -34,50 +35,49 @@ public class PlotCreateCommand extends BaseCommand {
         BukkitPlayer bukkitPlayer = BukkitAdapter.adapt(player);
         World bukkitWorld = player.getWorld();
 
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
 
-            boolean doTopToDown = topToDown == null || topToDown;
+        boolean doTopToDown = topToDown == null || topToDown;
 
-            try {
-                Region region = WorldEdit.getInstance().getSessionManager().get(bukkitPlayer).getSelection(bukkitPlayer.getWorld());
-                BlockVector3 max = region.getMaximumPoint();
-                BlockVector3 min = region.getMinimumPoint();
+        try {
+            Region region = WorldEdit.getInstance().getSessionManager().get(bukkitPlayer).getSelection(bukkitPlayer.getWorld());
+            BlockVector3 max = region.getMaximumPoint();
+            BlockVector3 min = region.getMinimumPoint();
 
-                if (doTopToDown) {
-                    max = region.getMaximumPoint().withY(bukkitWorld.getMaxHeight());
-                    min = region.getMinimumPoint().withY(bukkitWorld.getMinHeight());
-                }
-
-                ProtectedRegion wgRegion = new ProtectedCuboidRegion(name, min, max);
-                wgRegion.setFlag(OpenMinetopia.PLOT_FLAG, StateFlag.State.ALLOW);
-
-                RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-                RegionManager manager = container.get(region.getWorld());
-
-                if (manager == null) {
-                    player.sendMessage(MessageConfiguration.component("plot_creation_error"));
-                    return;
-                }
-
-                manager.addRegion(wgRegion);
-
-                for (String command : OpenMinetopia.getDefaultConfiguration().getPlotCommandsOnCreate()) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command
-                            .replace("<world>", bukkitWorld.getName())
-                            .replace("<plot>", name)
-                    );
-                }
-
-                PlotCreateEvent event = new PlotCreateEvent(player, wgRegion);
-                Bukkit.getPluginManager().callEvent(event);
-
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_creation_success")
-                        .replace("<plot_id>", name)
-                );
-            } catch (IncompleteRegionException e) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_no_selection"));
+            if (doTopToDown) {
+                max = region.getMaximumPoint().withY(bukkitWorld.getMaxHeight());
+                min = region.getMinimumPoint().withY(bukkitWorld.getMinHeight());
             }
-        });
+
+            ProtectedRegion wgRegion = new ProtectedCuboidRegion(name, min, max);
+            wgRegion.setFlag(OpenMinetopia.PLOT_FLAG, StateFlag.State.ALLOW);
+
+            RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            RegionManager manager = container.get(region.getWorld());
+
+            if (manager == null) {
+                player.sendMessage(MessageConfiguration.component("plot_creation_error"));
+                return;
+            }
+
+            manager.addRegion(wgRegion);
+
+            for (String command : OpenMinetopia.getDefaultConfiguration().getPlotCommandsOnCreate()) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command
+                        .replace("<world>", bukkitWorld.getName())
+                        .replace("<plot>", name)
+                );
+            }
+
+            PlotCreateEvent event = new PlotCreateEvent(player, wgRegion);
+            Bukkit.getPluginManager().callEvent(event);
+
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_creation_success")
+                    .replace("<plot_id>", name)
+            );
+        } catch (IncompleteRegionException e) {
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_no_selection"));
+        }
     }
 }

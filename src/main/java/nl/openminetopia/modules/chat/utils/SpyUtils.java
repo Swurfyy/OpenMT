@@ -2,6 +2,7 @@ package nl.openminetopia.modules.chat.utils;
 
 import lombok.experimental.UtilityClass;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
@@ -21,11 +22,10 @@ public class SpyUtils {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
             if (ignore.contains(onlinePlayer)) continue;
 
-            PlayerManager.getInstance().getMinetopiaPlayer(onlinePlayer).whenComplete((minetopiaPlayer, throwable1) -> {
-                if (minetopiaPlayer == null) return;
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+            if (minetopiaPlayer == null) return;
 
-                if (minetopiaPlayer.isChatSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
-            });
+            if (minetopiaPlayer.isChatSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
         }
     }
 
@@ -37,11 +37,10 @@ public class SpyUtils {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
 
-            PlayerManager.getInstance().getMinetopiaPlayer(onlinePlayer).whenComplete((minetopiaPlayer, throwable1) -> {
-                if (minetopiaPlayer == null) return;
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+            if (minetopiaPlayer == null) return;
 
-                if (minetopiaPlayer.isCommandSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
-            });
+            if (minetopiaPlayer.isCommandSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
         }
     }
 }

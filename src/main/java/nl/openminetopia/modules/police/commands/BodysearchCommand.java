@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
@@ -18,34 +19,33 @@ public class BodysearchCommand extends BaseCommand {
     @CommandPermission("openminetopia.bodysearch")
     public void bodysearch(Player player, OnlinePlayer onlineTarget) {
         Player target = onlineTarget.getPlayer();
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (player == target) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_bodysearch_self"));
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (player == target) {
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_bodysearch_self"));
+            return;
+        }
+
+        PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((minetopiaTarget, throwable1) -> {
+            if (minetopiaTarget == null) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                 return;
             }
 
-            PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((minetopiaTarget, throwable1) -> {
-                if (minetopiaTarget == null) {
-                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
-                    return;
-                }
+            if (player.getLocation().distance(target.getLocation()) > OpenMinetopia.getDefaultConfiguration().getBodysearchRange()) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_bodysearch_too_far")
+                        .replace("<player>", target.getName()));
+                return;
+            }
 
-                if (player.getLocation().distance(target.getLocation()) > OpenMinetopia.getDefaultConfiguration().getBodysearchRange()) {
-                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_bodysearch_too_far")
-                            .replace("<player>", target.getName()));
-                    return;
-                }
+            if (!MessageConfiguration.message("police_bodysearch_executor").isEmpty())
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_bodysearch_executor")
+                        .replace("<player>", target.getName()));
 
-                if (!MessageConfiguration.message("police_bodysearch_executor").isEmpty())
-                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_bodysearch_executor")
-                            .replace("<player>", target.getName()));
+            if (!MessageConfiguration.message("police_bodysearch_target").isEmpty())
+                ChatUtils.sendFormattedMessage(minetopiaTarget, MessageConfiguration.message("police_bodysearch_target")
+                        .replace("<player>", player.getName()));
 
-                if (!MessageConfiguration.message("police_bodysearch_target").isEmpty())
-                    ChatUtils.sendFormattedMessage(minetopiaTarget, MessageConfiguration.message("police_bodysearch_target")
-                            .replace("<player>", player.getName()));
-
-                player.openInventory(target.getInventory());
-            });
+            player.openInventory(target.getInventory());
         });
     }
 }

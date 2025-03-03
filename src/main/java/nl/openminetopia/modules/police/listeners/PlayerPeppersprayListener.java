@@ -2,6 +2,7 @@ package nl.openminetopia.modules.police.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.utils.PeppersprayUtils;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.PersistentDataUtil;
@@ -46,12 +47,10 @@ public class PlayerPeppersprayListener implements Listener {
 
         source.sendMessage(ChatUtils.color("<red>Je hebt <dark_red>" + target.getName() + " <red>gepeppersprayed."));
 
+        MinetopiaPlayer sourceMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(source);
+        if (sourceMinetopiaPlayer == null) return;
 
-        PlayerManager.getInstance().getMinetopiaPlayer(source).whenComplete((sourceMinetopiaPlayer, throwable) -> {
-            if (sourceMinetopiaPlayer == null) return;
-
-            target.sendMessage(ChatUtils.format(sourceMinetopiaPlayer, "<red>Je bent gepeppersprayed!"));
-            PeppersprayUtils.applyPeppersprayEffects(target);
-        });
+        target.sendMessage(ChatUtils.format(sourceMinetopiaPlayer, "<red>Je bent gepeppersprayed!"));
+        PeppersprayUtils.applyPeppersprayEffects(target);
     }
 }

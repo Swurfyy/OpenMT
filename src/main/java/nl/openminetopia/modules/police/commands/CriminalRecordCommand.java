@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.utils.ChatUtils;
@@ -28,22 +29,21 @@ public class CriminalRecordCommand extends BaseCommand {
     @CommandCompletion("@players")
     @CommandPermission("openminetopia.criminalrecord.add")
     public void add(Player player, OfflinePlayer target, String description) {
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
 
-            if (target == null) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
-                return;
-            }
+        if (target == null) {
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+            return;
+        }
 
-            PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
-                if (targetMinetopiaPlayer == null) return;
+        PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
+            if (targetMinetopiaPlayer == null) return;
 
-                targetMinetopiaPlayer.addCriminalRecord(description, player.getUniqueId(), System.currentTimeMillis());
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_added")
-                        .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName()))
-                        .replace("<description>", description));
-            });
+            targetMinetopiaPlayer.addCriminalRecord(description, player.getUniqueId(), System.currentTimeMillis());
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_added")
+                    .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName()))
+                    .replace("<description>", description));
         });
     }
 
@@ -53,34 +53,32 @@ public class CriminalRecordCommand extends BaseCommand {
     @CommandCompletion("@players")
     @CommandPermission("openminetopia.criminalrecord.remove")
     public void remove(Player player, OfflinePlayer target, int id) {
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
 
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
+        if (target == null) {
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+            return;
+        }
 
-            if (target == null) {
+        PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
+            if (targetMinetopiaPlayer == null) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
                 return;
             }
 
-            PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
-                if (targetMinetopiaPlayer == null) {
-                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+            for (CriminalRecordModel criminalRecord : targetMinetopiaPlayer.getCriminalRecords()) {
+                if (criminalRecord.getId() == id) {
+                    targetMinetopiaPlayer.removeCriminalRecord(criminalRecord);
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_removed")
+                            .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName()))
+                            .replace("<description>", criminalRecord.getDescription())
+                            .replace("<id>", String.valueOf(id)));
                     return;
                 }
+            }
 
-                for (CriminalRecordModel criminalRecord : targetMinetopiaPlayer.getCriminalRecords()) {
-                    if (criminalRecord.getId() == id) {
-                        targetMinetopiaPlayer.removeCriminalRecord(criminalRecord);
-                        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_removed")
-                                .replace("<player>", (target.getName() == null ? "Onbekend" : target.getName()))
-                                .replace("<description>", criminalRecord.getDescription())
-                                .replace("<id>", String.valueOf(id)));
-                        return;
-                    }
-                }
-
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_not_found"));
-            });
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_criminal_record_not_found"));
         });
     }
 

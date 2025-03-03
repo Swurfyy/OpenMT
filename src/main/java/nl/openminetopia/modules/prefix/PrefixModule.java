@@ -48,7 +48,7 @@ public class PrefixModule extends Module {
             });
         }, 20L);
 
-        OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("playerPrefixes", context -> {
+        OpenMinetopia.getCommandManager().getCommandCompletions().registerAsyncCompletion("playerPrefixes", context -> {
             List<String> prefixes = new ArrayList<>();
 
             PlayerManager.getInstance().getMinetopiaPlayer(context.getPlayer()).whenComplete((minetopiaPlayer, throwable1) -> {

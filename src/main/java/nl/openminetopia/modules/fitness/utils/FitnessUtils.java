@@ -23,28 +23,28 @@ import java.util.Objects;
 public class FitnessUtils {
 
     public static void applyFitness(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
-                clearFitnessEffects(player);
-                return;
-            }
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
 
-            FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
-            int totalFitness = minetopiaPlayer.getFitness().getTotalFitness();
+        if (minetopiaPlayer == null || !minetopiaPlayer.isInPlace()) {
+            clearFitnessEffects(player);
+            return;
+        }
 
-            // Get the closest matching fitness level effect
-            FitnessLevelEffect effectLevel = config.getLevelEffects().entrySet().stream()
-                    .filter(entry -> totalFitness >= entry.getKey())
-                    .map(Map.Entry::getValue)
-                    .reduce((first, second) -> second) // Get the last (highest) matching effect
-                    .orElse(null);
+        FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
+        int totalFitness = minetopiaPlayer.getFitness().getTotalFitness();
 
-            if (effectLevel == null) return; // No effect level applies
+        // Get the closest matching fitness level effect
+        FitnessLevelEffect effectLevel = config.getLevelEffects().entrySet().stream()
+                .filter(entry -> totalFitness >= entry.getKey())
+                .map(Map.Entry::getValue)
+                .reduce((first, second) -> second) // Get the last (highest) matching effect
+                .orElse(null);
 
-            // Apply walk speed and potion effects
-            applyPlayerWalkSpeed(player, config, (float) effectLevel.getWalkSpeed());
-            applyPotionEffects(player, effectLevel);
-        });
+        if (effectLevel == null) return; // No effect level applies
+
+        // Apply walk speed and potion effects
+        applyPlayerWalkSpeed(player, config, (float) effectLevel.getWalkSpeed());
+        applyPotionEffects(player, effectLevel);
     }
 
     private static void applyPlayerWalkSpeed(Player player, FitnessConfiguration config, float walkSpeed) {

@@ -2,6 +2,7 @@ package nl.openminetopia.modules.fitness.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.utils.FitnessUtils;
 import org.bukkit.entity.Player;
@@ -17,18 +18,17 @@ public class PlayerDeathListener implements Listener {
         if (!configuration.isFitnessDeathPunishmentEnabled()) return;
 
         Player player = event.getEntity();
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
 
-            int punishmentInMillis = configuration.getFitnessDeathPunishmentDuration() * 60 * 1000;
+        int punishmentInMillis = configuration.getFitnessDeathPunishmentDuration() * 60 * 1000;
 
-            int amount = configuration.getFitnessDeathPunishmentAmount();
-            long expiry = System.currentTimeMillis() + punishmentInMillis;
+        int amount = configuration.getFitnessDeathPunishmentAmount();
+        long expiry = System.currentTimeMillis() + punishmentInMillis;
 
-            FitnessUtils.clearFitnessEffects(player);
+        FitnessUtils.clearFitnessEffects(player);
 
-            minetopiaPlayer.getFitness().addBooster(amount, expiry);
-            minetopiaPlayer.getFitness().getRunnable().run();
-        });
+        minetopiaPlayer.getFitness().addBooster(amount, expiry);
+        minetopiaPlayer.getFitness().getRunnable().run();
     }
 }

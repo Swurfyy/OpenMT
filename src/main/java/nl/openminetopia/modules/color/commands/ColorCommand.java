@@ -6,6 +6,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.HelpCommand;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.menus.ColorSelectMenu;
 import nl.openminetopia.modules.color.menus.ColorTypeMenu;
@@ -21,42 +22,38 @@ public class ColorCommand extends BaseCommand {
 
     @Default
     public void onDefault(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
-            new ColorTypeMenu(player, player, minetopiaPlayer).open(player);
-        });
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
+        new ColorTypeMenu(player, player, minetopiaPlayer).open(player);
     }
 
 
     @CommandAlias("prefixcolor|prefixkleur")
     public void onPrefixColor(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
-            new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.PREFIX).open(player);
-        });
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
+        new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.PREFIX).open(player);
     }
 
     @CommandAlias("chatcolor|chatkleur")
     public void onChatColor(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
-            new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.CHAT).open(player);
-        });
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
+        new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.CHAT).open(player);
     }
 
     @CommandAlias("namecolor|naamkleur")
     public void onNameColor(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
-            new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.NAME).open(player);
-        });
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
+        new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.NAME).open(player);
+
     }
 
     @CommandAlias("levelcolor|levelkleur")
     public void onLevelColor(Player player) {
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
-            new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.LEVEL).open(player);
-        });
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
+        new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.LEVEL).open(player);
     }
 }

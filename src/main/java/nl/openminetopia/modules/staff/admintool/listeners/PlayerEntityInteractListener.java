@@ -2,6 +2,7 @@ package nl.openminetopia.modules.staff.admintool.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.staff.admintool.menus.AdminToolMenu;
@@ -24,13 +25,12 @@ public class PlayerEntityInteractListener implements Listener {
         if (PersistentDataUtil.get(item, "openmt.admintool") == null) return;
         if (!event.getPlayer().hasPermission("openminetopia.admintool")) return;
 
-        PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((minetopiaPlayer, throwable1) -> {
-            if (minetopiaPlayer == null) return;
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(event.getPlayer());
+        if (minetopiaPlayer == null) return;
 
-            BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
-            BankAccountModel bankAccountModel = bankingModule.getAccountByIdAsync(event.getPlayer().getUniqueId()).join();
+        BankingModule bankingModule = OpenMinetopia.getModuleManager().getModule(BankingModule.class);
+        BankAccountModel bankAccountModel = bankingModule.getAccountByIdAsync(event.getPlayer().getUniqueId()).join();
 
-            new AdminToolMenu(event.getPlayer(), event.getPlayer(), minetopiaPlayer, bankAccountModel).open(target);
-        });
+        new AdminToolMenu(event.getPlayer(), event.getPlayer(), minetopiaPlayer, bankAccountModel).open(target);
     }
 }

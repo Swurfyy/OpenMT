@@ -6,6 +6,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 
@@ -16,12 +17,10 @@ public class ModChatSpyCommand extends BaseCommand {
     @CommandPermission("openminetopia.mod.chatspy")
     @Description("Enables or disables ChatSpy")
     public void chatSpy(Player player) {
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
 
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
-
-            minetopiaPlayer.setChatSpyEnabled(!minetopiaPlayer.isChatSpyEnabled());
-            player.sendMessage(ChatUtils.color("<gold>Je hebt <yellow>ChatSpy <gold>" + (minetopiaPlayer.isChatSpyEnabled() ? "aangezet" : "uitgezet") + "!"));
-        });
+        minetopiaPlayer.setChatSpyEnabled(!minetopiaPlayer.isChatSpyEnabled());
+        player.sendMessage(ChatUtils.color("<gold>Je hebt <yellow>ChatSpy <gold>" + (minetopiaPlayer.isChatSpyEnabled() ? "aangezet" : "uitgezet") + "!"));
     }
 }

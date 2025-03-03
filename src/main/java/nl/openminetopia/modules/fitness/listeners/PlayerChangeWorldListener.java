@@ -2,6 +2,7 @@ package nl.openminetopia.modules.fitness.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.places.PlacesModule;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,9 +14,8 @@ public class PlayerChangeWorldListener implements Listener {
     public void worldChange(final PlayerChangedWorldEvent event) {
         PlacesModule placesModule = OpenMinetopia.getModuleManager().getModule(PlacesModule.class);
         if (placesModule.getWorld(event.getFrom().getSpawnLocation()) != null) return;
-        PlayerManager.getInstance().getMinetopiaPlayer(event.getPlayer()).whenComplete((minetopiaPlayer, throwable1) -> {
-            if (minetopiaPlayer == null) return;
-            minetopiaPlayer.getFitness().getRunnable().run();
-        });
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(event.getPlayer());
+        if (minetopiaPlayer == null) return;
+        minetopiaPlayer.getFitness().getRunnable().run();
     }
 }

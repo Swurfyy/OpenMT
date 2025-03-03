@@ -13,6 +13,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 
@@ -32,37 +33,35 @@ public class PlotListCommand extends BaseCommand {
 
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionManager manager = container.get(world);
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer == null) return;
 
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (minetopiaPlayer == null) return;
+        if (manager == null) {
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Er ging iets mis met het ophalen van de regio's."));
+            return;
+        }
 
-            if (manager == null) {
-                player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Er ging iets mis met het ophalen van de regio's."));
-                return;
-            }
+        // Create a new map with only regions that have the PLOT_FLAG set
+        Map<String, ProtectedRegion> filteredRegions = manager.getRegions().entrySet().stream()
+                .filter(entry -> entry.getValue().getFlag(OpenMinetopia.PLOT_FLAG) != null)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-            // Create a new map with only regions that have the PLOT_FLAG set
-            Map<String, ProtectedRegion> filteredRegions = manager.getRegions().entrySet().stream()
-                    .filter(entry -> entry.getValue().getFlag(OpenMinetopia.PLOT_FLAG) != null)
-                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-            Collection<String> regionNames = filteredRegions.keySet();
+        Collection<String> regionNames = filteredRegions.keySet();
 
 
-            int pageSize = 15;
-            int totalPages = (int) Math.ceil(regionNames.size() / (double) pageSize);
+        int pageSize = 15;
+        int totalPages = (int) Math.ceil(regionNames.size() / (double) pageSize);
 
-            int finalPage = page == null || page < 1 || page > totalPages ? 1 : page;
+        int finalPage = page == null || page < 1 || page > totalPages ? 1 : page;
 
-            int startIndex = (finalPage - 1) * pageSize;
-            int endIndex = Math.min(startIndex + pageSize, regionNames.size());
+        int startIndex = (finalPage - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, regionNames.size());
 
-            List<String> regionList = new ArrayList<>(regionNames);
-            for(int i = startIndex; i < endIndex; i++) {
-                player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua> - <aqua>" + regionList.get(i)));
-            }
+        List<String> regionList = new ArrayList<>(regionNames);
+        for (int i = startIndex; i < endIndex; i++) {
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua> - <aqua>" + regionList.get(i)));
+        }
 
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Pagina <aqua>" + finalPage + "<dark_aqua>/<aqua>" + totalPages + "<dark_aqua>. Totaal: <aqua>" + regionNames.size() + " <dark_aqua>regio's."));
-        });
+        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Pagina <aqua>" + finalPage + "<dark_aqua>/<aqua>" + totalPages + "<dark_aqua>. Totaal: <aqua>" + regionNames.size() + " <dark_aqua>regio's."));
     }
 }
