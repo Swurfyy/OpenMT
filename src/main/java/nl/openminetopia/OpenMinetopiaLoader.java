@@ -24,6 +24,7 @@ public class OpenMinetopiaLoader implements PluginLoader {
         resolver.addDependency(new Dependency(new DefaultArtifact("com.github.TheBathDuck.ModuleManager:spigot:7b2cd5708b"), null));
 
         resolver.addRepository(new RemoteRepository.Builder("maven", "default", "https://repo.maven.apache.org/maven2").build());
+        resolver.addRepository(new RemoteRepository.Builder("jitpack", "default", "https://jitpack.io/").build());
         classpathBuilder.addLibrary(resolver);
     }
 }
