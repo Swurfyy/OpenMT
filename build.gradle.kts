@@ -76,7 +76,7 @@ dependencies {
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.14-SNAPSHOT")
 
     /* Module Manager */
-    implementation("com.github.duranaaron.ModuleManager:spigot:115c799f91")
+    compileOnly("com.github.TheBathDuck.ModuleManager:spigot:7b2cd5708b")
 
     /* PersistentData addons */
     implementation("com.jeff-media:custom-block-data:2.2.4")
