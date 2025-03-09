@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.*;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.player.utils.PlaytimeUtil;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;
@@ -53,6 +54,7 @@ public class PrefixAddCommand extends BaseCommand {
 
             Prefix prefixModel = new Prefix(prefix, expiresAtMillis);
             targetMinetopiaPlayer.addPrefix(prefixModel);
+            targetMinetopiaPlayer.setActivePrefix(prefixModel);
 
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("prefix_added")
                     .replace("<player>", (offlinePlayer.getName() == null ? "null" : offlinePlayer.getName()))

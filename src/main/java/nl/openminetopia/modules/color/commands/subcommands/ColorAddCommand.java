@@ -61,6 +61,7 @@ public class ColorAddCommand extends BaseCommand {
 
                     PrefixColor prefixColor = new PrefixColor(colorId, expiresAtMillis);
                     targetMinetopiaPlayer.addColor(prefixColor);
+                    targetMinetopiaPlayer.setActiveColor(prefixColor, OwnableColorType.PREFIX);
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_prefix_added")
                             .replace("<color>", prefixColor.getColorId()));
                     break;
@@ -73,6 +74,7 @@ public class ColorAddCommand extends BaseCommand {
 
                     ChatColor chatColor = new ChatColor(colorId, expiresAtMillis);
                     targetMinetopiaPlayer.addColor(chatColor);
+                    targetMinetopiaPlayer.setActiveColor(chatColor, OwnableColorType.CHAT);
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_chat_added")
                             .replace("<color>", chatColor.getColorId()));
                     break;
@@ -84,6 +86,7 @@ public class ColorAddCommand extends BaseCommand {
 
                     NameColor nameColor = new NameColor(colorId, expiresAtMillis);
                     targetMinetopiaPlayer.addColor(nameColor);
+                    targetMinetopiaPlayer.setActiveColor(nameColor, OwnableColorType.NAME);
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_name_added")
                             .replace("<color>", nameColor.getColorId()));
                     break;
@@ -95,6 +98,7 @@ public class ColorAddCommand extends BaseCommand {
 
                     LevelColor levelColor = new LevelColor(colorId, expiresAtMillis);
                     targetMinetopiaPlayer.addColor(levelColor);
+                    targetMinetopiaPlayer.setActiveColor(levelColor, OwnableColorType.LEVEL);
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_level_added")
                             .replace("<color>", levelColor.getColorId()));
 
