@@ -1,4 +1,4 @@
-package nl.openminetopia.configuration.components;
+package nl.openminetopia.modules.color.configuration.components;
 
 /**
  * @param identifier

@@ -4,12 +4,14 @@ import com.craftmend.storm.api.enums.Where;
 import com.jazzkuh.modulemanager.spigot.SpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
+import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.player.commands.PlaytimeCommand;
+import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
 import nl.openminetopia.modules.player.listeners.PlayerPreLoginListener;
 import nl.openminetopia.modules.player.listeners.PlayerQuitListener;
 import nl.openminetopia.modules.player.models.PlayerModel;
@@ -23,15 +25,20 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-@Getter
+@Setter @Getter
 public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
 
     public PlayerModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 
+    private LevelCheckConfiguration configuration;
+
     @Override
     public void onEnable() {
+        configuration = new LevelCheckConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        configuration.saveConfiguration();
+
         registerComponent(new PlayerPreLoginListener());
         registerComponent(new PlayerQuitListener());
 

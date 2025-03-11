@@ -21,6 +21,7 @@ public class OpenMinetopiaLoader implements PluginLoader {
         resolver.addDependency(new Dependency(new DefaultArtifact("io.vertx:vertx-core:4.5.11"), null));
         resolver.addDependency(new Dependency(new DefaultArtifact("io.vertx:vertx-web:4.5.11"), null));
         resolver.addDependency(new Dependency(new DefaultArtifact("io.vertx:vertx-web-client:4.5.11"), null));
+        resolver.addDependency(new Dependency(new DefaultArtifact("net.objecthunter:exp4j:0.4.8"), null));
 
         resolver.addRepository(new RemoteRepository.Builder("maven", "default", "https://repo.maven.apache.org/maven2").build());
         classpathBuilder.addLibrary(resolver);

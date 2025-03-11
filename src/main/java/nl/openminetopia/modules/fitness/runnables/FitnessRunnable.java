@@ -4,7 +4,8 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.fitness.FitnessModule;
+import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.fitness.utils.FitnessUtils;
@@ -25,7 +26,7 @@ public class FitnessRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
+        FitnessConfiguration config = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
 
         if (player == null || !player.isOnline() && !force) {
             cancel();
@@ -79,7 +80,7 @@ public class FitnessRunnable extends BukkitRunnable {
     }
 
     private void updateEatingFitness() {
-        FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
+        FitnessConfiguration config = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
 
         FitnessStatisticModel eatingStat = fitness.getStatistic(FitnessStatisticType.EATING);
         double eatingPoints = (eatingStat.getSecondaryPoints() * config.getPointsForCheapFood())
@@ -95,7 +96,7 @@ public class FitnessRunnable extends BukkitRunnable {
     }
 
     private int calculateTotalFitness() {
-        FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
+        FitnessConfiguration config = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
 
         return fitness.getStatistics().stream()
                 .mapToInt(FitnessStatisticModel::getFitnessGained)

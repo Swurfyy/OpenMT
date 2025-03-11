@@ -6,6 +6,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 
@@ -19,7 +20,8 @@ public class ColorCreateCommand extends BaseCommand {
     public void create(Player player, String identifier, String displayName, String prefixColor) {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
-        OpenMinetopia.getColorsConfiguration().createColor(identifier, displayName, prefixColor);
+        ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
+        colorModule.getConfiguration().createColor(identifier, displayName, prefixColor);
         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_created")
                 .replace("<color>", displayName)
                 .replace("<identifier>", identifier));

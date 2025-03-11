@@ -12,6 +12,10 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import nl.openminetopia.configuration.*;
+import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
+import nl.openminetopia.modules.color.configuration.ColorsConfiguration;
+import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
 import nl.openminetopia.registry.CommandComponentRegistry;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.placeholderapi.OpenMinetopiaExpansion;
@@ -27,37 +31,17 @@ public final class OpenMinetopia extends JavaPlugin {
     @Getter
     private static OpenMinetopia instance;
 
-    @Getter
-    @Setter(AccessLevel.PRIVATE)
+    @Getter @Setter(AccessLevel.PRIVATE)
     private static SpigotModuleManager<@NotNull OpenMinetopia> moduleManager;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private static PaperCommandManager commandManager;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private static DefaultConfiguration defaultConfiguration;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private static MessageConfiguration messageConfiguration;
-
-    @Getter
-    @Setter
-    private static LevelCheckConfiguration levelcheckConfiguration;
-
-    @Getter
-    @Setter
-    private static ColorsConfiguration colorsConfiguration;
-
-    @Getter
-    @Setter
-    private static BankingConfiguration bankingConfiguration;
-
-    @Getter
-    @Setter
-    private static FitnessConfiguration fitnessConfiguration;
 
     private Vertx vertx;
 
@@ -81,18 +65,6 @@ public final class OpenMinetopia extends JavaPlugin {
             Metrics metrics = new Metrics(this, 23547);
             metrics.addCustomChart(new SimplePie("storage", () -> defaultConfiguration.getDatabaseType().toString()));
         }
-
-        levelcheckConfiguration = new LevelCheckConfiguration(getDataFolder());
-        levelcheckConfiguration.saveConfiguration();
-
-        colorsConfiguration = new ColorsConfiguration(getDataFolder());
-        colorsConfiguration.saveConfiguration();
-
-        bankingConfiguration = new BankingConfiguration(getDataFolder());
-        bankingConfiguration.saveConfiguration();
-
-        fitnessConfiguration = new FitnessConfiguration(getDataFolder());
-        fitnessConfiguration.saveConfiguration();
 
         commandManager.enableUnstableAPI("help");
         commandManager.setFormat(MessageType.HELP, 1, ChatColor.GOLD);

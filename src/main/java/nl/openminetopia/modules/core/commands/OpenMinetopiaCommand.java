@@ -6,6 +6,16 @@ import co.aikar.commands.annotation.*;
 import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.*;
+import nl.openminetopia.modules.banking.BankingModule;
+import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
+import nl.openminetopia.modules.color.ColorModule;
+import nl.openminetopia.modules.color.configuration.ColorsConfiguration;
+import nl.openminetopia.modules.fitness.FitnessModule;
+import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.player.PlayerModule;
+import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
+import nl.openminetopia.modules.plots.PlotModule;
+import nl.openminetopia.modules.plots.configuration.PlotCalculateConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,17 +38,25 @@ public class OpenMinetopiaCommand extends BaseCommand {
         OpenMinetopia.setMessageConfiguration(new MessageConfiguration(dataFolder));
         OpenMinetopia.getMessageConfiguration().saveConfiguration();
 
-        OpenMinetopia.setLevelcheckConfiguration(new LevelCheckConfiguration(dataFolder));
-        OpenMinetopia.getLevelcheckConfiguration().saveConfiguration();
+        PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
+        playerModule.setConfiguration(new LevelCheckConfiguration(dataFolder));
+        playerModule.getConfiguration().saveConfiguration();
 
-        OpenMinetopia.setColorsConfiguration(new ColorsConfiguration(dataFolder));
-        OpenMinetopia.getColorsConfiguration().saveConfiguration();
+        ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
+        colorModule.setConfiguration(new ColorsConfiguration(dataFolder));
+        colorModule.getConfiguration().saveConfiguration();
 
-        OpenMinetopia.setFitnessConfiguration(new FitnessConfiguration(dataFolder));
-        OpenMinetopia.getFitnessConfiguration().saveConfiguration();
+        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        fitnessModule.setConfiguration(new FitnessConfiguration(dataFolder));
+        fitnessModule.getConfiguration().saveConfiguration();
 
-        OpenMinetopia.setBankingConfiguration(new BankingConfiguration(dataFolder));
-        OpenMinetopia.getBankingConfiguration().saveConfiguration();
+        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        bankingModule.setConfiguration(new BankingConfiguration(dataFolder));
+        bankingModule.getConfiguration().saveConfiguration();
+
+        PlotModule plotModule = OpenMinetopia.getModuleManager().get(PlotModule.class);
+        plotModule.setCalculateConfiguration(new PlotCalculateConfiguration(dataFolder));
+        plotModule.getCalculateConfiguration().saveConfiguration();
 
         player.sendMessage(ChatUtils.color("<gold>De configuratiebestanden zijn succesvol herladen!"));
     }

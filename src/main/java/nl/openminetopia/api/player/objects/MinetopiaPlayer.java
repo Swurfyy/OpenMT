@@ -1,5 +1,6 @@
 package nl.openminetopia.api.player.objects;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
@@ -61,12 +62,12 @@ public class MinetopiaPlayer {
 
     private @Setter Fitness fitness;
 
-    private final PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
-    private final PrefixModule prefixModule = OpenMinetopia.getModuleManager().get(PrefixModule.class);
-    private final ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
-    private final PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
-    private final FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
-    private final PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
+    private final @Getter(AccessLevel.PRIVATE) PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
+    private final @Getter(AccessLevel.PRIVATE) PrefixModule prefixModule = OpenMinetopia.getModuleManager().get(PrefixModule.class);
+    private final @Getter(AccessLevel.PRIVATE) ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
+    private final @Getter(AccessLevel.PRIVATE) PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+    private final @Getter(AccessLevel.PRIVATE) FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+    private final @Getter(AccessLevel.PRIVATE) PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
 
     public MinetopiaPlayer(UUID uuid, PlayerModel playerModel) {
         this.uuid = uuid;

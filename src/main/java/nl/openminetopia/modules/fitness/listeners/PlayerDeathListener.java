@@ -3,7 +3,8 @@ package nl.openminetopia.modules.fitness.listeners;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.fitness.FitnessModule;
+import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.utils.FitnessUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +15,8 @@ public class PlayerDeathListener implements Listener {
 
     @EventHandler
     public void playerDeath(final PlayerDeathEvent event) {
-        FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
+        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessConfiguration configuration = fitnessModule.getConfiguration();
         if (!configuration.isFitnessDeathPunishmentEnabled()) return;
 
         Player player = event.getEntity();

@@ -2,11 +2,13 @@ package nl.openminetopia.modules.banking;
 
 import com.craftmend.storm.api.enums.Where;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import net.milkbowl.vault.economy.Economy;
 import com.jazzkuh.modulemanager.spigot.SpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
 import nl.openminetopia.modules.data.DataModule;
 import org.jetbrains.annotations.NotNull;
 import nl.openminetopia.modules.banking.commands.BankingCommand;
@@ -39,16 +41,21 @@ import java.util.stream.Collectors;
 @Getter
 public class BankingModule extends SpigotModule<@NotNull OpenMinetopia> {
 
-    private DecimalFormat decimalFormat;
-    private Collection<BankAccountModel> bankAccountModels;
-
     public BankingModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 
+    private DecimalFormat decimalFormat;
+    private Collection<BankAccountModel> bankAccountModels;
+    @Getter @Setter
+    private BankingConfiguration configuration;
+
     @Override
     public void onEnable() {
-        decimalFormat = new DecimalFormat(OpenMinetopia.getBankingConfiguration().getEconomyFormat());
+        configuration = new BankingConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        configuration.saveConfiguration();
+
+        decimalFormat = new DecimalFormat(configuration.getEconomyFormat());
         decimalFormat.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.GERMAN));
 
         this.bankAccountModels = new ArrayList<>();

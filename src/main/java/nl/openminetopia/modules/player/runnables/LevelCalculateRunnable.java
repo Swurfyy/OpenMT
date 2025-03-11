@@ -2,7 +2,8 @@ package nl.openminetopia.modules.player.runnables;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.LevelCheckConfiguration;
+import nl.openminetopia.modules.player.PlayerModule;
+import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
 import nl.openminetopia.modules.player.utils.LevelUtil;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -21,7 +22,8 @@ public class LevelCalculateRunnable extends BukkitRunnable {
             return;
         }
 
-        LevelCheckConfiguration configuration = OpenMinetopia.getLevelcheckConfiguration();
+        PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
+        LevelCheckConfiguration configuration = playerModule.getConfiguration();
         if (!minetopiaPlayer.isInPlace()) return;
         int calculatedLevel = LevelUtil.calculateLevel(minetopiaPlayer);
         if (configuration.isAutoLevelUp()) {

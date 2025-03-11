@@ -11,6 +11,7 @@ import nl.openminetopia.modules.banking.menus.BankContentsMenu;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.menus.ColorTypeMenu;
+import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.player.utils.PlaytimeUtil;
 import nl.openminetopia.modules.prefix.menus.PrefixMenu;
 import nl.openminetopia.modules.staff.admintool.menus.fitness.AdminToolFitnessMenu;
@@ -99,11 +100,12 @@ public class AdminToolInfoMenu extends Menu {
 
         /* -------- Fitness -------- */
 
+        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
         Fitness fitness = minetopiaPlayer.getFitness();
         ItemBuilder fitnessItemBuilder = new ItemBuilder(Material.MUSHROOM_STEW)
                 .setName("<gold>Fitheid")
                 .addLoreLine("<gold>Fitheid: " + fitness.getTotalFitness() + " / "
-                        + OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel())
+                        + fitnessModule.getConfiguration().getMaxFitnessLevel())
                 .addLoreLine("")
                 .addLoreLine("<gold>Klik <yellow>hier <gold>om de <yellow>fitheid <gold>van de speler te bekijken.");
 

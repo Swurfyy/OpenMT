@@ -1,4 +1,4 @@
-package nl.openminetopia.configuration;
+package nl.openminetopia.modules.player.configuration;
 
 import lombok.Getter;
 import nl.openminetopia.utils.ConfigurateConfig;

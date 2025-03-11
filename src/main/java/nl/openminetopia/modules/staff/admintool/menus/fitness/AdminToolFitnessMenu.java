@@ -6,7 +6,8 @@ import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.fitness.FitnessModule;
+import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.staff.admintool.menus.AdminToolInfoMenu;
@@ -34,7 +35,7 @@ public class AdminToolFitnessMenu extends Menu {
 
         if (minetopiaPlayer == null) return;
 
-        FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
+        FitnessConfiguration configuration = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
 
         FitnessStatisticModel drinkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
         ItemBuilder drinkingItemBuilder = new ItemBuilder(Material.POTION)
@@ -157,7 +158,7 @@ public class AdminToolFitnessMenu extends Menu {
 
         ItemBuilder totalItemBuilder = new ItemBuilder(Material.PAPER)
                 .setName("<gold>Totaal: <yellow>" + minetopiaPlayer.getFitness().getTotalFitness()
-                        + "<gold>/<yellow>" + OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel())
+                        + "<gold>/<yellow>" + configuration.getMaxFitnessLevel())
                 .addLoreLine(" ")
                 .addLoreLine("<gold>Klik om de <yellow>fitness boosters <gold>te bekijken.");
 

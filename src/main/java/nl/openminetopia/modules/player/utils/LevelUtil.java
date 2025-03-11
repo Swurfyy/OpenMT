@@ -5,7 +5,8 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.events.PlayerLevelCalculateEvent;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.LevelCheckConfiguration;
+import nl.openminetopia.modules.player.PlayerModule;
+import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.WorldGuardUtils;
@@ -15,7 +16,8 @@ import org.bukkit.entity.Player;
 public class LevelUtil {
 
     public int calculateLevel(MinetopiaPlayer minetopiaPlayer) {
-        LevelCheckConfiguration configuration = OpenMinetopia.getLevelcheckConfiguration();
+        PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
+        LevelCheckConfiguration configuration = playerModule.getConfiguration();
         double points = 0;
         int oldCalculatedLevel = minetopiaPlayer.getCalculatedLevel();
 
@@ -46,7 +48,7 @@ public class LevelUtil {
         int level = (int) Math.floor(points / neededPoints);
 
         level = Math.max(OpenMinetopia.getDefaultConfiguration().getDefaultLevel(),
-                Math.min(level, OpenMinetopia.getLevelcheckConfiguration().getMaxLevel()));
+                Math.min(level, configuration.getMaxLevel()));
 
         PlayerLevelCalculateEvent event = new PlayerLevelCalculateEvent(minetopiaPlayer, level, (int) points);
         if (!event.callEvent()) return oldCalculatedLevel;

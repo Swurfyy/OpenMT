@@ -3,8 +3,9 @@ package nl.openminetopia.modules.color.objects;
 import lombok.Getter;
 import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.configuration.ColorsConfiguration;
-import nl.openminetopia.configuration.components.ColorComponent;
+import nl.openminetopia.modules.color.ColorModule;
+import nl.openminetopia.modules.color.configuration.ColorsConfiguration;
+import nl.openminetopia.modules.color.configuration.components.ColorComponent;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 
 @Getter
@@ -48,7 +49,7 @@ public abstract class OwnableColor {
     }
 
     private ColorsConfiguration config() {
-        return OpenMinetopia.getColorsConfiguration();
+        return OpenMinetopia.getModuleManager().get(ColorModule.class).getConfiguration();
     }
 
 }

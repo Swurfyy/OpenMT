@@ -1,7 +1,7 @@
-package nl.openminetopia.configuration;
+package nl.openminetopia.modules.color.configuration;
 
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.configuration.components.ColorComponent;
+import nl.openminetopia.modules.color.configuration.components.ColorComponent;
 import nl.openminetopia.modules.color.objects.OwnableColor;
 import nl.openminetopia.utils.ConfigurateConfig;
 import org.spongepowered.configurate.ConfigurationNode;

@@ -8,20 +8,29 @@ import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.jazzkuh.modulemanager.spigot.SpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
+import lombok.Getter;
+import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.plots.configuration.PlotCalculateConfiguration;
 import org.jetbrains.annotations.NotNull;
 import nl.openminetopia.modules.plots.commands.PlotCommand;
 import nl.openminetopia.modules.plots.commands.subcommands.*;
 import nl.openminetopia.utils.WorldGuardUtils;
 
+@Setter @Getter
 public class PlotModule extends SpigotModule<@NotNull OpenMinetopia> {
 
     public PlotModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
         super(moduleManager);
     }
 
+    private PlotCalculateConfiguration calculateConfiguration;
+
     @Override
     public void onEnable() {
+        calculateConfiguration = new PlotCalculateConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        calculateConfiguration.saveConfiguration();
+
         registerComponent(new PlotInfoCommand());
 
         registerComponent(new PlotCommand());
@@ -34,6 +43,7 @@ public class PlotModule extends SpigotModule<@NotNull OpenMinetopia> {
         registerComponent(new PlotListCommand());
         registerComponent(new PlotTeleportCommand());
         registerComponent(new PlotTransferCommand());
+        registerComponent(new PlotCalculateCommand());
 
         OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("plotName", context ->
                 WorldGuardUtils.getProtectedRegions(priority -> priority >= 0).stream()

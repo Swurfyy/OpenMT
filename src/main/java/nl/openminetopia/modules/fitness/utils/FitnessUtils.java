@@ -5,7 +5,8 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.fitness.FitnessModule;
+import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.fitness.objects.FitnessLevelEffect;
 import org.bukkit.Bukkit;
@@ -30,7 +31,8 @@ public class FitnessUtils {
             return;
         }
 
-        FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
+        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessConfiguration config = fitnessModule.getConfiguration();
         int totalFitness = minetopiaPlayer.getFitness().getTotalFitness();
 
         // Get the closest matching fitness level effect
@@ -80,7 +82,8 @@ public class FitnessUtils {
     }
 
     public static void clearFitnessEffects(Player player) {
-        FitnessConfiguration config = OpenMinetopia.getFitnessConfiguration();
+        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessConfiguration config = fitnessModule.getConfiguration();
         List<PotionEffectType> effectsToRemove = config.getLevelEffects().values().stream()
                 .flatMap(levelEffect -> levelEffect.getEffects().stream())
                 .map(effect -> effect.split(":")[0].toLowerCase())
@@ -103,15 +106,17 @@ public class FitnessUtils {
         Player player = minetopiaPlayer.getBukkit().getPlayer();
         if (player == null) return;
 
+        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessConfiguration configuration = fitnessModule.getConfiguration();
         FitnessStatisticModel healthStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.HEALTH);
         double newHealthPoints = healthStatistic.getPoints();
 
         if (player.getFoodLevel() >= 18) {
-            newHealthPoints += OpenMinetopia.getFitnessConfiguration().getPointsAbove9Hearts();
+            newHealthPoints += configuration.getPointsAbove9Hearts();
         } else if (player.getFoodLevel() <= 4) {
-            newHealthPoints += OpenMinetopia.getFitnessConfiguration().getPointsBelow2Hearts();
+            newHealthPoints += configuration.getPointsBelow2Hearts();
         } else if (player.getFoodLevel() <= 10) {
-            newHealthPoints += OpenMinetopia.getFitnessConfiguration().getPointsBelow5Hearts();
+            newHealthPoints += configuration.getPointsBelow5Hearts();
         }
         healthStatistic.setPoints(newHealthPoints);
 

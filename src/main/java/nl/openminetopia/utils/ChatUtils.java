@@ -11,6 +11,7 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
+import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.police.utils.BalaclavaUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -63,9 +64,10 @@ public class ChatUtils {
         }
 
         if (minetopiaPlayer.getFitness().getStatistics() != null && !minetopiaPlayer.getFitness().getStatistics().isEmpty()) {
+            FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
             message = message
                     .replace("<fitness>", minetopiaPlayer.getFitness().getTotalFitness() + "")
-                    .replace("<max_fitness>", OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel() + "");
+                    .replace("<max_fitness>", fitnessModule.getConfiguration().getMaxFitnessLevel() + "");
         }
 
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);

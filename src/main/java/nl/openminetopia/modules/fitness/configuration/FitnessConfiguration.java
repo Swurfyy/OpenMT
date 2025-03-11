@@ -1,4 +1,4 @@
-package nl.openminetopia.configuration;
+package nl.openminetopia.modules.fitness.configuration;
 
 import lombok.Getter;
 import lombok.SneakyThrows;

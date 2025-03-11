@@ -6,6 +6,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.objects.ChatColor;
 import nl.openminetopia.modules.color.objects.LevelColor;
@@ -29,11 +30,12 @@ public class ColorAddCommand extends BaseCommand {
             return;
         }
 
+        ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
         final String colorId = draftColor.toLowerCase();
-        if (!OpenMinetopia.getColorsConfiguration().exists(colorId)) {
+        if (!colorModule.getConfiguration().exists(colorId)) {
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_not_found"));
             return;
         }

@@ -4,7 +4,8 @@ import com.jazzkuh.inventorylib.objects.PaginatedMenu;
 import com.jazzkuh.inventorylib.objects.icon.Icon;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
-import nl.openminetopia.configuration.components.ColorComponent;
+import nl.openminetopia.modules.color.ColorModule;
+import nl.openminetopia.modules.color.configuration.components.ColorComponent;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Material;
@@ -19,7 +20,8 @@ public class ColorLockedMenu extends PaginatedMenu {
         super(ChatUtils.color(oldMenu.getType().getDisplayName() + " <reset><dark_gray>locked menu"), 6);
         this.registerPageSlotsBetween(0, 44);
 
-        List<ColorComponent> lockedColors = OpenMinetopia.getColorsConfiguration().lockedColors(oldMenu.getColors());
+        ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
+        List<ColorComponent> lockedColors = colorModule.getConfiguration().lockedColors(oldMenu.getColors());
         lockedColors.forEach(component -> {
             this.addItem(new Icon(new ItemBuilder(Material.IRON_INGOT).setName(component.displayName()).toItemStack()));
         });

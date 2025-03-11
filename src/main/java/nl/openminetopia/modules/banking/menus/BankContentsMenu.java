@@ -36,7 +36,8 @@ public class BankContentsMenu extends Menu {
         this.accountModel = accountModel;
         this.asAdmin = asAdmin;
 
-        List<BankNote> bankNotes = OpenMinetopia.getBankingConfiguration().getBankNotes();
+        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        List<BankNote> bankNotes = bankingModule.getConfiguration().getBankNotes();
 
         for (int i = 36; i < 45; i++) {
             this.addItem(new Icon(i, new ItemBuilder(Material.PURPLE_STAINED_GLASS_PANE).toItemStack()));

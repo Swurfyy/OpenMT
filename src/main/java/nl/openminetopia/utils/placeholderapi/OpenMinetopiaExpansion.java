@@ -6,6 +6,7 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
+import nl.openminetopia.modules.fitness.FitnessModule;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,6 +38,7 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
     @Override
     public String onRequest(OfflinePlayer player, @NotNull String params) {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlinePlayers().get(player.getUniqueId());
+        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
 
         if (minetopiaPlayer == null) return null;
 
@@ -64,7 +66,7 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
                 yield null;
             }
             case "fitness" -> String.valueOf(minetopiaPlayer.getFitness().getTotalFitness());
-            case "max_fitness" -> String.valueOf(OpenMinetopia.getFitnessConfiguration().getMaxFitnessLevel());
+            case "max_fitness" -> String.valueOf(fitnessModule.getConfiguration().getMaxFitnessLevel());
             case "playtime_total" -> String.valueOf(playtimeInSeconds);
             case "playtime_days" -> String.valueOf(days);
             case "playtime_hours" -> String.valueOf(hours);

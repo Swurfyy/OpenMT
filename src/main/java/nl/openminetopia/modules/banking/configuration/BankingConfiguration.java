@@ -1,4 +1,4 @@
-package nl.openminetopia.configuration;
+package nl.openminetopia.modules.banking.configuration;
 
 import io.leangen.geantyref.TypeToken;
 import lombok.Getter;

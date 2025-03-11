@@ -8,7 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
-import nl.openminetopia.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.fitness.FitnessModule;
+import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.player.models.PlayerModel;
 
 @Data
@@ -47,7 +48,7 @@ public class FitnessStatisticModel extends StormModel {
     private Double tertiaryPoints;
 
     public int getMaximum() {
-        FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
+        FitnessConfiguration configuration = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
         return switch (type) {
             case WALKING -> configuration.getMaxFitnessByWalking();
             case SPRINTING -> configuration.getMaxFitnessBySprinting();
@@ -61,7 +62,7 @@ public class FitnessStatisticModel extends StormModel {
     }
 
     public double getProgressPerPoint() {
-        FitnessConfiguration configuration = OpenMinetopia.getFitnessConfiguration();
+        FitnessConfiguration configuration = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
         return switch (type) {
             case WALKING -> configuration.getCmPerWalkingLevel();
             case SPRINTING -> configuration.getCmPerSprintingLevel();

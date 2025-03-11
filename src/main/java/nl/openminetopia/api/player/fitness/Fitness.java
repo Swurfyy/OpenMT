@@ -165,7 +165,7 @@ public class Fitness {
         });
         playerModel.getBoosters().clear();
 
-        this.totalFitness = OpenMinetopia.getFitnessConfiguration().getDefaultFitnessLevel();
+        this.totalFitness = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration().getDefaultFitnessLevel();
 
         FitnessUtils.clearFitnessEffects(minetopiaPlayer.getBukkit().getPlayer());
 
