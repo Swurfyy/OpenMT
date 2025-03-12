@@ -12,3 +12,5 @@ wage:
   enabled: true
   interval: 3600
   formula: 50 + 0.25 * (<level> - 1)
+  overrides:
+    0: 10
