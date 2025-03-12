@@ -1,6 +1,8 @@
 package nl.openminetopia.modules.player.utils;
 
 import lombok.experimental.UtilityClass;
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.events.PlayerLevelCalculateEvent;
 import nl.openminetopia.api.player.fitness.Fitness;
@@ -11,6 +13,8 @@ import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.entity.Player;
+
+import java.util.concurrent.CompletableFuture;
 
 @UtilityClass
 public class LevelUtil {
@@ -54,5 +58,26 @@ public class LevelUtil {
         if (!event.callEvent()) return oldCalculatedLevel;
 
         return level;
+    }
+
+    public CompletableFuture<Double> calculateLevelupCosts(int currentLevel, int newLevel) {
+        LevelCheckConfiguration configuration = OpenMinetopia.getModuleManager().get(PlayerModule.class).getConfiguration();
+        return CompletableFuture.supplyAsync(() -> {
+            double cost = 0;
+            for (int i = currentLevel + 1; i <= newLevel; i++) {
+                if (configuration.getLevelUpCostOverrides().get(i) != null) {
+                    cost += configuration.getLevelUpCostOverrides().get(i);
+                    continue;
+                }
+
+                String wageFormula = configuration.getWageFormula().replace("<level>", "l");
+                Expression expression = new ExpressionBuilder(wageFormula)
+                        .variables("l")
+                        .build()
+                        .setVariable("l", i);
+                cost += expression.evaluate();
+            }
+            return cost;
+        });
     }
 }

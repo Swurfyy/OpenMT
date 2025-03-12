@@ -12,6 +12,7 @@ import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.player.commands.PlaytimeCommand;
 import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
+import nl.openminetopia.modules.player.listeners.LevelcheckNpcListener;
 import nl.openminetopia.modules.player.listeners.PlayerPreLoginListener;
 import nl.openminetopia.modules.player.listeners.PlayerQuitListener;
 import nl.openminetopia.modules.player.models.PlayerModel;
@@ -41,6 +42,8 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
 
         registerComponent(new PlayerPreLoginListener());
         registerComponent(new PlayerQuitListener());
+        if (OpenMinetopia.getInstance().isNpcSupport()) registerComponent(new LevelcheckNpcListener());
+
 
         registerComponent(new PlaytimeCommand());
 

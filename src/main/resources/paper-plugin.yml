@@ -20,3 +20,9 @@ dependencies:
     Skript:
       load: BEFORE
       required: false
+    Citizens:
+      load: BEFORE
+      required: false
+    FancyNpcs:
+      load: BEFORE
+      required: false

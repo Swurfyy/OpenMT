@@ -2,6 +2,7 @@ package nl.openminetopia.modules.player.configuration;
 
 import lombok.Getter;
 import nl.openminetopia.utils.ConfigurateConfig;
+import org.enginehub.linbus.stream.token.LinToken;
 import org.spongepowered.configurate.ConfigurationNode;
 
 import java.io.File;
@@ -32,6 +33,10 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
     private final Map<Integer, Double> wageOverrides = new HashMap<>();
     private final int wageInterval;
 
+    private final boolean levelUpCostEnabled;
+    private final String levelUpCostFormula;
+    private final Map<Integer, Double> levelUpCostOverrides = new HashMap<>();
+
     public LevelCheckConfiguration(File file) {
         super(file, "levelcheck.yml", "default-levelcheck.yml", true);
 
@@ -61,19 +66,18 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
         this.wageInterval = wageNode.node("interval").getInt(3600);
         this.wageFormula = wageNode.node("formula").getString("50 + 0.25 * (<level> - 1)");
         wageNode.node( "overrides").childrenMap().forEach((key, value) -> {
-            if (!(key instanceof String levelString)) return;
-            int level = Integer.parseInt(levelString);
+            if (!(key instanceof Integer level)) return;
             double wage = value.getDouble(0);
             wageOverrides.put(level, wage);
         });
-    }
 
-    public int getLevelUpCost(int level) {
-        return levelsNode.node(level, "cost").getInt(0);
+        ConfigurationNode costsNode = rootNode.node("costs");
+        this.levelUpCostEnabled = costsNode.node("enabled").getBoolean(true);
+        this.levelUpCostFormula = costsNode.node("formula").getString("250 + (<level> − 50) * 250");
+        costsNode.node("overrides").childrenMap().forEach((key, value) -> {
+            if (!(key instanceof Integer level)) return;
+            double cost = value.getDouble(0);
+            levelUpCostOverrides.put(level, cost);
+        });
     }
-
-    public int getHourWage(int level) {
-        return levelsNode.node(level, "wage").getInt(0);
-    }
-
 }

@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerQuitListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerQuit(PlayerQuitEvent event) {
+    public void playerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);

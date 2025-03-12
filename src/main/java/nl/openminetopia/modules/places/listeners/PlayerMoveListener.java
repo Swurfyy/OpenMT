@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public class PlayerMoveListener implements Listener {
 
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event) {
+    public void playerMove(PlayerMoveEvent event) {
         Bukkit.getScheduler().runTaskAsynchronously(OpenMinetopia.getInstance(), () -> {
             Player player = event.getPlayer();
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);

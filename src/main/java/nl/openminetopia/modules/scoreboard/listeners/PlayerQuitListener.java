@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerQuitListener implements Listener {
 
     @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
+    public void playerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
         Sidebar sidebar = ScoreboardManager.getInstance().getScoreboard(player.getUniqueId());

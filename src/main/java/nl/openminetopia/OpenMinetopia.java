@@ -19,6 +19,8 @@ import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
 import nl.openminetopia.registry.CommandComponentRegistry;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.placeholderapi.OpenMinetopiaExpansion;
+import nl.openminetopia.utils.wrappers.listeners.CitzensNpcClickListener;
+import nl.openminetopia.utils.wrappers.listeners.FancyNpcClickListener;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
@@ -26,6 +28,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+@Getter @Setter
 public final class OpenMinetopia extends JavaPlugin {
 
     @Getter
@@ -42,6 +45,8 @@ public final class OpenMinetopia extends JavaPlugin {
 
     @Getter @Setter
     private static MessageConfiguration messageConfiguration;
+
+    private boolean npcSupport = false;
 
     private Vertx vertx;
 
@@ -78,6 +83,19 @@ public final class OpenMinetopia extends JavaPlugin {
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new OpenMinetopiaExpansion().register();
             getLogger().info("Registered PlaceholderAPI expansion.");
+        }
+
+        // Registering of NPC wrapper listeners
+        if (Bukkit.getPluginManager().isPluginEnabled("Citizens")) {
+            getLogger().info("Initializing Citizens support.");
+            Bukkit.getPluginManager().registerEvents(new CitzensNpcClickListener(), this);
+            npcSupport = true;
+        }
+
+        if (Bukkit.getPluginManager().isPluginEnabled("FancyNpcs")) {
+            getLogger().info("Initializing FancyNpcs support.");
+            Bukkit.getPluginManager().registerEvents(new FancyNpcClickListener(), this);
+            npcSupport = true;
         }
 
         moduleManager.getComponentRegistry().registerComponentHandler(

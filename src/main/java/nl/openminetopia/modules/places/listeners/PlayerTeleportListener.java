@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 public class PlayerTeleportListener implements Listener {
 
     @EventHandler
-    public void onPlayerTeleport(PlayerTeleportEvent event) {
+    public void playerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;

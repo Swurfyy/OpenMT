@@ -43,6 +43,14 @@ repositories {
         name = "skript"
         url = uri("https://repo.skriptlang.org/releases")
     }
+    maven {
+        name = "citzens-repo"
+        url = uri("https://maven.citizensnpcs.co/repo")
+    }
+    maven {
+        name = "fancyplugins"
+        url = uri("https://repo.fancyplugins.de/releases")
+    }
 }
 
 dependencies {
@@ -102,6 +110,10 @@ dependencies {
     compileOnly("io.vertx:vertx-web-client:4.5.13")
 
     compileOnly("net.objecthunter:exp4j:0.4.8")
+
+    /* Npcs */
+    compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
+    compileOnly("de.oliver:FancyNpcs:2.4.4")
 }
 
 val targetJavaVersion = 21

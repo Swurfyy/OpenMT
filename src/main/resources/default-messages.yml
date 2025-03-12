@@ -195,3 +195,6 @@ place_enter_subtitle: "<city_color><city_loadingname>"
 
 # Levelcheck
 levelcheck_wage: "<gold>Je hebt jouw standaardinkomen van <yellow><amount> <gold>euro ontvangen!"
+levelcheck_already_at_level: "<new_line><dark_red>Welkom <red><player><dark_red>! Op dit moment kan ik jou <red>niet <dark_red>voorzien van een hoger level. Je kan jouw potentiële level zien in het scoreboard naast jouw huidige level."
+levelcheck_not_enough_money: "<dark_red>Je hebt <red>niet <dark_red>genoeg geld om levelup te gaan."
+levelcheck_success: "<gold>Je bent succesvol naar <yellow>level <level> <gold>gegaan!"
