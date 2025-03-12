@@ -1,6 +1,15 @@
 package nl.openminetopia.modules.player.runnables;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.modules.banking.BankingModule;
+import nl.openminetopia.modules.banking.models.BankAccountModel;
+import nl.openminetopia.modules.player.PlayerModule;
+import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
+import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -31,6 +40,35 @@ public class PlaytimeRunnable extends BukkitRunnable {
             return;
         }
         minetopiaPlayer.setPlaytime(newPlaytime, false);
+
+        // If the new playtime is a multiple of the wage interval, give the player their wage
+        PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
+        if (newPlaytime % playerModule.getConfiguration().getWageInterval() == 0) {
+            giveWage();
+        }
+    }
+
+    private void giveWage() {
+        PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
+        LevelCheckConfiguration configuration = playerModule.getConfiguration();
+        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankAccountModel bankAccountModel = bankingModule.getAccountById(minetopiaPlayer.getUuid());
+
+        if (!configuration.isWageEnabled()) return;
+        if (bankAccountModel == null) return;
+
+        double wage;
+        if (configuration.getWageOverrides().containsKey(minetopiaPlayer.getLevel())) {
+            wage = configuration.getWageOverrides().get(minetopiaPlayer.getLevel());
+        } else {
+            String wageFormula = configuration.getWageFormula().replace("<level>", "l");
+            Expression expression = new ExpressionBuilder(wageFormula).variables("l").build().setVariable("l", minetopiaPlayer.getLevel());
+            wage = expression.evaluate();
+        }
+
+        bankAccountModel.setBalance(bankAccountModel.getBalance() + wage);
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("levelcheck_wage")
+                .replace("<amount>", String.valueOf(wage)));
     }
 }
 

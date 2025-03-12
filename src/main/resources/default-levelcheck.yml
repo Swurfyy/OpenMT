@@ -1,0 +1,14 @@
+levelcheck:
+  max-level: 100
+  points-needed-for-level-up: 2500
+  points-per-plot: 4000
+  points-per-account-balance: 50
+  points-per-vehicle: 1200
+  points-for-prefix: 1750
+  points-per-hour-played: 350
+  points-per-fitness: 1500
+  auto-level-up: false
+wage:
+  enabled: true
+  interval: 3600
+  formula: 50 + 0.25 * (<level> - 1)

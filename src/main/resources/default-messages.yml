@@ -157,8 +157,7 @@ plot_calculate_summary: "<white>[<red><bold>Calculate<reset><white>] <white>Kost
 # Emergency command
 emergency_too_soon: "<red><b>112</b></red> <dark_gray>| <gray>Je kan niet zo snel achter elkaar een melding maken."
 emergency_cooldown: "<red><b>112</b></red> <dark_gray>| <gray>Probeer het over <white><time> <gray> nog eens."
-emergency_format: "<red>[<white>112<red>] [<white><world>, <x>, <y>, <z></white><red>] <gray><sender>:</gray> <white><message></white>
-"
+emergency_format: "<red>[<white>112<red>] [<white><world>, <x>, <y>, <z></white><red>] <gray><sender>:</gray> <white><message></white>"
 
 # Criminal records
 police_criminal_record_date_format: "dd-MM-yyyy HH:mm:ss"
@@ -193,3 +192,6 @@ trashcan_message: "<gold>Je hebt de prullenbak geopend.<new_line><red>WAARSCHUWI
 # Places (Cities/Worlds)
 place_enter_title: "<city_color>Welkom in"
 place_enter_subtitle: "<city_color><city_loadingname>"
+
+# Levelcheck
+levelcheck_wage: "<gold>Je hebt jouw standaardinkomen van <yellow><amount> <gold>euro ontvangen!"

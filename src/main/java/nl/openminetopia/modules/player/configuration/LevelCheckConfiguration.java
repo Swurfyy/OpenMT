@@ -5,6 +5,9 @@ import nl.openminetopia.utils.ConfigurateConfig;
 import org.spongepowered.configurate.ConfigurationNode;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 public class LevelCheckConfiguration extends ConfigurateConfig {
@@ -24,8 +27,13 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
 
     private final boolean autoLevelUp;
 
+    private final boolean wageEnabled;
+    private final String wageFormula;
+    private final Map<Integer, Double> wageOverrides = new HashMap<>();
+    private final int wageInterval;
+
     public LevelCheckConfiguration(File file) {
-        super(file, "levelcheck.yml", "", false);
+        super(file, "levelcheck.yml", "default-levelcheck.yml", true);
 
         ConfigurationNode levelCheckNode = rootNode.node("levelcheck");
 
@@ -42,10 +50,22 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
 
         this.autoLevelUp = levelCheckNode.node("auto-level-up").getBoolean(false);
 
-        for (int i = 1; i <= maxLevel; i++) {
-            levelsNode.node(i, "cost").getInt(0);
-            levelsNode.node(i, "wage").getInt(0);
-        }
+//        for (int i = 1; i <= maxLevel; i++) {
+//            levelsNode.node(i, "cost").getInt(0);
+//            levelsNode.node(i, "wage").getInt(0);
+//        }
+
+        ConfigurationNode wageNode = rootNode.node("wage");
+
+        this.wageEnabled = wageNode.node("enabled").getBoolean(true);
+        this.wageInterval = wageNode.node("interval").getInt(3600);
+        this.wageFormula = wageNode.node("formula").getString("50 + 0.25 * (<level> - 1)");
+        wageNode.node( "overrides").childrenMap().forEach((key, value) -> {
+            if (!(key instanceof String levelString)) return;
+            int level = Integer.parseInt(levelString);
+            double wage = value.getDouble(0);
+            wageOverrides.put(level, wage);
+        });
     }
 
     public int getLevelUpCost(int level) {
