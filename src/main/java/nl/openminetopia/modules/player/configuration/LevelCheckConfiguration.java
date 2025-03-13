@@ -55,11 +55,6 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
 
         this.autoLevelUp = levelCheckNode.node("auto-level-up").getBoolean(false);
 
-//        for (int i = 1; i <= maxLevel; i++) {
-//            levelsNode.node(i, "cost").getInt(0);
-//            levelsNode.node(i, "wage").getInt(0);
-//        }
-
         ConfigurationNode wageNode = rootNode.node("wage");
 
         this.wageEnabled = wageNode.node("enabled").getBoolean(true);

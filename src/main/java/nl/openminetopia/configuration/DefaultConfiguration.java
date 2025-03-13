@@ -451,7 +451,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Walkie-talkie configuration
          */
-        this.walkieTalkieItems = loadItemMappings(rootNode.node("walkie", "items"), List.of(
+        this.walkieTalkieItems = loadItemMappings(rootNode.node("walkietalkie", "items"), List.of(
                 new ItemStack(Material.PINK_DYE)
         ));
         this.walkieTalkieEmergencyCooldownEnabled = rootNode.node("walkietalkie", "emergency-button", "cooldown-enabled").getBoolean(true);
