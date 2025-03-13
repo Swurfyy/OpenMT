@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.DefaultConfiguration;
-import nl.openminetopia.modules.misc.utils.HeadUtils;
+import nl.openminetopia.modules.misc.utils.MiscUtils;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,7 +17,7 @@ public class HeadCommand extends BaseCommand {
     public void head(Player player) {
         ItemStack item = player.getInventory().getItemInMainHand();
 
-        if (item.getType() != Material.AIR && !HeadUtils.isValidHeadItem(item)) {
+        if (item.getType() != Material.AIR && !MiscUtils.isValidHeadItem(item)) {
             player.sendMessage(ChatUtils.color("<red>Je kan dit item niet op je hoofd dragen!"));
             return;
         }
@@ -35,7 +35,7 @@ public class HeadCommand extends BaseCommand {
     public void add(Player player) {
         ItemStack item = player.getInventory().getItemInMainHand();
 
-        if (item.getType() != Material.AIR && HeadUtils.isValidHeadItem(item)) {
+        if (item.getType() != Material.AIR && MiscUtils.isValidHeadItem(item)) {
             player.sendMessage(ChatUtils.color("<red>Dit item staat al op de head whitelist!"));
             return;
         }
@@ -52,7 +52,7 @@ public class HeadCommand extends BaseCommand {
     public void remove(Player player) {
         ItemStack item = player.getInventory().getItemInMainHand();
 
-        if (item.getType() != Material.AIR && !HeadUtils.isValidHeadItem(item)) {
+        if (item.getType() != Material.AIR && !MiscUtils.isValidHeadItem(item)) {
             player.sendMessage(ChatUtils.color("<red>Dit item staat niet op de head whitelist!"));
             return;
         }

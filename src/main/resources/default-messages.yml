@@ -182,6 +182,11 @@ police_walkietalkie_disabled: "<gold>Je zit nu niet meer in de <yellow>politiech
 police_walkietalkie_emergency_cooldown: "<red>Je moet nog even wachten voordat je weer op de <dark_red>noodkoop <red>kan drukken."
 police_walkietalkie_emergency_format: "<dark_red>[<red>NOODKNOP<dark_red>] <gray><player> <dark_red>(<red><world_name>, <x>, <y>, <z><dark_red>) <gray>heeft op de noodknop gedrukt!"
 
+# Handcuffs
+police_handcuff_on: "<red>Je bent in de boeien geslagen!"
+police_handcuff_off: "<green>Je bent uit de boeien gehaald!"
+police_handcuff_cant_pvp: "<red>Je kunt niet vechten als je in de <dark_red>handboeien<red> zit."
+
 # Staffchat
 staff_chat_format: "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b><world_name></b><dark_gray>) <green><player><white>: <message>"
 
@@ -198,3 +203,6 @@ levelcheck_wage: "<gold>Je hebt jouw standaardinkomen van <yellow><amount> <gold
 levelcheck_already_at_level: "<new_line><dark_red>Welkom <red><player><dark_red>! Op dit moment kan ik jou <red>niet <dark_red>voorzien van een hoger level. Je kan jouw potentiële level zien in het scoreboard naast jouw huidige level."
 levelcheck_not_enough_money: "<dark_red>Je hebt <red>niet <dark_red>genoeg geld om levelup te gaan."
 levelcheck_success: "<gold>Je bent succesvol naar <yellow>level <level> <gold>gegaan!"
+
+# PvP
+misc_pvp_disabled: "<red>PvP staat uitgeschakeld."

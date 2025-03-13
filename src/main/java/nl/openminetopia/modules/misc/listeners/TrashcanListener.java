@@ -15,7 +15,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class PlayerInteractListener implements Listener {
+public class TrashcanListener implements Listener {
 
     @EventHandler
     public void playerInteract(PlayerInteractEvent event) {

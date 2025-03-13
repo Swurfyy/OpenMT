@@ -3,9 +3,10 @@ package nl.openminetopia.modules.misc;
 import com.jazzkuh.modulemanager.spigot.SpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.misc.listeners.PlayerAttackListener;
 import org.jetbrains.annotations.NotNull;
 import nl.openminetopia.modules.misc.commands.HeadCommand;
-import nl.openminetopia.modules.misc.listeners.PlayerInteractListener;
+import nl.openminetopia.modules.misc.listeners.TrashcanListener;
 
 public class MiscModule extends SpigotModule<@NotNull OpenMinetopia> {
 
@@ -17,6 +18,7 @@ public class MiscModule extends SpigotModule<@NotNull OpenMinetopia> {
     public void onEnable() {
         registerComponent(new HeadCommand());
 
-        registerComponent(new PlayerInteractListener());
+        registerComponent(new TrashcanListener());
+        registerComponent(new PlayerAttackListener());
     }
 }

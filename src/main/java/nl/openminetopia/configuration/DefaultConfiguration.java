@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.types.DatabaseType;
+import nl.openminetopia.modules.misc.objects.PvPItem;
 import nl.openminetopia.utils.ConfigurateConfig;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -170,6 +171,12 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final List<ItemStack> walkieTalkieItems;
     private final boolean walkieTalkieEmergencyCooldownEnabled;
     private final int walkieTalkieEmergencyCooldownSeconds;
+
+    /**
+     * PvP configuration
+     */
+    private final boolean pvpEnabled;
+    private final List<PvPItem> pvpItems = new ArrayList<>();
 
     /**
      * Trashcan configuration
@@ -458,6 +465,17 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.walkieTalkieEmergencyCooldownSeconds = rootNode.node("walkietalkie", "emergency-button", "cooldown-seconds").getInt(60);
 
         /*
+         * PvP configuration
+         */
+        this.pvpEnabled = rootNode.node("pvp", "enabled").getBoolean(true);
+        rootNode.node("pvp", "items").childrenList().forEach(pvpItem -> {
+            ItemStack item = deserializeItemStack(pvpItem.node("item"));
+            String attackerMessage = pvpItem.node("attacker-message").getString("<red>Je hebt <dark_red><player> <red>aangevallen met een <dark_red><item>");
+            String victimMessage = pvpItem.node("victim-message").getString("<red>Je bent aangevallen door <dark_red><player> <red>met een <dark_red><item>");
+            this.getPvpItems().add(new PvPItem(item, attackerMessage, victimMessage));
+        });
+
+        /*
          * Trashcan configuration
          */
         this.trashcanEnabled = rootNode.node("trashcan", "enabled").getBoolean(true);
@@ -477,32 +495,12 @@ public class DefaultConfiguration extends ConfigurateConfig {
     public void addToHeadWhitelist(ItemStack item) {
         if (item == null || item.getType() == Material.AIR) return;
 
-        ItemMeta meta = item.getItemMeta();
-        if (meta != null) {
-            ConfigurationNode whitelistNode = rootNode.node("head", "whitelist");
+        ConfigurationNode whitelistNode = rootNode.node("head", "whitelist");
+        ConfigurationNode itemNode = whitelistNode.appendListNode();
 
-            ConfigurationNode itemNode = whitelistNode.appendListNode();
-
-            itemNode.node("type").set(item.getType().name());
-
-            int customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : -1;
-            if (customModelData != -1) {
-                itemNode.node("custom-model-data").set(customModelData);
-            }
-
-            if (meta instanceof Damageable damageable) {
-                int itemDamage = damageable.getDamage();
-                if (itemDamage != 0) {
-                    itemNode.node("damage").set(itemDamage);
-                }
-            }
-
-            if (meta.hasItemModel()) {
-                NamespacedKey itemModel = meta.getItemModel();
-                if (itemModel != null) {
-                    itemNode.node("item-model").set(itemModel.toString());
-                }
-            }
+        Map<Object, Object> itemData = serializeItemStack(item);
+        for (Map.Entry<Object, Object> entry : itemData.entrySet()) {
+            itemNode.node(entry.getKey()).set(entry.getValue());
         }
 
         this.headWhitelist.add(item);
@@ -512,53 +510,15 @@ public class DefaultConfiguration extends ConfigurateConfig {
     @SneakyThrows
     public void removeFromHeadWhitelist(ItemStack item) {
         ConfigurationNode whitelistNode = rootNode.node("head", "whitelist");
+
         for (ConfigurationNode itemNode : whitelistNode.childrenList()) {
-            String itemType = itemNode.node("type").getString();
-            if (itemType == null || !itemType.equals(item.getType().name())) {
-                continue;
+            ItemStack storedItem = deserializeItemStack(itemNode);
+            if (storedItem != null && storedItem.isSimilar(item)) {
+                itemNode.set(null);
             }
-
-            int customModelData = itemNode.node("custom-model-data").getInt(-1);
-            if (customModelData != -1 && item.getItemMeta() != null && item.getItemMeta().hasCustomModelData()) {
-                if (customModelData != item.getItemMeta().getCustomModelData()) continue;
-            }
-
-            int damage = itemNode.node("damage").getInt(-1);
-            if (damage != -1 && item.getItemMeta() instanceof Damageable damageable) {
-                if (damage != damageable.getDamage()) continue;
-            }
-
-            String itemModel = itemNode.node("item-model").getString("");
-            if (!itemModel.isEmpty() && item.getItemMeta() != null && item.getItemMeta().hasItemModel()) {
-                if (item.getItemMeta().getItemModel() == null) continue;
-                if (!itemModel.equals(item.getItemMeta().getItemModel().toString())) continue;
-            }
-
-            itemNode.set(null);
         }
 
-        this.headWhitelist.removeIf(itemStack -> {
-            Material material = itemStack.getType();
-            if (material != item.getType()) return false;
-
-            int customModelData = itemStack.getItemMeta().hasCustomModelData() ? itemStack.getItemMeta().getCustomModelData() : -1;
-            if (customModelData != -1 && item.getItemMeta() != null && item.getItemMeta().hasCustomModelData()) {
-                if (customModelData != item.getItemMeta().getCustomModelData()) return false;
-            }
-
-            int damage = ((Damageable) itemStack.getItemMeta()).getDamage() == 0 ? -1 : ((Damageable) itemStack.getItemMeta()).getDamage();
-            if (damage != -1 && item.getItemMeta() instanceof Damageable damageable) {
-                if (damage != damageable.getDamage()) return false;
-            }
-
-            String itemModel = !itemStack.getItemMeta().hasItemModel() || itemStack.getItemMeta().getItemModel() == null ? "" : itemStack.getItemMeta().getItemModel().toString();
-            if (!itemModel.isEmpty() && item.getItemMeta() != null && item.getItemMeta().hasItemModel()) {
-                if (item.getItemMeta().getItemModel() == null) return false;
-                if (!itemModel.equals(item.getItemMeta().getItemModel().toString())) return false;
-            }
-            return true;
-        });
-
+        this.headWhitelist.removeIf(itemStack -> itemStack.isSimilar(item));
         saveConfiguration();
     }
 
@@ -566,54 +526,62 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private List<ItemStack> loadItemMappings(ConfigurationNode itemsNode, List<ItemStack> defaultItems) {
         if (itemsNode.isNull()) {
             List<Map<Object, Object>> itemList = new ArrayList<>();
-
             for (ItemStack itemStack : defaultItems) {
-                Map<Object, Object> itemMap = new HashMap<>();
-                try {
-                    itemMap.put("type", itemStack.getType().name());
-
-                    int customModelData = itemStack.getItemMeta().hasCustomModelData() ? itemStack.getItemMeta().getCustomModelData() : -1;
-                    itemMap.put("custom-model-data", customModelData);
-
-                    Damageable damageable = (Damageable) itemStack.getItemMeta();
-                    int damage = damageable.hasDamage() ? damageable.getDamage() : -1;
-                    if (damage != -1) itemMap.put("damage", damage);
-
-                    if (itemStack.getItemMeta().hasItemModel() && itemStack.getItemMeta().getItemModel() != null) {
-                        itemMap.put("item-model", itemStack.getItemMeta().getItemModel());
-                    }
-
-                    itemList.add(itemMap);
-                } catch (Exception e) {
-                    OpenMinetopia.getInstance().getLogger().warning("Failed to load item: " + itemStack.getType().name());
-                }
+                itemList.add(serializeItemStack(itemStack));
             }
-
             itemsNode.set(itemList);
         }
 
         List<ItemStack> itemList = new ArrayList<>();
         for (ConfigurationNode val : itemsNode.childrenList()) {
-            String typeName = val.node("type").getString();
-            if (typeName == null) continue;
-
-            Material itemMaterial = Material.matchMaterial(typeName);
-            if (itemMaterial == null) continue;
-
-            int customModelData = val.node("custom-model-data").getInt(-1);
-            int damage = val.node("damage").getInt(-1);
-            String itemModel = val.node("item-model").getString("");
-
-            ItemBuilder itemBuilder = new ItemBuilder(itemMaterial);
-
-            if (customModelData != -1) itemBuilder.setCustomModelData(customModelData);
-            if (damage != -1) itemBuilder.setDamage(damage);
-            if (!itemModel.isEmpty()) itemBuilder.setItemModel(itemModel);
-
-            itemList.add(itemBuilder.toItemStack());
+            ItemStack item = deserializeItemStack(val);
+            if (item != null) {
+                itemList.add(item);
+            }
         }
 
         return itemList;
+    }
+
+    private Map<Object, Object> serializeItemStack(ItemStack itemStack) {
+        Map<Object, Object> itemMap = new HashMap<>();
+        try {
+            itemMap.put("type", itemStack.getType().name());
+
+            int customModelData = itemStack.getItemMeta().hasCustomModelData() ? itemStack.getItemMeta().getCustomModelData() : -1;
+            itemMap.put("custom-model-data", customModelData);
+
+            Damageable damageable = (Damageable) itemStack.getItemMeta();
+            int damage = damageable.hasDamage() ? damageable.getDamage() : -1;
+            if (damage != -1) itemMap.put("damage", damage);
+
+            if (itemStack.getItemMeta().hasItemModel() && itemStack.getItemMeta().getItemModel() != null) {
+                itemMap.put("item-model", itemStack.getItemMeta().getItemModel());
+            }
+        } catch (Exception e) {
+            OpenMinetopia.getInstance().getLogger().warning("Failed to serialize item: " + itemStack.getType().name());
+        }
+        return itemMap;
+    }
+
+    private ItemStack deserializeItemStack(ConfigurationNode val) {
+        String typeName = val.node("type").getString();
+        if (typeName == null) return null;
+
+        Material itemMaterial = Material.matchMaterial(typeName);
+        if (itemMaterial == null) return null;
+
+        int customModelData = val.node("custom-model-data").getInt(-1);
+        int damage = val.node("damage").getInt(-1);
+        String itemModel = val.node("item-model").getString("");
+
+        ItemBuilder itemBuilder = new ItemBuilder(itemMaterial);
+
+        if (customModelData != -1) itemBuilder.setCustomModelData(customModelData);
+        if (damage != -1) itemBuilder.setDamage(damage);
+        if (!itemModel.isEmpty()) itemBuilder.setItemModel(itemModel);
+
+        return itemBuilder.toItemStack();
     }
 
     @SneakyThrows
