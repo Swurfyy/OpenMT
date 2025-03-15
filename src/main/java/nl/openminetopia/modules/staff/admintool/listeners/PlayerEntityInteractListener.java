@@ -25,12 +25,12 @@ public class PlayerEntityInteractListener implements Listener {
         if (PersistentDataUtil.get(item, "openmt.admintool") == null) return;
         if (!event.getPlayer().hasPermission("openminetopia.admintool")) return;
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(event.getPlayer());
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
         if (minetopiaPlayer == null) return;
 
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
-        BankAccountModel bankAccountModel = bankingModule.getAccountByIdAsync(event.getPlayer().getUniqueId()).join();
+        BankAccountModel bankAccountModel = bankingModule.getAccountById(target.getUniqueId());
 
-        new AdminToolMenu(event.getPlayer(), event.getPlayer(), minetopiaPlayer, bankAccountModel).open(target);
+        new AdminToolMenu(event.getPlayer(), target, minetopiaPlayer, bankAccountModel).open(target);
     }
 }
