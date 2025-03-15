@@ -191,6 +191,12 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final boolean syncTime;
     private final String syncTimeZone;
 
+    /**
+     * Spy Webhook Configuration
+     */
+    public String commandSpyWebhookUrl;
+    public String chatSpyWebhookUrl;
+
     @SneakyThrows
     public DefaultConfiguration(File file) {
         super(file, "config.yml", "", false);
@@ -489,6 +495,12 @@ public class DefaultConfiguration extends ConfigurateConfig {
          */
         this.syncTime = rootNode.node("timesync", "enabled").getBoolean(true);
         this.syncTimeZone = rootNode.node("timesync", "timezone").getString("Europe/Amsterdam");
+
+        /*
+         * Spy Webhooks
+         */
+        this.chatSpyWebhookUrl = rootNode.node("spy", "chat-spy-webhook").getString("");
+        this.commandSpyWebhookUrl = rootNode.node("spy", "command-spy-webhook").getString("");
     }
 
     @SneakyThrows
