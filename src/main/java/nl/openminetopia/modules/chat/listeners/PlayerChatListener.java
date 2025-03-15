@@ -32,6 +32,9 @@ public class PlayerChatListener implements Listener {
 
         DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
 
+        String originalMessage = ChatUtils.rawMiniMessage(event.message());
+        SpyUtils.chatSpy(source, originalMessage, new ArrayList<>());
+
         if (!configuration.isChatEnabled()) return;
         if (!minetopiaPlayer.isInPlace()) return;
         if (minetopiaPlayer.isStaffchatEnabled()) return;
@@ -62,10 +65,7 @@ public class PlayerChatListener implements Listener {
         }
 
         // Format the message
-        String originalMessage = ChatUtils.rawMiniMessage(event.message());
         String formattedMessage = configuration.getChatFormat();
-
-        SpyUtils.chatSpy(source, originalMessage, recipients);
 
         // Replace <message> placeholder with original message
         String finalMessage = formattedMessage.replace("<message>", originalMessage);
