@@ -1,9 +1,7 @@
 package nl.openminetopia.utils.item;
 
 import lombok.experimental.UtilityClass;
-import nl.openminetopia.OpenMinetopia;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -44,7 +42,7 @@ public class ItemUtils {
                 ItemMeta compareMeta = compare.getItemMeta();
 
                 boolean isSame = true;
-                if (meta.hasItemModel() && compareMeta.hasItemModel()) {
+                if (Bukkit.getVersion().contains("1.21.4") && meta.hasItemModel() && compareMeta.hasItemModel()) {
                     if (meta.getItemModel() != compareMeta.getItemModel()) isSame = false;
                 }
 

@@ -5,7 +5,9 @@ import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.types.DatabaseType;
 import nl.openminetopia.modules.misc.objects.PvPItem;
+import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.ConfigurateConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -567,7 +569,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
             int damage = damageable.hasDamage() ? damageable.getDamage() : -1;
             if (damage != -1) itemMap.put("damage", damage);
 
-            if (itemStack.getItemMeta().hasItemModel() && itemStack.getItemMeta().getItemModel() != null) {
+            if (Bukkit.getVersion().contains("1.21.4") && itemStack.getItemMeta().hasItemModel() && itemStack.getItemMeta().getItemModel() != null) {
                 itemMap.put("item-model", itemStack.getItemMeta().getItemModel());
             }
         } catch (Exception e) {
@@ -591,7 +593,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
 
         if (customModelData != -1) itemBuilder.setCustomModelData(customModelData);
         if (damage != -1) itemBuilder.setDamage(damage);
-        if (!itemModel.isEmpty()) itemBuilder.setItemModel(itemModel);
+        if (Bukkit.getVersion().contains("1.21.4") && !itemModel.isEmpty()) itemBuilder.setItemModel(itemModel);
 
         return itemBuilder.toItemStack();
     }
