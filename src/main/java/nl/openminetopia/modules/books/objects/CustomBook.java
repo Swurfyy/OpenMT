@@ -4,9 +4,6 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.WrittenBookContent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import net.kyori.adventure.inventory.Book;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.utils.ChatUtils;
@@ -14,7 +11,6 @@ import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BookMeta;
 
 import java.util.Map;
 
@@ -43,7 +39,7 @@ public class CustomBook {
 
         // Vervang de variabelen in de content
         String processedContent = content;
-        String processedName = name;
+        String processedName = itemName;
         for (Map.Entry<String, String> entry : variables.entrySet()) {
             processedContent = processedContent.replace(entry.getKey(), entry.getValue());
             processedName = processedName.replace(entry.getKey(), entry.getValue());
@@ -59,8 +55,8 @@ public class CustomBook {
 
         book.setData(DataComponentTypes.WRITTEN_BOOK_CONTENT, builder.build());
 
-        String suffix = copy ? " <reset><white>[KOPIE]" : "";
-        String bookTitle = processedName.length() > 32 ? processedName.substring(0, 32) + suffix : processedName + suffix;
+        String suffix = copy ? "<reset><white>[COPY] <reset>" : "";
+        String bookTitle = processedName.length() > 32 ? suffix + processedName.substring(0, 32) : suffix + processedName;
         return new ItemBuilder(book).setName(ChatUtils.format(minetopiaPlayer, bookTitle)).toItemStack();
     }
 }
