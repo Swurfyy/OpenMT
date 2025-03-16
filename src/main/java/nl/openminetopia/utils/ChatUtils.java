@@ -108,6 +108,10 @@ public class ChatUtils {
         return MiniMessage.miniMessage().serialize(component);
     }
 
+    public String stripMiniMessage(String message) {
+        return MiniMessage.miniMessage().stripTags(message);
+    }
+
     public String rawMiniMessage(Component component) {
         String message = stripMiniMessage(component);
         return MiniMessage.miniMessage().stripTags(message);

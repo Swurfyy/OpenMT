@@ -118,6 +118,17 @@ public class ItemBuilder {
         return this;
     }
 
+    /**
+     * Set the displayname of the item.
+     *
+     * @param name The name to change it to.
+     */
+    public ItemBuilder setName(Component name) {
+        ItemMeta im = is.getItemMeta();
+        im.displayName(name.decoration(TextDecoration.ITALIC, false));
+        is.setItemMeta(im);
+        return this;
+    }
 
     /**
      * Make the item glow.

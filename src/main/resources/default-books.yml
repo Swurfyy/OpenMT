@@ -1,0 +1,187 @@
+fine:
+  enabled: true
+  copy: true
+  menu-item: DIAMOND
+  name: <world_color>Boete
+  item-name: Boete <player_name> (€<amount>)
+  description: <yellow>Schrijf boetes uit
+  variables:
+    <player_name>:
+      explanation: <world_color>Typ nu de <yellow>spelersnaam<world_color>.
+    <amount>:
+      explanation: <world_color>Typ nu het <yellow>bedrag<world_color>.
+    <reason>:
+      explanation: <world_color>Typ nu de <yellow>reden<world_color>.
+    <issuer>:
+      explanation: <world_color>Typ nu de <yellow>uitgever<world_color>.
+  content: '<black><b>Boete <player_name> (€<amount>)<new_line><blue>===================<new_line><black><b>Speler:<new_line><black><player_name><new_line><black><b>Bedrag: <black><amount><new_line><black><b>Datum uitgave: <black><date><new_line><black><b>Reden:</b><black> <reason><new_line><new_line><blue>===================<new_line><black>© <issuer>'
+
+receipt:
+  enabled: true
+  copy: true
+  menu-item: BOOK_AND_QUILL
+  name: <world_color>Bon
+  item-name: Bon <player_name>
+  description: <yellow>Maak gemakkelijk betaalbewijzen
+  variables:
+    <player_name>:
+      explanation: <world_color>Typ nu de <yellow>spelersnaam<world_color>.
+    <amount>:
+      explanation: <world_color>Typ nu het <yellow>bedrag<world_color>.
+    <company>:
+      explanation: <world_color>Typ nu het <yellow>bedrijf<world_color>.
+  content: '<black><b>Bonnetje <player_name> (€<amount>)<new_line><blue>===================<new_line><black><b>Speler:<new_line><black><player_name><new_line><new_line><black><b>Aankoopdatum: <black><date><new_line><new_line><black><b>Bedrijf: <black><company><new_line><new_line><black><b>Bedrag: <black>€<amount><new_line><blue>===================<new_line><black>© <company>'
+
+identification:
+  enabled: true
+  copy: true
+  menu-item: PAPER
+  name: <world_color>ID-Bewijs
+  item-name: ID-Bewijs <player_name>
+  description: <yellow>Maak snel ID bewijzen aan!
+  variables:
+    <player_name>:
+      explanation: <world_color>Typ nu de <yellow>spelersnaam<world_color>.
+    <residence>:
+      explanation: <world_color>Typ nu de <yellow>woonplaats<world_color>.
+    <issuer>:
+      explanation: <world_color>Typ nu de <yellow>uitgever<world_color>.
+  content: '<black><b>IDBewijs<new_line><blue>===================<new_line><black><b>Speler:<new_line><black><player_name><new_line><black><b>Woonplaats: <black><residence><new_line><black><b>Datum uitgave: <black><date><new_line><black><b>Uitgever:<new_line><black><issuer><new_line><blue>==================='
+
+kvk:
+  enabled: true
+  copy: true
+  menu-item: COOKED_BEEF
+  name: <world_color>Kamer van koophandel
+  item-name: KvK Inschrijving <kvk_number>
+  description: <yellow>Maak boekjes om de KvK inschrijvingen op te slaan!
+  variables:
+    <company>:
+      explanation: <world_color>Typ nu het <yellow>bedrijf<world_color>.
+    <company_owner>:
+      explanation: <world_color>Typ nu de <yellow>bedrijfseigenaar<world_color>.
+    <issuer>:
+      explanation: <world_color>Typ nu de <yellow>uitgever<world_color>.
+    <category>:
+      explanation: <world_color>Typ nu de <yellow>categorie<world_color>.
+    <kvk_number>:
+      explanation: <world_color>Typ nu het <yellow>KvK-nummer<world_color>.
+    <plot>:
+      explanation: <world_color>Typ nu het <yellow>plotnummer<world_color>.
+  content: '<black><b>Kamer van Koophandel<new_line><blue>===================<new_line><black><b>Bedrijf:<new_line><black><company><new_line><black><b>Eigenaar: <black><company_owner><new_line><black><b>Plot: <black><plot><new_line><black><b>Uitgever:<new_line><black><issuer><new_line><black><b>Categorie: <black><category><new_line><black><b>KvK-nummer: <black><kvk_number><new_line><blue>==================='
+
+plotregistration:
+  enabled: true
+  copy: true
+  menu-item: GRASS
+  name: <world_color>Plotbewijs
+  item-name: Plotbewijs <plotnumber> (<city>)
+  description: <yellow>Maak gemakkelijk plotbewijzen!
+  variables:
+    <player_name>:
+      explanation: <world_color>Typ nu de <yellow>spelersnaam<world_color>.
+    <city>:
+      explanation: <world_color>Typ nu de <yellow>stad<world_color>.
+    <plotnumber>:
+      explanation: <world_color>Typ nu het <yellow>plotnummer<world_color>.
+  content: '<black><b>Plot <plotnumber> (<city>)<new_line><blue>===================<new_line><black><b>Plotnummer:<new_line><black><plotnumber><new_line><black><b>Eigenaar: <black><player_name><new_line><black><b>Datum uitgave: <black><date><new_line><black><b>Uitgever:<new_line><black><city><new_line><new_line><blue>===================<new_line><black>© Gemeente <city>'
+
+driverslicense:
+  enabled: true
+  copy: true
+  menu-item: MINECART
+  name: <world_color>Rijbewijs
+  item-name: Rijbewijs <player_name>
+  description: <yellow>Schrijf rijbewijzen uit!
+  variables:
+    <player_name>:
+      explanation: <world_color>Typ nu de <yellow>spelersnaam<world_color>.
+    <city>:
+      explanation: <world_color>Typ nu de <yellow>stad<world_color>.
+    <vehicle_type>:
+      explanation: <world_color>Typ nu het <yellow>soort voertuig<world_color>.
+  content: '<black><b>Rijbewijs<new_line><blue>===================<new_line><black><b>Speler:<new_line><black><player_name><new_line><black><b>Stad: <black><city><new_line><black><b>Datum uitgave: <black><date><new_line><black><b>Voertuig:<new_line><black><vehicle_type><new_line><blue>==================='
+
+permit:
+  enabled: true
+  copy: true
+  menu-item: WOOD_STAIRS
+  name: <world_color>Vergunning
+  item-name: <permit_type>-vergunning <player_name>
+  description: <yellow>Maak gemakkelijk vergunningen!
+  variables:
+    <player_name>:
+      explanation: <world_color>Typ nu de <yellow>spelersnaam<world_color>.
+    <issuer>:
+      explanation: <world_color>Typ nu de <yellow>uitgever<world_color>.
+    <permit_type>:
+      explanation: <world_color>Typ nu de <yellow>vergunningssoort<world_color>.
+    <plot_number>:
+      explanation: <world_color>Typ nu het <yellow>plotnummer<world_color>.
+  content: '<black><b><permit_type>-vergunning<new_line><blue>===================<new_line><black><b>Plot: <black><plot_number><new_line><new_line><black><b>Datum uitgave: <black><date><new_line><new_line><black><b>Soort vergunning: <black><permit_type>-vergunning<new_line><new_line><black><b>Uitgever: <black><issuer><new_line><new_line><black><b>Speler: <black><player_name><new_line><new_line><blue>===================<new_line><black>© <issuer>'
+
+vog:
+  enabled: true
+  copy: true
+  menu-item: STICK
+  name: <world_color>VOG
+  item-name: VOG <player_name>
+  description: <yellow>Maak een VOG (verklaring omtrent gedrag)!
+  variables:
+    <player_name>:
+      explanation: <world_color>Typ nu de <yellow>spelersnaam<world_color>.
+    <status>:
+      explanation: <world_color>Typ de uitslag van de <yellow>VOG aanvraag<world_color> (normaal 'positief' of 'negatief').
+    <issuer>:
+      explanation: <world_color>Typ nu de <yellow>uitgever<world_color>.
+  content: '<black><b>Minist. van Just.:<new_line><black>-------------------<new_line><blue>===================<new_line><black><b>VOG VERKLARING<new_line><black><status><new_line><blue>===================<new_line><black><b>Burger:<new_line><black><player_name><new_line><black><b>Datum: <black><date><new_line><black><b>Geldigheid: <black>1 week.<new_line><blue>===================<new_line><new_line><black>© <issuer>'
+
+diploma:
+  enabled: true
+  copy: true
+  menu-item: BOOKSHELF
+  name: <world_color>Diploma
+  item-name: Diploma <player_name>
+  description: <yellow>Maak gemakkelijk een diploma!
+  variables:
+    <player_name>:
+      explanation: <world_color>Typ nu de <yellow>spelersnaam<world_color>.
+    <diploma_type>:
+      explanation: <world_color>Typ nu het <yellow>soort diploma<world_color>.
+    <issuer>:
+      explanation: <world_color>Typ nu de <yellow>uitgever<world_color>.
+    <department>:
+      explanation: <world_color>Typ nu de <yellow>afdeling<world_color>.
+  content: '<black><b>Diploma<new_line><blue>===================<new_line><black><b>Ontvanger: <black><player_name><new_line><black><b>Datum uitgave: <black><date><new_line><black><b>Diplomasoort: <black><diploma_type><new_line><black><b>Uitgever: <black><issuer><new_line><black><b>Afdeling: <black><department><new_line><blue>===================<new_line><black>© <issuer>'
+
+prescription:
+  enabled: true
+  copy: true
+  menu-item: MUSHROOM_SOUP
+  name: <world_color>Recept
+  item-name: Recept <player_name>
+  description: <yellow>Maak gemakkelijk recepten voor medicijnen!
+  variables:
+    <player_name>:
+      explanation: <world_color>Typ nu de <yellow>spelersnaam<world_color>.
+    <medicines>:
+      explanation: <world_color>Typ nu de <yellow>medicijnen<world_color>.
+    <issuer>:
+      explanation: <world_color>Typ nu de <yellow>uitgever<world_color>.
+  content: '<black><b>Recept voor <player_name><new_line><blue>===================<new_line><black><b>Ontvanger: <black><player_name><new_line><black><b>Datum uitgave: <black><date><new_line><black><b>Medicijnen: <black><medicines><new_line><black><b>Uitgever: <black><issuer><new_line><blue>==================='
+
+cheque:
+  enabled: true
+  copy: true
+  menu-item: GOLD_INGOT
+  name: <world_color>Cheque
+  item-name: Cheque <player_name> (€<amount>)
+  description: <yellow>Schrijf cheques uit.
+  variables:
+    <player_name>:
+      explanation: <world_color>Typ nu de <yellow>ontvanger<world_color>.
+    <amount>:
+      explanation: <world_color>Typ nu het <yellow>bedrag<world_color>.
+    <issuer>:
+      explanation: <world_color>Typ nu de <yellow>uitgever<world_color>.
+  content: '<black><b>Cheque van <issuer><new_line><blue>===================<new_line><new_line><black><b>Ontvanger: <black><player_name><new_line><black><b>Datum uitgave: <black><date><new_line><black><b>Bedrag: <black>€<amount><new_line><black><b>Uitgever: <black><issuer><new_line><new_line><blue>==================='

@@ -8,6 +8,8 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.*;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
+import nl.openminetopia.modules.books.BooksModule;
+import nl.openminetopia.modules.books.configuration.BooksConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.configuration.ColorsConfiguration;
 import nl.openminetopia.modules.fitness.FitnessModule;
@@ -57,6 +59,10 @@ public class OpenMinetopiaCommand extends BaseCommand {
         PlotModule plotModule = OpenMinetopia.getModuleManager().get(PlotModule.class);
         plotModule.setCalculateConfiguration(new PlotCalculateConfiguration(dataFolder));
         plotModule.getCalculateConfiguration().saveConfiguration();
+
+        BooksModule booksModule = OpenMinetopia.getModuleManager().get(BooksModule.class);
+        booksModule.setConfiguration(new BooksConfiguration(dataFolder));
+        booksModule.getConfiguration().saveConfiguration();
 
         player.sendMessage(ChatUtils.color("<gold>De configuratiebestanden zijn succesvol herladen!"));
     }
