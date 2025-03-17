@@ -15,42 +15,15 @@ paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArt
 
 repositories {
     mavenCentral()
-    maven {
-        name = "papermc-repo"
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
-    maven {
-        name = "sonatype"
-        url = uri("https://oss.sonatype.org/content/groups/public/")
-    }
-    maven {
-        name = "aikar"
-        url = uri("https://repo.aikar.co/content/groups/aikar/")
-    }
-    maven {
-        name = "jitpack"
-        url = uri("https://jitpack.io")
-    }
-    maven {
-        name = "extendedclip"
-        url = uri("https://repo.extendedclip.com/content/repositories/placeholderapi/")
-    }
-    maven {
-        name = "enginehub"
-        url = uri("https://maven.enginehub.org/repo/")
-    }
-    maven {
-        name = "skript"
-        url = uri("https://repo.skriptlang.org/releases")
-    }
-    maven {
-        name = "citzens-repo"
-        url = uri("https://maven.citizensnpcs.co/repo")
-    }
-    maven {
-        name = "fancyplugins"
-        url = uri("https://repo.fancyplugins.de/releases")
-    }
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://oss.sonatype.org/content/groups/public/")
+    maven("https://repo.aikar.co/content/groups/aikar/")
+    maven("https://jitpack.io")
+    maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
+    maven("https://maven.enginehub.org/repo/")
+    maven("https://repo.skriptlang.org/releases")
+    maven("https://maven.citizensnpcs.co/repo")
+    maven("https://repo.fancyplugins.de/releases")
 }
 
 dependencies {
