@@ -70,7 +70,7 @@ public class BankingConfiguration extends ConfigurateConfig {
         Map<String, Double> notesMap = rootNode.node("banking", "notes").get(new TypeToken<>() {
         }, defaultNotes);
 
-        this.bankNoteLore = rootNode.node("banking", "notes", "lore").getList(String.class, List.of(
+        this.bankNoteLore = rootNode.node("banking", "lore").getList(String.class, List.of(
                 "<yellow>Officieel Minetopia bankbiljet.",
                 "<yellow>Eigendom van de Centrale Bank."
         ));
