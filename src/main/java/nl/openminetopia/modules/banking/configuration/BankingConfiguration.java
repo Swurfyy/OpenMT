@@ -3,6 +3,7 @@ package nl.openminetopia.modules.banking.configuration;
 import io.leangen.geantyref.TypeToken;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import net.kyori.adventure.text.Component;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.banking.menus.BankContentsMenu;
 import nl.openminetopia.utils.ConfigurateConfig;
@@ -25,6 +26,7 @@ public class BankingConfiguration extends ConfigurateConfig {
     private final String accountContentsTitle;
 
     private final List<BankContentsMenu.BankNote> bankNotes;
+    private final List<String> bankNoteLore;
 
     @SneakyThrows
     public BankingConfiguration(File file) {
@@ -67,6 +69,11 @@ public class BankingConfiguration extends ConfigurateConfig {
 
         Map<String, Double> notesMap = rootNode.node("banking", "notes").get(new TypeToken<>() {
         }, defaultNotes);
+
+        this.bankNoteLore = rootNode.node("banking", "notes", "lore").getList(String.class, List.of(
+                "<yellow>Officieel Minetopia bankbiljet.",
+                "<yellow>Eigendom van de Centrale Bank."
+        ));
 
         notesMap.entrySet().stream()
                 .sorted(Map.Entry.<String, Double>comparingByValue().reversed())

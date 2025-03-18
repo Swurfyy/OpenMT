@@ -43,8 +43,6 @@ banking_no_withdraw_permission: "<red>Je hebt geen recht om geld op te nemen van
 banking_withdraw_message: "<gold>Je hebt <red><withdraw_value></red> <gold>opgenomen van je rekening."
 banking_no_deposit_permission: "<red>Je hebt geen recht om geld te storten op deze rekening."
 banking_deposit_message: "<gold>Je hebt <red><deposit_value></red> <gold>gestort naar je rekening."
-banking_note_lore1: "<yellow>Officieel Minetopia bankbiljet."
-banking_note_lore2: "<yellow>Eigendom van de Centrale Bank."
 
 # Chat
 chat_no_players_in_range: "<red>Er zijn geen spelers in de buurt om je bericht te horen!"

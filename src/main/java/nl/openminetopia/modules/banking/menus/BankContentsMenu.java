@@ -9,6 +9,7 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
+import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
@@ -146,12 +147,16 @@ public class BankContentsMenu extends Menu {
         }
 
         private ItemStack toNote(int amount) {
-            return new ItemBuilder(material, amount)
+            ItemBuilder itemBuilder = new ItemBuilder(material, amount)
                     .setName("<gold>" + bankingModule.format(value))
-                    .addLoreLine(MessageConfiguration.component("banking_note_lore1"))
-                    .addLoreLine(MessageConfiguration.component("banking_note_lore2"))
-                    .setNBT("bank_note_value", value)
-                    .toItemStack();
+                    .setNBT("bank_note_value", value);
+
+            if (bankingModule.getConfiguration().getBankNoteLore() != null) {
+                for (String lore : bankingModule.getConfiguration().getBankNoteLore()) {
+                    itemBuilder.addLoreLine(lore);
+                }
+            }
+            return itemBuilder.toItemStack();
         }
     }
 }
