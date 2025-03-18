@@ -102,40 +102,43 @@ java {
     }
 }
 
-tasks.withType<JavaCompile>().configureEach {
-    options.encoding = "UTF-8"
-    options.compilerArgs.add("-parameters")
-//    options.isFork = true
-//    options.forkOptions.executable = "javac"
+tasks {
+    compileJava {
+        options.encoding = "UTF-8"
+        options.compilerArgs.add("-parameters")
+        //  options.isFork = true
+        //  options.forkOptions.executable = "javac"
 
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible) {
-        options.release.set(targetJavaVersion)
+        if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible) {
+            options.release.set(targetJavaVersion)
+        }
     }
-}
 
-tasks.processResources {
-    val props = mapOf("version" to version)
-    inputs.properties(props)
-    filteringCharset = "UTF-8"
-    filesMatching("paper-plugin.yml") {
-        expand(props)
+    processResources {
+        val props = mapOf("version" to version)
+        inputs.properties(props)
+        filteringCharset = "UTF-8"
+        filesMatching("paper-plugin.yml") {
+            expand(props)
+        }
     }
-}
 
-tasks.named<ShadowJar>("shadowJar") {
-    archiveFileName.set(rootProject.name + "-" + rootProject.version + ".jar")
+    shadowJar {
+        archiveFileName.set(rootProject.name + "-" + rootProject.version + ".jar")
 
-    relocate("co.aikar.commands", "nl.openminetopia.shaded.acf")
-    relocate("co.aikar.locales", "nl.openminetopia.shaded.locales")
-    relocate("net.megavex.scoreboardlibrary", "nl.openminetopia.shaded.scoreboard")
-    relocate("com.jeff_media.customblockdata", "nl.openminetopia.shaded.customblockdata")
-    relocate("com.jeff_media.morepersistentdatatypes", "nl.openminetopia.shaded.morepersistentdatatypes")
-    relocate("com.jazzkuh.inventorylib", "nl.openminetopia.shaded.inventorylib")
-    relocate("org.bstats", "nl.openminetopia.shaded.bstats")
-}
+        relocate("co.aikar.commands", "nl.openminetopia.shaded.acf")
+        relocate("co.aikar.locales", "nl.openminetopia.shaded.locales")
+        relocate("net.megavex.scoreboardlibrary", "nl.openminetopia.shaded.scoreboard")
+        relocate("com.jeff_media.customblockdata", "nl.openminetopia.shaded.customblockdata")
+        relocate("com.jeff_media.morepersistentdatatypes", "nl.openminetopia.shaded.morepersistentdatatypes")
+        relocate("com.jazzkuh.inventorylib", "nl.openminetopia.shaded.inventorylib")
+        relocate("org.bstats", "nl.openminetopia.shaded.bstats")
+    }
 
-tasks.build {
-    dependsOn(tasks.named("shadowJar"))
+    build {
+        dependsOn("publishToMavenLocal")
+        dependsOn(shadowJar)
+    }
 }
 
 publishing {
