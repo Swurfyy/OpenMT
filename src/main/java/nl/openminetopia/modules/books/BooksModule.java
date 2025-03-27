@@ -8,7 +8,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.books.commands.BooksCommand;
 import nl.openminetopia.modules.books.configuration.BooksConfiguration;
 import nl.openminetopia.modules.books.objects.CustomBook;
-import nl.openminetopia.modules.books.utils.ChatInputHandler;
+import nl.openminetopia.utils.input.ChatInputHandler;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

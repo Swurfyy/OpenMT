@@ -1,16 +1,10 @@
-package nl.openminetopia.modules.books.utils;
+package nl.openminetopia.utils.input;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
-import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.modules.books.BooksModule;
 import nl.openminetopia.utils.ChatUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.HashMap;
 import java.util.Map;
