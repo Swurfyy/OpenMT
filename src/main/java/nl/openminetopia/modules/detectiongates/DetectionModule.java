@@ -1,10 +1,9 @@
 package nl.openminetopia.modules.detectiongates;
 
-import lombok.Getter;
 import com.jazzkuh.modulemanager.spigot.SpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
+import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
-import org.jetbrains.annotations.NotNull;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.detectiongates.listeners.DetectionListener;
 import org.bukkit.Location;
@@ -12,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 

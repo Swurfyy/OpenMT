@@ -9,7 +9,6 @@ import ch.njol.util.Kleenean;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
-import nl.openminetopia.modules.prefix.objects.Prefix;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;

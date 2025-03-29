@@ -5,7 +5,6 @@ import co.aikar.commands.annotation.*;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
-import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.player.utils.PlaytimeUtil;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;

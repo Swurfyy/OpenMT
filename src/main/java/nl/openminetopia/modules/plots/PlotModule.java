@@ -1,21 +1,21 @@
 package nl.openminetopia.modules.plots;
 
+import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.StringFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
-import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.modules.plots.configuration.PlotCalculateConfiguration;
-import org.jetbrains.annotations.NotNull;
 import nl.openminetopia.modules.plots.commands.PlotCommand;
 import nl.openminetopia.modules.plots.commands.subcommands.*;
+import nl.openminetopia.modules.plots.configuration.PlotCalculateConfiguration;
 import nl.openminetopia.utils.WorldGuardUtils;
+import org.jetbrains.annotations.NotNull;
 
 @Setter @Getter
 public class PlotModule extends SpigotModule<@NotNull OpenMinetopia> {

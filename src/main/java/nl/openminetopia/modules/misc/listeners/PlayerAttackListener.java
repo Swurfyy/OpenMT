@@ -1,6 +1,5 @@
 package nl.openminetopia.modules.misc.listeners;
 
-import io.papermc.paper.event.player.PrePlayerAttackEntityEvent;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.configuration.MessageConfiguration;

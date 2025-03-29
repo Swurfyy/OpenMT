@@ -2,13 +2,14 @@ package nl.openminetopia.modules.skript;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
-import lombok.Getter;
-import nl.openminetopia.modules.data.DataModule;
-import org.bukkit.Bukkit;
 import com.jazzkuh.modulemanager.spigot.SpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
+import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.data.DataModule;
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 @Getter

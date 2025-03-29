@@ -1,7 +1,10 @@
 package nl.openminetopia.modules.police;
 
 import com.craftmend.storm.api.enums.Where;
+import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
@@ -20,9 +23,6 @@ import nl.openminetopia.modules.police.taser.TaserManager;
 import nl.openminetopia.modules.police.walkietalkie.WalkieTalkieManager;
 import nl.openminetopia.modules.police.walkietalkie.listeners.PlayerChatListener;
 import nl.openminetopia.modules.police.walkietalkie.listeners.PlayerInteractListener;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
-import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
-import nl.openminetopia.OpenMinetopia;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

@@ -1,7 +1,10 @@
 package nl.openminetopia.modules.fitness;
 
+import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.fitness.commands.FitnessCommand;
 import nl.openminetopia.modules.fitness.commands.subcommands.FitnessBoosterCommand;
@@ -11,9 +14,6 @@ import nl.openminetopia.modules.fitness.listeners.PlayerChangeWorldListener;
 import nl.openminetopia.modules.fitness.listeners.PlayerDeathListener;
 import nl.openminetopia.modules.fitness.listeners.PlayerDrinkListener;
 import nl.openminetopia.modules.fitness.listeners.PlayerEatListener;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
-import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
-import nl.openminetopia.OpenMinetopia;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

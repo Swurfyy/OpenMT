@@ -1,18 +1,16 @@
 package nl.openminetopia.modules.banking;
 
 import com.craftmend.storm.api.enums.Where;
+import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import net.milkbowl.vault.economy.Economy;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
-import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
-import nl.openminetopia.modules.data.DataModule;
-import org.jetbrains.annotations.NotNull;
 import nl.openminetopia.modules.banking.commands.BankingCommand;
 import nl.openminetopia.modules.banking.commands.subcommands.*;
+import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.listeners.BankingInteractionListener;
@@ -20,10 +18,12 @@ import nl.openminetopia.modules.banking.listeners.PlayerPreLoginListener;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.banking.models.BankPermissionModel;
 import nl.openminetopia.modules.banking.vault.VaultEconomyHandler;
+import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;

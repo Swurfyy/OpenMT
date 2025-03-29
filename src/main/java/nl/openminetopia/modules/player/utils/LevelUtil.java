@@ -7,10 +7,10 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.events.PlayerLevelCalculateEvent;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.modules.player.PlayerModule;
-import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
+import nl.openminetopia.modules.player.PlayerModule;
+import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.entity.Player;
 

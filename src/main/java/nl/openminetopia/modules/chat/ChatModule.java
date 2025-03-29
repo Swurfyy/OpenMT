@@ -3,10 +3,10 @@ package nl.openminetopia.modules.chat;
 import com.jazzkuh.modulemanager.spigot.SpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.modules.data.DataModule;
-import org.jetbrains.annotations.NotNull;
 import nl.openminetopia.modules.chat.listeners.PlayerChatListener;
 import nl.openminetopia.modules.chat.listeners.PlayerCommandListener;
+import nl.openminetopia.modules.data.DataModule;
+import org.jetbrains.annotations.NotNull;
 
 public class ChatModule extends SpigotModule<@NotNull OpenMinetopia> {
 

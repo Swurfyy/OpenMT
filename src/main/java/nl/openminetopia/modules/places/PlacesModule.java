@@ -1,13 +1,12 @@
 package nl.openminetopia.modules.places;
 
 import com.craftmend.storm.api.enums.Where;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import lombok.Getter;
 import com.jazzkuh.modulemanager.spigot.SpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.DataModule;
-import org.jetbrains.annotations.NotNull;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.places.commands.mtcity.MTCityCommand;
@@ -26,6 +25,7 @@ import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;

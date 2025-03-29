@@ -4,8 +4,8 @@ import com.jazzkuh.modulemanager.spigot.SpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.DataModule;
-import org.jetbrains.annotations.NotNull;
 import nl.openminetopia.modules.portal.commands.LinkCommand;
+import org.jetbrains.annotations.NotNull;
 
 public class PortalModule extends SpigotModule<@NotNull OpenMinetopia> {
 

@@ -3,7 +3,6 @@ package nl.openminetopia.modules.banking.configuration;
 import io.leangen.geantyref.TypeToken;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import net.kyori.adventure.text.Component;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.banking.menus.BankContentsMenu;
 import nl.openminetopia.utils.ConfigurateConfig;
@@ -20,6 +19,8 @@ public class BankingConfiguration extends ConfigurateConfig {
 
     private final String economyFormat;
     private final List<Material> atmMaterials;
+
+    private final double startingBalance;
 
     private final String typeSelectionTitle;
     private final String accountSelectionTitle;
@@ -44,6 +45,8 @@ public class BankingConfiguration extends ConfigurateConfig {
             }
             this.atmMaterials.add(material);
         });
+
+        this.startingBalance = rootNode.node("banking", "starting-balance").getDouble(0.0);
 
         this.typeSelectionTitle = rootNode.node("banking", "inventories", "select-type-title").getString("<gray>Selecteer het rekeningtype:");
         this.accountSelectionTitle = rootNode.node("banking", "inventories", "select-account-title").getString("<type_color><type_name>");

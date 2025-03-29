@@ -1,5 +1,7 @@
 package nl.openminetopia.modules.scoreboard;
 
+import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import net.megavex.scoreboardlibrary.api.ScoreboardLibrary;
 import net.megavex.scoreboardlibrary.api.exception.NoPacketAdapterAvailableException;
@@ -10,9 +12,6 @@ import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.scoreboard.commands.ScoreboardCommand;
 import nl.openminetopia.modules.scoreboard.listeners.PlayerJoinListener;
 import nl.openminetopia.modules.scoreboard.listeners.PlayerQuitListener;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
-import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
-import nl.openminetopia.OpenMinetopia;
 import org.jetbrains.annotations.NotNull;
 
 @Getter

@@ -2,12 +2,10 @@ package nl.openminetopia.modules.player.configuration;
 
 import lombok.Getter;
 import nl.openminetopia.utils.ConfigurateConfig;
-import org.enginehub.linbus.stream.token.LinToken;
 import org.spongepowered.configurate.ConfigurationNode;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Getter
