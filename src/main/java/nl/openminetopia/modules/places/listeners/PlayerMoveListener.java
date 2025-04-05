@@ -27,7 +27,10 @@ public class PlayerMoveListener implements Listener {
             if (!minetopiaPlayer.isInPlace() || minetopiaPlayer.getPlace() == null) return;
 
             MTPlace from = MTPlaceManager.getInstance().getPlace(event.getFrom());
+            if (from == null) return;
+
             MTPlace to = minetopiaPlayer.getPlace();
+            if (to == null) return;
 
             if (from.equals(to)) return;
 
