@@ -50,7 +50,7 @@ public class PlotDeleteCommand extends BaseCommand {
         Bukkit.getPluginManager().callEvent(event);
 
         ChatUtils.sendMessage(player, MessageConfiguration.message("plot_deletion_success")
-                .replace("<plot_id>", region.getId()));
+                .replace("<plot>", region.getId()));
 
         regionManager.removeRegion(region.getId());
     }

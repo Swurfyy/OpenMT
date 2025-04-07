@@ -39,12 +39,12 @@ public class PlotTransferCommand extends BaseCommand {
         if (!transferable) {
             region.setFlag(PlotModule.PLOT_TRANSFER, StateFlag.State.DENY);
             ChatUtils.sendMessage(player, MessageConfiguration.message("plot_set_untranferable")
-                    .replace("<plot_id>", region.getId()));
+                    .replace("<plot>", region.getId()));
             return;
         }
 
         region.setFlag(PlotModule.PLOT_TRANSFER, StateFlag.State.ALLOW);
         ChatUtils.sendMessage(player, MessageConfiguration.message("plot_set_tranferable")
-                .replace("<plot_id>", region.getId()));
+                .replace("<plot>", region.getId()));
     }
 }

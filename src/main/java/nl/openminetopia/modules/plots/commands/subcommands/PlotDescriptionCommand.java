@@ -38,13 +38,13 @@ public class PlotDescriptionCommand extends BaseCommand {
                 description.equalsIgnoreCase("delete") || description.equalsIgnoreCase("null")) {
             region.setFlag(PlotModule.PLOT_DESCRIPTION, null);
             ChatUtils.sendMessage(player, MessageConfiguration.message("plot_description_removed")
-                    .replace("<plot_id>", region.getId()));
+                    .replace("<plot>", region.getId()));
             return;
         }
 
         region.setFlag(PlotModule.PLOT_DESCRIPTION, description);
         ChatUtils.sendMessage(player, MessageConfiguration.message("plot_description_updated")
                 .replace("<description>", description)
-                .replace("<plot_id>", region.getId()));
+                .replace("<plot>", region.getId()));
     }
 }

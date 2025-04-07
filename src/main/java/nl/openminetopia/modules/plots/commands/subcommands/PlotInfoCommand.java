@@ -48,7 +48,7 @@ public class PlotInfoCommand extends BaseCommand {
 
         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_header"));
         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_title")
-                .replace("<plotname>", region.getId()));
+                .replace("<plot>", region.getId()));
         player.sendMessage(Component.empty());
         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_owners")
                 .replace("<owners>", (region.getOwners().size() > 0 ? owners : "Geen.")));
