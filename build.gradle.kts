@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "nl.openminetopia"
-version = "1.3.1"
+version = "1.4.0"
 
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
 
