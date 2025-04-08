@@ -6,6 +6,7 @@ import lombok.Getter;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
+import nl.openminetopia.modules.player.utils.PlaytimeUtil;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Material;
@@ -37,8 +38,8 @@ public class AdminToolFitnessBoostersMenu extends PaginatedMenu {
                     .addLoreLine(" ")
                     .addLoreLine("<gold>Boost: <yellow>" + booster.getAmount());
 
-            if (booster.getExpiresAt() != -1 && booster.getExpiresAt() - System.currentTimeMillis() > -1)
-                icon.addLoreLine("<gold>Deze booster vervalt over <yellow>" + millisToTime(booster.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
+            if (booster.getExpiresAt() != -1 && booster.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine("<gold>Deze booster vervalt over <yellow>" + PlaytimeUtil.formatPlaytime(booster.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
+            if (booster.isExpired()) icon.addLoreLine("<gold>Deze booster is <red>verlopen<gold>.");
             if (booster.getExpiresAt() == -1) icon.addLoreLine("<gold>Deze booster vervalt <yellow>nooit<gold>.");
 
             icon.addLoreLine(" ").addLoreLine("<gold>Klik om deze booster te verwijderen.");
@@ -72,13 +73,6 @@ public class AdminToolFitnessBoostersMenu extends PaginatedMenu {
         return new Icon(26, new ItemBuilder(Material.ARROW)
                 .setName("<gold>Volgende pagina")
                 .toItemStack(), event -> event.setCancelled(true));
-    }
-
-    private String millisToTime(long millis) {
-        long hours = millisToHours(millis);
-        long minutes = millisToMinutes(millis) - (hours * 60);
-
-        return "<yellow>" + hours + " uur, <yellow>" + minutes + " <gold>minuten en <yellow>" + millisToSeconds(millis) + " <gold>seconden";
     }
 
     private int millisToHours(long millis) {
