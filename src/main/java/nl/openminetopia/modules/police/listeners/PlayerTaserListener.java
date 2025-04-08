@@ -65,7 +65,7 @@ public class PlayerTaserListener implements Listener {
 
         source.sendMessage(ChatUtils.color("<red>Je hebt <dark_red>" + target.getName() + " <red>geraakt met jouw taser!"));
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(source);
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
         if (minetopiaPlayer == null) return;
         PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
         policeModule.getTaserManager().taser(minetopiaPlayer);
