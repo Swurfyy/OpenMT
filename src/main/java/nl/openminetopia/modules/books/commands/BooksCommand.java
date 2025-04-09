@@ -10,6 +10,7 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.books.BooksModule;
 import nl.openminetopia.modules.books.objects.CustomBook;
 import nl.openminetopia.utils.ChatUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -43,8 +44,12 @@ public class BooksCommand extends BaseCommand {
 
         if (index >= keys.length) {
             // Alle variabelen zijn ingevuld, geef het boek
-            if (book.isCopy()) player.getInventory().addItem(book.getBookItem(booksModule.getVariableResponses().get(player.getUniqueId()), player, true));
-            player.getInventory().addItem(book.getBookItem(booksModule.getVariableResponses().get(player.getUniqueId()), player, false));
+            Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
+                if (book.isCopy()) {
+                    player.getInventory().addItem(book.getBookItem(booksModule.getVariableResponses().get(player.getUniqueId()), player, true));
+                }
+                player.getInventory().addItem(book.getBookItem(booksModule.getVariableResponses().get(player.getUniqueId()), player, false));
+            });
 
             player.sendMessage(ChatUtils.format(minetopiaPlayer, "<gold>Je hebt het boek <yellow>" + book.getName() + " <gold>ontvangen!"));
             return;
