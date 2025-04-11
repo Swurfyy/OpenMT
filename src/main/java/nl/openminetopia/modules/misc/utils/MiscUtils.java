@@ -15,7 +15,7 @@ public class MiscUtils {
 
     public PvPItem getPvPItem(ItemStack item) {
         for (PvPItem pvpItem : OpenMinetopia.getDefaultConfiguration().getPvpItems()) {
-            if (pvpItem.item().isSimilar(item)) return pvpItem;
+            if (pvpItem.isSimilar(item)) return pvpItem;
         }
         return null;
     }
