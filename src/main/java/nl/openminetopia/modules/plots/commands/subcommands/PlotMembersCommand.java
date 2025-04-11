@@ -16,10 +16,17 @@ public class PlotMembersCommand extends BaseCommand {
 
     @Subcommand("addmember")
     @Description("Voegt een speler toe aan een plot.")
-    @CommandCompletion("@players")
-    @Syntax("<speler>")
-    public void addPlotMember(Player player, OfflinePlayer offlinePlayer) {
+    @CommandCompletion("@players @plotName")
+    @Syntax("<speler> <region>")
+    public void addPlotMember(Player player, OfflinePlayer offlinePlayer, @Optional String regionName) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
+        if (regionName != null) {
+            region = WorldGuardUtils.getProtectedRegions(player.getWorld(), p -> p >= 0)
+                    .stream()
+                    .filter(r -> r.getId().equalsIgnoreCase(regionName))
+                    .findFirst()
+                    .orElse(null);
+        }
 
         if (offlinePlayer == null) {
             ChatUtils.sendMessage(player, MessageConfiguration.message("player_not_found")
@@ -58,9 +65,18 @@ public class PlotMembersCommand extends BaseCommand {
 
     @Subcommand("removemember")
     @Description("Verwijdert een speler van een plot.")
-    @Syntax("<speler>")
-    public void removePlotMember(Player player, OfflinePlayer offlinePlayer) {
+    @CommandCompletion("@players @plotName")
+    @Syntax("<speler> <region>")
+    public void removePlotMember(Player player, OfflinePlayer offlinePlayer, @Optional String regionName) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
+        if (regionName != null) {
+            region = WorldGuardUtils.getProtectedRegions(player.getWorld(), p -> p >= 0)
+                    .stream()
+                    .filter(r -> r.getId().equalsIgnoreCase(regionName))
+                    .findFirst()
+                    .orElse(null);
+        }
+
         PlayerProfile profile = offlinePlayer.getPlayerProfile();
 
         if (region == null) {

@@ -16,10 +16,18 @@ public class PlotDescriptionCommand extends BaseCommand {
 
     @Subcommand("description")
     @CommandPermission("openminetopia.plot.description")
-    @Syntax("<beschrijving>")
+    @Syntax("<beschrijving> <region>")
+    @CommandCompletion("@plotName")
     @Description("Zet een beschrijving van een plot.")
-    public void plotDescription(Player player, String description) {
+    public void plotDescription(Player player, String description, @Optional String regionName) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
+        if (regionName != null) {
+            region = WorldGuardUtils.getProtectedRegions(player.getWorld(), p -> p >= 0)
+                    .stream()
+                    .filter(r -> r.getId().equalsIgnoreCase(regionName))
+                    .findFirst()
+                    .orElse(null);
+        }
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;

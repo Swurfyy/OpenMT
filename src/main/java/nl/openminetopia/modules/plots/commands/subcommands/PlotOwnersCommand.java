@@ -17,10 +17,17 @@ public class PlotOwnersCommand extends BaseCommand {
     @Subcommand("addowner")
     @Description("Voegt een speler toe aan een plot.")
     @CommandPermission("openminetopia.plot.addowner")
-    @CommandCompletion("@players")
-    @Syntax("<speler>")
-    public void addPlotOwner(Player player, OfflinePlayer offlinePlayer) {
+    @CommandCompletion("@players @plotName")
+    @Syntax("<speler> <region>")
+    public void addPlotOwner(Player player, OfflinePlayer offlinePlayer, @Optional String regionName) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
+        if (regionName != null) {
+            region = WorldGuardUtils.getProtectedRegions(player.getWorld(), p -> p >= 0)
+                    .stream()
+                    .filter(r -> r.getId().equalsIgnoreCase(regionName))
+                    .findFirst()
+                    .orElse(null);
+        }
 
         if (offlinePlayer == null) {
             ChatUtils.sendMessage(player, MessageConfiguration.message("player_not_found"));
@@ -55,9 +62,18 @@ public class PlotOwnersCommand extends BaseCommand {
     @Subcommand("removeowner")
     @Description("Verwijdert een speler van een plot.")
     @CommandPermission("openminetopia.plot.removeowner")
-    @Syntax("<speler>")
-    public void removePlotOwner(Player player, OfflinePlayer offlinePlayer) {
+    @CommandCompletion("@players @plotName")
+    @Syntax("<speler> <region>")
+    public void removePlotOwner(Player player, OfflinePlayer offlinePlayer, @Optional String regionName) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
+        if (regionName != null) {
+            region = WorldGuardUtils.getProtectedRegions(player.getWorld(), p -> p >= 0)
+                    .stream()
+                    .filter(r -> r.getId().equalsIgnoreCase(regionName))
+                    .findFirst()
+                    .orElse(null);
+        }
+
         PlayerProfile profile = offlinePlayer.getPlayerProfile();
         
         if (region == null) {
