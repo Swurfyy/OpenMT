@@ -302,7 +302,6 @@ public class MinetopiaPlayer {
                 this.playerModel.setActiveLevelColorId(color.getId());
                 break;
         }
-        StormDatabase.getInstance().saveStormModel(this.playerModel);
     }
 
     public OwnableColor getActiveColor(OwnableColorType type) {
