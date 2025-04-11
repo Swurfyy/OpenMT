@@ -233,7 +233,6 @@ public class MinetopiaPlayer {
     public void setActivePrefix(Prefix prefix) {
         this.activePrefix = prefix;
         this.playerModel.setActivePrefixId(prefix.getId());
-        StormDatabase.getInstance().saveStormModel(this.playerModel);
     }
 
 
