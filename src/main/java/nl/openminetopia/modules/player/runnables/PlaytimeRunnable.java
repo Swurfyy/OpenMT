@@ -35,11 +35,7 @@ public class PlaytimeRunnable extends BukkitRunnable {
         int newPlaytime = minetopiaPlayer.getPlaytime() + 1;
 
         // If the new playtime is a multiple of 60, update the playtime in the database, so it's only updated every minute
-        if (newPlaytime % 60 == 0) {
-            minetopiaPlayer.setPlaytime(newPlaytime, true);
-            return;
-        }
-        minetopiaPlayer.setPlaytime(newPlaytime, false);
+        minetopiaPlayer.setPlaytime(newPlaytime, newPlaytime % 60 == 0);
 
         // If the new playtime is a multiple of the wage interval, give the player their wage
         PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
