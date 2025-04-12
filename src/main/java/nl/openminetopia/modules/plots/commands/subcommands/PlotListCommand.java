@@ -66,13 +66,18 @@ public class PlotListCommand extends BaseCommand {
 
     @Subcommand("plist")
     @CommandPermission("openminetopia.plot.plist")
-    public void playerListCommand(Player player, @Optional Integer page) {
+    public void playerListCommand(Player player, OfflinePlayer offlinePlayer, @Optional Integer page) {
         World world = BukkitAdapter.adapt(player.getWorld());
 
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionManager manager = container.get(world);
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
+
+        if (offlinePlayer == null) {
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Deze speler is niet gevonden."));
+            return;
+        }
 
         if (manager == null) {
             player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Er ging iets mis met het ophalen van de regio's."));
@@ -82,7 +87,7 @@ public class PlotListCommand extends BaseCommand {
         Map<String, String> regionNames = new HashMap<>();
         manager.getRegions().entrySet().stream()
                 .filter(entry -> entry.getValue().getFlag(PlotModule.PLOT_FLAG) != null)
-                .forEach(entry -> regionNames.put(entry.getKey(), entry.getValue().getOwners().contains(player.getUniqueId()) ? "Owner" : "Member"));
+                .forEach(entry -> regionNames.put(entry.getKey(), entry.getValue().getOwners().contains(offlinePlayer.getUniqueId()) ? "Owner" : "Member"));
 
         int pageSize = 15;
         int totalPages = (int) Math.ceil(regionNames.size() / (double) pageSize);
