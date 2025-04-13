@@ -5,20 +5,22 @@ import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerPreLoginListener implements Listener {
 
     @EventHandler
-    public void playerPreLogin(final AsyncPlayerPreLoginEvent event) {
+    public void playerPreLogin(final PlayerJoinEvent event) {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        Player player = event.getPlayer();
 
-        bankingModule.getAccountModel(event.getUniqueId()).whenComplete(((bankAccountModel, throwable) -> {
+        bankingModule.getAccountModel(player.getUniqueId()).whenComplete(((bankAccountModel, throwable) -> {
             if (throwable != null) {
                 OpenMinetopia.getInstance().getLogger().info("Could not account for: " + throwable.getMessage());
-                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, MessageConfiguration.component("player_bank_data_not_loaded"));
+                player.kick(MessageConfiguration.component("player_bank_data_not_loaded"));
                 return;
             }
 
@@ -26,23 +28,26 @@ public class PlayerPreLoginListener implements Listener {
                 OpenMinetopia.getInstance().getLogger().info("account is null, creating.");
 
                 double startingBalance = bankingModule.getConfiguration().getStartingBalance();
-                bankingModule.createBankAccount(event.getUniqueId(), AccountType.PRIVATE, startingBalance, event.getName(), false).whenComplete((accountModel, accountThrowable) -> {
+                bankingModule.createBankAccount(player.getUniqueId(), AccountType.PRIVATE, startingBalance, player.getName(), false).whenComplete((accountModel, accountThrowable) -> {
                     if (accountThrowable != null) {
-                        OpenMinetopia.getInstance().getLogger().severe("Couldn't create account for " + event.getName() + ": " + accountThrowable.getMessage());
-                        event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, MessageConfiguration.component("player_bank_data_not_loaded"));
+                        OpenMinetopia.getInstance().getLogger().severe("Couldn't create account for " + player.getName() + ": " + accountThrowable.getMessage());
+                        player.kick(MessageConfiguration.component("player_bank_data_not_loaded"));
                     }
 
                     accountModel.initSavingTask();
-                    accountModel.getUsers().put(event.getUniqueId(), AccountPermission.ADMIN);
+                    accountModel.getUsers().put(player.getUniqueId(), AccountPermission.ADMIN);
                     bankingModule.getBankAccountModels().add(accountModel);
-                    OpenMinetopia.getInstance().getLogger().info("Loaded account for: " + event.getName() + " (" + accountModel.getUniqueId() + ")");
+                    OpenMinetopia.getInstance().getLogger().info("Loaded account for: " + player.getName() + " (" + accountModel.getUniqueId() + ")");
                 });
                 return;
             }
 
-            OpenMinetopia.getInstance().getLogger().info("account is not null, loading.");
+            if (bankingModule.getBankAccountModels().contains(bankAccountModel)) {
+                OpenMinetopia.getInstance().getLogger().info("duplicated account found, skipping..");
+                return;
+            }
 
-            bankAccountModel.getUsers().put(event.getUniqueId(), AccountPermission.ADMIN);
+            bankAccountModel.getUsers().put(player.getUniqueId(), AccountPermission.ADMIN);
             bankAccountModel.initSavingTask();
             bankingModule.getBankAccountModels().add(bankAccountModel);
         }));
