@@ -10,7 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class PlayerPreLoginListener implements Listener {
+public class PlayerLoginListener implements Listener {
 
     @EventHandler
     public void playerPreLogin(final PlayerJoinEvent event) {
@@ -19,14 +19,12 @@ public class PlayerPreLoginListener implements Listener {
 
         bankingModule.getAccountModel(player.getUniqueId()).whenComplete(((bankAccountModel, throwable) -> {
             if (throwable != null) {
-                OpenMinetopia.getInstance().getLogger().info("Could not account for: " + throwable.getMessage());
+                OpenMinetopia.getInstance().getLogger().info("Could not find any bank account for: " + throwable.getMessage());
                 player.kick(MessageConfiguration.component("player_bank_data_not_loaded"));
                 return;
             }
 
             if (bankAccountModel == null) {
-                OpenMinetopia.getInstance().getLogger().info("account is null, creating.");
-
                 double startingBalance = bankingModule.getConfiguration().getStartingBalance();
                 bankingModule.createBankAccount(player.getUniqueId(), AccountType.PRIVATE, startingBalance, player.getName(), false).whenComplete((accountModel, accountThrowable) -> {
                     if (accountThrowable != null) {
@@ -37,7 +35,7 @@ public class PlayerPreLoginListener implements Listener {
                     accountModel.initSavingTask();
                     accountModel.getUsers().put(player.getUniqueId(), AccountPermission.ADMIN);
                     bankingModule.getBankAccountModels().add(accountModel);
-                    OpenMinetopia.getInstance().getLogger().info("Loaded account for: " + player.getName() + " (" + accountModel.getUniqueId() + ")");
+                    OpenMinetopia.getInstance().getLogger().info("Created new account for: " + player.getName() + " (" + accountModel.getUniqueId() + ")");
                 });
                 return;
             }
@@ -46,6 +44,8 @@ public class PlayerPreLoginListener implements Listener {
                 OpenMinetopia.getInstance().getLogger().info("duplicated account found, skipping..");
                 return;
             }
+
+            OpenMinetopia.getInstance().getLogger().info("Bank account for " + player.getName() + " was loaded.");
 
             bankAccountModel.getUsers().put(player.getUniqueId(), AccountPermission.ADMIN);
             bankAccountModel.initSavingTask();
