@@ -21,6 +21,7 @@ import nl.openminetopia.modules.banking.vault.VaultEconomyHandler;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
+import nl.openminetopia.modules.transactions.TransactionsModule;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
 import org.jetbrains.annotations.NotNull;
@@ -41,7 +42,7 @@ import java.util.stream.Collectors;
 @Getter
 public class BankingModule extends SpigotModule<@NotNull OpenMinetopia> {
 
-    public BankingModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public BankingModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule, TransactionsModule transactionsModule) {
         super(moduleManager);
     }
 

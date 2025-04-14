@@ -9,8 +9,13 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
+import nl.openminetopia.modules.transactions.TransactionsModule;
+import nl.openminetopia.modules.transactions.enums.TransactionType;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 @CommandAlias("accounts|account|rekening")
 public class BankingBalanceCommand extends BaseCommand {
@@ -29,6 +34,11 @@ public class BankingBalanceCommand extends BaseCommand {
 
         accountModel.setBalance(balance);
         accountModel.save();
+
+        UUID executorUuid = ((sender instanceof Player executor) ? executor.getUniqueId() : new UUID(0, 0));
+        TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), executorUuid, TransactionType.SET, balance, accountModel.getUniqueId(), "Set via '/account setbalance'");
+
         sender.sendMessage(ChatUtils.color("<gold>De balans van <red>" + accountModel.getName() + " <gold>is nu ingesteld op <red>" + bankingModule.format(balance) + "<gold>."));
     }
 
