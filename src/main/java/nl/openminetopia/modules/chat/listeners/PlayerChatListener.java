@@ -84,17 +84,21 @@ public class PlayerChatListener implements Listener {
         Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage)); // Log the message without potential scrambled name
 
         for (Player target : recipients) {
+            String messageToSend;
             // Check if the target's name is in the original message and highlight it
             if (originalMessage.contains(target.getName())) {
-                String highlightedMessage = originalMessage.replace(target.getName(), "<green>" + target.getName() + "<white>");
-                finalMessage = formattedMessage.replace("<message>", highlightedMessage);
+                String highlightedMessage = originalMessage.replace(
+                        target.getName(),
+                        "<green>" + target.getName() + minetopiaPlayer.getActiveChatColor().color()
+                );
+                messageToSend = formattedMessage.replace("<message>", highlightedMessage);
 
-                // Play sound for the mentioned target
                 target.playSound(target.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+            } else {
+                messageToSend = formattedMessage.replace("<message>", originalMessage);
             }
 
-            // Send the formatted message to the target
-            target.sendMessage(ChatUtils.format(minetopiaPlayer, finalMessage));
+            target.sendMessage(ChatUtils.format(minetopiaPlayer, messageToSend));
         }
     }
 }
