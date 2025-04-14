@@ -38,7 +38,8 @@ public class AdminToolFitnessBoostersMenu extends PaginatedMenu {
                     .addLoreLine(" ")
                     .addLoreLine("<gold>Boost: <yellow>" + booster.getAmount());
 
-            if (booster.getExpiresAt() != -1 && booster.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine("<gold>Deze booster vervalt over <yellow>" + PlaytimeUtil.formatPlaytime(booster.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
+            String duration = PlaytimeUtil.formatPlaytime((booster.getExpiresAt() - System.currentTimeMillis()) / 1000);
+            if (booster.getExpiresAt() != -1 && booster.getExpiresAt() - System.currentTimeMillis() > -1) icon.addLoreLine("<gold>Deze booster vervalt over <yellow>" + duration + "<gold>.");
             if (booster.isExpired()) icon.addLoreLine("<gold>Deze booster is <red>verlopen<gold>.");
             if (booster.getExpiresAt() == -1) icon.addLoreLine("<gold>Deze booster vervalt <yellow>nooit<gold>.");
 

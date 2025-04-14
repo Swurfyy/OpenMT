@@ -6,11 +6,11 @@ import nl.openminetopia.configuration.MessageConfiguration;
 @UtilityClass
 public class PlaytimeUtil {
 
-    public static String formatPlaytime(long playtimeInMillis) {
-        long days = playtimeInMillis / 86400;
-        long hours = (playtimeInMillis % 86400) / 3600;
-        long minutes = ((playtimeInMillis % 86400) % 3600) / 60;
-        long seconds = ((playtimeInMillis % 86400) % 3600) % 60;
+    public static String formatPlaytime(long playtimeInSeconds) {
+        long days = playtimeInSeconds / 86400;
+        long hours = (playtimeInSeconds % 86400) / 3600;
+        long minutes = ((playtimeInSeconds % 86400) % 3600) / 60;
+        long seconds = ((playtimeInSeconds % 86400) % 3600) % 60;
         return MessageConfiguration.message("player_time_format")
                 .replace("<days>", days + "")
                 .replace("<hours>", hours + "")
