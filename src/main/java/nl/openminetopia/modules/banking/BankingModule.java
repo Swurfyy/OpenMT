@@ -14,7 +14,7 @@ import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.listeners.BankingInteractionListener;
-import nl.openminetopia.modules.banking.listeners.PlayerPreLoginListener;
+import nl.openminetopia.modules.banking.listeners.PlayerLoginListener;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.banking.models.BankPermissionModel;
 import nl.openminetopia.modules.banking.vault.VaultEconomyHandler;
@@ -105,7 +105,7 @@ public class BankingModule extends SpigotModule<@NotNull OpenMinetopia> {
         registerComponent(new BankingBalanceCommand());
         registerComponent(new BankingListCommand());
 
-        registerComponent(new PlayerPreLoginListener());
+        registerComponent(new PlayerLoginListener());
         registerComponent(new BankingInteractionListener());
 
         if (Bukkit.getPluginManager().isPluginEnabled("Vault")) {
