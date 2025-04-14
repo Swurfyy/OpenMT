@@ -1,10 +1,8 @@
 package nl.openminetopia.modules.plots.commands.subcommands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.*;
 import co.aikar.commands.annotation.Optional;
-import co.aikar.commands.annotation.Subcommand;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.WorldGuard;
@@ -66,6 +64,7 @@ public class PlotListCommand extends BaseCommand {
 
     @Subcommand("plist")
     @CommandPermission("openminetopia.plot.plist")
+    @CommandCompletion("@players")
     public void playerListCommand(Player player, OfflinePlayer offlinePlayer, @Optional Integer page) {
         World world = BukkitAdapter.adapt(player.getWorld());
 
@@ -87,6 +86,7 @@ public class PlotListCommand extends BaseCommand {
         Map<String, String> regionNames = new HashMap<>();
         manager.getRegions().entrySet().stream()
                 .filter(entry -> entry.getValue().getFlag(PlotModule.PLOT_FLAG) != null)
+                .filter(entry -> entry.getValue().getOwners().contains(offlinePlayer.getUniqueId()) || entry.getValue().getMembers().contains(offlinePlayer.getUniqueId()))
                 .forEach(entry -> regionNames.put(entry.getKey(), entry.getValue().getOwners().contains(offlinePlayer.getUniqueId()) ? "Owner" : "Member"));
 
         int pageSize = 15;
