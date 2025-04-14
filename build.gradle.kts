@@ -64,7 +64,7 @@ dependencies {
     implementation("com.jeff-media:MorePersistentDataTypes:2.4.0")
 
     /* InventoryLib (JAZZZZ) */
-    implementation("com.github.Jazzkuh.InventoryLib:spigot:bc68f4f677")
+    implementation("com.github.Jazzkuh.InventoryLib:spigot:486b8563a7")
 
     /* bStats */
     implementation("org.bstats:bstats-bukkit:3.1.0")
