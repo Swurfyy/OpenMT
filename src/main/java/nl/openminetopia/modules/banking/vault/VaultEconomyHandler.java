@@ -5,15 +5,19 @@ import net.milkbowl.vault.economy.EconomyResponse;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
+import nl.openminetopia.modules.transactions.TransactionsModule;
+import nl.openminetopia.modules.transactions.enums.TransactionType;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.UUID;
 
 public class VaultEconomyHandler implements Economy {
 
     private final BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+    private final TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
 
     @Override
     public boolean isEnabled() {
@@ -53,7 +57,7 @@ public class VaultEconomyHandler implements Economy {
     @Override
     public boolean hasAccount(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
-        if(player == null) return false;
+        if (player == null) return false;
         return bankingModule.getAccountById(player.getUniqueId()) != null;
     }
 
@@ -75,14 +79,14 @@ public class VaultEconomyHandler implements Economy {
     @Override
     public double getBalance(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
-        if(player == null) return -1;
+        if (player == null) return -1;
         return bankingModule.getAccountById(player.getUniqueId()).getBalance();
     }
 
     @Override
     public double getBalance(OfflinePlayer offlinePlayer) {
         BankAccountModel accountModel = bankingModule.getAccountById(offlinePlayer.getUniqueId());
-        if(accountModel == null) return -1;
+        if (accountModel == null) return -1;
         return accountModel.getBalance();
     }
 
@@ -119,18 +123,27 @@ public class VaultEconomyHandler implements Economy {
     @Override
     public EconomyResponse withdrawPlayer(String playerName, double amount) {
         Player player = Bukkit.getPlayer(playerName);
-        if(player == null) return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Player is not online or doesn't exist.");
+        if (player == null)
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Player is not online or doesn't exist.");
         BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
-        if(accountModel == null) return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
+        if (accountModel == null)
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
         accountModel.setBalance(accountModel.getBalance() - amount);
+
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, accountModel.getUniqueId(), "Vault Interaction");
+
         return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
     }
 
     @Override
     public EconomyResponse withdrawPlayer(OfflinePlayer offlinePlayer, double amount) {
         BankAccountModel accountModel = bankingModule.getAccountById(offlinePlayer.getUniqueId());
-        if(accountModel == null) return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
+        if (accountModel == null)
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
         accountModel.setBalance(accountModel.getBalance() - amount);
+
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, accountModel.getUniqueId(), "Vault Interaction");
+
         return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
     }
 
@@ -147,18 +160,27 @@ public class VaultEconomyHandler implements Economy {
     @Override
     public EconomyResponse depositPlayer(String playerName, double amount) {
         Player player = Bukkit.getPlayer(playerName);
-        if(player == null) return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Player is not online or doesn't exist.");
+        if (player == null)
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Player is not online or doesn't exist.");
         BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
-        if(accountModel == null) return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
+        if (accountModel == null)
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
         accountModel.setBalance(accountModel.getBalance() + amount);
+
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, accountModel.getUniqueId(), "Vault Interaction");
+
         return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
     }
 
     @Override
     public EconomyResponse depositPlayer(OfflinePlayer offlinePlayer, double amount) {
         BankAccountModel accountModel = bankingModule.getAccountById(offlinePlayer.getUniqueId());
-        if(accountModel == null) return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
+        if (accountModel == null)
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
         accountModel.setBalance(accountModel.getBalance() + amount);
+
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, accountModel.getUniqueId(), "Vault Interaction");
+
         return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
     }
 
@@ -251,4 +273,5 @@ public class VaultEconomyHandler implements Economy {
     public boolean createPlayerAccount(OfflinePlayer offlinePlayer, String s) {
         return false;
     }
+
 }

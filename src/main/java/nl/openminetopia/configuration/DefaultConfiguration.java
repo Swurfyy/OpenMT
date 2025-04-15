@@ -34,7 +34,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
     /**
      * Database configuration
      */
-    private final DatabaseType databaseType;
+    private DatabaseType databaseType;
     private final String databaseHost;
     private final int databasePort;
     private final String databaseName;
@@ -207,7 +207,15 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Database configuration
          */
-        this.databaseType = DatabaseType.valueOf(rootNode.node("database", "type").getString("sqlite").toUpperCase());
+
+        String databaseTypeString = rootNode.node("database", "type").getString("sqlite").toUpperCase();
+        try {
+            this.databaseType = DatabaseType.valueOf(databaseTypeString);
+        } catch (IllegalArgumentException e) {
+            this.databaseType = DatabaseType.SQLITE;
+            OpenMinetopia.getInstance().getLogger().severe("Couldn't find database type for: " + databaseTypeString + ", defaulting to SQLite.");
+        }
+
         this.databaseHost = rootNode.node("database", "host").getString("localhost");
         this.databasePort = rootNode.node("database", "port").getInt(3306);
         this.databaseName = rootNode.node("database", "name").getString("openminetopia");
@@ -635,7 +643,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
 
             int amplifier = val.node("amplifier").getInt(0);
             int duration = val.node("duration").getInt(600); // Default duration if not specified
-            
+
             potionEffects.add(new PotionEffect(potionEffectType, duration, amplifier));
         });
 
