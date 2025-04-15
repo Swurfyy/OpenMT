@@ -20,8 +20,6 @@ public class BankingConfiguration extends ConfigurateConfig {
     private final String economyFormat;
     private final List<Material> atmMaterials;
 
-    private final boolean logTransactions;
-
     private final double startingBalance;
 
     private final String typeSelectionTitle;
@@ -48,7 +46,6 @@ public class BankingConfiguration extends ConfigurateConfig {
             this.atmMaterials.add(material);
         });
 
-        this.logTransactions = rootNode.node("enable-transaction-logging").getBoolean(true);
         this.startingBalance = rootNode.node("banking", "starting-balance").getDouble(0.0);
 
         this.typeSelectionTitle = rootNode.node("banking", "inventories", "select-type-title").getString("<gray>Selecteer het rekeningtype:");

@@ -5,12 +5,14 @@ import com.jazzkuh.inventorylib.objects.icon.Icon;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
+import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
@@ -36,15 +38,26 @@ public class BankAccountSelectionMenu extends PaginatedMenu {
                 .toList();
 
         for (BankAccountModel accountModel : accountModels) {
-            ItemStack accountStack = new ItemBuilder(type.getMaterial())
+            ItemBuilder accountBuilder = new ItemBuilder(type.getMaterial())
                     .setName(type.getColor() + accountModel.getName())
                     .addLoreLine("<dark_gray><i>" + type.getName())
                     .addLoreLine("")
-                    .addLoreLine("<gray>Klik om te bekijken.")
-                    .toItemStack();
+                    .addLoreLine("<gray>Linker-muis om te openen.");
+
+            if (accountModel.hasPermission(player.getUniqueId(), AccountPermission.ADMIN)) {
+                accountBuilder.addLoreLine("<gray>Right-click om transacties te bekijken.");
+            }
+
+            ItemStack accountStack = accountBuilder.toItemStack();
 
             Icon accountIcon = new Icon(accountStack, event -> {
                 event.setCancelled(true);
+
+                if (event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+                    new BankTransactionsMenu(player, accountModel).open(player);
+                    return;
+                }
+
                 new BankContentsMenu(player, accountModel, false).open(player);
             });
 

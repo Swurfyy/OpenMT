@@ -19,8 +19,6 @@ import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -112,7 +110,7 @@ public class BankContentsMenu extends Menu {
                 .replace("<deposit_value>", bankingModule.format(totalValue)));
 
         TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
-        transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), TransactionType.DEPOSIT, totalValue, accountModel.getUniqueId(), "Deposited from ATM.");
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), player.getName(), TransactionType.DEPOSIT, totalValue, accountModel.getUniqueId(), "Deposited from ATM.");
 
         new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
     }
@@ -140,7 +138,7 @@ public class BankContentsMenu extends Menu {
                 .replace("<withdraw_value>", bankingModule.format(totalValue)));
 
         TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
-        transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), TransactionType.WITHDRAW, totalValue, accountModel.getUniqueId(), "Withdrawn in ATM.");
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), player.getName(), TransactionType.WITHDRAW, totalValue, accountModel.getUniqueId(), "Withdrawn in ATM.");
 
         new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
     }

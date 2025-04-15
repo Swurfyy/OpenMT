@@ -36,8 +36,10 @@ public class BankingBalanceCommand extends BaseCommand {
         accountModel.save();
 
         UUID executorUuid = ((sender instanceof Player executor) ? executor.getUniqueId() : new UUID(0, 0));
+        String username = ((sender instanceof Player executor) ? executor.getName() : "Console");
+
         TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
-        transactionsModule.createTransactionLog(System.currentTimeMillis(), executorUuid, TransactionType.SET, balance, accountModel.getUniqueId(), "Set via '/account setbalance'");
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), executorUuid, username, TransactionType.SET, balance, accountModel.getUniqueId(), "Set via '/account setbalance'");
 
         sender.sendMessage(ChatUtils.color("<gold>De balans van <red>" + accountModel.getName() + " <gold>is nu ingesteld op <red>" + bankingModule.format(balance) + "<gold>."));
     }

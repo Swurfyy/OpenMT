@@ -20,6 +20,9 @@ public class TransactionModel extends StormModel {
     @Column(name = "player_uuid")
     private UUID player;
 
+    @Column(name = "player_username")
+    private String username;
+
     @Column(name = "transaction_type")
     private TransactionType type;
 
