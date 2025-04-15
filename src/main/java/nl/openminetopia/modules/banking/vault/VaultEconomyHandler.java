@@ -6,11 +6,13 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.transactions.TransactionsModule;
+import nl.openminetopia.modules.transactions.enums.TransactionType;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.UUID;
 
 public class VaultEconomyHandler implements Economy {
 
@@ -127,6 +129,9 @@ public class VaultEconomyHandler implements Economy {
         if (accountModel == null)
             return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
         accountModel.setBalance(accountModel.getBalance() - amount);
+
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, accountModel.getUniqueId(), "Vault Interaction");
+
         return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
     }
 
@@ -136,6 +141,9 @@ public class VaultEconomyHandler implements Economy {
         if (accountModel == null)
             return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
         accountModel.setBalance(accountModel.getBalance() - amount);
+
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, accountModel.getUniqueId(), "Vault Interaction");
+
         return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
     }
 
@@ -158,6 +166,9 @@ public class VaultEconomyHandler implements Economy {
         if (accountModel == null)
             return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
         accountModel.setBalance(accountModel.getBalance() + amount);
+
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, accountModel.getUniqueId(), "Vault Interaction");
+
         return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
     }
 
@@ -167,6 +178,9 @@ public class VaultEconomyHandler implements Economy {
         if (accountModel == null)
             return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
         accountModel.setBalance(accountModel.getBalance() + amount);
+
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, accountModel.getUniqueId(), "Vault Interaction");
+
         return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
     }
 
@@ -258,10 +272,6 @@ public class VaultEconomyHandler implements Economy {
     @Override
     public boolean createPlayerAccount(OfflinePlayer offlinePlayer, String s) {
         return false;
-    }
-
-    private void createEconomyLog(Player player, double amount) {
-
     }
 
 }
