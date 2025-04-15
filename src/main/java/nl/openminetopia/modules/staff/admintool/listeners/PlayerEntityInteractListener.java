@@ -31,6 +31,6 @@ public class PlayerEntityInteractListener implements Listener {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
         BankAccountModel bankAccountModel = bankingModule.getAccountById(target.getUniqueId());
 
-        new AdminToolMenu(event.getPlayer(), target, minetopiaPlayer, bankAccountModel).open(target);
+        new AdminToolMenu(event.getPlayer(), target, minetopiaPlayer, bankAccountModel).open(event.getPlayer());
     }
 }
