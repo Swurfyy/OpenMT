@@ -11,7 +11,7 @@ import nl.openminetopia.modules.transactions.TransactionsModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 
-@CommandAlias("transaction|transactions|transactie|transacties")
+@CommandAlias("transactions|transacties")
 @CommandPermission("openminetopia.transactions")
 public class TransactionCommand extends BaseCommand {
 

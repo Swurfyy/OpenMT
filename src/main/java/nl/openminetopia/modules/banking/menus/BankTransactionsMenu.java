@@ -64,6 +64,7 @@ public class BankTransactionsMenu extends PaginatedMenu {
                 addItem(new Icon(PersistentDataUtil.set(transactionBuilder.toItemStack(), sortedTransaction.getTime(), "time")));
             }
 
+            createBackButton();
             update();
         }));
     }
