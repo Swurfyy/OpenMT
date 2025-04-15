@@ -34,9 +34,6 @@ public class BankTransactionsMenu extends PaginatedMenu {
 
         this.addSpecialIcon(new Icon(13, new ItemBuilder(Material.IRON_BLOCK)
                 .setName("<red>Transacties inladen.")
-                .addLoreLine("")
-                .addLoreLine("<gray>Mocht dit lang duren moet je")
-                .addLoreLine("<gray>het menu opnieuw openen.")
                 .toItemStack()
         ));
         createBackButton();
@@ -50,16 +47,11 @@ public class BankTransactionsMenu extends PaginatedMenu {
             }
 
             player.sendMessage(ChatUtils.color("<gold>Er zijn in totaal <red>" + transactionModels.size() + " <gold>transacties ingeladen."));
-
             clearItems();
-
-            player.sendMessage("Unsorted: " + transactionModels.size());
 
             List<TransactionModel> sortedTransactions = transactionModels.stream()
                     .sorted(Comparator.comparing(TransactionModel::getTime).reversed())
                     .toList();
-
-            player.sendMessage("Sorted: " + sortedTransactions.size());
 
             for (TransactionModel sortedTransaction : sortedTransactions) {
                 TransactionType type = sortedTransaction.getType();

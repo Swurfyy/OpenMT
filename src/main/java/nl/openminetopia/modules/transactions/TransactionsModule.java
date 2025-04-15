@@ -6,10 +6,7 @@ import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.modules.banking.BankingModule;
-import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.data.storm.StormDatabase;
-import nl.openminetopia.modules.transactions.commands.TransactionCommand;
 import nl.openminetopia.modules.transactions.enums.TransactionType;
 import nl.openminetopia.modules.transactions.objects.TransactionModel;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +23,6 @@ public class TransactionsModule extends SpigotModule<@NotNull OpenMinetopia> {
 
     @Override
     public void onEnable() {
-        registerComponent(new TransactionCommand());
     }
 
     public CompletableFuture<TransactionModel> createTransactionLog(long time, UUID player, String username, TransactionType type, double amount, UUID bankAccount, String description) {
@@ -49,9 +45,6 @@ public class TransactionsModule extends SpigotModule<@NotNull OpenMinetopia> {
 
     public CompletableFuture<Collection<TransactionModel>> getAccountTransactions(LookupType type, UUID uuid) {
         CompletableFuture<Collection<TransactionModel>> completableFuture = new CompletableFuture<>();
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
-        BankAccountModel accountModel = bankingModule.getAccountById(uuid);
-
         StormDatabase.getExecutorService().submit(() -> {
             try {
                 Collection<TransactionModel> transactionModels = StormDatabase.getInstance().getStorm().buildQuery(TransactionModel.class)

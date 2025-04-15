@@ -53,10 +53,12 @@ public class BankAccountSelectionMenu extends PaginatedMenu {
             Icon accountIcon = new Icon(accountStack, event -> {
                 event.setCancelled(true);
 
-                if (event.getClick() == ClickType.RIGHT || event.getClick() == ClickType.SHIFT_RIGHT) {
+                boolean hasAdmin = accountModel.hasPermission(player.getUniqueId(), AccountPermission.ADMIN);
+                if (event.getClick() == ClickType.RIGHT && hasAdmin || event.getClick() == ClickType.SHIFT_RIGHT && hasAdmin) {
                     new BankTransactionsMenu(player, accountModel).open(player);
                     return;
                 }
+
 
                 new BankContentsMenu(player, accountModel, false).open(player);
             });
