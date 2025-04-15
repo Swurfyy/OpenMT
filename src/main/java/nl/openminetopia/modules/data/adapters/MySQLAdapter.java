@@ -24,6 +24,9 @@ import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.prefix.models.PrefixModel;
+import nl.openminetopia.modules.transactions.adapter.TransactionTypeAdapter;
+import nl.openminetopia.modules.transactions.enums.TransactionType;
+import nl.openminetopia.modules.transactions.objects.TransactionModel;
 
 public class MySQLAdapter implements DatabaseAdapter {
 
@@ -61,6 +64,7 @@ public class MySQLAdapter implements DatabaseAdapter {
         TypeRegistry.registerAdapter(OwnableColorType.class, new OwnableColorTypeAdapter());
         TypeRegistry.registerAdapter(FitnessStatisticType.class, new FitnessStatisticTypeAdapter());
         TypeRegistry.registerAdapter(Boolean.class, new FixedBooleanAdapter());
+        TypeRegistry.registerAdapter(TransactionType.class, new TransactionTypeAdapter());
 
         registerStormModel(new BankAccountModel());
         registerStormModel(new BankPermissionModel());
@@ -72,6 +76,7 @@ public class MySQLAdapter implements DatabaseAdapter {
         registerStormModel(new WorldModel());
         registerStormModel(new CityModel());
         registerStormModel(new CriminalRecordModel());
+        registerStormModel(new TransactionModel());
     }
 
     @SneakyThrows

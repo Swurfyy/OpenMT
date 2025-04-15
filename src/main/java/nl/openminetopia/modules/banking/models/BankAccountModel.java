@@ -49,6 +49,7 @@ public class BankAccountModel extends StormModel {
         this.savingTask.runTaskTimer(OpenMinetopia.getInstance(), (20 * 60 * 2), (20 * 60 * 3));
     }
 
+
     public void save() {
         StormDatabase.getInstance().saveStormModel(this);
     }

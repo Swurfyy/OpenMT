@@ -11,6 +11,8 @@ import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
+import nl.openminetopia.modules.transactions.TransactionsModule;
+import nl.openminetopia.modules.transactions.enums.TransactionType;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.PersistentDataUtil;
 import nl.openminetopia.utils.item.ItemBuilder;
@@ -84,6 +86,7 @@ public class BankContentsMenu extends Menu {
     @Override
     @SuppressWarnings("all") // warning check for nothing
     public void onClick(InventoryClickEvent event) {
+        event.setCancelled(true);
         if (event.getCurrentItem() == null) return;
         if (event.getCurrentItem().getType() == Material.AIR) return;
         ItemStack item = event.getCurrentItem();
@@ -105,6 +108,10 @@ public class BankContentsMenu extends Menu {
         accountModel.setBalance(accountModel.getBalance() + totalValue);
         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
                 .replace("<deposit_value>", bankingModule.format(totalValue)));
+
+        TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), player.getName(), TransactionType.DEPOSIT, totalValue, accountModel.getUniqueId(), "Deposited from ATM.");
+
         new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
     }
 
@@ -129,6 +136,10 @@ public class BankContentsMenu extends Menu {
         player.getInventory().addItem(note.toNote(amount));
         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_withdraw_message")
                 .replace("<withdraw_value>", bankingModule.format(totalValue)));
+
+        TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
+        transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), player.getName(), TransactionType.WITHDRAW, totalValue, accountModel.getUniqueId(), "Withdrawn in ATM.");
+
         new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
     }
 
