@@ -108,6 +108,7 @@ public class MinetopiaPlayer {
         this.activePrefix = prefixModule.getActivePrefixFromPlayer(playerModel)
                 .orElse(new Prefix(-1, configuration.getDefaultPrefix(), -1));
 
+        System.out.println("playtime");
         this.playtimeRunnable = new PlaytimeRunnable(this);
         playtimeRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 20L);
 

@@ -10,10 +10,11 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.restapi.base.VerticleManager;
 import nl.openminetopia.modules.restapi.verticles.MainVerticle;
-import nl.openminetopia.modules.restapi.verticles.banking.BankAccountTransactionVerticle;
+import nl.openminetopia.modules.restapi.verticles.banking.transactions.BankAccountTransactionVerticle;
 import nl.openminetopia.modules.restapi.verticles.banking.BankAccountUsersVerticle;
 import nl.openminetopia.modules.restapi.verticles.banking.BankAccountVerticle;
 import nl.openminetopia.modules.restapi.verticles.banking.BankAccountsVerticle;
+import nl.openminetopia.modules.restapi.verticles.banking.transactions.BankAccountTransactionsVerticle;
 import nl.openminetopia.modules.restapi.verticles.places.PlacesVerticle;
 import nl.openminetopia.modules.restapi.verticles.player.*;
 import nl.openminetopia.modules.restapi.verticles.plots.PlotsVerticle;
@@ -55,6 +56,7 @@ public class RestAPIModule extends SpigotModule<@NotNull OpenMinetopia> {
                     new PlacesVerticle(),
 
                     /* POST */
+                    new BankAccountTransactionsVerticle(),
                     new BankAccountTransactionVerticle()
             );
         }

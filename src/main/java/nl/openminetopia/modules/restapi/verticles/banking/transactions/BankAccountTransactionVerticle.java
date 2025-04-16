@@ -1,4 +1,4 @@
-package nl.openminetopia.modules.restapi.verticles.banking;
+package nl.openminetopia.modules.restapi.verticles.banking.transactions;
 
 import io.vertx.core.Promise;
 import io.vertx.ext.web.RoutingContext;
