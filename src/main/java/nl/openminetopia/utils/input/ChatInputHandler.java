@@ -6,6 +6,7 @@ import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import java.nio.Buffer;
@@ -24,10 +25,10 @@ public class ChatInputHandler implements Listener {
                 inputHandlers.remove(player.getUniqueId());
                 ChatUtils.sendMessage(player, "<red>Actie afgebroken, geen invoer ontvangen.");
             }
-        }, 20L * 30); // 30 seconds timeout
+        }, 20L * 60); // 1 minute timeout
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void playerChat(final AsyncChatEvent event) {
         Player player = event.getPlayer();
         UUID playerId = player.getUniqueId();

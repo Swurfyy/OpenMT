@@ -68,9 +68,10 @@ public class CustomBook {
         return new ItemBuilder(book).setName(ChatUtils.format(minetopiaPlayer, bookTitle)).toItemStack();
     }
 
-    private static final int MAX_CHARS_PER_PAGE = 255;
+    private static final int MAX_CHARS_PER_PAGE = 1024;
     private List<String> splitContentToPages(String text) {
         List<String> pages = new ArrayList<>();
+
         for (int i = 0; i < text.length(); i += MAX_CHARS_PER_PAGE) {
             pages.add(text.substring(i, Math.min(i + MAX_CHARS_PER_PAGE, text.length())));
         }
