@@ -11,7 +11,10 @@ import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -45,18 +48,32 @@ public class CustomBook {
             processedName = processedName.replace(entry.getKey(), entry.getValue());
         }
 
-        ItemStack book = ItemStack.of(Material.WRITTEN_BOOK);
-        WrittenBookContent.Builder builder = WrittenBookContent.writtenBookContent(processedName, player.getName());
+        String prefix = copy ? "<reset><white>[COPY] <reset>" : "";
+        int maxTitleLength = 32 - prefix.length();
+        String trimmedName = processedName.length() > maxTitleLength ? processedName.substring(0, maxTitleLength) : processedName;
+        String bookTitle = prefix + trimmedName;
 
-        builder.addPage(ChatUtils.format(minetopiaPlayer, processedContent));
+        ItemStack book = ItemStack.of(Material.WRITTEN_BOOK);
+        WrittenBookContent.Builder builder = WrittenBookContent.writtenBookContent(bookTitle, player.getName());
+
+        for (String page : splitContentToPages(processedContent)) {
+            builder.addPage(ChatUtils.format(minetopiaPlayer, page));
+        }
 
         if (copy) builder.generation(1);
         else builder.generation(0);
 
         book.setData(DataComponentTypes.WRITTEN_BOOK_CONTENT, builder.build());
 
-        String suffix = copy ? "<reset><white>[COPY] <reset>" : "";
-        String bookTitle = processedName.length() > 32 ? suffix + processedName.substring(0, 32) : suffix + processedName;
         return new ItemBuilder(book).setName(ChatUtils.format(minetopiaPlayer, bookTitle)).toItemStack();
+    }
+
+    private static final int MAX_CHARS_PER_PAGE = 255;
+    private List<String> splitContentToPages(String text) {
+        List<String> pages = new ArrayList<>();
+        for (int i = 0; i < text.length(); i += MAX_CHARS_PER_PAGE) {
+            pages.add(text.substring(i, Math.min(i + MAX_CHARS_PER_PAGE, text.length())));
+        }
+        return pages;
     }
 }
