@@ -6,6 +6,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
+import nl.openminetopia.utils.input.ChatInputHandler;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -35,7 +36,17 @@ public class WalkieTalkieContactsMenu extends PaginatedMenu {
             Icon contactIcon = new Icon(10, contactBuilder.toItemStack(), event -> {
                 ChatUtils.sendMessage(player, MessageConfiguration.message("police_walkietalkie_type_your_message")
                         .replace("<player>", target.getName()));
-                policeModule.getWalkieTalkieManager().startComposingMessage(player, target);
+
+                OpenMinetopia.getChatInputHandler().waitForInput(player, response -> {
+                    String formattedMessage = MessageConfiguration.message("police_walkietalkie_private_format")
+                            .replace("<player>", player.getName())
+                            .replace("<target>", target.getName())
+                            .replace("<message>", response);
+
+                    ChatUtils.sendMessage(player, formattedMessage);
+                    ChatUtils.sendMessage(target, formattedMessage);
+                    Bukkit.getConsoleSender().sendMessage(ChatUtils.color(formattedMessage));
+                });
                 this.getInventory().close();
             });
             this.addItem(contactIcon);

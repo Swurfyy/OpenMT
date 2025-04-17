@@ -24,6 +24,6 @@ public class HandcuffUtils {
     }
 
     public boolean isHandcuffItem(ItemStack item) {
-        return ItemUtils.isValidItem(item, OpenMinetopia.getDefaultConfiguration().getHandcuffItems());
+        return ItemUtils.isSimilarToAny(item, OpenMinetopia.getDefaultConfiguration().getHandcuffItems());
     }
 }

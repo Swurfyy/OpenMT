@@ -17,7 +17,7 @@ public class PlayerInteractListener implements Listener {
         ItemStack item = event.getItem();
         if (item == null) return;
 
-        if (!ItemUtils.isValidItem(item, OpenMinetopia.getDefaultConfiguration().getWalkieTalkieItems())) return;
+        if (!ItemUtils.isSimilarToAny(item, OpenMinetopia.getDefaultConfiguration().getWalkieTalkieItems())) return;
         if (!event.getPlayer().hasPermission("openminetopia.walkietalkie")) return;
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(event.getPlayer());

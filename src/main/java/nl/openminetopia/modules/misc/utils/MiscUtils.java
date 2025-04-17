@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class MiscUtils {
 
     public boolean isValidHeadItem(ItemStack head) {
-        return ItemUtils.isValidItem(head, OpenMinetopia.getDefaultConfiguration().getHeadWhitelist());
+        return ItemUtils.isSimilarToAny(head, OpenMinetopia.getDefaultConfiguration().getHeadWhitelist());
     }
 
     public PvPItem getPvPItem(ItemStack item) {

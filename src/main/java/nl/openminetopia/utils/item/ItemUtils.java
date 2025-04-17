@@ -32,31 +32,36 @@ public class ItemUtils {
         }
     }
 
-    public boolean isValidItem(ItemStack item, List<ItemStack> validItems) {
-        if (item == null) return false;
+    public boolean isSimilarToAny(ItemStack itemToCheck, List<ItemStack> validItems) {
+        if (itemToCheck == null || validItems == null || validItems.isEmpty()) return false;
 
-        for (ItemStack compare : validItems) {
-            if (item.getType() == compare.getType()) {
-                if (!compare.hasItemMeta() || !item.hasItemMeta()) return true;
-                ItemMeta meta = item.getItemMeta();
-                ItemMeta compareMeta = compare.getItemMeta();
+        for (ItemStack item : validItems) {
+            if (item == null) continue;
+            if (item.getType() != itemToCheck.getType()) continue;
 
-                boolean isSame = true;
-                if (Bukkit.getVersion().contains("1.21.4") && meta.hasItemModel() && compareMeta.hasItemModel()) {
-                    if (meta.getItemModel() != compareMeta.getItemModel()) isSame = false;
-                }
+            if (item.hasItemMeta() != itemToCheck.hasItemMeta()) continue;
 
-                if (meta.hasCustomModelData() && compareMeta.hasCustomModelData()) {
-                    if (meta.getCustomModelData() != compareMeta.getCustomModelData()) isSame = false;
-                }
+            if (!item.hasItemMeta()) return true; // Both have no meta, match
 
-                Damageable damageable = (Damageable) meta;
-                Damageable compareDamageable = (Damageable) compareMeta;
-                if (damageable.getDamage() != compareDamageable.getDamage()) isSame = false;
+            var meta = item.getItemMeta();
+            var checkMeta = itemToCheck.getItemMeta();
+            if (meta == null || checkMeta == null) continue;
 
-                return isSame;
+            if (meta.hasCustomModelData() != checkMeta.hasCustomModelData()) continue;
+            if (meta.hasCustomModelData() && checkMeta.getCustomModelData() != meta.getCustomModelData()) continue;
+
+            if (meta instanceof org.bukkit.inventory.meta.Damageable damageMeta
+                    && checkMeta instanceof org.bukkit.inventory.meta.Damageable checkDamageMeta) {
+                if (damageMeta.getDamage() != checkDamageMeta.getDamage()) continue;
             }
+
+            if (Bukkit.getVersion().contains("1.21.4") && meta.hasItemModel() && checkMeta.hasItemModel()) {
+                if (meta.getItemModel() != checkMeta.getItemModel()) continue;
+            }
+
+            return true; // Found a match
         }
+
         return false;
     }
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
+import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
@@ -108,7 +109,6 @@ public class MinetopiaPlayer {
         this.activePrefix = prefixModule.getActivePrefixFromPlayer(playerModel)
                 .orElse(new Prefix(-1, configuration.getDefaultPrefix(), -1));
 
-        System.out.println("playtime");
         this.playtimeRunnable = new PlaytimeRunnable(this);
         playtimeRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 20L);
 

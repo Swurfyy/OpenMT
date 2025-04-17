@@ -17,6 +17,6 @@ public class PeppersprayUtils {
     }
 
     public boolean isPeppersprayItem(ItemStack item) {
-        return ItemUtils.isValidItem(item, OpenMinetopia.getDefaultConfiguration().getPeppersprayItems());
+        return ItemUtils.isSimilarToAny(item, OpenMinetopia.getDefaultConfiguration().getPeppersprayItems());
     }
 }

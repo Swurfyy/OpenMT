@@ -24,6 +24,6 @@ public class NightvisionUtils {
     }
 
     public boolean isNightvisonItem(ItemStack head) {
-        return ItemUtils.isValidItem(head, OpenMinetopia.getDefaultConfiguration().getNightvisionItems());
+        return ItemUtils.isSimilarToAny(head, OpenMinetopia.getDefaultConfiguration().getNightvisionItems());
     }
 }

@@ -19,7 +19,7 @@ public class BalaclavaUtils {
     }
 
     public boolean isBalaclavaItem(ItemStack head) {
-        return ItemUtils.isValidItem(head, OpenMinetopia.getDefaultConfiguration().getBalaclavaItems());
+        return ItemUtils.isSimilarToAny(head, OpenMinetopia.getDefaultConfiguration().getBalaclavaItems());
     }
 
     public boolean isWearingBalaclava(Player player) {

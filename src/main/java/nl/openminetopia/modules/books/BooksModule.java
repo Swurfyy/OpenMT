@@ -23,17 +23,14 @@ public class BooksModule extends SpigotModule<@NotNull OpenMinetopia> {
     }
 
     private BooksConfiguration configuration;
-    private ChatInputHandler chatInputHandler;
     private Map<UUID, Map<String, String>> variableResponses;
 
     @Override
     public void onEnable() {
         configuration = new BooksConfiguration(OpenMinetopia.getInstance().getDataFolder());
-        chatInputHandler = new ChatInputHandler();
         variableResponses = new HashMap<>();
 
         registerComponent(new BooksCommand());
-        registerComponent(chatInputHandler);
 
         OpenMinetopia.getCommandManager().getCommandCompletions().registerAsyncCompletion("books", c -> {
             if (!(c.getSender() instanceof Player player)) return null;

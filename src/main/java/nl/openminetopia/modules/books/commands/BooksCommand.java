@@ -60,7 +60,7 @@ public class BooksCommand extends BaseCommand {
 
         player.sendMessage(ChatUtils.format(minetopiaPlayer, explanation));
 
-        booksModule.getChatInputHandler().waitForInput(player, response -> {
+        OpenMinetopia.getChatInputHandler().waitForInput(player, response -> {
             Map<String, String> responded = new HashMap<>();
             if (booksModule.getVariableResponses().containsKey(player.getUniqueId())) {
                 responded = booksModule.getVariableResponses().get(player.getUniqueId());

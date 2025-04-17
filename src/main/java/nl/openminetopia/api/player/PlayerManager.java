@@ -7,6 +7,8 @@ import nl.openminetopia.modules.player.PlayerModule;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -74,7 +76,6 @@ public class PlayerManager {
             }
 
             MinetopiaPlayer minetopiaPlayer = new MinetopiaPlayer(player.getUniqueId(), playerModel);
-
             minetopiaPlayer.load().thenAccept(unused -> {
                 if (player.isOnline()) {
                     onlinePlayers.put(player.getUniqueId(), minetopiaPlayer);

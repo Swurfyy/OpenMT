@@ -19,12 +19,15 @@ public class PlayerChatListener implements Listener {
         Player source = event.getPlayer();
 
         PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
-        if (policeModule.getWalkieTalkieManager().isComposingMessage(source)
-                || policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)) return;
+        if (policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)) return;
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(source);
         if (minetopiaPlayer == null) return;
 
+        if (!source.hasPermission("openminetopia.staffchat") && minetopiaPlayer.isStaffchatEnabled()) {
+            minetopiaPlayer.setStaffchatEnabled(false);
+            return;
+        }
         if (!source.hasPermission("openminetopia.staffchat") || !minetopiaPlayer.isStaffchatEnabled()) return;
 
         event.setCancelled(true);

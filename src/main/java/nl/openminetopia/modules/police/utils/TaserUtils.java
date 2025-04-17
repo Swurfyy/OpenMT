@@ -17,6 +17,6 @@ public class TaserUtils {
     }
 
     public boolean isTaserItem(ItemStack item) {
-        return ItemUtils.isValidItem(item, OpenMinetopia.getDefaultConfiguration().getTaserItems());
+        return ItemUtils.isSimilarToAny(item, OpenMinetopia.getDefaultConfiguration().getTaserItems());
     }
 }

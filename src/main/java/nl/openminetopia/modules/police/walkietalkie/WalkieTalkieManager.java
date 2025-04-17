@@ -10,26 +10,7 @@ import java.util.*;
 public class WalkieTalkieManager {
 
     private final List<UUID> policeChatPlayers = new ArrayList<>();
-    private final Map<UUID, UUID> composingPrivateMessage = new HashMap<>();
     private final Map<UUID, Long> emergencyButtonCooldown = new HashMap<>();
-
-    /* -------- Private messaging -------- */
-    public void startComposingMessage(Player player, Player target) {
-        composingPrivateMessage.put(player.getUniqueId(), target.getUniqueId());
-    }
-
-    public void cancelComposeMessage(Player player) {
-        composingPrivateMessage.remove(player.getUniqueId());
-    }
-
-    public boolean isComposingMessage(Player player) {
-        return composingPrivateMessage.containsKey(player.getUniqueId());
-    }
-
-    public Player getTarget(Player player) {
-        UUID targetUuid = composingPrivateMessage.get(player.getUniqueId());
-        return Bukkit.getServer().getPlayer(targetUuid);
-    }
 
     /* -------- Police chat -------- */
 

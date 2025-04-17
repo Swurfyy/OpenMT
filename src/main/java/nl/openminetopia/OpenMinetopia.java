@@ -15,6 +15,7 @@ import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.registry.CommandComponentRegistry;
 import nl.openminetopia.utils.ChatUtils;
+import nl.openminetopia.utils.input.ChatInputHandler;
 import nl.openminetopia.utils.placeholderapi.OpenMinetopiaExpansion;
 import nl.openminetopia.utils.wrappers.listeners.CitzensNpcClickListener;
 import nl.openminetopia.utils.wrappers.listeners.FancyNpcClickListener;
@@ -42,6 +43,9 @@ public final class OpenMinetopia extends JavaPlugin {
 
     @Getter @Setter
     private static MessageConfiguration messageConfiguration;
+
+    @Getter
+    private static ChatInputHandler chatInputHandler;
 
     private boolean npcSupport = false;
 
@@ -72,6 +76,9 @@ public final class OpenMinetopia extends JavaPlugin {
         commandManager.setFormat(MessageType.HELP, 1, ChatColor.GOLD);
         commandManager.setFormat(MessageType.HELP, 2, ChatColor.YELLOW);
         commandManager.setFormat(MessageType.HELP, 3, ChatColor.GRAY);
+
+        chatInputHandler = new ChatInputHandler();
+        Bukkit.getPluginManager().registerEvents(chatInputHandler, this);
 
         CustomBlockData.registerListener(this);
         Menu.init(this);

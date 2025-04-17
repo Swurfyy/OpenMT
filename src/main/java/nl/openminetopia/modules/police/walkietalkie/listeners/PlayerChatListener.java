@@ -21,22 +21,6 @@ public class PlayerChatListener implements Listener {
     public void onChat(final AsyncChatEvent event) {
         Player source = event.getPlayer();
 
-        if (policeModule.getWalkieTalkieManager().isComposingMessage(source)) {
-            event.setCancelled(true);
-
-            Player target = policeModule.getWalkieTalkieManager().getTarget(source);
-            String formattedMessage = MessageConfiguration.message("police_walkietalkie_private_format")
-                    .replace("<player>", source.getName())
-                    .replace("<target>", target.getName())
-                    .replace("<message>", ChatUtils.rawMiniMessage(event.message()));
-
-            ChatUtils.sendMessage(source, formattedMessage);
-            ChatUtils.sendMessage(target, formattedMessage);
-            Bukkit.getConsoleSender().sendMessage(ChatUtils.color(formattedMessage));
-
-            policeModule.getWalkieTalkieManager().cancelComposeMessage(event.getPlayer());
-        }
-
         if (policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)) {
             event.setCancelled(true);
 
