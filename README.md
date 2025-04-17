@@ -15,3 +15,5 @@ Dit project is volledig open-source en iedereen kan meehelpen aan de ontwikkelin
 
 # Licentie
 Dit project is gelicentieerd onder de [GNU General Public License 3.0](LICENSE).
+
+![image](https://github.com/user-attachments/assets/60ba675c-78a7-42b4-a3cb-276ced5f4987)
