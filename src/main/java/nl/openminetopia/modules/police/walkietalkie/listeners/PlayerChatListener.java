@@ -24,23 +24,15 @@ public class PlayerChatListener implements Listener {
         if (policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)) {
             event.setCancelled(true);
 
-            List<Player> recipients = new ArrayList<>();
-
-            policeModule.getWalkieTalkieManager().getPoliceChatPlayers().forEach(uuid -> {
-                Player target = Bukkit.getPlayer(uuid);
-                recipients.add(target);
-            });
-
             String formattedMessage = MessageConfiguration.message("police_walkietalkie_format")
                     .replace("<player>", source.getName())
                     .replace("<world_name>", source.getWorld().getName())
                     .replace("<message>", ChatUtils.stripMiniMessage(event.message()));
 
-            // Iterate over recipients
-            recipients.forEach(player -> {
-                // Send the formatted message to the player
-                ChatUtils.sendMessage(player, formattedMessage);
-            });
+            for (Player recipient : Bukkit.getOnlinePlayers()) {
+                if (!recipient.hasPermission("openminetopia.walkietalkie")) return;
+                ChatUtils.sendMessage(recipient, formattedMessage);
+            }
             Bukkit.getConsoleSender().sendMessage(ChatUtils.color(formattedMessage));
         }
     }
