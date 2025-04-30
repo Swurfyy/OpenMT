@@ -73,7 +73,7 @@ public class FitnessRunnable extends BukkitRunnable {
         int newFitness = FitnessUtils.calculateFitness(currentDistance, (int) statModel.getProgressPerPoint());
 
         if (statModel.getFitnessGained() != newFitness && newFitness <= statModel.getMaximum()) {
-            statModel.setFitnessGained(newFitness);
+            statModel.setFitnessGained(Math.min(newFitness, statModel.getMaximum()));
         }
 
         fitness.setStatistic(type, statModel);
