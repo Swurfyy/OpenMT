@@ -19,7 +19,10 @@ public class LockCommand extends BaseCommand {
     public void defaultCommand(Player player) {
         Block targetBlock = player.getTargetBlockExact(5);
         if (!validateBlock(player, targetBlock)) return;
-
+        if (LockUtil.isLocked(targetBlock)) {
+            player.sendMessage(ChatUtils.color("<red>Dit blok is al <dark_red>vergrendeld<red>!"));
+            return;
+        }
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         player.sendMessage(ChatUtils.format(minetopiaPlayer, "<gold>Je hebt dit blok <yellow>vergrendeld<gold>."));
         LockUtil.setLocked(targetBlock, player.getUniqueId());
@@ -86,10 +89,6 @@ public class LockCommand extends BaseCommand {
                 player.sendMessage(ChatUtils.color("<red>Je bent geen eigenaar van dit plot!"));
                 return false;
             }
-        }
-        if (LockUtil.isLocked(targetBlock)) {
-            player.sendMessage(ChatUtils.color("<red>Dit blok is al <dark_red>vergrendeld<red>!"));
-            return false;
         }
         return true;
     }
