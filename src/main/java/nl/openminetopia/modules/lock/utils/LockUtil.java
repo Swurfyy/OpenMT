@@ -129,9 +129,6 @@ public class LockUtil {
         PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
         if (!isLocked(block)) return true;
 
-        ProtectedRegion region = WorldGuardUtils.getProtectedRegion(block.getLocation(), p -> p >= 0);
-        if (region == null) return true;
-
         UUID ownerUuid = data.get(new NamespacedKey(OpenMinetopia.getInstance(), "lock.owner"), DataType.UUID);
         if (ownerUuid == null) return false;
 
@@ -151,9 +148,9 @@ public class LockUtil {
         if (block.getBlockData() instanceof Door) return true;
         if (block.getBlockData() instanceof TrapDoor) return true;
         if (block.getBlockData() instanceof Gate) return true;
-        if (block.getState() instanceof Chest) return true;
-        if (block.getState() instanceof Sign) return true;
-        if (block.getState() instanceof Furnace) return true;
-        return block.getState() instanceof Barrel;
+        if (block.getBlockData() instanceof Chest) return true;
+        if (block.getBlockData() instanceof Sign) return true;
+        if (block.getBlockData() instanceof Furnace) return true;
+        return block.getBlockData() instanceof Barrel;
     }
 }

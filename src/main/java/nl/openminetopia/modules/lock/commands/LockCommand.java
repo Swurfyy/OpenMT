@@ -76,14 +76,19 @@ public class LockCommand extends BaseCommand {
             player.sendMessage(ChatUtils.color("<red>Je kijkt niet naar een blok!"));
             return false;
         }
-
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(targetBlock.getLocation(), p -> p >= 0);
-        if (region == null) {
-            player.sendMessage(ChatUtils.color("<red>Je staat niet op een plot!"));
-            return false;
+        if (!player.hasPermission("openminetopia.lock")) {
+            if (region == null) {
+                player.sendMessage(ChatUtils.color("<red>Je staat niet op een plot!"));
+                return false;
+            }
+            if (!region.getOwners().contains(player.getUniqueId())) {
+                player.sendMessage(ChatUtils.color("<red>Je bent geen eigenaar van dit plot!"));
+                return false;
+            }
         }
-        if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("openminetopia.lock")) {
-            player.sendMessage(ChatUtils.color("<red>Je bent niet de eigenaar van dit plot!"));
+        if (LockUtil.isLocked(targetBlock)) {
+            player.sendMessage(ChatUtils.color("<red>Dit blok is al <dark_red>vergrendeld<red>!"));
             return false;
         }
         return true;
