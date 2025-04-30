@@ -84,17 +84,17 @@ public class PlayerChatListener implements Listener {
 
         for (Player target : recipients) {
             String messageToSend;
-            // Check if the target's name is in the original message and highlight it
+
             if (originalMessage.contains(target.getName())) {
                 String highlightedMessage = originalMessage.replace(
                         target.getName(),
                         "<green>" + target.getName() + minetopiaPlayer.getActiveChatColor().color()
                 );
-                messageToSend = formattedMessage.replace("<message>", highlightedMessage);
+                messageToSend = finalMessage.replace("<message>", highlightedMessage);
 
                 target.playSound(target.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             } else {
-                messageToSend = formattedMessage.replace("<message>", originalMessage);
+                messageToSend = finalMessage;
             }
 
             target.sendMessage(ChatUtils.format(minetopiaPlayer, messageToSend));
