@@ -26,3 +26,6 @@ dependencies:
     FancyNpcs:
       load: BEFORE
       required: false
+    LabyModServerAPI:
+      load: BEFORE
+      required: false
