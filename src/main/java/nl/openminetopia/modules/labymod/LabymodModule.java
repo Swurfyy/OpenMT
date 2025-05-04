@@ -7,7 +7,7 @@ import lombok.Setter;
 import net.labymod.serverapi.core.LabyModProtocol;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.labymod.configuration.LabymodConfiguration;
-import nl.openminetopia.modules.labymod.listeners.PlayerJoinListener;
+import nl.openminetopia.modules.labymod.listeners.LabyPlayerListener;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -26,13 +26,13 @@ public class LabymodModule extends SpigotModule<@NotNull OpenMinetopia> {
 		configuration = new LabymodConfiguration(OpenMinetopia.getInstance().getDataFolder());
 		configuration.saveConfiguration();
 
-		if (!configuration.isEnabled()) { return; }
+		if (!configuration.isEnabled()) return;
 		if (!OpenMinetopia.getInstance().isLabymodSupport()) {
 			getLogger().warn("labymod support is enabled in labymod.yml but the Labymod server API is not installed. Disabling labymod support.");
 			return;
 		}
 
-		registerComponent(new PlayerJoinListener());
+		registerComponent(new LabyPlayerListener());
 
 
 	}

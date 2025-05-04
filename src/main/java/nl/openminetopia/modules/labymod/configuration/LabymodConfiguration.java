@@ -11,8 +11,11 @@ public class LabymodConfiguration extends ConfigurateConfig {
 
 	private final boolean enabled;
 
-	private final boolean EconomyDisplayEnabled;
-	private final String EconomyIconUrl;
+	private final boolean economyDisplayEnabled;
+	private final String economyIconUrl;
+
+	private final boolean subtitleEnabled;
+	private final String subtitleDisplay;
 
 	public LabymodConfiguration(File file) {
 		super(file, "labymod.yml", "default-labymod.yml", true);
@@ -21,8 +24,14 @@ public class LabymodConfiguration extends ConfigurateConfig {
 
 		ConfigurationNode economyNode = rootNode.node("economy-display");
 
-		this.EconomyDisplayEnabled = economyNode.node( "enabled").getBoolean();
-		this.EconomyIconUrl = economyNode.node("icon-url").getString();
+		this.economyDisplayEnabled = economyNode.node( "enabled").getBoolean();
+		this.economyIconUrl = economyNode.node("icon-url").getString();
+
+		ConfigurationNode subtitleNode = rootNode.node("subtitle");
+
+		this.subtitleEnabled = subtitleNode.node("enabled").getBoolean();
+		this.subtitleDisplay = subtitleNode.node("display").getString();
+
 
 	}
 
