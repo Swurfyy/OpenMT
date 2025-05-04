@@ -1,5 +1,6 @@
 package nl.openminetopia.modules.labymod.listeners;
 
+import net.kyori.adventure.text.Component;
 import net.labymod.serverapi.server.bukkit.LabyModPlayer;
 import net.labymod.serverapi.server.bukkit.event.LabyModPlayerJoinEvent;
 import net.labymod.serverapi.api.model.component.ServerAPIComponent;
@@ -46,11 +47,21 @@ public class LabyPlayerListener implements Listener {
 			return;
 		}
 
-		BankAccountModel accountModel = economyEnabled ? bankingModule.getAccountById(playerId) : null;
-
-		BukkitTask task = Bukkit.getScheduler().runTaskTimerAsynchronously(
+		BukkitTask task = Bukkit.getScheduler().runTaskTimer(
 				OpenMinetopia.getInstance(),
-				() -> updateLabyModFeatures(labyPlayer, accountModel, economyEnabled, subtitleEnabled),
+				() -> {
+
+					if (!player.isOnline()) {
+						BukkitTask currentTask = playerTasks.remove(playerId);
+						if (currentTask != null) {
+							currentTask.cancel();
+						}
+						return;
+					}
+
+					BankAccountModel accountModel = economyEnabled ? bankingModule.getAccountById(playerId) : null;
+					updateLabyModFeatures(labyPlayer, accountModel, economyEnabled, subtitleEnabled);
+				},
 				20L,
 				20L
 		);
@@ -69,10 +80,6 @@ public class LabyPlayerListener implements Listener {
 
 	private void updateLabyModFeatures(LabyModPlayer labyPlayer, BankAccountModel accountModel, boolean economyEnabled, boolean subtitleEnabled) {
 
-		if (!labyPlayer.getPlayer().isOnline()) {
-			return;
-		}
-
 		if (economyEnabled && accountModel != null) {
 			labyPlayer.updateBankEconomy(economy -> {
 				economy.visible(true);
@@ -85,13 +92,12 @@ public class LabyPlayerListener implements Listener {
 			});
 		}
 
-		// Update subtitle if enabled
 		if (subtitleEnabled) {
 			labyPlayer.updateSubtitle(subtitle -> {
-				String formattedText = String.valueOf(ChatUtils.format(
+				Component formattedText = ChatUtils.format(
 						PlayerManager.getInstance().getOnlineMinetopiaPlayer(labyPlayer.getPlayer()),
 						configuration.getSubtitleDisplay()
-				));
+				);
 				subtitle.text(ServerAPIComponent.text(ChatUtils.stripMiniMessage(formattedText)));
 			});
 		}
