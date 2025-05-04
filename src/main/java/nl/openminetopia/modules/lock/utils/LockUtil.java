@@ -129,6 +129,8 @@ public class LockUtil {
         PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
         if (!isLocked(block)) return true;
 
+        if (player.hasPermission("openminetopia.lock.bypass")) return true;
+
         UUID ownerUuid = data.get(new NamespacedKey(OpenMinetopia.getInstance(), "lock.owner"), DataType.UUID);
         if (ownerUuid == null) return false;
 
