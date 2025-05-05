@@ -24,6 +24,7 @@ import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.jetbrains.annotations.NotNull;
 
 @Getter @Setter
@@ -48,6 +49,8 @@ public final class OpenMinetopia extends JavaPlugin {
     private static ChatInputHandler chatInputHandler;
 
     private boolean npcSupport = false;
+
+    private boolean labymodSupport = false;
 
     private Vertx vertx;
 
@@ -100,6 +103,11 @@ public final class OpenMinetopia extends JavaPlugin {
             getLogger().info("Initializing FancyNpcs support.");
             Bukkit.getPluginManager().registerEvents(new FancyNpcClickListener(), this);
             npcSupport = true;
+        }
+
+        if (Bukkit.getPluginManager().isPluginEnabled("LabyModServerAPI")) {
+            getLogger().info("Initializing LabyModServerAPI support.");
+            labymodSupport = true;
         }
 
         moduleManager.getComponentRegistry().registerComponentHandler(

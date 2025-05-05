@@ -1,0 +1,7 @@
+enabled: false
+economy-display:
+  enabled: true
+  url: ''
+subtitle:
+  enabled: true
+  display: '<prefix>'

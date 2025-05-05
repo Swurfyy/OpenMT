@@ -15,6 +15,8 @@ import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.configuration.ColorsConfiguration;
 import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
+import nl.openminetopia.modules.labymod.LabymodModule;
+import nl.openminetopia.modules.labymod.configuration.LabymodConfiguration;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
@@ -64,6 +66,10 @@ public class OpenMinetopiaCommand extends BaseCommand {
         BooksModule booksModule = OpenMinetopia.getModuleManager().get(BooksModule.class);
         booksModule.setConfiguration(new BooksConfiguration(dataFolder));
         booksModule.getConfiguration().saveConfiguration();
+
+        LabymodModule labymodModule = OpenMinetopia.getModuleManager().get(LabymodModule.class);
+        labymodModule.setConfiguration(new LabymodConfiguration(dataFolder));
+        labymodModule.getConfiguration().saveConfiguration();
 
         player.sendMessage(ChatUtils.color("<gold>De configuratiebestanden zijn succesvol herladen!"));
     }
