@@ -164,12 +164,14 @@ public class FitnessConfiguration extends ConfigurateConfig {
             }
             int fitnessAmount = value.node("fitness", "amount").getInt(0);
             int fitnessDuration = value.node("fitness", "duration").getInt(0);
+            int cooldown = value.node("fitness", "cooldown").getInt(0);
 
             fitnessItems.put(identifier, new FitnessItem(
                     identifier,
                     item,
                     fitnessAmount,
-                    fitnessDuration
+                    fitnessDuration,
+                    cooldown
             ));
         });
     }

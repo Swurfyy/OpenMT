@@ -11,11 +11,13 @@ public class FitnessItem {
     private final ItemStack itemStack;
     private final int fitnessAmount;
     private final int fitnessDuration;
+    private final int cooldown;
 
-    public FitnessItem(String identifier, ItemStack itemStack, int fitnessAmount, int fitnessDuration) {
+    public FitnessItem(String identifier, ItemStack itemStack, int fitnessAmount, int fitnessDuration, int cooldown) {
         this.identifier = identifier;
         this.itemStack = itemStack;
         this.fitnessAmount = fitnessAmount;
         this.fitnessDuration = fitnessDuration;
+        this.cooldown = cooldown;
     }
 }

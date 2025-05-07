@@ -25,6 +25,7 @@ public class FitnessModule extends SpigotModule<@NotNull OpenMinetopia> {
     }
 
     public final Map<UUID, Long> lastDrinkingTimes = new HashMap<>();
+    public final Map<UUID, Long> fitnessItemCooldowns = new HashMap<>();
 
     @Getter @Setter
     private FitnessConfiguration configuration;

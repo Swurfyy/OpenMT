@@ -48,12 +48,23 @@ public class PlayerConsumeBoosterListener implements Listener {
                     .toList();
             if (!ItemUtils.isSimilarToAny(item, fitnessItems)) continue;
 
+            if (fitnessModule.getFitnessItemCooldowns().containsKey(player.getUniqueId())) {
+                long cooldown = fitnessModule.getFitnessItemCooldowns().get(player.getUniqueId());
+                if (System.currentTimeMillis() < cooldown) {
+                    ChatUtils.sendFormattedMessage(PlayerManager.getInstance().getOnlineMinetopiaPlayer(player), "<red>Je moet nog even wachten voordat je weer een booster kan gebruiken.");
+                    return true;
+                }
+                fitnessModule.getFitnessItemCooldowns().remove(player.getUniqueId());
+            }
+
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
             long msTillExpire = System.currentTimeMillis() + (1000L * fitnessItem.fitnessDuration());
             minetopiaPlayer.getFitness().addBooster(fitnessItem.fitnessAmount(), msTillExpire);
 
             item.setAmount(item.getAmount() - 1);
 
+            long cooldown = System.currentTimeMillis() + (1000L * fitnessItem.cooldown());
+            fitnessModule.getFitnessItemCooldowns().put(player.getUniqueId(), cooldown);
             ChatUtils.sendFormattedMessage(minetopiaPlayer, "<gold>Je hebt <yellow>" + fitnessItem.fitnessAmount() + " <gold>fitheid verdiend!");
             return true;
         }
