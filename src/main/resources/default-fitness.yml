@@ -2,6 +2,16 @@ fitness:
   max-fitness-level: 225
   default-fitness-level: 20
   rain-slowdown-enabled: false
+  items:
+    vitamine_b:
+      item:
+        type: COOKED_BEEF
+        custom-model-data: -1
+        damage: -1
+        item-model: "vitamine_b"
+      fitness:
+        amount: 10 # Hoeveel fitheid booster
+        duration: 10 # In seconden
   statistics:
     drinking:
       max-fitness: 20

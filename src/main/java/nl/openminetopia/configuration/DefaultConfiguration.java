@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.types.DatabaseType;
 import nl.openminetopia.modules.misc.objects.PvPItem;
+import nl.openminetopia.utils.ConfigUtils;
 import nl.openminetopia.utils.ConfigurateConfig;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
@@ -288,7 +289,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.detectionCooldown = rootNode.node("detection-gate", "cooldown").getInt(3);
         this.detectionPressurePlate = Material.matchMaterial(rootNode.node("detection-gate", "blocks", "pressure-plate-type").getString(Material.LIGHT_WEIGHTED_PRESSURE_PLATE.toString()));
         this.detectionActivationBlock = Material.matchMaterial(rootNode.node("detection-gate", "blocks", "activation-block").getString(Material.IRON_BLOCK.toString()));
-        this.detectionMaterials = loadItemMappings(rootNode.node("detection-gate", "flagged-materials"), List.of(
+        this.detectionMaterials = ConfigUtils.loadItemMappings(rootNode.node("detection-gate", "flagged-materials"), List.of(
                 new ItemStack(Material.SUGAR),
                 new ItemStack(Material.IRON_HOE),
                 new ItemStack(Material.STICK),
@@ -367,17 +368,17 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Balaclava configuration
          */
-        this.balaclavaItems = loadItemMappings(rootNode.node("balaclava", "items"), List.of(
+        this.balaclavaItems = ConfigUtils.loadItemMappings(rootNode.node("balaclava", "items"), List.of(
                 new ItemStack(Material.CLAY_BALL)
         ));
 
         /*
          * Handcuff configuration
          */
-        this.handcuffItems = loadItemMappings(rootNode.node("handcuff", "items"), List.of(
+        this.handcuffItems = ConfigUtils.loadItemMappings(rootNode.node("handcuff", "items"), List.of(
                 new ItemStack(Material.GRAY_DYE)
         ));
-        this.handcuffEffects = loadEffectMappings(rootNode.node("handcuffs", "effects"), List.of(
+        this.handcuffEffects = ConfigUtils.loadEffectMappings(rootNode.node("handcuffs", "effects"), List.of(
                 new PotionEffect(PotionEffectType.BLINDNESS, 0, 2),
                 new PotionEffect(PotionEffectType.MINING_FATIGUE, 0, 1),
                 new PotionEffect(PotionEffectType.SLOWNESS, 0, 4)
@@ -393,30 +394,30 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Pepperspray configuration
          */
-        this.peppersprayItems = loadItemMappings(rootNode.node("pepperspray", "items"), List.of(
+        this.peppersprayItems = ConfigUtils.loadItemMappings(rootNode.node("pepperspray", "items"), List.of(
                 new ItemStack(Material.RED_DYE)
         ));
         this.peppersprayUsagesEnabled = rootNode.node("pepperspray", "usages-enabled").getBoolean(true);
         this.peppersprayMaxUsages = rootNode.node("pepperspray", "max-usages").getInt(10);
         this.peppersprayEffectsDuration = rootNode.node("pepperspray", "effects-duration").getInt(5);
-        this.peppersprayEffects = loadEffectMappings(rootNode.node("pepperspray", "effects"), List.of(
+        this.peppersprayEffects = ConfigUtils.loadEffectMappings(rootNode.node("pepperspray", "effects"), List.of(
                 new PotionEffect(PotionEffectType.BLINDNESS, -1, 0)
         ));
 
         /*
          * Nightvision goggles configuration
          */
-        this.nightvisionItems = loadItemMappings(rootNode.node("nightvision", "items"), List.of(
+        this.nightvisionItems = ConfigUtils.loadItemMappings(rootNode.node("nightvision", "items"), List.of(
                 new ItemStack(Material.GREEN_DYE)
         ));
-        this.nightvisionEffects = loadEffectMappings(rootNode.node("nightvision", "effects"), List.of(
+        this.nightvisionEffects = ConfigUtils.loadEffectMappings(rootNode.node("nightvision", "effects"), List.of(
                 new PotionEffect(PotionEffectType.NIGHT_VISION, -1, 0)
         ));
 
         /*
          * Taser configuration
          */
-        this.taserItems = loadItemMappings(rootNode.node("taser", "items"), List.of(
+        this.taserItems = ConfigUtils.loadItemMappings(rootNode.node("taser", "items"), List.of(
                 new ItemStack(Material.LIGHT_BLUE_DYE)
         ));
         this.taserUsagesEnabled = rootNode.node("taser", "usages-enabled").getBoolean(true);
@@ -425,7 +426,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.taserFreezeEnabled = rootNode.node("taser", "freeze", "enabled").getBoolean(true);
         this.taserFreezeDuration = rootNode.node("taser", "freeze", "duration").getInt(3);
         this.taserEffectsDuration = rootNode.node("taser", "effects-duration").getInt(5);
-        this.taserEffects = loadEffectMappings(rootNode.node("taser", "effects"), List.of(
+        this.taserEffects = ConfigUtils.loadEffectMappings(rootNode.node("taser", "effects"), List.of(
                 new PotionEffect(PotionEffectType.BLINDNESS, -1, 0),
                 new PotionEffect(PotionEffectType.SLOWNESS, -1, 0)
         ));
@@ -433,7 +434,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Head configuration
          */
-        this.headWhitelist = loadItemMappings(rootNode.node("head", "whitelist"), List.of(
+        this.headWhitelist = ConfigUtils.loadItemMappings(rootNode.node("head", "whitelist"), List.of(
                 new ItemStack(Material.CLAY_BALL),
                 new ItemStack(Material.BEDROCK),
                 new ItemStack(Material.SPONGE),
@@ -471,7 +472,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Walkie-talkie configuration
          */
-        this.walkieTalkieItems = loadItemMappings(rootNode.node("walkietalkie", "items"), List.of(
+        this.walkieTalkieItems = ConfigUtils.loadItemMappings(rootNode.node("walkietalkie", "items"), List.of(
                 new ItemStack(Material.PINK_DYE)
         ));
         this.walkieTalkieEmergencyCooldownEnabled = rootNode.node("walkietalkie", "emergency-button", "cooldown-enabled").getBoolean(true);
@@ -482,7 +483,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
          */
         this.pvpEnabled = rootNode.node("pvp", "enabled").getBoolean(true);
         rootNode.node("pvp", "items").childrenList().forEach(pvpItem -> {
-            ItemStack item = deserializeItemStack(pvpItem.node("item"));
+            ItemStack item = ConfigUtils.deserializeItemStack(pvpItem.node("item"));
             String attackerMessage = pvpItem.node("attacker-message").getString("<red>Je hebt <dark_red><player> <red>aangevallen met een <dark_red><item>");
             String victimMessage = pvpItem.node("victim-message").getString("<red>Je bent aangevallen door <dark_red><player> <red>met een <dark_red><item>");
             this.getPvpItems().add(new PvPItem(item, attackerMessage, victimMessage));
@@ -517,7 +518,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         ConfigurationNode whitelistNode = rootNode.node("head", "whitelist");
         ConfigurationNode itemNode = whitelistNode.appendListNode();
 
-        Map<Object, Object> itemData = serializeItemStack(item);
+        Map<Object, Object> itemData = ConfigUtils.serializeItemStack(item);
         for (Map.Entry<Object, Object> entry : itemData.entrySet()) {
             itemNode.node(entry.getKey()).set(entry.getValue());
         }
@@ -531,7 +532,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         ConfigurationNode whitelistNode = rootNode.node("head", "whitelist");
 
         for (ConfigurationNode itemNode : whitelistNode.childrenList()) {
-            ItemStack storedItem = deserializeItemStack(itemNode);
+            ItemStack storedItem = ConfigUtils.deserializeItemStack(itemNode);
             if (storedItem != null && storedItem.isSimilar(item)) {
                 itemNode.set(null);
             }
@@ -539,114 +540,5 @@ public class DefaultConfiguration extends ConfigurateConfig {
 
         this.headWhitelist.removeIf(itemStack -> itemStack.isSimilar(item));
         saveConfiguration();
-    }
-
-    @SneakyThrows
-    private List<ItemStack> loadItemMappings(ConfigurationNode itemsNode, List<ItemStack> defaultItems) {
-        if (itemsNode.isNull()) {
-            List<Map<Object, Object>> itemList = new ArrayList<>();
-            for (ItemStack itemStack : defaultItems) {
-                itemList.add(serializeItemStack(itemStack));
-            }
-            itemsNode.set(itemList);
-        }
-
-        List<ItemStack> itemList = new ArrayList<>();
-        for (ConfigurationNode val : itemsNode.childrenList()) {
-            ItemStack item = deserializeItemStack(val);
-            if (item != null) {
-                itemList.add(item);
-            }
-        }
-
-        return itemList;
-    }
-
-    private Map<Object, Object> serializeItemStack(ItemStack itemStack) {
-        Map<Object, Object> itemMap = new HashMap<>();
-        try {
-            itemMap.put("type", itemStack.getType().name());
-
-            int customModelData = itemStack.getItemMeta().hasCustomModelData() ? itemStack.getItemMeta().getCustomModelData() : -1;
-            itemMap.put("custom-model-data", customModelData);
-
-            Damageable damageable = (Damageable) itemStack.getItemMeta();
-            int damage = damageable.hasDamage() ? damageable.getDamage() : -1;
-            if (damage != -1) itemMap.put("damage", damage);
-
-            if (Bukkit.getVersion().contains("1.21.4") && itemStack.getItemMeta().hasItemModel() && itemStack.getItemMeta().getItemModel() != null) {
-                itemMap.put("item-model", itemStack.getItemMeta().getItemModel());
-            }
-        } catch (Exception e) {
-            OpenMinetopia.getInstance().getLogger().warning("Failed to serialize item: " + itemStack.getType().name());
-        }
-        return itemMap;
-    }
-
-    private ItemStack deserializeItemStack(ConfigurationNode val) {
-        String typeName = val.node("type").getString();
-        if (typeName == null) return null;
-
-        Material itemMaterial = Material.matchMaterial(typeName);
-        if (itemMaterial == null) return null;
-
-        int customModelData = val.node("custom-model-data").getInt(-1);
-        int damage = val.node("damage").getInt(-1);
-        String itemModel = val.node("item-model").getString("");
-
-        ItemBuilder itemBuilder = new ItemBuilder(itemMaterial);
-
-        if (customModelData != -1) itemBuilder.setCustomModelData(customModelData);
-        if (damage != -1) itemBuilder.setDamage(damage);
-        if (Bukkit.getVersion().contains("1.21.4") && !itemModel.isEmpty()) itemBuilder.setItemModel(itemModel);
-
-        return itemBuilder.toItemStack();
-    }
-
-    @SneakyThrows
-    private List<PotionEffect> loadEffectMappings(ConfigurationNode effectsNode, List<PotionEffect> defaultEffects) {
-        if (effectsNode.isNull()) {
-            defaultEffects.forEach((effect) -> {
-                NamespacedKey effectKey = effect.getType().getKey();
-
-                PotionEffectType potionEffectType = Registry.EFFECT.get(effectKey);
-                if (potionEffectType == null) {
-                    OpenMinetopia.getInstance().getLogger().warning("Invalid potion effect: " + effectKey);
-                    return;
-                }
-
-                String effectName = potionEffectType.getKey().getKey().toLowerCase();
-                ConfigurationNode effectNode = effectsNode.node(effectName);
-
-                int amplifier = effect.getAmplifier();
-                int duration = effect.getDuration();
-
-                try {
-                    effectNode.node("amplifier").set(amplifier);
-                    effectNode.node("duration").set(duration);
-                } catch (Exception e) {
-                    OpenMinetopia.getInstance().getLogger().warning("Failed to load effect: " + effectName);
-                }
-            });
-        }
-
-        List<PotionEffect> potionEffects = new ArrayList<>();
-
-        effectsNode.childrenMap().forEach((key, val) -> {
-            String effectName = key.toString().toLowerCase();
-            PotionEffectType potionEffectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
-
-            if (potionEffectType == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Invalid potion effect: " + effectName);
-                return;
-            }
-
-            int amplifier = val.node("amplifier").getInt(0);
-            int duration = val.node("duration").getInt(600); // Default duration if not specified
-
-            potionEffects.add(new PotionEffect(potionEffectType, duration, amplifier));
-        });
-
-        return potionEffects;
     }
 }

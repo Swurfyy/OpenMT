@@ -3,8 +3,12 @@ package nl.openminetopia.modules.fitness.configuration;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.fitness.objects.FitnessItem;
 import nl.openminetopia.modules.fitness.objects.FitnessLevelEffect;
+import nl.openminetopia.utils.ConfigUtils;
 import nl.openminetopia.utils.ConfigurateConfig;
+import nl.openminetopia.utils.item.ItemBuilder;
+import org.bukkit.inventory.ItemStack;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 
@@ -61,6 +65,7 @@ public class FitnessConfiguration extends ConfigurateConfig {
     private final boolean rainSlowdownEnabled;
 
     private final Map<Integer, FitnessLevelEffect> levelEffects = new HashMap<>();
+    private final Map<String, FitnessItem> fitnessItems = new HashMap<>();
 
     @SneakyThrows
     public FitnessConfiguration(File file) {
@@ -141,6 +146,31 @@ public class FitnessConfiguration extends ConfigurateConfig {
             } catch (NumberFormatException e) {
                 OpenMinetopia.getInstance().getLogger().severe("Invalid level range format in configuration: " + key);
             }
+        });
+
+        ConfigurationNode itemsNode = rootNode.node("fitness", "items");
+        itemsNode.childrenMap().forEach((key, value) -> {
+            if (!(key instanceof String identifier)) return;
+
+            ConfigurationNode itemNode = value.node("item");
+            if (itemNode.isNull()) {
+                OpenMinetopia.getInstance().getLogger().warning("Invalid item stack for identifier: " + identifier);
+                return;
+            }
+            ItemStack item = ConfigUtils.deserializeItemStack(itemNode);
+            if (item == null) {
+                OpenMinetopia.getInstance().getLogger().warning("Invalid item stack for identifier: " + identifier);
+                return;
+            }
+            int fitnessAmount = value.node("fitness", "amount").getInt(0);
+            int fitnessDuration = value.node("fitness", "duration").getInt(0);
+
+            fitnessItems.put(identifier, new FitnessItem(
+                    identifier,
+                    item,
+                    fitnessAmount,
+                    fitnessDuration
+            ));
         });
     }
 }
