@@ -6,6 +6,7 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
+import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.fitness.FitnessModule;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
@@ -55,6 +56,12 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
             case "city" -> minetopiaPlayer.getPlace().getName();
             case "world" -> minetopiaPlayer.getWorld().getName();
             case "temperature" -> String.valueOf(minetopiaPlayer.getPlace().getTemperature());
+            case "city_color" -> minetopiaPlayer.getPlace().getColor();
+            case "world_color" -> minetopiaPlayer.getWorld().getColor();
+            case "prefix_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.PREFIX).color();
+            case "name_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.NAME).color();
+            case "chat_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).color();
+            case "level_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).color();
             case "balance", "balance_formatted" -> {
                 BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
                 BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
