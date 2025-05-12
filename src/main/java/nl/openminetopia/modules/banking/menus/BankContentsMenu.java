@@ -19,6 +19,7 @@ import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -113,6 +114,12 @@ public class BankContentsMenu extends Menu {
         transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), player.getName(), TransactionType.DEPOSIT, totalValue, accountModel.getUniqueId(), "Deposited from ATM.");
 
         new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
+    }
+
+    @Override
+    public void onClose(InventoryCloseEvent event) {
+        if (!isAsAdmin()) return;
+        accountModel.save();
     }
 
     private void withdrawMoney(BankNote note, int amount) {

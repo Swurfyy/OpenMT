@@ -122,29 +122,30 @@ public class VaultEconomyHandler implements Economy {
 
     @Override
     public EconomyResponse withdrawPlayer(String playerName, double amount) {
-        Player player = Bukkit.getPlayer(playerName);
-        if (player == null)
+        OfflinePlayer player = Bukkit.getOfflinePlayer(playerName);
+        if (!player.hasPlayedBefore())
             return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Player is not online or doesn't exist.");
-        BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
-        if (accountModel == null)
-            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
-        accountModel.setBalance(accountModel.getBalance() - amount);
-
-        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, accountModel.getUniqueId(), "Vault Interaction");
-
-        return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
+        return withdrawPlayer(player, amount);
     }
 
     @Override
     public EconomyResponse withdrawPlayer(OfflinePlayer offlinePlayer, double amount) {
         BankAccountModel accountModel = bankingModule.getAccountById(offlinePlayer.getUniqueId());
-        if (accountModel == null)
-            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
-        accountModel.setBalance(accountModel.getBalance() - amount);
+        if (accountModel != null) {
+            accountModel.setBalance(accountModel.getBalance() - amount);
+            transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, accountModel.getUniqueId(), "Vault Interaction");
+            return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
+        }
 
-        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, accountModel.getUniqueId(), "Vault Interaction");
+        bankingModule.getAccountByIdAsync(offlinePlayer.getUniqueId()).thenAccept(model -> {
+            if (model != null) {
+                model.setBalance(model.getBalance() - amount);
+                model.save();
+                transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, model.getUniqueId(), "Vault Interaction");
+            }
+        });
 
-        return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
+        return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found.");
     }
 
     @Override
@@ -159,29 +160,30 @@ public class VaultEconomyHandler implements Economy {
 
     @Override
     public EconomyResponse depositPlayer(String playerName, double amount) {
-        Player player = Bukkit.getPlayer(playerName);
-        if (player == null)
+        OfflinePlayer player = Bukkit.getOfflinePlayer(playerName);
+        if (!player.hasPlayedBefore())
             return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Player is not online or doesn't exist.");
-        BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
-        if (accountModel == null)
-            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
-        accountModel.setBalance(accountModel.getBalance() + amount);
-
-        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, accountModel.getUniqueId(), "Vault Interaction");
-
-        return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
+        return depositPlayer(player, amount);
     }
 
     @Override
     public EconomyResponse depositPlayer(OfflinePlayer offlinePlayer, double amount) {
         BankAccountModel accountModel = bankingModule.getAccountById(offlinePlayer.getUniqueId());
-        if (accountModel == null)
-            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
-        accountModel.setBalance(accountModel.getBalance() + amount);
+        if (accountModel != null) {
+            accountModel.setBalance(accountModel.getBalance() + amount);
+            transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, accountModel.getUniqueId(), "Vault Interaction");
+            return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
+        }
 
-        transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, accountModel.getUniqueId(), "Vault Interaction");
+        bankingModule.getAccountByIdAsync(offlinePlayer.getUniqueId()).thenAccept(model -> {
+            if (model != null) {
+                model.setBalance(model.getBalance() + amount);
+                model.save();
+                transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, model.getUniqueId(), "Vault Interaction");
+            }
+        });
 
-        return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
+        return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account not found");
     }
 
     @Override

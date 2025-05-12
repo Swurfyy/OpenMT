@@ -22,19 +22,16 @@ public class BankingInfoCommand extends BaseCommand {
     @CommandPermission("openminetopia.banking.info")
     public void infoAccount(CommandSender sender, String accountName) {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
-        BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
-
-        PlayerManager.getInstance().getMinetopiaPlayer((OfflinePlayer) sender).whenComplete((minetopiaPlayer, throwable1 ) -> {
+        bankingModule.getAccountByNameAsync(accountName).thenAccept(accountModel -> {
             if (accountModel == null) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_account_not_found"));
+                ChatUtils.sendMessage(sender, MessageConfiguration.message("banking_account_not_found"));
                 return;
             }
 
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line1"), accountModel));
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line2"), accountModel));
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line3"), accountModel));
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, replacePlaceholders(MessageConfiguration.message("banking_account_info_line4"), accountModel));
-
+            ChatUtils.sendMessage(sender, replacePlaceholders(MessageConfiguration.message("banking_account_info_line1"), accountModel));
+            ChatUtils.sendMessage(sender, replacePlaceholders(MessageConfiguration.message("banking_account_info_line2"), accountModel));
+            ChatUtils.sendMessage(sender, replacePlaceholders(MessageConfiguration.message("banking_account_info_line3"), accountModel));
+            ChatUtils.sendMessage(sender, replacePlaceholders(MessageConfiguration.message("banking_account_info_line4"), accountModel));
         });
     }
 

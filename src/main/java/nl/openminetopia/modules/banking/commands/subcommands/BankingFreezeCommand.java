@@ -23,23 +23,16 @@ public class BankingFreezeCommand extends BaseCommand {
     @CommandPermission("openminetopia.banking.freeze")
     public void freezeAccount(CommandSender sender, String accountName) {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
-        BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
-
-        if (accountModel == null) {
-            ChatUtils.sendMessage(sender, MessageConfiguration.message("banking_account_not_found"));
-            return;
-        }
-
-        boolean newState = !accountModel.getFrozen();
-
-        accountModel.setFrozen(newState);
-        CompletableFuture<Integer> updateFuture = StormDatabase.getInstance().saveStormModel(accountModel);
-
-        updateFuture.whenComplete((v, throwable) -> {
-            if (throwable != null) {
-                ChatUtils.sendMessage(sender, MessageConfiguration.message("database_update_error"));
+        bankingModule.getAccountByNameAsync(accountName).thenAccept(accountModel -> {
+            if (accountModel == null) {
+                ChatUtils.sendMessage(sender, MessageConfiguration.message("banking_account_not_found"));
                 return;
             }
+
+            boolean newState = !accountModel.getFrozen();
+
+            accountModel.setFrozen(newState);
+            accountModel.save();
 
             if (newState) {
                 ChatUtils.sendMessage(sender, MessageConfiguration.message("banking_account_frozen")

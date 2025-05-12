@@ -25,23 +25,22 @@ public class BankingBalanceCommand extends BaseCommand {
     @CommandPermission("openminetopia.banking.setbalance")
     public void setBalance(CommandSender sender, String accountName, double balance) {
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
-        BankAccountModel accountModel = bankingModule.getAccountByName(accountName);
+        bankingModule.getAccountByNameAsync(accountName).whenComplete((accountModel, throwable) -> {
+            if (accountModel == null) {
+                sender.sendMessage(MessageConfiguration.component("banking_account_not_found"));
+                return;
+            }
 
-        if (accountModel == null) {
-            sender.sendMessage(MessageConfiguration.component("banking_account_not_found"));
-            return;
-        }
+            accountModel.setBalance(balance);
+            accountModel.save();
 
-        accountModel.setBalance(balance);
-        accountModel.save();
+            UUID executorUuid = ((sender instanceof Player executor) ? executor.getUniqueId() : new UUID(0, 0));
+            String username = ((sender instanceof Player executor) ? executor.getName() : "Console");
 
-        UUID executorUuid = ((sender instanceof Player executor) ? executor.getUniqueId() : new UUID(0, 0));
-        String username = ((sender instanceof Player executor) ? executor.getName() : "Console");
+            TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
+            transactionsModule.createTransactionLog(System.currentTimeMillis(), executorUuid, username, TransactionType.SET, balance, accountModel.getUniqueId(), "Set via '/account setbalance'");
 
-        TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
-        transactionsModule.createTransactionLog(System.currentTimeMillis(), executorUuid, username, TransactionType.SET, balance, accountModel.getUniqueId(), "Set via '/account setbalance'");
-
-        sender.sendMessage(ChatUtils.color("<gold>De balans van <red>" + accountModel.getName() + " <gold>is nu ingesteld op <red>" + bankingModule.format(balance) + "<gold>."));
+            sender.sendMessage(ChatUtils.color("<gold>De balans van <red>" + accountModel.getName() + " <gold>is nu ingesteld op <red>" + bankingModule.format(balance) + "<gold>."));
+        });
     }
-
 }

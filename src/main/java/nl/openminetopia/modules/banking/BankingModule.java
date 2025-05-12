@@ -133,6 +133,28 @@ public class BankingModule extends SpigotModule<@NotNull OpenMinetopia> {
         return bankAccountModels.stream().filter(account -> account.getName().equals(name)).findAny().orElse(null);
     }
 
+    public CompletableFuture<BankAccountModel> getAccountByNameAsync(String name) {
+        CompletableFuture<BankAccountModel> completableFuture = new CompletableFuture<>();
+
+        if (this.getAccountByName(name) != null) {
+            completableFuture.complete(this.getAccountByName(name));
+            return completableFuture;
+        }
+
+        StormDatabase.getExecutorService().submit(() -> {
+            try {
+                Collection<BankAccountModel> accountModels = StormDatabase.getInstance().getStorm().buildQuery(BankAccountModel.class)
+                        .where("name", Where.EQUAL, name)
+                        .execute().join();
+                completableFuture.complete(accountModels.stream().findFirst().orElse(null));
+            } catch (Exception e) {
+                completableFuture.completeExceptionally(e);
+            }
+        });
+
+        return completableFuture;
+    }
+
     public BankAccountModel getAccountById(UUID uuid) {
         return bankAccountModels.stream().filter(account -> account.getUniqueId().equals(uuid)).findAny().orElse(null);
     }
