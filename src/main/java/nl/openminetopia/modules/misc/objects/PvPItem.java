@@ -37,11 +37,6 @@ public class PvPItem {
         if (meta.hasCustomModelData() != checkMeta.hasCustomModelData()) return false;
         if (meta.hasCustomModelData() && checkMeta.getCustomModelData() != meta.getCustomModelData()) return false;
 
-        if (meta instanceof org.bukkit.inventory.meta.Damageable damageMeta
-                && checkMeta instanceof org.bukkit.inventory.meta.Damageable checkDamageMeta) {
-            if (damageMeta.getDamage() != checkDamageMeta.getDamage()) return false;
-        }
-
         if (Bukkit.getVersion().contains("1.21.4") && meta.hasItemModel() && checkMeta.hasItemModel()) {
             return meta.getItemModel() == checkMeta.getItemModel();
         }
