@@ -1,8 +1,8 @@
 currencies:
-  testcoin:
-    display-name: Test Coin
+  graycoin:
+    display-name: Gray Coin
     aliases:
-      - tc
+      - gc
     automatic:
       interval: 3600
       amount: 1
