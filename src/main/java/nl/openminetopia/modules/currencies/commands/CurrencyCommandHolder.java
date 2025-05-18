@@ -241,7 +241,7 @@ public class CurrencyCommandHolder extends Command {
 
     @Override
     public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String @NotNull [] args) throws IllegalArgumentException {
-        if (sender.hasPermission("openminetopia.currency." + currency.getId())) return List.of();
+        if (!sender.hasPermission("openminetopia.currency." + currency.getId())) return List.of();
 
         List<String> usernames = Bukkit.getOnlinePlayers().stream()
                 .map(Player::getName)

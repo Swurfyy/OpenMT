@@ -8,6 +8,7 @@ import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.currencies.objects.RegisteredCurrency;
+import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -44,6 +45,8 @@ public class CurrencyTask extends BukkitRunnable {
                             .replaceAll("<display_name>", configCurrency.getDisplayName());
 
                     ChatUtils.sendFormattedMessage(player, message);
+                    currency.setBalance(currency.getBalance() + configCurrency.getAmount());
+                    StormDatabase.getInstance().saveStormModel(currency);
                 }
             }
         }
