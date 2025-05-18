@@ -15,6 +15,7 @@ import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.banking.models.BankPermissionModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.models.ColorModel;
+import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.storm.adapters.*;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
@@ -77,6 +78,7 @@ public class MySQLAdapter implements DatabaseAdapter {
         registerStormModel(new CityModel());
         registerStormModel(new CriminalRecordModel());
         registerStormModel(new TransactionModel());
+        registerStormModel(new CurrencyModel());
     }
 
     @SneakyThrows

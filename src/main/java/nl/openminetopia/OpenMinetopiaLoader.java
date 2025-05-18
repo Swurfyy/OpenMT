@@ -26,4 +26,5 @@ public class OpenMinetopiaLoader implements PluginLoader {
         resolver.addRepository(new RemoteRepository.Builder("maven", "default", "https://repo.maven.apache.org/maven2").build());
         classpathBuilder.addLibrary(resolver);
     }
+
 }
