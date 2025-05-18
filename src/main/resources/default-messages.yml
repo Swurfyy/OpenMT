@@ -204,3 +204,12 @@ levelcheck_success: "<gold>Je bent succesvol naar <yellow>level <level> <gold>ge
 
 # PvP
 misc_pvp_disabled: "<red>PvP staat uitgeschakeld."
+
+# Currencies
+currency_automatic_reward: "<gold>Je hebt <red><amount> <display_name> <gold>ontvangen."
+currency_invalid_amount: "<red>Je hebt geen geldig aantal opgegeven."
+currency_show: "<gold>Je hebt momenteel <red><amount> <display_name>"
+currency_show_other: "<red><target> <gold>heeft momenteel <red><amount> <display_name><gold>."
+currency_balance_set: "<gold>Je hebt <red><target> <gold>zijn <red><display_name> <gold>gezet naar <red><amount><gold>."
+currency_balance_add: "<gold>Je hebt <red><amount> <display_name> <gold>toegevoegd aan <red><target><gold>."
+currency_balance_remove: "<gold>Je hebt <red><amount> <display_name> <gold>verwijderd van <red><target><gold>."

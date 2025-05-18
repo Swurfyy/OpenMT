@@ -1,0 +1,8 @@
+currencies:
+  testcoin:
+    display-name: Test Coin
+    aliases:
+      - tc
+    automatic:
+      interval: 3600
+      amount: 1
