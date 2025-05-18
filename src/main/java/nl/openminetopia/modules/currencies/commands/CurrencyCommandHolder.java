@@ -55,6 +55,11 @@ public class CurrencyCommandHolder extends Command {
 
         /* - /currency <player> */
         if (args.length == 1) {
+            if(!sender.hasPermission("openminetopia.currency.info." + currency.getId())) {
+                ChatUtils.sendMessage(sender, "<red>Sorry, je hebt geen toestemming om dit commando uit te voeren.");
+                return false;
+            }
+
             Player target = Bukkit.getPlayer(args[0]);
 
             if (target == null) {
@@ -68,6 +73,11 @@ public class CurrencyCommandHolder extends Command {
 
         /* - /currency set <player> <amount> */
         if (args.length == 3 && args[0].equalsIgnoreCase("set")) {
+            if(!sender.hasPermission("openminetopia.currency.set." + currency.getId())) {
+                ChatUtils.sendMessage(sender, "<red>Sorry, je hebt geen toestemming om dit commando uit te voeren.");
+                return false;
+            }
+
             Player target = Bukkit.getPlayer(args[1]);
 
             if (target == null) {
@@ -87,6 +97,10 @@ public class CurrencyCommandHolder extends Command {
 
         /* - /currency add <player> <amount> */
         if (args.length == 3 && args[0].equalsIgnoreCase("add")) {
+            if(!sender.hasPermission("openminetopia.currency.add." + currency.getId())) {
+                ChatUtils.sendMessage(sender, "<red>Sorry, je hebt geen toestemming om dit commando uit te voeren.");
+                return false;
+            }
             Player target = Bukkit.getPlayer(args[1]);
 
             if (target == null) {
@@ -106,6 +120,10 @@ public class CurrencyCommandHolder extends Command {
 
         /* - /currency remove <player> <amount> */
         if (args.length == 3 && args[0].equalsIgnoreCase("remove")) {
+            if(!sender.hasPermission("openminetopia.currency.remove." + currency.getId())) {
+                ChatUtils.sendMessage(sender, "<red>Sorry, je hebt geen toestemming om dit commando uit te voeren.");
+                return false;
+            }
             Player target = Bukkit.getPlayer(args[1]);
 
             if (target == null) {
