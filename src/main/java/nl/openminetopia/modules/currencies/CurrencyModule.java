@@ -16,11 +16,8 @@ import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.player.PlayerModule;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.SimpleCommandMap;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
@@ -56,8 +53,14 @@ public class CurrencyModule extends SpigotModule<@NotNull OpenMinetopia> {
 
     }
 
-    public CompletableFuture<Collection<CurrencyModel>> getCurrenciesAsync(UUID uuid) {
+    public CompletableFuture<Collection<CurrencyModel>> getCurrencies(UUID uuid) {
         CompletableFuture<Collection<CurrencyModel>> completableFuture = new CompletableFuture<>();
+
+        if (currencyModels.containsKey(uuid)) {
+            completableFuture.complete(currencyModels.get(uuid));
+            return completableFuture;
+        }
+
 
         StormDatabase.getExecutorService().submit(() -> {
             try {

@@ -16,9 +16,8 @@ import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 @SuppressWarnings("UnstableApiUsage")
 public class CurrencyCommandHolder extends Command {
@@ -57,7 +56,7 @@ public class CurrencyCommandHolder extends Command {
 
         /* - /currency <player> */
         if (args.length == 1) {
-            if(!sender.hasPermission("openminetopia.currency.info." + currency.getId())) {
+            if (!sender.hasPermission("openminetopia.currency.info." + currency.getId())) {
                 ChatUtils.sendMessage(sender, "<red>Sorry, je hebt geen toestemming om dit commando uit te voeren.");
                 return false;
             }
@@ -75,7 +74,7 @@ public class CurrencyCommandHolder extends Command {
 
         /* - /currency set <player> <amount> */
         if (args.length == 3 && args[0].equalsIgnoreCase("set")) {
-            if(!sender.hasPermission("openminetopia.currency.set." + currency.getId())) {
+            if (!sender.hasPermission("openminetopia.currency.set." + currency.getId())) {
                 ChatUtils.sendMessage(sender, "<red>Sorry, je hebt geen toestemming om dit commando uit te voeren.");
                 return false;
             }
@@ -99,7 +98,7 @@ public class CurrencyCommandHolder extends Command {
 
         /* - /currency add <player> <amount> */
         if (args.length == 3 && args[0].equalsIgnoreCase("add")) {
-            if(!sender.hasPermission("openminetopia.currency.add." + currency.getId())) {
+            if (!sender.hasPermission("openminetopia.currency.add." + currency.getId())) {
                 ChatUtils.sendMessage(sender, "<red>Sorry, je hebt geen toestemming om dit commando uit te voeren.");
                 return false;
             }
@@ -123,7 +122,7 @@ public class CurrencyCommandHolder extends Command {
 
         /* - /currency remove <player> <amount> */
         if (args.length == 3 && args[0].equalsIgnoreCase("remove")) {
-            if(!sender.hasPermission("openminetopia.currency.remove." + currency.getId())) {
+            if (!sender.hasPermission("openminetopia.currency.remove." + currency.getId())) {
                 ChatUtils.sendMessage(sender, "<red>Sorry, je hebt geen toestemming om dit commando uit te voeren.");
                 return false;
             }
@@ -151,93 +150,123 @@ public class CurrencyCommandHolder extends Command {
 
 
     private void showCurrencySelf(Player player) {
-        CurrencyModel currencyModel = getCurrencyModel(player.getUniqueId());
+        currencyModule.getCurrencies(player.getUniqueId()).whenComplete((models, throwable) -> {
+            CurrencyModel currencyModel = getCurrencyModel(models);
 
-        if (currencyModel == null) {
-            ChatUtils.sendMessage(player, "<red>Er ging wat mis.");
-            return;
-        }
+            if (currencyModel == null) {
+                ChatUtils.sendMessage(player, "<red>Er ging wat mis.");
+                return;
+            }
 
-        String message = MessageConfiguration.message("currency_show")
-                .replaceAll("<amount>", String.valueOf(currencyModel.getBalance()))
-                .replaceAll("<display_name>", currency.getDisplayName());
+            String message = MessageConfiguration.message("currency_show")
+                    .replaceAll("<amount>", String.valueOf(currencyModel.getBalance()))
+                    .replaceAll("<display_name>", currency.getDisplayName());
 
-        ChatUtils.sendMessage(player, message);
+            ChatUtils.sendMessage(player, message);
+        });
     }
 
     private void showCurrencyOther(CommandSender executor, OfflinePlayer player) {
-        CurrencyModel currencyModel = getCurrencyModel(player.getUniqueId());
+        currencyModule.getCurrencies(player.getUniqueId()).whenComplete((models, throwable) -> {
+            CurrencyModel currencyModel = getCurrencyModel(models);
 
-        if (currencyModel == null) {
-            ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
-            return;
-        }
+            if (player == null) {
+                ChatUtils.sendMessage(executor, "<red>Speler niet gevonden.");
+                return;
+            }
 
-        String message = MessageConfiguration.message("currency_show_other")
-                .replaceAll("<target>", player.getName())
-                .replaceAll("<amount>", String.valueOf(currencyModel.getBalance()))
-                .replaceAll("<display_name>", currency.getDisplayName());
+            if (currencyModel == null) {
+                ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
+                return;
+            }
 
-        ChatUtils.sendMessage(executor, message);
+            String message = MessageConfiguration.message("currency_show_other")
+                    .replaceAll("<target>", player.getName())
+                    .replaceAll("<amount>", String.valueOf(currencyModel.getBalance()))
+                    .replaceAll("<display_name>", currency.getDisplayName());
+
+            ChatUtils.sendMessage(executor, message);
+        });
+
     }
 
     private void setCurrency(CommandSender executor, OfflinePlayer player, double amount) {
-        CurrencyModel currencyModel = getCurrencyModel(player.getUniqueId());
+        currencyModule.getCurrencies(player.getUniqueId()).whenComplete((models, throwable) -> {
+            CurrencyModel currencyModel = getCurrencyModel(models);
 
-        if (currencyModel == null) {
-            ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
-            return;
-        }
+            if (player == null) {
+                ChatUtils.sendMessage(executor, "<red>Speler niet gevonden.");
+                return;
+            }
 
-        String message = MessageConfiguration.message("currency_balance_set")
-                .replaceAll("<target>", player.getName())
-                .replaceAll("<amount>", String.valueOf(amount))
-                .replaceAll("<display_name>", currency.getDisplayName());
+            if (currencyModel == null) {
+                ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
+                return;
+            }
 
-        currencyModel.setBalance(amount);
-        ChatUtils.sendMessage(executor, message);
+            String message = MessageConfiguration.message("currency_balance_set")
+                    .replaceAll("<target>", player.getName())
+                    .replaceAll("<amount>", String.valueOf(amount))
+                    .replaceAll("<display_name>", currency.getDisplayName());
+
+            currencyModel.setBalance(amount);
+            ChatUtils.sendMessage(executor, message);
+        });
     }
 
     private void addCurrency(CommandSender executor, OfflinePlayer player, double amount) {
-        CurrencyModel currencyModel = getCurrencyModel(player.getUniqueId());
+        currencyModule.getCurrencies(player.getUniqueId()).whenComplete((models, throwable) -> {
+            CurrencyModel currencyModel = getCurrencyModel(models);
 
-        if (currencyModel == null) {
-            ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
-            return;
-        }
+            if (player == null) {
+                ChatUtils.sendMessage(executor, "<red>Speler niet gevonden.");
+                return;
+            }
 
-        String message = MessageConfiguration.message("currency_balance_add")
-                .replaceAll("<target>", player.getName())
-                .replaceAll("<amount>", String.valueOf(amount))
-                .replaceAll("<display_name>", currency.getDisplayName());
+            if (currencyModel == null) {
+                ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
+                return;
+            }
 
-        currencyModel.setBalance(currencyModel.getBalance() + amount);
-        ChatUtils.sendMessage(executor, message);
+            String message = MessageConfiguration.message("currency_balance_add")
+                    .replaceAll("<target>", player.getName())
+                    .replaceAll("<amount>", String.valueOf(amount))
+                    .replaceAll("<display_name>", currency.getDisplayName());
+
+            currencyModel.setBalance(currencyModel.getBalance() + amount);
+            ChatUtils.sendMessage(executor, message);
+        });
     }
 
     private void removeCurrency(CommandSender executor, OfflinePlayer player, double amount) {
-        CurrencyModel currencyModel = getCurrencyModel(player.getUniqueId());
+        currencyModule.getCurrencies(player.getUniqueId()).whenComplete((models, throwable) -> {
+            CurrencyModel currencyModel = getCurrencyModel(models);
 
-        if (currencyModel == null) {
-            ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
-            return;
-        }
+            if (player == null) {
+                ChatUtils.sendMessage(executor, "<red>Speler niet gevonden.");
+                return;
+            }
 
-        String message = MessageConfiguration.message("currency_balance_remove")
-                .replaceAll("<target>", player.getName())
-                .replaceAll("<amount>", String.valueOf(amount))
-                .replaceAll("<display_name>", currency.getDisplayName());
+            if (currencyModel == null) {
+                ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
+                return;
+            }
+
+            String message = MessageConfiguration.message("currency_balance_remove")
+                    .replaceAll("<target>", player.getName())
+                    .replaceAll("<amount>", String.valueOf(amount))
+                    .replaceAll("<display_name>", currency.getDisplayName());
 
 
-        currencyModel.setBalance(currencyModel.getBalance() - amount);
-        ChatUtils.sendMessage(executor, message);
+            currencyModel.setBalance(currencyModel.getBalance() - amount);
+            ChatUtils.sendMessage(executor, message);
+        });
     }
 
-    private CurrencyModel getCurrencyModel(UUID uuid) {
-        List<CurrencyModel> currencyModels = currencyModule.getCurrencyModels().get(uuid);
-        if (currencyModels.isEmpty()) return null;
+    private CurrencyModel getCurrencyModel(Collection<CurrencyModel> models) {
+        if (models.isEmpty()) return null;
 
-        return currencyModels.stream()
+        return models.stream()
                 .filter(model -> model.getName().equalsIgnoreCase(currency.getId()))
                 .findAny()
                 .orElse(null);
@@ -265,9 +294,8 @@ public class CurrencyCommandHolder extends Command {
     public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String @NotNull [] args) throws IllegalArgumentException {
         if (!sender.hasPermission("openminetopia.currency." + currency.getId())) return List.of();
 
-        /* This may cause lag on servers with lots of players */
-        List<String> usernames = Arrays.stream(Bukkit.getOfflinePlayers())
-                .map(OfflinePlayer::getName)
+        List<String> usernames = Bukkit.getOnlinePlayers().stream()
+                .map(Player::getName)
                 .toList();
 
         if (args.length == 1) {

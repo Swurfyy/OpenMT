@@ -23,7 +23,7 @@ public class CurrencyJoinListener implements Listener {
         Player player = event.getPlayer();
 
         List<CurrencyModel> currencyModels = new ArrayList<>();
-        currencyModule.getCurrenciesAsync(player.getUniqueId()).whenComplete((models, throwable) -> {
+        currencyModule.getCurrencies(player.getUniqueId()).whenComplete((models, throwable) -> {
             if (throwable != null) {
                 currencyModule.getLogger().error("Couldn't load player currencies: {}", throwable.getMessage());
                 return;
@@ -43,7 +43,7 @@ public class CurrencyJoinListener implements Listener {
                             player.getUniqueId(),
                             registeredCurrency.getId(),
                             0d,
-                            0L
+                            player.getPlayerTime()
                     );
 
                     currencyModels.add(newCurrencymodel);
