@@ -3,16 +3,20 @@ package nl.openminetopia.modules.fitness.configuration;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.fitness.FitnessStatisticType;
+import nl.openminetopia.modules.fitness.objects.FitnessFood;
 import nl.openminetopia.modules.fitness.objects.FitnessItem;
 import nl.openminetopia.modules.fitness.objects.FitnessLevelEffect;
 import nl.openminetopia.utils.ConfigUtils;
 import nl.openminetopia.utils.ConfigurateConfig;
 import nl.openminetopia.utils.item.ItemBuilder;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,8 +59,8 @@ public class FitnessConfiguration extends ConfigurateConfig {
     private final double pointsForLuxuryFood;
     private final double pointsForCheapFood;
     private final double eatingPointsPerFitnessLevel;
-    private final List<String> cheapFood;
-    private final List<String> luxuryFood;
+    private final List<FitnessFood> cheapFood = new ArrayList<>();
+    private final List<FitnessFood> luxuryFood = new ArrayList<>();
 
     private final boolean fitnessDeathPunishmentEnabled;
     private final int fitnessDeathPunishmentAmount;
@@ -95,8 +99,35 @@ public class FitnessConfiguration extends ConfigurateConfig {
         this.pointsForLuxuryFood = eatingNode.node("points-for-luxury-food").getDouble(0.05);
         this.pointsForCheapFood = eatingNode.node("points-for-cheap-food").getDouble(0.02);
         this.eatingPointsPerFitnessLevel = eatingNode.node("points-per-fitness-level").getDouble(1.0);
-        this.luxuryFood = eatingNode.node("food-items", "luxury").getList(String.class, List.of("COOKED_BEEF", "MUSHROOM_STEW", "COOKED_PORKCHOP", "COOKED_SALMON", "COOKED_COD", "BAKED_POTATO", "COOKED_RABBIT"));
-        this.cheapFood = eatingNode.node("food-items", "cheap").getList(String.class, List.of("APPLE", "BREAD", "MELON_BLOCK", "RAW_FISH", "COOKED_CHICKEN", "COOKED_MUTTON", "COOKIE"));
+
+        eatingNode.node("food-items", "cheap").childrenList().forEach((value) -> {
+            Material material = Material.matchMaterial(value.node("material").getString("COOKED_BEEF"));
+            if (material == null) {
+                OpenMinetopia.getInstance().getLogger().warning("Couldn't find material for " + value);
+                return;
+            }
+
+            int customModelData = value.node("custom-model-data").getInt(-1);
+            if (customModelData == 0) {
+                OpenMinetopia.getInstance().getLogger().warning("Couldn't find custom model data for " + value);
+                return;
+            }
+            cheapFood.add(new FitnessFood(FitnessStatisticType.EATING, material, customModelData));
+        });
+
+        eatingNode.node("food-items", "luxury").childrenList().forEach((value) -> {
+            Material material = Material.matchMaterial(value.node("material").getString("COOKED_BEEF"));
+            if (material == null) {
+                OpenMinetopia.getInstance().getLogger().warning("Couldn't find material for " + value);
+                return;
+            }
+            int customModelData = value.node("custom-model-data").getInt(-1);
+            if (customModelData == 0) {
+                OpenMinetopia.getInstance().getLogger().warning("Couldn't find custom model data for " + value);
+                return;
+            }
+            luxuryFood.add(new FitnessFood(FitnessStatisticType.EATING, material, customModelData));
+        });
 
         ConfigurationNode statisticsNode = rootNode.node("fitness", "statistics");
         this.maxFitnessByWalking = statisticsNode.node("walking", "max-fitness").getInt(30);

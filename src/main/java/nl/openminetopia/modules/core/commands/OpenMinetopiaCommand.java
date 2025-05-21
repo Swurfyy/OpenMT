@@ -34,7 +34,7 @@ public class OpenMinetopiaCommand extends BaseCommand {
     @Subcommand("reload")
     @SneakyThrows
     @CommandPermission("openminetopia.reload")
-    public void reload(Player player) {
+    public void reload(CommandSender sender) {
         File dataFolder = OpenMinetopia.getInstance().getDataFolder();
 
         OpenMinetopia.setDefaultConfiguration(new DefaultConfiguration(dataFolder));
@@ -71,7 +71,7 @@ public class OpenMinetopiaCommand extends BaseCommand {
         labymodModule.setConfiguration(new LabymodConfiguration(dataFolder));
         labymodModule.getConfiguration().saveConfiguration();
 
-        player.sendMessage(ChatUtils.color("<gold>De configuratiebestanden zijn succesvol herladen!"));
+        sender.sendMessage(ChatUtils.color("<gold>De configuratiebestanden zijn succesvol herladen!"));
     }
 
     @Default

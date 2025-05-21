@@ -7,6 +7,7 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
+import nl.openminetopia.modules.fitness.objects.FitnessFood;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,8 +21,26 @@ public class PlayerEatListener implements Listener {
         FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
         FitnessConfiguration configuration = fitnessModule.getConfiguration();
 
-        if (!configuration.getCheapFood().contains(event.getItem().getType().name()) && !configuration.getLuxuryFood().contains(event.getItem().getType().name()))
-            return;
+        FitnessFood food = null;
+        for (FitnessFood fitnessFood : configuration.getCheapFood()) {
+            if (fitnessFood.getMaterial() != event.getItem().getType()) continue;
+            if (!event.getItem().hasItemMeta()) continue;
+
+            int customModelData = !event.getItem().getItemMeta().hasCustomModelData() ? 0 : event.getItem().getItemMeta().getCustomModelData();
+            if (fitnessFood.getCustomModelData() != customModelData) continue;
+            food = fitnessFood;
+        }
+
+        for (FitnessFood fitnessFood : configuration.getLuxuryFood()) {
+            if (fitnessFood.getMaterial() != event.getItem().getType()) continue;
+            if (!event.getItem().hasItemMeta()) continue;
+
+            int customModelData = !event.getItem().getItemMeta().hasCustomModelData() ? 0 : event.getItem().getItemMeta().getCustomModelData();
+            if (fitnessFood.getCustomModelData() != customModelData) continue;
+            food = fitnessFood;
+        }
+
+        if (food == null) return;
 
         Player player = event.getPlayer();
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
@@ -29,10 +48,10 @@ public class PlayerEatListener implements Listener {
 
         FitnessStatisticModel eatingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
 
-        if (configuration.getCheapFood().contains(event.getItem().getType().name())) {
+        if (configuration.getCheapFood().contains(food)) {
             eatingStatistic.setPoints(eatingStatistic.getPoints() + configuration.getPointsForCheapFood());
             eatingStatistic.setSecondaryPoints(eatingStatistic.getSecondaryPoints() + 1);
-        } else if (configuration.getLuxuryFood().contains(event.getItem().getType().name())) {
+        } else if (configuration.getLuxuryFood().contains(food)) {
             eatingStatistic.setPoints(eatingStatistic.getPoints() + configuration.getPointsForLuxuryFood());
             eatingStatistic.setTertiaryPoints(eatingStatistic.getTertiaryPoints() + 1);
         }

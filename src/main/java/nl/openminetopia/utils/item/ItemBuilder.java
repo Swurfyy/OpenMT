@@ -100,6 +100,7 @@ public class ItemBuilder {
     public ItemBuilder setItemModel(String itemModel) {
         ItemMeta im = is.getItemMeta();
         String[] split = itemModel.split(":");
+        if (split.length != 2) throw new IllegalArgumentException("Item model must be in the format namespace:key");
         NamespacedKey key = new NamespacedKey(split[0], split[1]);
         im.setItemModel(key);
         is.setItemMeta(im);

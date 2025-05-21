@@ -8,7 +8,7 @@ fitness:
         type: COOKED_BEEF
         custom-model-data: -1
         damage: -1
-        item-model: "vitamine_b"
+        item-model: "mtcustom:vitamine_b"
       fitness:
         amount: 10 # Hoeveel fitheid booster
         duration: 10 # In seconden
@@ -33,21 +33,35 @@ fitness:
       points-per-fitness-level: 1
       food-items:
         luxury:
-          - COOKED_BEEF
-          - MUSHROOM_STEW
-          - COOKED_PORKCHOP
-          - COOKED_SALMON
-          - COOKED_COD
-          - BAKED_POTATO
-          - COOKED_RABBIT
+          - material: COOKED_BEEF
+            custom-model-data: -1
+          - material: MUSHROOM_STEW
+            custom-model-data: -1
+          - material: COOKED_PORKCHOP
+            custom-model-data: -1
+          - material: COOKED_SALMON
+            custom-model-data: -1
+          - material: COOKED_COD
+            custom-model-data: -1
+          - material: BAKED_POTATO
+            custom-model-data: -1
+          - material: COOKED_RABBIT
+            custom-model-data: -1
         cheap:
-          - APPLE
-          - BREAD
-          - MELON_BLOCK
-          - RAW_FISH
-          - COOKED_CHICKEN
-          - COOKED_MUTTON
-          - COOKIE
+          - material: APPLE
+            custom-model-data: -1
+          - material: BREAD
+            custom-model-data: -1
+          - material: MELON
+            custom-model-data: -1
+          - material: COD
+            custom-model-data: -1
+          - material: COOKED_CHICKEN
+            custom-model-data: -1
+          - material: COOKED_MUTTON
+            custom-model-data: -1
+          - material: COOKIE
+            custom-model-data: -1
     walking:
       max-fitness: 30
       cm-per-level: 1000000
