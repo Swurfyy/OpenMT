@@ -28,6 +28,7 @@ public class PlayerManager {
 
     private final PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
     private final Map<UUID, MinetopiaPlayer> onlinePlayers = new ConcurrentHashMap<>();
+    private final Map<UUID, CompletableFuture<MinetopiaPlayer>> loadingPlayers = new ConcurrentHashMap<>();
 
     /**
      * Retrieves a {@link MinetopiaPlayer} object for an online player.
@@ -62,32 +63,34 @@ public class PlayerManager {
      * @since 1.3.0
      */
     public CompletableFuture<MinetopiaPlayer> getMinetopiaPlayer(OfflinePlayer player) {
-        CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
+        UUID uuid = player.getUniqueId();
 
-        if (onlinePlayers.containsKey(player.getUniqueId())) {
-            future.complete(onlinePlayers.get(player.getUniqueId()));
-            return future;
+        if (onlinePlayers.containsKey(uuid)) {
+            return CompletableFuture.completedFuture(onlinePlayers.get(uuid));
         }
 
-        this.playerModule.getPlayerModel(player.getUniqueId()).whenComplete((playerModel, throwable) -> {
-            if (throwable != null) {
-                future.completeExceptionally(throwable);
-                return;
-            }
+        // Prevent duplicate loads
+        return loadingPlayers.computeIfAbsent(uuid, id -> {
+            CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
 
-            MinetopiaPlayer minetopiaPlayer = new MinetopiaPlayer(player.getUniqueId(), playerModel);
-            minetopiaPlayer.load().thenAccept(unused -> {
+            this.playerModule.getPlayerModel(uuid).whenComplete((playerModel, throwable) -> {
+                if (throwable != null) {
+                    future.completeExceptionally(throwable);
+                    loadingPlayers.remove(uuid);
+                    return;
+                }
+
+                MinetopiaPlayer minetopiaPlayer = new MinetopiaPlayer(uuid, playerModel);
+                minetopiaPlayer.load().join();
                 if (player.isOnline()) {
-                    onlinePlayers.put(player.getUniqueId(), minetopiaPlayer);
+                    onlinePlayers.put(uuid, minetopiaPlayer);
                 }
 
                 future.complete(minetopiaPlayer);
-            }).exceptionally(throwable2 -> {
-                future.completeExceptionally(throwable2);
-                return null;
+                loadingPlayers.remove(uuid);
             });
-        });
 
-        return future;
+            return future;
+        });
     }
 }

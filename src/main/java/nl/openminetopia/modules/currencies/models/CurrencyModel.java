@@ -5,6 +5,7 @@ import com.craftmend.storm.api.markers.Column;
 import com.craftmend.storm.api.markers.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.currencies.CurrencyModule;
@@ -12,6 +13,7 @@ import nl.openminetopia.modules.currencies.objects.RegisteredCurrency;
 
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
