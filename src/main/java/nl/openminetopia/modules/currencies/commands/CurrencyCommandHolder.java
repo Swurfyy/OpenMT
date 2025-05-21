@@ -8,6 +8,7 @@ import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.currencies.objects.RegisteredCurrency;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -15,6 +16,7 @@ import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,9 +62,9 @@ public class CurrencyCommandHolder extends Command {
                 return false;
             }
 
-            Player target = Bukkit.getPlayer(args[0]);
+            OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
 
-            if (target == null) {
+            if (!target.hasPlayedBefore()) {
                 ChatUtils.sendMessage(sender, MessageConfiguration.message("player_not_found"));
                 return false;
             }
@@ -78,9 +80,9 @@ public class CurrencyCommandHolder extends Command {
                 return false;
             }
 
-            Player target = Bukkit.getPlayer(args[1]);
+            OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
 
-            if (target == null) {
+            if (!target.hasPlayedBefore()) {
                 ChatUtils.sendMessage(sender, MessageConfiguration.message("player_not_found"));
                 return false;
             }
@@ -101,9 +103,10 @@ public class CurrencyCommandHolder extends Command {
                 ChatUtils.sendMessage(sender, "<red>Sorry, je hebt geen toestemming om dit commando uit te voeren.");
                 return false;
             }
-            Player target = Bukkit.getPlayer(args[1]);
 
-            if (target == null) {
+            OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+
+            if (!target.hasPlayedBefore()) {
                 ChatUtils.sendMessage(sender, MessageConfiguration.message("player_not_found"));
                 return false;
             }
@@ -124,9 +127,10 @@ public class CurrencyCommandHolder extends Command {
                 ChatUtils.sendMessage(sender, "<red>Sorry, je hebt geen toestemming om dit commando uit te voeren.");
                 return false;
             }
-            Player target = Bukkit.getPlayer(args[1]);
 
-            if (target == null) {
+            OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+
+            if (!target.hasPlayedBefore()) {
                 ChatUtils.sendMessage(sender, MessageConfiguration.message("player_not_found"));
                 return false;
             }
@@ -161,7 +165,7 @@ public class CurrencyCommandHolder extends Command {
         ChatUtils.sendMessage(player, message);
     }
 
-    private void showCurrencyOther(CommandSender executor, Player player) {
+    private void showCurrencyOther(CommandSender executor, OfflinePlayer player) {
         CurrencyModel currencyModel = getCurrencyModel(player.getUniqueId());
 
         if (currencyModel == null) {
@@ -177,11 +181,11 @@ public class CurrencyCommandHolder extends Command {
         ChatUtils.sendMessage(executor, message);
     }
 
-    private void setCurrency(CommandSender executor, Player player, double amount) {
+    private void setCurrency(CommandSender executor, OfflinePlayer player, double amount) {
         CurrencyModel currencyModel = getCurrencyModel(player.getUniqueId());
 
         if (currencyModel == null) {
-            ChatUtils.sendMessage(player, "<red>Er ging wat mis.");
+            ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
             return;
         }
 
@@ -194,11 +198,11 @@ public class CurrencyCommandHolder extends Command {
         ChatUtils.sendMessage(executor, message);
     }
 
-    private void addCurrency(CommandSender executor, Player player, double amount) {
+    private void addCurrency(CommandSender executor, OfflinePlayer player, double amount) {
         CurrencyModel currencyModel = getCurrencyModel(player.getUniqueId());
 
         if (currencyModel == null) {
-            ChatUtils.sendMessage(player, "<red>Er ging wat mis.");
+            ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
             return;
         }
 
@@ -211,11 +215,11 @@ public class CurrencyCommandHolder extends Command {
         ChatUtils.sendMessage(executor, message);
     }
 
-    private void removeCurrency(CommandSender executor, Player player, double amount) {
+    private void removeCurrency(CommandSender executor, OfflinePlayer player, double amount) {
         CurrencyModel currencyModel = getCurrencyModel(player.getUniqueId());
 
         if (currencyModel == null) {
-            ChatUtils.sendMessage(player, "<red>Er ging wat mis.");
+            ChatUtils.sendMessage(executor, "<red>Er ging wat mis.");
             return;
         }
 
@@ -261,8 +265,9 @@ public class CurrencyCommandHolder extends Command {
     public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String @NotNull [] args) throws IllegalArgumentException {
         if (!sender.hasPermission("openminetopia.currency." + currency.getId())) return List.of();
 
-        List<String> usernames = Bukkit.getOnlinePlayers().stream()
-                .map(Player::getName)
+        /* This may cause lag on servers with lots of players */
+        List<String> usernames = Arrays.stream(Bukkit.getOfflinePlayers())
+                .map(OfflinePlayer::getName)
                 .toList();
 
         if (args.length == 1) {
