@@ -30,7 +30,7 @@ public class PlayerChatListener implements Listener {
                 .replace("<message>", ChatUtils.stripMiniMessage(event.message()));
 
         for (Player recipient : Bukkit.getOnlinePlayers()) {
-            if (!recipient.hasPermission("openminetopia.walkietalkie")) return;
+            if (!recipient.hasPermission("openminetopia.walkietalkie")) continue;
             ChatUtils.sendMessage(recipient, formattedMessage);
         }
         Bukkit.getConsoleSender().sendMessage(ChatUtils.color(formattedMessage));
