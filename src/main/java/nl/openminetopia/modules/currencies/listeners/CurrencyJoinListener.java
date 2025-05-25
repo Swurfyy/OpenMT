@@ -1,10 +1,12 @@
 package nl.openminetopia.modules.currencies.listeners;
 
 import lombok.RequiredArgsConstructor;
+import net.kyori.adventure.title.Title;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.currencies.objects.RegisteredCurrency;
 import nl.openminetopia.modules.data.storm.StormDatabase;
+import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

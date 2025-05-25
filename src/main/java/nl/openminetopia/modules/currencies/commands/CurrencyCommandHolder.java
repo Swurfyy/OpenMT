@@ -6,6 +6,7 @@ import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.currencies.objects.RegisteredCurrency;
+import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -234,6 +235,7 @@ public class CurrencyCommandHolder extends Command {
                     .replaceAll("<display_name>", currency.getDisplayName());
 
             currencyModel.setBalance(currencyModel.getBalance() + amount);
+            StormDatabase.getInstance().saveStormModel(currencyModel);
             ChatUtils.sendMessage(executor, message);
         });
     }
@@ -259,6 +261,7 @@ public class CurrencyCommandHolder extends Command {
 
 
             currencyModel.setBalance(currencyModel.getBalance() - amount);
+            StormDatabase.getInstance().saveStormModel(currencyModel);
             ChatUtils.sendMessage(executor, message);
         });
     }
