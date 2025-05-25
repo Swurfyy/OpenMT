@@ -211,6 +211,7 @@ public class CurrencyCommandHolder extends Command {
                     .replaceAll("<display_name>", currency.getDisplayName());
 
             currencyModel.setBalance(amount);
+            StormDatabase.getInstance().saveStormModel(currencyModel);
             ChatUtils.sendMessage(executor, message);
         });
     }
