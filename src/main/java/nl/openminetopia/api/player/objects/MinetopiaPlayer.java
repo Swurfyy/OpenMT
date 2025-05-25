@@ -110,7 +110,7 @@ public class MinetopiaPlayer {
                 .orElse(new Prefix(-1, configuration.getDefaultPrefix(), -1));
 
         this.playtimeRunnable = new PlaytimeRunnable(this);
-        playtimeRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 20L);
+        this.playtimeRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 20L);
 
         this.levelcheckRunnable = new LevelCalculateRunnable(this);
         levelcheckRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 20L * 30);
