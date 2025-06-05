@@ -15,6 +15,9 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FitnessRunnable extends BukkitRunnable {
 
     private final Fitness fitness;
@@ -36,7 +39,8 @@ public class FitnessRunnable extends BukkitRunnable {
             return;
         }
 
-        for (FitnessBoosterModel boosterModel : fitness.getBoosters()) {
+        List<FitnessBoosterModel> boosterModels = new ArrayList<>(fitness.getBoosters());
+        for (FitnessBoosterModel boosterModel : boosterModels) {
             if (!boosterModel.isExpired()) continue;
             fitness.removeBooster(boosterModel);
         }
