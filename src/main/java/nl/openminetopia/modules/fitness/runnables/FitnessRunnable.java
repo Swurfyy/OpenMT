@@ -1,9 +1,11 @@
 package nl.openminetopia.modules.fitness.runnables;
 
+import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
+import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
@@ -25,6 +27,7 @@ public class FitnessRunnable extends BukkitRunnable {
     }
 
     @Override
+    @SneakyThrows
     public void run() {
         FitnessConfiguration config = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
 
@@ -33,7 +36,10 @@ public class FitnessRunnable extends BukkitRunnable {
             return;
         }
 
-        fitness.getBoosters().removeIf(FitnessBoosterModel::isExpired);
+        for (FitnessBoosterModel boosterModel : fitness.getBoosters()) {
+            if (!boosterModel.isExpired()) continue;
+            fitness.removeBooster(boosterModel);
+        }
 
         if (!force) {
             MinetopiaPlayer minetopiaPlayer = fitness.getMinetopiaPlayer();
