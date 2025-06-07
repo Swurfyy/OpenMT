@@ -11,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -61,12 +60,6 @@ public class ItemsModule extends SpigotModule<@NotNull OpenMinetopia> {
         this.categoriesConfiguration = new CategoriesConfiguration(itemsPath.toFile());
 
         loadItems(itemsPath.toFile());
-
-        OpenMinetopia.getInstance().getLogger().info("Loaded " + categoriesConfiguration.getCategories().size() + " item categories.");
-
-        categoriesConfiguration.getCategories().forEach((s, itemCategory) -> {
-            OpenMinetopia.getInstance().getLogger().info("Loaded item category: " + itemCategory.name() + " (" + itemCategory.namespace() + ")");
-        });
     }
 
     private void copyResources(String resourcePath, Path destination) throws URISyntaxException, IOException {

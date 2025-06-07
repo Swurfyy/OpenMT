@@ -36,7 +36,6 @@ public class ItemConfiguration extends ConfigurateConfig {
             return;
         }
         ItemCategory category = categoryOpt.get();
-        OpenMinetopia.getInstance().getLogger().info("Loading items for category: " + category.name() + " (" + namespace + ")");
 
         ConfigurationNode itemsNode = rootNode.node("items");
         List<CustomItem> items = new ArrayList<>();
@@ -64,8 +63,6 @@ public class ItemConfiguration extends ConfigurateConfig {
                 OpenMinetopia.getInstance().getLogger().warning("Item " + itemName + " has an invalid material: " + materialName);
                 return;
             }
-
-            OpenMinetopia.getInstance().getLogger().info("Loading item: " + identifier);
 
             final String itemModel = value.node("item_model").getString("");
             final int customModelData = value.node("custom_model_data").getInt(-1);

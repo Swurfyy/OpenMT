@@ -30,7 +30,7 @@ public class ItemsCommand extends BaseCommand {
 
         String[] namespacedKey = identifier.split(":");
         if (namespacedKey.length != 2) {
-            ChatUtils.sendMessage(player, "<red>Invalid identifier format. Use 'namespace:item_name'.");
+            ChatUtils.sendMessage(player, "<red>Ongeldig identifier formaat. Gebruik 'namespace:item_name'.");
             return;
         }
         String namespace = namespacedKey[0];
@@ -38,27 +38,19 @@ public class ItemsCommand extends BaseCommand {
 
         Optional<ItemCategory> categoryOpt = module.getCategoriesConfiguration().category(namespace);
         if (categoryOpt.isEmpty()) {
-            ChatUtils.sendMessage(player, "<red>No item category found with namespace: " + namespace);
+            ChatUtils.sendMessage(player, "<red>Geen item categorie gevonden met namespace: " + namespace);
             return;
         }
         ItemCategory category = categoryOpt.get();
 
         Optional<CustomItem> itemOpt = category.item(itemName);
         if (itemOpt.isEmpty()) {
-            ChatUtils.sendMessage(player, "<red>No item found with identifier: " + identifier);
+            ChatUtils.sendMessage(player, "<red>Geen item gevonden met identifier: " + identifier);
             return;
         }
         CustomItem item = itemOpt.get();
         ItemStack itemStack = item.build();
         player.getInventory().addItem(itemStack);
-        ChatUtils.sendMessage(player, "<gold>You have received the item: " + item.name() + " (" + item.identifier() + ")");
-    }
-
-    @Subcommand("reload")
-    @CommandPermission("openminetopia.items.reload")
-    public void reloadCommand(Player player) {
-        ItemsModule module = OpenMinetopia.getModuleManager().get(ItemsModule.class);
-        module.reload();
-        ChatUtils.sendMessage(player, "<green>Items configuration reloaded successfully.");
+        ChatUtils.sendMessage(player, "<gold>Je hebt het item: " + item.name() + " (" + item.identifier() + ") ontvangen.");
     }
 }
