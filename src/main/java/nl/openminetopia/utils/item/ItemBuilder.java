@@ -1,12 +1,12 @@
 package nl.openminetopia.utils.item;
 
-import com.jazzkuh.inventorylib.utils.PersistentData;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import nl.openminetopia.utils.ChatUtils;
+import nl.openminetopia.utils.PersistentDataUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -72,7 +72,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setNBT(String key, Object value) {
-        is = PersistentData.set(is, value, key);
+        is = PersistentDataUtil.set(is, value, key);
         return this;
     }
 

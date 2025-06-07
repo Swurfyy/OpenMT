@@ -1,5 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
     java
     id("io.freefair.lombok") version "8.13.1"
@@ -64,8 +62,8 @@ dependencies {
     implementation("com.jeff-media:custom-block-data:2.2.4")
     implementation("com.jeff-media:MorePersistentDataTypes:2.4.0")
 
-    /* InventoryLib (JAZZZZ) */
-    implementation("com.github.Jazzkuh.InventoryLib:spigot:486b8563a7")
+    /* TriumphGUI */
+    implementation("dev.triumphteam:triumph-gui:3.1.12")
 
     /* bStats */
     implementation("org.bstats:bstats-bukkit:3.1.0")
@@ -135,7 +133,7 @@ tasks {
         relocate("net.megavex.scoreboardlibrary", "nl.openminetopia.shaded.scoreboard")
         relocate("com.jeff_media.customblockdata", "nl.openminetopia.shaded.customblockdata")
         relocate("com.jeff_media.morepersistentdatatypes", "nl.openminetopia.shaded.morepersistentdatatypes")
-        relocate("com.jazzkuh.inventorylib", "nl.openminetopia.shaded.inventorylib")
+        relocate("dev.triumphteam.gui", "nl.openminetopia.shaded.gui")
         relocate("org.bstats", "nl.openminetopia.shaded.bstats")
     }
 

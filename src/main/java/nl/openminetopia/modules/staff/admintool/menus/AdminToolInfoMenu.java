@@ -1,7 +1,6 @@
 package nl.openminetopia.modules.staff.admintool.menus;
 
-import com.jazzkuh.inventorylib.objects.Menu;
-import com.jazzkuh.inventorylib.objects.icon.Icon;
+import dev.triumphteam.gui.guis.GuiItem;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.Fitness;
@@ -17,6 +16,7 @@ import nl.openminetopia.modules.prefix.menus.PrefixMenu;
 import nl.openminetopia.modules.staff.admintool.menus.fitness.AdminToolFitnessMenu;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
+import nl.openminetopia.utils.menu.Menu;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -30,11 +30,13 @@ public class AdminToolInfoMenu extends Menu {
     private final BankAccountModel bankAccountModel;
 
     public AdminToolInfoMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer, BankAccountModel bankAccountModel) {
-        super(ChatUtils.color("<gold>Beheerscherm <yellow>" + offlinePlayer.getPlayerProfile().getName()), 3);
+        super("<gold>Beheerscherm <yellow>" + offlinePlayer.getPlayerProfile().getName(), 3);
         this.player = player;
         this.offlinePlayer = offlinePlayer;
         this.minetopiaPlayer = minetopiaPlayer;
         this.bankAccountModel = bankAccountModel;
+
+        gui.disableAllInteractions();
 
         if (minetopiaPlayer == null) {
             player.sendMessage(ChatUtils.color("<red>Er is een fout opgetreden bij het ophalen van de spelergegevens."));
@@ -51,8 +53,8 @@ public class AdminToolInfoMenu extends Menu {
                 .addLoreLine(" ")
                 .setSkullOwner(offlinePlayer);
 
-        Icon targetSkullIcon = new Icon(10, skullBuilder.toItemStack(), event -> event.setCancelled(true));
-        this.addItem(targetSkullIcon);
+        GuiItem targetSkullItem = new GuiItem(skullBuilder.toItemStack());
+        gui.setItem(10, targetSkullItem);
 
         /* -------- Prefix -------- */
 
@@ -62,10 +64,10 @@ public class AdminToolInfoMenu extends Menu {
                 .addLoreLine("<gold>Klik <yellow>hier <gold>om de <yellow>prefix <gold>van de speler aan te passen.")
                 .addLoreLine("");
 
-        Icon targetPrefixIcon = new Icon(11, prefixItemBuilder.toItemStack(), event -> {
+        GuiItem targetPrefixItem = new GuiItem(prefixItemBuilder.toItemStack(), event -> {
             new PrefixMenu(player, offlinePlayer, minetopiaPlayer).open(player);
         });
-        this.addItem(targetPrefixIcon);
+        gui.setItem(11, targetPrefixItem);
 
         /* -------- Colors -------- */
 
@@ -75,10 +77,10 @@ public class AdminToolInfoMenu extends Menu {
                 .addLoreLine("<gold>Klik <yellow>hier <gold>om de <rainbow>kleuren <gold>van de speler aan te passen.")
                 .addLoreLine("");
 
-        Icon targetColorIcon = new Icon(12, colorItemBuilder.toItemStack(), event -> {
+        GuiItem targetColorItem = new GuiItem(colorItemBuilder.toItemStack(), event -> {
             new ColorTypeMenu(player, offlinePlayer, minetopiaPlayer).open(player);
         });
-        this.addItem(targetColorIcon);
+        gui.setItem(12, targetColorItem);
 
         /* -------- Level -------- */
 
@@ -91,12 +93,12 @@ public class AdminToolInfoMenu extends Menu {
                 .addLoreLine("<yellow>Rechtermuisklik <gold>om het level te verhogen.")
                 .addLoreLine("<yellow>Linkermuisklik <gold>om het level te verlagen.");
 
-        Icon targetLevelIcon = new Icon(13, levelItemBuilder.toItemStack(), event -> {
+        GuiItem targetLevelItem = new GuiItem(levelItemBuilder.toItemStack(), event -> {
             minetopiaPlayer.setLevel(event.isRightClick() ? minetopiaPlayer.getLevel() + 1 : minetopiaPlayer.getLevel() - 1);
             player.sendMessage(ChatUtils.color("<gold>Je hebt het level van <yellow>" + offlinePlayer.getName() + " <gold>aangepast naar <yellow>" + minetopiaPlayer.getLevel() + "<gold>."));
             new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open(player);
         });
-        this.addItem(targetLevelIcon);
+        gui.setItem(13, targetLevelItem);
 
         /* -------- Fitness -------- */
 
@@ -109,25 +111,24 @@ public class AdminToolInfoMenu extends Menu {
                 .addLoreLine("")
                 .addLoreLine("<gold>Klik <yellow>hier <gold>om de <yellow>fitheid <gold>van de speler te bekijken.");
 
-
-        Icon targetFitnessIcon = new Icon(14, fitnessItemBuilder.toItemStack(), event -> {
+        GuiItem targetFitnessItem = new GuiItem(fitnessItemBuilder.toItemStack(), event -> {
             new AdminToolFitnessMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open(player);
         });
-        this.addItem(targetFitnessIcon);
+        gui.setItem(14, targetFitnessItem);
 
         /* -------- Banking -------- */
 
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
 
         ItemBuilder bankItemBuilder;
-        Icon targetBankIcon;
+        GuiItem targetBankItem;
         if (bankAccountModel != null) {
             bankItemBuilder = new ItemBuilder(Material.GOLD_INGOT)
                     .setName("<gold>Banksaldo")
                     .addLoreLine("<gold>Banksaldo: " + bankingModule.format(bankAccountModel.getBalance()))
                     .addLoreLine("")
                     .addLoreLine("<gold>Klik <yellow>hier <gold>om de <yellow>bank <gold>van de speler te openen.");
-            targetBankIcon = new Icon(15, bankItemBuilder.toItemStack(), event -> {
+            targetBankItem = new GuiItem(bankItemBuilder.toItemStack(), event -> {
                 new BankContentsMenu(player, bankAccountModel, true).open(player);
             });
         } else {
@@ -135,21 +136,21 @@ public class AdminToolInfoMenu extends Menu {
                     .setName("<gold>Banksaldo")
                     .addLoreLine("<red>Deze speler heeft geen bankrekening.");
 
-            targetBankIcon = new Icon(15, bankItemBuilder.toItemStack(), event -> {
+            targetBankItem = new GuiItem(bankItemBuilder.toItemStack(), event -> {
                 event.setCancelled(true);
-                player.sendMessage(ChatUtils.color("<red>Deze speler zijn bankrekening is niet ingeladen. (Soon)"));
+                player.sendMessage(ChatUtils.color("<red>Deze speler heeft geen bankrekening."));
             });
         }
-        this.addItem(targetBankIcon);
+        gui.setItem(15, targetBankItem);
 
         /* -------- Back -------- */
 
         ItemBuilder backItemBuilder = new ItemBuilder(Material.OAK_DOOR)
                 .setName("<gray>Terug");
 
-        Icon backIcon = new Icon(22, backItemBuilder.toItemStack(), event -> {
+        GuiItem backItem = new GuiItem(backItemBuilder.toItemStack(), event -> {
             new AdminToolMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open(player);
         });
-        this.addItem(backIcon);
+        gui.setItem(22, backItem);
     }
 }

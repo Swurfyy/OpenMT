@@ -1,7 +1,6 @@
 package nl.openminetopia.modules.staff.admintool.menus.fitness;
 
-import com.jazzkuh.inventorylib.objects.Menu;
-import com.jazzkuh.inventorylib.objects.icon.Icon;
+import dev.triumphteam.gui.guis.GuiItem;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
@@ -11,8 +10,8 @@ import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.staff.admintool.menus.AdminToolInfoMenu;
-import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
+import nl.openminetopia.utils.menu.Menu;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
@@ -27,12 +26,13 @@ public class AdminToolFitnessMenu extends Menu {
     private final BankAccountModel bankAccountModel;
 
     public AdminToolFitnessMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer, BankAccountModel bankAccountModel) {
-        super(ChatUtils.color("<gold>Fitheid <yellow>" + offlinePlayer.getPlayerProfile().getName()), 3);
+        super("<gold>Fitheid <yellow>" + offlinePlayer.getPlayerProfile().getName(), 3);
         this.player = player;
         this.offlinePlayer = offlinePlayer;
         this.minetopiaPlayer = minetopiaPlayer;
         this.bankAccountModel = bankAccountModel;
 
+        gui.disableAllInteractions();
         if (minetopiaPlayer == null) return;
 
         FitnessConfiguration configuration = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
@@ -47,8 +47,8 @@ public class AdminToolFitnessMenu extends Menu {
                 .addLoreLine("<dark_purple>Spelers krijgen <light_purple>" + configuration.getDrinkingPointsPerPotion() + " <dark_purple>punt voor het drinken van potions.")
                 .addLoreLine(" ");
 
-        Icon targetDrinkingIcon = new Icon(9, drinkingItemBuilder.toItemStack(), event -> event.setCancelled(true));
-        this.addItem(targetDrinkingIcon);
+        GuiItem targetDrinkingItem = new GuiItem(drinkingItemBuilder.toItemStack());
+        gui.setItem(9, targetDrinkingItem);
 
         FitnessStatisticModel healthStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.HEALTH);
         ItemBuilder healthItemBuilder = new ItemBuilder(Material.APPLE)
@@ -66,8 +66,8 @@ public class AdminToolFitnessMenu extends Menu {
                 .addLoreLine("check hun voedselniveau lager is dan <light_purple>2")
                 .addLoreLine(" ");
 
-        Icon targetHealthIcon = new Icon(10, healthItemBuilder.toItemStack(), event -> event.setCancelled(true));
-        this.addItem(targetHealthIcon);
+        GuiItem targetHealthItem = new GuiItem(healthItemBuilder.toItemStack());
+        gui.setItem(10, targetHealthItem);
 
         FitnessStatisticModel eatingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.EATING);
 
@@ -91,8 +91,8 @@ public class AdminToolFitnessMenu extends Menu {
                 .addLoreLine("<dark_purple>Spelers krijgen <light_purple>" + configuration.getPointsBelow5Hearts() + " <dark_purple>voor het eten van goedkoop voedsel.")
                 .addLoreLine(" ");
 
-        Icon targetFoodIcon = new Icon(11, foodItemBuilder.toItemStack(), event -> event.setCancelled(true));
-        this.addItem(targetFoodIcon);
+        GuiItem targetFoodItem = new GuiItem(foodItemBuilder.toItemStack());
+        gui.setItem(11, targetFoodItem);
 
         FitnessStatisticModel climbingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.CLIMBING);
         ItemBuilder climbingItemBuilder = new ItemBuilder(Material.LADDER)
@@ -105,8 +105,8 @@ public class AdminToolFitnessMenu extends Menu {
                         + (configuration.getCmPerClimbingLevel() / 1000) + " <dark_purple>kilometer klimmen.")
                 .addLoreLine(" ");
 
-        Icon targetClimbingIcon = new Icon(12, climbingItemBuilder.toItemStack(), event -> event.setCancelled(true));
-        this.addItem(targetClimbingIcon);
+        GuiItem targetClimbingItem = new GuiItem(climbingItemBuilder.toItemStack());
+        gui.setItem(12, targetClimbingItem);
 
         FitnessStatisticModel flyingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.FLYING);
         ItemBuilder flyingItemBuilder = new ItemBuilder(Material.ELYTRA)
@@ -118,8 +118,8 @@ public class AdminToolFitnessMenu extends Menu {
                         + (configuration.getCmPerFlyingLevel() / 1000) + " <dark_purple>kilometer vliegen.")
                 .addLoreLine(" ");
 
-        Icon targetFlyingIcon = new Icon(13, flyingItemBuilder.toItemStack(), event -> event.setCancelled(true));
-        this.addItem(targetFlyingIcon);
+        GuiItem targetFlyingItem = new GuiItem(flyingItemBuilder.toItemStack());
+        gui.setItem(13, targetFlyingItem);
 
         FitnessStatisticModel walkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.WALKING);
         ItemBuilder walkingItemBuilder = new ItemBuilder(Material.LEATHER_BOOTS)
@@ -131,8 +131,8 @@ public class AdminToolFitnessMenu extends Menu {
                         + (configuration.getCmPerWalkingLevel() / 1000) + " <dark_purple>kilometer lopen.")
                 .addLoreLine(" ");
 
-        Icon targetWalkingIcon = new Icon(14, walkingItemBuilder.toItemStack(), event -> event.setCancelled(true));
-        this.addItem(targetWalkingIcon);
+        GuiItem targetWalkingItem = new GuiItem(walkingItemBuilder.toItemStack());
+        gui.setItem(14, targetWalkingItem);
 
         FitnessStatisticModel swimmingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.SWIMMING);
         ItemBuilder swimmingItemBuilder = new ItemBuilder(Material.OAK_BOAT)
@@ -144,8 +144,8 @@ public class AdminToolFitnessMenu extends Menu {
                         + (configuration.getCmPerSwimmingLevel() / 1000) + " <dark_purple>kilometer zwemmen.")
                 .addLoreLine(" ");
 
-        Icon targetSwimmingIcon = new Icon(15, swimmingItemBuilder.toItemStack(), event -> event.setCancelled(true));
-        this.addItem(targetSwimmingIcon);
+        GuiItem targetSwimmingItem = new GuiItem(swimmingItemBuilder.toItemStack());
+        gui.setItem(15, targetSwimmingItem);
 
         FitnessStatisticModel sprintingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.SPRINTING);
         ItemBuilder sprintingItemBuilder = new ItemBuilder(Material.DIAMOND_BOOTS)
@@ -157,8 +157,8 @@ public class AdminToolFitnessMenu extends Menu {
                         + (configuration.getCmPerSprintingLevel() / 1000) + " <dark_purple>kilometer rennen.")
                 .addLoreLine(" ");
 
-        Icon targetSprintingIcon = new Icon(16, sprintingItemBuilder.toItemStack(), event -> event.setCancelled(true));
-        this.addItem(targetSprintingIcon);
+        GuiItem targetSprintingItem = new GuiItem(sprintingItemBuilder.toItemStack());
+        gui.setItem(16, targetSprintingItem);
 
         ItemBuilder totalItemBuilder = new ItemBuilder(Material.PAPER)
                 .setName("<gold>Totaal: <yellow>" + minetopiaPlayer.getFitness().getTotalFitness()
@@ -166,18 +166,18 @@ public class AdminToolFitnessMenu extends Menu {
                 .addLoreLine(" ")
                 .addLoreLine("<gold>Klik om de <yellow>fitness boosters <gold>te bekijken.");
 
-        Icon targetTotalIcon = new Icon(17, totalItemBuilder.toItemStack(), event -> {
+        GuiItem targetTotalItem = new GuiItem(totalItemBuilder.toItemStack(), event -> {
             event.setCancelled(true);
             new AdminToolFitnessBoostersMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open((Player) event.getWhoClicked());
         });
-        this.addItem(targetTotalIcon);
+        gui.setItem(17, targetTotalItem);
 
         ItemBuilder backItemBuilder = new ItemBuilder(Material.OAK_DOOR)
                 .setName("<gray>Terug");
 
-        Icon backIcon = new Icon(22, backItemBuilder.toItemStack(), event -> {
+        GuiItem backItem = new GuiItem(backItemBuilder.toItemStack(), event -> {
             new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open((Player) event.getWhoClicked());
         });
-        this.addItem(backIcon);
+        gui.setItem(22, backItem);
     }
 }

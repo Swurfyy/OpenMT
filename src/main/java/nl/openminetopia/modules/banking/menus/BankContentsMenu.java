@@ -1,7 +1,6 @@
 package nl.openminetopia.modules.banking.menus;
 
-import com.jazzkuh.inventorylib.objects.Menu;
-import com.jazzkuh.inventorylib.objects.icon.Icon;
+import dev.triumphteam.gui.guis.GuiItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import nl.openminetopia.OpenMinetopia;
@@ -16,10 +15,9 @@ import nl.openminetopia.modules.transactions.enums.TransactionType;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.PersistentDataUtil;
 import nl.openminetopia.utils.item.ItemBuilder;
+import nl.openminetopia.utils.menu.Menu;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -34,21 +32,23 @@ public class BankContentsMenu extends Menu {
     private final boolean asAdmin;
 
     public BankContentsMenu(Player player, BankAccountModel accountModel, boolean asAdmin) {
-        super(ChatUtils.color(accountModel.getType().getColor() + accountModel.getName() + "<reset> | <red>" + OpenMinetopia.getModuleManager().get(BankingModule.class).format(accountModel.getBalance())), 6);
+        super(accountModel.getType().getColor() + accountModel.getName() + "<reset> | <red>" + OpenMinetopia.getModuleManager().get(BankingModule.class).format(accountModel.getBalance()), 6);
         this.player = player;
         this.accountModel = accountModel;
         this.asAdmin = asAdmin;
+
+        gui.disableAllInteractions();
 
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
         List<BankNote> bankNotes = bankingModule.getConfiguration().getBankNotes();
 
         for (int i = 36; i < 45; i++) {
-            this.addItem(new Icon(i, new ItemBuilder(Material.PURPLE_STAINED_GLASS_PANE).toItemStack()));
+            gui.setItem(i, new GuiItem(new ItemBuilder(Material.PURPLE_STAINED_GLASS_PANE).toItemStack()));
         }
 
         int i = 45;
         for (BankNote bankNote : bankNotes) {
-            this.addItem(new Icon(i, bankNote.toMenuItem(1), true, event -> withdrawMoney(bankNote, 1)));
+            gui.setItem(i, new GuiItem(bankNote.toMenuItem(1), event -> withdrawMoney(bankNote, 1)));
             i++;
         }
 
@@ -60,7 +60,7 @@ public class BankContentsMenu extends Menu {
 
             if (stackCount > 0) {
                 for (int j = 0; j < stackCount; j++) {
-                    this.addItem(new Icon(slot, bankNote.toMenuItem(64), true, event -> withdrawMoney(bankNote, 64)));
+                    gui.setItem(slot, new GuiItem(bankNote.toMenuItem(64), event -> withdrawMoney(bankNote, 64)));
                     slot++;
                     if (slot >= 36) {
                         break;
@@ -72,7 +72,7 @@ public class BankContentsMenu extends Menu {
 
             int remainingItems = (int) (remainingBalance / bankNote.getValue());
             if (remainingItems > 0 && slot < 36) {
-                this.addItem(new Icon(slot, bankNote.toMenuItem(remainingItems), true, event -> withdrawMoney(bankNote, remainingItems)));
+                gui.setItem(slot, new GuiItem(bankNote.toMenuItem(remainingItems), event -> withdrawMoney(bankNote, remainingItems)));
                 remainingBalance -= remainingItems * bankNote.getValue();
                 slot++;
             }
@@ -82,44 +82,40 @@ public class BankContentsMenu extends Menu {
             }
         }
 
-    }
+        gui.setDefaultClickAction(event -> {
+            event.setCancelled(true);
+            if (event.getCurrentItem() == null) return;
+            if (event.getCurrentItem().getType() == Material.AIR) return;
+            ItemStack item = event.getCurrentItem();
 
-    @Override
-    @SuppressWarnings("all") // warning check for nothing
-    public void onClick(InventoryClickEvent event) {
-        event.setCancelled(true);
-        if (event.getCurrentItem() == null) return;
-        if (event.getCurrentItem().getType() == Material.AIR) return;
-        ItemStack item = event.getCurrentItem();
+            if (!PersistentDataUtil.contains(item, "bank_note_value")) return;
+            if (PersistentDataUtil.getDouble(item, "bank_note_value") == null) return;
 
-        if (!PersistentDataUtil.contains(item, "bank_note_value")) return;
-        if (PersistentDataUtil.getDouble(item, "bank_note_value") == null) return;
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
 
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+            if (!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.DEPOSIT)) {
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_deposit_permission"));
+                return;
+            }
 
-        if (!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.DEPOSIT)) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_deposit_permission"));
-            return;
-        }
+            double noteValue = PersistentDataUtil.getDouble(item, "bank_note_value");
+            double totalValue = noteValue * item.getAmount();
 
-        double noteValue = PersistentDataUtil.getDouble(item, "bank_note_value");
-        double totalValue = noteValue * item.getAmount();
+            item.setAmount(0);
+            accountModel.setBalance(accountModel.getBalance() + totalValue);
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
+                    .replace("<deposit_value>", bankingModule.format(totalValue)));
 
-        item.setAmount(0);
-        accountModel.setBalance(accountModel.getBalance() + totalValue);
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
-                .replace("<deposit_value>", bankingModule.format(totalValue)));
+            TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
+            transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), player.getName(), TransactionType.DEPOSIT, totalValue, accountModel.getUniqueId(), "Deposited from ATM.");
 
-        TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
-        transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), player.getName(), TransactionType.DEPOSIT, totalValue, accountModel.getUniqueId(), "Deposited from ATM.");
+            new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
+        });
 
-        new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
-    }
-
-    @Override
-    public void onClose(InventoryCloseEvent event) {
-        if (!isAsAdmin()) return;
-        accountModel.save();
+        gui.setCloseGuiAction(event -> {
+            if (!isAsAdmin()) return;
+            accountModel.save();
+        });
     }
 
     private void withdrawMoney(BankNote note, int amount) {
