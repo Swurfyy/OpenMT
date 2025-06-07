@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  highsneaker_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/highsneaker/boots
+    name: Highsneaker Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:highsneaker

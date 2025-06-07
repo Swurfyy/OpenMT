@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  sandermander20suit_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/sandermander20suit/leggings
+    name: Sandermander20suit Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:sandermander20suit
+  sandermander20suit_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/sandermander20suit/chestplate
+    name: Sandermander20suit Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:sandermander20suit
+  sandermander20suit_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/sandermander20suit/boots
+    name: Sandermander20suit Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:sandermander20suit

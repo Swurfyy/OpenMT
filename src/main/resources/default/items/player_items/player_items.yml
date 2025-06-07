@@ -1,0 +1,38 @@
+namespace: player_items
+items:
+  moederaarde_vlag:
+    material: PAPER
+    item_model: minecraft:custom/player_items/moederaarde/moederaarde_vlag
+    name: Moederaarde Vlag
+  darktastic_vlag:
+    material: PAPER
+    item_model: minecraft:custom/player_items/darktastic/darktastic_vlag
+    name: Darktastic Vlag
+  mjaartenn_vlag:
+    material: PAPER
+    item_model: minecraft:custom/player_items/mjaartenn/mjaartenn_vlag
+    name: Mjaartenn Vlag
+  esmeearrows_vlag:
+    material: PAPER
+    item_model: minecraft:custom/player_items/esmeearrows/esmeearrows_vlag
+    name: Esmeearrows Vlag
+  justjoesoehere_vlag:
+    material: PAPER
+    item_model: minecraft:custom/player_items/justjoesoehere/justjoesoehere_vlag
+    name: Justjoesoehere Vlag
+  swagger27_vlag:
+    material: PAPER
+    item_model: minecraft:custom/player_items/swagger_27/swagger27_vlag
+    name: Swagger27 Vlag
+  p1zz4b0x_vlag:
+    material: PAPER
+    item_model: minecraft:custom/player_items/p1zz4b0x/p1zz4b0x_vlag
+    name: P1zz4b0x Vlag
+  cuzo_vlag:
+    material: PAPER
+    item_model: minecraft:custom/player_items/cuzo/cuzo_vlag
+    name: Cuzo Vlag
+  het_is_thijmen_vlag:
+    material: PAPER
+    item_model: minecraft:custom/player_items/het_is_thijmen/het_is_thijmen_vlag
+    name: Het Is Thijmen Vlag

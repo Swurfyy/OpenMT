@@ -1,0 +1,18 @@
+namespace: krasloten
+items:
+  klaver4_kraslot:
+    material: PAPER
+    item_model: minecraft:custom/krasloten/klaver4_kraslot
+    name: Klaver4 Kraslot
+  winitall_kraslot:
+    material: PAPER
+    item_model: minecraft:custom/krasloten/winitall_kraslot
+    name: Winitall Kraslot
+  7klapper_kraslot:
+    material: PAPER
+    item_model: minecraft:custom/krasloten/7klapper_kraslot
+    name: 7klapper Kraslot
+  7klapper_kraslot_geelblauw:
+    material: PAPER
+    item_model: minecraft:custom/krasloten/7klapper_kraslot_geelblauw
+    name: 7klapper Kraslot Geelblauw

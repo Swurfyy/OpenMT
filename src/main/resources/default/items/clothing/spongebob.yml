@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  spongebob_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/spongebob/leggings
+    name: Spongebob Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:spongebob
+  spongebob_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/spongebob/chestplate
+    name: Spongebob Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:spongebob
+  spongebob_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/spongebob/helmet
+    name: Spongebob Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:spongebob
+  spongebob_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/spongebob/boots
+    name: Spongebob Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:spongebob

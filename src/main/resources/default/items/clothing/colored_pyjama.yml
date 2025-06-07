@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  colored_pyjama_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/colored_pyjama/leggings
+    name: Colored Pyjama Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:colored_pyjama
+  colored_pyjama_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/colored_pyjama/chestplate
+    name: Colored Pyjama Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:colored_pyjama
+  colored_pyjama_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/colored_pyjama/helmet
+    name: Colored Pyjama Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:colored_pyjama

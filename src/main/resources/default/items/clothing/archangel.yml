@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  archangel_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/archangel/leggings
+    name: Archangel Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:archangel
+  archangel_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/archangel/chestplate
+    name: Archangel Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:archangel
+  archangel_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/archangel/helmet
+    name: Archangel Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:archangel
+  archangel_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/archangel/boots
+    name: Archangel Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:archangel

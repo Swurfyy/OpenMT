@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  henchmanlimeblack_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/henchmanlimeblack/leggings
+    name: Henchmanlimeblack Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:henchmanlimeblack
+  henchmanlimeblack_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/henchmanlimeblack/chestplate
+    name: Henchmanlimeblack Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:henchmanlimeblack
+  henchmanlimeblack_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/henchmanlimeblack/helmet
+    name: Henchmanlimeblack Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:henchmanlimeblack
+  henchmanlimeblack_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/henchmanlimeblack/boots
+    name: Henchmanlimeblack Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:henchmanlimeblack

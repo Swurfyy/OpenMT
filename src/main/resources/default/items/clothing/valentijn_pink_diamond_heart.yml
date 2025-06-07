@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  valentijn_pink_diamond_heart_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/valentijn_pink_diamond_heart/leggings
+    name: Valentijn Pink Diamond Heart Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:valentijn_pink_diamond_heart
+  valentijn_pink_diamond_heart_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/valentijn_pink_diamond_heart/chestplate
+    name: Valentijn Pink Diamond Heart Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:valentijn_pink_diamond_heart
+  valentijn_pink_diamond_heart_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/valentijn_pink_diamond_heart/helmet
+    name: Valentijn Pink Diamond Heart Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:valentijn_pink_diamond_heart
+  valentijn_pink_diamond_heart_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/valentijn_pink_diamond_heart/boots
+    name: Valentijn Pink Diamond Heart Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:valentijn_pink_diamond_heart

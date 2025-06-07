@@ -1,0 +1,130 @@
+namespace: emojis
+items:
+  tekstballon_kusje:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_kusje
+    name: Tekstballon Kusje
+  tekstballon_vink:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_vink
+    name: Tekstballon Vink
+  tekstballon_smilie:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_smilie
+    name: Tekstballon Smilie
+  tekstballon_like:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_like
+    name: Tekstballon Like
+  tekstballon_gg:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_gg
+    name: Tekstballon Gg
+  tekstballon_duimpje_omlaag:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_duimpje_omlaag
+    name: Tekstballon Duimpje Omlaag
+  tekstballon_pickaxe:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_pickaxe
+    name: Tekstballon Pickaxe
+  tekstballon_fire:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_fire
+    name: Tekstballon Fire
+  tekstballon_duimpje:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_duimpje
+    name: Tekstballon Duimpje
+  tekstballon_aarde:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_aarde
+    name: Tekstballon Aarde
+  tekstballon_gekkie:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_gekkie
+    name: Tekstballon Gekkie
+  tekstballon_engel:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_engel
+    name: Tekstballon Engel
+  tekstballon_kruis:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_kruis
+    name: Tekstballon Kruis
+  tekstballon_evil:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_evil
+    name: Tekstballon Evil
+  tekstballon_eyes:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_eyes
+    name: Tekstballon Eyes
+  tekstballon_ster:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_ster
+    name: Tekstballon Ster
+  tekstballon_sad:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_sad
+    name: Tekstballon Sad
+  tekstballon_vraagteken:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_vraagteken
+    name: Tekstballon Vraagteken
+  tekstballon_uitroepteken:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_uitroepteken
+    name: Tekstballon Uitroepteken
+  tekstballon_lachen:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_lachen
+    name: Tekstballon Lachen
+  tekstballon_poep:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_poep
+    name: Tekstballon Poep
+  tekstballon_zwaard:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_zwaard
+    name: Tekstballon Zwaard
+  tekstballon_broken_hart:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_broken_hart
+    name: Tekstballon Broken Hart
+  tekstballon_geld_emoji:
+    material: PAPER
+    item_model: minecraft:custom/emojis/groot/tekstballon_geld_emoji
+    name: Tekstballon Geld Emoji
+  tekstballon_geld_zak:
+    material: PAPER
+    item_model: minecraft:custom/emojis/groot/tekstballon_geld_zak
+    name: Tekstballon Geld Zak
+  tekstballon_bes:
+    material: PAPER
+    item_model: minecraft:custom/emojis/groot/tekstballon_bes
+    name: Tekstballon Bes
+  tekstballon_party:
+    material: PAPER
+    item_model: minecraft:custom/emojis/groot/tekstballon_party
+    name: Tekstballon Party
+  tekstballon_dirt:
+    material: PAPER
+    item_model: minecraft:custom/emojis/groot/tekstballon_dirt
+    name: Tekstballon Dirt
+  tekstballon_lava:
+    material: PAPER
+    item_model: minecraft:custom/emojis/groot/tekstballon_lava
+    name: Tekstballon Lava
+  tekstballon_pray:
+    material: PAPER
+    item_model: minecraft:custom/emojis/groot/tekstballon_pray
+    name: Tekstballon Pray
+  tekstballon_slapen:
+    material: PAPER
+    item_model: minecraft:custom/emojis/groot/tekstballon_slapen
+    name: Tekstballon Slapen
+  tekstballon_puppy_face:
+    material: PAPER
+    item_model: minecraft:custom/emojis/groot/tekstballon_puppy_face
+    name: Tekstballon Puppy Face

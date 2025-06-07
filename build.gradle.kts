@@ -4,6 +4,7 @@ plugins {
     id("com.gradleup.shadow") version "8.3.6"
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
     id("maven-publish")
+    id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "nl.openminetopia"
@@ -105,6 +106,17 @@ java {
 }
 
 tasks {
+    runServer {
+        minecraftVersion("1.21.4")
+        jvmArgs("-Dcom.mojang.eula.agree=true", "-Dfile.encoding=UTF-8")
+        downloadPlugins {
+            github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
+            hangar("PlaceholderAPI", "2.11.6")
+            modrinth("WorldGuard", "7.0.13")
+            hangar("WorldEdit", "7.3.14")
+        }
+    }
+
     compileJava {
         options.encoding = "UTF-8"
         options.compilerArgs.add("-parameters")

@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  lala_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/lala/leggings
+    name: Lala Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:lala
+  lala_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/lala/chestplate
+    name: Lala Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:lala
+  lala_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/lala/boots
+    name: Lala Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:lala

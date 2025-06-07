@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  voetbal_nederland_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/voetbal_nederland/leggings
+    name: Voetbal Nederland Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:voetbal_nederland
+  voetbal_nederland_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/voetbal_nederland/chestplate
+    name: Voetbal Nederland Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:voetbal_nederland
+  voetbal_nederland_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/voetbal_nederland/boots
+    name: Voetbal Nederland Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:voetbal_nederland

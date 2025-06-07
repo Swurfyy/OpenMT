@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  dreaming_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/dreaming/leggings
+    name: Dreaming Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:dreaming
+  dreaming_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/dreaming/chestplate
+    name: Dreaming Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:dreaming
+  dreaming_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/dreaming/helmet
+    name: Dreaming Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:dreaming
+  dreaming_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/dreaming/boots
+    name: Dreaming Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:dreaming

@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  ghost_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/ghost/leggings
+    name: Ghost Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:ghost
+  ghost_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/ghost/chestplate
+    name: Ghost Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:ghost
+  ghost_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/ghost/boots
+    name: Ghost Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:ghost

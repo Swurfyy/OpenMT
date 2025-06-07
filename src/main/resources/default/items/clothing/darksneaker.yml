@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  darksneaker_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/darksneaker/boots
+    name: Darksneaker Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:darksneaker

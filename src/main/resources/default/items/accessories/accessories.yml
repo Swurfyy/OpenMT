@@ -1,0 +1,1002 @@
+namespace: accessories
+items:
+  sterrebril:
+    material: PAPER
+    item_model: minecraft:custom/items/sterrebril
+    name: Sterrebril
+  kppet:
+    material: PAPER
+    item_model: minecraft:custom/items/kppet
+    name: Kppet
+  badge_social1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_social1
+    name: Badge Social1
+  pinguinpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/pinguinpoppetje
+    name: Pinguinpoppetje
+  twbril:
+    material: PAPER
+    item_model: minecraft:custom/items/twbril
+    name: Twbril
+  rotjochbag:
+    material: PAPER
+    item_model: minecraft:custom/items/rotjochbag
+    name: Rotjochbag
+  rodestrik:
+    material: PAPER
+    item_model: minecraft:custom/items/rodestrik
+    name: Rodestrik
+  teddybeer:
+    material: PAPER
+    item_model: minecraft:custom/items/teddybeer
+    name: Teddybeer
+  dusdavidpoppetje_lootcrate:
+    material: PAPER
+    item_model: minecraft:custom/items/dusdavidpoppetje_lootcrate
+    name: Dusdavidpoppetje Lootcrate
+  silver1:
+    material: PAPER
+    item_model: minecraft:custom/items/silver1
+    name: Silver1
+  paraplu_roodwit:
+    material: PAPER
+    item_model: minecraft:custom/items/paraplu_roodwit
+    name: Paraplu Roodwit
+  diamondbluebig:
+    material: PAPER
+    item_model: minecraft:custom/items/diamondbluebig
+    name: Diamondbluebig
+  ijsbeerhead:
+    material: PAPER
+    item_model: minecraft:custom/items/ijsbeerhead
+    name: Ijsbeerhead
+  pompoenlantaarn:
+    material: PAPER
+    item_model: minecraft:custom/items/pompoenlantaarn
+    name: Pompoenlantaarn
+  elytrabooster:
+    material: PAPER
+    item_model: minecraft:custom/items/elytrabooster
+    name: Elytrabooster
+  heroshead1:
+    material: PAPER
+    item_model: minecraft:custom/items/heroshead1
+    name: Heroshead1
+  wandelstok_clean:
+    material: PAPER
+    item_model: minecraft:custom/items/wandelstok_clean
+    name: Wandelstok Clean
+  filmcamera:
+    material: PAPER
+    item_model: minecraft:custom/items/filmcamera
+    name: Filmcamera
+  rotjochhead:
+    material: PAPER
+    item_model: minecraft:custom/items/rotjochhead
+    name: Rotjochhead
+  rendierpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/rendierpoppetje
+    name: Rendierpoppetje
+  jerrycan_full:
+    material: PAPER
+    item_model: minecraft:custom/items/jerrycan_full
+    name: Jerrycan Full
+  onstopperhead:
+    material: PAPER
+    item_model: minecraft:custom/items/onstopperhead
+    name: Onstopperhead
+  planga_roze:
+    material: PAPER
+    item_model: minecraft:custom/items/planga_roze
+    name: Planga Roze
+  minderbenzine:
+    material: PAPER
+    item_model: minecraft:custom/items/minderbenzine
+    name: Minderbenzine
+  beerhead:
+    material: PAPER
+    item_model: minecraft:custom/items/beerhead
+    name: Beerhead
+  gopro:
+    material: PAPER
+    item_model: minecraft:custom/items/gopro
+    name: Gopro
+  ddgzwaard:
+    material: PAPER
+    item_model: minecraft:custom/items/ddgzwaard
+    name: Ddgzwaard
+  gelehelm:
+    material: PAPER
+    item_model: minecraft:custom/items/gelehelm
+    name: Gelehelm
+  trafficsign6:
+    material: PAPER
+    item_model: minecraft:custom/items/trafficsign6
+    name: Trafficsign6
+  trafficsign7:
+    material: PAPER
+    item_model: minecraft:custom/items/trafficsign7
+    name: Trafficsign7
+  kofferuitbreiding:
+    material: PAPER
+    item_model: minecraft:custom/items/kofferuitbreiding
+    name: Kofferuitbreiding
+  sneeuwpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/sneeuwpoppetje
+    name: Sneeuwpoppetje
+  6yrkoffer:
+    material: PAPER
+    item_model: minecraft:custom/items/6yrkoffer
+    name: 6yrkoffer
+  featherfalling:
+    material: PAPER
+    item_model: minecraft:custom/items/featherfalling
+    name: Featherfalling
+  pinkgokuhair:
+    material: PAPER
+    item_model: minecraft:custom/items/pinkgokuhair
+    name: Pinkgokuhair
+  geslaagdhoed:
+    material: PAPER
+    item_model: minecraft:custom/items/geslaagdhoed
+    name: Geslaagdhoed
+  thewizpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/thewizpoppetje
+    name: Thewizpoppetje
+  lobbyxp:
+    material: PAPER
+    item_model: minecraft:custom/items/lobbyxp
+    name: Lobbyxp
+  duikfles:
+    material: PAPER
+    item_model: minecraft:custom/items/duikfles
+    name: Duikfles
+  oranjepet:
+    material: PAPER
+    item_model: minecraft:custom/items/oranjepet
+    name: Oranjepet
+  egszwaard:
+    material: PAPER
+    item_model: minecraft:custom/items/egszwaard
+    name: Egszwaard
+  pepperspray:
+    material: PAPER
+    item_model: minecraft:custom/items/pepperspray
+    name: Pepperspray
+  badge_gezondeten1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_gezondeten1
+    name: Badge Gezondeten1
+  diamondpinkbig:
+    material: PAPER
+    item_model: minecraft:custom/items/diamondpinkbig
+    name: Diamondpinkbig
+  badge_wandelschoen1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_wandelschoen1
+    name: Badge Wandelschoen1
+  jumpboost:
+    material: PAPER
+    item_model: minecraft:custom/items/jumpboost
+    name: Jumpboost
+  duikbril_groen:
+    material: PAPER
+    item_model: minecraft:custom/items/duikbril_groen
+    name: Duikbril Groen
+  gitaar:
+    material: PAPER
+    item_model: minecraft:custom/items/gitaar
+    name: Gitaar
+  ddgback:
+    material: PAPER
+    item_model: minecraft:custom/items/ddgback
+    name: Ddgback
+  headset:
+    material: PAPER
+    item_model: minecraft:custom/items/headset
+    name: Headset
+  duikbril_blauw:
+    material: PAPER
+    item_model: minecraft:custom/items/duikbril_blauw
+    name: Duikbril Blauw
+  badge_tropischeeter1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_tropischeeter1
+    name: Badge Tropischeeter1
+  jerrycan_empty:
+    material: PAPER
+    item_model: minecraft:custom/items/jerrycan_empty
+    name: Jerrycan Empty
+  zwemspeed:
+    material: PAPER
+    item_model: minecraft:custom/items/zwemspeed
+    name: Zwemspeed
+  sleutel:
+    material: PAPER
+    item_model: minecraft:custom/items/sleutel
+    name: Sleutel
+  egsbag:
+    material: PAPER
+    item_model: minecraft:custom/items/egsbag
+    name: Egsbag
+  reiskluis_matrix:
+    material: PAPER
+    item_model: minecraft:custom/items/reiskluis_matrix
+    name: Reiskluis Matrix
+  badge_elytra1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_elytra1
+    name: Badge Elytra1
+  lantaarnclean:
+    material: PAPER
+    item_model: minecraft:custom/items/lantaarnclean
+    name: Lantaarnclean
+  walkietalkie:
+    material: PAPER
+    item_model: minecraft:custom/items/walkietalkie
+    name: Walkietalkie
+  diamondbluesmall:
+    material: PAPER
+    item_model: minecraft:custom/items/diamondbluesmall
+    name: Diamondbluesmall
+  groenedollarbril:
+    material: PAPER
+    item_model: minecraft:custom/items/groenedollarbril
+    name: Groenedollarbril
+  orangegokuhair:
+    material: PAPER
+    item_model: minecraft:custom/items/orangegokuhair
+    name: Orangegokuhair
+  bouwhelm:
+    material: PAPER
+    item_model: minecraft:custom/items/bouwhelm
+    name: Bouwhelm
+  ballon_geel:
+    material: PAPER
+    item_model: minecraft:custom/items/ballon_geel
+    name: Ballon Geel
+  pinguinhead:
+    material: PAPER
+    item_model: minecraft:custom/items/pinguinhead
+    name: Pinguinhead
+  duikbril_roze:
+    material: PAPER
+    item_model: minecraft:custom/items/duikbril_roze
+    name: Duikbril Roze
+  paraplu_blauwwit:
+    material: PAPER
+    item_model: minecraft:custom/items/paraplu_blauwwit
+    name: Paraplu Blauwwit
+  goldherohead:
+    material: PAPER
+    item_model: minecraft:custom/items/goldherohead
+    name: Goldherohead
+  vendingbag:
+    material: PAPER
+    item_model: minecraft:custom/items/vendingbag
+    name: Vendingbag
+  goudstaafgroot:
+    material: PAPER
+    item_model: minecraft:custom/items/goudstaafgroot
+    name: Goudstaafgroot
+  halloweenmask:
+    material: PAPER
+    item_model: minecraft:custom/items/halloweenmask
+    name: Halloweenmask
+  money:
+    material: PAPER
+    item_model: minecraft:custom/items/money
+    name: Money
+  wittebril:
+    material: PAPER
+    item_model: minecraft:custom/items/wittebril
+    name: Wittebril
+  ballon_rood:
+    material: PAPER
+    item_model: minecraft:custom/items/ballon_rood
+    name: Ballon Rood
+  badge_gatinschoen1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_gatinschoen1
+    name: Badge Gatinschoen1
+  bivak:
+    material: PAPER
+    item_model: minecraft:custom/items/bivak
+    name: Bivak
+  grayshardbooster:
+    material: PAPER
+    item_model: minecraft:custom/items/grayshardbooster
+    name: Grayshardbooster
+  goudeheadset:
+    material: PAPER
+    item_model: minecraft:custom/items/goudeheadset
+    name: Goudeheadset
+  blauwestrik:
+    material: PAPER
+    item_model: minecraft:custom/items/blauwestrik
+    name: Blauwestrik
+  easterbunnypoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/easterbunnypoppetje
+    name: Easterbunnypoppetje
+  shannyriapoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/shannyriapoppetje
+    name: Shannyriapoppetje
+  travelbypass:
+    material: PAPER
+    item_model: minecraft:custom/items/travelbypass
+    name: Travelbypass
+  koalahead:
+    material: PAPER
+    item_model: minecraft:custom/items/koalahead
+    name: Koalahead
+  koffer:
+    material: PAPER
+    item_model: minecraft:custom/items/koffer
+    name: Koffer
+  rendierhead:
+    material: PAPER
+    item_model: minecraft:custom/items/rendierhead
+    name: Rendierhead
+  ghosthead:
+    material: PAPER
+    item_model: minecraft:custom/items/ghosthead
+    name: Ghosthead
+  reiskoffermini:
+    material: PAPER
+    item_model: minecraft:custom/items/reiskoffermini
+    name: Reiskoffermini
+  koelbox:
+    material: PAPER
+    item_model: minecraft:custom/items/koelbox
+    name: Koelbox
+  badge_kampeerder1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_kampeerder1
+    name: Badge Kampeerder1
+  trafficsign1:
+    material: PAPER
+    item_model: minecraft:custom/items/trafficsign1
+    name: Trafficsign1
+  flamingopoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/flamingopoppetje
+    name: Flamingopoppetje
+  gold1:
+    material: PAPER
+    item_model: minecraft:custom/items/gold1
+    name: Gold1
+  heroshead6:
+    material: PAPER
+    item_model: minecraft:custom/items/heroshead6
+    name: Heroshead6
+  healthboost:
+    material: PAPER
+    item_model: minecraft:custom/items/healthboost
+    name: Healthboost
+  abilitycooldown:
+    material: PAPER
+    item_model: minecraft:custom/items/abilitycooldown
+    name: Abilitycooldown
+  handtasdiamond:
+    material: PAPER
+    item_model: minecraft:custom/items/handtasdiamond
+    name: Handtasdiamond
+  abubuhoed:
+    material: PAPER
+    item_model: minecraft:custom/items/abubuhoed
+    name: Abubuhoed
+  trafficsign2:
+    material: PAPER
+    item_model: minecraft:custom/items/trafficsign2
+    name: Trafficsign2
+  goudenhorloge:
+    material: PAPER
+    item_model: minecraft:custom/items/goudenhorloge
+    name: Goudenhorloge
+  lowgravity:
+    material: PAPER
+    item_model: minecraft:custom/items/lowgravity
+    name: Lowgravity
+  ballon_roze:
+    material: PAPER
+    item_model: minecraft:custom/items/ballon_roze
+    name: Ballon Roze
+  pumpkinmask:
+    material: PAPER
+    item_model: minecraft:custom/items/pumpkinmask
+    name: Pumpkinmask
+  suitcase:
+    material: PAPER
+    item_model: minecraft:custom/items/suitcase
+    name: Suitcase
+  gold2:
+    material: PAPER
+    item_model: minecraft:custom/items/gold2
+    name: Gold2
+  duikbril_geel:
+    material: PAPER
+    item_model: minecraft:custom/items/duikbril_geel
+    name: Duikbril Geel
+  heroshead5:
+    material: PAPER
+    item_model: minecraft:custom/items/heroshead5
+    name: Heroshead5
+  sporthorloge:
+    material: PAPER
+    item_model: minecraft:custom/items/sporthorloge
+    name: Sporthorloge
+  nether_backpack:
+    material: PAPER
+    item_model: minecraft:custom/items/nether_backpack
+    name: Nether Backpack
+  kppet_back:
+    material: PAPER
+    item_model: minecraft:custom/items/kppet_back
+    name: Kppet Back
+  wolfhead:
+    material: PAPER
+    item_model: minecraft:custom/items/wolfhead
+    name: Wolfhead
+  rotjochzwaard:
+    material: PAPER
+    item_model: minecraft:custom/items/rotjochzwaard
+    name: Rotjochzwaard
+  silverstaafbig:
+    material: PAPER
+    item_model: minecraft:custom/items/silverstaafbig
+    name: Silverstaafbig
+  duckpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/duckpoppetje
+    name: Duckpoppetje
+  duffyhead:
+    material: PAPER
+    item_model: minecraft:custom/items/duffyhead
+    name: Duffyhead
+  sombrero:
+    material: PAPER
+    item_model: minecraft:custom/items/sombrero
+    name: Sombrero
+  silver5:
+    material: PAPER
+    item_model: minecraft:custom/items/silver5
+    name: Silver5
+  planga_goud:
+    material: PAPER
+    item_model: minecraft:custom/items/planga_goud
+    name: Planga Goud
+  cowpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/cowpoppetje
+    name: Cowpoppetje
+  helo:
+    material: PAPER
+    item_model: minecraft:custom/items/helo
+    name: Helo
+  pikachupoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/pikachupoppetje
+    name: Pikachupoppetje
+  badge_city1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_city1
+    name: Badge City1
+  pas_lichtblauw1:
+    material: PAPER
+    item_model: minecraft:custom/items/pas_lichtblauw1
+    name: Pas Lichtblauw1
+  smilleymask:
+    material: PAPER
+    item_model: minecraft:custom/items/smilleymask
+    name: Smilleymask
+  dhdpet:
+    material: PAPER
+    item_model: minecraft:custom/items/dhdpet
+    name: Dhdpet
+  ddgpet_back:
+    material: PAPER
+    item_model: minecraft:custom/items/ddgpet_back
+    name: Ddgpet Back
+  danny026head:
+    material: PAPER
+    item_model: minecraft:custom/items/danny026head
+    name: Danny026head
+  badge_drinken1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_drinken1
+    name: Badge Drinken1
+  kerstmanpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/kerstmanpoppetje
+    name: Kerstmanpoppetje
+  hollandbril:
+    material: PAPER
+    item_model: minecraft:custom/items/hollandbril
+    name: Hollandbril
+  woodypoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/woodypoppetje
+    name: Woodypoppetje
+  minionpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/minionpoppetje
+    name: Minionpoppetje
+  handtasgoud:
+    material: PAPER
+    item_model: minecraft:custom/items/handtasgoud
+    name: Handtasgoud
+  blauwehelm:
+    material: PAPER
+    item_model: minecraft:custom/items/blauwehelm
+    name: Blauwehelm
+  badge_spring1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_spring1
+    name: Badge Spring1
+  mineboost:
+    material: PAPER
+    item_model: minecraft:custom/items/mineboost
+    name: Mineboost
+  rozepet:
+    material: PAPER
+    item_model: minecraft:custom/items/rozepet
+    name: Rozepet
+  rugzak:
+    material: PAPER
+    item_model: minecraft:custom/items/rugzak
+    name: Rugzak
+  battlefieldgun:
+    material: PAPER
+    item_model: minecraft:custom/items/battlefieldgun
+    name: Battlefieldgun
+  davidhead:
+    material: PAPER
+    item_model: minecraft:custom/items/davidhead
+    name: Davidhead
+  gokuhair:
+    material: PAPER
+    item_model: minecraft:custom/items/gokuhair
+    name: Gokuhair
+  thuglifebril:
+    material: PAPER
+    item_model: minecraft:custom/items/thuglifebril
+    name: Thuglifebril
+  zebrapoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/zebrapoppetje
+    name: Zebrapoppetje
+  bluegokuhair:
+    material: PAPER
+    item_model: minecraft:custom/items/bluegokuhair
+    name: Bluegokuhair
+  pas_lichtblauw:
+    material: PAPER
+    item_model: minecraft:custom/items/pas_lichtblauw
+    name: Pas Lichtblauw
+  silver4:
+    material: PAPER
+    item_model: minecraft:custom/items/silver4
+    name: Silver4
+  planga_paars:
+    material: PAPER
+    item_model: minecraft:custom/items/planga_paars
+    name: Planga Paars
+  myreclypsapoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/myreclypsapoppetje
+    name: Myreclypsapoppetje
+  badge_lucky1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_lucky1
+    name: Badge Lucky1
+  dennisv96head:
+    material: PAPER
+    item_model: minecraft:custom/items/dennisv96head
+    name: Dennisv96head
+  nightriderhelm:
+    material: PAPER
+    item_model: minecraft:custom/items/nightriderhelm
+    name: Nightriderhelm
+  speedboost:
+    material: PAPER
+    item_model: minecraft:custom/items/speedboost
+    name: Speedboost
+  pas_goud:
+    material: PAPER
+    item_model: minecraft:custom/items/pas_goud
+    name: Pas Goud
+  pokemonpet_back:
+    material: PAPER
+    item_model: minecraft:custom/items/pokemonpet_back
+    name: Pokemonpet Back
+  backpack:
+    material: PAPER
+    item_model: minecraft:custom/items/backpack
+    name: Backpack
+  paraplu_rainbow:
+    material: PAPER
+    item_model: minecraft:custom/items/paraplu_rainbow
+    name: Paraplu Rainbow
+  heroshead4:
+    material: PAPER
+    item_model: minecraft:custom/items/heroshead4
+    name: Heroshead4
+  pet:
+    material: PAPER
+    item_model: minecraft:custom/items/pet
+    name: Pet
+  ddgpet:
+    material: PAPER
+    item_model: minecraft:custom/items/ddgpet
+    name: Ddgpet
+  gold3:
+    material: PAPER
+    item_model: minecraft:custom/items/gold3
+    name: Gold3
+  minetopiabag:
+    material: PAPER
+    item_model: minecraft:custom/items/minetopiabag
+    name: Minetopiabag
+  dollarbril:
+    material: PAPER
+    item_model: minecraft:custom/items/dollarbril
+    name: Dollarbril
+  snorlaxpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/snorlaxpoppetje
+    name: Snorlaxpoppetje
+  leeuwpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/leeuwpoppetje
+    name: Leeuwpoppetje
+  giantskeletonpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/giantskeletonpoppetje
+    name: Giantskeletonpoppetje
+  trafficsign3:
+    material: PAPER
+    item_model: minecraft:custom/items/trafficsign3
+    name: Trafficsign3
+  duikbril_geel_duffy:
+    material: PAPER
+    item_model: minecraft:custom/items/duikbril_geel_duffy
+    name: Duikbril Geel Duffy
+  ring:
+    material: PAPER
+    item_model: minecraft:custom/items/ring
+    name: Ring
+  duffybag:
+    material: PAPER
+    item_model: minecraft:custom/items/duffybag
+    name: Duffybag
+  propellorpet:
+    material: PAPER
+    item_model: minecraft:custom/items/propellorpet
+    name: Propellorpet
+  trafficsign8:
+    material: PAPER
+    item_model: minecraft:custom/items/trafficsign8
+    name: Trafficsign8
+  diamondhogehoed:
+    material: PAPER
+    item_model: minecraft:custom/items/diamondhogehoed
+    name: Diamondhogehoed
+  silver3:
+    material: PAPER
+    item_model: minecraft:custom/items/silver3
+    name: Silver3
+  planga_magenta:
+    material: PAPER
+    item_model: minecraft:custom/items/planga_magenta
+    name: Planga Magenta
+  handtasemerald:
+    material: PAPER
+    item_model: minecraft:custom/items/handtasemerald
+    name: Handtasemerald
+  microfoon:
+    material: PAPER
+    item_model: minecraft:custom/items/microfoon
+    name: Microfoon
+  horloge:
+    material: PAPER
+    item_model: minecraft:custom/items/horloge
+    name: Horloge
+  goldcoin:
+    material: PAPER
+    item_model: minecraft:custom/items/goldcoin
+    name: Goldcoin
+  rodehogehoed:
+    material: PAPER
+    item_model: minecraft:custom/items/rodehogehoed
+    name: Rodehogehoed
+  reiskoffer:
+    material: PAPER
+    item_model: minecraft:custom/items/reiskoffer
+    name: Reiskoffer
+  handtas:
+    material: PAPER
+    item_model: minecraft:custom/items/handtas
+    name: Handtas
+  elfenhoed:
+    material: PAPER
+    item_model: minecraft:custom/items/elfenhoed
+    name: Elfenhoed
+  badge_ladder1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_ladder1
+    name: Badge Ladder1
+  greengokuhair:
+    material: PAPER
+    item_model: minecraft:custom/items/greengokuhair
+    name: Greengokuhair
+  pet_back:
+    material: PAPER
+    item_model: minecraft:custom/items/pet_back
+    name: Pet Back
+  boombox:
+    material: PAPER
+    item_model: minecraft:custom/items/boombox
+    name: Boombox
+  planga_geel:
+    material: PAPER
+    item_model: minecraft:custom/items/planga_geel
+    name: Planga Geel
+  myreleiospoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/myreleiospoppetje
+    name: Myreleiospoppetje
+  badge_vergrootglas1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_vergrootglas1
+    name: Badge Vergrootglas1
+  trafficsign4:
+    material: PAPER
+    item_model: minecraft:custom/items/trafficsign4
+    name: Trafficsign4
+  heksenhoed:
+    material: PAPER
+    item_model: minecraft:custom/items/heksenhoed
+    name: Heksenhoed
+  wapenstokcooldown:
+    material: PAPER
+    item_model: minecraft:custom/items/wapenstokcooldown
+    name: Wapenstokcooldown
+  rijbewijs:
+    material: PAPER
+    item_model: minecraft:custom/items/rijbewijs
+    name: Rijbewijs
+  badge_eten1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_eten1
+    name: Badge Eten1
+  badge_aanwezig1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_aanwezig1
+    name: Badge Aanwezig1
+  minderdrinken:
+    material: PAPER
+    item_model: minecraft:custom/items/minderdrinken
+    name: Minderdrinken
+  silverstaafsmall:
+    material: PAPER
+    item_model: minecraft:custom/items/silverstaafsmall
+    name: Silverstaafsmall
+  gold4:
+    material: PAPER
+    item_model: minecraft:custom/items/gold4
+    name: Gold4
+  planga_groen:
+    material: PAPER
+    item_model: minecraft:custom/items/planga_groen
+    name: Planga Groen
+  heroshead3:
+    material: PAPER
+    item_model: minecraft:custom/items/heroshead3
+    name: Heroshead3
+  danny026poppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/danny026poppetje
+    name: Danny026poppetje
+  ballon_blauw:
+    material: PAPER
+    item_model: minecraft:custom/items/ballon_blauw
+    name: Ballon Blauw
+  zeis:
+    material: PAPER
+    item_model: minecraft:custom/items/zeis
+    name: Zeis
+  handtaspurple:
+    material: PAPER
+    item_model: minecraft:custom/items/handtaspurple
+    name: Handtaspurple
+  kerstkoffer:
+    material: PAPER
+    item_model: minecraft:custom/items/kerstkoffer
+    name: Kerstkoffer
+  ballon_groen:
+    material: PAPER
+    item_model: minecraft:custom/items/ballon_groen
+    name: Ballon Groen
+  tiara:
+    material: PAPER
+    item_model: minecraft:custom/items/tiara
+    name: Tiara
+  badge_duikbril1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_duikbril1
+    name: Badge Duikbril1
+  crimineel:
+    material: PAPER
+    item_model: minecraft:custom/items/crimineel
+    name: Crimineel
+  extrauurloon:
+    material: PAPER
+    item_model: minecraft:custom/items/extrauurloon
+    name: Extrauurloon
+  whoamshead:
+    material: PAPER
+    item_model: minecraft:custom/items/whoamshead
+    name: Whoamshead
+  dinopoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/dinopoppetje
+    name: Dinopoppetje
+  verrekijker:
+    material: PAPER
+    item_model: minecraft:custom/items/verrekijker
+    name: Verrekijker
+  zakkenrollen:
+    material: PAPER
+    item_model: minecraft:custom/items/zakkenrollen
+    name: Zakkenrollen
+  pas_rood:
+    material: PAPER
+    item_model: minecraft:custom/items/pas_rood
+    name: Pas Rood
+  rodehelm:
+    material: PAPER
+    item_model: minecraft:custom/items/rodehelm
+    name: Rodehelm
+  pokemonpet:
+    material: PAPER
+    item_model: minecraft:custom/items/pokemonpet
+    name: Pokemonpet
+  kerstmanhead:
+    material: PAPER
+    item_model: minecraft:custom/items/kerstmanhead
+    name: Kerstmanhead
+  heroshead2:
+    material: PAPER
+    item_model: minecraft:custom/items/heroshead2
+    name: Heroshead2
+  olifantpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/olifantpoppetje
+    name: Olifantpoppetje
+  schaappoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/schaappoppetje
+    name: Schaappoppetje
+  wittestrik:
+    material: PAPER
+    item_model: minecraft:custom/items/wittestrik
+    name: Wittestrik
+  pas_blauw:
+    material: PAPER
+    item_model: minecraft:custom/items/pas_blauw
+    name: Pas Blauw
+  gold5:
+    material: PAPER
+    item_model: minecraft:custom/items/gold5
+    name: Gold5
+  badge_unlucky1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_unlucky1
+    name: Badge Unlucky1
+  davidoscar:
+    material: PAPER
+    item_model: minecraft:custom/items/davidoscar
+    name: Davidoscar
+  tijgerpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/tijgerpoppetje
+    name: Tijgerpoppetje
+  fabriceei:
+    material: PAPER
+    item_model: minecraft:custom/items/fabriceei
+    name: Fabriceei
+  haaipoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/haaipoppetje
+    name: Haaipoppetje
+  trafficsign5:
+    material: PAPER
+    item_model: minecraft:custom/items/trafficsign5
+    name: Trafficsign5
+  pas_geel:
+    material: PAPER
+    item_model: minecraft:custom/items/pas_geel
+    name: Pas Geel
+  marnickurhead:
+    material: PAPER
+    item_model: minecraft:custom/items/marnickurhead
+    name: Marnickurhead
+  badge_money1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_money1
+    name: Badge Money1
+  waterbreathing:
+    material: PAPER
+    item_model: minecraft:custom/items/waterbreathing
+    name: Waterbreathing
+  diamondpinksmall:
+    material: PAPER
+    item_model: minecraft:custom/items/diamondpinksmall
+    name: Diamondpinksmall
+  ijsbeerpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/items/ijsbeerpoppetje
+    name: Ijsbeerpoppetje
+  ballon_oranje:
+    material: PAPER
+    item_model: minecraft:custom/items/ballon_oranje
+    name: Ballon Oranje
+  duffygameszwaard:
+    material: PAPER
+    item_model: minecraft:custom/items/duffygameszwaard
+    name: Duffygameszwaard
+  planga_oranje:
+    material: PAPER
+    item_model: minecraft:custom/items/planga_oranje
+    name: Planga Oranje
+  badge_sportschoenen1:
+    material: PAPER
+    item_model: minecraft:custom/items/badge_sportschoenen1
+    name: Badge Sportschoenen1
+  kortingreizen:
+    material: PAPER
+    item_model: minecraft:custom/items/kortingreizen
+    name: Kortingreizen
+  kerstmuts:
+    material: PAPER
+    item_model: minecraft:custom/items/kerstmuts
+    name: Kerstmuts
+  eenhoornhead:
+    material: PAPER
+    item_model: minecraft:custom/items/eenhoornhead
+    name: Eenhoornhead
+  wandeltak:
+    material: PAPER
+    item_model: minecraft:custom/items/wandeltak
+    name: Wandeltak
+  silver2:
+    material: PAPER
+    item_model: minecraft:custom/items/silver2
+    name: Silver2
+  relic_koffer:
+    material: PAPER
+    item_model: minecraft:custom/items/relic_koffer
+    name: Relic Koffer
+  drolhoed:
+    material: PAPER
+    item_model: minecraft:custom/items/drolhoed
+    name: Drolhoed
+  dhdpet_back:
+    material: PAPER
+    item_model: minecraft:custom/items/dhdpet_back
+    name: Dhdpet Back
+  mistletoe:
+    material: PAPER
+    item_model: minecraft:custom/items/temp/mistletoe
+    name: Mistletoe
+  krans:
+    material: PAPER
+    item_model: minecraft:custom/items/temp/krans
+    name: Krans

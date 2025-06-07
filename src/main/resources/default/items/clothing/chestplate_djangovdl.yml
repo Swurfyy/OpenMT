@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  chestplate_djangovdl_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/chestplate_djangovdl/chestplate
+    name: Chestplate Djangovdl Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:chestplate_djangovdl

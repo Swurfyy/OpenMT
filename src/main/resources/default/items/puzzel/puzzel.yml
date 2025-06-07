@@ -1,0 +1,90 @@
+namespace: puzzel
+items:
+  pokemon_kaart_pikachu_puzzel_1:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/pokemon_kaart_pikachu/pokemon_kaart_pikachu_puzzel_1
+    name: Pokemon Kaart Pikachu Puzzel 1
+  pokemon_kaart_pikachu_puzzel_6:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/pokemon_kaart_pikachu/pokemon_kaart_pikachu_puzzel_6
+    name: Pokemon Kaart Pikachu Puzzel 6
+  pokemon_kaart_pikachu_puzzel_5:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/pokemon_kaart_pikachu/pokemon_kaart_pikachu_puzzel_5
+    name: Pokemon Kaart Pikachu Puzzel 5
+  pokemon_kaart_pikachu_puzzel_4:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/pokemon_kaart_pikachu/pokemon_kaart_pikachu_puzzel_4
+    name: Pokemon Kaart Pikachu Puzzel 4
+  pokemon_kaart_pikachu_puzzel_3:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/pokemon_kaart_pikachu/pokemon_kaart_pikachu_puzzel_3
+    name: Pokemon Kaart Pikachu Puzzel 3
+  pokemon_kaart_pikachu_puzzel_2:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/pokemon_kaart_pikachu/pokemon_kaart_pikachu_puzzel_2
+    name: Pokemon Kaart Pikachu Puzzel 2
+  spiderman_puzzel_10:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_10
+    name: Spiderman Puzzel 10
+  spiderman_puzzel_1:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_1
+    name: Spiderman Puzzel 1
+  spiderman_puzzel_11:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_11
+    name: Spiderman Puzzel 11
+  spiderman_puzzel_7:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_7
+    name: Spiderman Puzzel 7
+  spiderman_puzzel_16:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_16
+    name: Spiderman Puzzel 16
+  spiderman_puzzel_6:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_6
+    name: Spiderman Puzzel 6
+  spiderman_puzzel_5:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_5
+    name: Spiderman Puzzel 5
+  spiderman_puzzel_14:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_14
+    name: Spiderman Puzzel 14
+  spiderman_puzzel_9:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_9
+    name: Spiderman Puzzel 9
+  spiderman_puzzel_8:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_8
+    name: Spiderman Puzzel 8
+  spiderman_puzzel_15:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_15
+    name: Spiderman Puzzel 15
+  spiderman_puzzel_4:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_4
+    name: Spiderman Puzzel 4
+  spiderman_puzzel_12:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_12
+    name: Spiderman Puzzel 12
+  spiderman_puzzel_3:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_3
+    name: Spiderman Puzzel 3
+  spiderman_puzzel_2:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_2
+    name: Spiderman Puzzel 2
+  spiderman_puzzel_13:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/spiderman/spiderman_puzzel_13
+    name: Spiderman Puzzel 13

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  spectral_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/spectral/leggings
+    name: Spectral Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:spectral
+  spectral_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/spectral/chestplate
+    name: Spectral Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:spectral
+  spectral_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/spectral/helmet
+    name: Spectral Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:spectral
+  spectral_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/spectral/boots
+    name: Spectral Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:spectral

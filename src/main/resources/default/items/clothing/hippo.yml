@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  hippo_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/hippo/leggings
+    name: Hippo Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:hippo
+  hippo_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/hippo/chestplate
+    name: Hippo Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:hippo
+  hippo_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/hippo/boots
+    name: Hippo Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:hippo

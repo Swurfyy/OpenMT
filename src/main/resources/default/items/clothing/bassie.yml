@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  bassie_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/bassie/leggings
+    name: Bassie Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:bassie
+  bassie_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/bassie/chestplate
+    name: Bassie Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:bassie
+  bassie_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/bassie/helmet
+    name: Bassie Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:bassie
+  bassie_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/bassie/boots
+    name: Bassie Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:bassie

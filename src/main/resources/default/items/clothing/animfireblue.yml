@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  animfireblue_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/animfireblue/leggings
+    name: Animfireblue Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:animfireblue
+  animfireblue_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/animfireblue/chestplate
+    name: Animfireblue Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:animfireblue
+  animfireblue_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/animfireblue/helmet
+    name: Animfireblue Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:animfireblue
+  animfireblue_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/animfireblue/boots
+    name: Animfireblue Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:animfireblue

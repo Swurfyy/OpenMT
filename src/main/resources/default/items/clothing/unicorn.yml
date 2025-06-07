@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  unicorn_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/unicorn/leggings
+    name: Unicorn Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:unicorn
+  unicorn_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/unicorn/chestplate
+    name: Unicorn Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:unicorn
+  unicorn_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/unicorn/boots
+    name: Unicorn Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:unicorn

@@ -1,0 +1,1474 @@
+namespace: funko
+items:
+  funko_pop_blaze:
+    material: PAPER
+    item_model: minecraft:custom/funko/113-blaze/funko_pop_blaze
+    name: Funko Pop Blaze
+  funko_doos_blaze:
+    material: PAPER
+    item_model: minecraft:custom/funko/113-blaze/funko_doos_blaze
+    name: Funko Doos Blaze
+  funko_pop_big_blaze:
+    material: PAPER
+    item_model: minecraft:custom/funko/113-blaze/funko_pop_big_blaze
+    name: Funko Pop Big Blaze
+  funko_doos_dead_stormtrooper:
+    material: PAPER
+    item_model: minecraft:custom/funko/523-dead_stormtrooper/funko_doos_dead_stormtrooper
+    name: Funko Doos Dead Stormtrooper
+  player_funko_head_orange:
+    material: PAPER
+    item_model: minecraft:custom/funko/playerfunkos/player_funko_head_orange
+    name: Player Funko Head Orange
+  player_funko_head_blue:
+    material: PAPER
+    item_model: minecraft:custom/funko/playerfunkos/player_funko_head_blue
+    name: Player Funko Head Blue
+  player_funko_head_base:
+    material: PAPER
+    item_model: minecraft:custom/funko/playerfunkos/player_funko_head_base
+    name: Player Funko Head Base
+  player_funko_head_pink:
+    material: PAPER
+    item_model: minecraft:custom/funko/playerfunkos/player_funko_head_pink
+    name: Player Funko Head Pink
+  player_funko_head_green:
+    material: PAPER
+    item_model: minecraft:custom/funko/playerfunkos/player_funko_head_green
+    name: Player Funko Head Green
+  player_funko_head_lennertdecleen:
+    material: PAPER
+    item_model: minecraft:custom/funko/playerfunkos/player_funko_head_lennertdecleen
+    name: Player Funko Head Lennertdecleen
+  funko_doos_cuzo_liam:
+    material: PAPER
+    item_model: minecraft:custom/funko/liam/funko_doos_cuzo_liam
+    name: Funko Doos Cuzo Liam
+  funko_doos_camioneurlex:
+    material: PAPER
+    item_model: minecraft:custom/funko/818-camioneurlex/funko_doos_camioneurlex
+    name: Funko Doos Camioneurlex
+  funko_doos_broodjeelias:
+    material: PAPER
+    item_model: minecraft:custom/funko/811-broodjeelias/funko_doos_broodjeelias
+    name: Funko Doos Broodjeelias
+  funko_doos_ron:
+    material: PAPER
+    item_model: minecraft:custom/funko/527-ron/funko_doos_ron
+    name: Funko Doos Ron
+  funko_doos_fortnite_cuddle_team_leader:
+    material: PAPER
+    item_model: minecraft:custom/funko/417-424-fortnite/funko_doos_fortnite_cuddle_team_leader
+    name: Funko Doos Fortnite Cuddle Team Leader
+  funko_doos_beef_burger:
+    material: PAPER
+    item_model: minecraft:custom/funko/fortnite/funko_doos_beef_burger
+    name: Funko Doos Beef Burger
+  funko_doos_renegade_raider:
+    material: PAPER
+    item_model: minecraft:custom/funko/417-424-fortnite/funko_doos_renegade_raider
+    name: Funko Doos Renegade Raider
+  funko_doos_dark_astronaut:
+    material: PAPER
+    item_model: minecraft:custom/funko/417-424-fortnite/funko_doos_dark_astronaut
+    name: Funko Doos Dark Astronaut
+  funko_doos_fortnite_red_knight:
+    material: PAPER
+    item_model: minecraft:custom/funko/417-424-fortnite/funko_doos_fortnite_red_knight
+    name: Funko Doos Fortnite Red Knight
+  funko_doos_fortnite_jonesy:
+    material: PAPER
+    item_model: minecraft:custom/funko/417-424-fortnite/funko_doos_fortnite_jonesy
+    name: Funko Doos Fortnite Jonesy
+  funko_doos_fortnite_fish_stick:
+    material: PAPER
+    item_model: minecraft:custom/funko/417-424-fortnite/funko_doos_fortnite_fish_stick
+    name: Funko Doos Fortnite Fish Stick
+  funko_doos_fortnite_raptor:
+    material: PAPER
+    item_model: minecraft:custom/funko/417-424-fortnite/funko_doos_fortnite_raptor
+    name: Funko Doos Fortnite Raptor
+  funko_doos_dyrenza:
+    material: PAPER
+    item_model: minecraft:custom/funko/805-dyrenza/funko_doos_dyrenza
+    name: Funko Doos Dyrenza
+  funko_doos_goomba:
+    material: PAPER
+    item_model: minecraft:custom/funko/405-goomba/funko_doos_goomba
+    name: Funko Doos Goomba
+  funko_doos_mephidantes:
+    material: PAPER
+    item_model: minecraft:custom/funko/9-mephidantes/funko_doos_mephidantes
+    name: Funko Doos Mephidantes
+  funko_doos_mephidantes_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/9-mephidantes/funko_doos_mephidantes_halloween
+    name: Funko Doos Mephidantes Halloween
+  funko_pop_chicken:
+    material: PAPER
+    item_model: minecraft:custom/funko/110-chicken/funko_pop_chicken
+    name: Funko Pop Chicken
+  funko_doos_chicken:
+    material: PAPER
+    item_model: minecraft:custom/funko/110-chicken/funko_doos_chicken
+    name: Funko Doos Chicken
+  funko_pop_big_goofy:
+    material: PAPER
+    item_model: minecraft:custom/funko/306-goofy/funko_pop_big_goofy
+    name: Funko Pop Big Goofy
+  funko_doos_goofy:
+    material: PAPER
+    item_model: minecraft:custom/funko/306-goofy/funko_doos_goofy
+    name: Funko Doos Goofy
+  funko_doos_shiny_gyarados:
+    material: PAPER
+    item_model: minecraft:custom/funko/210-shiny_gyarados/funko_doos_shiny_gyarados
+    name: Funko Doos Shiny Gyarados
+  funko_doos_mickey_kerst:
+    material: PAPER
+    item_model: minecraft:custom/funko/317-mickey_kerst/funko_doos_mickey_kerst
+    name: Funko Doos Mickey Kerst
+  funko_doos_benderdt_2017:
+    material: PAPER
+    item_model: minecraft:custom/funko/16-benderdt_2017/funko_doos_benderdt_2017
+    name: Funko Doos Benderdt 2017
+  funko_doos_ironhead_2005:
+    material: PAPER
+    item_model: minecraft:custom/funko/842-ironhead_2005/funko_doos_ironhead_2005
+    name: Funko Doos Ironhead 2005
+  funko_doos_darth_vader_gold:
+    material: PAPER
+    item_model: minecraft:custom/funko/518-darth_vader/funko_doos_darth_vader_gold
+    name: Funko Doos Darth Vader Gold
+  funko_doos_darth_vader:
+    material: PAPER
+    item_model: minecraft:custom/funko/518-darth_vader/funko_doos_darth_vader
+    name: Funko Doos Darth Vader
+  funko_doos_momo:
+    material: PAPER
+    item_model: minecraft:custom/funko/512-momo/funko_doos_momo
+    name: Funko Doos Momo
+  funko_doos_ps5_spiderman_gold:
+    material: PAPER
+    item_model: minecraft:custom/funko/playstation/funko_doos_ps5_spiderman_gold
+    name: Funko Doos Ps5 Spiderman Gold
+  funko_doos_spiderman:
+    material: PAPER
+    item_model: minecraft:custom/funko/501-600film/501-spiderman/funko_doos_spiderman
+    name: Funko Doos Spiderman
+  funko_doos_justchax_2020:
+    material: PAPER
+    item_model: minecraft:custom/funko/19-justchax_2020/funko_doos_justchax_2020
+    name: Funko Doos Justchax 2020
+  funko_doos_rahthanatos:
+    material: PAPER
+    item_model: minecraft:custom/funko/7-ragthanatos/funko_doos_rahthanatos
+    name: Funko Doos Rahthanatos
+  funko_doos_rahthanatos_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/7-ragthanatos/funko_doos_rahthanatos_halloween
+    name: Funko Doos Rahthanatos Halloween
+  funko_doos_myrbora:
+    material: PAPER
+    item_model: minecraft:custom/funko/4-myrbora/funko_doos_myrbora
+    name: Funko Doos Myrbora
+  funko_doos_pikachu:
+    material: PAPER
+    item_model: minecraft:custom/funko/201-pikachu/funko_doos_pikachu
+    name: Funko Doos Pikachu
+  funko_doos_dendonia_2018:
+    material: PAPER
+    item_model: minecraft:custom/funko/17-dendonia_2018/funko_doos_dendonia_2018
+    name: Funko Doos Dendonia 2018
+  funko_doos_anakin_skywalker:
+    material: PAPER
+    item_model: minecraft:custom/funko/517-anakin_skywalker/funko_doos_anakin_skywalker
+    name: Funko Doos Anakin Skywalker
+  funko_doos_horse:
+    material: PAPER
+    item_model: minecraft:custom/funko/106-horse/funko_doos_horse
+    name: Funko Doos Horse
+  funko_pop_big_horse:
+    material: PAPER
+    item_model: minecraft:custom/funko/106-horse/funko_pop_big_horse
+    name: Funko Pop Big Horse
+  funko_pop_big_pikachu:
+    material: PAPER
+    item_model: minecraft:custom/funko/201-pikachu/funko_pop_big_pikachu
+    name: Funko Pop Big Pikachu
+  funko_doos_golden_pikachu:
+    material: PAPER
+    item_model: minecraft:custom/funko/201-pikachu/funko_doos_golden_pikachu
+    name: Funko Doos Golden Pikachu
+  funko_pop_big_pikachu_black:
+    material: PAPER
+    item_model: minecraft:custom/funko/201-pikachu/funko_pop_big_pikachu_black
+    name: Funko Pop Big Pikachu Black
+  funko_doos_pikachu_black:
+    material: PAPER
+    item_model: minecraft:custom/funko/201-pikachu/funko_doos_pikachu_black
+    name: Funko Doos Pikachu Black
+  funko_doos_skeleton:
+    material: PAPER
+    item_model: minecraft:custom/funko/109-skeleton/funko_doos_skeleton
+    name: Funko Doos Skeleton
+  funko_pop_skeleton:
+    material: PAPER
+    item_model: minecraft:custom/funko/109-skeleton/funko_pop_skeleton
+    name: Funko Pop Skeleton
+  funko_doos_skeleton_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/109-skeleton/funko_doos_skeleton_halloween
+    name: Funko Doos Skeleton Halloween
+  funko_doos_squirtle:
+    material: PAPER
+    item_model: minecraft:custom/funko/207-squirtle/funko_doos_squirtle
+    name: Funko Doos Squirtle
+  funko_pop_big_squirtle:
+    material: PAPER
+    item_model: minecraft:custom/funko/207-squirtle/funko_pop_big_squirtle
+    name: Funko Pop Big Squirtle
+  funko_doos_mr_potato_head:
+    material: PAPER
+    item_model: minecraft:custom/funko/322-mrpatato_head/funko_doos_mr_potato_head
+    name: Funko Doos Mr Potato Head
+  funko_doos_bobba_fett:
+    material: PAPER
+    item_model: minecraft:custom/funko/519-bobba_fett/funko_doos_bobba_fett
+    name: Funko Doos Bobba Fett
+  funko_doos_dropfayter:
+    material: PAPER
+    item_model: minecraft:custom/funko/813-dropfayter/funko_doos_dropfayter
+    name: Funko Doos Dropfayter
+  funko_doos_nick_nelson_gold:
+    material: PAPER
+    item_model: minecraft:custom/funko/514-nick_nelson/funko_doos_nick_nelson_gold
+    name: Funko Doos Nick Nelson Gold
+  funko_doos_nick_nelson:
+    material: PAPER
+    item_model: minecraft:custom/funko/514-nick_nelson/funko_doos_nick_nelson
+    name: Funko Doos Nick Nelson
+  funko_doos_plop:
+    material: PAPER
+    item_model: minecraft:custom/funko/532-plop/funko_doos_plop
+    name: Funko Doos Plop
+  funko_doos_anna:
+    material: PAPER
+    item_model: minecraft:custom/funko/308-anna/funko_doos_anna
+    name: Funko Doos Anna
+  funko_doos_xbox2_cod:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_xbox2_cod
+    name: Funko Doos Xbox2 Cod
+  funko_doos_ps5_cod:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_ps5_cod
+    name: Funko Doos Ps5 Cod
+  funko_doos_xbox2_fifa:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_xbox2_fifa
+    name: Funko Doos Xbox2 Fifa
+  funko_doos_hogwarts_legacy_case:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_hogwarts_legacy_case
+    name: Funko Doos Hogwarts Legacy Case
+  funko_doos_xbox2_fortnite:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_xbox2_fortnite
+    name: Funko Doos Xbox2 Fortnite
+  funko_doos_xbox2_hogwarts_legacy_case:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_xbox2_hogwarts_legacy_case
+    name: Funko Doos Xbox2 Hogwarts Legacy Case
+  funko_doos_ps5_fc24:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_ps5_fc24
+    name: Funko Doos Ps5 Fc24
+  funko_doos_ps5_fortnite:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_ps5_fortnite
+    name: Funko Doos Ps5 Fortnite
+  funko_doos_ps5_hogwarts_legacy:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_ps5_hogwarts_legacy
+    name: Funko Doos Ps5 Hogwarts Legacy
+  funko_doos_fifa_case:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_fifa_case
+    name: Funko Doos Fifa Case
+  funko_doos_fortnite_case:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_fortnite_case
+    name: Funko Doos Fortnite Case
+  funko_doos_cod_case:
+    material: PAPER
+    item_model: minecraft:custom/funko/429-432-playstation2/funko_doos_cod_case
+    name: Funko Doos Cod Case
+  funko_doos_dtclej:
+    material: PAPER
+    item_model: minecraft:custom/funko/804-dtclej/funko_doos_dtclej
+    name: Funko Doos Dtclej
+  funko_doos_metroid:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/funko_doos_metroid
+    name: Funko Doos Metroid
+  gameboy_sonic:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_sonic
+    name: Gameboy Sonic
+  funko_doos_sonic:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/funko_doos_sonic
+    name: Funko Doos Sonic
+  gameboy_duck_hunt:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_duck_hunt
+    name: Gameboy Duck Hunt
+  gameboy_pokemon:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_pokemon
+    name: Gameboy Pokemon
+  gameboy_kong:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_kong
+    name: Gameboy Kong
+  funko_doos_pokemon:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/funko_doos_pokemon
+    name: Funko Doos Pokemon
+  funko_doos_duck_hunt:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/funko_doos_duck_hunt
+    name: Funko Doos Duck Hunt
+  gameboy_base:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_base
+    name: Gameboy Base
+  gameboy_mega_man:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_mega_man
+    name: Gameboy Mega Man
+  funko_doos_snake:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/funko_doos_snake
+    name: Funko Doos Snake
+  gameboy_snake:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_snake
+    name: Gameboy Snake
+  funko_doos_mega_man:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/funko_doos_mega_man
+    name: Funko Doos Mega Man
+  gameboy_mario:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_mario
+    name: Gameboy Mario
+  funko_doos_mario:
+    material: PAPER
+    item_model: minecraft:custom/funko/401-mario/funko_doos_mario
+    name: Funko Doos Mario
+  funko_doos_kirby:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/funko_doos_kirby
+    name: Funko Doos Kirby
+  gameboy_kirby:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_kirby
+    name: Gameboy Kirby
+  gameboy_pacman:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_pacman
+    name: Gameboy Pacman
+  funko_doos_kong:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/funko_doos_kong
+    name: Funko Doos Kong
+  funko_doos_pacman:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/funko_doos_pacman
+    name: Funko Doos Pacman
+  gameboy_metroid:
+    material: PAPER
+    item_model: minecraft:custom/funko/407-415-gameboy/gameboy_metroid
+    name: Gameboy Metroid
+  funko_doos_golden_slime:
+    material: PAPER
+    item_model: minecraft:custom/funko/112-slime/funko_doos_golden_slime
+    name: Funko Doos Golden Slime
+  funko_pop_big_slime:
+    material: PAPER
+    item_model: minecraft:custom/funko/112-slime/funko_pop_big_slime
+    name: Funko Pop Big Slime
+  funko_doos_snow_slime:
+    material: PAPER
+    item_model: minecraft:custom/funko/112-slime/funko_doos_snow_slime
+    name: Funko Doos Snow Slime
+  funko_pop_slime:
+    material: PAPER
+    item_model: minecraft:custom/funko/112-slime/funko_pop_slime
+    name: Funko Pop Slime
+  funko_doos_slime:
+    material: PAPER
+    item_model: minecraft:custom/funko/112-slime/funko_doos_slime
+    name: Funko Doos Slime
+  funko_doos_princess_leia:
+    material: PAPER
+    item_model: minecraft:custom/funko/520-princess_leia/funko_doos_princess_leia
+    name: Funko Doos Princess Leia
+  funko_doos_snorlax:
+    material: PAPER
+    item_model: minecraft:custom/funko/202-snorlax/funko_doos_snorlax
+    name: Funko Doos Snorlax
+  funko_pop_snorlax:
+    material: PAPER
+    item_model: minecraft:custom/funko/202-snorlax/funko_pop_snorlax
+    name: Funko Pop Snorlax
+  funko_doos_kerst_snorlax:
+    material: PAPER
+    item_model: minecraft:custom/funko/202-snorlax/funko_doos_kerst_snorlax
+    name: Funko Doos Kerst Snorlax
+  funko_doos_snorlax_gold:
+    material: PAPER
+    item_model: minecraft:custom/funko/202-snorlax/funko_doos_snorlax_gold
+    name: Funko Doos Snorlax Gold
+  funko_pop_big_snorlax:
+    material: PAPER
+    item_model: minecraft:custom/funko/202-snorlax/funko_pop_big_snorlax
+    name: Funko Pop Big Snorlax
+  funko_doos_pastagedrag:
+    material: PAPER
+    item_model: minecraft:custom/funko/839-pastagedrag/funko_doos_pastagedrag
+    name: Funko Doos Pastagedrag
+  zebra_funko_groot:
+    material: PAPER
+    item_model: minecraft:custom/funko/zebra/zebra_funko_groot
+    name: Zebra Funko Groot
+  funko_doos_polarbear:
+    material: PAPER
+    item_model: minecraft:custom/funko/107-polarbear/funko_doos_polarbear
+    name: Funko Doos Polarbear
+  funko_pop_polarbear:
+    material: PAPER
+    item_model: minecraft:custom/funko/107-polarbear/funko_pop_polarbear
+    name: Funko Pop Polarbear
+  funko_doos_slinky_dog:
+    material: PAPER
+    item_model: minecraft:custom/funko/321-slinky/funko_doos_slinky_dog
+    name: Funko Doos Slinky Dog
+  funko_doos_kwak:
+    material: PAPER
+    item_model: minecraft:custom/funko/315-kwak_kerst/funko_doos_kwak
+    name: Funko Doos Kwak
+  funko_doos_zuko:
+    material: PAPER
+    item_model: minecraft:custom/funko/509-zuko/funko_doos_zuko
+    name: Funko Doos Zuko
+  funko_pop_olaf:
+    material: PAPER
+    item_model: minecraft:custom/funko/309-olaf/funko_pop_olaf
+    name: Funko Pop Olaf
+  funko_hoofd_olaf:
+    material: PAPER
+    item_model: minecraft:custom/funko/309-olaf/funko_hoofd_olaf
+    name: Funko Hoofd Olaf
+  funko_doos_olaf:
+    material: PAPER
+    item_model: minecraft:custom/funko/309-olaf/funko_doos_olaf
+    name: Funko Doos Olaf
+  funko_pop_big_olaf:
+    material: PAPER
+    item_model: minecraft:custom/funko/309-olaf/funko_pop_big_olaf
+    name: Funko Pop Big Olaf
+  funko_pop_groot_mew:
+    material: PAPER
+    item_model: minecraft:custom/funko/pokemon/funko_pop_groot_mew
+    name: Funko Pop Groot Mew
+  funko_pop_groot_mewtwo:
+    material: PAPER
+    item_model: minecraft:custom/funko/pokemon/funko_pop_groot_mewtwo
+    name: Funko Pop Groot Mewtwo
+  funko_poop_groot_articuno:
+    material: PAPER
+    item_model: minecraft:custom/funko/pokemon/funko_poop_groot_articuno
+    name: Funko Poop Groot Articuno
+  funko_doos_donald:
+    material: PAPER
+    item_model: minecraft:custom/funko/312-donald_kerst/funko_doos_donald
+    name: Funko Doos Donald
+  funko_pop_big_donald:
+    material: PAPER
+    item_model: minecraft:custom/funko/304-donald/funko_pop_big_donald
+    name: Funko Pop Big Donald
+  funko_doos_aarde:
+    material: PAPER
+    item_model: minecraft:custom/funko/807-aarde/funko_doos_aarde
+    name: Funko Doos Aarde
+  funko_doos_zeveraar:
+    material: PAPER
+    item_model: minecraft:custom/funko/840-zeveraar/funko_doos_zeveraar
+    name: Funko Doos Zeveraar
+  funko_doos_danny_5_minister_hoed:
+    material: PAPER
+    item_model: minecraft:custom/funko/806-danny026/funko_doos_danny_5_minister_hoed
+    name: Funko Doos Danny 5 Minister Hoed
+  funko_danny_feest:
+    material: PAPER
+    item_model: minecraft:custom/funko/806-danny026/funko_danny_feest
+    name: Funko Danny Feest
+  funko_doos_danny_5_minister:
+    material: PAPER
+    item_model: minecraft:custom/funko/806-danny026/funko_doos_danny_5_minister
+    name: Funko Doos Danny 5 Minister
+  funko_danny_feestmini:
+    material: PAPER
+    item_model: minecraft:custom/funko/806-danny026/funko_danny_feestmini
+    name: Funko Danny Feestmini
+  funko_doos_danny026:
+    material: PAPER
+    item_model: minecraft:custom/funko/806-danny026/funko_doos_danny026
+    name: Funko Doos Danny026
+  danny_3_jaar_admin:
+    material: PAPER
+    item_model: minecraft:custom/funko/806-danny026/danny_3_jaar_admin
+    name: Danny 3 Jaar Admin
+  funko_doos_alex:
+    material: PAPER
+    item_model: minecraft:custom/funko/101-alex/funko_doos_alex
+    name: Funko Doos Alex
+  funko_doos_harrypotter:
+    material: PAPER
+    item_model: minecraft:custom/funko/525-harrypotter/funko_doos_harrypotter
+    name: Funko Doos Harrypotter
+  funko_doos_steve:
+    material: PAPER
+    item_model: minecraft:custom/funko/102-steve/funko_doos_steve
+    name: Funko Doos Steve
+  funko_doos_chewbakka:
+    material: PAPER
+    item_model: minecraft:custom/funko/521-chewbakka/funko_doos_chewbakka
+    name: Funko Doos Chewbakka
+  funko_doos_r2d2:
+    material: PAPER
+    item_model: minecraft:custom/funko/522-r2d2/funko_doos_r2d2
+    name: Funko Doos R2d2
+  funko_doos_aang:
+    material: PAPER
+    item_model: minecraft:custom/funko/507-avatar_aang/funko_doos_aang
+    name: Funko Doos Aang
+  funko_pop_big_cubone:
+    material: PAPER
+    item_model: minecraft:custom/funko/203-cubone/funko_pop_big_cubone
+    name: Funko Pop Big Cubone
+  funko_doos_cubone:
+    material: PAPER
+    item_model: minecraft:custom/funko/203-cubone/funko_doos_cubone
+    name: Funko Doos Cubone
+  funko_doos_luigi:
+    material: PAPER
+    item_model: minecraft:custom/funko/404-luigi/funko_doos_luigi
+    name: Funko Doos Luigi
+  funko_doos_ditto:
+    material: PAPER
+    item_model: minecraft:custom/funko/205-ditto/funko_doos_ditto
+    name: Funko Doos Ditto
+  funko_doos_danny026_mt:
+    material: PAPER
+    item_model: minecraft:custom/funko/danny_funko/funko_doos_danny026_mt
+    name: Funko Doos Danny026 Mt
+  funko_doos_danny026_fatbike:
+    material: PAPER
+    item_model: minecraft:custom/funko/danny_funko/funko_doos_danny026_fatbike
+    name: Funko Doos Danny026 Fatbike
+  funko_doos_danny026_poppetje:
+    material: PAPER
+    item_model: minecraft:custom/funko/danny_funko/funko_doos_danny026_poppetje
+    name: Funko Doos Danny026 Poppetje
+  funko_doos_claudia17:
+    material: PAPER
+    item_model: minecraft:custom/funko/23-claudia17/funko_doos_claudia17
+    name: Funko Doos Claudia17
+  funko_doos_annabelle:
+    material: PAPER
+    item_model: minecraft:custom/funko/530-annabelle/funko_doos_annabelle
+    name: Funko Doos Annabelle
+  funko_doos_tetris:
+    material: PAPER
+    item_model: minecraft:custom/funko/416-tetris/funko_doos_tetris
+    name: Funko Doos Tetris
+  funko_doos_myrelios:
+    material: PAPER
+    item_model: minecraft:custom/funko/1-myrelios/funko_doos_myrelios
+    name: Funko Doos Myrelios
+  funko_pop_myrelios:
+    material: PAPER
+    item_model: minecraft:custom/funko/1-myrelios/funko_pop_myrelios
+    name: Funko Pop Myrelios
+  funko_doos_fairygirl1984:
+    material: PAPER
+    item_model: minecraft:custom/funko/802-fairygirl1984/funko_doos_fairygirl1984
+    name: Funko Doos Fairygirl1984
+  funko_doos_dead_harry_potter_invisibility_cloak:
+    material: PAPER
+    item_model: minecraft:custom/funko/524-harry_potter_invisibility_cloak/funko_doos_dead_harry_potter_invisibility_cloak
+    name: Funko Doos Dead Harry Potter Invisibility Cloak
+  funko_doos_alex1000gamer:
+    material: PAPER
+    item_model: minecraft:custom/funko/823-alex1000gamer/funko_doos_alex1000gamer
+    name: Funko Doos Alex1000gamer
+  funko_doos_sven:
+    material: PAPER
+    item_model: minecraft:custom/funko/310-sven/funko_doos_sven
+    name: Funko Doos Sven
+  funko_doos_sven_kerst:
+    material: PAPER
+    item_model: minecraft:custom/funko/310-sven/funko_doos_sven_kerst
+    name: Funko Doos Sven Kerst
+  funko_doos_golden_sven:
+    material: PAPER
+    item_model: minecraft:custom/funko/310-sven/funko_doos_golden_sven
+    name: Funko Doos Golden Sven
+  funko_pop_big_sven:
+    material: PAPER
+    item_model: minecraft:custom/funko/310-sven/funko_pop_big_sven
+    name: Funko Pop Big Sven
+  funko_doos_pluto_kerst:
+    material: PAPER
+    item_model: minecraft:custom/funko/316-pluto_kerst/funko_doos_pluto_kerst
+    name: Funko Doos Pluto Kerst
+  funko_doos_piet_pieraat:
+    material: PAPER
+    item_model: minecraft:custom/funko/533-piet_pieraat/funko_doos_piet_pieraat
+    name: Funko Doos Piet Pieraat
+  funko_doos_buzz_ligthyear:
+    material: PAPER
+    item_model: minecraft:custom/funko/319-buzz/funko_doos_buzz_ligthyear
+    name: Funko Doos Buzz Ligthyear
+  funko_doos_beerco:
+    material: PAPER
+    item_model: minecraft:custom/funko/814-beerco/funko_doos_beerco
+    name: Funko Doos Beerco
+  funko_doos_sandermander20:
+    material: PAPER
+    item_model: minecraft:custom/funko/824-sandermander20/funko_doos_sandermander20
+    name: Funko Doos Sandermander20
+  funko_doos_gabitogop:
+    material: PAPER
+    item_model: minecraft:custom/funko/837-gabitogop/funko_doos_gabitogop
+    name: Funko Doos Gabitogop
+  funko_doos_leeg:
+    material: PAPER
+    item_model: minecraft:custom/funko/funko_doos_leeg/funko_doos_leeg
+    name: Funko Doos Leeg
+  funko_doos_dreamgirl00:
+    material: PAPER
+    item_model: minecraft:custom/funko/820-dreamgirl00/funko_doos_dreamgirl00
+    name: Funko Doos Dreamgirl00
+  funko_doos_ijan:
+    material: PAPER
+    item_model: minecraft:custom/funko/836-ijan/funko_doos_ijan
+    name: Funko Doos Ijan
+  funko_doos_alberto:
+    material: PAPER
+    item_model: minecraft:custom/funko/534-alberto/funko_doos_alberto
+    name: Funko Doos Alberto
+  funko_doos_gewoonjoris:
+    material: PAPER
+    item_model: minecraft:custom/funko/815-gewoonjoris/funko_doos_gewoonjoris
+    name: Funko Doos Gewoonjoris
+  funko_pop_creeper:
+    material: PAPER
+    item_model: minecraft:custom/funko/108-creeper/funko_pop_creeper
+    name: Funko Pop Creeper
+  funko_doos_creeper:
+    material: PAPER
+    item_model: minecraft:custom/funko/108-creeper/funko_doos_creeper
+    name: Funko Doos Creeper
+  funko_pop_big_creeper:
+    material: PAPER
+    item_model: minecraft:custom/funko/108-creeper/funko_pop_big_creeper
+    name: Funko Pop Big Creeper
+  funko_doos_pluto:
+    material: PAPER
+    item_model: minecraft:custom/funko/303-pluto/funko_doos_pluto
+    name: Funko Doos Pluto
+  funko_doos_enderdragon:
+    material: PAPER
+    item_model: minecraft:custom/funko/115-enderdragon/funko_doos_enderdragon
+    name: Funko Doos Enderdragon
+  funko_pop_enderdragon:
+    material: PAPER
+    item_model: minecraft:custom/funko/115-enderdragon/funko_pop_enderdragon
+    name: Funko Pop Enderdragon
+  funko_doos_torchic:
+    material: PAPER
+    item_model: minecraft:custom/funko/torchic/funko_doos_torchic
+    name: Funko Doos Torchic
+  torchic:
+    material: PAPER
+    item_model: minecraft:custom/funko/torchic/torchic
+    name: Torchic
+  funko_doos_guardian:
+    material: PAPER
+    item_model: minecraft:custom/funko/114-guardian/funko_doos_guardian
+    name: Funko Doos Guardian
+  funko_pop_guardian:
+    material: PAPER
+    item_model: minecraft:custom/funko/114-guardian/funko_pop_guardian
+    name: Funko Pop Guardian
+  funko_doos_netherman_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/111-enderman/funko_doos_netherman_halloween
+    name: Funko Doos Netherman Halloween
+  funko_pop_enderman:
+    material: PAPER
+    item_model: minecraft:custom/funko/111-enderman/funko_pop_enderman
+    name: Funko Pop Enderman
+  funko_doos_netherman:
+    material: PAPER
+    item_model: minecraft:custom/funko/111-enderman/funko_doos_netherman
+    name: Funko Doos Netherman
+  funko_doos_enderman:
+    material: PAPER
+    item_model: minecraft:custom/funko/111-enderman/funko_doos_enderman
+    name: Funko Doos Enderman
+  funko_doos_enderman_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/111-enderman/funko_doos_enderman_halloween
+    name: Funko Doos Enderman Halloween
+  funko_pop_big_enderman:
+    material: PAPER
+    item_model: minecraft:custom/funko/111-enderman/funko_pop_big_enderman
+    name: Funko Pop Big Enderman
+  funko_doos_kwek:
+    material: PAPER
+    item_model: minecraft:custom/funko/314-kwek_kerst/funko_doos_kwek
+    name: Funko Doos Kwek
+  funko_pop_big_mega_mindy:
+    material: PAPER
+    item_model: minecraft:custom/funko/817-mega_mindy/funko_pop_big_mega_mindy
+    name: Funko Pop Big Mega Mindy
+  funko_doos_manaphy:
+    material: PAPER
+    item_model: minecraft:custom/funko/212-manaphy/funko_doos_manaphy
+    name: Funko Doos Manaphy
+  funko_doos_maikeyboy:
+    material: PAPER
+    item_model: minecraft:custom/funko/funko_maikeyboy/funko_doos_maikeyboy
+    name: Funko Doos Maikeyboy
+  funko_doos_mickey:
+    material: PAPER
+    item_model: minecraft:custom/funko/301-mickey/funko_doos_mickey
+    name: Funko Doos Mickey
+  funko_pop_big_mickey:
+    material: PAPER
+    item_model: minecraft:custom/funko/301-mickey/funko_pop_big_mickey
+    name: Funko Pop Big Mickey
+  funko_doos_golden_mickey:
+    material: PAPER
+    item_model: minecraft:custom/funko/301-mickey/funko_doos_golden_mickey
+    name: Funko Doos Golden Mickey
+  funko_doos_charmander:
+    material: PAPER
+    item_model: minecraft:custom/funko/206-charmander/funko_doos_charmander
+    name: Funko Doos Charmander
+  funko_pop_big_charmander:
+    material: PAPER
+    item_model: minecraft:custom/funko/206-charmander/funko_pop_big_charmander
+    name: Funko Pop Big Charmander
+  funko_pop_big_eevee:
+    material: PAPER
+    item_model: minecraft:custom/funko/204-eevee/funko_pop_big_eevee
+    name: Funko Pop Big Eevee
+  funko_doos_eevee:
+    material: PAPER
+    item_model: minecraft:custom/funko/204-eevee/funko_doos_eevee
+    name: Funko Doos Eevee
+  funko_doos_stefan_076:
+    material: PAPER
+    item_model: minecraft:custom/funko/803-stefan_076/funko_doos_stefan_076
+    name: Funko Doos Stefan 076
+  funko_doos_robinlol2:
+    material: PAPER
+    item_model: minecraft:custom/funko/841-robinlol2/funko_doos_robinlol2
+    name: Funko Doos Robinlol2
+  funko_doos_django:
+    material: PAPER
+    item_model: minecraft:custom/funko/funko_django/funko_doos_django
+    name: Funko Doos Django
+  funko_doos_happyviv:
+    material: PAPER
+    item_model: minecraft:custom/funko/808-happyviv/funko_doos_happyviv
+    name: Funko Doos Happyviv
+  funko_pop_malino:
+    material: PAPER
+    item_model: minecraft:custom/funko/10-malino/funko_pop_malino
+    name: Funko Pop Malino
+  funko_doos_malino:
+    material: PAPER
+    item_model: minecraft:custom/funko/10-malino/funko_doos_malino
+    name: Funko Doos Malino
+  funko_doos_appa:
+    material: PAPER
+    item_model: minecraft:custom/funko/511-appa/funko_doos_appa
+    name: Funko Doos Appa
+  funko_pop_big_sheep:
+    material: PAPER
+    item_model: minecraft:custom/funko/104-sheep/funko_pop_big_sheep
+    name: Funko Pop Big Sheep
+  funko_doos_sheep:
+    material: PAPER
+    item_model: minecraft:custom/funko/104-sheep/funko_doos_sheep
+    name: Funko Doos Sheep
+  funko_doos_hieristim:
+    material: PAPER
+    item_model: minecraft:custom/funko/809-hieristim/funko_doos_hieristim
+    name: Funko Doos Hieristim
+  funko_doos_empion:
+    material: PAPER
+    item_model: minecraft:custom/funko/8-empion/funko_doos_empion
+    name: Funko Doos Empion
+  funko_doos_xbox_gta:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-xbox/funko_doos_xbox_gta
+    name: Funko Doos Xbox Gta
+  funko_doos_xbox_it_takes_two:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-xbox/funko_doos_xbox_it_takes_two
+    name: Funko Doos Xbox It Takes Two
+  funko_pop_xbox_spiderman:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-xbox/funko_pop_xbox_spiderman
+    name: Funko Pop Xbox Spiderman
+  funko_pop_xbox_gta:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-xbox/funko_pop_xbox_gta
+    name: Funko Pop Xbox Gta
+  funko_doos_xbox_spiderman:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-xbox/funko_doos_xbox_spiderman
+    name: Funko Doos Xbox Spiderman
+  funko_pop_xbox_ratchet_clank:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-xbox/funko_pop_xbox_ratchet_clank
+    name: Funko Pop Xbox Ratchet Clank
+  funko_pop_xbox_it_takes_two:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-xbox/funko_pop_xbox_it_takes_two
+    name: Funko Pop Xbox It Takes Two
+  funko_doos_xbox_ratchet_clank:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-xbox/funko_doos_xbox_ratchet_clank
+    name: Funko Doos Xbox Ratchet Clank
+  funko_doos_avatar_state_aang_gold:
+    material: PAPER
+    item_model: minecraft:custom/funko/513-avatar_state_aang/funko_doos_avatar_state_aang_gold
+    name: Funko Doos Avatar State Aang Gold
+  funko_doos_avatar_state_aang:
+    material: PAPER
+    item_model: minecraft:custom/funko/513-avatar_state_aang/funko_doos_avatar_state_aang
+    name: Funko Doos Avatar State Aang
+  funko_doos_woody:
+    material: PAPER
+    item_model: minecraft:custom/funko/318-woody/funko_doos_woody
+    name: Funko Doos Woody
+  funko_doos_woody_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/318-woody/funko_doos_woody_halloween
+    name: Funko Doos Woody Halloween
+  funko_doos_spiderman_gold:
+    material: PAPER
+    item_model: minecraft:custom/funko/501-spiderman/funko_doos_spiderman_gold
+    name: Funko Doos Spiderman Gold
+  funko_doos_yoshi_groot:
+    material: PAPER
+    item_model: minecraft:custom/funko/funko_yoshi_groot/funko_doos_yoshi_groot
+    name: Funko Doos Yoshi Groot
+  funko_doos_myreclypsa_2013:
+    material: PAPER
+    item_model: minecraft:custom/funko/12-myreclypsa_2013/funko_doos_myreclypsa_2013
+    name: Funko Doos Myreclypsa 2013
+  funko_doos_jesse0301:
+    material: PAPER
+    item_model: minecraft:custom/funko/funko_liam_shop/funko_doos_jesse0301
+    name: Funko Doos Jesse0301
+  funko_doos_rosaantonia:
+    material: PAPER
+    item_model: minecraft:custom/funko/funko_liam_shop/funko_doos_rosaantonia
+    name: Funko Doos Rosaantonia
+  funko_doos_dtclej2:
+    material: PAPER
+    item_model: minecraft:custom/funko/funko_liam_shop/funko_doos_dtclej2
+    name: Funko Doos Dtclej2
+  funko_doos_voldemort:
+    material: PAPER
+    item_model: minecraft:custom/funko/528-voldemort/funko_doos_voldemort
+    name: Funko Doos Voldemort
+  funko_doos_voldemort_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/528-voldemort/funko_doos_voldemort_halloween
+    name: Funko Doos Voldemort Halloween
+  funko_doos_claever:
+    material: PAPER
+    item_model: minecraft:custom/funko/24-claever/funko_doos_claever
+    name: Funko Doos Claever
+  funko_doos_emilyvm:
+    material: PAPER
+    item_model: minecraft:custom/funko/821-emilyvm/funko_doos_emilyvm
+    name: Funko Doos Emilyvm
+  funko_doos_coolboy93:
+    material: PAPER
+    item_model: minecraft:custom/funko/801-coolboy93/funko_doos_coolboy93
+    name: Funko Doos Coolboy93
+  funko_doos_kenny14k:
+    material: PAPER
+    item_model: minecraft:custom/funko/825-kenny14000/funko_doos_kenny14k
+    name: Funko Doos Kenny14k
+  funko_doos_sandermander:
+    material: PAPER
+    item_model: minecraft:custom/funko/834-sandermander/funko_doos_sandermander
+    name: Funko Doos Sandermander
+  funko_doos_alakazam:
+    material: PAPER
+    item_model: minecraft:custom/funko/209-alakazam/funko_doos_alakazam
+    name: Funko Doos Alakazam
+  funko_pop_big_alakazam:
+    material: PAPER
+    item_model: minecraft:custom/funko/209-alakazam/funko_pop_big_alakazam
+    name: Funko Pop Big Alakazam
+  funko_doos_feyenoord_logo:
+    material: PAPER
+    item_model: minecraft:custom/funko/835-feyenoord_funko/funko_doos_feyenoord_logo
+    name: Funko Doos Feyenoord Logo
+  funko_doos_charlie_spring:
+    material: PAPER
+    item_model: minecraft:custom/funko/515-charlie_spring/funko_doos_charlie_spring
+    name: Funko Doos Charlie Spring
+  funko_doos_gewoon_collin_2019:
+    material: PAPER
+    item_model: minecraft:custom/funko/18-gewoon_collin_2019/funko_doos_gewoon_collin_2019
+    name: Funko Doos Gewoon Collin 2019
+  funko_doos_skrei69:
+    material: PAPER
+    item_model: minecraft:custom/funko/skrei69/funko_doos_skrei69
+    name: Funko Doos Skrei69
+  funko_doos_shiny_voldemort_vs_harry:
+    material: PAPER
+    item_model: minecraft:custom/funko/529-voldemort_vs_harry/funko_doos_shiny_voldemort_vs_harry
+    name: Funko Doos Shiny Voldemort Vs Harry
+  funko_doos_shanyrria:
+    material: PAPER
+    item_model: minecraft:custom/funko/819-shanyrria/funko_doos_shanyrria
+    name: Funko Doos Shanyrria
+  funko_doos_yoshi:
+    material: PAPER
+    item_model: minecraft:custom/funko/833-yoshi/funko_doos_yoshi
+    name: Funko Doos Yoshi
+  funko_doos_chucky:
+    material: PAPER
+    item_model: minecraft:custom/funko/531-chucky/funko_doos_chucky
+    name: Funko Doos Chucky
+  funko_doos_chucky_gold:
+    material: PAPER
+    item_model: minecraft:custom/funko/531-chucky/funko_doos_chucky_gold
+    name: Funko Doos Chucky Gold
+  funko_chucky:
+    material: PAPER
+    item_model: minecraft:custom/funko/531-chucky/funko_chucky
+    name: Funko Chucky
+  funko_doos_justchax_2014:
+    material: PAPER
+    item_model: minecraft:custom/funko/13-justchax_2014/funko_doos_justchax_2014
+    name: Funko Doos Justchax 2014
+  funko_doos_jessie:
+    material: PAPER
+    item_model: minecraft:custom/funko/320-jessie/funko_doos_jessie
+    name: Funko Doos Jessie
+  funko_doos_loeka06:
+    material: PAPER
+    item_model: minecraft:custom/funko/838-loeka06/funko_doos_loeka06
+    name: Funko Doos Loeka06
+  funko_doos_vakonov_2015:
+    material: PAPER
+    item_model: minecraft:custom/funko/14-vakonov_2015/funko_doos_vakonov_2015
+    name: Funko Doos Vakonov 2015
+  funko_doos_katara:
+    material: PAPER
+    item_model: minecraft:custom/funko/508-katara/funko_doos_katara
+    name: Funko Doos Katara
+  funko_doos_doos_sinterklaas:
+    material: PAPER
+    item_model: minecraft:custom/funko/921-sinterklaas/funko_doos_doos_sinterklaas
+    name: Funko Doos Doos Sinterklaas
+  senta_woman:
+    material: PAPER
+    item_model: minecraft:custom/funko/938-940-kerst/senta_woman
+    name: Senta Woman
+  funko_doos_santa:
+    material: PAPER
+    item_model: minecraft:custom/funko/938-940-kerst/funko_doos_santa
+    name: Funko Doos Santa
+  funko_doos_hert:
+    material: PAPER
+    item_model: minecraft:custom/funko/938-940-kerst/funko_doos_hert
+    name: Funko Doos Hert
+  funko_doos_milanvd:
+    material: PAPER
+    item_model: minecraft:custom/funko/funko_milanvd/funko_doos_milanvd
+    name: Funko Doos Milanvd
+  funko_pop_big_bulbasaur:
+    material: PAPER
+    item_model: minecraft:custom/funko/208-bulbasaur/funko_pop_big_bulbasaur
+    name: Funko Pop Big Bulbasaur
+  funko_doos_bulbasaur:
+    material: PAPER
+    item_model: minecraft:custom/funko/208-bulbasaur/funko_doos_bulbasaur
+    name: Funko Doos Bulbasaur
+  funko_doos_koningwillie:
+    material: PAPER
+    item_model: minecraft:custom/funko/koningwilm/funko_doos_koningwillie
+    name: Funko Doos Koningwillie
+  funko_pop_ragtempos:
+    material: PAPER
+    item_model: minecraft:custom/funko/2-ragtempos/funko_pop_ragtempos
+    name: Funko Pop Ragtempos
+  funko_doos_ragtempos:
+    material: PAPER
+    item_model: minecraft:custom/funko/2-ragtempos/funko_doos_ragtempos
+    name: Funko Doos Ragtempos
+  funko_doos_minnie:
+    material: PAPER
+    item_model: minecraft:custom/funko/302-minnie/funko_doos_minnie
+    name: Funko Doos Minnie
+  funko_pop_big_minnie:
+    material: PAPER
+    item_model: minecraft:custom/funko/302-minnie/funko_pop_big_minnie
+    name: Funko Pop Big Minnie
+  funko_doos_weatherlight_2016:
+    material: PAPER
+    item_model: minecraft:custom/funko/15-weatherlight_2016/funko_doos_weatherlight_2016
+    name: Funko Doos Weatherlight 2016
+  funko_doos_golden_parrot:
+    material: PAPER
+    item_model: minecraft:custom/funko/105-parrot/funko_doos_golden_parrot
+    name: Funko Doos Golden Parrot
+  funko_pop_big_parrot:
+    material: PAPER
+    item_model: minecraft:custom/funko/105-parrot/funko_pop_big_parrot
+    name: Funko Pop Big Parrot
+  funko_doos_parrot:
+    material: PAPER
+    item_model: minecraft:custom/funko/105-parrot/funko_doos_parrot
+    name: Funko Doos Parrot
+  funko_doos_sokka:
+    material: PAPER
+    item_model: minecraft:custom/funko/510-sokka/funko_doos_sokka
+    name: Funko Doos Sokka
+  funko_pop_perry_big_gold:
+    material: PAPER
+    item_model: minecraft:custom/funko/311-perry/funko_pop_perry_big_gold
+    name: Funko Pop Perry Big Gold
+  funko_pop_perry_big:
+    material: PAPER
+    item_model: minecraft:custom/funko/311-perry/funko_pop_perry_big
+    name: Funko Pop Perry Big
+  funko_doos_kennykiip:
+    material: PAPER
+    item_model: minecraft:custom/funko/832-kennykiip/funko_doos_kennykiip
+    name: Funko Doos Kennykiip
+  funko_pop_big_katrien:
+    material: PAPER
+    item_model: minecraft:custom/funko/305-katrien/funko_pop_big_katrien
+    name: Funko Pop Big Katrien
+  funko_doos_katrien:
+    material: PAPER
+    item_model: minecraft:custom/funko/305-katrien/funko_doos_katrien
+    name: Funko Doos Katrien
+  funko_pop_ps5_ratchet_clank:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-playstation/funko_pop_ps5_ratchet_clank
+    name: Funko Pop Ps5 Ratchet Clank
+  funko_doos_it_takes_two:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-playstation/funko_doos_it_takes_two
+    name: Funko Doos It Takes Two
+  funko_pop_ps5_spiderman:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-playstation/funko_pop_ps5_spiderman
+    name: Funko Pop Ps5 Spiderman
+  funko_doos_ratchet_clank:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-playstation/funko_doos_ratchet_clank
+    name: Funko Doos Ratchet Clank
+  funko_doos_gta:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-playstation/funko_doos_gta
+    name: Funko Doos Gta
+  funko_pop_ps5_gta:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-playstation/funko_pop_ps5_gta
+    name: Funko Pop Ps5 Gta
+  funko_pop_ps5_it_takes_two:
+    material: PAPER
+    item_model: minecraft:custom/funko/425-428-playstation/funko_pop_ps5_it_takes_two
+    name: Funko Pop Ps5 It Takes Two
+  funko_doos_melis:
+    material: PAPER
+    item_model: minecraft:custom/funko/31-melizr/funko_doos_melis
+    name: Funko Doos Melis
+  funko_doos_hermione:
+    material: PAPER
+    item_model: minecraft:custom/funko/526-hermione/funko_doos_hermione
+    name: Funko Doos Hermione
+  funko_doos_itsagame:
+    material: PAPER
+    item_model: minecraft:custom/funko/22-itsagame/funko_doos_itsagame
+    name: Funko Doos Itsagame
+  funko_doos_myreclypsa:
+    material: PAPER
+    item_model: minecraft:custom/funko/5-myreclypsa/funko_doos_myreclypsa
+    name: Funko Doos Myreclypsa
+  funko_doos_toad2:
+    material: PAPER
+    item_model: minecraft:custom/funko/403-toad/funko_doos_toad2
+    name: Funko Doos Toad2
+  funko_doos_toad:
+    material: PAPER
+    item_model: minecraft:custom/funko/403-toad/funko_doos_toad
+    name: Funko Doos Toad
+  funko_doos_cascompedwin:
+    material: PAPER
+    item_model: minecraft:custom/funko/812-cascomp/funko_doos_cascompedwin
+    name: Funko Doos Cascompedwin
+  funko_doos_ragterros:
+    material: PAPER
+    item_model: minecraft:custom/funko/3-ragterros/funko_doos_ragterros
+    name: Funko Doos Ragterros
+  funko_pop_ragterros:
+    material: PAPER
+    item_model: minecraft:custom/funko/3-ragterros/funko_pop_ragterros
+    name: Funko Pop Ragterros
+  funko_doos_ragterros_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/3-ragterros/funko_doos_ragterros_halloween
+    name: Funko Doos Ragterros Halloween
+  funko_doos_peach_gold:
+    material: PAPER
+    item_model: minecraft:custom/funko/402-peach/funko_doos_peach_gold
+    name: Funko Doos Peach Gold
+  funko_doos_peach:
+    material: PAPER
+    item_model: minecraft:custom/funko/402-peach/funko_doos_peach
+    name: Funko Doos Peach
+  funko_doos_elsa:
+    material: PAPER
+    item_model: minecraft:custom/funko/307-elsa/funko_doos_elsa
+    name: Funko Doos Elsa
+  funko_doos_squid:
+    material: PAPER
+    item_model: minecraft:custom/funko/103-squid/funko_doos_squid
+    name: Funko Doos Squid
+  funko_pop_big_squid:
+    material: PAPER
+    item_model: minecraft:custom/funko/103-squid/funko_pop_big_squid
+    name: Funko Pop Big Squid
+  funko_doos__stroopwafel:
+    material: PAPER
+    item_model: minecraft:custom/funko/20-_stroopwafel_2021/funko_doos__stroopwafel
+    name: Funko Doos Stroopwafel
+  funko_doos_ditisluuk:
+    material: PAPER
+    item_model: minecraft:custom/funko/810-ditisluuk/funko_doos_ditisluuk
+    name: Funko Doos Ditisluuk
+  funko_ditisluuk_big:
+    material: PAPER
+    item_model: minecraft:custom/funko/810-ditisluuk/funko_ditisluuk_big
+    name: Funko Ditisluuk Big
+  funko_doos_stephanvw:
+    material: PAPER
+    item_model: minecraft:custom/funko/822-stephanvw/funko_doos_stephanvw
+    name: Funko Doos Stephanvw
+  funko_doos_stitch:
+    material: PAPER
+    item_model: minecraft:custom/funko/320-stitch/funko_doos_stitch
+    name: Funko Doos Stitch
+  funko_doos_stitch_black:
+    material: PAPER
+    item_model: minecraft:custom/funko/320-stitch/funko_doos_stitch_black
+    name: Funko Doos Stitch Black
+  funko_pop_dusdavid:
+    material: PAPER
+    item_model: minecraft:custom/funko/6-dusdavid/funko_pop_dusdavid
+    name: Funko Pop Dusdavid
+  funko_doos_dusdavid:
+    material: PAPER
+    item_model: minecraft:custom/funko/6-dusdavid/funko_doos_dusdavid
+    name: Funko Doos Dusdavid
+  funko_doos_dusdavid_2012:
+    material: PAPER
+    item_model: minecraft:custom/funko/6-dusdavid/funko_doos_dusdavid_2012
+    name: Funko Doos Dusdavid 2012
+  funko_doos_beef_burger_gold:
+    material: PAPER
+    item_model: minecraft:custom/funko/fortnite/funko_doos_beef_burger_gold
+    name: Funko Doos Beef Burger Gold
+  funko_doos_kwik:
+    material: PAPER
+    item_model: minecraft:custom/funko/313-kwik_kerst/funko_doos_kwik
+    name: Funko Doos Kwik
+  funko_doos_luke_skywalker:
+    material: PAPER
+    item_model: minecraft:custom/funko/516-luke_skywalker/funko_doos_luke_skywalker
+    name: Funko Doos Luke Skywalker
+  funko_doos_captain_america:
+    material: PAPER
+    item_model: minecraft:custom/funko/501-600film/503-captain_america/funko_doos_captain_america
+    name: Funko Doos Captain America
+  funko_doos_venom_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/501-600film/504-venom/funko_doos_venom_halloween
+    name: Funko Doos Venom Halloween
+  funko_doos_venom:
+    material: PAPER
+    item_model: minecraft:custom/funko/501-600film/504-venom/funko_doos_venom
+    name: Funko Doos Venom
+  funko_doos_war_machine_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/501-600film/505-war_machine/funko_doos_war_machine_halloween
+    name: Funko Doos War Machine Halloween
+  funko_doos_war_machine:
+    material: PAPER
+    item_model: minecraft:custom/funko/501-600film/505-war_machine/funko_doos_war_machine
+    name: Funko Doos War Machine
+  funko_doos_iron_man:
+    material: PAPER
+    item_model: minecraft:custom/funko/501-600film/502-iron_man/funko_doos_iron_man
+    name: Funko Doos Iron Man
+  funko_doos_dr_doom:
+    material: PAPER
+    item_model: minecraft:custom/funko/501-600film/506-dr_doom/funko_doos_dr_doom
+    name: Funko Doos Dr Doom
+  funko_doos_dr_doom_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/501-600film/506-dr_doom/funko_doos_dr_doom_halloween
+    name: Funko Doos Dr Doom Halloween
+  funko_doos_6_jaar_relic:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/909-6_jaar_relic/funko_doos_6_jaar_relic
+    name: Funko Doos 6 Jaar Relic
+  funko_pop_6_jaar_relic:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/909-6_jaar_relic/funko_pop_6_jaar_relic
+    name: Funko Pop 6 Jaar Relic
+  7yr_funko:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/928-7yr_mt/7yr_funko
+    name: 7yr Funko
+  funko_doos_tovenaar_timewalk:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/905-tovenaar_timewalk/funko_doos_tovenaar_timewalk
+    name: Funko Doos Tovenaar Timewalk
+  funko_doos_tovenaar_timewalk_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/905-tovenaar_timewalk/funko_doos_tovenaar_timewalk_halloween
+    name: Funko Doos Tovenaar Timewalk Halloween
+  funko_doos_dinoland:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/919-dinoland/funko_doos_dinoland
+    name: Funko Doos Dinoland
+  funko_the_city_paart:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/933-the_city_paart/funko_the_city_paart
+    name: Funko The City Paart
+  funko_doos_piet:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/922-piet/funko_doos_piet
+    name: Funko Doos Piet
+  ddg_funko:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/926-ddg/ddg_funko
+    name: Ddg Funko
+  funko_doos_11jaarddg:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/925-11jaarddg/funko_doos_11jaarddg
+    name: Funko Doos 11jaarddg
+  funko_doos_dusdavid11jaarddg:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/923-david/funko_doos_dusdavid11jaarddg
+    name: Funko Doos Dusdavid11jaarddg
+  funko_doos_zombie_goud:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/912-zombie_gold/funko_doos_zombie_goud
+    name: Funko Doos Zombie Goud
+  funko_doos_portal:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/910-portal/funko_doos_portal
+    name: Funko Doos Portal
+  funko_doos_zombie_brons:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/914-zombie_brons/funko_doos_zombie_brons
+    name: Funko Doos Zombie Brons
+  funko_doos_vampier_danny:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/902-vampier_danny/funko_doos_vampier_danny
+    name: Funko Doos Vampier Danny
+  funko_doos_vampier_danny_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/902-vampier_danny/funko_doos_vampier_danny_halloween
+    name: Funko Doos Vampier Danny Halloween
+  funko_doos_nether_cube:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/911-nether_cube/funko_doos_nether_cube
+    name: Funko Doos Nether Cube
+  funko_pop_nether_cube:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/911-nether_cube/funko_pop_nether_cube
+    name: Funko Pop Nether Cube
+  funko_doos_groot_suport_2:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/936-suport_2/funko_doos_groot_suport_2
+    name: Funko Doos Groot Suport 2
+  gingerbread:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/920_-_gingerbread/gingerbread
+    name: Gingerbread
+  funko_doos_edwin:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/907-edwin/funko_doos_edwin
+    name: Funko Doos Edwin
+  funko_edwin_groot_black:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/907-edwin/funko_edwin_groot_black
+    name: Funko Edwin Groot Black
+  funko_doos_edwin_black:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/907-edwin/funko_doos_edwin_black
+    name: Funko Doos Edwin Black
+  funko_edwin_groot:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/907-edwin/funko_edwin_groot
+    name: Funko Edwin Groot
+  funko_doos_spook_the_wiz76_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/904-spook_the_wiz76/funko_doos_spook_the_wiz76_halloween
+    name: Funko Doos Spook The Wiz76 Halloween
+  funko_doos_spook_the_wiz76:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/904-spook_the_wiz76/funko_doos_spook_the_wiz76
+    name: Funko Doos Spook The Wiz76
+  funko_doos_myreclypsa11jaarddg:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/924-reve/funko_doos_myreclypsa11jaarddg
+    name: Funko Doos Myreclypsa11jaarddg
+  funko_doos_david_hoedje:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/931-david_hoedje/funko_doos_david_hoedje
+    name: Funko Doos David Hoedje
+  funko_doos_groot_suport_1:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/935-suport_1/funko_doos_groot_suport_1
+    name: Funko Doos Groot Suport 1
+  funko_doos_pompoen_melissa:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/901-pompoen_melissa/funko_doos_pompoen_melissa
+    name: Funko Doos Pompoen Melissa
+  funko_doos_freddy_krueger_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/917-freddy_krueger/funko_doos_freddy_krueger_halloween
+    name: Funko Doos Freddy Krueger Halloween
+  funko_doos_freddy_krueger:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/917-freddy_krueger/funko_doos_freddy_krueger
+    name: Funko Doos Freddy Krueger
+  funko_doos_danny_hoedje:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/932-danny_hoedje/funko_doos_danny_hoedje
+    name: Funko Doos Danny Hoedje
+  funko_doos_groot_valentijn_david_en_reve:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/929-valentijn_david_en_reve/funko_doos_groot_valentijn_david_en_reve
+    name: Funko Doos Groot Valentijn David En Reve
+  funko_doos_creepy_skull_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/918-creepy_skull/funko_doos_creepy_skull_halloween
+    name: Funko Doos Creepy Skull Halloween
+  funko_doos_creepy_skull:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/918-creepy_skull/funko_doos_creepy_skull
+    name: Funko Doos Creepy Skull
+  mt_funko:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/927-mt/mt_funko
+    name: Mt Funko
+  funko_doos_groot_artist_trio:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/934-artist_trio/funko_doos_groot_artist_trio
+    name: Funko Doos Groot Artist Trio
+  funko_doos_scream_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/915-scream/funko_doos_scream_halloween
+    name: Funko Doos Scream Halloween
+  funko_doos_scream:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/915-scream/funko_doos_scream
+    name: Funko Doos Scream
+  funko_doos_frankenstein:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/906-frankenstein/funko_doos_frankenstein
+    name: Funko Doos Frankenstein
+  funko_doos_frankenstein_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/906-frankenstein/funko_doos_frankenstein_halloween
+    name: Funko Doos Frankenstein Halloween
+  funko_doos_amerigo:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/920-americo/funko_doos_amerigo
+    name: Funko Doos Amerigo
+  funko_valentijn_zijn:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/930-valentijn_zijn/funko_valentijn_zijn
+    name: Funko Valentijn Zijn
+  funko_valentijn_zijn_pop:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/930-valentijn_zijn/funko_valentijn_zijn_pop
+    name: Funko Valentijn Zijn Pop
+  funko_doos_sinterklaas:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/921-sinterklaas/funko_doos_sinterklaas
+    name: Funko Doos Sinterklaas
+  veiling:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/908-6_jaar_mt/veiling
+    name: Veiling
+  funko_pop_6_jaar_mt:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/908-6_jaar_mt/funko_pop_6_jaar_mt
+    name: Funko Pop 6 Jaar Mt
+  funko_doos_6_jaar_mt:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/908-6_jaar_mt/funko_doos_6_jaar_mt
+    name: Funko Doos 6 Jaar Mt
+  funko_doos_danny_cas:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/937-funko_doos_danny_cas/funko_doos_danny_cas
+    name: Funko Doos Danny Cas
+  funko_doos_zombie_david_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/903-zombie_david/funko_doos_zombie_david_halloween
+    name: Funko Doos Zombie David Halloween
+  funko_doos_zombie_david:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/903-zombie_david/funko_doos_zombie_david
+    name: Funko Doos Zombie David
+  funko_doos_leatherface:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/916-leatherface/funko_doos_leatherface
+    name: Funko Doos Leatherface
+  funko_doos_leatherface_halloween:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/916-leatherface/funko_doos_leatherface_halloween
+    name: Funko Doos Leatherface Halloween
+  funko_doos_zombie_zilver:
+    material: PAPER
+    item_model: minecraft:custom/funko/901-1000special_edition/913-zombie_zilver/funko_doos_zombie_zilver
+    name: Funko Doos Zombie Zilver

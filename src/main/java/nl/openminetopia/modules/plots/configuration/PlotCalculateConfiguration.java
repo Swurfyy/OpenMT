@@ -17,7 +17,7 @@ public class PlotCalculateConfiguration extends ConfigurateConfig {
     private final Map<Material, Double> blockValues = new HashMap<>();
 
     public PlotCalculateConfiguration(File file) {
-        super(file, "plotcalculate.yml", "default-plotcalculate.yml", false);
+        super(file, "plotcalculate.yml", "default/plotcalculate.yml", false);
 
         this.buildersWage = rootNode.node("builders-wage").getInt(20);
         this.calculateFormula = rootNode.node("plot-calculate-formula").getString("<length> * <width> * 32");

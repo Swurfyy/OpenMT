@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  kerstmanbaard_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/kerstmanbaard/helmet
+    name: Kerstmanbaard Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:kerstmanbaard

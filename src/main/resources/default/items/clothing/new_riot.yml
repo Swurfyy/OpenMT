@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  new_riot_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/new_riot/leggings
+    name: New Riot Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:new_riot
+  new_riot_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/new_riot/chestplate
+    name: New Riot Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:new_riot
+  new_riot_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/new_riot/helmet
+    name: New Riot Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:new_riot
+  new_riot_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/new_riot/boots
+    name: New Riot Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:new_riot

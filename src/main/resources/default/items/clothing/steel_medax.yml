@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  steel_medax_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/steel_medax/leggings
+    name: Steel Medax Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:steel_medax
+  steel_medax_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/steel_medax/chestplate
+    name: Steel Medax Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:steel_medax
+  steel_medax_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/steel_medax/helmet
+    name: Steel Medax Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:steel_medax
+  steel_medax_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/steel_medax/boots
+    name: Steel Medax Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:steel_medax

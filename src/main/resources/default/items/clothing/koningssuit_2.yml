@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  koningssuit_2_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/koningssuit_2/leggings
+    name: Koningssuit 2 Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:koningssuit_2
+  koningssuit_2_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/koningssuit_2/chestplate
+    name: Koningssuit 2 Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:koningssuit_2
+  koningssuit_2_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/koningssuit_2/helmet
+    name: Koningssuit 2 Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:koningssuit_2
+  koningssuit_2_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/koningssuit_2/boots
+    name: Koningssuit 2 Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:koningssuit_2

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  halloweengroenpaars_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/halloweengroenpaars/leggings
+    name: Halloweengroenpaars Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:halloweengroenpaars
+  halloweengroenpaars_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/halloweengroenpaars/chestplate
+    name: Halloweengroenpaars Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:halloweengroenpaars
+  halloweengroenpaars_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/halloweengroenpaars/helmet
+    name: Halloweengroenpaars Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:halloweengroenpaars
+  halloweengroenpaars_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/halloweengroenpaars/boots
+    name: Halloweengroenpaars Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:halloweengroenpaars

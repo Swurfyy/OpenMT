@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  snorry123army_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/snorry123army/leggings
+    name: Snorry123army Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:snorry123army
+  snorry123army_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/snorry123army/chestplate
+    name: Snorry123army Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:snorry123army
+  snorry123army_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/snorry123army/helmet
+    name: Snorry123army Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:snorry123army
+  snorry123army_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/snorry123army/boots
+    name: Snorry123army Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:snorry123army

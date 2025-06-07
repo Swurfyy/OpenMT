@@ -36,7 +36,7 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
     private final Map<Integer, Double> levelUpCostOverrides = new HashMap<>();
 
     public LevelCheckConfiguration(File file) {
-        super(file, "levelcheck.yml", "default-levelcheck.yml", true);
+        super(file, "levelcheck.yml", "default/levelcheck.yml", true);
 
         ConfigurationNode levelCheckNode = rootNode.node("levelcheck");
 

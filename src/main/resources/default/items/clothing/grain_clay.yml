@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  grain_clay_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/grain_clay/leggings
+    name: Grain Clay Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:grain_clay
+  grain_clay_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/grain_clay/chestplate
+    name: Grain Clay Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:grain_clay
+  grain_clay_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/grain_clay/helmet
+    name: Grain Clay Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:grain_clay
+  grain_clay_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/grain_clay/boots
+    name: Grain Clay Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:grain_clay

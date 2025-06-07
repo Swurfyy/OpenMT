@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  yoshi_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/yoshi/leggings
+    name: Yoshi Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:yoshi
+  yoshi_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/yoshi/chestplate
+    name: Yoshi Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:yoshi
+  yoshi_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/yoshi/helmet
+    name: Yoshi Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:yoshi
+  yoshi_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/yoshi/boots
+    name: Yoshi Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:yoshi

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  masterpo_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/masterpo/leggings
+    name: Masterpo Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:masterpo
+  masterpo_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/masterpo/chestplate
+    name: Masterpo Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:masterpo
+  masterpo_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/masterpo/helmet
+    name: Masterpo Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:masterpo
+  masterpo_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/masterpo/boots
+    name: Masterpo Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:masterpo

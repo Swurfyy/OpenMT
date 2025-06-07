@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  cars_set_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/cars_set/leggings
+    name: Cars Set Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:cars_set
+  cars_set_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/cars_set/chestplate
+    name: Cars Set Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:cars_set
+  cars_set_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/cars_set/helmet
+    name: Cars Set Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:cars_set
+  cars_set_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/cars_set/boots
+    name: Cars Set Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:cars_set

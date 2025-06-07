@@ -1,0 +1,30 @@
+namespace: mobieltjes
+items:
+  mobiel3:
+    material: PAPER
+    item_model: minecraft:custom/mobieltjes/mobiel3
+    name: Mobiel3
+  mobiel2:
+    material: PAPER
+    item_model: minecraft:custom/mobieltjes/mobiel2
+    name: Mobiel2
+  mobiel5:
+    material: PAPER
+    item_model: minecraft:custom/mobieltjes/mobiel5
+    name: Mobiel5
+  mobiel4:
+    material: PAPER
+    item_model: minecraft:custom/mobieltjes/mobiel4
+    name: Mobiel4
+  mobiel7:
+    material: PAPER
+    item_model: minecraft:custom/mobieltjes/mobiel7
+    name: Mobiel7
+  mobiel6:
+    material: PAPER
+    item_model: minecraft:custom/mobieltjes/mobiel6
+    name: Mobiel6
+  mobiel1:
+    material: PAPER
+    item_model: minecraft:custom/mobieltjes/mobiel1
+    name: Mobiel1

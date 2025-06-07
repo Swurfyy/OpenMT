@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  valentijn_2024_gear_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/valentijn_2024_gear/leggings
+    name: Valentijn 2024 Gear Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:valentijn_2024_gear
+  valentijn_2024_gear_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/valentijn_2024_gear/chestplate
+    name: Valentijn 2024 Gear Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:valentijn_2024_gear
+  valentijn_2024_gear_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/valentijn_2024_gear/helmet
+    name: Valentijn 2024 Gear Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:valentijn_2024_gear
+  valentijn_2024_gear_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/valentijn_2024_gear/boots
+    name: Valentijn 2024 Gear Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:valentijn_2024_gear

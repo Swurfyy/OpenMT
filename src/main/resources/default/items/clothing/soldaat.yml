@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  soldaat_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/soldaat/leggings
+    name: Soldaat Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:soldaat
+  soldaat_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/soldaat/chestplate
+    name: Soldaat Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:soldaat
+  soldaat_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/soldaat/helmet
+    name: Soldaat Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:soldaat
+  soldaat_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/soldaat/boots
+    name: Soldaat Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:soldaat

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  charmander_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/charmander/leggings
+    name: Charmander Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:charmander
+  charmander_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/charmander/chestplate
+    name: Charmander Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:charmander
+  charmander_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/charmander/helmet
+    name: Charmander Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:charmander
+  charmander_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/charmander/boots
+    name: Charmander Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:charmander

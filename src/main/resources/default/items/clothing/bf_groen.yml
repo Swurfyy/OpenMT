@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  bf_groen_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/bf_groen/leggings
+    name: Bf Groen Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:bf_groen
+  bf_groen_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/bf_groen/chestplate
+    name: Bf Groen Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:bf_groen
+  bf_groen_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/bf_groen/helmet
+    name: Bf Groen Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:bf_groen
+  bf_groen_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/bf_groen/boots
+    name: Bf Groen Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:bf_groen

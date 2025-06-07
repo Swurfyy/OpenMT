@@ -1,0 +1,142 @@
+namespace: decoration
+items:
+  ferris_wheel_seat:
+    material: PAPER
+    item_model: minecraft:custom/decoration/ferris_wheel_seat
+    name: Ferris Wheel Seat
+  street_lamppost:
+    material: PAPER
+    item_model: minecraft:custom/decoration/street_lamppost
+    name: Street Lamppost
+  welcome_sign_kerst_david:
+    material: PAPER
+    item_model: minecraft:custom/decoration/welcome_sign_kerst_david
+    name: Welcome Sign Kerst David
+  wooden_chair:
+    material: PAPER
+    item_model: minecraft:custom/decoration/wooden_chair
+    name: Wooden Chair
+  flower_pot_purple:
+    material: PAPER
+    item_model: minecraft:custom/decoration/flower_pot_purple
+    name: Flower Pot Purple
+  small_tree:
+    material: PAPER
+    item_model: minecraft:custom/decoration/small_tree
+    name: Small Tree
+  babybed:
+    material: PAPER
+    item_model: minecraft:custom/decoration/babybed
+    name: Babybed
+  bank:
+    material: PAPER
+    item_model: minecraft:custom/decoration/bank
+    name: Bank
+  fire_hydrant:
+    material: PAPER
+    item_model: minecraft:custom/decoration/fire_hydrant
+    name: Fire Hydrant
+  cactus:
+    material: PAPER
+    item_model: minecraft:custom/decoration/cactus
+    name: Cactus
+  table_plant:
+    material: PAPER
+    item_model: minecraft:custom/decoration/table_plant
+    name: Table Plant
+  large_flower_pot:
+    material: PAPER
+    item_model: minecraft:custom/decoration/large_flower_pot
+    name: Large Flower Pot
+  bed:
+    material: PAPER
+    item_model: minecraft:custom/decoration/bed
+    name: Bed
+  welcome_sign_david:
+    material: PAPER
+    item_model: minecraft:custom/decoration/welcome_sign_david
+    name: Welcome Sign David
+  vlieger:
+    material: PAPER
+    item_model: minecraft:custom/decoration/vlieger
+    name: Vlieger
+  koelbox:
+    material: PAPER
+    item_model: minecraft:custom/decoration/koelbox
+    name: Koelbox
+  aanrecht:
+    material: PAPER
+    item_model: minecraft:custom/decoration/aanrecht
+    name: Aanrecht
+  pile_of_planks_02:
+    material: PAPER
+    item_model: minecraft:custom/decoration/pile_of_planks_02
+    name: Pile Of Planks 02
+  fire_pot:
+    material: PAPER
+    item_model: minecraft:custom/decoration/fire_pot
+    name: Fire Pot
+  stoel:
+    material: PAPER
+    item_model: minecraft:custom/decoration/stoel
+    name: Stoel
+  pile_of_planks_01:
+    material: PAPER
+    item_model: minecraft:custom/decoration/pile_of_planks_01
+    name: Pile Of Planks 01
+  modern_plant_pancake:
+    material: PAPER
+    item_model: minecraft:custom/decoration/modern_plant_pancake
+    name: Modern Plant Pancake
+  stoplicht:
+    material: PAPER
+    item_model: minecraft:custom/decoration/stoplicht
+    name: Stoplicht
+  stapelbed:
+    material: PAPER
+    item_model: minecraft:custom/decoration/stapelbed
+    name: Stapelbed
+  wooden_table_large:
+    material: PAPER
+    item_model: minecraft:custom/decoration/wooden_table_large
+    name: Wooden Table Large
+  valentine_chair:
+    material: PAPER
+    item_model: minecraft:custom/decoration/valentine_chair
+    name: Valentine Chair
+  welcome_sign:
+    material: PAPER
+    item_model: minecraft:custom/decoration/welcome_sign
+    name: Welcome Sign
+  welcome_sign_kerst_danny:
+    material: PAPER
+    item_model: minecraft:custom/decoration/welcome_sign_kerst_danny
+    name: Welcome Sign Kerst Danny
+  iron_chair:
+    material: PAPER
+    item_model: minecraft:custom/decoration/iron_chair
+    name: Iron Chair
+  modern_plant_4:
+    material: PAPER
+    item_model: minecraft:custom/decoration/modern_plant_4
+    name: Modern Plant 4
+  flower_pot_2:
+    material: PAPER
+    item_model: minecraft:custom/decoration/flower_pot_2
+    name: Flower Pot 2
+  welcome_sign_danny026:
+    material: PAPER
+    item_model: minecraft:custom/decoration/welcome_sign_danny026
+    name: Welcome Sign Danny026
+  bush:
+    material: PAPER
+    item_model: minecraft:custom/decoration/bush
+    name: Bush
+  merlijn_de_tovenaar:
+    material: PAPER
+    item_model: minecraft:custom/decoration/merlijn_de_tovenaar
+    name: Merlijn De Tovenaar
+  coffee_machine:
+    material: PAPER
+    item_model: minecraft:custom/decoration/coffee_machine
+    name: Coffee Machine

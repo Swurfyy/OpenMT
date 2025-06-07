@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  valentijn_ddg_2023_2_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/valentijn_ddg_2023_2/leggings
+    name: Valentijn Ddg 2023 2 Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:valentijn_ddg_2023_2
+  valentijn_ddg_2023_2_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/valentijn_ddg_2023_2/chestplate
+    name: Valentijn Ddg 2023 2 Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:valentijn_ddg_2023_2
+  valentijn_ddg_2023_2_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/valentijn_ddg_2023_2/helmet
+    name: Valentijn Ddg 2023 2 Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:valentijn_ddg_2023_2
+  valentijn_ddg_2023_2_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/valentijn_ddg_2023_2/boots
+    name: Valentijn Ddg 2023 2 Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:valentijn_ddg_2023_2

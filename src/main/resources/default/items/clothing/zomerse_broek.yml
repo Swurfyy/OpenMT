@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  zomerse_broek_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/zomerse_broek/leggings
+    name: Zomerse Broek Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:zomerse_broek

@@ -1,0 +1,50 @@
+namespace: merchandise
+items:
+  potgrond_backpack:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/potgrond_backpack/potgrond_backpack
+    name: Potgrond Backpack
+  ddg_ballon:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/ddg_ballon/ddg_ballon
+    name: Ddg Ballon
+  serialerror_sword:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/serialerror_sword/serialerror_sword
+    name: Serialerror Sword
+  duffy_cap_forward:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/duffy_caps/duffy_cap_forward
+    name: Duffy Cap Forward
+  duffy_cap_backward:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/duffy_caps/duffy_cap_backward
+    name: Duffy Cap Backward
+  duffy_ballon:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/duffy_ballon/duffy_ballon
+    name: Duffy Ballon
+  egs_cap_backward:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/egs_caps/egs_cap_backward
+    name: Egs Cap Backward
+  egs_cap_forward:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/egs_caps/egs_cap_forward
+    name: Egs Cap Forward
+  egs_ballon:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/egs_ballon/egs_ballon
+    name: Egs Ballon
+  dinoland_pet:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/dinoland_merch/dinoland_pet
+    name: Dinoland Pet
+  dinoland_ballon:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/dinoland_merch/dinoland_ballon
+    name: Dinoland Ballon
+  potgrond_sword:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/potgrond_sword/potgrond_sword
+    name: Potgrond Sword

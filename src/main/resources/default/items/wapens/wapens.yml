@@ -1,0 +1,1822 @@
+namespace: wapens
+items:
+  shield_biza:
+    material: PAPER
+    item_model: minecraft:custom/wapens/aniversary_shield/shield_biza
+    name: Shield Biza
+  shield_infra:
+    material: PAPER
+    item_model: minecraft:custom/wapens/aniversary_shield/shield_infra
+    name: Shield Infra
+  shield_eco:
+    material: PAPER
+    item_model: minecraft:custom/wapens/aniversary_shield/shield_eco
+    name: Shield Eco
+  shield_ozw:
+    material: PAPER
+    item_model: minecraft:custom/wapens/aniversary_shield/shield_ozw
+    name: Shield Ozw
+  shield_defentie:
+    material: PAPER
+    item_model: minecraft:custom/wapens/aniversary_shield/shield_defentie
+    name: Shield Defentie
+  shield_finantie:
+    material: PAPER
+    item_model: minecraft:custom/wapens/aniversary_shield/shield_finantie
+    name: Shield Finantie
+  shield_justitie:
+    material: PAPER
+    item_model: minecraft:custom/wapens/aniversary_shield/shield_justitie
+    name: Shield Justitie
+  teser:
+    material: PAPER
+    item_model: minecraft:custom/wapens/teser/teser
+    name: Teser
+  05_x_white_yellow_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/05_x_white_yellow_lightsaber
+    name: 05 X White Yellow Lightsaber
+  03_sword_white_red_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/03_sword_white_red_lightsaber
+    name: 03 Sword White Red Lightsaber
+  00_duble_white_blue_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/00_duble_white_blue_lightsaber
+    name: 00 Duble White Blue Lightsaber
+  00_pike_white_blue_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/00_pike_white_blue_lightsaber
+    name: 00 Pike White Blue Lightsaber
+  09_x_black_white_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/09_x_black_white_lightsaber
+    name: 09 X Black White Lightsaber
+  01_pike_white_purple_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/01_pike_white_purple_lightsaber
+    name: 01 Pike White Purple Lightsaber
+  07_x_white_cyan_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/07_x_white_cyan_lightsaber
+    name: 07 X White Cyan Lightsaber
+  08_pike_white_light_bule_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/08_pike_white_light_bule_lightsaber
+    name: 08 Pike White Light Bule Lightsaber
+  05_duble_white_yellow_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/05_duble_white_yellow_lightsaber
+    name: 05 Duble White Yellow Lightsaber
+  09_brood_guard_black_white_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/09_brood_guard_black_white_lightsaber
+    name: 09 Brood Guard Black White Lightsaber
+  04_brood_guard_white_orange_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/04_brood_guard_white_orange_lightsaber
+    name: 04 Brood Guard White Orange Lightsaber
+  03_white_red_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/03_white_red_lightsaber
+    name: 03 White Red Lightsaber
+  05_pike_white_yellow_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/05_pike_white_yellow_lightsaber
+    name: 05 Pike White Yellow Lightsaber
+  06_white_green_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/06_white_green_lightsaber
+    name: 06 White Green Lightsaber
+  06_brood_guard_white_green_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/06_brood_guard_white_green_lightsaber
+    name: 06 Brood Guard White Green Lightsaber
+  01_duble_white_purple_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/01_duble_white_purple_lightsaber
+    name: 01 Duble White Purple Lightsaber
+  00_x_white_blue_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/00_x_white_blue_lightsaber
+    name: 00 X White Blue Lightsaber
+  03_x_white_red_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/03_x_white_red_lightsaber
+    name: 03 X White Red Lightsaber
+  04_white_orange_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/04_white_orange_lightsaber
+    name: 04 White Orange Lightsaber
+  04_x_white_orange_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/04_x_white_orange_lightsaber
+    name: 04 X White Orange Lightsaber
+  10_pike_gradient_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/10_pike_gradient_lightsaber
+    name: 10 Pike Gradient Lightsaber
+  03_claws_white_red_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/03_claws_white_red_lightsaber
+    name: 03 Claws White Red Lightsaber
+  02_white_pink_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/02_white_pink_lightsaber
+    name: 02 White Pink Lightsaber
+  04_duble_white_orange_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/04_duble_white_orange_lightsaber
+    name: 04 Duble White Orange Lightsaber
+  10_gradient_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/10_gradient_lightsaber
+    name: 10 Gradient Lightsaber
+  10_sword_gradient_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/10_sword_gradient_lightsaber
+    name: 10 Sword Gradient Lightsaber
+  01_brood_guard_white_purple_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/01_brood_guard_white_purple_lightsaber
+    name: 01 Brood Guard White Purple Lightsaber
+  02_brood_guard_white_pink_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/02_brood_guard_white_pink_lightsaber
+    name: 02 Brood Guard White Pink Lightsaber
+  00_claws_white_blue_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/00_claws_white_blue_lightsaber
+    name: 00 Claws White Blue Lightsaber
+  00_sword_white_blue_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/00_sword_white_blue_lightsaber
+    name: 00 Sword White Blue Lightsaber
+  07_white_cyan_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/07_white_cyan_lightsaber
+    name: 07 White Cyan Lightsaber
+  08_x_white_light_bule_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/08_x_white_light_bule_lightsaber
+    name: 08 X White Light Bule Lightsaber
+  09_black_white_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/09_black_white_lightsaber
+    name: 09 Black White Lightsaber
+  01_x_white_purple_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/01_x_white_purple_lightsaber
+    name: 01 X White Purple Lightsaber
+  06_x_white_green_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/06_x_white_green_lightsaber
+    name: 06 X White Green Lightsaber
+  04_pike_white_orange_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/04_pike_white_orange_lightsaber
+    name: 04 Pike White Orange Lightsaber
+  10_claws_gradient_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/10_claws_gradient_lightsaber
+    name: 10 Claws Gradient Lightsaber
+  07_pike_white_cyan_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/07_pike_white_cyan_lightsaber
+    name: 07 Pike White Cyan Lightsaber
+  05_sword_white_yellow_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/05_sword_white_yellow_lightsaber
+    name: 05 Sword White Yellow Lightsaber
+  00_brood_guard_white_blue_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/00_brood_guard_white_blue_lightsaber
+    name: 00 Brood Guard White Blue Lightsaber
+  06_sword_white_green_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/06_sword_white_green_lightsaber
+    name: 06 Sword White Green Lightsaber
+  02_x_white_pink_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/02_x_white_pink_lightsaber
+    name: 02 X White Pink Lightsaber
+  06_claws_white_green_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/06_claws_white_green_lightsaber
+    name: 06 Claws White Green Lightsaber
+  00_white_blue_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/00_white_blue_lightsaber
+    name: 00 White Blue Lightsaber
+  07_brood_guard_white_cyan_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/07_brood_guard_white_cyan_lightsaber
+    name: 07 Brood Guard White Cyan Lightsaber
+  05_brood_guard_white_yellow_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/05_brood_guard_white_yellow_lightsaber
+    name: 05 Brood Guard White Yellow Lightsaber
+  09_duble_black_white_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/09_duble_black_white_lightsaber
+    name: 09 Duble Black White Lightsaber
+  08_brood_guard_white_light_bule_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/08_brood_guard_white_light_bule_lightsaber
+    name: 08 Brood Guard White Light Bule Lightsaber
+  08_duble_white_light_bule_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/08_duble_white_light_bule_lightsaber
+    name: 08 Duble White Light Bule Lightsaber
+  03_duble_white_red_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/03_duble_white_red_lightsaber
+    name: 03 Duble White Red Lightsaber
+  05_white_yellow_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/05_white_yellow_lightsaber
+    name: 05 White Yellow Lightsaber
+  03_brood_guard_white_red_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/03_brood_guard_white_red_lightsaber
+    name: 03 Brood Guard White Red Lightsaber
+  02_sword_white_pink_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/02_sword_white_pink_lightsaber
+    name: 02 Sword White Pink Lightsaber
+  07_duble_white_cyan_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/07_duble_white_cyan_lightsaber
+    name: 07 Duble White Cyan Lightsaber
+  03_pike_white_red_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/03_pike_white_red_lightsaber
+    name: 03 Pike White Red Lightsaber
+  10_brood_guard_gradient_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/10_brood_guard_gradient_lightsaber
+    name: 10 Brood Guard Gradient Lightsaber
+  02_claws_white_pink_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/02_claws_white_pink_lightsaber
+    name: 02 Claws White Pink Lightsaber
+  02_pike_white_pink_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/02_pike_white_pink_lightsaber
+    name: 02 Pike White Pink Lightsaber
+  05_claws_white_yellow_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/05_claws_white_yellow_lightsaber
+    name: 05 Claws White Yellow Lightsaber
+  10_x_gradient_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/10_x_gradient_lightsaber
+    name: 10 X Gradient Lightsaber
+  06_duble_white_green_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/06_duble_white_green_lightsaber
+    name: 06 Duble White Green Lightsaber
+  04_sword_white_orange_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/04_sword_white_orange_lightsaber
+    name: 04 Sword White Orange Lightsaber
+  10_duble_gradient_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/10_duble_gradient_lightsaber
+    name: 10 Duble Gradient Lightsaber
+  09_pike_black_white_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/09_pike_black_white_lightsaber
+    name: 09 Pike Black White Lightsaber
+  09_sword_black_white_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/09_sword_black_white_lightsaber
+    name: 09 Sword Black White Lightsaber
+  09_claws_black_white_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/09_claws_black_white_lightsaber
+    name: 09 Claws Black White Lightsaber
+  07_claws_white_cyan_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/07_claws_white_cyan_lightsaber
+    name: 07 Claws White Cyan Lightsaber
+  02_duble_white_pink_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/02_duble_white_pink_lightsaber
+    name: 02 Duble White Pink Lightsaber
+  07_sword_white_cyan_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/07_sword_white_cyan_lightsaber
+    name: 07 Sword White Cyan Lightsaber
+  01_sword_white_purple_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/01_sword_white_purple_lightsaber
+    name: 01 Sword White Purple Lightsaber
+  08_sword_white_light_bule_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/08_sword_white_light_bule_lightsaber
+    name: 08 Sword White Light Bule Lightsaber
+  01_claws_white_purple_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/01_claws_white_purple_lightsaber
+    name: 01 Claws White Purple Lightsaber
+  08_claws_white_light_bule_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/08_claws_white_light_bule_lightsaber
+    name: 08 Claws White Light Bule Lightsaber
+  08_white_light_bule_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/08_white_light_bule_lightsaber
+    name: 08 White Light Bule Lightsaber
+  01_white_purple_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/01_white_purple_lightsaber
+    name: 01 White Purple Lightsaber
+  04_claws_white_orange_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/04_claws_white_orange_lightsaber
+    name: 04 Claws White Orange Lightsaber
+  06_pike_white_green_lightsaber:
+    material: PAPER
+    item_model: minecraft:custom/wapens/light_sabers/06_pike_white_green_lightsaber
+    name: 06 Pike White Green Lightsaber
+  new_politie_wapenstok:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenstok/new_politie_wapenstok
+    name: New Politie Wapenstok
+  new_wapenstok:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenstok/new_wapenstok
+    name: New Wapenstok
+  mythic_yubashiri:
+    material: PAPER
+    item_model: minecraft:custom/wapens/mythic_swords/mythic_yubashiri
+    name: Mythic Yubashiri
+  mythic_kiss_of_ghost:
+    material: PAPER
+    item_model: minecraft:custom/wapens/mythic_swords/mythic_kiss_of_ghost
+    name: Mythic Kiss Of Ghost
+  mythic_nail_of_destiny:
+    material: PAPER
+    item_model: minecraft:custom/wapens/mythic_swords/mythic_nail_of_destiny
+    name: Mythic Nail Of Destiny
+  mythic_punisher_of_immortal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/mythic_swords/mythic_punisher_of_immortal
+    name: Mythic Punisher Of Immortal
+  mythic_echo_of_death:
+    material: PAPER
+    item_model: minecraft:custom/wapens/mythic_swords/mythic_echo_of_death
+    name: Mythic Echo Of Death
+  evil_queens_blade:
+    material: PAPER
+    item_model: minecraft:custom/wapens/mythic_swords/evil_queens_blade
+    name: Evil Queens Blade
+  knuppel_birch:
+    material: PAPER
+    item_model: minecraft:custom/wapens/knuppel_birch/knuppel_birch
+    name: Knuppel Birch
+  minitnt:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/minitnt
+    name: Minitnt
+  grenade_4:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/grenade_4
+    name: Grenade 4
+  grenade_2:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/grenade_2
+    name: Grenade 2
+  grenade_3:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/grenade_3
+    name: Grenade 3
+  gunpowder_can:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/gunpowder_can
+    name: Gunpowder Can
+  lama_pickaxe:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/lama_pickaxe
+    name: Lama Pickaxe
+  grenade_bol:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/grenade_bol
+    name: Grenade Bol
+  remote:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/remote
+    name: Remote
+  c4_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/c4_normal
+    name: C4 Normal
+  lama_pickaxe_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/lama_pickaxe_forgedt10
+    name: Lama Pickaxe Forgedt10
+  nether_grenade:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/nether_grenade
+    name: Nether Grenade
+  lama_pickaxe_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/granaten/lama_pickaxe_forged
+    name: Lama Pickaxe Forged
+  new_politie_pepperspray:
+    material: PAPER
+    item_model: minecraft:custom/wapens/pepperspray/new_politie_pepperspray
+    name: New Politie Pepperspray
+  new_pepperspray:
+    material: PAPER
+    item_model: minecraft:custom/wapens/pepperspray/new_pepperspray
+    name: New Pepperspray
+  waltherp99_magazijn:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/waltherp99_magazijn/waltherp99_magazijn
+    name: Waltherp99 Magazijn
+  deserteagle_grip:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/deserteagle_grip/deserteagle_grip
+    name: Deserteagle Grip
+  m16a4_frame:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/m16a4_frame/m16a4_frame
+    name: M16a4 Frame
+  waltherp99_frame:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/waltherp99_frame/waltherp99_frame
+    name: Waltherp99 Frame
+  deserteagle_frame:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/deserteagle_frame/deserteagle_frame
+    name: Deserteagle Frame
+  magnum44_grip:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/magnum44_grip/magnum44_grip
+    name: Magnum44 Grip
+  m16a4_achterkant:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/m16a4_achterkant/m16a4_achterkant
+    name: M16a4 Achterkant
+  m16a4_loop:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/m16a4_loop/m16a4_loop
+    name: M16a4 Loop
+  m16a4_magazijnhouder:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/m16a4_magazijnhouder/m16a4_magazijnhouder
+    name: M16a4 Magazijnhouder
+  m16a4_grip:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/m16a4_grip/m16a4_grip
+    name: M16a4 Grip
+  m16a4_trekker:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/m16a4_trekker/m16a4_trekker
+    name: M16a4 Trekker
+  glock19_trekker:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/glock19_trekker/glock19_trekker
+    name: Glock19 Trekker
+  magnum44_trekker:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/magnum44_trekker/magnum44_trekker
+    name: Magnum44 Trekker
+  magnum44_magazijn:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/magnum44_magazijn/magnum44_magazijn
+    name: Magnum44 Magazijn
+  waltherp99_grip:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/waltherp99_grip/waltherp99_grip
+    name: Waltherp99 Grip
+  m16a4_magazijn:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/m16a4_magazijn/m16a4_magazijn
+    name: M16a4 Magazijn
+  deserteagle_trekker:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/deserteagle_trekker/deserteagle_trekker
+    name: Deserteagle Trekker
+  glock19_magazijn:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/glock19_magazijn/glock19_magazijn
+    name: Glock19 Magazijn
+  magnum44_frame:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/magnum44_frame/magnum44_frame
+    name: Magnum44 Frame
+  glock19_frame:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/glock19_frame/glock19_frame
+    name: Glock19 Frame
+  waltherp99_trekker:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/waltherp99_trekker/waltherp99_trekker
+    name: Waltherp99 Trekker
+  glock19_grip:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/glock19_grip/glock19_grip
+    name: Glock19 Grip
+  deserteagle_magazijn:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapenparts/deserteagle_magazijn/deserteagle_magazijn
+    name: Deserteagle Magazijn
+  molossssdtov:
+    material: PAPER
+    item_model: minecraft:custom/wapens/ammo/molotov/molossssdtov
+    name: Molossssdtov
+  molotov:
+    material: PAPER
+    item_model: minecraft:custom/wapens/ammo/molotov/molotov
+    name: Molotov
+  snowball:
+    material: PAPER
+    item_model: minecraft:custom/wapens/ammo/snowballlauncher/snowball
+    name: Snowball
+  boksbeugelblack:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/boksbeugel/boksbeugelblack
+    name: Boksbeugelblack
+  boksbeugel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/boksbeugel/boksbeugel
+    name: Boksbeugel
+  boksbeugelforgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/boksbeugel/boksbeugelforgedt10
+    name: Boksbeugelforgedt10
+  boksbeugelforged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/boksbeugel/boksbeugelforged
+    name: Boksbeugelforged
+  boksbeugelgold:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/boksbeugel/boksbeugelgold
+    name: Boksbeugelgold
+  m240_lama:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m240/m240_lama
+    name: M240 Lama
+  m240_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m240/m240_forgedt10
+    name: M240 Forgedt10
+  m240_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m240/m240_normal
+    name: M240 Normal
+  m240_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m240/m240_forged
+    name: M240 Forged
+  barett50_diamond:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barett50/barett50_diamond
+    name: Barett50 Diamond
+  barett50_gold:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barett50/barett50_gold
+    name: Barett50 Gold
+  barett50_iron:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barett50/barett50_iron
+    name: Barett50 Iron
+  barett50_bolle_beren:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barett50/barett50_bolle_beren
+    name: Barett50 Bolle Beren
+  barett50_copper:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barett50/barett50_copper
+    name: Barett50 Copper
+  barett50_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barett50/barett50_normal
+    name: Barett50 Normal
+  barett50_nether:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barett50/barett50_nether
+    name: Barett50 Nether
+  barett50_fullblack:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barett50/barett50_fullblack
+    name: Barett50 Fullblack
+  barett50_black_buzzy:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barett50/barett50_black_buzzy
+    name: Barett50 Black Buzzy
+  smr_fullops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/smr_fullops
+    name: Smr Fullops
+  smr:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/smr
+    name: Smr
+  ammo_smr:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/ammo_smr
+    name: Ammo Smr
+  smr_snow:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/smr_snow
+    name: Smr Snow
+  smr_forrest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/smr_forrest
+    name: Smr Forrest
+  smr_camoblue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/smr_camoblue
+    name: Smr Camoblue
+  smr_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/smr_pink
+    name: Smr Pink
+  smr_marine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/smr_marine
+    name: Smr Marine
+  smr_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/smr_camo
+    name: Smr Camo
+  smr_dessert:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/smr_dessert
+    name: Smr Dessert
+  smr_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/smr/smr_red
+    name: Smr Red
+  lasergun:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/lasergun/lasergun
+    name: Lasergun
+  shotgun_1_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_1_forged
+    name: Shotgun 1 Forged
+  shotgun_1_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_1_normal
+    name: Shotgun 1 Normal
+  shotgun_2_blue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_2_blue
+    name: Shotgun 2 Blue
+  shotgun_1:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_1
+    name: Shotgun 1
+  shotgun_2_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_2_normal
+    name: Shotgun 2 Normal
+  shotgun_2_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_2_forged
+    name: Shotgun 2 Forged
+  shotgun_1_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_1_forgedt10
+    name: Shotgun 1 Forgedt10
+  shotgun_2_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_2_red
+    name: Shotgun 2 Red
+  shotgun_2:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_2
+    name: Shotgun 2
+  shotgun_2_joker:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_2_joker
+    name: Shotgun 2 Joker
+  shotgun_2_fullops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_2_fullops
+    name: Shotgun 2 Fullops
+  shotgun_2_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_2_forgedt10
+    name: Shotgun 2 Forgedt10
+  shotgun_1_green:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_1_green
+    name: Shotgun 1 Green
+  shotgun_1_blue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/shotgun/shotgun_1_blue
+    name: Shotgun 1 Blue
+  bow_pulling_1_vanilla:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/bow/bow_pulling_1_vanilla
+    name: Bow Pulling 1 Vanilla
+  bow_pulling_0_vanilla:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/bow/bow_pulling_0_vanilla
+    name: Bow Pulling 0 Vanilla
+  bow_pulling_2_vanilla:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/bow/bow_pulling_2_vanilla
+    name: Bow Pulling 2 Vanilla
+  bow_vanilla:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/bow/bow_vanilla
+    name: Bow Vanilla
+  ballista_scoped_marine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_scoped_marine
+    name: Ballista Scoped Marine
+  ammo_ballista:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ammo_ballista
+    name: Ammo Ballista
+  ballista_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_forgedt10
+    name: Ballista Forgedt10
+  ballista:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista
+    name: Ballista
+  ballista_fullops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_fullops
+    name: Ballista Fullops
+  ballista_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_red
+    name: Ballista Red
+  ballista_scoped:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_scoped
+    name: Ballista Scoped
+  ballista_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_pink
+    name: Ballista Pink
+  ballista_scoped_dessert:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_scoped_dessert
+    name: Ballista Scoped Dessert
+  ballista_dessert:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_dessert
+    name: Ballista Dessert
+  ballista_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_forged
+    name: Ballista Forged
+  ballista_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_camo
+    name: Ballista Camo
+  ballista_scoped_forrest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_scoped_forrest
+    name: Ballista Scoped Forrest
+  ballista_forrest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_forrest
+    name: Ballista Forrest
+  ballista_scoped_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_scoped_pink
+    name: Ballista Scoped Pink
+  ballista_scoped_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_scoped_red
+    name: Ballista Scoped Red
+  ballista_marine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_marine
+    name: Ballista Marine
+  ballista_camoblue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_camoblue
+    name: Ballista Camoblue
+  ballista_snow:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_snow
+    name: Ballista Snow
+  ballista_scoped_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/ballista/ballista_scoped_camo
+    name: Ballista Scoped Camo
+  scorpion_looij:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scorpion/scorpion_looij
+    name: Scorpion Looij
+  scorpion_yoshitiger:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scorpion/scorpion_yoshitiger
+    name: Scorpion Yoshitiger
+  scorpion_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scorpion/scorpion_normal
+    name: Scorpion Normal
+  scorpion_flamingo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scorpion/scorpion_flamingo
+    name: Scorpion Flamingo
+  scorpion_flamingoroze:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scorpion/scorpion_flamingoroze
+    name: Scorpion Flamingoroze
+  scorpion_fullblack:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scorpion/scorpion_fullblack
+    name: Scorpion Fullblack
+  minigun_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/minigun/minigun_normal
+    name: Minigun Normal
+  minigun_fullblack:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/minigun/minigun_fullblack
+    name: Minigun Fullblack
+  minigun_kerst:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/minigun/minigun_kerst
+    name: Minigun Kerst
+  minigun_lama:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/minigun/minigun_lama
+    name: Minigun Lama
+  minigun_shark:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/minigun/minigun_shark
+    name: Minigun Shark
+  minigun_sharkpinkred:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/minigun/minigun_sharkpinkred
+    name: Minigun Sharkpinkred
+  minigun_normal_nether:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/minigun/minigun_normal_nether
+    name: Minigun Normal Nether
+  minigun_winter:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/minigun/minigun_winter
+    name: Minigun Winter
+  minigun_sharkreverse:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/minigun/minigun_sharkreverse
+    name: Minigun Sharkreverse
+  awp_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/awp/awp_forgedt10
+    name: Awp Forgedt10
+  awp:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/awp/awp
+    name: Awp
+  awp_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/awp/awp_forged
+    name: Awp Forged
+  ammo_fad:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/ammo_fad
+    name: Ammo Fad
+  fad:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad
+    name: Fad
+  fad_dessert:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_dessert
+    name: Fad Dessert
+  fad_forrest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_forrest
+    name: Fad Forrest
+  fad_snow:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_snow
+    name: Fad Snow
+  fad_marine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_marine
+    name: Fad Marine
+  fad_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_forged
+    name: Fad Forged
+  fad_fullops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_fullops
+    name: Fad Fullops
+  fad_camoblue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_camoblue
+    name: Fad Camoblue
+  fad_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_camo
+    name: Fad Camo
+  fad_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_pink
+    name: Fad Pink
+  fad_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_red
+    name: Fad Red
+  fad_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fad/fad_forgedt10
+    name: Fad Forgedt10
+  guitaarkoffer:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/guitaarkoffer/guitaarkoffer
+    name: Guitaarkoffer
+  m16a4_fullmodel_bolle_beren:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m16a4_fullmodel/m16a4_fullmodel_bolle_beren
+    name: M16a4 Fullmodel Bolle Beren
+  m16a4_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/m16a4_fullmodel
+    name: M16a4 Fullmodel
+  m16a4_forrest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m16a4_fullmodel/m16a4_forrest
+    name: M16a4 Forrest
+  m16a4_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m16a4_fullmodel/m16a4_forgedt10
+    name: M16a4 Forgedt10
+  m16a4_asiimov:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m16a4_fullmodel/m16a4_asiimov
+    name: M16a4 Asiimov
+  m16a4_sweethart:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m16a4_fullmodel/m16a4_sweethart
+    name: M16a4 Sweethart
+  m16a4_gold:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m16a4_fullmodel/m16a4_gold
+    name: M16a4 Gold
+  m16a4_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m16a4_fullmodel/m16a4_forged
+    name: M16a4 Forged
+  grenade_launcher_snowball:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/grenadelauncher/grenade_launcher_snowball
+    name: Grenade Launcher Snowball
+  grenade_launcher:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/grenadelauncher/grenade_launcher
+    name: Grenade Launcher
+  grenade_launcher_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/grenadelauncher/grenade_launcher_forgedt10
+    name: Grenade Launcher Forgedt10
+  grenade_launcher_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/grenadelauncher/grenade_launcher_normal
+    name: Grenade Launcher Normal
+  grenade_launcher_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/grenadelauncher/grenade_launcher_forged
+    name: Grenade Launcher Forged
+  2xhand_dgp:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fun/2xhand_dgp
+    name: 2xhand Dgp
+  2xhand_big_dgp:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/fun/2xhand_big_dgp
+    name: 2xhand Big Dgp
+  m16a4_fake:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m16a4_fake/m16a4_fake
+    name: M16a4 Fake
+  sifi_grenadelauncher:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/sifiguns/sifi_grenadelauncher
+    name: Sifi Grenadelauncher
+  sifi_pistol:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/sifiguns/sifi_pistol
+    name: Sifi Pistol
+  sifi_shotgun:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/sifiguns/sifi_shotgun
+    name: Sifi Shotgun
+  sifi_sniper:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/sifiguns/sifi_sniper
+    name: Sifi Sniper
+  sifi_smg:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/sifiguns/sifi_smg
+    name: Sifi Smg
+  sifi_ar:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/sifiguns/sifi_ar
+    name: Sifi Ar
+  mk14_danny026:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_danny026
+    name: Mk14 Danny026
+  mk14_iron_sight_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_iron_sight_red
+    name: Mk14 Iron Sight Red
+  mk14_snow:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_snow
+    name: Mk14 Snow
+  mk14_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_forgedt10
+    name: Mk14 Forgedt10
+  mk14_iron_sight:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_iron_sight
+    name: Mk14 Iron Sight
+  mk14_iron_sight_dessert:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_iron_sight_dessert
+    name: Mk14 Iron Sight Dessert
+  mk14_camoblue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_camoblue
+    name: Mk14 Camoblue
+  mk14_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_forged
+    name: Mk14 Forged
+  mk14_iron_sight_forrest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_iron_sight_forrest
+    name: Mk14 Iron Sight Forrest
+  mk14_iron_sight_marine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_iron_sight_marine
+    name: Mk14 Iron Sight Marine
+  mk14_scoped:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_scoped
+    name: Mk14 Scoped
+  mk14_iron_sight_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_iron_sight_pink
+    name: Mk14 Iron Sight Pink
+  mk14_scoped_forrest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_scoped_forrest
+    name: Mk14 Scoped Forrest
+  mk14_iron_sight_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_iron_sight_camo
+    name: Mk14 Iron Sight Camo
+  mk14_scoped_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_scoped_pink
+    name: Mk14 Scoped Pink
+  mk14_fullops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_fullops
+    name: Mk14 Fullops
+  mk14_scoped_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_scoped_camo
+    name: Mk14 Scoped Camo
+  ammo_mk14:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/ammo_mk14
+    name: Ammo Mk14
+  mk14_scoped_dessert:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_scoped_dessert
+    name: Mk14 Scoped Dessert
+  mk14_scoped_marine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_scoped_marine
+    name: Mk14 Scoped Marine
+  mk14_scoped_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk14/mk14_scoped_red
+    name: Mk14 Scoped Red
+  scar_normal_blackops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_normal_blackops
+    name: Scar Normal Blackops
+  scar_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_forgedt10
+    name: Scar Forgedt10
+  scar_normal_inverted:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_normal_inverted
+    name: Scar Normal Inverted
+  scar_matrix_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_matrix_red
+    name: Scar Matrix Red
+  scar_normal_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_normal_pink
+    name: Scar Normal Pink
+  scar_black_buzzy:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_black_buzzy
+    name: Scar Black Buzzy
+  scar_normal_nether:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_normal_nether
+    name: Scar Normal Nether
+  scar_fullblack:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_fullblack
+    name: Scar Fullblack
+  scar_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_forged
+    name: Scar Forged
+  scar_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_normal
+    name: Scar Normal
+  scar_gucci:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_gucci
+    name: Scar Gucci
+  scar_valentijn_2023:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_valentijn_2023
+    name: Scar Valentijn 2023
+  scar_sunset:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_sunset
+    name: Scar Sunset
+  scar_lama:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_lama
+    name: Scar Lama
+  scar_kerst:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_kerst
+    name: Scar Kerst
+  scar_matrix_green:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/scar/scar_matrix_green
+    name: Scar Matrix Green
+  stinger_raket_blue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/stingerraket/stinger_raket_blue
+    name: Stinger Raket Blue
+  stinger_raket_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/stingerraket/stinger_raket_red
+    name: Stinger Raket Red
+  stinger_raket_normal_inverse:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/stingerraket/stinger_raket_normal_inverse
+    name: Stinger Raket Normal Inverse
+  stinger_raket_fullblack:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/stingerraket/stinger_raket_fullblack
+    name: Stinger Raket Fullblack
+  stinger_raket_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/stingerraket/stinger_raket_normal
+    name: Stinger Raket Normal
+  waltherp99_fake:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/waltherp99_fullmodel/waltherp99_fake
+    name: Waltherp99 Fake
+  waltherp99_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/waltherp99_fullmodel/waltherp99_fullmodel
+    name: Waltherp99 Fullmodel
+  mk2_danny026:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/mk2_danny026
+    name: Mk2 Danny026
+  01_mk2_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/01_mk2_red
+    name: 01 Mk2 Red
+  ammo_mk2:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/ammo_mk2
+    name: Ammo Mk2
+  01_mk2_desert:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/01_mk2_desert
+    name: 01 Mk2 Desert
+  mk2_snow:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/mk2_snow
+    name: Mk2 Snow
+  mk2_camoblue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/mk2_camoblue
+    name: Mk2 Camoblue
+  01_mk2_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/01_mk2_camo
+    name: 01 Mk2 Camo
+  01_mk2_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/01_mk2_pink
+    name: 01 Mk2 Pink
+  01_mk2_marine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/01_mk2_marine
+    name: 01 Mk2 Marine
+  mk2_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/mk2_forgedt10
+    name: Mk2 Forgedt10
+  mk2_fullops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/mk2_fullops
+    name: Mk2 Fullops
+  mk2_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/mk2_forged
+    name: Mk2 Forged
+  01_mk2_forest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/01_mk2_forest
+    name: 01 Mk2 Forest
+  01_mk2:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mk2/01_mk2
+    name: 01 Mk2
+  glock19_fake:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/glock19_fullmodel/glock19_fake
+    name: Glock19 Fake
+  glock19_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/glock19_fullmodel/glock19_fullmodel
+    name: Glock19 Fullmodel
+  roe:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/roe/roe
+    name: Roe
+  nerf-ammo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/nerfgun/nerf-ammo
+    name: Nerf Ammo
+  nerfgun:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/nerfgun/nerfgun
+    name: Nerfgun
+  barrett50nieuw:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barrett50_new/barrett50nieuw
+    name: Barrett50nieuw
+  barrett50_bolleberen:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/barrett50_new/barrett50_bolleberen
+    name: Barrett50 Bolleberen
+  zakmes:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/zakmes/zakmes
+    name: Zakmes
+  zakmesdiamond:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/zakmes/zakmesdiamond
+    name: Zakmesdiamond
+  zakmes_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/zakmes/zakmes_forgedt10
+    name: Zakmes Forgedt10
+  zakmesgold:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/zakmes/zakmesgold
+    name: Zakmesgold
+  zakmes_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/zakmes/zakmes_forged
+    name: Zakmes Forged
+  mag_7_seabird:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mag7/mag_7_seabird
+    name: Mag 7 Seabird
+  mag_7_fullblack:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mag7/mag_7_fullblack
+    name: Mag 7 Fullblack
+  mag_7_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mag7/mag_7_normal
+    name: Mag 7 Normal
+  mag_7_seabirdreverse:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mag7/mag_7_seabirdreverse
+    name: Mag 7 Seabirdreverse
+  paintballgun:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/paintballgun/paintballgun
+    name: Paintballgun
+  handgunscope_explorertje:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/handgunscope/handgunscope_explorertje
+    name: Handgunscope Explorertje
+  handgunscope_fullops_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/handgunscope/handgunscope_fullops_forgedt10
+    name: Handgunscope Fullops Forgedt10
+  handgunscope_camoblue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/handgunscope/handgunscope_camoblue
+    name: Handgunscope Camoblue
+  handgunscope_fullops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/handgunscope/handgunscope_fullops
+    name: Handgunscope Fullops
+  handgunscope_fullops_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/handgunscope/handgunscope_fullops_forged
+    name: Handgunscope Fullops Forged
+  handgunscope_ricardoog:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/handgunscope/handgunscope_ricardoog
+    name: Handgunscope Ricardoog
+  handgunscope:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/handgunscope/handgunscope
+    name: Handgunscope
+  p90_asiimovice:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/p90/p90_asiimovice
+    name: P90 Asiimovice
+  p90_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/p90/p90_forged
+    name: P90 Forged
+  p90_asiimov:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/p90/p90_asiimov
+    name: P90 Asiimov
+  p90_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/p90/p90_forgedt10
+    name: P90 Forgedt10
+  p90_fullops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/p90/p90_fullops
+    name: P90 Fullops
+  m1a_camoblue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_camoblue
+    name: M1a Camoblue
+  m1a_x8scope:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_x8scope
+    name: M1a X8scope
+  m1a_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_forged
+    name: M1a Forged
+  m1a_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_forgedt10
+    name: M1a Forgedt10
+  m1a_snow:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_snow
+    name: M1a Snow
+  m1a_x8scope_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_x8scope_pink
+    name: M1a X8scope Pink
+  m1a_x8scope_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_x8scope_camo
+    name: M1a X8scope Camo
+  m1a_danny026:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_danny026
+    name: M1a Danny026
+  m1a_ironsight_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_ironsight_red
+    name: M1a Ironsight Red
+  m1a_ironsight_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_ironsight_camo
+    name: M1a Ironsight Camo
+  m1a_ironsight_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_ironsight_pink
+    name: M1a Ironsight Pink
+  m1a_x8scope_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_x8scope_red
+    name: M1a X8scope Red
+  m1a_x8scope_forrest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_x8scope_forrest
+    name: M1a X8scope Forrest
+  m1a_ironsight_forrest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_ironsight_forrest
+    name: M1a Ironsight Forrest
+  m1a_ironsight:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_ironsight
+    name: M1a Ironsight
+  m1a_ironsight_dessert:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_ironsight_dessert
+    name: M1a Ironsight Dessert
+  m1a_fullops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_fullops
+    name: M1a Fullops
+  m1a_x8scope_dessert:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_x8scope_dessert
+    name: M1a X8scope Dessert
+  ammo_m1a:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/ammo_m1a
+    name: Ammo M1a
+  m1a_ironsight_marine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_ironsight_marine
+    name: M1a Ironsight Marine
+  m1a_x8scope_marine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/m1a/m1a_x8scope_marine
+    name: M1a X8scope Marine
+  ak47_fullmodel_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_forged
+    name: Ak47 Fullmodel Forged
+  m4carbine2:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/m4carbine2
+    name: M4carbine2
+  ak47_fullmodel_cyre:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_cyre
+    name: Ak47 Fullmodel Cyre
+  mac10_fullmodel_cyre:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mac10_fullmodel_cyre
+    name: Mac10 Fullmodel Cyre
+  mac10_fullmodel_tigerstripes:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mac10_fullmodel_tigerstripes
+    name: Mac10 Fullmodel Tigerstripes
+  makarov_fullmodel_vulcan:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/makarov_fullmodel_vulcan
+    name: Makarov Fullmodel Vulcan
+  ak47_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel
+    name: Ak47 Fullmodel
+  coltm1911_fullmodel_toxicgreen:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/coltm1911_fullmodel_toxicgreen
+    name: Coltm1911 Fullmodel Toxicgreen
+  mac10_1:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mac10_1
+    name: Mac10 1
+  ak47_fullmodel_4:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_4
+    name: Ak47 Fullmodel 4
+  makarov_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/makarov_fullmodel
+    name: Makarov Fullmodel
+  mac10_fullmodel_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mac10_fullmodel_forgedt10
+    name: Mac10 Fullmodel Forgedt10
+  coltm1911_fullmodel_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/coltm1911_fullmodel_red
+    name: Coltm1911 Fullmodel Red
+  ak47_black:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_black
+    name: Ak47 Black
+  makarov_fullmodel_cyre:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/makarov_fullmodel_cyre
+    name: Makarov Fullmodel Cyre
+  coltm1911_fullmodel2:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/coltm1911_fullmodel2
+    name: Coltm1911 Fullmodel2
+  coltm1911_fullmodel_asiimov:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/coltm1911_fullmodel_asiimov
+    name: Coltm1911 Fullmodel Asiimov
+  ak47_fullmodel_3:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_3
+    name: Ak47 Fullmodel 3
+  mac10_fullmodel_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mac10_fullmodel_forged
+    name: Mac10 Fullmodel Forged
+  ak47_fullmodel_2:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_2
+    name: Ak47 Fullmodel 2
+  ak47_fullmodel_vulcan:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_vulcan
+    name: Ak47 Fullmodel Vulcan
+  ak47_fullmodel_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_camo
+    name: Ak47 Fullmodel Camo
+  makarov_fullmodel_blue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/makarov_fullmodel_blue
+    name: Makarov Fullmodel Blue
+  mac10_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mac10_fullmodel
+    name: Mac10 Fullmodel
+  ak47_fullmodel_1:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_1
+    name: Ak47 Fullmodel 1
+  ak47_fullmodel_camo2:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_camo2
+    name: Ak47 Fullmodel Camo2
+  coltm1911_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/coltm1911_forgedt10
+    name: Coltm1911 Forgedt10
+  makarov_fullmodel_redfire:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/makarov_fullmodel_redfire
+    name: Makarov Fullmodel Redfire
+  mp5_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mp5_fullmodel
+    name: Mp5 Fullmodel
+  revolver_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/revolver_fullmodel
+    name: Revolver Fullmodel
+  mac10_2:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mac10_2
+    name: Mac10 2
+  ump45_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ump45_fullmodel
+    name: Ump45 Fullmodel
+  coltm1911_fullmodel_bluefire:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/coltm1911_fullmodel_bluefire
+    name: Coltm1911 Fullmodel Bluefire
+  coltm1911_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/coltm1911_fullmodel
+    name: Coltm1911 Fullmodel
+  m4carbine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/m4carbine
+    name: M4carbine
+  ak47_fullmodel_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_forgedt10
+    name: Ak47 Fullmodel Forgedt10
+  mp5_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mp5_forgedt10
+    name: Mp5 Forgedt10
+  mp5_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mp5_forged
+    name: Mp5 Forged
+  ak47_fullmodel_asiimov:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_asiimov
+    name: Ak47 Fullmodel Asiimov
+  coltm1911_fullmodel_vulcan:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/coltm1911_fullmodel_vulcan
+    name: Coltm1911 Fullmodel Vulcan
+  mac10_fullmodel_asiimov:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mac10_fullmodel_asiimov
+    name: Mac10 Fullmodel Asiimov
+  ak47_fullmodel_vanguish:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/ak47_fullmodel_vanguish
+    name: Ak47 Fullmodel Vanguish
+  mac10_3:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/mtw/mac10_3
+    name: Mac10 3
+  flamethrowerlightblue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/flamethrower/flamethrowerlightblue
+    name: Flamethrowerlightblue
+  flamethrowerpink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/flamethrower/flamethrowerpink
+    name: Flamethrowerpink
+  flamethrowergreen:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/flamethrower/flamethrowergreen
+    name: Flamethrowergreen
+  flamethrower:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/flamethrower/flamethrower
+    name: Flamethrower
+  flamethrower_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/flamethrower/flamethrower_forgedt10
+    name: Flamethrower Forgedt10
+  flamethrower2:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/flamethrower/flamethrower2
+    name: Flamethrower2
+  flamethrower_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/flamethrower/flamethrower_forged
+    name: Flamethrower Forged
+  awg_gold:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/awg/awg_gold
+    name: Awg Gold
+  awg_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/awg/awg_normal
+    name: Awg Normal
+  awg_bolle_beren:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/awg/awg_bolle_beren
+    name: Awg Bolle Beren
+  awg_fullblack:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/awg/awg_fullblack
+    name: Awg Fullblack
+  awg_pepernoot:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/awg/awg_pepernoot
+    name: Awg Pepernoot
+  awg_lama:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/awg/awg_lama
+    name: Awg Lama
+  awg_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/awg/awg_pink
+    name: Awg Pink
+  blaaspijp_ammo_green:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/blaaspijp/blaaspijp_ammo_green
+    name: Blaaspijp Ammo Green
+  blaaspijp_ammo_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/blaaspijp/blaaspijp_ammo_pink
+    name: Blaaspijp Ammo Pink
+  blaaspijp_ammo_yellow:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/blaaspijp/blaaspijp_ammo_yellow
+    name: Blaaspijp Ammo Yellow
+  blaaspijp_ammo_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/blaaspijp/blaaspijp_ammo_red
+    name: Blaaspijp Ammo Red
+  blaaspijp:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/blaaspijp/blaaspijp
+    name: Blaaspijp
+  blaaspijp_ammo_blue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/blaaspijp/blaaspijp_ammo_blue
+    name: Blaaspijp Ammo Blue
+  blaaspijp_ammo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/blaaspijp/blaaspijp_ammo
+    name: Blaaspijp Ammo
+  vector_normal_lightblue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/vector/vector_normal_lightblue
+    name: Vector Normal Lightblue
+  vector_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/vector/vector_forgedt10
+    name: Vector Forgedt10
+  vector_pepernoot:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/vector/vector_pepernoot
+    name: Vector Pepernoot
+  vector_fullblack:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/vector/vector_fullblack
+    name: Vector Fullblack
+  vector_normal_reverse:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/vector/vector_normal_reverse
+    name: Vector Normal Reverse
+  vector_kerst:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/vector/vector_kerst
+    name: Vector Kerst
+  vector_normal:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/vector/vector_normal
+    name: Vector Normal
+  vector_normal_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/vector/vector_normal_red
+    name: Vector Normal Red
+  vector_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/vector/vector_forged
+    name: Vector Forged
+  vector_normal_green:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/vector/vector_normal_green
+    name: Vector Normal Green
+  deserteagle_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/deserteagle_fullmodel/deserteagle_fullmodel
+    name: Deserteagle Fullmodel
+  deserteagle_fake:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/deserteagle_fullmodel/deserteagle_fake
+    name: Deserteagle Fake
+  magnum44_fake:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/magnum44_fullmodel/magnum44_fake
+    name: Magnum44 Fake
+  magnum44_fullmodel:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/magnum44_fullmodel/magnum44_fullmodel
+    name: Magnum44 Fullmodel
+  walther_pp_forrest:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/walther_pp_forrest
+    name: Walther Pp Forrest
+  walther_pp_forgedt10:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/walther_pp_forgedt10
+    name: Walther Pp Forgedt10
+  walther_pp_dessert:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/walther_pp_dessert
+    name: Walther Pp Dessert
+  waltherpp_camoblue:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/waltherpp_camoblue
+    name: Waltherpp Camoblue
+  ammo_walther_pp:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/ammo_walther_pp
+    name: Ammo Walther Pp
+  walther_pp:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/walther_pp
+    name: Walther Pp
+  waltherpp_fullops:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/waltherpp_fullops
+    name: Waltherpp Fullops
+  walther_pp_forged:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/walther_pp_forged
+    name: Walther Pp Forged
+  waltherpp_snow:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/waltherpp_snow
+    name: Waltherpp Snow
+  walther_pp_red:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/walther_pp_red
+    name: Walther Pp Red
+  walther_pp_marine:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/walther_pp_marine
+    name: Walther Pp Marine
+  walther_pp_camo:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/walther_pp_camo
+    name: Walther Pp Camo
+  walther_pp_pink:
+    material: PAPER
+    item_model: minecraft:custom/wapens/wapens/walterpp/walther_pp_pink
+    name: Walther Pp Pink

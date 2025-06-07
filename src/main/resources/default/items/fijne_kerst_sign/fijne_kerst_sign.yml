@@ -1,0 +1,6 @@
+namespace: fijne_kerst_sign
+items:
+  fijne_kerst_sign:
+    material: PAPER
+    item_model: minecraft:custom/fijne_kerst_sign/fijne_kerst_sign
+    name: Fijne Kerst Sign

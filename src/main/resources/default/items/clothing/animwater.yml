@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  animwater_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/animwater/leggings
+    name: Animwater Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:animwater
+  animwater_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/animwater/chestplate
+    name: Animwater Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:animwater
+  animwater_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/animwater/helmet
+    name: Animwater Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:animwater
+  animwater_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/animwater/boots
+    name: Animwater Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:animwater

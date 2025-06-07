@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  startreklegendaryred_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/startreklegendaryred/leggings
+    name: Startreklegendaryred Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:startreklegendaryred
+  startreklegendaryred_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/startreklegendaryred/chestplate
+    name: Startreklegendaryred Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:startreklegendaryred
+  startreklegendaryred_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/startreklegendaryred/boots
+    name: Startreklegendaryred Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:startreklegendaryred

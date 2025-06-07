@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  new_aang_state_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/new_aang_state/leggings
+    name: New Aang State Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:new_aang_state
+  new_aang_state_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/new_aang_state/chestplate
+    name: New Aang State Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:new_aang_state
+  new_aang_state_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/new_aang_state/helmet
+    name: New Aang State Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:new_aang_state
+  new_aang_state_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/new_aang_state/boots
+    name: New Aang State Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:new_aang_state

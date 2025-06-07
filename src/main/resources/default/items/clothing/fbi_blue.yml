@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  fbi_blue_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/fbi_blue/leggings
+    name: Fbi Blue Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:fbi_blue
+  fbi_blue_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/fbi_blue/chestplate
+    name: Fbi Blue Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:fbi_blue
+  fbi_blue_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/fbi_blue/helmet
+    name: Fbi Blue Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:fbi_blue
+  fbi_blue_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/fbi_blue/boots
+    name: Fbi Blue Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:fbi_blue

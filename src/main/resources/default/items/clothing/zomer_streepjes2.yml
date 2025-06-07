@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  zomer_streepjes2_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/zomer_streepjes2/chestplate
+    name: Zomer Streepjes2 Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:zomer_streepjes2

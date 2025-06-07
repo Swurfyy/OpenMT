@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  smooth_wood_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/smooth_wood/leggings
+    name: Smooth Wood Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:smooth_wood
+  smooth_wood_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/smooth_wood/chestplate
+    name: Smooth Wood Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:smooth_wood
+  smooth_wood_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/smooth_wood/helmet
+    name: Smooth Wood Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:smooth_wood
+  smooth_wood_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/smooth_wood/boots
+    name: Smooth Wood Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:smooth_wood

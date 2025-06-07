@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  plus_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/plus/leggings
+    name: Plus Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:plus
+  plus_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/plus/chestplate
+    name: Plus Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:plus
+  plus_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/plus/boots
+    name: Plus Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:plus

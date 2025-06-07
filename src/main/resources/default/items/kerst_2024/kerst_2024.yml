@@ -1,0 +1,250 @@
+namespace: kerst_2024
+items:
+  nm_plushie_gingerbread_woman:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_gingerbread_woman
+    name: Nm Plushie Gingerbread Woman
+  nm_plushie_snowman:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_snowman
+    name: Nm Plushie Snowman
+  nm_plushie_scringe:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_scringe
+    name: Nm Plushie Scringe
+  nm_plushie_angel:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_angel
+    name: Nm Plushie Angel
+  nm_plushie_scrooge:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_scrooge
+    name: Nm Plushie Scrooge
+  nm_plushie_santa_hunky:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_santa_hunky
+    name: Nm Plushie Santa Hunky
+  nm_plushie_nutcracker_green:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_nutcracker_green
+    name: Nm Plushie Nutcracker Green
+  nm_plushie_nutcracker_blue:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_nutcracker_blue
+    name: Nm Plushie Nutcracker Blue
+  nm_plushie_krampus:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_krampus
+    name: Nm Plushie Krampus
+  nm_plushie_nutcracker_red:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_nutcracker_red
+    name: Nm Plushie Nutcracker Red
+  mickey_mouse_head_new:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/mickey_mouse_head_new
+    name: Mickey Mouse Head New
+  elf_hat:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/elf_hat
+    name: Elf Hat
+  sneeuwpop_2024:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/sneeuwpop_2024
+    name: Sneeuwpop 2024
+  christmas_top_hat:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/christmas_top_hat
+    name: Christmas Top Hat
+  rudolph_hat:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/rudolph_hat
+    name: Rudolph Hat
+  kerstboom_head:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/kerstboom_head
+    name: Kerstboom Head
+  grinch_hat:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/grinch_hat
+    name: Grinch Hat
+  present_hat:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/present_hat
+    name: Present Hat
+  santa_hat:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/santa_hat
+    name: Santa Hat
+  piek_head:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/piek_head
+    name: Piek Head
+  nutcracker_hat:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/nutcracker_hat
+    name: Nutcracker Hat
+  christmas_hat:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/christmas_hat
+    name: Christmas Hat
+  gingerbread_hat:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/gingerbread_hat
+    name: Gingerbread Hat
+  frosty_the_snowman_hat:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/hats/frosty_the_snowman_hat
+    name: Frosty The Snowman Hat
+  carpet:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/carpet
+    name: Carpet
+  totem:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/totem
+    name: Totem
+  drum:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/drum
+    name: Drum
+  clock:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/clock
+    name: Clock
+  funko_1000:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/funko_1000
+    name: Funko 1000
+  gift:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/gift
+    name: Gift
+  lamp:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/lamp
+    name: Lamp
+  kerstverlichting_3:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/kerstverlichting_3
+    name: Kerstverlichting 3
+  funko_750:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/funko_750
+    name: Funko 750
+  chair:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/chair
+    name: Chair
+  mini_xmas_tree_decoration:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/mini_xmas_tree_decoration
+    name: Mini Xmas Tree Decoration
+  bar_chair:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/bar_chair
+    name: Bar Chair
+  candy:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/candy
+    name: Candy
+  kerstverlichting_4:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/kerstverlichting_4
+    name: Kerstverlichting 4
+  funko_900:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/funko_900
+    name: Funko 900
+  coffee:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/coffee
+    name: Coffee
+  santa_bag:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/santa_bag
+    name: Santa Bag
+  big_christmas_tree:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/big_christmas_tree
+    name: Big Christmas Tree
+  boots:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/boots
+    name: Boots
+  leaf_decoration:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/leaf_decoration
+    name: Leaf Decoration
+  ceiling_light:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/ceiling_light
+    name: Ceiling Light
+  christmas_tree_out_door:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/christmas_tree_out_door
+    name: Christmas Tree Out Door
+  snowman:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/snowman
+    name: Snowman
+  letter:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/letter
+    name: Letter
+  kerstverlichting_1:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/kerstverlichting_1
+    name: Kerstverlichting 1
+  blackbuzzy_piano:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/blackbuzzy_piano
+    name: Blackbuzzy Piano
+  jukebox_new:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/jukebox_new
+    name: Jukebox New
+  bell_decoration:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/furniture/bell_decoration
+    name: Bell Decoration
+  kerstbalhead_2024_blauw:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/kerstballen/kerstbalhead_2024_blauw
+    name: Kerstbalhead 2024 Blauw
+  kerstbalhead_2024_groen:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/kerstballen/kerstbalhead_2024_groen
+    name: Kerstbalhead 2024 Groen
+  kerstbal_2024_oranje:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/kerstballen/kerstbal_2024_oranje
+    name: Kerstbal 2024 Oranje
+  kerstbalhead_2024_roze:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/kerstballen/kerstbalhead_2024_roze
+    name: Kerstbalhead 2024 Roze
+  kerstbal_2024_blauw:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/kerstballen/kerstbal_2024_blauw
+    name: Kerstbal 2024 Blauw
+  kerstbal_2024_groen:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/kerstballen/kerstbal_2024_groen
+    name: Kerstbal 2024 Groen
+  kerstbalhead_2024_rood:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/kerstballen/kerstbalhead_2024_rood
+    name: Kerstbalhead 2024 Rood
+  kerstbalhead_2024_geel:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/kerstballen/kerstbalhead_2024_geel
+    name: Kerstbalhead 2024 Geel
+  kerstbal_2024_grijs:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/kerstballen/kerstbal_2024_grijs
+    name: Kerstbal 2024 Grijs
+  kerstbal_2024_rood:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/kerstballen/kerstbal_2024_rood
+    name: Kerstbal 2024 Rood

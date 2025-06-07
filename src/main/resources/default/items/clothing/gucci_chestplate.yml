@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  gucci_chestplate_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/gucci_chestplate/chestplate
+    name: Gucci Chestplate Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:gucci_chestplate

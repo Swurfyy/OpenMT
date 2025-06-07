@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  nexus_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/nexus/leggings
+    name: Nexus Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:nexus
+  nexus_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/nexus/chestplate
+    name: Nexus Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:nexus
+  nexus_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/nexus/helmet
+    name: Nexus Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:nexus
+  nexus_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/nexus/boots
+    name: Nexus Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:nexus

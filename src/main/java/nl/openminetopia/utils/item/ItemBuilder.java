@@ -13,12 +13,14 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.lang.reflect.Method;
@@ -373,6 +375,37 @@ public class ItemBuilder {
         is.setItemMeta(im);
         return this;
     }
+
+    /**
+     * Set the equippable component of an item.
+     *
+     * @param slot The equipment slot to set it to.
+     */
+    public ItemBuilder setEquippableSlot(EquipmentSlot slot) {
+        ItemMeta im = is.getItemMeta();
+        EquippableComponent equippable = im.getEquippable();
+        if (equippable == null) return this;
+        equippable.setSlot(slot);
+        im.setEquippable(equippable);
+        is.setItemMeta(im);
+        return this;
+    }
+
+    /**
+     * Set the equippable component of an item.
+     *
+     * @param model The equipment asset_id to set it to.
+     */
+    public ItemBuilder setEquippableModel(NamespacedKey model) {
+        ItemMeta im = is.getItemMeta();
+        EquippableComponent equippable = im.getEquippable();
+        if (equippable == null) return this;
+        equippable.setModel(model);
+        im.setEquippable(equippable);
+        is.setItemMeta(im);
+        return this;
+    }
+
 
     public ItemBuilder setSkinURL(String url) {
         try {

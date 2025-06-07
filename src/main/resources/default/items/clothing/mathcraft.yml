@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  mathcraft_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/mathcraft/leggings
+    name: Mathcraft Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:mathcraft
+  mathcraft_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/mathcraft/chestplate
+    name: Mathcraft Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:mathcraft
+  mathcraft_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/mathcraft/helmet
+    name: Mathcraft Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:mathcraft
+  mathcraft_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/mathcraft/boots
+    name: Mathcraft Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:mathcraft

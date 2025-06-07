@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  rhaezorarmy_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/rhaezorarmy/leggings
+    name: Rhaezorarmy Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:rhaezorarmy
+  rhaezorarmy_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/rhaezorarmy/chestplate
+    name: Rhaezorarmy Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:rhaezorarmy
+  rhaezorarmy_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/rhaezorarmy/helmet
+    name: Rhaezorarmy Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:rhaezorarmy
+  rhaezorarmy_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/rhaezorarmy/boots
+    name: Rhaezorarmy Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:rhaezorarmy

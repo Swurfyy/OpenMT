@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  genie_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/genie/leggings
+    name: Genie Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:genie
+  genie_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/genie/chestplate
+    name: Genie Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:genie
+  genie_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/genie/boots
+    name: Genie Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:genie

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  intergalactic_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/intergalactic/leggings
+    name: Intergalactic Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:intergalactic
+  intergalactic_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/intergalactic/chestplate
+    name: Intergalactic Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:intergalactic
+  intergalactic_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/intergalactic/helmet
+    name: Intergalactic Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:intergalactic
+  intergalactic_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/intergalactic/boots
+    name: Intergalactic Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:intergalactic

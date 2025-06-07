@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  piet_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/piet/leggings
+    name: Piet Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:piet
+  piet_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/piet/chestplate
+    name: Piet Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:piet
+  piet_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/piet/boots
+    name: Piet Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:piet

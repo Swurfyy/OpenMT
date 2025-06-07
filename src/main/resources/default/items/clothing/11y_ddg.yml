@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  11y_ddg_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/11y_ddg/leggings
+    name: 11y Ddg Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:11y_ddg
+  11y_ddg_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/11y_ddg/helmet
+    name: 11y Ddg Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:11y_ddg
+  11y_ddg_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/11y_ddg/boots
+    name: 11y Ddg Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:11y_ddg

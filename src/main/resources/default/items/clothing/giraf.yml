@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  giraf_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/giraf/leggings
+    name: Giraf Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:giraf
+  giraf_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/giraf/chestplate
+    name: Giraf Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:giraf
+  giraf_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/giraf/boots
+    name: Giraf Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:giraf

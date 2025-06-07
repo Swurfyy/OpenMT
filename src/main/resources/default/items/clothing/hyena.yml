@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  hyena_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/hyena/leggings
+    name: Hyena Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:hyena
+  hyena_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/hyena/chestplate
+    name: Hyena Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:hyena
+  hyena_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/hyena/boots
+    name: Hyena Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:hyena

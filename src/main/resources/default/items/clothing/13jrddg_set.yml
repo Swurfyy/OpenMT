@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  13jrddg_set_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/13jrddg_set/chestplate
+    name: 13jrddg Set Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:13jrddg_set
+  13jrddg_set_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/13jrddg_set/helmet
+    name: 13jrddg Set Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:13jrddg_set
+  13jrddg_set_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/13jrddg_set/boots
+    name: 13jrddg Set Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:13jrddg_set

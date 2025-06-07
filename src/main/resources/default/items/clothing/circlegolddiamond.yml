@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  circlegolddiamond_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/circlegolddiamond/leggings
+    name: Circlegolddiamond Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:circlegolddiamond
+  circlegolddiamond_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/circlegolddiamond/chestplate
+    name: Circlegolddiamond Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:circlegolddiamond
+  circlegolddiamond_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/circlegolddiamond/helmet
+    name: Circlegolddiamond Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:circlegolddiamond
+  circlegolddiamond_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/circlegolddiamond/boots
+    name: Circlegolddiamond Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:circlegolddiamond

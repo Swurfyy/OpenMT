@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  simba_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/simba/leggings
+    name: Simba Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:simba
+  simba_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/simba/chestplate
+    name: Simba Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:simba
+  simba_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/simba/boots
+    name: Simba Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:simba

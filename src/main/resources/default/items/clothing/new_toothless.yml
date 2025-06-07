@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  new_toothless_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/new_toothless/leggings
+    name: New Toothless Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:new_toothless
+  new_toothless_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/new_toothless/chestplate
+    name: New Toothless Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:new_toothless
+  new_toothless_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/new_toothless/boots
+    name: New Toothless Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:new_toothless

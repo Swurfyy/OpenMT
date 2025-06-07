@@ -1,0 +1,66 @@
+namespace: food
+items:
+  cookie_model:
+    material: PAPER
+    item_model: minecraft:custom/food/cookie_model
+    name: Cookie Model
+  mutton:
+    material: PAPER
+    item_model: minecraft:custom/food/update/mutton
+    name: Mutton
+  enchantment_poeder:
+    material: PAPER
+    item_model: minecraft:custom/food/update/enchantment_poeder
+    name: Enchantment Poeder
+  varken:
+    material: PAPER
+    item_model: minecraft:custom/food/update/varken
+    name: Varken
+  fles_melk:
+    material: PAPER
+    item_model: minecraft:custom/food/update/fles_melk
+    name: Fles Melk
+  deeg_bol:
+    material: PAPER
+    item_model: minecraft:custom/food/update/deeg_bol
+    name: Deeg Bol
+  egg:
+    material: PAPER
+    item_model: minecraft:custom/food/update/egg
+    name: Egg
+  sugar:
+    material: PAPER
+    item_model: minecraft:custom/food/update/sugar
+    name: Sugar
+  appeltaart:
+    material: PAPER
+    item_model: minecraft:custom/food/update/appeltaart
+    name: Appeltaart
+  kip:
+    material: PAPER
+    item_model: minecraft:custom/food/update/kip
+    name: Kip
+  sla:
+    material: PAPER
+    item_model: minecraft:custom/food/update/sla
+    name: Sla
+  wol:
+    material: PAPER
+    item_model: minecraft:custom/food/update/wol
+    name: Wol
+  leather:
+    material: PAPER
+    item_model: minecraft:custom/food/update/leather
+    name: Leather
+  boter:
+    material: PAPER
+    item_model: minecraft:custom/food/update/boter
+    name: Boter
+  broodje:
+    material: PAPER
+    item_model: minecraft:custom/food/update/broodje
+    name: Broodje
+  goud_klompje:
+    material: PAPER
+    item_model: minecraft:custom/food/update/goud_klompje
+    name: Goud Klompje

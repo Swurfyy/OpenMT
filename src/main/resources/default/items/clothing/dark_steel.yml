@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  dark_steel_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/dark_steel/leggings
+    name: Dark Steel Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:dark_steel
+  dark_steel_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/dark_steel/chestplate
+    name: Dark Steel Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:dark_steel
+  dark_steel_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/dark_steel/helmet
+    name: Dark Steel Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:dark_steel
+  dark_steel_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/dark_steel/boots
+    name: Dark Steel Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:dark_steel

@@ -1,0 +1,178 @@
+namespace: plushies
+items:
+  plushie_pickett:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_pickett
+    name: Plushie Pickett
+  p1zz4b0x_plushie:
+    material: PAPER
+    item_model: minecraft:custom/plushies/p1zz4b0x_plushie
+    name: P1zz4b0x Plushie
+  plushie_centaur:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_centaur
+    name: Plushie Centaur
+  darktastic_plushie:
+    material: PAPER
+    item_model: minecraft:custom/plushies/darktastic_plushie
+    name: Darktastic Plushie
+  plushie_base_esmeearrows:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_base_esmeearrows
+    name: Plushie Base Esmeearrows
+  plushie_spongebob:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_spongebob
+    name: Plushie Spongebob
+  plushie_sandy:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_sandy
+    name: Plushie Sandy
+  plushie_francine_smith:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_francine_smith
+    name: Plushie Francine Smith
+  plushie_bart:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_bart
+    name: Plushie Bart
+  plushie_chrisgriffin:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_chrisgriffin
+    name: Plushie Chrisgriffin
+  plushie_petergriffin:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_petergriffin
+    name: Plushie Petergriffin
+  plushie_octo:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_octo
+    name: Plushie Octo
+  parent:
+    material: PAPER
+    item_model: minecraft:custom/plushies/parent
+    name: Parent
+  plushie_loisgriffin:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_loisgriffin
+    name: Plushie Loisgriffin
+  plushie_patrickstar:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_patrickstar
+    name: Plushie Patrickstar
+  justjoesoehere_plushie:
+    material: PAPER
+    item_model: minecraft:custom/plushies/justjoesoehere_plushie
+    name: Justjoesoehere Plushie
+  moederaarde_plushie:
+    material: PAPER
+    item_model: minecraft:custom/plushies/moederaarde_plushie
+    name: Moederaarde Plushie
+  plushie_mrcrabs:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_mrcrabs
+    name: Plushie Mrcrabs
+  plushie_niffler:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_niffler
+    name: Plushie Niffler
+  plushie_haleysmith:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_haleysmith
+    name: Plushie Haleysmith
+  plushie_wandelendetak:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_wandelendetak
+    name: Plushie Wandelendetak
+  plushie_joeswanson:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_joeswanson
+    name: Plushie Joeswanson
+  het_is_thijmen_plushie:
+    material: PAPER
+    item_model: minecraft:custom/plushies/het_is_thijmen_plushie
+    name: Het Is Thijmen Plushie
+  plushie_quagmire:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_quagmire
+    name: Plushie Quagmire
+  plushie_marge:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_marge
+    name: Plushie Marge
+  plushie_crusty:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_crusty
+    name: Plushie Crusty
+  plushie_lisa:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_lisa
+    name: Plushie Lisa
+  plushie_nedflanders:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_nedflanders
+    name: Plushie Nedflanders
+  cuzo_plushie:
+    material: PAPER
+    item_model: minecraft:custom/plushies/cuzo_plushie
+    name: Cuzo Plushie
+  parent_slim:
+    material: PAPER
+    item_model: minecraft:custom/plushies/parent_slim
+    name: Parent Slim
+  plushie_stewiegriffin:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_stewiegriffin
+    name: Plushie Stewiegriffin
+  plushie_base_slim:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_base_slim
+    name: Plushie Base Slim
+  plushie_seymour:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_seymour
+    name: Plushie Seymour
+  plushie_rogersmith:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_rogersmith
+    name: Plushie Rogersmith
+  plushie_briangriffin:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_briangriffin
+    name: Plushie Briangriffin
+  plushie_meggriffin:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_meggriffin
+    name: Plushie Meggriffin
+  plushie_stevesmith:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_stevesmith
+    name: Plushie Stevesmith
+  plushie_stansmith:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_stansmith
+    name: Plushie Stansmith
+  plushie_ralphie:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_ralphie
+    name: Plushie Ralphie
+  plushie_mrburns:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_mrburns
+    name: Plushie Mrburns
+  plushie_base_swagger27:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_base_swagger27
+    name: Plushie Base Swagger27
+  plushie_base:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_base
+    name: Plushie Base
+  plushie_plankton:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_plankton
+    name: Plushie Plankton
+  plushie_base_mjaartenn:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_base_mjaartenn
+    name: Plushie Base Mjaartenn

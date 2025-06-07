@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  avatar_water_soldier_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/avatar_water_soldier/leggings
+    name: Avatar Water Soldier Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:avatar_water_soldier
+  avatar_water_soldier_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/avatar_water_soldier/chestplate
+    name: Avatar Water Soldier Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:avatar_water_soldier
+  avatar_water_soldier_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/avatar_water_soldier/boots
+    name: Avatar Water Soldier Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:avatar_water_soldier

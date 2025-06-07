@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  aardebander_soldier_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/aardebander_soldier/leggings
+    name: Aardebander Soldier Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:aardebander_soldier
+  aardebander_soldier_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/aardebander_soldier/chestplate
+    name: Aardebander Soldier Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:aardebander_soldier
+  aardebander_soldier_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/aardebander_soldier/boots
+    name: Aardebander Soldier Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:aardebander_soldier

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  dark_redstone_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/dark_redstone/leggings
+    name: Dark Redstone Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:dark_redstone
+  dark_redstone_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/dark_redstone/chestplate
+    name: Dark Redstone Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:dark_redstone
+  dark_redstone_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/dark_redstone/helmet
+    name: Dark Redstone Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:dark_redstone
+  dark_redstone_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/dark_redstone/boots
+    name: Dark Redstone Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:dark_redstone

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  mastershifu_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/mastershifu/leggings
+    name: Mastershifu Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:mastershifu
+  mastershifu_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/mastershifu/chestplate
+    name: Mastershifu Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:mastershifu
+  mastershifu_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/mastershifu/helmet
+    name: Mastershifu Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:mastershifu
+  mastershifu_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/mastershifu/boots
+    name: Mastershifu Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:mastershifu

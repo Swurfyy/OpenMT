@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  mario_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/mario/leggings
+    name: Mario Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:mario
+  mario_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/mario/chestplate
+    name: Mario Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:mario
+  mario_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/mario/helmet
+    name: Mario Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:mario
+  mario_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/mario/boots
+    name: Mario Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:mario

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  midnight_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/midnight/leggings
+    name: Midnight Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:midnight
+  midnight_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/midnight/chestplate
+    name: Midnight Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:midnight
+  midnight_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/midnight/helmet
+    name: Midnight Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:midnight
+  midnight_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/midnight/boots
+    name: Midnight Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:midnight

@@ -1,0 +1,16 @@
+namespace: clothing
+items:
+  minion_armor_headweare_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/minion_armor_headweare/leggings
+    name: Minion Armor Headweare Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:minion_armor_headweare
+  minion_armor_headweare_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/minion_armor_headweare/boots
+    name: Minion Armor Headweare Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:minion_armor_headweare

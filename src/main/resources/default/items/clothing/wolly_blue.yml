@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  wolly_blue_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/wolly_blue/leggings
+    name: Wolly Blue Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:wolly_blue
+  wolly_blue_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/wolly_blue/chestplate
+    name: Wolly Blue Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:wolly_blue
+  wolly_blue_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/wolly_blue/helmet
+    name: Wolly Blue Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:wolly_blue
+  wolly_blue_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/wolly_blue/boots
+    name: Wolly Blue Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:wolly_blue

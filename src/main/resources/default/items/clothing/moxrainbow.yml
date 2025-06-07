@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  moxrainbow_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/moxrainbow/leggings
+    name: Moxrainbow Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:moxrainbow
+  moxrainbow_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/moxrainbow/chestplate
+    name: Moxrainbow Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:moxrainbow
+  moxrainbow_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/moxrainbow/helmet
+    name: Moxrainbow Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:moxrainbow
+  moxrainbow_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/moxrainbow/boots
+    name: Moxrainbow Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:moxrainbow

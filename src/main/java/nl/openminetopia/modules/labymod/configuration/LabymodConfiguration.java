@@ -18,7 +18,7 @@ public class LabymodConfiguration extends ConfigurateConfig {
 	private final String subtitleDisplay;
 
 	public LabymodConfiguration(File file) {
-		super(file, "labymod.yml", "default-labymod.yml", true);
+		super(file, "labymod.yml", "default/labymod.yml", true);
 
 		this.enabled = rootNode.node("enabled").getBoolean();
 

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  kingsday2021_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/kingsday2021/leggings
+    name: Kingsday2021 Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:kingsday2021
+  kingsday2021_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/kingsday2021/chestplate
+    name: Kingsday2021 Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:kingsday2021
+  kingsday2021_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/kingsday2021/helmet
+    name: Kingsday2021 Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:kingsday2021
+  kingsday2021_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/kingsday2021/boots
+    name: Kingsday2021 Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:kingsday2021

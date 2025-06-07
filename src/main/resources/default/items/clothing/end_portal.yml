@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  end_portal_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/end_portal/leggings
+    name: End Portal Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:end_portal
+  end_portal_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/end_portal/chestplate
+    name: End Portal Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:end_portal
+  end_portal_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/end_portal/helmet
+    name: End Portal Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:end_portal
+  end_portal_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/end_portal/boots
+    name: End Portal Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:end_portal

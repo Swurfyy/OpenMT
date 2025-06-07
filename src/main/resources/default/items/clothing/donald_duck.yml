@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  donald_duck_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/donald_duck/leggings
+    name: Donald Duck Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:donald_duck
+  donald_duck_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/donald_duck/chestplate
+    name: Donald Duck Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:donald_duck
+  donald_duck_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/donald_duck/boots
+    name: Donald Duck Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:donald_duck

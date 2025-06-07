@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  elfenschoentjes_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/elfenschoentjes/boots
+    name: Elfenschoentjes Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:elfenschoentjes

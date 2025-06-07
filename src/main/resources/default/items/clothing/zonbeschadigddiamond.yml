@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  zonbeschadigddiamond_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/zonbeschadigddiamond/leggings
+    name: Zonbeschadigddiamond Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:zonbeschadigddiamond
+  zonbeschadigddiamond_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/zonbeschadigddiamond/chestplate
+    name: Zonbeschadigddiamond Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:zonbeschadigddiamond
+  zonbeschadigddiamond_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/zonbeschadigddiamond/helmet
+    name: Zonbeschadigddiamond Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:zonbeschadigddiamond
+  zonbeschadigddiamond_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/zonbeschadigddiamond/boots
+    name: Zonbeschadigddiamond Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:zonbeschadigddiamond

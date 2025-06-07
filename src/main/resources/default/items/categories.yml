@@ -1,0 +1,180 @@
+'1.0':
+  name: '1.0'
+  namespace: '1.0'
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/1.0/pinautomaatoud
+13jrddg:
+  name: 13jrddg
+  namespace: 13jrddg
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/heads/dom_glass
+accessoires:
+  name: Accessoires
+  namespace: accessoires
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/relic_speaker/relic_speaker
+accessories:
+  name: Accessories
+  namespace: accessories
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/items/sterrebril
+clothing:
+  name: Kleding
+  namespace: clothing
+  icon:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/valentijnrechts/chestplate
+decoration:
+  name: Decoration
+  namespace: decoration
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/decoration/ferris_wheel_seat
+drank:
+  name: Drank
+  namespace: drank
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/drank/wisky
+economie:
+  name: Economie
+  namespace: economie
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/economie/arrow_head/arrow_head
+emojis:
+  name: Emojis
+  namespace: emojis
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/emojis/tekstballon_kusje
+fijne_kerst_sign:
+  name: Fijne Kerst Sign
+  namespace: fijne_kerst_sign
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/fijne_kerst_sign/fijne_kerst_sign
+food:
+  name: Food
+  namespace: food
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/food/cookie_model
+fotobooth:
+  name: Fotobooth
+  namespace: fotobooth
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/fotobooth/fotobooth_snowman
+funko:
+  name: Funko
+  namespace: funko
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/funko/113-blaze/funko_pop_blaze
+funko2_0:
+  name: Funko2 0
+  namespace: funko2_0
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/funko2_0/2-princes_en_de_kikker/funko_doos2_princes_en_de_kikker
+gui:
+  name: Gui
+  namespace: gui
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/gui/filter
+head_particle:
+  name: Head Particle
+  namespace: head_particle
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/head_particle/head_particle_hoelahoop_olympic
+kerst_2024:
+  name: Kerst 2024
+  namespace: kerst_2024
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/kerst_2024/xmas_plushies/nm_plushie_gingerbread_woman
+kerst_sinterklaas_2024:
+  name: Kerst Sinterklaas 2024
+  namespace: kerst_sinterklaas_2024
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/iphone16base
+krasloten:
+  name: Krasloten
+  namespace: krasloten
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/krasloten/klaver4_kraslot
+machines:
+  name: Machines
+  namespace: machines
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/machines/juwelen_machine
+merchandise:
+  name: Merchandise
+  namespace: merchandise
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/merchandise/potgrond_backpack/potgrond_backpack
+mobieltjes:
+  name: Mobieltjes
+  namespace: mobieltjes
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/mobieltjes/mobiel3
+nieuw_funko:
+  name: Nieuw Funko
+  namespace: nieuw_funko
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_niffler_hp
+overige:
+  name: Overige
+  namespace: overige
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/overige/limo/limonade_glass
+player_items:
+  name: Player Items
+  namespace: player_items
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/player_items/moederaarde/moederaarde_vlag
+plushies:
+  name: Plushies
+  namespace: plushies
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/plushies/plushie_pickett
+puzzel:
+  name: Puzzel
+  namespace: puzzel
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/puzzel/pokemon_kaart_pikachu/pokemon_kaart_pikachu_puzzel_1
+shields:
+  name: Shields
+  namespace: shields
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/shields/shield
+trophies:
+  name: Trophies
+  namespace: trophies
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/trophies/rotc/strophy1
+wapens:
+  name: Wapens
+  namespace: wapens
+  icon:
+    material: PAPER
+    item_model: minecraft:custom/wapens/aniversary_shield/shield_biza
