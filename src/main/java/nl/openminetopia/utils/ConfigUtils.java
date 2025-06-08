@@ -56,7 +56,7 @@ public class ConfigUtils {
             if (damage != -1) itemMap.put("damage", damage);
 
             if (Bukkit.getVersion().contains("1.21.4") && itemStack.getItemMeta().hasItemModel() && itemStack.getItemMeta().getItemModel() != null) {
-                itemMap.put("item-model", itemStack.getItemMeta().getItemModel());
+                itemMap.put("item-model", itemStack.getItemMeta().getItemModel().toString());
             }
         } catch (Exception e) {
             OpenMinetopia.getInstance().getLogger().warning("Failed to serialize item: " + itemStack.getType().name());
