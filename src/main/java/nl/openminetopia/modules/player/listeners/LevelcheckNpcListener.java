@@ -48,13 +48,14 @@ public class LevelcheckNpcListener implements Listener {
 
         LevelUtil.calculateLevelupCosts(level, calculatedLevel).whenComplete((cost, throwable) -> {
             if (cost == null || throwable != null) return;
-            Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> new LevelCheckMenu(minetopiaPlayer, calculatedLevel, cost).open(player));
+            new LevelCheckMenu(minetopiaPlayer, calculatedLevel, cost).open(player);
         });
     }
 
     private static class LevelCheckMenu extends Menu {
         public LevelCheckMenu(MinetopiaPlayer minetopiaPlayer, int newLevel, double cost) {
             super("<gold>Levelcheck", 3);
+            gui.disableAllInteractions();
 
             BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
             if (bankingModule == null) return;

@@ -60,7 +60,7 @@ dependencies {
     implementation("com.github.Jazzkuh.ModuleManager:spigot:0b399761d5")
 
     /* PersistentData addons */
-    implementation("com.jeff-media:custom-block-data:2.2.5")
+    implementation("com.jeff-media:custom-block-data:2.2.4")
     implementation("com.jeff-media:MorePersistentDataTypes:2.4.0")
 
     /* TriumphGUI */
@@ -78,7 +78,7 @@ dependencies {
     compileOnly("com.github.SkriptLang:Skript:2.10.2")
 
     /* Rest API & Portal dependencies */
-    compileOnly("io.vertx:vertx-core:5.0.0")
+    compileOnly("io.vertx:vertx-core:4.5.13")
     compileOnly("io.vertx:vertx-web:4.5.13")
     compileOnly("io.vertx:vertx-web-client:4.5.13")
 
@@ -155,14 +155,20 @@ tasks {
     }
 }
 
+tasks.register<Jar>("apiJar") {
+    archiveClassifier.set("api")
+    from(sourceSets.main.get().output) {
+        include("nl/openminetopia/api/**")
+    }
+}
+
 publishing {
     publications {
-        create<MavenPublication>("maven") {
-            groupId = group.toString()
-            artifactId = project.name
+        create<MavenPublication>("api") {
+            artifact(tasks["apiJar"])
+            groupId = "nl.openminetopia"
+            artifactId = "api"
             version = version.toString()
-
-            from(components["java"])
         }
     }
 }
