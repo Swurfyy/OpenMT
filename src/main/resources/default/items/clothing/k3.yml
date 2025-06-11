@@ -1,0 +1,16 @@
+namespace: clothing
+items:
+  k3_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/k3/leggings
+    name: K3 Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:k3
+  k3_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/k3/chestplate
+    name: K3 Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:k3

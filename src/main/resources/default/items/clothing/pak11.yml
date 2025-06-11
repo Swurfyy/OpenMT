@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  pak11_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/pak11/leggings
+    name: Pak11 Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:pak11
+  pak11_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/pak11/chestplate
+    name: Pak11 Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:pak11
+  pak11_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/pak11/boots
+    name: Pak11 Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:pak11

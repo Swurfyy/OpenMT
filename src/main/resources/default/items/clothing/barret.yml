@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  barret_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/barret/helmet
+    name: Barret Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:barret

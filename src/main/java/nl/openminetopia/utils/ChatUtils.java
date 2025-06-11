@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
 import nl.openminetopia.OpenMinetopia;
@@ -23,7 +24,7 @@ import java.util.Date;
 public class ChatUtils {
 
     public Component color(String message) {
-        return MiniMessage.miniMessage().deserialize(message);
+        return MiniMessage.miniMessage().deserialize(message).decoration(TextDecoration.ITALIC, false);
     }
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

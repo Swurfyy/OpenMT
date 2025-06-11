@@ -1,0 +1,422 @@
+namespace: nieuw_funko
+items:
+  nieuw_funko_niffler_hp:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_niffler_hp
+    name: Nieuw Funko Niffler Hp
+  nieuw_funko_briangriffin:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_briangriffin
+    name: Nieuw Funko Briangriffin
+  nieuw_funko_justjoesoehere:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_justjoesoehere
+    name: Nieuw Funko Justjoesoehere
+  nieuw_funko_plushie_kuiken:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_plushie_kuiken
+    name: Nieuw Funko Plushie Kuiken
+  new_funko_toph:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_toph
+    name: New Funko Toph
+  dragonballs_5:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/dragonballs_5
+    name: Dragonballs 5
+  nieuw_funko_pardoes_cascomp2:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_pardoes_cascomp2
+    name: Nieuw Funko Pardoes Cascomp2
+  nieuw_funko_herbert:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_herbert
+    name: Nieuw Funko Herbert
+  nieuw_funko_coolblue:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_coolblue
+    name: Nieuw Funko Coolblue
+  po_kung_fu_panda:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/po_kung_fu_panda
+    name: Po Kung Fu Panda
+  new_funko_ty_lee:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_ty_lee
+    name: New Funko Ty Lee
+  tai_lung_kung_fu_panda:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/tai_lung_kung_fu_panda
+    name: Tai Lung Kung Fu Panda
+  nieuw_funko_kenny:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_kenny
+    name: Nieuw Funko Kenny
+  frieza_funko:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/frieza_funko
+    name: Frieza Funko
+  minion_neutraal:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/minion_neutraal
+    name: Minion Neutraal
+  nieuw_funko_mjaartenn:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_mjaartenn
+    name: Nieuw Funko Mjaartenn
+  nieuw_funko_standbeeld:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_standbeeld
+    name: Nieuw Funko Standbeeld
+  goku_funko:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/goku_funko
+    name: Goku Funko
+  nieuw_funko_fawkesphoenix_hp:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_fawkesphoenix_hp
+    name: Nieuw Funko Fawkesphoenix Hp
+  nieuw_funko_mandjson:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_mandjson
+    name: Nieuw Funko Mandjson
+  olympische_spelen_fakkel:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/olympische_spelen_fakkel
+    name: Olympische Spelen Fakkel
+  dragonballs_4:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/dragonballs_4
+    name: Dragonballs 4
+  nieuw_funko_swagger27:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_swagger27
+    name: Nieuw Funko Swagger27
+  minion_fitness:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/minion_fitness
+    name: Minion Fitness
+  nieuw_funko_david_pasen:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_david_pasen
+    name: Nieuw Funko David Pasen
+  nieuw_funko_danny_pasen:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_danny_pasen
+    name: Nieuw Funko Danny Pasen
+  olympische_spelen_finishvlag:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/olympische_spelen_finishvlag
+    name: Olympische Spelen Finishvlag
+  nieuw_funko_jake_tucker:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_jake_tucker
+    name: Nieuw Funko Jake Tucker
+  new_funko_katara:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_katara
+    name: New Funko Katara
+  nieuw_funko_pardoes_cascomp:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_pardoes_cascomp
+    name: Nieuw Funko Pardoes Cascomp
+  minion_hello:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/minion_hello
+    name: Minion Hello
+  dragonballs_3:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/dragonballs_3
+    name: Dragonballs 3
+  nieuw_funko_woody_jessie:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_woody_jessie
+    name: Nieuw Funko Woody Jessie
+  new_funko_princess_yue:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_princess_yue
+    name: New Funko Princess Yue
+  nieuw_funko_mjaartenn2:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_mjaartenn2
+    name: Nieuw Funko Mjaartenn2
+  nieuw_funko_darktastic:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_darktastic
+    name: Nieuw Funko Darktastic
+  dragonballs_2:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/dragonballs_2
+    name: Dragonballs 2
+  nieuw_funko_mowpi:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_mowpi
+    name: Nieuw Funko Mowpi
+  nieuw_funko_goofy:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_goofy
+    name: Nieuw Funko Goofy
+  nieuw_funko_stewie:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_stewie
+    name: Nieuw Funko Stewie
+  nieuw_funko_itsdeppy:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_itsdeppy
+    name: Nieuw Funko Itsdeppy
+  nieuw_funko_gekkecrimineel:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_gekkecrimineel
+    name: Nieuw Funko Gekkecrimineel
+  nieuw_funko_sandermander20:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_sandermander20
+    name: Nieuw Funko Sandermander20
+  minion_runing:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/minion_runing
+    name: Minion Runing
+  nieuw_funko_anger:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_anger
+    name: Nieuw Funko Anger
+  new_funko_cabbagesssss_guy:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_cabbagesssss_guy
+    name: New Funko Cabbagesssss Guy
+  nieuw_funko_moederaarde:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_moederaarde
+    name: Nieuw Funko Moederaarde
+  nieuw_funko_mr_potato_head:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_mr_potato_head
+    name: Nieuw Funko Mr Potato Head
+  new_funko_azula:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_azula
+    name: New Funko Azula
+  nieuw_funko_petergriffin:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_petergriffin
+    name: Nieuw Funko Petergriffin
+  nieuw_funko_meg_griffin:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_meg_griffin
+    name: Nieuw Funko Meg Griffin
+  nieuw_funko_buis:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_buis
+    name: Nieuw Funko Buis
+  new_funko_jet:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_jet
+    name: New Funko Jet
+  nieuw_funko_swaggie_045:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_swaggie_045
+    name: Nieuw Funko Swaggie 045
+  nieuw_funko_slinky_buzzlightyear:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_slinky_buzzlightyear
+    name: Nieuw Funko Slinky Buzzlightyear
+  dragonballs_1:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/dragonballs_1
+    name: Dragonballs 1
+  funko_appa:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/funko_appa
+    name: Funko Appa
+  nieuw_funko_lois_griffin:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_lois_griffin
+    name: Nieuw Funko Lois Griffin
+  nieuw_funko_ano_ouk:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_ano_ouk
+    name: Nieuw Funko Ano Ouk
+  nieuw_funko_chriss_griffin:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_chriss_griffin
+    name: Nieuw Funko Chriss Griffin
+  nieuw_funko_paasei_2:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_paasei_2
+    name: Nieuw Funko Paasei 2
+  master_shifu_kung_fu_panda:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/master_shifu_kung_fu_panda
+    name: Master Shifu Kung Fu Panda
+  new_funko_suki:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_suki
+    name: New Funko Suki
+  nieuw_funko_cleveland:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_cleveland
+    name: Nieuw Funko Cleveland
+  nieuw_funko_bjoimb:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_bjoimb
+    name: Nieuw Funko Bjoimb
+  piccolo_funko:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/piccolo_funko
+    name: Piccolo Funko
+  nieuw_funko_hedwig:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_hedwig
+    name: Nieuw Funko Hedwig
+  madamtusseau_taylorswift:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/madamtusseau_taylorswift
+    name: Madamtusseau Taylorswift
+  new_funko_dyrenza:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_dyrenza
+    name: New Funko Dyrenza
+  new_funko_xjordiii_daenerys:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_xjordiii_daenerys
+    name: New Funko Xjordiii Daenerys
+  new_funko_aang:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_aang
+    name: New Funko Aang
+  madamtusseau_brunomars:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/madamtusseau_brunomars
+    name: Madamtusseau Brunomars
+  minion_first:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/minion_first
+    name: Minion First
+  nieuw_funko_paashaas_funko:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_paashaas_funko
+    name: Nieuw Funko Paashaas Funko
+  nieuw_funko_het_is_thijmen:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_het_is_thijmen
+    name: Nieuw Funko Het Is Thijmen
+  nieuw_funko_mandrake_hp:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_mandrake_hp
+    name: Nieuw Funko Mandrake Hp
+  nieuw_funko_fear:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_fear
+    name: Nieuw Funko Fear
+  nieuw_funko_stitch:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_stitch
+    name: Nieuw Funko Stitch
+  olympische_spelen_wereldkaart:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/olympische_spelen_wereldkaart
+    name: Olympische Spelen Wereldkaart
+  funko_roodkapje:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/funko_roodkapje
+    name: Funko Roodkapje
+  dragonballs_7:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/dragonballs_7
+    name: Dragonballs 7
+  vegeta_funko:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/vegeta_funko
+    name: Vegeta Funko
+  minion_prison:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/minion_prison
+    name: Minion Prison
+  nieuw_funko_paasei:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_paasei
+    name: Nieuw Funko Paasei
+  nieuw_funko_cuzo:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_cuzo
+    name: Nieuw Funko Cuzo
+  nieuw_funko_perry:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_perry
+    name: Nieuw Funko Perry
+  new_funko_iroh:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_iroh
+    name: New Funko Iroh
+  new_funko_sokka:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_sokka
+    name: New Funko Sokka
+  nieuw_funko_alex1000gamer:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_alex1000gamer
+    name: Nieuw Funko Alex1000gamer
+  madamtusseau_edsheeran:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/madamtusseau_edsheeran
+    name: Madamtusseau Edsheeran
+  olympische_spelen_ringen:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/olympische_spelen_ringen
+    name: Olympische Spelen Ringen
+  nieuw_funko_jacob200tk:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_jacob200tk
+    name: Nieuw Funko Jacob200tk
+  new_funko_mai:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_mai
+    name: New Funko Mai
+  nieuw_funko_p1zz4b0x:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_p1zz4b0x
+    name: Nieuw Funko P1zz4b0x
+  nieuw_funko_pluto:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_pluto
+    name: Nieuw Funko Pluto
+  nieuw_funko_quagmire:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_quagmire
+    name: Nieuw Funko Quagmire
+  nieuw_funko_mickey_minnie:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_mickey_minnie
+    name: Nieuw Funko Mickey Minnie
+  nieuw_funko_slakjesslijm:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_slakjesslijm
+    name: Nieuw Funko Slakjesslijm
+  madamtusseau_joostklein:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/madamtusseau_joostklein
+    name: Madamtusseau Joostklein
+  beerus_funko:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/beerus_funko
+    name: Beerus Funko
+  nieuw_funko_donald_katrien:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_donald_katrien
+    name: Nieuw Funko Donald Katrien
+  new_funko_blue_spirit:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/new_funko_blue_spirit
+    name: New Funko Blue Spirit
+  dragonballs_6:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/dragonballs_6
+    name: Dragonballs 6
+  zhen_kung_fu_panda:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/zhen_kung_fu_panda
+    name: Zhen Kung Fu Panda
+  nieuw_funko_esmeearrows:
+    material: PAPER
+    item_model: minecraft:custom/nieuw_funko/nieuw_funko_esmeearrows
+    name: Nieuw Funko Esmeearrows

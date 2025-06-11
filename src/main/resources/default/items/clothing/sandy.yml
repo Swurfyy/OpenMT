@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  sandy_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/sandy/leggings
+    name: Sandy Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:sandy
+  sandy_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/sandy/chestplate
+    name: Sandy Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:sandy
+  sandy_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/sandy/helmet
+    name: Sandy Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:sandy
+  sandy_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/sandy/boots
+    name: Sandy Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:sandy

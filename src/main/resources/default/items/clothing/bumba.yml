@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  bumba_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/bumba/leggings
+    name: Bumba Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:bumba
+  bumba_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/bumba/chestplate
+    name: Bumba Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:bumba
+  bumba_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/bumba/boots
+    name: Bumba Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:bumba

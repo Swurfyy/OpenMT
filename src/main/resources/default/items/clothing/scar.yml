@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  scar_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/scar/leggings
+    name: Scar Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:scar
+  scar_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/scar/chestplate
+    name: Scar Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:scar
+  scar_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/scar/boots
+    name: Scar Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:scar

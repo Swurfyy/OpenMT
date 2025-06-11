@@ -1,0 +1,470 @@
+namespace: accessoires
+items:
+  relic_speaker:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/relic_speaker/relic_speaker
+    name: Relic Speaker
+  teddy_brown:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/teddy_brown/teddy_brown
+    name: Teddy Brown
+  harrypotterbril:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harrypotterbril/harrypotterbril
+    name: Harrypotterbril
+  harrypotterbril_gold:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harrypotterbril/harrypotterbril_gold
+    name: Harrypotterbril Gold
+  teddy_pink:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/teddy_pink/teddy_pink
+    name: Teddy Pink
+  armband:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/armband/armband
+    name: Armband
+  wandelstok:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/wandelstok/wandelstok
+    name: Wandelstok
+  zuurstok_wandelstok:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/wandelstok/zuurstok_wandelstok
+    name: Zuurstok Wandelstok
+  handtasgucci:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/handtas/handtasgucci
+    name: Handtasgucci
+  bandana_blue:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/bandana/bandana_blue
+    name: Bandana Blue
+  bandana_yellow:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/bandana/bandana_yellow
+    name: Bandana Yellow
+  bandana_red:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/bandana/bandana_red
+    name: Bandana Red
+  champagne_bottle:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/champagne/champagne_bottle
+    name: Champagne Bottle
+  abubu_rood:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/abubu/abubu_rood
+    name: Abubu Rood
+  abubu_groen:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/abubu/abubu_groen
+    name: Abubu Groen
+  abubu_roze:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/abubu/abubu_roze
+    name: Abubu Roze
+  abubu_blauw:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/abubu/abubu_blauw
+    name: Abubu Blauw
+  abubu_zwart:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/abubu/abubu_zwart
+    name: Abubu Zwart
+  abubu_oranje:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/abubu/abubu_oranje
+    name: Abubu Oranje
+  buckethat_relic:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/buckethat/buckethat_relic
+    name: Buckethat Relic
+  buckethat_vlinder:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/buckethat/buckethat_vlinder
+    name: Buckethat Vlinder
+  buckethat_supreme:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/buckethat/buckethat_supreme
+    name: Buckethat Supreme
+  kerstboom_oorbel:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/kerstboom_oorbel/kerstboom_oorbel
+    name: Kerstboom Oorbel
+  hogehoed_green:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/hogehoed/hogehoed_green
+    name: Hogehoed Green
+  hogehoed_yellow:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/hogehoed/hogehoed_yellow
+    name: Hogehoed Yellow
+  hogehoed:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/hogehoed/hogehoed
+    name: Hogehoed
+  hogehoed_gold:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/hogehoed/hogehoed_gold
+    name: Hogehoed Gold
+  hogehoed_blue:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/hogehoed/hogehoed_blue
+    name: Hogehoed Blue
+  relicriem:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/relicriem/relicriem
+    name: Relicriem
+  aviator_bril4:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/aviator_bril/aviator_bril4
+    name: Aviator Bril4
+  aviator_bril3:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/aviator_bril/aviator_bril3
+    name: Aviator Bril3
+  aviator_bril2:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/aviator_bril/aviator_bril2
+    name: Aviator Bril2
+  aviator_bril:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/aviator_bril/aviator_bril
+    name: Aviator Bril
+  ballon_yellow:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/ballon/ballon_yellow
+    name: Ballon Yellow
+  ballonheart:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/ballon/ballonheart
+    name: Ballonheart
+  ballon_rood:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/ballon/ballon_rood
+    name: Ballon Rood
+  ballon:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/ballon/ballon
+    name: Ballon
+  airdrop:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/ballon/airdrop
+    name: Airdrop
+  ballon_roze:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/ballon/ballon_roze
+    name: Ballon Roze
+  ballon_green:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/ballon/ballon_green
+    name: Ballon Green
+  rheazor_ballon:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/ballon/rheazor_ballon
+    name: Rheazor Ballon
+  ballon_oranje:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/ballon/ballon_oranje
+    name: Ballon Oranje
+  cadeau_small_gold:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/presents/cadeau_small_gold
+    name: Cadeau Small Gold
+  cadeau_small_redyellow:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/presents/cadeau_small_redyellow
+    name: Cadeau Small Redyellow
+  cadeau_big_black:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/presents/cadeau_big_black
+    name: Cadeau Big Black
+  cadeau_small_black:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/presents/cadeau_small_black
+    name: Cadeau Small Black
+  cadeau_big_blueyellow:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/presents/cadeau_big_blueyellow
+    name: Cadeau Big Blueyellow
+  cadeau_big_greenwhite:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/presents/cadeau_big_greenwhite
+    name: Cadeau Big Greenwhite
+  cadeau_big_gold:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/presents/cadeau_big_gold
+    name: Cadeau Big Gold
+  cadeau_big_redyellow:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/presents/cadeau_big_redyellow
+    name: Cadeau Big Redyellow
+  cadeau_small_blueyellow:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/presents/cadeau_small_blueyellow
+    name: Cadeau Small Blueyellow
+  cadeau_small_greenwhite:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/presents/cadeau_small_greenwhite
+    name: Cadeau Small Greenwhite
+  armband2:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/armband2/armband2
+    name: Armband2
+  teddy_white:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/teddy_white/teddy_white
+    name: Teddy White
+  coolboy93_poppetje:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/coolboy93_poppetje/coolboy93_poppetje
+    name: Coolboy93 Poppetje
+  kerstboom:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/kerstboom/kerstboom
+    name: Kerstboom
+  airpods:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/airpods/airpods
+    name: Airpods
+  relic_curfed:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/relic_curfed/relic_curfed
+    name: Relic Curfed
+  relic_token_1yr:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/relictoken/relic_token_1yr
+    name: Relic Token 1yr
+  rolex_silver:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/rolex/rolex_silver
+    name: Rolex Silver
+  rolex_diamond:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/rolex/rolex_diamond
+    name: Rolex Diamond
+  rolex_model:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/rolex/rolex_model
+    name: Rolex Model
+  zonnebril2:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/zonnebril/zonnebril2
+    name: Zonnebril2
+  zonnebril1:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/zonnebril/zonnebril1
+    name: Zonnebril1
+  moose_hat:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/moosehat/moose_hat
+    name: Moose Hat
+  quidditch_goggles:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/quidditch_goggles/quidditch_goggles
+    name: Quidditch Goggles
+  dementor:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/dementor/dementor
+    name: Dementor
+  beaters_bat:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/beaters_bat/beaters_bat
+    name: Beaters Bat
+  owl:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/owl/owl
+    name: Owl
+  flying_key:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/flying_key/flying_key
+    name: Flying Key
+  goblet_red:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/goblets/goblet_red
+    name: Goblet Red
+  goblet_blue:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/goblets/goblet_blue
+    name: Goblet Blue
+  goblet_silver:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/goblets/goblet_silver
+    name: Goblet Silver
+  goblet_green:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/goblets/goblet_green
+    name: Goblet Green
+  goblet:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/goblets/goblet
+    name: Goblet
+  slytherin_banner:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/banners/slytherin_banner
+    name: Slytherin Banner
+  hufflepuff_banner:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/banners/hufflepuff_banner
+    name: Hufflepuff Banner
+  ravenclaw_banner:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/banners/ravenclaw_banner
+    name: Ravenclaw Banner
+  gryffindor_banner:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/banners/gryffindor_banner
+    name: Gryffindor Banner
+  dark_spirit:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/dark_spirit/dark_spirit
+    name: Dark Spirit
+  fancy_sword:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/swords/fancy_sword
+    name: Fancy Sword
+  rusty_sword:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/swords/rusty_sword
+    name: Rusty Sword
+  gryffindor_sword:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/swords/gryffindor_sword
+    name: Gryffindor Sword
+  nimbus_2000:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/nimbus/nimbus_2000
+    name: Nimbus 2000
+  nimbus_2001:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/nimbus/nimbus_2001
+    name: Nimbus 2001
+  toad:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/toad/toad
+    name: Toad
+  toad_brown:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/toad/toad_brown
+    name: Toad Brown
+  toad_green:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/toad/toad_green
+    name: Toad Green
+  toad_poison_1:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/toad/toad_poison_1
+    name: Toad Poison 1
+  toad_grey:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/toad/toad_grey
+    name: Toad Grey
+  toad_poison_3:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/toad/toad_poison_3
+    name: Toad Poison 3
+  toad_poison_2:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/toad/toad_poison_2
+    name: Toad Poison 2
+  toad_poison_4:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/toad/toad_poison_4
+    name: Toad Poison 4
+  snow_owl:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/snow_owl/snow_owl
+    name: Snow Owl
+  spider:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/spider/spider
+    name: Spider
+  pigeon:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/pidgeon/pigeon
+    name: Pigeon
+  beans:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/jelly_beans/beans
+    name: Beans
+  crystal_ball:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/crystal_ball/crystal_ball
+    name: Crystal Ball
+  bowtruckleidle:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/bowtuckle/idle/bowtruckleidle
+    name: Bowtruckleidle
+  bowtruckle:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/bowtuckle/moving/bowtruckle
+    name: Bowtruckle
+  mandrake_idle:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/mandrake/idle/mandrake_idle
+    name: Mandrake Idle
+  scream_animated:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/mandrake/scream/scream_animated
+    name: Scream Animated
+  ravenclaw_scarf:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/scarf/ravenclaw_scarf
+    name: Ravenclaw Scarf
+  hufflepuff_scarf:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/scarf/hufflepuff_scarf
+    name: Hufflepuff Scarf
+  gryffindor_scarf:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/scarf/gryffindor_scarf
+    name: Gryffindor Scarf
+  slytherin_scarf:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/scarf/slytherin_scarf
+    name: Slytherin Scarf
+  blue_pointed_hat:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/pointed_hat/blue_pointed_hat
+    name: Blue Pointed Hat
+  grey_pointed_hat:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/pointed_hat/grey_pointed_hat
+    name: Grey Pointed Hat
+  green_pointed_hat:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/pointed_hat/green_pointed_hat
+    name: Green Pointed Hat
+  red_pointed_hat:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/pointed_hat/red_pointed_hat
+    name: Red Pointed Hat
+  slytherin_beanie:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/beanies/slytherin_beanie
+    name: Slytherin Beanie
+  gryffindor_beanie:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/beanies/gryffindor_beanie
+    name: Gryffindor Beanie
+  ravenclaw_beanie:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/beanies/ravenclaw_beanie
+    name: Ravenclaw Beanie
+  hufflepuff_beanie:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/beanies/hufflepuff_beanie
+    name: Hufflepuff Beanie
+  hogwarts_student_hat:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/hogwarts_student_hat/hogwarts_student_hat
+    name: Hogwarts Student Hat
+  feather_hat:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/harry_potter/hats/feather_hat/feather_hat
+    name: Feather Hat
+  masker:
+    material: PAPER
+    item_model: minecraft:custom/accessoires/maskers/clown/masker
+    name: Masker

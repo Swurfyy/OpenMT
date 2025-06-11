@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  aladin_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/aladin/leggings
+    name: Aladin Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:aladin
+  aladin_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/aladin/chestplate
+    name: Aladin Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:aladin
+  aladin_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/aladin/helmet
+    name: Aladin Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:aladin
+  aladin_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/aladin/boots
+    name: Aladin Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:aladin

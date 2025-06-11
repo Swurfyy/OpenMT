@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  halloweenbloed_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/halloweenbloed/leggings
+    name: Halloweenbloed Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:halloweenbloed
+  halloweenbloed_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/halloweenbloed/chestplate
+    name: Halloweenbloed Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:halloweenbloed
+  halloweenbloed_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/halloweenbloed/helmet
+    name: Halloweenbloed Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:halloweenbloed
+  halloweenbloed_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/halloweenbloed/boots
+    name: Halloweenbloed Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:halloweenbloed

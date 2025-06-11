@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  halloweenpompoen_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/halloweenpompoen/leggings
+    name: Halloweenpompoen Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:halloweenpompoen
+  halloweenpompoen_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/halloweenpompoen/chestplate
+    name: Halloweenpompoen Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:halloweenpompoen
+  halloweenpompoen_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/halloweenpompoen/helmet
+    name: Halloweenpompoen Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:halloweenpompoen
+  halloweenpompoen_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/halloweenpompoen/boots
+    name: Halloweenpompoen Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:halloweenpompoen

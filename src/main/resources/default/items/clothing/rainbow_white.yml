@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  rainbow_white_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/rainbow_white/leggings
+    name: Rainbow White Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:rainbow_white
+  rainbow_white_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/rainbow_white/chestplate
+    name: Rainbow White Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:rainbow_white
+  rainbow_white_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/rainbow_white/helmet
+    name: Rainbow White Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:rainbow_white
+  rainbow_white_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/rainbow_white/boots
+    name: Rainbow White Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:rainbow_white

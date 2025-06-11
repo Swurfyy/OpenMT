@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  new_fckip_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/new_fckip/leggings
+    name: New Fckip Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:new_fckip
+  new_fckip_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/new_fckip/chestplate
+    name: New Fckip Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:new_fckip
+  new_fckip_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/new_fckip/boots
+    name: New Fckip Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:new_fckip

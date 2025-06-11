@@ -17,7 +17,7 @@ public class BooksConfiguration extends ConfigurateConfig {
     private final List<CustomBook> customBooks = new ArrayList<>();
 
     public BooksConfiguration(File file) {
-        super(file, "books.yml", "default-books.yml", true);
+        super(file, "books.yml", "default/books.yml", true);
 
         this.rootNode.childrenMap().forEach((key, value) -> {
             if (!(key instanceof String identifier)) return;

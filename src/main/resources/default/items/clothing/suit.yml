@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  suit_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/suit/leggings
+    name: Suit Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:suit
+  suit_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/suit/chestplate
+    name: Suit Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:suit
+  suit_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/suit/boots
+    name: Suit Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:suit

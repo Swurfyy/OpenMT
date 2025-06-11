@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  new_swat_special_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/new_swat_special/leggings
+    name: New Swat Special Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:new_swat_special
+  new_swat_special_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/new_swat_special/chestplate
+    name: New Swat Special Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:new_swat_special
+  new_swat_special_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/new_swat_special/helmet
+    name: New Swat Special Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:new_swat_special
+  new_swat_special_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/new_swat_special/boots
+    name: New Swat Special Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:new_swat_special

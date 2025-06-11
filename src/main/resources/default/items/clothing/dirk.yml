@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  dirk_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/dirk/leggings
+    name: Dirk Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:dirk
+  dirk_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/dirk/chestplate
+    name: Dirk Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:dirk
+  dirk_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/dirk/boots
+    name: Dirk Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:dirk

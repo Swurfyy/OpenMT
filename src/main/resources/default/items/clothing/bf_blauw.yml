@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  bf_blauw_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/bf_blauw/leggings
+    name: Bf Blauw Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:bf_blauw
+  bf_blauw_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/bf_blauw/chestplate
+    name: Bf Blauw Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:bf_blauw
+  bf_blauw_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/bf_blauw/helmet
+    name: Bf Blauw Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:bf_blauw
+  bf_blauw_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/bf_blauw/boots
+    name: Bf Blauw Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:bf_blauw

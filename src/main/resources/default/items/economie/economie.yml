@@ -1,0 +1,370 @@
+namespace: economie
+items:
+  arrow_head:
+    material: PAPER
+    item_model: minecraft:custom/economie/arrow_head/arrow_head
+    name: Arrow Head
+  bigempirewand:
+    material: PAPER
+    item_model: minecraft:custom/economie/bigempirewand/bigempirewand
+    name: Bigempirewand
+  crownwithdiamond:
+    material: PAPER
+    item_model: minecraft:custom/economie/crownwithdiamond/crownwithdiamond
+    name: Crownwithdiamond
+  mtcasino_silver:
+    material: PAPER
+    item_model: minecraft:custom/economie/casino/mtcasino_silver
+    name: Mtcasino Silver
+  mtcasino_base:
+    material: PAPER
+    item_model: minecraft:custom/economie/casino/mtcasino_base
+    name: Mtcasino Base
+  mtcasino_oranje:
+    material: PAPER
+    item_model: minecraft:custom/economie/casino/mtcasino_oranje
+    name: Mtcasino Oranje
+  mtcasino_gold:
+    material: PAPER
+    item_model: minecraft:custom/economie/casino/mtcasino_gold
+    name: Mtcasino Gold
+  mtcasino_groen:
+    material: PAPER
+    item_model: minecraft:custom/economie/casino/mtcasino_groen
+    name: Mtcasino Groen
+  mtcasino_blauw:
+    material: PAPER
+    item_model: minecraft:custom/economie/casino/mtcasino_blauw
+    name: Mtcasino Blauw
+  mtcasino_rood:
+    material: PAPER
+    item_model: minecraft:custom/economie/casino/mtcasino_rood
+    name: Mtcasino Rood
+  snor:
+    material: PAPER
+    item_model: minecraft:custom/economie/snor/snor
+    name: Snor
+  mining_helmet:
+    material: PAPER
+    item_model: minecraft:custom/economie/mining_helmet/mining_helmet
+    name: Mining Helmet
+  eth:
+    material: PAPER
+    item_model: minecraft:custom/economie/bitcoin/eth
+    name: Eth
+  bitcoin:
+    material: PAPER
+    item_model: minecraft:custom/economie/bitcoin/bitcoin
+    name: Bitcoin
+  jerrycan:
+    material: PAPER
+    item_model: minecraft:custom/economie/jerrycan/jerrycan
+    name: Jerrycan
+  knuppel_gold:
+    material: PAPER
+    item_model: minecraft:custom/economie/wapenstokken/knuppel_gold
+    name: Knuppel Gold
+  knuppels:
+    material: PAPER
+    item_model: minecraft:custom/economie/wapenstokken/knuppels
+    name: Knuppels
+  knuppel_blue:
+    material: PAPER
+    item_model: minecraft:custom/economie/wapenstokken/knuppel_blue
+    name: Knuppel Blue
+  wapenstok_emerald:
+    material: PAPER
+    item_model: minecraft:custom/economie/wapenstokken/wapenstok_emerald
+    name: Wapenstok Emerald
+  knuppel_diamond:
+    material: PAPER
+    item_model: minecraft:custom/economie/wapenstokken/knuppel_diamond
+    name: Knuppel Diamond
+  knuppel_iron:
+    material: PAPER
+    item_model: minecraft:custom/economie/wapenstokken/knuppel_iron
+    name: Knuppel Iron
+  wapenstok_gold:
+    material: PAPER
+    item_model: minecraft:custom/economie/wapenstokken/wapenstok_gold
+    name: Wapenstok Gold
+  wapenstok_redstone:
+    material: PAPER
+    item_model: minecraft:custom/economie/wapenstokken/wapenstok_redstone
+    name: Wapenstok Redstone
+  wapenstok_diamond:
+    material: PAPER
+    item_model: minecraft:custom/economie/wapenstokken/wapenstok_diamond
+    name: Wapenstok Diamond
+  wapenstok_iron:
+    material: PAPER
+    item_model: minecraft:custom/economie/wapenstokken/wapenstok_iron
+    name: Wapenstok Iron
+  giraffe_pet:
+    material: PAPER
+    item_model: minecraft:custom/economie/giraffe_pet/giraffe_pet
+    name: Giraffe Pet
+  vissershoedje_paars:
+    material: PAPER
+    item_model: minecraft:custom/economie/vissershoedjes/vissershoedje_paars
+    name: Vissershoedje Paars
+  vissershoedje_rood:
+    material: PAPER
+    item_model: minecraft:custom/economie/vissershoedjes/vissershoedje_rood
+    name: Vissershoedje Rood
+  vissershoedje_geel:
+    material: PAPER
+    item_model: minecraft:custom/economie/vissershoedjes/vissershoedje_geel
+    name: Vissershoedje Geel
+  vissershoedje_groen:
+    material: PAPER
+    item_model: minecraft:custom/economie/vissershoedjes/vissershoedje_groen
+    name: Vissershoedje Groen
+  vissershoedje_blauw:
+    material: PAPER
+    item_model: minecraft:custom/economie/vissershoedjes/vissershoedje_blauw
+    name: Vissershoedje Blauw
+  vissershoedje:
+    material: PAPER
+    item_model: minecraft:custom/economie/vissershoedjes/vissershoedje
+    name: Vissershoedje
+  vissershoedje_oranje:
+    material: PAPER
+    item_model: minecraft:custom/economie/vissershoedjes/vissershoedje_oranje
+    name: Vissershoedje Oranje
+  vissershoedje_roze:
+    material: PAPER
+    item_model: minecraft:custom/economie/vissershoedjes/vissershoedje_roze
+    name: Vissershoedje Roze
+  relic_skibril:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relic_skibril/relic_skibril
+    name: Relic Skibril
+  relic_bril:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relic_bril/relic_bril
+    name: Relic Bril
+  relic_dusdavidpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relic_poppetjes/relic_dusdavidpoppetje
+    name: Relic Dusdavidpoppetje
+  relic_danny026poppetje:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relic_poppetjes/relic_danny026poppetje
+    name: Relic Danny026poppetje
+  relic_timewalkpoppetje:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relic_poppetjes/relic_timewalkpoppetje
+    name: Relic Timewalkpoppetje
+  relic_ballon:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relic_ballon/relic_ballon
+    name: Relic Ballon
+  relic_horloge:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relic_horloge/relic_horloge
+    name: Relic Horloge
+  relic_riem:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relicriem/relic_riem
+    name: Relic Riem
+  relic_paraplu:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relic_paraplu/relic_paraplu
+    name: Relic Paraplu
+  relic_kompas:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relic_kompas/relic_kompas
+    name: Relic Kompas
+  relic_token_lente:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relictoken/relic_token_lente
+    name: Relic Token Lente
+  relic_token_kerst:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relictoken/relic_token_kerst
+    name: Relic Token Kerst
+  relic_token:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relictoken/relic_token
+    name: Relic Token
+  relic_token3:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relictoken/relic_token3
+    name: Relic Token3
+  relic_tokens2:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relictoken/relic_tokens2
+    name: Relic Tokens2
+  relic_token_nether:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relictoken/relic_token_nether
+    name: Relic Token Nether
+  relic_token5:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relictoken/relic_token5
+    name: Relic Token5
+  relic_token_roze:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relictoken/relic_token_roze
+    name: Relic Token Roze
+  relic_token4:
+    material: PAPER
+    item_model: minecraft:custom/economie/relics/relictoken/relic_token4
+    name: Relic Token4
+  kerstmutssparkel:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmutssparkel/kerstmutssparkel
+    name: Kerstmutssparkel
+  kerstgun:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstgun/kerstgun
+    name: Kerstgun
+  kerst_kaart_02_model:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerst_kaart_02/kerst_kaart_02_model
+    name: Kerst Kaart 02 Model
+  kerst_kaart_05_model:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerst_kaart_05/kerst_kaart_05_model
+    name: Kerst Kaart 05 Model
+  kerst_kaart_04_model:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerst_kaart_04/kerst_kaart_04_model
+    name: Kerst Kaart 04 Model
+  kerst_kaart_03_model:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerst_kaart_03/kerst_kaart_03_model
+    name: Kerst Kaart 03 Model
+  handbag:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/handbag/handbag
+    name: Handbag
+  carrot_nose:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/carrot_nose/carrot_nose
+    name: Carrot Nose
+  halo:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/halo/halo
+    name: Halo
+  herthoofd:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/herthoofd/herthoofd
+    name: Herthoofd
+  kerstcowboyhoed:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstcowboyhoed/kerstcowboyhoed
+    name: Kerstcowboyhoed
+  kerstwandelstok:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerst_wandelstok/kerstwandelstok
+    name: Kerstwandelstok
+  kerstmutspinguin:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmutspinguin/kerstmutspinguin
+    name: Kerstmutspinguin
+  kerstbel:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstbel/kerstbel
+    name: Kerstbel
+  sneeuwpophead:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/sneeuwpophead/sneeuwpophead
+    name: Sneeuwpophead
+  kerstmutsijsbeer:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmutsijsbeer/kerstmutsijsbeer
+    name: Kerstmutsijsbeer
+  teddybear:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerst_tedybeer/teddybear
+    name: Teddybear
+  kerstmutszwart:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmutszwart
+    name: Kerstmutszwart
+  kerstmutslime:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmutslime
+    name: Kerstmutslime
+  kerstmutspaars:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmutspaars
+    name: Kerstmutspaars
+  kerstmutsgroen:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmutsgroen
+    name: Kerstmutsgroen
+  kerstmutsblauw:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmutsblauw
+    name: Kerstmutsblauw
+  kerstmutsmagenta:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmutsmagenta
+    name: Kerstmutsmagenta
+  kerstmutscyan:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmutscyan
+    name: Kerstmutscyan
+  kerstmutsgoud:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmutsgoud
+    name: Kerstmutsgoud
+  kerstmutsgray:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmutsgray
+    name: Kerstmutsgray
+  kerstmutsoranje:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmutsoranje
+    name: Kerstmutsoranje
+  kerstmuts:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmuts/kerstmuts
+    name: Kerstmuts
+  sinterklaasmijter:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/sinterklaas_mijter/sinterklaasmijter
+    name: Sinterklaasmijter
+  kerst_kaart_06_model:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerst_kaart_06/kerst_kaart_06_model
+    name: Kerst Kaart 06 Model
+  kerst_kaart_01_model:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerst_kaart_01/kerst_kaart_01_model
+    name: Kerst Kaart 01 Model
+  kerstsokken:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstsok/kerstsokken
+    name: Kerstsokken
+  sinterklaas_staf:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/sinterklaas_staf/sinterklaas_staf
+    name: Sinterklaas Staf
+  kerstmutssparkel2:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstmutssparkel2/kerstmutssparkel2
+    name: Kerstmutssparkel2
+  kerstoorwarmers:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstoorwarmers/kerstoorwarmers
+    name: Kerstoorwarmers
+  kerst_ballon:
+    material: PAPER
+    item_model: minecraft:custom/economie/kerst/kerstballon/kerst_ballon
+    name: Kerst Ballon
+  bunnyears:
+    material: PAPER
+    item_model: minecraft:custom/economie/easter/bunnyears/bunnyears
+    name: Bunnyears
+  pasenstrik:
+    material: PAPER
+    item_model: minecraft:custom/economie/easter/pasenstrik/pasenstrik
+    name: Pasenstrik
+  easterbunnyhead:
+    material: PAPER
+    item_model: minecraft:custom/economie/easter/easterbunnyhead/easterbunnyhead
+    name: Easterbunnyhead

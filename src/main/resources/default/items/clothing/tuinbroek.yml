@@ -1,0 +1,16 @@
+namespace: clothing
+items:
+  tuinbroek_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/tuinbroek/leggings
+    name: Tuinbroek Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:tuinbroek
+  tuinbroek_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/tuinbroek/chestplate
+    name: Tuinbroek Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:tuinbroek

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  frozen_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/frozen/leggings
+    name: Frozen Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:frozen
+  frozen_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/frozen/chestplate
+    name: Frozen Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:frozen
+  frozen_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/frozen/helmet
+    name: Frozen Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:frozen
+  frozen_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/frozen/boots
+    name: Frozen Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:frozen

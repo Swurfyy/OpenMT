@@ -1,0 +1,30 @@
+namespace: head_particle
+items:
+  head_particle_hoelahoop_olympic:
+    material: PAPER
+    item_model: minecraft:custom/head_particle/head_particle_hoelahoop_olympic
+    name: Head Particle Hoelahoop Olympic
+  head_particle_plus_smoke:
+    material: PAPER
+    item_model: minecraft:custom/head_particle/head_particle_plus_smoke
+    name: Head Particle Plus Smoke
+  head_particlekroon_koningsdag:
+    material: PAPER
+    item_model: minecraft:custom/head_particle/head_particlekroon_koningsdag
+    name: Head Particlekroon Koningsdag
+  head_particle_hoelahoop:
+    material: PAPER
+    item_model: minecraft:custom/head_particle/head_particle_hoelahoop
+    name: Head Particle Hoelahoop
+  head_particle_snow:
+    material: PAPER
+    item_model: minecraft:custom/head_particle/head_particle_snow
+    name: Head Particle Snow
+  head_particle_7yr:
+    material: PAPER
+    item_model: minecraft:custom/head_particle/head_particle_7yr
+    name: Head Particle 7yr
+  head_particle_easter:
+    material: PAPER
+    item_model: minecraft:custom/head_particle/head_particle_easter
+    name: Head Particle Easter

@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  po_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/po/leggings
+    name: Po Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:po
+  po_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/po/chestplate
+    name: Po Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:po
+  po_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/po/boots
+    name: Po Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:po

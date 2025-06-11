@@ -1,0 +1,14 @@
+namespace: funko2_0
+items:
+  funko_doos2_princes_en_de_kikker:
+    material: PAPER
+    item_model: minecraft:custom/funko2_0/2-princes_en_de_kikker/funko_doos2_princes_en_de_kikker
+    name: Funko Doos2 Princes En De Kikker
+  funko_doos2_omni_man:
+    material: PAPER
+    item_model: minecraft:custom/funko2_0/1-_omni_man/funko_doos2_omni_man
+    name: Funko Doos2 Omni Man
+  funko_doos2_isabela:
+    material: PAPER
+    item_model: minecraft:custom/funko2_0/3-isabela/funko_doos2_isabela
+    name: Funko Doos2 Isabela

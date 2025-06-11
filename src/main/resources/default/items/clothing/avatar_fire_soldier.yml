@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  avatar_fire_soldier_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/avatar_fire_soldier/leggings
+    name: Avatar Fire Soldier Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:avatar_fire_soldier
+  avatar_fire_soldier_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/avatar_fire_soldier/chestplate
+    name: Avatar Fire Soldier Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:avatar_fire_soldier
+  avatar_fire_soldier_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/avatar_fire_soldier/boots
+    name: Avatar Fire Soldier Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:avatar_fire_soldier

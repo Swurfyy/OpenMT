@@ -9,7 +9,6 @@ import nl.openminetopia.modules.fitness.objects.FitnessItem;
 import nl.openminetopia.modules.fitness.objects.FitnessLevelEffect;
 import nl.openminetopia.utils.ConfigUtils;
 import nl.openminetopia.utils.ConfigurateConfig;
-import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.configurate.ConfigurationNode;
@@ -73,7 +72,7 @@ public class FitnessConfiguration extends ConfigurateConfig {
 
     @SneakyThrows
     public FitnessConfiguration(File file) {
-        super(file, "fitness.yml", "default-fitness.yml", false);
+        super(file, "fitness.yml", "default/fitness.yml", false);
 
         this.maxFitnessLevel = rootNode.node("fitness", "max-fitness-level").getInt(225);
         this.defaultFitnessLevel = rootNode.node("fitness", "default-fitness-level").getInt(20);

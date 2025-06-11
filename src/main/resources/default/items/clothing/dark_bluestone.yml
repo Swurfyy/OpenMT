@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  dark_bluestone_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/dark_bluestone/leggings
+    name: Dark Bluestone Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:dark_bluestone
+  dark_bluestone_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/dark_bluestone/chestplate
+    name: Dark Bluestone Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:dark_bluestone
+  dark_bluestone_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/dark_bluestone/helmet
+    name: Dark Bluestone Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:dark_bluestone
+  dark_bluestone_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/dark_bluestone/boots
+    name: Dark Bluestone Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:dark_bluestone

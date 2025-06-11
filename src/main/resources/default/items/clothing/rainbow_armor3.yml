@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  rainbow_armor3_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/rainbow_armor3/leggings
+    name: Rainbow Armor3 Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:rainbow_armor3
+  rainbow_armor3_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/rainbow_armor3/chestplate
+    name: Rainbow Armor3 Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:rainbow_armor3
+  rainbow_armor3_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/rainbow_armor3/helmet
+    name: Rainbow Armor3 Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:rainbow_armor3
+  rainbow_armor3_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/rainbow_armor3/boots
+    name: Rainbow Armor3 Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:rainbow_armor3

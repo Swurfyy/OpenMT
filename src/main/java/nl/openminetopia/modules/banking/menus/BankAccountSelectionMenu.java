@@ -1,7 +1,6 @@
 package nl.openminetopia.modules.banking.menus;
 
-import com.jazzkuh.inventorylib.objects.PaginatedMenu;
-import com.jazzkuh.inventorylib.objects.icon.Icon;
+import dev.triumphteam.gui.guis.GuiItem;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
@@ -10,6 +9,7 @@ import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
+import nl.openminetopia.utils.menu.PaginatedMenu;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -20,18 +20,19 @@ import java.util.Collection;
 public class BankAccountSelectionMenu extends PaginatedMenu {
 
     public BankAccountSelectionMenu(Player player, AccountType type) {
-        super(ChatUtils.color(type.getColor() + type.getName()), 4);
-        this.registerPageSlotsBetween(0, 27);
+        super(type.getColor() + type.getName(), 4, 27);
+        gui.disableAllInteractions();
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
 
-        this.addSpecialIcon(new Icon(31, new ItemBuilder(Material.OAK_SIGN)
+        gui.setItem(29, this.previousPageItem());
+        gui.setItem(33, this.nextPageItem());
+
+        gui.setItem(31, new GuiItem(new ItemBuilder(Material.OAK_SIGN)
                 .setName(MessageConfiguration.message("go_back"))
-                .toItemStack(),
-                event -> {
-                    event.setCancelled(true);
-                    new BankTypeSelectionMenu(player).open(player);
-                }
-        ));
+                .toItemStack(), event -> {
+            event.setCancelled(true);
+            new BankTypeSelectionMenu(player).open(player);
+        }));
 
         Collection<BankAccountModel> accountModels = bankingModule.getAccountsFromPlayer(player.getUniqueId())
                 .stream().filter(account -> account.getType() == type)
@@ -50,7 +51,7 @@ public class BankAccountSelectionMenu extends PaginatedMenu {
 
             ItemStack accountStack = accountBuilder.toItemStack();
 
-            Icon accountIcon = new Icon(accountStack, event -> {
+            GuiItem accountItem = new GuiItem(accountStack, event -> {
                 event.setCancelled(true);
 
                 boolean hasAdmin = accountModel.hasPermission(player.getUniqueId(), AccountPermission.ADMIN);
@@ -59,29 +60,9 @@ public class BankAccountSelectionMenu extends PaginatedMenu {
                     return;
                 }
 
-
                 new BankContentsMenu(player, accountModel, false).open(player);
             });
-
-            this.addItem(accountIcon);
+            gui.addItem(accountItem);
         }
-
-
-    }
-
-    @Override
-    public Icon getPreviousPageItem() {
-        ItemStack previousStack = new ItemBuilder(Material.ARROW)
-                .setName(MessageConfiguration.message("previous_page"))
-                .toItemStack();
-        return new Icon(29, previousStack, e -> e.setCancelled(true));
-    }
-
-    @Override
-    public Icon getNextPageItem() {
-        ItemStack previousStack = new ItemBuilder(Material.ARROW)
-                .setName(MessageConfiguration.message("next_page"))
-                .toItemStack();
-        return new Icon(33, previousStack, e -> e.setCancelled(true));
     }
 }

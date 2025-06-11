@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  dipsy_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/dipsy/leggings
+    name: Dipsy Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:dipsy
+  dipsy_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/dipsy/chestplate
+    name: Dipsy Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:dipsy
+  dipsy_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/dipsy/boots
+    name: Dipsy Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:dipsy

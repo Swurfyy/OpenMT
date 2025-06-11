@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  mickeymouse_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/mickeymouse/leggings
+    name: Mickeymouse Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:mickeymouse
+  mickeymouse_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/mickeymouse/chestplate
+    name: Mickeymouse Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:mickeymouse
+  mickeymouse_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/mickeymouse/boots
+    name: Mickeymouse Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:mickeymouse

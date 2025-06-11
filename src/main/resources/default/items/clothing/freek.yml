@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  freek_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/freek/leggings
+    name: Freek Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:freek
+  freek_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/freek/chestplate
+    name: Freek Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:freek
+  freek_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/freek/boots
+    name: Freek Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:freek

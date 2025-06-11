@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  koala_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/koala/leggings
+    name: Koala Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:koala
+  koala_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/koala/chestplate
+    name: Koala Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:koala
+  koala_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/koala/boots
+    name: Koala Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:koala

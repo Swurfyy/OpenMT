@@ -1,0 +1,6 @@
+namespace: '1.0'
+items:
+  pinautomaatoud:
+    material: PAPER
+    item_model: minecraft:custom/1.0/pinautomaatoud
+    name: Pinautomaatoud

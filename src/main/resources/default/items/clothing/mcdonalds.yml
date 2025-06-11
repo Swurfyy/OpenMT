@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  mcdonalds_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/mcdonalds/leggings
+    name: Mcdonalds Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:mcdonalds
+  mcdonalds_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/mcdonalds/chestplate
+    name: Mcdonalds Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:mcdonalds
+  mcdonalds_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/mcdonalds/boots
+    name: Mcdonalds Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:mcdonalds

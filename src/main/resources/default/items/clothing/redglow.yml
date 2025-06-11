@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  redglow_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/redglow/leggings
+    name: Redglow Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:redglow
+  redglow_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/redglow/chestplate
+    name: Redglow Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:redglow
+  redglow_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/redglow/helmet
+    name: Redglow Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:redglow
+  redglow_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/redglow/boots
+    name: Redglow Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:redglow

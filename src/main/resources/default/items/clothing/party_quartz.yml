@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  party_quartz_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/party_quartz/leggings
+    name: Party Quartz Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:party_quartz
+  party_quartz_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/party_quartz/chestplate
+    name: Party Quartz Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:party_quartz
+  party_quartz_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/party_quartz/helmet
+    name: Party Quartz Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:party_quartz
+  party_quartz_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/party_quartz/boots
+    name: Party Quartz Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:party_quartz

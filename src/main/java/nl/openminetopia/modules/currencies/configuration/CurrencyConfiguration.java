@@ -13,7 +13,7 @@ import java.util.List;
 public class CurrencyConfiguration extends ConfigurateConfig {
 
     public CurrencyConfiguration(CurrencyModule module, File file) {
-        super(file, "currencies.yml", "default-currencies.yml", false);
+        super(file, "currencies.yml", "default/currencies.yml", false);
 
         ConfigurationNode node = rootNode.node("currencies");
 

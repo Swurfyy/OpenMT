@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  leatherdiamond_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/leatherdiamond/leggings
+    name: Leatherdiamond Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:leatherdiamond
+  leatherdiamond_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/leatherdiamond/chestplate
+    name: Leatherdiamond Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:leatherdiamond
+  leatherdiamond_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/leatherdiamond/helmet
+    name: Leatherdiamond Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:leatherdiamond
+  leatherdiamond_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/leatherdiamond/boots
+    name: Leatherdiamond Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:leatherdiamond

@@ -1,0 +1,170 @@
+namespace: gui
+items:
+  filter:
+    material: PAPER
+    item_model: minecraft:custom/gui/filter
+    name: Filter
+  player_head:
+    material: PAPER
+    item_model: minecraft:custom/gui/player_head
+    name: Player Head
+  icon_base:
+    material: PAPER
+    item_model: minecraft:custom/gui/icon_base
+    name: Icon Base
+  high_ligt_4_kant:
+    material: PAPER
+    item_model: minecraft:custom/gui/high_ligt_4_kant
+    name: High Ligt 4 Kant
+  stopknop:
+    material: PAPER
+    item_model: minecraft:custom/gui/stopknop
+    name: Stopknop
+  lock:
+    material: PAPER
+    item_model: minecraft:custom/gui/lock
+    name: Lock
+  settings:
+    material: PAPER
+    item_model: minecraft:custom/gui/settings
+    name: Settings
+  high_ligt_1:
+    material: PAPER
+    item_model: minecraft:custom/gui/high_ligt_1
+    name: High Ligt 1
+  chest:
+    material: PAPER
+    item_model: minecraft:custom/gui/chest
+    name: Chest
+  up_page:
+    material: PAPER
+    item_model: minecraft:custom/gui/up_page
+    name: Up Page
+  empty_paper:
+    material: PAPER
+    item_model: minecraft:custom/gui/empty_paper
+    name: Empty Paper
+  chestplate:
+    material: PAPER
+    item_model: minecraft:custom/gui/chestplate
+    name: Chestplate
+  recycle:
+    material: PAPER
+    item_model: minecraft:custom/gui/recycle
+    name: Recycle
+  next_page:
+    material: PAPER
+    item_model: minecraft:custom/gui/next_page
+    name: Next Page
+  previous_page:
+    material: PAPER
+    item_model: minecraft:custom/gui/previous_page
+    name: Previous Page
+  menu_leeg:
+    material: PAPER
+    item_model: minecraft:custom/gui/menu_leeg
+    name: Menu Leeg
+  gray_boost:
+    material: PAPER
+    item_model: minecraft:custom/gui/gray_boost
+    name: Gray Boost
+  gray_achivments:
+    material: PAPER
+    item_model: minecraft:custom/gui/gray_achivments
+    name: Gray Achivments
+  cup:
+    material: PAPER
+    item_model: minecraft:custom/gui/cup
+    name: Cup
+  paper:
+    material: PAPER
+    item_model: minecraft:custom/gui/paper
+    name: Paper
+  crown_gold:
+    material: PAPER
+    item_model: minecraft:custom/gui/crown_gold
+    name: Crown Gold
+  gray_shards:
+    material: PAPER
+    item_model: minecraft:custom/gui/gray_shards
+    name: Gray Shards
+  gold_shards:
+    material: PAPER
+    item_model: minecraft:custom/gui/gold_shards
+    name: Gold Shards
+  high_ligt_3:
+    material: PAPER
+    item_model: minecraft:custom/gui/high_ligt_3
+    name: High Ligt 3
+  skin_doll_2:
+    material: PAPER
+    item_model: minecraft:custom/gui/skin_doll_2
+    name: Skin Doll 2
+  card:
+    material: PAPER
+    item_model: minecraft:custom/gui/card
+    name: Card
+  menu:
+    material: PAPER
+    item_model: minecraft:custom/gui/menu
+    name: Menu
+  achivments:
+    material: PAPER
+    item_model: minecraft:custom/gui/achivments
+    name: Achivments
+  crown_gray:
+    material: PAPER
+    item_model: minecraft:custom/gui/crown_gray
+    name: Crown Gray
+  high_ligt_2:
+    material: PAPER
+    item_model: minecraft:custom/gui/high_ligt_2
+    name: High Ligt 2
+  pets:
+    material: PAPER
+    item_model: minecraft:custom/gui/pets
+    name: Pets
+  skin_doll:
+    material: PAPER
+    item_model: minecraft:custom/gui/skin_doll
+    name: Skin Doll
+  cross:
+    material: PAPER
+    item_model: minecraft:custom/gui/cross
+    name: Cross
+  gadgets:
+    material: PAPER
+    item_model: minecraft:custom/gui/gadgets
+    name: Gadgets
+  menu_leeg_5_hoog:
+    material: PAPER
+    item_model: minecraft:custom/gui/menu_leeg_5_hoog
+    name: Menu Leeg 5 Hoog
+  home:
+    material: PAPER
+    item_model: minecraft:custom/gui/home
+    name: Home
+  high_ligt_4:
+    material: PAPER
+    item_model: minecraft:custom/gui/high_ligt_4
+    name: High Ligt 4
+  gold_boost:
+    material: PAPER
+    item_model: minecraft:custom/gui/gold_boost
+    name: Gold Boost
+  chest_gold:
+    material: PAPER
+    item_model: minecraft:custom/gui/chest_gold
+    name: Chest Gold
+  gui_balkje_base:
+    material: PAPER
+    item_model: minecraft:custom/gui/gui_balkje_base
+    name: Gui Balkje Base
+  join_mini:
+    material: PAPER
+    item_model: minecraft:custom/gui/join_mini
+    name: Join Mini
+  join:
+    material: PAPER
+    item_model: minecraft:custom/gui/join
+    name: Join

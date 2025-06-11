@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  mox_bordeaux_rood_star_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/mox_bordeaux_rood_star/leggings
+    name: Mox Bordeaux Rood Star Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:mox_bordeaux_rood_star
+  mox_bordeaux_rood_star_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/mox_bordeaux_rood_star/chestplate
+    name: Mox Bordeaux Rood Star Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:mox_bordeaux_rood_star
+  mox_bordeaux_rood_star_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/mox_bordeaux_rood_star/helmet
+    name: Mox Bordeaux Rood Star Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:mox_bordeaux_rood_star
+  mox_bordeaux_rood_star_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/mox_bordeaux_rood_star/boots
+    name: Mox Bordeaux Rood Star Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:mox_bordeaux_rood_star

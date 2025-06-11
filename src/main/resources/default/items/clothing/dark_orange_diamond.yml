@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  dark_orange_diamond_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/dark_orange_diamond/leggings
+    name: Dark Orange Diamond Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:dark_orange_diamond
+  dark_orange_diamond_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/dark_orange_diamond/chestplate
+    name: Dark Orange Diamond Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:dark_orange_diamond
+  dark_orange_diamond_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/dark_orange_diamond/helmet
+    name: Dark Orange Diamond Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:dark_orange_diamond
+  dark_orange_diamond_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/dark_orange_diamond/boots
+    name: Dark Orange Diamond Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:dark_orange_diamond

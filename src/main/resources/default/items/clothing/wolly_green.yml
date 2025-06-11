@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  wolly_green_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/wolly_green/leggings
+    name: Wolly Green Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:wolly_green
+  wolly_green_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/wolly_green/chestplate
+    name: Wolly Green Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:wolly_green
+  wolly_green_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/wolly_green/helmet
+    name: Wolly Green Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:wolly_green
+  wolly_green_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/wolly_green/boots
+    name: Wolly Green Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:wolly_green

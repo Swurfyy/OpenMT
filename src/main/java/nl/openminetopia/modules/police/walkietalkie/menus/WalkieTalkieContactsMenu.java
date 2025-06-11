@@ -1,13 +1,11 @@
 package nl.openminetopia.modules.police.walkietalkie.menus;
 
-import com.jazzkuh.inventorylib.objects.PaginatedMenu;
-import com.jazzkuh.inventorylib.objects.icon.Icon;
+import dev.triumphteam.gui.guis.GuiItem;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
-import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
-import nl.openminetopia.utils.input.ChatInputHandler;
 import nl.openminetopia.utils.item.ItemBuilder;
+import nl.openminetopia.utils.menu.PaginatedMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,12 +13,13 @@ import org.bukkit.potion.PotionEffectType;
 
 public class WalkieTalkieContactsMenu extends PaginatedMenu {
 
-    private final PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
-
     public WalkieTalkieContactsMenu(Player player) {
-        super(ChatUtils.color("<gold>Contacten"), 3);
+        super("<gold>Contacten", 3, 18);
 
-        this.registerPageSlotsBetween(0, 17);
+        gui.disableAllInteractions();
+
+        gui.setItem(18, this.previousPageItem());
+        gui.setItem(26, this.nextPageItem());
 
         Bukkit.getServer().getOnlinePlayers().forEach(target -> {
             if (target.getName().equals(player.getName())
@@ -33,7 +32,7 @@ public class WalkieTalkieContactsMenu extends PaginatedMenu {
                     .setName("<gray>" + target.getName())
                     .addLoreLine("<gray>Stuur een privébericht naar <dark_gray>" + target.getName());
 
-            Icon contactIcon = new Icon(10, contactBuilder.toItemStack(), event -> {
+            GuiItem contactItem = new GuiItem(contactBuilder.toItemStack(), event -> {
                 ChatUtils.sendMessage(player, MessageConfiguration.message("police_walkietalkie_type_your_message")
                         .replace("<player>", target.getName()));
 
@@ -47,29 +46,15 @@ public class WalkieTalkieContactsMenu extends PaginatedMenu {
                     ChatUtils.sendMessage(target, formattedMessage);
                     Bukkit.getConsoleSender().sendMessage(ChatUtils.color(formattedMessage));
                 });
-                this.getInventory().close();
+                gui.close(player);
             });
-            this.addItem(contactIcon);
+            gui.addItem(contactItem);
         });
 
         ItemBuilder backItemBuilder = new ItemBuilder(Material.OAK_DOOR)
                 .setName("<gray>Terug");
 
-        Icon backIcon = new Icon(22, backItemBuilder.toItemStack(), event -> new WalkieTalkieMenu(player).open(player));
-        this.addSpecialIcon(backIcon);
-    }
-
-    @Override
-    public Icon getPreviousPageItem() {
-        return new Icon(18, new ItemBuilder(Material.ARROW)
-                .setName("<gold>Vorige pagina")
-                .toItemStack(), event -> event.setCancelled(true));
-    }
-
-    @Override
-    public Icon getNextPageItem() {
-        return new Icon(26, new ItemBuilder(Material.ARROW)
-                .setName("<gold>Volgende pagina")
-                .toItemStack(), event -> event.setCancelled(true));
+        GuiItem backItem = new GuiItem(backItemBuilder.toItemStack(), event -> new WalkieTalkieContactsMenu(player));
+        gui.setItem(22, backItem);
     }
 }

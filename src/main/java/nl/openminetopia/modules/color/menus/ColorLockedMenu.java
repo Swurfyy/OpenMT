@@ -1,13 +1,12 @@
 package nl.openminetopia.modules.color.menus;
 
-import com.jazzkuh.inventorylib.objects.PaginatedMenu;
-import com.jazzkuh.inventorylib.objects.icon.Icon;
+import dev.triumphteam.gui.guis.GuiItem;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.configuration.components.ColorComponent;
-import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
+import nl.openminetopia.utils.menu.PaginatedMenu;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -15,32 +14,21 @@ import java.util.List;
 
 public class ColorLockedMenu extends PaginatedMenu {
 
-
     public ColorLockedMenu(Player player, ColorSelectMenu oldMenu) {
-        super(ChatUtils.color(oldMenu.getType().getDisplayName() + " <reset><dark_gray>locked menu"), 6);
-        this.registerPageSlotsBetween(0, 44);
+        super(oldMenu.getType().getDisplayName() + " <reset><dark_gray>locked menu", 6);
+
+        gui.disableAllInteractions();
+        gui.setItem(53, this.nextPageItem());
+        gui.setItem(45, this.previousPageItem());
 
         ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
         List<ColorComponent> lockedColors = colorModule.getConfiguration().lockedColors(oldMenu.getColors());
         lockedColors.forEach(component -> {
-            this.addItem(new Icon(new ItemBuilder(Material.IRON_INGOT).setName(component.displayName()).toItemStack()));
+            gui.addItem(new GuiItem(new ItemBuilder(Material.IRON_INGOT).setName(component.displayName()).toItemStack()));
         });
 
-        this.addSpecialIcon(new Icon(49, new ItemBuilder(Material.LADDER).setName(MessageConfiguration.message("go_back")).toItemStack(),
-                (e) -> oldMenu.open(player)));
-    }
+        gui.setItem(49, new GuiItem(new ItemBuilder(Material.LADDER).setName(MessageConfiguration.message("go_back")).toItemStack(),
+                e -> oldMenu.open(player)));
 
-    @Override
-    public Icon getPreviousPageItem() {
-        return new Icon(45, new ItemBuilder(Material.ARROW)
-                .setName(MessageConfiguration.message("previous_page"))
-                .toItemStack(), event -> event.setCancelled(true));
-    }
-
-    @Override
-    public Icon getNextPageItem() {
-        return new Icon(53, new ItemBuilder(Material.ARROW)
-                .setName(MessageConfiguration.message("next_page"))
-                .toItemStack(), event -> event.setCancelled(true));
     }
 }

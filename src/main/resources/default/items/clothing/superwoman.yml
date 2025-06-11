@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  superwoman_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/superwoman/leggings
+    name: Superwoman Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:superwoman
+  superwoman_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/superwoman/chestplate
+    name: Superwoman Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:superwoman
+  superwoman_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/superwoman/boots
+    name: Superwoman Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:superwoman

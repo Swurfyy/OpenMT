@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  fading_yellow_diamond_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/fading_yellow_diamond/leggings
+    name: Fading Yellow Diamond Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:fading_yellow_diamond
+  fading_yellow_diamond_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/fading_yellow_diamond/chestplate
+    name: Fading Yellow Diamond Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:fading_yellow_diamond
+  fading_yellow_diamond_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/fading_yellow_diamond/helmet
+    name: Fading Yellow Diamond Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:fading_yellow_diamond
+  fading_yellow_diamond_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/fading_yellow_diamond/boots
+    name: Fading Yellow Diamond Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:fading_yellow_diamond

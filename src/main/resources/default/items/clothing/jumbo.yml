@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  jumbo_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/jumbo/leggings
+    name: Jumbo Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:jumbo
+  jumbo_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/jumbo/chestplate
+    name: Jumbo Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:jumbo
+  jumbo_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/jumbo/boots
+    name: Jumbo Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:jumbo

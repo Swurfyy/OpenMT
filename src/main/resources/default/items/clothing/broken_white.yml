@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  broken_white_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/broken_white/leggings
+    name: Broken White Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:broken_white
+  broken_white_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/broken_white/chestplate
+    name: Broken White Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:broken_white
+  broken_white_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/broken_white/helmet
+    name: Broken White Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:broken_white
+  broken_white_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/broken_white/boots
+    name: Broken White Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:broken_white

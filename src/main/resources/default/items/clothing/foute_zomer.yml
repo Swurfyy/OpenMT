@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  foute_zomer_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/foute_zomer/leggings
+    name: Foute Zomer Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:foute_zomer
+  foute_zomer_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/foute_zomer/chestplate
+    name: Foute Zomer Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:foute_zomer
+  foute_zomer_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/foute_zomer/boots
+    name: Foute Zomer Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:foute_zomer

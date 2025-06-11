@@ -1,24 +1,26 @@
 package nl.openminetopia.utils.item;
 
-import com.jazzkuh.inventorylib.utils.PersistentData;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import nl.openminetopia.utils.ChatUtils;
+import nl.openminetopia.utils.PersistentDataUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.lang.reflect.Method;
@@ -72,7 +74,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setNBT(String key, Object value) {
-        is = PersistentData.set(is, value, key);
+        is = PersistentDataUtil.set(is, value, key);
         return this;
     }
 
@@ -373,6 +375,37 @@ public class ItemBuilder {
         is.setItemMeta(im);
         return this;
     }
+
+    /**
+     * Set the equippable component of an item.
+     *
+     * @param slot The equipment slot to set it to.
+     */
+    public ItemBuilder setEquippableSlot(EquipmentSlot slot) {
+        ItemMeta im = is.getItemMeta();
+        EquippableComponent equippable = im.getEquippable();
+        if (equippable == null) return this;
+        equippable.setSlot(slot);
+        im.setEquippable(equippable);
+        is.setItemMeta(im);
+        return this;
+    }
+
+    /**
+     * Set the equippable component of an item.
+     *
+     * @param model The equipment asset_id to set it to.
+     */
+    public ItemBuilder setEquippableModel(NamespacedKey model) {
+        ItemMeta im = is.getItemMeta();
+        EquippableComponent equippable = im.getEquippable();
+        if (equippable == null) return this;
+        equippable.setModel(model);
+        im.setEquippable(equippable);
+        is.setItemMeta(im);
+        return this;
+    }
+
 
     public ItemBuilder setSkinURL(String url) {
         try {

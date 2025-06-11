@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  ajax_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/ajax/boots
+    name: Ajax Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:ajax

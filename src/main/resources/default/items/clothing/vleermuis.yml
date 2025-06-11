@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  vleermuis_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/vleermuis/helmet
+    name: Vleermuis Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:vleermuis

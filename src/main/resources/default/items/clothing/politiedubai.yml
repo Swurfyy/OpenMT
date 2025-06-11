@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  politiedubai_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/politiedubai/leggings
+    name: Politiedubai Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:politiedubai
+  politiedubai_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/politiedubai/chestplate
+    name: Politiedubai Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:politiedubai
+  politiedubai_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/politiedubai/helmet
+    name: Politiedubai Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:politiedubai
+  politiedubai_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/politiedubai/boots
+    name: Politiedubai Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:politiedubai

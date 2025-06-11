@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  katara_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/katara/leggings
+    name: Katara Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:katara
+  katara_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/katara/chestplate
+    name: Katara Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:katara
+  katara_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/katara/boots
+    name: Katara Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:katara

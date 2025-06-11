@@ -1,13 +1,13 @@
 package nl.openminetopia.modules.police.walkietalkie.menus;
 
-import com.jazzkuh.inventorylib.objects.Menu;
-import com.jazzkuh.inventorylib.objects.icon.Icon;
+import dev.triumphteam.gui.guis.GuiItem;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
+import nl.openminetopia.utils.menu.Menu;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,7 +15,8 @@ import org.bukkit.entity.Player;
 public class WalkieTalkieMenu extends Menu {
 
     public WalkieTalkieMenu(Player player) {
-        super(ChatUtils.color("<gold>Portofoon"), 3);
+        super("<gold>Portofoon", 3);
+        gui.disableAllInteractions();
 
         PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
 
@@ -24,28 +25,29 @@ public class WalkieTalkieMenu extends Menu {
                 .setName("<gray>Politiechat")
                 .addLoreLine(policeChatEnabled ? "<gray>Verlaat de politiechat" : "<gray>Verbind met de politiechat");
 
-        Icon policeChatIcon = new Icon(10, policeChatBuilder.toItemStack(), event -> {
+        GuiItem policeChatItem = new GuiItem(policeChatBuilder.toItemStack(), event -> {
             policeModule.getWalkieTalkieManager().setPoliceChatEnabled(player, !policeChatEnabled);
             ChatUtils.sendMessage(player, !policeChatEnabled
                     ? MessageConfiguration.message("police_walkietalkie_enabled")
                     : MessageConfiguration.message("police_walkietalkie_disabled"));
-            this.getInventory().close();
+            gui.close(player);
         });
-        this.addItem(policeChatIcon);
+
+        gui.setItem(10, policeChatItem);
 
         ItemBuilder contactsBuilder = new ItemBuilder(Material.NAME_TAG)
                 .setName("<gray>Contacten")
                 .addLoreLine("<gray>Stuur een privébericht naar een andere agent");
 
-        Icon contactsIcon = new Icon(14, contactsBuilder.toItemStack(), event -> {
+        GuiItem contactsItem = new GuiItem(contactsBuilder.toItemStack(), event -> {
             new WalkieTalkieContactsMenu(player).open(player);
         });
-        this.addItem(contactsIcon);
+        gui.setItem(14, contactsItem);
 
         ItemBuilder emergencyBuilder = new ItemBuilder(Material.RED_WOOL)
                 .setName("<red><b>NOODKNOP");
 
-        Icon emergencyIcon = new Icon(16, emergencyBuilder.toItemStack(), event -> {
+        GuiItem emergencyItem = new GuiItem(emergencyBuilder.toItemStack(), event -> {
             DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
 
             if (configuration.isWalkieTalkieEmergencyCooldownEnabled()) {
@@ -67,6 +69,6 @@ public class WalkieTalkieMenu extends Menu {
                         System.currentTimeMillis() + configuration.getWalkieTalkieEmergencyCooldownSeconds());
             }
         });
-        this.addItem(emergencyIcon);
+        gui.setItem(16, emergencyItem);
     }
 }

@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  santa_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/santa/leggings
+    name: Santa Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:santa
+  santa_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/santa/chestplate
+    name: Santa Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:santa
+  santa_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/santa/helmet
+    name: Santa Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:santa
+  santa_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/santa/boots
+    name: Santa Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:santa

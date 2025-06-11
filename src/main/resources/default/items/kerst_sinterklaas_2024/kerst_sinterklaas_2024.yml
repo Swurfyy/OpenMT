@@ -1,0 +1,118 @@
+namespace: kerst_sinterklaas_2024
+items:
+  iphone16base:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/iphone16base
+    name: Iphone16base
+  chocoladeletter_s_sinterklaas:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/chocoladeletter_s_sinterklaas
+    name: Chocoladeletter S Sinterklaas
+  bear_brick_3:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/bear_brick_3
+    name: Bear Brick 3
+  iphone16baseskin_gold:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/iphone16baseskin_gold
+    name: Iphone16baseskin Gold
+  grotegingerbread_kerst:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/grotegingerbread_kerst
+    name: Grotegingerbread Kerst
+  bear_brick_2:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/bear_brick_2
+    name: Bear Brick 2
+  frozen:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/frozen
+    name: Frozen
+  kristal:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/kristal
+    name: Kristal
+  cadeautje_sinterklaas_roze:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/cadeautje_sinterklaas_roze
+    name: Cadeautje Sinterklaas Roze
+  kerstster_geel:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/kerstster_geel
+    name: Kerstster Geel
+  kerstster_rood:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/kerstster_rood
+    name: Kerstster Rood
+  bear_brick_5:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/bear_brick_5
+    name: Bear Brick 5
+  iphone16baseskin_blue:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/iphone16baseskin_blue
+    name: Iphone16baseskin Blue
+  bear_brick_4:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/bear_brick_4
+    name: Bear Brick 4
+  kerstboom_2024:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/kerstboom_2024
+    name: Kerstboom 2024
+  bear_brick:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/bear_brick
+    name: Bear Brick
+  cadeautjes_sinterklaas:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/cadeautjes_sinterklaas
+    name: Cadeautjes Sinterklaas
+  i-am-iron-man:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/i-am-iron-man
+    name: I Am Iron Man
+  beamer:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/beamer
+    name: Beamer
+  grinch_kerst:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/grinch_kerst
+    name: Grinch Kerst
+  gingerbread_kerst:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/gingerbread_kerst
+    name: Gingerbread Kerst
+  bear_brick_6:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/bear_brick_6
+    name: Bear Brick 6
+  kerstster_blauw:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/kerstster_blauw
+    name: Kerstster Blauw
+  cadeautje_sinterklaas_licht_blauw:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/cadeautje_sinterklaas_licht_blauw
+    name: Cadeautje Sinterklaas Licht Blauw
+  zakvansinterklaas_sinterklaas:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/zakvansinterklaas_sinterklaas
+    name: Zakvansinterklaas Sinterklaas
+  hetboekvan_sinterklaas:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/hetboekvan_sinterklaas
+    name: Hetboekvan Sinterklaas
+  funko_iamyedi:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/funko_iamyedi
+    name: Funko Iamyedi
+  pietenmuts_sinterklaas:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/pietenmuts_sinterklaas
+    name: Pietenmuts Sinterklaas
+  iphone16baseskin_pink:
+    material: PAPER
+    item_model: minecraft:custom/kerst_sinterklaas_2024/iphone16baseskin_pink
+    name: Iphone16baseskin Pink

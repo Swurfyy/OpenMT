@@ -1,0 +1,22 @@
+namespace: drank
+items:
+  wisky:
+    material: PAPER
+    item_model: minecraft:custom/drank/wisky
+    name: Wisky
+  blik_color:
+    material: PAPER
+    item_model: minecraft:custom/drank/blik_color
+    name: Blik Color
+  pak_melk:
+    material: PAPER
+    item_model: minecraft:custom/drank/pak_melk
+    name: Pak Melk
+  blik_coca_cola:
+    material: PAPER
+    item_model: minecraft:custom/drank/blik_coca_cola
+    name: Blik Coca Cola
+  pak:
+    material: PAPER
+    item_model: minecraft:custom/drank/pak
+    name: Pak

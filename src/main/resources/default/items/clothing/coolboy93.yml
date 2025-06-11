@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  coolboy93_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/coolboy93/chestplate
+    name: Coolboy93 Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:coolboy93

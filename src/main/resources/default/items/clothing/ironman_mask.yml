@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  ironman_mask_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/ironman_mask/helmet
+    name: Ironman Mask Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:ironman_mask

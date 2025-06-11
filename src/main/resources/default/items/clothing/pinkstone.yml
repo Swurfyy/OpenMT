@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  pinkstone_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/pinkstone/leggings
+    name: Pinkstone Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:pinkstone
+  pinkstone_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/pinkstone/chestplate
+    name: Pinkstone Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:pinkstone
+  pinkstone_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/pinkstone/helmet
+    name: Pinkstone Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:pinkstone
+  pinkstone_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/pinkstone/boots
+    name: Pinkstone Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:pinkstone

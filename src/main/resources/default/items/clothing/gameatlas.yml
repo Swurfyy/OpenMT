@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  gameatlas_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/gameatlas/leggings
+    name: Gameatlas Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:gameatlas
+  gameatlas_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/gameatlas/chestplate
+    name: Gameatlas Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:gameatlas
+  gameatlas_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/gameatlas/helmet
+    name: Gameatlas Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:gameatlas
+  gameatlas_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/gameatlas/boots
+    name: Gameatlas Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:gameatlas

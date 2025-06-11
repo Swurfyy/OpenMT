@@ -1,0 +1,322 @@
+namespace: trophies
+items:
+  strophy1:
+    material: PAPER
+    item_model: minecraft:custom/trophies/mtc_logo_trophie/strophy1
+    name: Strophy1
+  btrophy1:
+    material: PAPER
+    item_model: minecraft:custom/trophies/mtc_logo_trophie/btrophy1
+    name: Btrophy1
+  gtrophy1:
+    material: PAPER
+    item_model: minecraft:custom/trophies/mtc_logo_trophie/gtrophy1
+    name: Gtrophy1
+  talent_trofee:
+    material: PAPER
+    item_model: minecraft:custom/trophies/talent_trophie/talent_trofee
+    name: Talent Trofee
+  legend_duffy:
+    material: PAPER
+    item_model: minecraft:custom/trophies/legend/legend_duffy
+    name: Legend Duffy
+  legend_beker:
+    material: PAPER
+    item_model: minecraft:custom/trophies/legend/legend_beker
+    name: Legend Beker
+  legend_danny026:
+    material: PAPER
+    item_model: minecraft:custom/trophies/legend/legend_danny026
+    name: Legend Danny026
+  legend_thewiz76:
+    material: PAPER
+    item_model: minecraft:custom/trophies/legend/legend_thewiz76
+    name: Legend Thewiz76
+  car_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/car/car_trophie_silver
+    name: Car Trophie Silver
+  car_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/car/car_trophie_bronze
+    name: Car Trophie Bronze
+  car_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/car/car_trophie_gold
+    name: Car Trophie Gold
+  racer_trofee:
+    material: PAPER
+    item_model: minecraft:custom/trophies/racer_trophie/racer_trofee
+    name: Racer Trofee
+  van_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/van/van_trophie_silver
+    name: Van Trophie Silver
+  van_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/van/van_trophie_gold
+    name: Van Trophie Gold
+  van_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/van/van_trophie_bronze
+    name: Van Trophie Bronze
+  golden_trophie:
+    material: PAPER
+    item_model: minecraft:custom/trophies/1jaar/golden_trophie
+    name: Golden Trophie
+  silver_trophie:
+    material: PAPER
+    item_model: minecraft:custom/trophies/1jaar/silver_trophie
+    name: Silver Trophie
+  diamond_trophie:
+    material: PAPER
+    item_model: minecraft:custom/trophies/1jaar/diamond_trophie
+    name: Diamond Trophie
+  bronze_trophie:
+    material: PAPER
+    item_model: minecraft:custom/trophies/1jaar/bronze_trophie
+    name: Bronze Trophie
+  manager_trofee:
+    material: PAPER
+    item_model: minecraft:custom/trophies/manager_trophies/manager_trofee
+    name: Manager Trofee
+  mirage_trophie_gold2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/mirage/mirage_trophie_gold2
+    name: Mirage Trophie Gold2
+  mirage_trophie_silver2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/mirage/mirage_trophie_silver2
+    name: Mirage Trophie Silver2
+  mirage_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/mirage/mirage_trophie_silver
+    name: Mirage Trophie Silver
+  mirage_trophie_bronze2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/mirage/mirage_trophie_bronze2
+    name: Mirage Trophie Bronze2
+  mirage_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/mirage/mirage_trophie_bronze
+    name: Mirage Trophie Bronze
+  mirage_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/mirage/mirage_trophie_gold
+    name: Mirage Trophie Gold
+  bucket_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/bucket/bucket_trophie_gold
+    name: Bucket Trophie Gold
+  bucket_trophie_silver2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/bucket/bucket_trophie_silver2
+    name: Bucket Trophie Silver2
+  bucket_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/bucket/bucket_trophie_silver
+    name: Bucket Trophie Silver
+  bucket_trophie_bronze2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/bucket/bucket_trophie_bronze2
+    name: Bucket Trophie Bronze2
+  bucket_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/bucket/bucket_trophie_bronze
+    name: Bucket Trophie Bronze
+  bucket_trophie_gold2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/bucket/bucket_trophie_gold2
+    name: Bucket Trophie Gold2
+  dragrace_trophie_gold2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/dragrace/dragrace_trophie_gold2
+    name: Dragrace Trophie Gold2
+  dragrace_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/dragrace/dragrace_trophie_bronze
+    name: Dragrace Trophie Bronze
+  placeholder_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/dragrace/placeholder_trophie_gold
+    name: Placeholder Trophie Gold
+  dragrace_trophie_bronze2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/dragrace/dragrace_trophie_bronze2
+    name: Dragrace Trophie Bronze2
+  dragrace_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/dragrace/dragrace_trophie_gold
+    name: Dragrace Trophie Gold
+  dragrace_trophie_silver2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/dragrace/dragrace_trophie_silver2
+    name: Dragrace Trophie Silver2
+  dragrace_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/dragrace/dragrace_trophie_silver
+    name: Dragrace Trophie Silver
+  oilsjt_trophie:
+    material: PAPER
+    item_model: minecraft:custom/trophies/oilsjt/oilsjt_trophie
+    name: Oilsjt Trophie
+  trophie_waterscooter_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/waterscooter/trophie_waterscooter_silver
+    name: Trophie Waterscooter Silver
+  trophie_waterscooter_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/waterscooter/trophie_waterscooter_gold
+    name: Trophie Waterscooter Gold
+  trophie_waterscooter_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/waterscooter/trophie_waterscooter_bronze
+    name: Trophie Waterscooter Bronze
+  carshow_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/carshow/carshow_trophie_bronze
+    name: Carshow Trophie Bronze
+  carshow_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/carshow/carshow_trophie_gold
+    name: Carshow Trophie Gold
+  carshow_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/carshow/carshow_trophie_silver
+    name: Carshow Trophie Silver
+  stallion_trophie_silver2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/stallion/stallion_trophie_silver2
+    name: Stallion Trophie Silver2
+  stallion_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/stallion/stallion_trophie_silver
+    name: Stallion Trophie Silver
+  stallion_trophie_gold2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/stallion/stallion_trophie_gold2
+    name: Stallion Trophie Gold2
+  stallion_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/stallion/stallion_trophie_gold
+    name: Stallion Trophie Gold
+  stallion_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/stallion/stallion_trophie_bronze
+    name: Stallion Trophie Bronze
+  stallion_trophie_bronze2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/stallion/stallion_trophie_bronze2
+    name: Stallion Trophie Bronze2
+  omega_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/omega/omega_trophie_gold
+    name: Omega Trophie Gold
+  omega_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/omega/omega_trophie_bronze
+    name: Omega Trophie Bronze
+  omega_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/omega/omega_trophie_silver
+    name: Omega Trophie Silver
+  tire_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/tire/tire_trophie_bronze
+    name: Tire Trophie Bronze
+  tire_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/tire/tire_trophie_gold
+    name: Tire Trophie Gold
+  tire_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/tire/tire_trophie_silver
+    name: Tire Trophie Silver
+  tire_cup:
+    material: PAPER
+    item_model: minecraft:custom/trophies/tire/tire_cup
+    name: Tire Cup
+  hero_myreclypsa:
+    material: PAPER
+    item_model: minecraft:custom/trophies/hero/hero_myreclypsa
+    name: Hero Myreclypsa
+  hero_beker:
+    material: PAPER
+    item_model: minecraft:custom/trophies/hero/hero_beker
+    name: Hero Beker
+  hero_timewalk:
+    material: PAPER
+    item_model: minecraft:custom/trophies/hero/hero_timewalk
+    name: Hero Timewalk
+  hero_myreleios:
+    material: PAPER
+    item_model: minecraft:custom/trophies/hero/hero_myreleios
+    name: Hero Myreleios
+  piston_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/piston/piston_trophie_bronze
+    name: Piston Trophie Bronze
+  piston_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/piston/piston_trophie_gold
+    name: Piston Trophie Gold
+  piston_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/piston/piston_trophie_silver
+    name: Piston Trophie Silver
+  ddg_11jaar_trofee:
+    material: PAPER
+    item_model: minecraft:custom/trophies/11jaar/ddg_11jaar_trofee
+    name: Ddg 11jaar Trofee
+  ddg_11jaar_trofee_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/11jaar/ddg_11jaar_trofee_silver
+    name: Ddg 11jaar Trofee Silver
+  cruiser_trophie_silver2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/cruiser/cruiser_trophie_silver2
+    name: Cruiser Trophie Silver2
+  cruiser_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/cruiser/cruiser_trophie_gold
+    name: Cruiser Trophie Gold
+  cruiser_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/cruiser/cruiser_trophie_bronze
+    name: Cruiser Trophie Bronze
+  cruiser_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/cruiser/cruiser_trophie_silver
+    name: Cruiser Trophie Silver
+  cruiser_trophie_gold2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/cruiser/cruiser_trophie_gold2
+    name: Cruiser Trophie Gold2
+  cruiser_trophie_bronze2:
+    material: PAPER
+    item_model: minecraft:custom/trophies/cruiser/cruiser_trophie_bronze2
+    name: Cruiser Trophie Bronze2
+  range_trophie_silver:
+    material: PAPER
+    item_model: minecraft:custom/trophies/range_trophie/range_trophie_silver
+    name: Range Trophie Silver
+  range_trophie_gold:
+    material: PAPER
+    item_model: minecraft:custom/trophies/range_trophie/range_trophie_gold
+    name: Range Trophie Gold
+  range_trophie_bronze:
+    material: PAPER
+    item_model: minecraft:custom/trophies/range_trophie/range_trophie_bronze
+    name: Range Trophie Bronze
+  seizoensbeker_ra4004:
+    material: PAPER
+    item_model: minecraft:custom/trophies/season_victory/ra4004/seizoensbeker_ra4004
+    name: Seizoensbeker Ra4004
+  season_trophie:
+    material: PAPER
+    item_model: minecraft:custom/trophies/season_victory/luukhidde/season_trophie
+    name: Season Trophie
+  season_emiliyo:
+    material: PAPER
+    item_model: minecraft:custom/trophies/season_victory/emiliyo/season_emiliyo
+    name: Season Emiliyo

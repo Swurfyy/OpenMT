@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  disco_overlay_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/disco_overlay/chestplate
+    name: Disco Overlay Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:disco_overlay
+  disco_overlay_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/disco_overlay/helmet
+    name: Disco Overlay Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:disco_overlay
+  disco_overlay_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/disco_overlay/boots
+    name: Disco Overlay Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:disco_overlay

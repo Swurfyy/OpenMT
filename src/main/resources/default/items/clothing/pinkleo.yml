@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  pinkleo_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/pinkleo/leggings
+    name: Pinkleo Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:pinkleo
+  pinkleo_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/pinkleo/chestplate
+    name: Pinkleo Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:pinkleo
+  pinkleo_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/pinkleo/helmet
+    name: Pinkleo Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:pinkleo
+  pinkleo_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/pinkleo/boots
+    name: Pinkleo Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:pinkleo

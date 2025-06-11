@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  daredevil_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/daredevil/leggings
+    name: Daredevil Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:daredevil
+  daredevil_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/daredevil/chestplate
+    name: Daredevil Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:daredevil
+  daredevil_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/daredevil/helmet
+    name: Daredevil Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:daredevil
+  daredevil_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/daredevil/boots
+    name: Daredevil Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:daredevil

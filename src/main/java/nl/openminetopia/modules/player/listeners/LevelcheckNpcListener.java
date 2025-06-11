@@ -1,7 +1,6 @@
 package nl.openminetopia.modules.player.listeners;
 
-import com.jazzkuh.inventorylib.objects.Menu;
-import com.jazzkuh.inventorylib.objects.icon.Icon;
+import dev.triumphteam.gui.guis.GuiItem;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
@@ -12,6 +11,7 @@ import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.utils.LevelUtil;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
+import nl.openminetopia.utils.menu.Menu;
 import nl.openminetopia.utils.wrappers.CustomNpcClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -54,7 +54,7 @@ public class LevelcheckNpcListener implements Listener {
 
     private static class LevelCheckMenu extends Menu {
         public LevelCheckMenu(MinetopiaPlayer minetopiaPlayer, int newLevel, double cost) {
-            super(ChatUtils.color("<gold>Levelcheck"), 3);
+            super("<gold>Levelcheck", 3);
 
             BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
             if (bankingModule == null) return;
@@ -64,32 +64,35 @@ public class LevelcheckNpcListener implements Listener {
             boolean canAfford = bankAccountModel.getBalance() >= cost;
 
             // Akkoord-knop
-            addItem(new Icon(11, new ItemBuilder(Material.GREEN_WOOL)
+            GuiItem acceptItem = new GuiItem(new ItemBuilder(Material.GREEN_WOOL)
                     .setName("<green>Akkoord")
                     .addLoreLine(" ")
                     .addLoreLine("<dark_green>Klik hier om je level te upgraden naar <green>Level " + newLevel + "<dark_green>!")
                     .addLoreLine("<dark_green>Deze upgrade kost <green>" + (cost == 0 ? "niks" : "€" + cost))
-                    .toItemStack(), event -> {
-                        if (!canAfford) {
-                            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("levelcheck_not_enough_money"));
-                            return;
-                        }
+                    .toItemStack());
+            acceptItem.setAction(event -> {
+                if (!canAfford) {
+                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("levelcheck_not_enough_money"));
+                    return;
+                }
 
-                        bankAccountModel.setBalance(bankAccountModel.getBalance() - cost);
-                        minetopiaPlayer.setLevel(newLevel);
-                        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("levelcheck_success")
-                                .replace("<level>", String.valueOf(newLevel)));
-                        minetopiaPlayer.save();
-
-                        player.getOpenInventory().close();
-                    }));
+                bankAccountModel.setBalance(bankAccountModel.getBalance() - cost);
+                minetopiaPlayer.setLevel(newLevel);
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("levelcheck_success")
+                        .replace("<level>", String.valueOf(newLevel)));
+                minetopiaPlayer.save();
+                gui.close((Player) event.getWhoClicked());
+            });
+            gui.setItem(11, acceptItem);
 
             // Annuleer-knop
-            addItem(new Icon(15, new ItemBuilder(Material.RED_WOOL)
+            GuiItem cancelItem = new GuiItem(new ItemBuilder(Material.RED_WOOL)
                     .setName("<red>Annuleren")
                     .addLoreLine(" ")
                     .addLoreLine("<dark_red>Klik om deze actie te <red>annuleren</red>.")
-                    .toItemStack(), event -> player.getOpenInventory().close()));
+                    .toItemStack());
+            cancelItem.setAction(event -> gui.close((Player) event.getWhoClicked()));
+            gui.setItem(15, cancelItem);
         }
     }
 }

@@ -1,13 +1,13 @@
 package nl.openminetopia.modules.prefix.menus;
 
-import com.jazzkuh.inventorylib.objects.PaginatedMenu;
-import com.jazzkuh.inventorylib.objects.icon.Icon;
+import dev.triumphteam.gui.guis.GuiItem;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
+import nl.openminetopia.utils.menu.PaginatedMenu;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -18,8 +18,8 @@ import java.util.List;
 public class PrefixMenu extends PaginatedMenu {
 
     public PrefixMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer) {
-        super(ChatUtils.color("<black>Kies een prefix"), 2);
-        this.registerPageSlotsBetween(0, 9);
+        super("<black>Kies een prefix", 2, 9);
+        gui.disableAllInteractions();
 
         if (minetopiaPlayer == null) return;
 
@@ -31,14 +31,17 @@ public class PrefixMenu extends PaginatedMenu {
 
         prefixes.removeIf(prefix -> prefix.getId() == minetopiaPlayer.getActivePrefix().getId());
 
-        Icon selectedPrefix = new Icon(0, new ItemBuilder(Material.NAME_TAG)
+        gui.setItem(12, this.previousPageItem());
+        gui.setItem(14, this.nextPageItem());
+
+        GuiItem selectedPrefixItem = new GuiItem(new ItemBuilder(Material.NAME_TAG)
                 .setName("<white>" + minetopiaPlayer.getActivePrefix().getPrefix())
                 .addLoreLine("")
                 .addLoreLine("<gold>Je hebt deze prefix geselecteerd.")
                 .setGlowing(true)
                 .toItemStack(),
                 event -> event.setCancelled(true));
-        this.addItem(selectedPrefix);
+        gui.addItem(selectedPrefixItem);
 
         for (Prefix prefix : prefixes) {
             var builder = new ItemBuilder(Material.PAPER)
@@ -53,14 +56,14 @@ public class PrefixMenu extends PaginatedMenu {
                 builder.addLoreLine("<gold>Deze prefix vervalt over <yellow>" + millisToTime(prefix.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
             if (prefix.getExpiresAt() == -1) builder.addLoreLine("<gold>Deze prefix vervalt <yellow>nooit<gold>.");
 
-            Icon prefixIcon = new Icon(builder.toItemStack(),
+            GuiItem prefixItem = new GuiItem(builder.toItemStack(),
                     event -> {
                         event.setCancelled(true);
                         minetopiaPlayer.setActivePrefix(prefix.getId() == -1 ? new Prefix(-1, OpenMinetopia.getDefaultConfiguration().getDefaultPrefix(), -1) : prefix);
                         player.sendMessage(ChatUtils.format(minetopiaPlayer, "<gold>Je hebt de prefix <yellow>" + prefix.getPrefix() + " <gold>geselecteerd."));
                         new PrefixMenu(player, offlinePlayer, minetopiaPlayer).open(player);
                     });
-            this.addItem(prefixIcon);
+            gui.addItem(prefixItem);
         }
     }
 
@@ -79,23 +82,5 @@ public class PrefixMenu extends PaginatedMenu {
                 .replace("<hours>", String.valueOf(hours))
                 .replace("<minutes>", String.valueOf(minutes))
                 .replace("<seconds>", String.valueOf(seconds));
-    }
-
-    @Override
-    public Icon getPreviousPageItem() {
-        return new Icon(12, new ItemBuilder(Material.ARROW)
-                .setName("<gold>Vorige pagina")
-                .toItemStack(), event -> {
-            event.setCancelled(true);
-        });
-    }
-
-    @Override
-    public Icon getNextPageItem() {
-        return new Icon(14, new ItemBuilder(Material.ARROW)
-                .setName("<gold>Volgende pagina")
-                .toItemStack(), event -> {
-            event.setCancelled(true);
-        });
     }
 }

@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  zomerse_clothing_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/zomerse_clothing/chestplate
+    name: Zomerse clothing Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:zomerse_clothing

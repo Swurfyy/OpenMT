@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  stijnklaverarmy_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/stijnklaverarmy/leggings
+    name: Stijnklaverarmy Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:stijnklaverarmy
+  stijnklaverarmy_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/stijnklaverarmy/chestplate
+    name: Stijnklaverarmy Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:stijnklaverarmy
+  stijnklaverarmy_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/stijnklaverarmy/helmet
+    name: Stijnklaverarmy Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:stijnklaverarmy
+  stijnklaverarmy_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/stijnklaverarmy/boots
+    name: Stijnklaverarmy Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:stijnklaverarmy

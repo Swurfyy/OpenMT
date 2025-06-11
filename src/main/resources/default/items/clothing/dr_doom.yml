@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  dr_doom_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/dr_doom/leggings
+    name: Dr Doom Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:dr_doom
+  dr_doom_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/dr_doom/chestplate
+    name: Dr Doom Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:dr_doom
+  dr_doom_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/dr_doom/helmet
+    name: Dr Doom Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:dr_doom
+  dr_doom_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/dr_doom/boots
+    name: Dr Doom Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:dr_doom

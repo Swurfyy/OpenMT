@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  gingerbread_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/gingerbread/leggings
+    name: Gingerbread Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:gingerbread
+  gingerbread_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/gingerbread/chestplate
+    name: Gingerbread Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:gingerbread
+  gingerbread_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/gingerbread/boots
+    name: Gingerbread Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:gingerbread

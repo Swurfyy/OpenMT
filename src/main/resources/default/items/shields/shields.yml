@@ -1,0 +1,74 @@
+namespace: shields
+items:
+  shield:
+    material: PAPER
+    item_model: minecraft:custom/shields/shield
+    name: Shield
+  bin_head:
+    material: PAPER
+    item_model: minecraft:custom/shields/bin_head
+    name: Bin Head
+  riot_shield_1:
+    material: PAPER
+    item_model: minecraft:custom/shields/riot_shield_1
+    name: Riot Shield 1
+  shield_custom_blocking:
+    material: PAPER
+    item_model: minecraft:custom/shields/shield_custom_blocking
+    name: Shield Custom Blocking
+  minetopia_shield:
+    material: PAPER
+    item_model: minecraft:custom/shields/steden/minetopia_shield
+    name: Minetopia Shield
+  sunnyville_shield:
+    material: PAPER
+    item_model: minecraft:custom/shields/steden/sunnyville_shield
+    name: Sunnyville Shield
+  graydale_shield:
+    material: PAPER
+    item_model: minecraft:custom/shields/steden/graydale_shield
+    name: Graydale Shield
+  industrial_shield:
+    material: PAPER
+    item_model: minecraft:custom/shields/steden/industrial_shield
+    name: Industrial Shield
+  heratopia_shield:
+    material: PAPER
+    item_model: minecraft:custom/shields/steden/heratopia_shield
+    name: Heratopia Shield
+  qtraxia_sheeld:
+    material: PAPER
+    item_model: minecraft:custom/shields/steden/qtraxia_sheeld
+    name: Qtraxia Sheeld
+  cosmopolitan_shield:
+    material: PAPER
+    item_model: minecraft:custom/shields/steden/cosmopolitan_shield
+    name: Cosmopolitan Shield
+  rolandia_sheeld:
+    material: PAPER
+    item_model: minecraft:custom/shields/steden/rolandia_sheeld
+    name: Rolandia Sheeld
+  wasteland_shield:
+    material: PAPER
+    item_model: minecraft:custom/shields/steden/wasteland_shield
+    name: Wasteland Shield
+  front_vieuw_rh:
+    material: PAPER
+    item_model: minecraft:custom/shields/shield_disney/front_vieuw_rh
+    name: Front Vieuw Rh
+  front_vieuw_ice_age:
+    material: PAPER
+    item_model: minecraft:custom/shields/shield_disney/front_vieuw_ice_age
+    name: Front Vieuw Ice Age
+  front_vieuw_lionking:
+    material: PAPER
+    item_model: minecraft:custom/shields/shield_disney/front_vieuw_lionking
+    name: Front Vieuw Lionking
+  front_vieuw_cars:
+    material: PAPER
+    item_model: minecraft:custom/shields/shield_disney/front_vieuw_cars
+    name: Front Vieuw Cars
+  front_vieuw_big_hero_6:
+    material: PAPER
+    item_model: minecraft:custom/shields/shield_disney/front_vieuw_big_hero_6
+    name: Front Vieuw Big Hero 6

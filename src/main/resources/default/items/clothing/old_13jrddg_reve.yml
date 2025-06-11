@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  old_13jrddg_reve_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/old_13jrddg_reve/leggings
+    name: Old 13jrddg Reve Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:old_13jrddg_reve
+  old_13jrddg_reve_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/old_13jrddg_reve/chestplate
+    name: Old 13jrddg Reve Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:old_13jrddg_reve
+  old_13jrddg_reve_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/old_13jrddg_reve/boots
+    name: Old 13jrddg Reve Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:old_13jrddg_reve

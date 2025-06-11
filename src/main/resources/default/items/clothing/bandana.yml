@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  bandana_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/bandana/helmet
+    name: Bandana Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:bandana

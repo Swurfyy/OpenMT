@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  rendier_masker_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/rendier_masker/helmet
+    name: Rendier Masker Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:rendier_masker

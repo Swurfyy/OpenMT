@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  black_diamond_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/black_diamond/leggings
+    name: Black Diamond Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:black_diamond
+  black_diamond_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/black_diamond/chestplate
+    name: Black Diamond Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:black_diamond
+  black_diamond_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/black_diamond/helmet
+    name: Black Diamond Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:black_diamond
+  black_diamond_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/black_diamond/boots
+    name: Black Diamond Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:black_diamond

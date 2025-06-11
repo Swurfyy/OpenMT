@@ -1,0 +1,9 @@
+namespace: clothing
+items:
+  luxebroek_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/luxebroek/leggings
+    name: Luxebroek Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:luxebroek

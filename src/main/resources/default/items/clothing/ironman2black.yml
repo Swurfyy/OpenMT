@@ -1,0 +1,30 @@
+namespace: clothing
+items:
+  ironman2black_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/ironman2black/leggings
+    name: Ironman2black Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:ironman2black
+  ironman2black_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/ironman2black/chestplate
+    name: Ironman2black Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:ironman2black
+  ironman2black_helmet:
+    material: LEATHER_HELMET
+    item_model: minecraft:armor/ironman2black/helmet
+    name: Ironman2black Helmet
+    equippable:
+      slot: HEAD
+      asset_id: minecraft:ironman2black
+  ironman2black_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/ironman2black/boots
+    name: Ironman2black Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:ironman2black

@@ -1,0 +1,42 @@
+namespace: 13jrddg
+items:
+  dom_glass:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/heads/dom_glass
+    name: Dom Glass
+  glasses_glass:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/heads/glasses_glass
+    name: Glasses Glass
+  glass:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/heads/glass
+    name: Glass
+  mt_glass:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/heads/mt_glass
+    name: Mt Glass
+  feestelijke_hoed:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/heads/feestelijke_hoed
+    name: Feestelijke Hoed
+  confetti_glass:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/heads/confetti_glass
+    name: Confetti Glass
+  funko_4749:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/deco/funko_4749
+    name: Funko 4749
+  13jrddgballon:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/deco/13jrddgballon
+    name: 13jrddgballon
+  bord_13jaar:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/deco/bord_13jaar
+    name: Bord 13jaar
+  13y_cake:
+    material: PAPER
+    item_model: minecraft:custom/13jrddg/deco/13y_cake
+    name: 13y Cake

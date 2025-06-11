@@ -1,0 +1,23 @@
+namespace: clothing
+items:
+  kermit_leggings:
+    material: LEATHER_LEGGINGS
+    item_model: minecraft:armor/kermit/leggings
+    name: Kermit Leggings
+    equippable:
+      slot: LEGS
+      asset_id: minecraft:kermit
+  kermit_chestplate:
+    material: LEATHER_CHESTPLATE
+    item_model: minecraft:armor/kermit/chestplate
+    name: Kermit Chestplate
+    equippable:
+      slot: CHEST
+      asset_id: minecraft:kermit
+  kermit_boots:
+    material: LEATHER_BOOTS
+    item_model: minecraft:armor/kermit/boots
+    name: Kermit Boots
+    equippable:
+      slot: FEET
+      asset_id: minecraft:kermit

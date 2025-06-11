@@ -1,11 +1,10 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
     java
     id("io.freefair.lombok") version "8.13.1"
     id("com.gradleup.shadow") version "8.3.6"
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
     id("maven-publish")
+    id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "nl.openminetopia"
@@ -64,8 +63,8 @@ dependencies {
     implementation("com.jeff-media:custom-block-data:2.2.5")
     implementation("com.jeff-media:MorePersistentDataTypes:2.4.0")
 
-    /* InventoryLib (JAZZZZ) */
-    implementation("com.github.Jazzkuh.InventoryLib:spigot:486b8563a7")
+    /* TriumphGUI */
+    implementation("dev.triumphteam:triumph-gui:3.1.12")
 
     /* bStats */
     implementation("org.bstats:bstats-bukkit:3.1.0")
@@ -107,6 +106,17 @@ java {
 }
 
 tasks {
+    runServer {
+        minecraftVersion("1.21.4")
+        jvmArgs("-Dcom.mojang.eula.agree=true", "-Dfile.encoding=UTF-8")
+        downloadPlugins {
+            github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
+            hangar("PlaceholderAPI", "2.11.6")
+            modrinth("WorldGuard", "7.0.13")
+            hangar("WorldEdit", "7.3.14")
+        }
+    }
+
     compileJava {
         options.encoding = "UTF-8"
         options.compilerArgs.add("-parameters")
@@ -135,7 +145,7 @@ tasks {
         relocate("net.megavex.scoreboardlibrary", "nl.openminetopia.shaded.scoreboard")
         relocate("com.jeff_media.customblockdata", "nl.openminetopia.shaded.customblockdata")
         relocate("com.jeff_media.morepersistentdatatypes", "nl.openminetopia.shaded.morepersistentdatatypes")
-        relocate("com.jazzkuh.inventorylib", "nl.openminetopia.shaded.inventorylib")
+        relocate("dev.triumphteam.gui", "nl.openminetopia.shaded.gui")
         relocate("org.bstats", "nl.openminetopia.shaded.bstats")
     }
 

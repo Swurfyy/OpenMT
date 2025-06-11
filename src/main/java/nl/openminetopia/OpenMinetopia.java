@@ -3,8 +3,6 @@ package nl.openminetopia;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.MessageType;
 import co.aikar.commands.PaperCommandManager;
-import com.jazzkuh.inventorylib.loader.InventoryLoader;
-import com.jazzkuh.inventorylib.objects.Menu;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import com.jeff_media.customblockdata.CustomBlockData;
 import io.vertx.core.Vertx;
@@ -84,8 +82,6 @@ public final class OpenMinetopia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(chatInputHandler, this);
 
         CustomBlockData.registerListener(this);
-        Menu.init(this);
-        InventoryLoader.setFormattingProvider(message -> ChatUtils.color("<red>" + message));
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new OpenMinetopiaExpansion().register();
