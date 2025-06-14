@@ -1,6 +1,8 @@
 package nl.openminetopia.modules.teleporter.listeners;
 
+import nl.openminetopia.modules.teleporter.events.PlayerUseTeleporterEvent;
 import nl.openminetopia.modules.teleporter.utils.TeleporterUtil;
+import nl.openminetopia.utils.events.EventUtils;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -19,6 +21,9 @@ public class TeleporterInteractListener implements Listener {
 
         Location location = TeleporterUtil.blockLocation(block);
         if (location == null) return;
+
+        PlayerUseTeleporterEvent playerUseTeleporterEvent = new PlayerUseTeleporterEvent(event.getPlayer(), location);
+        if (EventUtils.callCancellable(playerUseTeleporterEvent)) return;
 
         event.getPlayer().teleport(location);
     }

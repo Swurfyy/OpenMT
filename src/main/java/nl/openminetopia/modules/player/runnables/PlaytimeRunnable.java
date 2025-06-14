@@ -9,7 +9,10 @@ import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
+import nl.openminetopia.modules.transactions.enums.TransactionType;
+import nl.openminetopia.modules.transactions.events.TransactionUpdateEvent;
 import nl.openminetopia.utils.ChatUtils;
+import nl.openminetopia.utils.events.EventUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -61,6 +64,9 @@ public class PlaytimeRunnable extends BukkitRunnable {
             Expression expression = new ExpressionBuilder(wageFormula).variables("l").build().setVariable("l", minetopiaPlayer.getLevel());
             wage = expression.evaluate();
         }
+
+        TransactionUpdateEvent transactionUpdateEvent = new TransactionUpdateEvent(player.getUniqueId(), playerModule.getName(), TransactionType.DEPOSIT, wage, bankAccountModel, "Wage payment for playtime", System.currentTimeMillis());
+        if (EventUtils.callCancellable(transactionUpdateEvent)) return;
 
         bankAccountModel.setBalance(bankAccountModel.getBalance() + wage);
         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("levelcheck_wage")

@@ -11,7 +11,9 @@ import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.transactions.TransactionsModule;
 import nl.openminetopia.modules.transactions.enums.TransactionType;
+import nl.openminetopia.modules.transactions.events.TransactionUpdateEvent;
 import nl.openminetopia.utils.ChatUtils;
+import nl.openminetopia.utils.events.EventUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -31,11 +33,17 @@ public class BankingBalanceCommand extends BaseCommand {
                 return;
             }
 
-            accountModel.setBalance(balance);
-            accountModel.save();
-
             UUID executorUuid = ((sender instanceof Player executor) ? executor.getUniqueId() : new UUID(0, 0));
             String username = ((sender instanceof Player executor) ? executor.getName() : "Console");
+
+            TransactionUpdateEvent event = new TransactionUpdateEvent(executorUuid, username, TransactionType.SET, balance, accountModel, "Set via '/account setbalance'", System.currentTimeMillis());
+            if (EventUtils.callCancellable(event)) {
+                sender.sendMessage(ChatUtils.color("<red>De transactie is geannuleerd door een plugin."));
+                return;
+            }
+
+            accountModel.setBalance(balance); 
+            accountModel.save();
 
             TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
             transactionsModule.createTransactionLog(System.currentTimeMillis(), executorUuid, username, TransactionType.SET, balance, accountModel.getUniqueId(), "Set via '/account setbalance'");
