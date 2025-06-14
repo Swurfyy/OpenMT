@@ -4,8 +4,10 @@ import dev.triumphteam.gui.guis.GuiItem;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.modules.prefix.events.PlayerChangePrefixEvent;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;
+import nl.openminetopia.utils.events.EventUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import nl.openminetopia.utils.menu.PaginatedMenu;
 import org.bukkit.Material;
@@ -59,7 +61,13 @@ public class PrefixMenu extends PaginatedMenu {
             GuiItem prefixItem = new GuiItem(builder.toItemStack(),
                     event -> {
                         event.setCancelled(true);
-                        minetopiaPlayer.setActivePrefix(prefix.getId() == -1 ? new Prefix(-1, OpenMinetopia.getDefaultConfiguration().getDefaultPrefix(), -1) : prefix);
+
+                        Prefix toSet = prefix.getId() == -1 ? new Prefix(-1, OpenMinetopia.getDefaultConfiguration().getDefaultPrefix(), -1) : prefix;
+
+                        PlayerChangePrefixEvent changePrefixEvent = new PlayerChangePrefixEvent(player, toSet);
+                        if (EventUtils.callCancellable(changePrefixEvent)) return;
+
+                        minetopiaPlayer.setActivePrefix(toSet);
                         player.sendMessage(ChatUtils.format(minetopiaPlayer, "<gold>Je hebt de prefix <yellow>" + prefix.getPrefix() + " <gold>geselecteerd."));
                         new PrefixMenu(player, offlinePlayer, minetopiaPlayer).open(player);
                     });

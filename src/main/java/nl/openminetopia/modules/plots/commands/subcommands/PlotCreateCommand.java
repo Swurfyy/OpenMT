@@ -17,7 +17,6 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.api.plots.events.PlotCreateEvent;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.utils.ChatUtils;
@@ -70,9 +69,6 @@ public class PlotCreateCommand extends BaseCommand {
                         .replace("<plot>", name)
                 );
             }
-
-            PlotCreateEvent event = new PlotCreateEvent(player, wgRegion);
-            Bukkit.getPluginManager().callEvent(event);
 
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_creation_success")
                     .replace("<plot>", name)

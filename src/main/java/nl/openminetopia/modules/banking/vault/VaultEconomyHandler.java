@@ -7,6 +7,8 @@ import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.transactions.TransactionsModule;
 import nl.openminetopia.modules.transactions.enums.TransactionType;
+import nl.openminetopia.modules.transactions.events.TransactionUpdateEvent;
+import nl.openminetopia.utils.events.EventUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -132,6 +134,10 @@ public class VaultEconomyHandler implements Economy {
     public EconomyResponse withdrawPlayer(OfflinePlayer offlinePlayer, double amount) {
         BankAccountModel accountModel = bankingModule.getAccountById(offlinePlayer.getUniqueId());
         if (accountModel != null) {
+            TransactionUpdateEvent event = new TransactionUpdateEvent(new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, accountModel, "Vault Interaction", System.currentTimeMillis());
+            if (EventUtils.callCancellable(event))
+                return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Transaction cancelled by plugin.");
+
             accountModel.setBalance(accountModel.getBalance() - amount);
             transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, accountModel.getUniqueId(), "Vault Interaction");
             return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
@@ -139,6 +145,10 @@ public class VaultEconomyHandler implements Economy {
 
         bankingModule.getAccountByIdAsync(offlinePlayer.getUniqueId()).thenAccept(model -> {
             if (model != null) {
+                TransactionUpdateEvent event = new TransactionUpdateEvent(new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, model, "Vault Interaction", System.currentTimeMillis());
+                if (EventUtils.callCancellable(event))
+                    return;
+
                 model.setBalance(model.getBalance() - amount);
                 model.save();
                 transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.WITHDRAW, amount, model.getUniqueId(), "Vault Interaction");
@@ -170,6 +180,10 @@ public class VaultEconomyHandler implements Economy {
     public EconomyResponse depositPlayer(OfflinePlayer offlinePlayer, double amount) {
         BankAccountModel accountModel = bankingModule.getAccountById(offlinePlayer.getUniqueId());
         if (accountModel != null) {
+            TransactionUpdateEvent event = new TransactionUpdateEvent(new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, accountModel, "Vault Interaction", System.currentTimeMillis());
+            if (EventUtils.callCancellable(event))
+                return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Transaction cancelled by plugin.");
+
             accountModel.setBalance(accountModel.getBalance() + amount);
             transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, accountModel.getUniqueId(), "Vault Interaction");
             return new EconomyResponse(amount, accountModel.getBalance(), EconomyResponse.ResponseType.SUCCESS, "");
@@ -177,6 +191,10 @@ public class VaultEconomyHandler implements Economy {
 
         bankingModule.getAccountByIdAsync(offlinePlayer.getUniqueId()).thenAccept(model -> {
             if (model != null) {
+                TransactionUpdateEvent event = new TransactionUpdateEvent(new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, model, "Vault Interaction", System.currentTimeMillis());
+                if (EventUtils.callCancellable(event))
+                    return;
+
                 model.setBalance(model.getBalance() + amount);
                 model.save();
                 transactionsModule.createTransactionLog(System.currentTimeMillis(), new UUID(0, 0), "Server", TransactionType.DEPOSIT, amount, model.getUniqueId(), "Vault Interaction");
