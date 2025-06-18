@@ -12,8 +12,10 @@ import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.transactions.TransactionsModule;
 import nl.openminetopia.modules.transactions.enums.TransactionType;
+import nl.openminetopia.modules.transactions.events.TransactionUpdateEvent;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.PersistentDataUtil;
+import nl.openminetopia.utils.events.EventUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import nl.openminetopia.utils.menu.Menu;
 import org.bukkit.Material;
@@ -101,6 +103,9 @@ public class BankContentsMenu extends Menu {
             double noteValue = PersistentDataUtil.getDouble(item, "bank_note_value");
             double totalValue = noteValue * item.getAmount();
 
+            TransactionUpdateEvent transactionUpdateEvent = new TransactionUpdateEvent(player.getUniqueId(), player.getName(), TransactionType.DEPOSIT, totalValue, accountModel, "Deposited via ATM.", System.currentTimeMillis());
+            if (EventUtils.callCancellable(transactionUpdateEvent)) return;
+
             item.setAmount(0);
             accountModel.setBalance(accountModel.getBalance() + totalValue);
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
@@ -133,6 +138,9 @@ public class BankContentsMenu extends Menu {
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_withdraw_permission"));
             return;
         }
+
+        TransactionUpdateEvent transactionUpdateEvent = new TransactionUpdateEvent(player.getUniqueId(), player.getName(), TransactionType.WITHDRAW, totalValue, accountModel, "Withdrawn in ATM.", System.currentTimeMillis());
+        if (EventUtils.callCancellable(transactionUpdateEvent)) return;
 
         accountModel.setBalance(balance - totalValue);
 

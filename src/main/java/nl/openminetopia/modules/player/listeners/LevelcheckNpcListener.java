@@ -8,8 +8,10 @@ import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.player.PlayerModule;
+import nl.openminetopia.modules.player.events.PlayerLevelChangeEvent;
 import nl.openminetopia.modules.player.utils.LevelUtil;
 import nl.openminetopia.utils.ChatUtils;
+import nl.openminetopia.utils.events.EventUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import nl.openminetopia.utils.menu.Menu;
 import nl.openminetopia.utils.wrappers.CustomNpcClickEvent;
@@ -42,6 +44,9 @@ public class LevelcheckNpcListener implements Listener {
 
         PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
         if (!playerModule.getConfiguration().isLevelUpCostEnabled()) {
+            PlayerLevelChangeEvent levelChangeEvent = new PlayerLevelChangeEvent(player, level, calculatedLevel);
+            if (EventUtils.callCancellable(levelChangeEvent)) return;
+
             minetopiaPlayer.setLevel(calculatedLevel);
             return;
         }
@@ -76,6 +81,9 @@ public class LevelcheckNpcListener implements Listener {
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("levelcheck_not_enough_money"));
                     return;
                 }
+
+                PlayerLevelChangeEvent levelChangeEvent = new PlayerLevelChangeEvent(minetopiaPlayer.getBukkit().getPlayer(), minetopiaPlayer.getLevel(), newLevel);
+                if (EventUtils.callCancellable(levelChangeEvent)) return;
 
                 bankAccountModel.setBalance(bankAccountModel.getBalance() - cost);
                 minetopiaPlayer.setLevel(newLevel);

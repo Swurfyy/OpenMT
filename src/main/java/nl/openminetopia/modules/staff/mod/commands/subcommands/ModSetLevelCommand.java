@@ -3,10 +3,11 @@ package nl.openminetopia.modules.staff.mod.commands.subcommands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.modules.player.events.PlayerLevelChangeEvent;
+import nl.openminetopia.utils.events.EventUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
 
 @CommandAlias("mod")
 public class ModSetLevelCommand extends BaseCommand {
@@ -25,11 +26,13 @@ public class ModSetLevelCommand extends BaseCommand {
         PlayerManager.getInstance().getMinetopiaPlayer(offlinePlayer.getPlayer()).whenComplete((minetopiaPlayer, throwable1) -> {
             if (minetopiaPlayer == null) return;
             int oldLevel = minetopiaPlayer.getLevel();
+
+            PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(offlinePlayer.getPlayer(), oldLevel, newLevel);
+            if (EventUtils.callCancellable(event)) return;
+
             minetopiaPlayer.setLevel(newLevel);
 
             player.sendMessage("Set the level of the player to " + newLevel + ".");
-
-            Bukkit.getServer().getPluginManager().callEvent(new PlayerLevelChangeEvent(offlinePlayer.getPlayer(), oldLevel, newLevel));
         });
     }
 }
