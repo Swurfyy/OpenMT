@@ -45,6 +45,8 @@ public class LinkCommand extends BaseCommand {
                     if (response.statusCode() != 200) {
                         // Handle non-200 status codes
                         ChatUtils.sendMessage(player, "<red>Er is iets fout gegaan bij het verifiëren van je account.");
+                        OpenMinetopia.getInstance().getLogger().warning("Response code " + response.statusCode() + " " + response.statusMessage()
+                                + " while trying to verify player " + player.getName());
                         return;
                     }
 
