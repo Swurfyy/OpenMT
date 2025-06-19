@@ -21,7 +21,7 @@ public class AdminToolFitnessBoostersMenu extends PaginatedMenu {
     private final BankAccountModel bankAccountModel;
 
     public AdminToolFitnessBoostersMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer, BankAccountModel bankAccountModel) {
-        super("<gold>Fitheid Boosters <yellow>" + offlinePlayer.getPlayerProfile().getName(), 3);
+        super("<gold>Fitheid Boosters <yellow>" + offlinePlayer.getPlayerProfile().getName(), 3, 18);
         this.player = player;
         this.offlinePlayer = offlinePlayer;
         this.minetopiaPlayer = minetopiaPlayer;
@@ -30,6 +30,7 @@ public class AdminToolFitnessBoostersMenu extends PaginatedMenu {
         gui.disableAllInteractions();
         gui.setItem(18, this.previousPageItem());
         gui.setItem(26, this.nextPageItem());
+
         if (minetopiaPlayer == null) return;
 
         for (FitnessBoosterModel booster : minetopiaPlayer.getFitness().getBoosters()) {
