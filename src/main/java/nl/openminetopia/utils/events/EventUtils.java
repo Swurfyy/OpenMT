@@ -1,6 +1,7 @@
 package nl.openminetopia.utils.events;
 
 import lombok.experimental.UtilityClass;
+import nl.openminetopia.OpenMinetopia;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -9,7 +10,8 @@ import org.bukkit.event.Event;
 public final class EventUtils {
 
     public static boolean callCancellable(Cancellable event) {
-        Bukkit.getPluginManager().callEvent((Event) event);
+        // Ensure synchronous execution of the event
+        Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> Bukkit.getPluginManager().callEvent((Event) event));
 
         return event.isCancelled();
     }
