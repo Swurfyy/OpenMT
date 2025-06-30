@@ -19,5 +19,4 @@ public final class EventUtils {
     public static void call(Event event) {
         Bukkit.getPluginManager().callEvent(event);
     }
-
 }

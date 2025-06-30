@@ -12,6 +12,7 @@ import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
 import nl.openminetopia.modules.player.events.PlayerLevelCalculateEvent;
 import nl.openminetopia.utils.WorldGuardUtils;
+import nl.openminetopia.utils.events.EventUtils;
 import org.bukkit.entity.Player;
 
 import java.util.concurrent.CompletableFuture;
@@ -55,7 +56,7 @@ public class LevelUtil {
                 Math.min(level, configuration.getMaxLevel()));
 
         PlayerLevelCalculateEvent event = new PlayerLevelCalculateEvent(player, level, (int) points);
-        if (!event.callEvent()) return oldCalculatedLevel;
+        if (!EventUtils.callCancellable(event)) return oldCalculatedLevel;
 
         return level;
     }
