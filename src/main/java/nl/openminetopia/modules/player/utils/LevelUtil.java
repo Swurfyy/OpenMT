@@ -56,7 +56,7 @@ public class LevelUtil {
                 Math.min(level, configuration.getMaxLevel()));
 
         PlayerLevelCalculateEvent event = new PlayerLevelCalculateEvent(player, level, (int) points);
-        if (!EventUtils.callCancellable(event)) return oldCalculatedLevel;
+        if (EventUtils.callCancellable(event)) return oldCalculatedLevel;
 
         return level;
     }

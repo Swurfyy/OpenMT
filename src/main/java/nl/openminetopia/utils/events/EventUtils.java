@@ -9,6 +9,12 @@ import org.bukkit.event.Event;
 @UtilityClass
 public final class EventUtils {
 
+    /**
+     * Calls a cancellable event and ensures it is executed synchronously.
+     *
+     * @param event the cancellable event to call
+     * @return true if the event was cancelled, false otherwise
+     */
     public static boolean callCancellable(Cancellable event) {
         // Ensure synchronous execution of the event
         Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> Bukkit.getPluginManager().callEvent((Event) event));
