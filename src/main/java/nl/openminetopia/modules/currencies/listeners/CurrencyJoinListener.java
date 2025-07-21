@@ -45,7 +45,7 @@ public class CurrencyJoinListener implements Listener {
                             player.getUniqueId(),
                             registeredCurrency.getId(),
                             0d,
-                            player.getPlayerTime()
+                            0L
                     );
 
                     currencyModels.add(newCurrencymodel);
@@ -54,9 +54,6 @@ public class CurrencyJoinListener implements Listener {
             }
 
             currencyModule.getCurrencyModels().put(player.getUniqueId(), currencyModels);
-
         });
-
     }
-
 }
