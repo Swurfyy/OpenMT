@@ -37,7 +37,7 @@ public class CurrencyTask extends BukkitRunnable {
                 RegisteredCurrency configCurrency = currency.configModel();
                 if (!configCurrency.isAutomatic()) continue;
 
-                if (currency.getLastReward() == 0 || player.getPlaytime() - currency.getLastReward() >= configCurrency.getInterval()) {
+                if (currency.getLastReward() != 0 && player.getPlaytime() - currency.getLastReward() >= configCurrency.getInterval()) {
                     currency.setLastReward((long) player.getPlaytime());
 
                     String message = MessageConfiguration.message("currency_automatic_reward")
@@ -51,5 +51,4 @@ public class CurrencyTask extends BukkitRunnable {
             }
         }
     }
-
 }
