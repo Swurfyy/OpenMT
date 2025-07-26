@@ -2,6 +2,7 @@ package nl.openminetopia.utils.item;
 
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -39,29 +40,38 @@ public class ItemUtils {
             if (item == null) continue;
             if (item.getType() != itemToCheck.getType()) continue;
 
-            if (item.hasItemMeta() != itemToCheck.hasItemMeta()) continue;
+            boolean hasMeta = item.hasItemMeta();
+            boolean checkHasMeta = itemToCheck.hasItemMeta();
 
-            if (!item.hasItemMeta()) return true; // Both have no meta, match
+            if (hasMeta != checkHasMeta) continue;
+            if (!hasMeta) return true;
 
-            var meta = item.getItemMeta();
-            var checkMeta = itemToCheck.getItemMeta();
+            ItemMeta meta = item.getItemMeta();
+            ItemMeta checkMeta = itemToCheck.getItemMeta();
+
             if (meta == null || checkMeta == null) continue;
 
-            if (meta.hasCustomModelData() != checkMeta.hasCustomModelData()) continue;
-            if (meta.hasCustomModelData() && checkMeta.getCustomModelData() != meta.getCustomModelData()) continue;
+            boolean hasModelData = meta.hasCustomModelData();
+            boolean checkHasModelData = checkMeta.hasCustomModelData();
 
-            if (meta instanceof org.bukkit.inventory.meta.Damageable damageMeta
-                    && checkMeta instanceof org.bukkit.inventory.meta.Damageable checkDamageMeta) {
+            if (hasModelData != checkHasModelData) continue;
+            if (hasModelData && meta.getCustomModelData() != checkMeta.getCustomModelData()) continue;
+
+            if (meta instanceof Damageable damageMeta && checkMeta instanceof Damageable checkDamageMeta) {
                 if (damageMeta.getDamage() != checkDamageMeta.getDamage()) continue;
             }
 
-            if (Bukkit.getVersion().contains("1.21.4") && meta.hasItemModel() && checkMeta.hasItemModel()) {
-                if (meta.getItemModel() != checkMeta.getItemModel()) continue;
+            if (Bukkit.getVersion().contains("1.21.4")) {
+                NamespacedKey modelA = meta.getItemModel();
+                NamespacedKey modelB = checkMeta.getItemModel();
+
+                if (modelA != null || modelB != null) {
+                    if (modelA == null || modelB == null) continue;
+                    if (!modelA.equals(modelB)) continue;
+                }
             }
-
-            return true; // Found a match
+            return true;
         }
-
         return false;
     }
 }
