@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.items.menus;
 
-import dev.triumphteam.gui.builder.item.ItemBuilder;
+import dev.triumphteam.gui.builder.item.PaperItemBuilder;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.items.ItemsModule;
 import nl.openminetopia.utils.ChatUtils;
@@ -16,7 +16,7 @@ public class ItemCategoriesMenu extends PaginatedMenu {
 
         ItemsModule module = OpenMinetopia.getModuleManager().get(ItemsModule.class);
         module.getCategoriesConfiguration().getCategories().forEach((id, category)-> {
-            gui.addItem(ItemBuilder.from(category.icon().clone())
+            gui.addItem(PaperItemBuilder.from(category.icon().clone())
                     .name(ChatUtils.color("<gold>" + category.name()))
                     .asGuiItem(event -> {
                 new ItemsMenu(category).open((Player) event.getWhoClicked());

@@ -2,7 +2,7 @@ plugins {
     java
     id("io.freefair.lombok") version "8.13.1"
     id("com.gradleup.shadow") version "8.3.6"
-    id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.18"
     id("maven-publish")
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
@@ -24,11 +24,12 @@ repositories {
     maven("https://maven.citizensnpcs.co/repo")
     maven("https://repo.fancyplugins.de/releases")
     maven("https://dist.labymod.net/api/v1/maven/release/")
+    maven("https://repo.triumphteam.dev/snapshots/")
 }
 
 dependencies {
     /* Paper */
-    paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
 
     /* Configuration */
     compileOnly("org.spongepowered:configurate-yaml:4.2.0")
@@ -64,7 +65,7 @@ dependencies {
     implementation("com.jeff-media:MorePersistentDataTypes:2.4.0")
 
     /* TriumphGUI */
-    implementation("dev.triumphteam:triumph-gui:3.1.12")
+    implementation("dev.triumphteam:triumph-gui-paper:3.1.13-SNAPSHOT")
 
     /* bStats */
     implementation("org.bstats:bstats-bukkit:3.1.0")

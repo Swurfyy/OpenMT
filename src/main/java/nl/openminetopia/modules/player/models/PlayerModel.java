@@ -82,7 +82,8 @@ public class PlayerModel extends StormModel {
     )
     private List<FitnessBoosterModel> boosters = new ArrayList<>();
 
-    @Column(type = ColumnType.ONE_TO_MANY,
+    @Column(
+            type = ColumnType.ONE_TO_MANY,
             references = CriminalRecordModel.class,
             matchTo = "player_id"
     )

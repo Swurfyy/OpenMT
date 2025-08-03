@@ -79,6 +79,7 @@ public class LockCommand extends BaseCommand {
             player.sendMessage(ChatUtils.color("<red>Je kijkt niet naar een blok!"));
             return false;
         }
+
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(targetBlock.getLocation(), p -> p >= 0);
         if (!player.hasPermission("openminetopia.lock")) {
             if (region == null) {

@@ -10,7 +10,7 @@ import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.teleporter.utils.enums.PressurePlate;
 import nl.openminetopia.utils.PersistentDataUtil;
 import nl.openminetopia.utils.item.ItemBuilder;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Display;

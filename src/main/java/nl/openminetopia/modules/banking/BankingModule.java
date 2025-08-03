@@ -33,12 +33,6 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-/**
- * Todo:
- * - Menu's (banking inventory)
- * - Debitcards
- */
-
 @Getter
 public class BankingModule extends SpigotModule<@NotNull OpenMinetopia> {
 

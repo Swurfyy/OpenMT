@@ -1,6 +1,6 @@
 package nl.openminetopia.utils.menu;
 
-import dev.triumphteam.gui.builder.item.ItemBuilder;
+import dev.triumphteam.gui.builder.item.PaperItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
@@ -21,13 +21,13 @@ public class PaginatedMenu {
     }
 
     public GuiItem nextPageItem() {
-        return ItemBuilder.from(Material.ARROW).name(ChatUtils.color("<gold>Volgende pagina")).asGuiItem(
+        return PaperItemBuilder.from(Material.ARROW).name(ChatUtils.color("<gold>Volgende pagina")).asGuiItem(
                 event -> gui.next()
         );
     }
 
     public GuiItem previousPageItem() {
-        return ItemBuilder.from(Material.ARROW).name(ChatUtils.color("<gold>Vorige pagina")).asGuiItem(
+        return PaperItemBuilder.from(Material.ARROW).name(ChatUtils.color("<gold>Vorige pagina")).asGuiItem(
                 event -> gui.previous()
         );
     }
