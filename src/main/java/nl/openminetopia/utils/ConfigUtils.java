@@ -55,7 +55,7 @@ public class ConfigUtils {
             int damage = damageable.hasDamage() ? damageable.getDamage() : -1;
             if (damage != -1) itemMap.put("damage", damage);
 
-            if (Bukkit.getVersion().contains("1.21.4") && itemStack.getItemMeta().hasItemModel() && itemStack.getItemMeta().getItemModel() != null) {
+            if (VersionUtil.isCompatible("1.21.4") && itemStack.getItemMeta().hasItemModel() && itemStack.getItemMeta().getItemModel() != null) {
                 itemMap.put("item-model", itemStack.getItemMeta().getItemModel().toString());
             }
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class ConfigUtils {
 
         if (customModelData != -1) itemBuilder.setCustomModelData(customModelData);
         if (damage != -1) itemBuilder.setDamage(damage);
-        if (Bukkit.getVersion().contains("1.21.4") && !itemModel.isEmpty()) itemBuilder.setItemModel(itemModel);
+        if (VersionUtil.isCompatible("1.21.4") && !itemModel.isEmpty()) itemBuilder.setItemModel(itemModel);
 
         return itemBuilder.toItemStack();
     }

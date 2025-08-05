@@ -1,6 +1,7 @@
 package nl.openminetopia.utils.item;
 
 import lombok.experimental.UtilityClass;
+import nl.openminetopia.utils.VersionUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -61,7 +62,7 @@ public class ItemUtils {
                 if (damageMeta.getDamage() != checkDamageMeta.getDamage()) continue;
             }
 
-            if (Bukkit.getVersion().contains("1.21.4")) {
+            if (VersionUtil.isCompatible("1.21.4")) {
                 NamespacedKey modelA = meta.getItemModel();
                 NamespacedKey modelB = checkMeta.getItemModel();
 
