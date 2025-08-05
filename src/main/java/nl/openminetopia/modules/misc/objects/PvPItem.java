@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 
 @AllArgsConstructor
 @Data
@@ -24,7 +25,20 @@ public class PvPItem {
 
     public boolean isSimilar(ItemStack itemToCheck) {
         if (item == null || itemToCheck == null) return false;
+        ItemStack item = this.item.clone();
+        itemToCheck = itemToCheck.clone();
         if (item.getType() != itemToCheck.getType()) return false;
+
+        Damageable damageable = (Damageable) item.getItemMeta();
+        if (damageable.hasDamage()) {
+            damageable.setDamage(0);
+            item.setItemMeta(damageable);
+        }
+        Damageable checkDamageable = (Damageable) itemToCheck.getItemMeta();
+        if (checkDamageable.hasDamage()) {
+            checkDamageable.setDamage(0);
+            itemToCheck.setItemMeta(checkDamageable);
+        }
 
         if (item.hasItemMeta() != itemToCheck.hasItemMeta()) return false;
 
