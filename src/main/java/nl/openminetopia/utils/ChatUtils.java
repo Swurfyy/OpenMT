@@ -12,6 +12,8 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
+import nl.openminetopia.modules.currencies.CurrencyModule;
+import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.police.utils.BalaclavaUtils;
 import org.bukkit.command.CommandSender;
@@ -51,6 +53,11 @@ public class ChatUtils {
                 .replace("<time>", timeFormat.format(new Date()))
                 .replace("<new_line>", "\n");
 
+        CurrencyModule currencyModule = OpenMinetopia.getModuleManager().get(CurrencyModule.class);
+        for (CurrencyModel currencyModel : currencyModule.getCurrencyModels().get(player.getUniqueId())) {
+            message = message.replace("<currency_" + currencyModel.getName() + ">", String.valueOf(currencyModel.getBalance()));
+        }
+
         if (minetopiaPlayer.isInPlace()) {
             message = message
                     .replace("<world_title>", minetopiaPlayer.getWorld().getTitle())
@@ -75,7 +82,7 @@ public class ChatUtils {
         BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
         if (accountModel != null) {
             message = message.replace("<balance_formatted>", bankingModule.format(accountModel.getBalance())
-                             .replace("<balance>", String.valueOf(accountModel.getBalance())));
+                    .replace("<balance>", String.valueOf(accountModel.getBalance())));
         }
 
         if (OpenMinetopia.getInstance().getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {

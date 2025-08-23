@@ -61,7 +61,6 @@ public class CurrencyModule extends SpigotModule<@NotNull OpenMinetopia> {
             return completableFuture;
         }
 
-
         StormDatabase.getExecutorService().submit(() -> {
             try {
                 Collection<CurrencyModel> accountModels = StormDatabase.getInstance().getStorm().buildQuery(CurrencyModel.class)
