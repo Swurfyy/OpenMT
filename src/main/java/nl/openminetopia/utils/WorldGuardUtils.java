@@ -40,6 +40,14 @@ public class WorldGuardUtils {
         return region;
     }
 
+    public List<ProtectedRegion> getProtectedRegions(@Nonnull Location location, Predicate<Integer> priorityPredicate) {
+        RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        RegionManager manager = container.get(BukkitAdapter.adapt(location.getWorld()));
+        if (manager == null) return new ArrayList<>();
+        return manager.getApplicableRegions(BukkitAdapter.asBlockVector(location)).getRegions().stream()
+                .filter(protectedRegion -> priorityPredicate.test(protectedRegion.getPriority())).toList();
+    }
+
     public List<ProtectedRegion> getProtectedRegions(@Nonnull World world, Predicate<Integer> priorityPredicate) {
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionManager manager = container.get(BukkitAdapter.adapt(world));

@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Getter
@@ -109,13 +110,15 @@ public class PlacesModule extends SpigotModule<@NotNull OpenMinetopia> {
     }
 
     public CityModel getCity(Location location) {
-        ProtectedRegion region = WorldGuardUtils.getProtectedRegion(location, priority -> priority >= 0);
+        List<ProtectedRegion> region = WorldGuardUtils.getProtectedRegions(location, priority -> priority >= 0);
 
         if (region == null) return null;
 
         for (CityModel city : cityModels) {
-            if (!city.getName().equalsIgnoreCase(region.getId())) continue;
-            return city;
+            for (ProtectedRegion protectedRegion : region) {
+                if (!city.getName().equalsIgnoreCase(protectedRegion.getId())) continue;
+                return city;
+            }
         }
         return null;
     }
