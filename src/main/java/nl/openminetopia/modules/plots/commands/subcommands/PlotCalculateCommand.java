@@ -17,6 +17,7 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.modules.plots.configuration.PlotCalculateConfiguration;
+import nl.openminetopia.modules.plots.utils.PlotUtil;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.Location;
@@ -39,7 +40,9 @@ public class PlotCalculateCommand extends BaseCommand {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 
-        if (region == null && plotName != null) {
+        if (plotName == null) region = PlotUtil.getPlot(player.getLocation());
+
+        if (region == null) {
             player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
             return;
         }

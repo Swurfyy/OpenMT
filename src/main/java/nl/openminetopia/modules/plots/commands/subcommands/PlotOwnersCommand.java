@@ -6,6 +6,7 @@ import com.destroystokyo.paper.profile.PlayerProfile;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
+import nl.openminetopia.modules.plots.utils.PlotUtil;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.OfflinePlayer;
@@ -20,13 +21,9 @@ public class PlotOwnersCommand extends BaseCommand {
     @CommandCompletion("@players @plotName")
     @Syntax("<speler> <region>")
     public void addPlotOwner(Player player, OfflinePlayer offlinePlayer, @Optional String regionName) {
-        ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
+        ProtectedRegion region = PlotUtil.getPlot(player.getLocation());
         if (regionName != null) {
-            region = WorldGuardUtils.getProtectedRegions(player.getWorld(), p -> p >= 0)
-                    .stream()
-                    .filter(r -> r.getId().equalsIgnoreCase(regionName))
-                    .findFirst()
-                    .orElse(null);
+            region = PlotUtil.getPlot(player.getWorld(), regionName);
         }
 
         if (offlinePlayer == null) {
