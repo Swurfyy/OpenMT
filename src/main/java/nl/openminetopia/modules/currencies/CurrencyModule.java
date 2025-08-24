@@ -5,6 +5,7 @@ import com.jazzkuh.modulemanager.spigot.SpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.currencies.commands.CurrencyCommand;
 import nl.openminetopia.modules.currencies.commands.CurrencyCommandHolder;
 import nl.openminetopia.modules.currencies.configuration.CurrencyConfiguration;
 import nl.openminetopia.modules.currencies.listeners.CurrencyJoinListener;
@@ -42,6 +43,7 @@ public class CurrencyModule extends SpigotModule<@NotNull OpenMinetopia> {
         registerComponent(new CurrencyJoinListener(this));
         registerComponent(new CurrencyQuitListener(this));
         registerComponent(new CurrencyTask(this));
+        registerComponent(new CurrencyCommand());
 
         String pluginName = getPlugin().getPluginMeta().getName();
         CommandMap commandMap = Bukkit.getCommandMap();
@@ -76,4 +78,19 @@ public class CurrencyModule extends SpigotModule<@NotNull OpenMinetopia> {
         return completableFuture;
     }
 
+    public CompletableFuture<Collection<CurrencyModel>> getAllCurrencies() {
+        CompletableFuture<Collection<CurrencyModel>> completableFuture = new CompletableFuture<>();
+
+        StormDatabase.getExecutorService().submit(() -> {
+            try {
+                Collection<CurrencyModel> accountModels = StormDatabase.getInstance().getStorm()
+                        .findAll(CurrencyModel.class).join();
+                completableFuture.complete(accountModels);
+            } catch (Exception e) {
+                completableFuture.completeExceptionally(e);
+            }
+        });
+
+        return completableFuture;
+    }
 }
