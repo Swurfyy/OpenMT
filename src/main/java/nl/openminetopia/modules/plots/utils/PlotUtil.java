@@ -25,7 +25,7 @@ public class PlotUtil {
         if (regions == null || regions.isEmpty()) return null;
 
         for (ProtectedRegion region : regions) {
-            if (!(region.getFlag(PlotModule.PLOT_FLAG) == null)) continue;
+            if (region.getFlag(PlotModule.PLOT_FLAG) == null) continue;
             return region;
         }
         return null;
