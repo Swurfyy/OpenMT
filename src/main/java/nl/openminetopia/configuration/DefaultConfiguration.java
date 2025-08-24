@@ -72,6 +72,12 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final List<String> scoreboardLines;
 
     /**
+     * Actionbar configuration
+     */
+    private final boolean actionbarEnabled;
+    private final String actionbarText;
+
+    /**
      * Default settings configuration
      */
     private final String defaultPrefix;
@@ -300,6 +306,12 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "<world_color>Fitheid:",
                 "<fitness>/<max_fitness>"
         ));
+
+        /*
+         * Actionbar configuration
+         */
+        this.actionbarEnabled = rootNode.node("actionbar", "enabled").getBoolean(true);
+        this.actionbarText = rootNode.node("actionbar", "text").getString("<world_color>Datum: <white><date> <world_color>Tijd: <white><time>");
 
         /*
          * Teleporter configuration

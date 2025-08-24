@@ -10,6 +10,7 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
+import nl.openminetopia.modules.plots.utils.PlotUtil;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.entity.Player;
 
@@ -20,7 +21,7 @@ public class PlotClearCommand extends BaseCommand {
     @CommandPermission("openminetopia.plot.clear")
     @Description("Verwijderd alle members en spelers van een plot.")
     public void plotClear(Player player) {
-        ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
+        ProtectedRegion region = PlotUtil.getPlot(player.getLocation());
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
 

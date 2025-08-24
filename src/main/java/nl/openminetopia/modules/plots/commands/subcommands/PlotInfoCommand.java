@@ -10,6 +10,7 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
+import nl.openminetopia.modules.plots.utils.PlotUtil;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.Bukkit;
@@ -23,7 +24,7 @@ public class PlotInfoCommand extends BaseCommand {
     @Default
     @Description("Bekijk informatie van een plot.")
     public void plotInfo(Player player) {
-        ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
+        ProtectedRegion region = PlotUtil.getPlot(player.getLocation());
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;

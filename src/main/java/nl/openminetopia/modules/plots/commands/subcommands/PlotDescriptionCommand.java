@@ -7,6 +7,7 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
+import nl.openminetopia.modules.plots.utils.PlotUtil;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.entity.Player;
@@ -20,14 +21,8 @@ public class PlotDescriptionCommand extends BaseCommand {
     @CommandCompletion("@plotName")
     @Description("Zet een beschrijving van een plot.")
     public void plotDescription(Player player, String description, @Optional String regionName) {
-        ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
-        if (regionName != null) {
-            region = WorldGuardUtils.getProtectedRegions(player.getWorld(), p -> p >= 0)
-                    .stream()
-                    .filter(r -> r.getId().equalsIgnoreCase(regionName))
-                    .findFirst()
-                    .orElse(null);
-        }
+        ProtectedRegion region = PlotUtil.getPlot(player.getLocation());
+        if (regionName != null) region = PlotUtil.getPlot(player.getWorld(), regionName);
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;

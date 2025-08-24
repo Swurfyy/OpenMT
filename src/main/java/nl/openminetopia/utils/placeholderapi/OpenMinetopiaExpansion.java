@@ -7,6 +7,8 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
+import nl.openminetopia.modules.currencies.CurrencyModule;
+import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.fitness.FitnessModule;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
@@ -48,6 +50,16 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
         long hours = (playtimeInSeconds % 86400) / 3600;
         long minutes = ((playtimeInSeconds % 86400) % 3600) / 60;
         long seconds = ((playtimeInSeconds % 86400) % 3600) % 60;
+
+        if (params.startsWith("currency_")) {
+            String currencyId = params.substring("currency_".length());
+            CurrencyModule module = OpenMinetopia.getModuleManager().get(CurrencyModule.class);
+            CurrencyModel currencyModel = module.getCurrencyModels().get(player.getUniqueId()).stream()
+                    .filter(currency -> currency.getName().equals(currencyId))
+                    .findFirst().orElse(null);
+            if (currencyModel == null) return null;
+            return String.valueOf(currencyModel.getBalance());
+        }
 
         return switch (params.toLowerCase()) {
             case "prefix" -> minetopiaPlayer.getActivePrefix().getPrefix();

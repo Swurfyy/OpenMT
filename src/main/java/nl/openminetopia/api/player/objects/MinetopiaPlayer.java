@@ -40,6 +40,8 @@ public class MinetopiaPlayer {
     private final PlayerModel playerModel;
 
     private @Setter boolean scoreboardVisible;
+    private @Setter boolean actionbarVisible;
+
 
     private int playtime;
     private PlaytimeRunnable playtimeRunnable;

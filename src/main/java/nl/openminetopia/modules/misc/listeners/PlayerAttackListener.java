@@ -2,6 +2,8 @@ package nl.openminetopia.modules.misc.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.places.MTPlaceManager;
+import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.misc.objects.PvPItem;
 import nl.openminetopia.modules.misc.utils.MiscUtils;
@@ -38,9 +40,11 @@ public class PlayerAttackListener implements Listener {
                 event.setCancelled(true);
                 return;
             }
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+            MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
 
-            player.sendMessage(ChatUtils.color(pvpItem.attackerMessage().replace("<player>", target.getName())));
-            target.sendMessage(ChatUtils.color(pvpItem.victimMessage().replace("<player>", player.getName())));
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, pvpItem.attackerMessage().replace("<victim>", target.getName())));
+            target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, pvpItem.victimMessage().replace("<attacker>", player.getName())));
             return;
         }
 
@@ -50,17 +54,23 @@ public class PlayerAttackListener implements Listener {
                 event.setCancelled(true);
                 return;
             }
-            player.sendMessage(ChatUtils.color(pvpItem.attackerMessage().replace("<player>", target.getName())));
-            target.sendMessage(ChatUtils.color(pvpItem.victimMessage().replace("<player>", player.getName())));
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+            MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
+
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, pvpItem.attackerMessage().replace("<victim>", target.getName())));
+            target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, pvpItem.victimMessage().replace("<attacker>", player.getName())));
             return;
         }
 
         if (!(event.getDamager() instanceof Player player)) return;
         if (!(event.getEntity() instanceof Player target)) return;
 
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
+
         if (HandcuffManager.getInstance().isHandcuffed(player) && !OpenMinetopia.getDefaultConfiguration().isHandcuffCanPvP()) {
             event.setCancelled(true);
-            player.sendMessage(ChatUtils.color(MessageConfiguration.message("police_handcuff_cant_pvp")));
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("police_handcuff_cant_pvp")));
             return;
         }
 
@@ -68,18 +78,18 @@ public class PlayerAttackListener implements Listener {
                 player.getInventory().getItemInMainHand().getType() == Material.SNOWBALL ||
                 player.getInventory().getItemInMainHand().getType() == Material.AIR) {
             event.setCancelled(true);
-            player.sendMessage(ChatUtils.color(MessageConfiguration.message("misc_pvp_disabled")));
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("misc_pvp_disabled")));
             return;
         }
 
         PvPItem pvpItem = MiscUtils.getPvPItem(player.getInventory().getItemInMainHand());
         if (pvpItem == null) {
             event.setCancelled(true);
-            player.sendMessage(ChatUtils.color(MessageConfiguration.message("misc_pvp_disabled")));
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("misc_pvp_disabled")));
             return;
         }
 
-        player.sendMessage(ChatUtils.color(pvpItem.attackerMessage().replace("<player>", target.getName())));
-        target.sendMessage(ChatUtils.color(pvpItem.victimMessage().replace("<player>", player.getName())));
+        player.sendMessage(ChatUtils.format(minetopiaPlayer, pvpItem.attackerMessage().replace("<victim>", target.getName())));
+        target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, pvpItem.victimMessage().replace("<attacker>", player.getName())));
     }
 }
