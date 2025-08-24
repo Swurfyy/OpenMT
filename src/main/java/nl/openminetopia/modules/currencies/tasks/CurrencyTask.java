@@ -39,7 +39,7 @@ public class CurrencyTask extends BukkitRunnable {
                 if (configCurrency == null) {
                     if (currencyModule.getConfiguration().isIgnoreUnused()) continue;
                     OpenMinetopia.getInstance().getLogger().warning("Currency config not found for currency " + currency.getName());
-                    OpenMinetopia.getInstance().getLogger().warning("You should consider removing the currency model from the database (if it is not used) by using /currency purge-unused");
+                    OpenMinetopia.getInstance().getLogger().warning("You should consider removing the currency model from the database (if it is not used) by using /currency purge-unused or enabling ignore-unused in currencies.yml");
                     continue;
                 }
                 if (!configCurrency.isAutomatic()) continue;
