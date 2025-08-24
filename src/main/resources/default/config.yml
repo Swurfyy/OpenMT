@@ -3,29 +3,29 @@ pvp:
   items:
     - item:
         type: STICK
-      attacker-message: "<red>Je hebt <dark_red><player> <red>geslagen met jouw knuppel"
+      attacker-message: "<red>Je hebt <dark_red><victim> <red>geslagen met jouw knuppel"
       victim-message: "<red>Je bent geslagen met een knuppel!"
     - item:
         type: FERMENTED_SPIDER_EYE
-      attacker-message: "<red>Je hebt <dark_red><player> <red>geslagen met jouw wapenstok"
+      attacker-message: "<red>Je hebt <dark_red><victim> <red>geslagen met jouw wapenstok"
       victim-message: "<red>Je bent geslagen met een wapenstok!"
     - item:
         type: STONE_AXE
-      attacker-message: "<red>Je hebt <dark_red><player> <red>geslagen met jouw knuppel"
+      attacker-message: "<red>Je hebt <dark_red><victim> <red>geslagen met jouw knuppel"
       victim-message: "<red>Je bent geslagen met een knuppel!"
     - item:
         type: STONE_HOE
-      attacker-message: "<red>Je hebt <dark_red><player> <red>geslagen met jouw knuppel"
+      attacker-message: "<red>Je hebt <dark_red><victim> <red>geslagen met jouw knuppel"
       victim-message: "<red>Je bent geslagen met een knuppel!"
     - item:
         type: WOODEN_SWORD
-      attacker-message: "<red>Je hebt <dark_red><player> <red>gestoken met jouw mes"
+      attacker-message: "<red>Je hebt <dark_red><victim> <red>gestoken met jouw mes"
       victim-message: "<red>Je bent gestoken met een mes!"
     - item:
         type: SNOWBALL
-      attacker-message: "<red>Je hebt <dark_red><player> <red>geraakt met jouw sneeuwbal"
+      attacker-message: "<red>Je hebt <dark_red><victim> <red>geraakt met jouw sneeuwbal"
       victim-message: "<red>Je bent geraakt met een sneeuwbal!"
     - item:
         type: ARROW
-      attacker-message: "<red>Je hebt <dark_red><player> <red>geraakt met jouw schot"
+      attacker-message: "<red>Je hebt <dark_red><victim> <red>geraakt met jouw schot"
       victim-message: "<red>Je bent geraakt met een schot!"
