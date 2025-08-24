@@ -39,5 +39,4 @@ public class CurrencyModel extends StormModel {
                 .findAny()
                 .orElse(null);
     }
-
 }

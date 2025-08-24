@@ -2,6 +2,7 @@ package nl.openminetopia.modules.currencies.tasks;
 
 import com.jazzkuh.modulemanager.spigot.handlers.tasks.TaskInfo;
 import lombok.RequiredArgsConstructor;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -35,6 +36,11 @@ public class CurrencyTask extends BukkitRunnable {
 
             for (CurrencyModel currency : currencies) {
                 RegisteredCurrency configCurrency = currency.configModel();
+                if (configCurrency == null) {
+                    OpenMinetopia.getInstance().getLogger().warning("Currency config not found for currency " + currency.getName());
+                    OpenMinetopia.getInstance().getLogger().warning("You should try restarting your server or removing the currency model from the database (if it is not used)");
+                    continue;
+                }
                 if (!configCurrency.isAutomatic()) continue;
 
                 if (currency.getLastReward() != 0 && player.getPlaytime() - currency.getLastReward() >= configCurrency.getInterval()) {
