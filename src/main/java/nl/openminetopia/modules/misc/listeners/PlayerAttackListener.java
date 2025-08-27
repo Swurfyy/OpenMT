@@ -60,7 +60,10 @@ public class PlayerAttackListener implements Listener {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (HandcuffManager.getInstance().isHandcuffed(player) && !OpenMinetopia.getDefaultConfiguration().isHandcuffCanPvP()) {
             event.setCancelled(true);
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("police_handcuff_cant_pvp")));
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("police_handcuff_cant_pvp")
+                    .replace("<victim>", target.getName())
+                    .replace("<attacker>", player.getName())
+            ));
             return;
         }
 
@@ -68,14 +71,20 @@ public class PlayerAttackListener implements Listener {
                 player.getInventory().getItemInMainHand().getType() == Material.SNOWBALL ||
                 player.getInventory().getItemInMainHand().getType() == Material.AIR) {
             event.setCancelled(true);
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("misc_pvp_disabled")));
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("misc_pvp_disabled")
+                    .replace("<victim>", target.getName())
+                    .replace("<attacker>", player.getName())
+            ));
             return;
         }
 
         PvPItem pvpItem = MiscUtils.getPvPItem(player.getInventory().getItemInMainHand());
         if (pvpItem == null) {
             event.setCancelled(true);
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("misc_pvp_disabled")));
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("misc_pvp_disabled")
+                    .replace("<victim>", target.getName())
+                    .replace("<attacker>", player.getName())
+            ));
             return;
         }
 
