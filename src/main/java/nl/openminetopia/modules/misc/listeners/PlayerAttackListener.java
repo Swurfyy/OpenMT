@@ -40,11 +40,7 @@ public class PlayerAttackListener implements Listener {
                 event.setCancelled(true);
                 return;
             }
-            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
-            MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
-
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, pvpItem.attackerMessage().replace("<victim>", target.getName())));
-            target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, pvpItem.victimMessage().replace("<attacker>", player.getName())));
+            sendAttackedMessages(player, target, pvpItem);
             return;
         }
 
@@ -54,11 +50,7 @@ public class PlayerAttackListener implements Listener {
                 event.setCancelled(true);
                 return;
             }
-            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
-            MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
-
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, pvpItem.attackerMessage().replace("<victim>", target.getName())));
-            target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, pvpItem.victimMessage().replace("<attacker>", player.getName())));
+            sendAttackedMessages(player, target, pvpItem);
             return;
         }
 
@@ -66,8 +58,6 @@ public class PlayerAttackListener implements Listener {
         if (!(event.getEntity() instanceof Player target)) return;
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
-        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
-
         if (HandcuffManager.getInstance().isHandcuffed(player) && !OpenMinetopia.getDefaultConfiguration().isHandcuffCanPvP()) {
             event.setCancelled(true);
             player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("police_handcuff_cant_pvp")));
@@ -89,7 +79,16 @@ public class PlayerAttackListener implements Listener {
             return;
         }
 
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, pvpItem.attackerMessage().replace("<victim>", target.getName())));
-        target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, pvpItem.victimMessage().replace("<attacker>", player.getName())));
+        sendAttackedMessages(player, target, pvpItem);
+    }
+
+    private void sendAttackedMessages(Player player, Player target, PvPItem pvpItem) {
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
+
+        player.sendMessage(ChatUtils.format(minetopiaPlayer, pvpItem.attackerMessage()
+                .replace("<attacker>", player.getName()).replace("<victim>", target.getName())));
+        target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, pvpItem.victimMessage()
+                .replace("<attacker>", player.getName()).replace("<victim>", target.getName())));
     }
 }
