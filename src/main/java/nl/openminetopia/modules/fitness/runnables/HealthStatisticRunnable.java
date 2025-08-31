@@ -19,6 +19,6 @@ public class HealthStatisticRunnable extends BukkitRunnable {
             return;
         }
         // check if playtime is a multiple of 3600
-        if (minetopiaPlayer.getPlaytime() % 3600 == 0) FitnessUtils.performHealthCheck(minetopiaPlayer);
+        if (minetopiaPlayer.getPlaytime() / 1000 % 3600 == 0) FitnessUtils.performHealthCheck(minetopiaPlayer);
     }
 }
