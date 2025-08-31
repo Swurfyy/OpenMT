@@ -45,7 +45,7 @@ public class CurrencyTask extends BukkitRunnable {
                 if (!configCurrency.isAutomatic()) continue;
 
                 if (currency.getLastReward() != 0 && player.getPlaytime() - currency.getLastReward() >= configCurrency.getInterval()) {
-                    currency.setLastReward((long) player.getPlaytime());
+                    currency.setLastReward(player.getPlaytime());
 
                     String message = MessageConfiguration.message("currency_automatic_reward")
                             .replaceAll("<amount>", String.valueOf(configCurrency.getAmount()))

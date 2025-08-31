@@ -17,10 +17,12 @@ import nl.openminetopia.modules.banking.listeners.BankingInteractionListener;
 import nl.openminetopia.modules.banking.listeners.PlayerLoginListener;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.banking.models.BankPermissionModel;
+import nl.openminetopia.modules.banking.tasks.WagePaymentTask;
 import nl.openminetopia.modules.banking.vault.VaultEconomyHandler;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
+import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.transactions.TransactionsModule;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
@@ -102,6 +104,8 @@ public class BankingModule extends SpigotModule<@NotNull OpenMinetopia> {
 
         registerComponent(new PlayerLoginListener());
         registerComponent(new BankingInteractionListener());
+
+        registerComponent(new WagePaymentTask(OpenMinetopia.getModuleManager().get(PlayerModule.class)::getConfiguration));
 
         if (Bukkit.getPluginManager().isPluginEnabled("Vault")) {
             Bukkit.getServicesManager().register(Economy.class, new VaultEconomyHandler(), OpenMinetopia.getInstance(), ServicePriority.Normal);

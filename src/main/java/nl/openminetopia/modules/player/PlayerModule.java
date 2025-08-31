@@ -16,7 +16,6 @@ import nl.openminetopia.modules.player.listeners.LevelcheckNpcListener;
 import nl.openminetopia.modules.player.listeners.PlayerPreLoginListener;
 import nl.openminetopia.modules.player.listeners.PlayerQuitListener;
 import nl.openminetopia.modules.player.models.PlayerModel;
-import nl.openminetopia.modules.player.runnables.PlaytimeRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +31,6 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
     }
 
     private LevelCheckConfiguration configuration;
-    private final Map<UUID, PlaytimeRunnable> playtimeRunnables = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -92,7 +90,7 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
             if (playerModel.isEmpty()) {
                 PlayerModel createdModel = new PlayerModel();
                 createdModel.setUniqueId(uuid);
-                createdModel.setPlaytime(0);
+                createdModel.setPlaytime(0L);
                 createdModel.setLevel(1);
                 createdModel.setActivePrefixId(-1);
                 createdModel.setActivePrefixColorId(-1);

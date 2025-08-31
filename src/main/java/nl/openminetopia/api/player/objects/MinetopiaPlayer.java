@@ -6,7 +6,6 @@ import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
-import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
@@ -19,7 +18,6 @@ import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.player.runnables.LevelCalculateRunnable;
-import nl.openminetopia.modules.player.runnables.PlaytimeRunnable;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.prefix.PrefixModule;
@@ -42,9 +40,11 @@ public class MinetopiaPlayer {
     private @Setter boolean scoreboardVisible;
     private @Setter boolean actionbarVisible;
 
-
-    private int playtime;
-    private PlaytimeRunnable playtimeRunnable;
+    @Getter
+    private long playtime;
+    @Getter
+    private long wageTime;
+    private transient long startTime;
 
     private int level;
     private @Setter int calculatedLevel;
@@ -88,6 +88,8 @@ public class MinetopiaPlayer {
         this.fitness = new Fitness(this);
 
         this.playtime = this.playerModel.getPlaytime();
+        this.wageTime = this.playerModel.getWageTime();
+        this.startTime = System.currentTimeMillis();
         this.level = this.playerModel.getLevel();
         this.calculatedLevel = configuration.getDefaultLevel();
         this.staffchatEnabled = this.playerModel.getStaffchatEnabled();
@@ -111,9 +113,6 @@ public class MinetopiaPlayer {
         this.activePrefix = prefixModule.getActivePrefixFromPlayer(playerModel)
                 .orElse(new Prefix(-1, configuration.getDefaultPrefix(), -1));
 
-        this.playtimeRunnable = new PlaytimeRunnable(this);
-        this.playtimeRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 20L);
-
         this.levelcheckRunnable = new LevelCalculateRunnable(this);
         levelcheckRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 20L * 30);
 
@@ -136,23 +135,6 @@ public class MinetopiaPlayer {
         return Bukkit.getOfflinePlayer(uuid);
     }
 
-    /* ---------- Playtime ---------- */
-
-    /**
-     * Sets the playtime in seconds
-     *
-     * @param seconds        The amount of seconds
-     * @param updateDatabase If true, the playtime will be pushed to the database, otherwise it will only be set in the object
-     *                       This should be set to false by default, and only set to true when the player logs out to prevent unnecessary database calls
-     */
-
-    public void setPlaytime(int seconds, boolean updateDatabase) {
-        this.playtime = seconds;
-        if (updateDatabase) {
-            this.playerModel.setPlaytime(seconds);
-            StormDatabase.getInstance().saveStormModel(this.playerModel);
-        }
-    }
 
     /* ---------- Places ---------- */
 
@@ -340,5 +322,27 @@ public class MinetopiaPlayer {
 
     public List<CriminalRecordModel> getCriminalRecords() {
         return playerModel.getCriminalRecords();
+    }
+
+    /* ---------- Playtime ---------- */
+
+    public void updatePlaytime(){
+        this.playtime = this.playtime + resetStart();
+        this.playerModel.setPlaytime(this.playtime);
+    }
+
+    public void setWageTime(long wageTime) {
+        this.wageTime = wageTime;
+        this.playerModel.setWageTime(wageTime);
+    }
+
+    private long sinceStart() {
+        return System.currentTimeMillis() - this.startTime;
+    }
+
+    private long resetStart() {
+        long since = sinceStart();
+        this.startTime = System.currentTimeMillis();
+        return since;
     }
 }
