@@ -43,7 +43,7 @@ public class WagePaymentTask implements Runnable {
 
             if (playerWageTime + wageTime <= totalPlayTime) {
                 giveWage(minetopiaPlayer);
-                minetopiaPlayer.setWageTime(playerWageTime + wageTime);
+                minetopiaPlayer.setWageTime(totalPlayTime);
             }
         }
     }
