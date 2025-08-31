@@ -48,7 +48,6 @@ public class MinetopiaPlayer {
 
     private int level;
     private @Setter int calculatedLevel;
-    private LevelCalculateRunnable levelcheckRunnable;
 
     private boolean staffchatEnabled;
     private boolean commandSpyEnabled;
@@ -112,9 +111,6 @@ public class MinetopiaPlayer {
         this.prefixes = prefixModule.getPrefixesFromPlayer(this.playerModel);
         this.activePrefix = prefixModule.getActivePrefixFromPlayer(playerModel)
                 .orElse(new Prefix(-1, configuration.getDefaultPrefix(), -1));
-
-        this.levelcheckRunnable = new LevelCalculateRunnable(this);
-        levelcheckRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 20L * 30);
 
         loadFuture.complete(null);
         return loadFuture;

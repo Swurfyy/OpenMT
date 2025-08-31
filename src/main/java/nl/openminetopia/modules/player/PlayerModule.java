@@ -16,6 +16,7 @@ import nl.openminetopia.modules.player.listeners.LevelcheckNpcListener;
 import nl.openminetopia.modules.player.listeners.PlayerPreLoginListener;
 import nl.openminetopia.modules.player.listeners.PlayerQuitListener;
 import nl.openminetopia.modules.player.models.PlayerModel;
+import nl.openminetopia.modules.player.runnables.LevelCalculateRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -43,6 +44,8 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
 
 
         registerComponent(new PlaytimeCommand());
+
+        registerComponent(new LevelCalculateRunnable(PlayerManager.getInstance()));
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(OpenMinetopia.getInstance(), () -> {
             for (MinetopiaPlayer minetopiaPlayer : PlayerManager.getInstance().getOnlinePlayers().values()) {

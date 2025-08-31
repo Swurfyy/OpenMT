@@ -38,7 +38,6 @@ public class PlayerQuitListener implements Listener {
 
             minetopiaPlayer.getFitness().getRunnable().cancel();
             minetopiaPlayer.getFitness().getHealthStatisticRunnable().cancel();
-            minetopiaPlayer.getLevelcheckRunnable().cancel();
 
             PlayerManager.getInstance().getOnlinePlayers().remove(player.getUniqueId());
         });
