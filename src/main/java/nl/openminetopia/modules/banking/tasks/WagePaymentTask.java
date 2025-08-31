@@ -32,16 +32,16 @@ public class WagePaymentTask implements Runnable {
 
     @Override
     public void run() {
+        long wageTime = this.levelCheckConfigurationSupplier.get().getWageInterval() * 1000L;
         for (MinetopiaPlayer minetopiaPlayer : PlayerManager.getInstance().getOnlinePlayers().values()) {
             Player bukkitPlayer = minetopiaPlayer.getBukkit().getPlayer();
             if (bukkitPlayer == null || !bukkitPlayer.isOnline()) continue;
             minetopiaPlayer.updatePlaytime();
+            if (!levelCheckConfigurationSupplier.get().isWageEnabled()) continue;
             long playerWageTime = minetopiaPlayer.getWageTime();
             long totalPlayTime = minetopiaPlayer.getPlaytime();
 
-            long wageTime = this.levelCheckConfigurationSupplier.get().getWageInterval() * 1000L;
             if (playerWageTime + wageTime <= totalPlayTime) {
-                if (!levelCheckConfigurationSupplier.get().isWageEnabled()) continue;
                 giveWage(minetopiaPlayer);
                 minetopiaPlayer.setWageTime(playerWageTime + wageTime);
             }
