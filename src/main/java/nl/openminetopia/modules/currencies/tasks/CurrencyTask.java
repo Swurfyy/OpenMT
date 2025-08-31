@@ -17,7 +17,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.List;
 
 @RequiredArgsConstructor
-@TaskInfo(repeating = true, delay = 20L, period = 20L)
+@TaskInfo(repeating = true, delay = 20L, period = 20L * 30L) // every 30 seconds
 public class CurrencyTask extends BukkitRunnable {
 
     private final CurrencyModule currencyModule;
@@ -29,7 +29,6 @@ public class CurrencyTask extends BukkitRunnable {
         for (MinetopiaPlayer player : playerManager.getOnlinePlayers().values()) {
             Player bukkitPlayer = player.getBukkit().getPlayer();
             if (bukkitPlayer == null || !bukkitPlayer.isOnline()) continue;
-
             if (!currencyModule.getCurrencyModels().containsKey(player.getUuid())) continue;
             List<CurrencyModel> currencies = currencyModule.getCurrencyModels().get(player.getUuid());
             if (currencies.isEmpty()) continue;
@@ -44,7 +43,7 @@ public class CurrencyTask extends BukkitRunnable {
                 }
                 if (!configCurrency.isAutomatic()) continue;
 
-                if (currency.getLastReward() != 0 && player.getPlaytime() - currency.getLastReward() >= configCurrency.getInterval()) {
+                if (player.getPlaytime() - currency.getLastReward() >= configCurrency.getInterval() * 1000L) {
                     currency.setLastReward(player.getPlaytime());
 
                     String message = MessageConfiguration.message("currency_automatic_reward")
