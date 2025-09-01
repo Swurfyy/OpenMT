@@ -36,8 +36,6 @@ public class PlayerQuitListener implements Listener {
                 OpenMinetopia.getInstance().getLogger().info("Saved player data for " + player.getName());
             });
 
-            minetopiaPlayer.getFitness().getRunnable().cancel();
-
             PlayerManager.getInstance().getOnlinePlayers().remove(player.getUniqueId());
         });
     }

@@ -28,7 +28,6 @@ public class Fitness {
     private final MinetopiaPlayer minetopiaPlayer;
     private final UUID uuid;
     private final PlayerModel playerModel;
-    private final FitnessRunnable runnable;
     private boolean fitnessReset;
 
     private @Setter int totalFitness;
@@ -39,10 +38,7 @@ public class Fitness {
         this.minetopiaPlayer = minetopiaPlayer;
         this.uuid = minetopiaPlayer.getUuid();
         this.playerModel = minetopiaPlayer.getPlayerModel();
-        this.runnable = new FitnessRunnable(this);
         this.fitnessReset = playerModel.getFitnessReset();
-
-        runnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 60 * 20L);
     }
 
     public CompletableFuture<Void> save() {
@@ -108,7 +104,7 @@ public class Fitness {
         boosterModel.setExpiresAt(expiresAtMillis);
         this.playerModel.getBoosters().add(boosterModel);
         StormDatabase.getInstance().saveStormModel(boosterModel);
-        runnable.run();
+        fitnessModule.getFitnessRunnable().forceMarkDirty(minetopiaPlayer.getUuid());
     }
 
     @SneakyThrows
@@ -116,7 +112,7 @@ public class Fitness {
         this.playerModel.getBoosters().remove(booster);
         StormDatabase.getInstance().getStorm().delete(booster);
 
-        runnable.run();
+        fitnessModule.getFitnessRunnable().forceMarkDirty(minetopiaPlayer.getUuid());
     }
 
     public List<FitnessStatisticModel> getStatistics() {
@@ -167,6 +163,6 @@ public class Fitness {
         FitnessUtils.clearFitnessEffects(minetopiaPlayer.getBukkit().getPlayer());
 
         save();
-        runnable.run();
+        fitnessModule.getFitnessRunnable().forceMarkDirty(minetopiaPlayer.getUuid());
     }
 }

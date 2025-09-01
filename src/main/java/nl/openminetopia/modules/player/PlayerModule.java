@@ -70,6 +70,7 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
                 });
             });
         }
+        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(levelCalculateRunnable);
     }
 
     private CompletableFuture<Optional<PlayerModel>> findPlayerModel(@NotNull UUID uuid) {

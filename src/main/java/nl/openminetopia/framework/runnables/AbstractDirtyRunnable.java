@@ -41,6 +41,11 @@ public abstract class AbstractDirtyRunnable<K> implements Runnable {
                 : Bukkit.getScheduler().runTaskTimer(plugin, this, 2L, periodTicks);
     }
 
+    public void forceMarkDirty(K key) {
+        dirty.add(key);
+        lastTouch.put(key, System.currentTimeMillis());
+    }
+
     public void markDirty(K key) {
         long now = System.currentTimeMillis();
         Long last = lastTouch.get(key);
