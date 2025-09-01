@@ -29,7 +29,6 @@ public class Fitness {
     private final UUID uuid;
     private final PlayerModel playerModel;
     private final FitnessRunnable runnable;
-    private final HealthStatisticRunnable healthStatisticRunnable;
     private boolean fitnessReset;
 
     private @Setter int totalFitness;
@@ -42,10 +41,8 @@ public class Fitness {
         this.playerModel = minetopiaPlayer.getPlayerModel();
         this.runnable = new FitnessRunnable(this);
         this.fitnessReset = playerModel.getFitnessReset();
-        this.healthStatisticRunnable = new HealthStatisticRunnable(minetopiaPlayer);
 
         runnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 20L, 60 * 20L);
-        healthStatisticRunnable.runTaskTimerAsynchronously(OpenMinetopia.getInstance(), 0, 20L);
     }
 
     public CompletableFuture<Void> save() {

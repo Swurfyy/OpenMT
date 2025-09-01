@@ -8,19 +8,19 @@ import java.util.concurrent.TimeUnit;
 @UtilityClass
 public class PlaytimeUtil {
 
-    private long seconds(long time) {
+    public static long seconds(long time) {
         return TimeUnit.MILLISECONDS.toSeconds(time) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time));
     }
 
-    private long minutes(long time) {
+    public static long minutes(long time) {
         return TimeUnit.MILLISECONDS.toMinutes(time) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(time));
     }
 
-    private long hours(long time) {
+    public static long hours(long time) {
         return TimeUnit.MILLISECONDS.toHours(time) - TimeUnit.DAYS.toHours(TimeUnit.MILLISECONDS.toDays(time));
     }
 
-    private long days(long time) {
+    public static long days(long time) {
         return TimeUnit.MILLISECONDS.toDays(time);
     }
 

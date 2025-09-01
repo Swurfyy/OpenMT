@@ -11,6 +11,7 @@ import nl.openminetopia.modules.fitness.commands.subcommands.FitnessBoosterComma
 import nl.openminetopia.modules.fitness.commands.subcommands.FitnessResetCommand;
 import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.listeners.*;
+import nl.openminetopia.modules.fitness.runnables.HealthStatisticRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -43,6 +44,8 @@ public class FitnessModule extends SpigotModule<@NotNull OpenMinetopia> {
         registerComponent(new PlayerDeathListener());
         registerComponent(new PlayerChangeWorldListener());
         registerComponent(new PlayerConsumeBoosterListener());
+
+        registerComponent(new HealthStatisticRunnable());
     }
 
     public void onDisable() {
