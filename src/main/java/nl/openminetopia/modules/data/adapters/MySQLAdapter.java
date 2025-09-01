@@ -66,7 +66,7 @@ public class MySQLAdapter implements DatabaseAdapter {
         TypeRegistry.registerAdapter(FitnessStatisticType.class, new FitnessStatisticTypeAdapter());
         TypeRegistry.registerAdapter(Boolean.class, new FixedBooleanAdapter());
         TypeRegistry.registerAdapter(TransactionType.class, new TransactionTypeAdapter());
-        TypeRegistry.registerAdapter(LongTypeAdapter.class, new LongTypeAdapter());
+        TypeRegistry.registerAdapter(Long.class, new LongTypeAdapter());
 
         registerStormModel(new BankAccountModel());
         registerStormModel(new BankPermissionModel());
