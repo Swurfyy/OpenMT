@@ -24,16 +24,6 @@ public class PlayerJoinListener implements Listener {
 
             minetopiaPlayer.setScoreboardVisible(true);
             ScoreboardManager.getInstance().addScoreboard(player);
-
-            Bukkit.getServer().getScheduler().runTaskTimer(OpenMinetopia.getInstance(), task -> {
-                if (!player.isOnline()) {
-                    task.cancel();
-                    return;
-                }
-                if (!minetopiaPlayer.isScoreboardVisible()) return;
-
-                ScoreboardManager.getInstance().updateBoard(minetopiaPlayer);
-            }, 0, 20);
         });
     }
 }

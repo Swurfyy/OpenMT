@@ -6,11 +6,11 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.scoreboard.ScoreboardModule;
 import nl.openminetopia.utils.ChatUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Getter
 public class ScoreboardManager {
@@ -26,6 +26,60 @@ public class ScoreboardManager {
 
     public final HashMap<UUID, Sidebar> scoreboards = new HashMap<>();
 
+    private final Set<UUID> dirty = ConcurrentHashMap.newKeySet();
+    private final Map<UUID, Long> lastTouchMs = new HashMap<>();
+    private static final long MIN_UPDATE_INTERVAL_MS = 250;
+    private static final int BATCH_PER_TICK = 128;
+
+    public void initTicker() {
+        Bukkit.getScheduler().runTaskTimer(OpenMinetopia.getInstance(), this::flushDirty, 2L, 10L);
+    }
+
+    /** Markeer een speler voor update (met simpele rate-limit) */
+    public void markDirty(UUID id) {
+        long now = System.currentTimeMillis();
+        Long last = lastTouchMs.get(id);
+        if (last == null || (now - last) >= MIN_UPDATE_INTERVAL_MS) {
+            dirty.add(id);
+            lastTouchMs.put(id, now);
+        }
+    }
+
+    /** (Optioneel) iedereen periodiek verversen, bv. elke 3s */
+    private long lastHeartbeat = 0;
+    private void heartbeatAll() {
+        long now = System.currentTimeMillis();
+        if (now - lastHeartbeat >= 3000) {
+            lastHeartbeat = now;
+            dirty.addAll(scoreboards.keySet());
+        }
+    }
+
+    private void flushDirty() {
+        heartbeatAll();
+
+        int budget = BATCH_PER_TICK;
+        Iterator<UUID> it = dirty.iterator();
+        while (it.hasNext() && budget-- > 0) {
+            UUID id = it.next();
+            it.remove();
+
+            Sidebar sidebar = scoreboards.get(id);
+            if (sidebar == null) continue;
+
+            Player player = Bukkit.getPlayer(id);
+            if (player == null || !player.isOnline()) {
+                removeScoreboard(id);
+                continue;
+            }
+
+            MinetopiaPlayer mtp = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+            if (mtp == null) continue;
+
+            updateBoard(mtp);
+        }
+    }
+
     public void updateBoard(MinetopiaPlayer minetopiaPlayer) {
         Sidebar sidebar = getScoreboard(minetopiaPlayer.getUuid());
         if (sidebar == null) return;
@@ -35,13 +89,10 @@ public class ScoreboardManager {
         if (player == null) return;
 
         if (!minetopiaPlayer.isInPlace()) {
-            if (!sidebar.players().contains(player)) return;
-            removeScoreboard(player);
+            if (sidebar.players().contains(player)) removeScoreboard(player);
             return;
         }
-        if (minetopiaPlayer.isInPlace() && !sidebar.players().contains(player) && minetopiaPlayer.isScoreboardVisible()) {
-            addScoreboard(player);
-        }
+        if (!sidebar.players().contains(player)) addScoreboard(player);
 
         List<String> lines = OpenMinetopia.getDefaultConfiguration().getScoreboardLines();
         int size = Math.min(lines.size(), 16);
@@ -49,26 +100,40 @@ public class ScoreboardManager {
             String line = lines.get(i);
             if (i == 0) {
                 sidebar.title(ChatUtils.format(minetopiaPlayer, line));
-                continue;
+            } else {
+                sidebar.line(i - 1, ChatUtils.format(minetopiaPlayer, line));
             }
-            sidebar.line(i - 1, ChatUtils.format(minetopiaPlayer, line));
         }
     }
 
     public void addScoreboard(Player player) {
         if (!OpenMinetopia.getDefaultConfiguration().isScoreboardEnabled()) return;
         if (scoreboards.containsKey(player.getUniqueId())) return;
-        Sidebar sidebar = OpenMinetopia.getModuleManager().get(ScoreboardModule.class).getScoreboardLibrary().createSidebar();
+
+        Sidebar sidebar = OpenMinetopia.getModuleManager()
+                .get(ScoreboardModule.class)
+                .getScoreboardLibrary()
+                .createSidebar();
+
         sidebar.addPlayer(player);
         scoreboards.put(player.getUniqueId(), sidebar);
+
+        markDirty(player.getUniqueId());
     }
 
     public void removeScoreboard(Player player) {
-        Sidebar sidebar = getScoreboard(player.getUniqueId());
-        if (sidebar == null) return;
-        sidebar.removePlayer(player);
-        sidebar.close();
-        scoreboards.remove(player.getUniqueId());
+        removeScoreboard(player.getUniqueId());
+    }
+
+    public void removeScoreboard(UUID uuid) {
+        Sidebar sidebar = scoreboards.remove(uuid);
+        if (sidebar != null) {
+            Player p = Bukkit.getPlayer(uuid);
+            if (p != null) sidebar.removePlayer(p);
+            sidebar.close();
+        }
+        dirty.remove(uuid);
+        lastTouchMs.remove(uuid);
     }
 
     public Sidebar getScoreboard(UUID uuid) {

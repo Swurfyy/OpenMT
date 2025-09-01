@@ -7,6 +7,7 @@ import net.megavex.scoreboardlibrary.api.ScoreboardLibrary;
 import net.megavex.scoreboardlibrary.api.exception.NoPacketAdapterAvailableException;
 import net.megavex.scoreboardlibrary.api.noop.NoopScoreboardLibrary;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.ScoreboardManager;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.scoreboard.commands.ScoreboardCommand;
@@ -35,6 +36,7 @@ public class ScoreboardModule extends SpigotModule<@NotNull OpenMinetopia> {
 
         try {
             scoreboardLibrary = ScoreboardLibrary.loadScoreboardLibrary(OpenMinetopia.getInstance());
+            ScoreboardManager.getInstance().initTicker();
         } catch (NoPacketAdapterAvailableException e) {
             // If no packet adapter was found, you can fallback to the no-op implementation:
             scoreboardLibrary = new NoopScoreboardLibrary();

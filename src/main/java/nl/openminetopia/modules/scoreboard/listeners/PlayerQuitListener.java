@@ -12,12 +12,6 @@ public class PlayerQuitListener implements Listener {
     @EventHandler
     public void playerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-
-        Sidebar sidebar = ScoreboardManager.getInstance().getScoreboard(player.getUniqueId());
         ScoreboardManager.getInstance().removeScoreboard(player);
-
-        if (sidebar != null) {
-            sidebar.close();
-        }
     }
 }
