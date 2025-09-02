@@ -26,6 +26,7 @@ import java.util.Date;
 public class ChatUtils {
 
     public Component color(String message) {
+        message = message.replaceAll("(?i)§([0-9a-fk-or])", "");
         return MiniMessage.miniMessage().deserialize(message).decoration(TextDecoration.ITALIC, false);
     }
 
@@ -89,7 +90,7 @@ public class ChatUtils {
             message = PlaceholderAPI.setPlaceholders(player, message);
         }
 
-        return MiniMessage.miniMessage().deserialize(message);
+        return color(message);
     }
 
     public void sendMessage(Player player, String message) {
