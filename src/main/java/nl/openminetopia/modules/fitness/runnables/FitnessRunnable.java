@@ -42,7 +42,7 @@ public class FitnessRunnable extends AbstractDirtyRunnable<UUID> {
         if (fitness == null) return;
         OfflinePlayer player = minetopiaPlayer.getBukkit();
         if (player == null || !player.isOnline()) {
-            cancel();
+            remove(key);
             return;
         }
 
