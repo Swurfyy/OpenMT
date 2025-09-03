@@ -18,6 +18,7 @@ import nl.openminetopia.modules.player.listeners.PlayerQuitListener;
 import nl.openminetopia.modules.player.models.PlayerModel;
 
 import nl.openminetopia.modules.player.runnables.LevelCalculateRunnable;
+import nl.openminetopia.modules.player.runnables.MinetopiaPlayerSaveTask;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +36,8 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
     private LevelCheckConfiguration configuration;
     private LevelCalculateRunnable levelCalculateRunnable;
 
+    private MinetopiaPlayerSaveTask minetopiaPlayerSaveTask;
+
     @Override
     public void onEnable() {
         configuration = new LevelCheckConfiguration(OpenMinetopia.getInstance().getDataFolder());
@@ -49,6 +52,9 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
 
         levelCalculateRunnable = new LevelCalculateRunnable(this, PlayerManager.getInstance(), 5000L, 50, 30 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
         OpenMinetopia.getInstance().registerDirtyPlayerRunnable(levelCalculateRunnable, 20L);
+
+        minetopiaPlayerSaveTask = new MinetopiaPlayerSaveTask(PlayerManager.getInstance(), 5 * 60 * 1000L, 10, 30 * 60 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()), true);
+        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(minetopiaPlayerSaveTask, 20L * 5);
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(OpenMinetopia.getInstance(), () -> {
             for (MinetopiaPlayer minetopiaPlayer : PlayerManager.getInstance().getOnlinePlayers().values()) {

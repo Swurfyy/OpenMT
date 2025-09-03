@@ -2,6 +2,7 @@ package nl.openminetopia.framework.runnables.listeners;
 
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.framework.runnables.AbstractDirtyRunnable;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -20,7 +21,10 @@ public class PlayerLifecycleListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         UUID uuid = event.getPlayer().getUniqueId();
-        for (AbstractDirtyRunnable<UUID> runnable: openMinetopia.getDirtyPlayerRunnables()) runnable.markDirty(uuid);
+        for (AbstractDirtyRunnable<UUID> runnable: openMinetopia.getDirtyPlayerRunnables()) {
+            if (runnable.getPolicy().dirtyOnJoin())
+                Bukkit.getScheduler().runTaskLater(openMinetopia, () -> runnable.markDirty(uuid), runnable.getPolicy().initialDelayMs());
+        }
     }
 
     @EventHandler

@@ -1,6 +1,7 @@
 package nl.openminetopia.framework.runnables;
 
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -10,6 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 public abstract class AbstractDirtyRunnable<K> implements Runnable {
+
+    @Getter
+    private final DirtyPolicy policy;
 
     private final Set<K> dirty = ConcurrentHashMap.newKeySet();
     private final Map<K, Long> lastTouch = new ConcurrentHashMap<>();
@@ -28,6 +32,10 @@ public abstract class AbstractDirtyRunnable<K> implements Runnable {
         this(minIntervalMs, batch, heartbeatMs, allKeysSupplier, false);
     }
     protected AbstractDirtyRunnable(long minIntervalMs, int batch, long heartbeatMs, Supplier<List<K>> allKeysSupplier, boolean async) {
+        this(DirtyPolicy.DEFAULT, minIntervalMs, batch, heartbeatMs, allKeysSupplier, async);
+    }
+    protected AbstractDirtyRunnable(DirtyPolicy dirtyPolicy, long minIntervalMs, int batch, long heartbeatMs, Supplier<List<K>> allKeysSupplier, boolean async) {
+        this.policy = dirtyPolicy;
         this.minIntervalMs = minIntervalMs;
         this.heartbeatMs = heartbeatMs;
         this.allKeysSupplier = allKeysSupplier;
