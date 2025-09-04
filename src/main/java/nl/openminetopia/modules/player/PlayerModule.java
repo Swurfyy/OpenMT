@@ -55,15 +55,7 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
 
         minetopiaPlayerSaveTask = new MinetopiaPlayerSaveTask(PlayerManager.getInstance(), 5 * 60 * 1000L, 10, 30 * 60 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()), true);
         OpenMinetopia.getInstance().registerDirtyPlayerRunnable(minetopiaPlayerSaveTask, 20L * 5);
-
-        Bukkit.getScheduler().runTaskTimerAsynchronously(OpenMinetopia.getInstance(), () -> {
-            for (MinetopiaPlayer minetopiaPlayer : PlayerManager.getInstance().getOnlinePlayers().values()) {
-                if (!(minetopiaPlayer instanceof MinetopiaPlayer onlineMinetopiaPlayer)) continue;
-                onlineMinetopiaPlayer.save().whenComplete((unused, throwable) -> {
-                    if (throwable != null) throwable.printStackTrace();
-                });
-            }
-        }, 0, 20 * 60 * 5); // Save every 5 minutes
+        
     }
 
     @Override
