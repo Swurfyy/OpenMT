@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-public class MinetopiaPlayerSaveTask extends AbstractDirtyRunnable<UUID> {
+public class MinetopiaPlayerSaveRunnable extends AbstractDirtyRunnable<UUID> {
 
     private final PlayerManager playerManager;
 
-    public MinetopiaPlayerSaveTask(PlayerManager playerManager, long minIntervalMs, int batch, long heartbeatMs, Supplier<List<UUID>> allKeysSupplier, boolean async) {
+    public MinetopiaPlayerSaveRunnable(PlayerManager playerManager, long minIntervalMs, int batch, long heartbeatMs, Supplier<List<UUID>> allKeysSupplier, boolean async) {
         super(DirtyPolicy.DB_SAVING_TASK, minIntervalMs, batch, heartbeatMs, allKeysSupplier, async);
         this.playerManager = playerManager;
     }

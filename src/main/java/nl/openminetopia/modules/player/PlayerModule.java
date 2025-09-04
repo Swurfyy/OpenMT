@@ -18,7 +18,8 @@ import nl.openminetopia.modules.player.listeners.PlayerQuitListener;
 import nl.openminetopia.modules.player.models.PlayerModel;
 
 import nl.openminetopia.modules.player.runnables.LevelCalculateRunnable;
-import nl.openminetopia.modules.player.runnables.MinetopiaPlayerSaveTask;
+import nl.openminetopia.modules.player.runnables.MinetopiaPlayerSaveRunnable;
+import nl.openminetopia.modules.player.runnables.PlayerPlaytimeRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +37,8 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
     private LevelCheckConfiguration configuration;
     private LevelCalculateRunnable levelCalculateRunnable;
 
-    private MinetopiaPlayerSaveTask minetopiaPlayerSaveTask;
+    private MinetopiaPlayerSaveRunnable minetopiaPlayerSaveRunnable;
+    private PlayerPlaytimeRunnable playerPlaytimeRunnable;
 
     @Override
     public void onEnable() {
@@ -47,28 +49,30 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
         registerComponent(new PlayerQuitListener());
         if (OpenMinetopia.getInstance().isNpcSupport()) registerComponent(new LevelcheckNpcListener());
 
-
         registerComponent(new PlaytimeCommand());
 
         levelCalculateRunnable = new LevelCalculateRunnable(this, PlayerManager.getInstance(), 5000L, 50, 30 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
         OpenMinetopia.getInstance().registerDirtyPlayerRunnable(levelCalculateRunnable, 20L);
 
-        minetopiaPlayerSaveTask = new MinetopiaPlayerSaveTask(PlayerManager.getInstance(), 5 * 60 * 1000L, 10, 30 * 60 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()), true);
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(minetopiaPlayerSaveTask, 20L * 5);
-        
+        minetopiaPlayerSaveRunnable = new MinetopiaPlayerSaveRunnable(PlayerManager.getInstance(), 5 * 60 * 1000L, 50, 30 * 60 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()), true);
+        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(minetopiaPlayerSaveRunnable, 20L * 5);
+
+        playerPlaytimeRunnable = new PlayerPlaytimeRunnable(PlayerManager.getInstance(), 1000L * 5, 50, 20 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()), true);
+        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(playerPlaytimeRunnable, 20L);
+
     }
 
     @Override
     public void onDisable() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-                if (minetopiaPlayer == null) return;
-                minetopiaPlayer.save().whenComplete((unused, throwable1) -> {
-                    if (throwable != null) throwable.printStackTrace();
-                });
-            });
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player).join();
+            if (minetopiaPlayer == null) continue;
+            minetopiaPlayer.updatePlaytime();
+            minetopiaPlayer.save().join();
         }
         OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(levelCalculateRunnable);
+        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(minetopiaPlayerSaveRunnable);
+        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(playerPlaytimeRunnable);
     }
 
     private CompletableFuture<Optional<PlayerModel>> findPlayerModel(@NotNull UUID uuid) {

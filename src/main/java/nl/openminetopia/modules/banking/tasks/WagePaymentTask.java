@@ -1,12 +1,12 @@
 package nl.openminetopia.modules.banking.tasks;
 
-import com.jazzkuh.modulemanager.spigot.handlers.tasks.TaskInfo;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.framework.runnables.AbstractDirtyRunnable;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.player.PlayerModule;
@@ -15,36 +15,36 @@ import nl.openminetopia.modules.transactions.enums.TransactionType;
 import nl.openminetopia.modules.transactions.events.TransactionUpdateEvent;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.events.EventUtils;
-import org.bukkit.entity.Player;
 
+import java.util.List;
+import java.util.UUID;
 import java.util.function.Supplier;
 
-@TaskInfo(repeating = true, period = 10L * 20L)
-public class WagePaymentTask implements Runnable {
+public class WagePaymentTask extends AbstractDirtyRunnable<UUID > {
 
     private final Supplier<LevelCheckConfiguration> levelCheckConfigurationSupplier;
     private final PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
     private final BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+    private final PlayerManager playerManager;
 
-    public WagePaymentTask(Supplier<LevelCheckConfiguration> levelCheckConfigurationSupplier) {
+    public WagePaymentTask(Supplier<LevelCheckConfiguration> levelCheckConfigurationSupplier, PlayerManager playerManager, long minIntervalMs, int batch, long heartbeatMs, Supplier<List<UUID>> allKeysSupplier) {
+        super(minIntervalMs, batch, heartbeatMs, allKeysSupplier);
         this.levelCheckConfigurationSupplier = levelCheckConfigurationSupplier;
+        this.playerManager = playerManager;
     }
 
     @Override
-    public void run() {
+    protected void process(UUID key) {
+        if (!levelCheckConfigurationSupplier.get().isWageEnabled()) return;
+        MinetopiaPlayer minetopiaPlayer = playerManager.getOnlinePlayers().get(key);
+        if (minetopiaPlayer == null) return;
         long wageTime = this.levelCheckConfigurationSupplier.get().getWageInterval() * 1000L;
-        for (MinetopiaPlayer minetopiaPlayer : PlayerManager.getInstance().getOnlinePlayers().values()) {
-            Player bukkitPlayer = minetopiaPlayer.getBukkit().getPlayer();
-            if (bukkitPlayer == null || !bukkitPlayer.isOnline()) continue;
-            minetopiaPlayer.updatePlaytime();
-            if (!levelCheckConfigurationSupplier.get().isWageEnabled()) continue;
-            long playerWageTime = minetopiaPlayer.getWageTime();
-            long totalPlayTime = minetopiaPlayer.getPlaytime();
+        long playerWageTime = minetopiaPlayer.getWageTime();
+        long totalPlayTime = minetopiaPlayer.getPlaytime();
 
-            if (playerWageTime + wageTime <= totalPlayTime) {
-                giveWage(minetopiaPlayer);
-                minetopiaPlayer.setWageTime(totalPlayTime);
-            }
+        if (playerWageTime + wageTime <= totalPlayTime) {
+            giveWage(minetopiaPlayer);
+            minetopiaPlayer.setWageTime(totalPlayTime);
         }
     }
 
@@ -62,7 +62,7 @@ public class WagePaymentTask implements Runnable {
             wage = expression.evaluate();
         }
 
-        TransactionUpdateEvent transactionUpdateEvent = new TransactionUpdateEvent(minetopiaPlayer.getBukkit().getUniqueId(), playerModule.getName(), TransactionType.DEPOSIT, wage, bankAccountModel, "Wage payment for playtime", System.currentTimeMillis());
+        TransactionUpdateEvent transactionUpdateEvent = new TransactionUpdateEvent(minetopiaPlayer.getUuid(), playerModule.getName(), TransactionType.DEPOSIT, wage, bankAccountModel, "Wage payment for playtime", System.currentTimeMillis());
         if (EventUtils.callCancellable(transactionUpdateEvent)) return;
 
         bankAccountModel.setBalance(bankAccountModel.getBalance() + wage);
