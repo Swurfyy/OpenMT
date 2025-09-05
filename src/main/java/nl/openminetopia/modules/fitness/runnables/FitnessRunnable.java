@@ -7,7 +7,7 @@ import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.framework.runnables.AbstractDirtyRunnable;
-import nl.openminetopia.modules.data.storm.StormDatabase;
+
 import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
@@ -15,7 +15,7 @@ import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.fitness.utils.FitnessUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
-import org.bukkit.scheduler.BukkitRunnable;
+
 
 import java.util.ArrayList;
 import java.util.List;
