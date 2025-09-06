@@ -100,6 +100,7 @@ public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
                 PlayerModel createdModel = new PlayerModel();
                 createdModel.setUniqueId(uuid);
                 createdModel.setPlaytime(0L);
+                createdModel.setWageTime(0L);
                 createdModel.setLevel(1);
                 createdModel.setActivePrefixId(-1);
                 createdModel.setActivePrefixColorId(-1);
