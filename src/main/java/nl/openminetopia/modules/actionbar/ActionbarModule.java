@@ -25,7 +25,7 @@ public class ActionbarModule extends SpigotModule<@NotNull OpenMinetopia> {
         registerComponent(new ActionbarJoinListener());
         registerComponent(new ActionbarCommand());
 
-        this.actionbarRunnable = new ActionbarRunnable(PlayerManager.getInstance(), 1000, 100, 2500, () -> PlayerManager.getInstance().getOnlinePlayers().keySet().stream().toList());
+        this.actionbarRunnable = new ActionbarRunnable(PlayerManager.getInstance(), 1000, 100, 1500, () -> PlayerManager.getInstance().getOnlinePlayers().keySet().stream().toList());
         OpenMinetopia.getInstance().registerDirtyPlayerRunnable(actionbarRunnable, 20L);
     }
 
