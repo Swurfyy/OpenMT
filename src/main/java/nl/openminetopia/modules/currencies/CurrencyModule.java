@@ -5,6 +5,7 @@ import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.currencies.commands.CurrencyCommand;
 import nl.openminetopia.modules.currencies.commands.CurrencyCommandHolder;
 import nl.openminetopia.modules.currencies.configuration.CurrencyConfiguration;
@@ -30,6 +31,8 @@ public class CurrencyModule extends ExtendedSpigotModule {
     private final Map<UUID, List<CurrencyModel>> currencyModels = new HashMap<>();
 
     private CurrencyConfiguration configuration;
+    @Getter
+    private CurrencyTask currencyTask;
 
     public CurrencyModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, PlayerModule playerModule) {
         super(moduleManager);
@@ -42,7 +45,7 @@ public class CurrencyModule extends ExtendedSpigotModule {
 
         registerComponent(new CurrencyJoinListener(this));
         registerComponent(new CurrencyQuitListener(this));
-        registerComponent(new CurrencyTask(this));
+
         registerComponent(new CurrencyCommand());
 
         String pluginName = getPlugin().getPluginMeta().getName();
@@ -53,6 +56,14 @@ public class CurrencyModule extends ExtendedSpigotModule {
             commandMap.register(pluginName, command);
         }
 
+        currencyTask = new CurrencyTask(this, PlayerManager.getInstance(), 5000L, 50, 30 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
+        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(currencyTask, 20L);
+
+    }
+
+    @Override
+    public void onDisable() {
+        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(currencyTask);
     }
 
     public CompletableFuture<Collection<CurrencyModel>> getCurrencies(UUID uuid) {
