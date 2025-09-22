@@ -204,7 +204,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
     /**
      * Disabled modules configuration
      */
-    public final List<String> disabledModules = new ArrayList<>();
+    public List<String> disabledModules = new ArrayList<>();
 
     @SneakyThrows
     public DefaultConfiguration(File file) {
@@ -529,7 +529,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Disabled modules configuration
          */
-        this.rootNode.node("disabled-modules").getList(String.class, new ArrayList<>());
+        this.disabledModules = this.rootNode.node("disabled-modules").getList(String.class, new ArrayList<>());
     }
 
     public boolean isModuleDisabled(Class<? extends ExtendedSpigotModule> moduleClass) {
