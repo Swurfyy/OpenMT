@@ -529,7 +529,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Disabled modules configuration
          */
-        this.rootNode.node("disabled-modules").get(String.class, new ArrayList<>());
+        this.rootNode.node("disabled-modules").getList(String.class, new ArrayList<>());
     }
 
     public boolean isModuleDisabled(Class<? extends ExtendedSpigotModule> moduleClass) {

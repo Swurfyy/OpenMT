@@ -13,6 +13,6 @@ public class ExtendedSpigotModule extends SpigotModule<@NotNull OpenMinetopia> {
 
     @Override
     public boolean shouldLoad() {
-        return OpenMinetopia.getDefaultConfiguration().isModuleDisabled(this.getClass());
+        return !OpenMinetopia.getDefaultConfiguration().isModuleDisabled(this.getClass());
     }
 }

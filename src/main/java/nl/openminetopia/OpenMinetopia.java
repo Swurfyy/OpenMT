@@ -69,9 +69,6 @@ public final class OpenMinetopia extends JavaPlugin {
         commandManager = new PaperCommandManager(this);
         moduleManager.setDebug(false);
 
-        defaultConfiguration = new DefaultConfiguration(getDataFolder());
-        defaultConfiguration.saveConfiguration();
-
         messageConfiguration = new MessageConfiguration(getDataFolder());
         messageConfiguration.saveConfiguration();
 
@@ -128,6 +125,9 @@ public final class OpenMinetopia extends JavaPlugin {
 
     @Override
     public void onLoad() {
+        defaultConfiguration = new DefaultConfiguration(getDataFolder());
+        defaultConfiguration.saveConfiguration();
+
         moduleManager.scanModules(this.getClass());
         moduleManager.load();
     }
