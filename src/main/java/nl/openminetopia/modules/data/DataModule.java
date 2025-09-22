@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.data;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
@@ -11,7 +11,7 @@ import nl.openminetopia.modules.data.types.DatabaseType;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class DataModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class DataModule extends ExtendedSpigotModule {
 
     private DatabaseAdapter adapter;
 

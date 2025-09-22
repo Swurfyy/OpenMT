@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.prefix;
 
 import com.craftmend.storm.api.enums.Where;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
@@ -26,7 +26,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-public class PrefixModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class PrefixModule extends ExtendedSpigotModule {
 
     Collection<PrefixModel> prefixModels = new ArrayList<>();
 

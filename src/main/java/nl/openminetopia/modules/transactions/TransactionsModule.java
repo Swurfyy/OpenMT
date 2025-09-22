@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.transactions;
 
 import com.craftmend.storm.api.enums.Where;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public class TransactionsModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class TransactionsModule extends ExtendedSpigotModule {
 
     public TransactionsModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
         super(moduleManager);

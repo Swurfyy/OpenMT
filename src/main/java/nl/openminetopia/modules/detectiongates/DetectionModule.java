@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.detectiongates;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 @Getter
-public class DetectionModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class DetectionModule extends ExtendedSpigotModule {
 
     private final Map<Location, Material> blocks = new HashMap<>();
 

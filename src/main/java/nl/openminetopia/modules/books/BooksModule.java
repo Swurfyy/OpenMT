@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.books;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Getter @Setter
-public class BooksModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class BooksModule extends ExtendedSpigotModule {
     public BooksModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
         super(moduleManager);
     }

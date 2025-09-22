@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.banking;
 
 import com.craftmend.storm.api.enums.Where;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,7 +34,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Getter
-public class BankingModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class BankingModule extends ExtendedSpigotModule {
 
     public BankingModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule, TransactionsModule transactionsModule) {
         super(moduleManager);

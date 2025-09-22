@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.time;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.DataModule;
@@ -11,7 +11,7 @@ import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.jetbrains.annotations.NotNull;
 
-public class TimeModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class TimeModule extends ExtendedSpigotModule {
 
     public TimeModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
         super(moduleManager);

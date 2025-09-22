@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.restapi;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import io.vertx.core.Context;
 import io.vertx.core.Vertx;
@@ -20,7 +20,7 @@ import nl.openminetopia.modules.restapi.verticles.player.*;
 import nl.openminetopia.modules.restapi.verticles.plots.PlotsVerticle;
 import org.jetbrains.annotations.NotNull;
 
-public class RestAPIModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class RestAPIModule extends ExtendedSpigotModule {
 
     public RestAPIModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
         super(moduleManager);

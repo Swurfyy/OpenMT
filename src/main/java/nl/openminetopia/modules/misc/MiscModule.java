@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.misc;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.misc.commands.HeadCommand;
@@ -8,7 +8,7 @@ import nl.openminetopia.modules.misc.listeners.PlayerAttackListener;
 import nl.openminetopia.modules.misc.listeners.TrashcanListener;
 import org.jetbrains.annotations.NotNull;
 
-public class MiscModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class MiscModule extends ExtendedSpigotModule {
 
     public MiscModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
         super(moduleManager);

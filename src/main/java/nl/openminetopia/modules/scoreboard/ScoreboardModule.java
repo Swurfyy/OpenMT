@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.scoreboard;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import net.megavex.scoreboardlibrary.api.ScoreboardLibrary;
@@ -15,7 +15,7 @@ import nl.openminetopia.modules.scoreboard.listeners.PlayerQuitListener;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class ScoreboardModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class ScoreboardModule extends ExtendedSpigotModule {
 
     public ScoreboardModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
         super(moduleManager);

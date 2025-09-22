@@ -2,7 +2,7 @@ package nl.openminetopia.modules.skript;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 @Getter
-public class SkriptModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class SkriptModule extends ExtendedSpigotModule {
 
     public SkriptModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
         super(moduleManager);

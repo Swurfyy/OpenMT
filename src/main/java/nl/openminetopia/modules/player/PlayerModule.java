@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.player;
 
 import com.craftmend.storm.api.enums.Where;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +25,7 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 @Setter @Getter
-public class PlayerModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class PlayerModule extends ExtendedSpigotModule {
 
     public PlayerModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
         super(moduleManager);

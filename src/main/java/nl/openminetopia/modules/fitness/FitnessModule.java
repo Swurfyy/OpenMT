@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.fitness;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Getter
-public class FitnessModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class FitnessModule extends ExtendedSpigotModule {
 
     public FitnessModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
         super(moduleManager);

@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.labymod;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 @Setter
 @Getter
-public class LabymodModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class LabymodModule extends ExtendedSpigotModule {
 
 	public LabymodModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
 		super(moduleManager);

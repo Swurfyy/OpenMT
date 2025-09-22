@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.places;
 
 import com.craftmend.storm.api.enums.Where;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import lombok.Getter;
@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Getter
-public class PlacesModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class PlacesModule extends ExtendedSpigotModule {
 
     public Collection<WorldModel> worldModels = new ArrayList<>();
     public Collection<CityModel> cityModels = new ArrayList<>();

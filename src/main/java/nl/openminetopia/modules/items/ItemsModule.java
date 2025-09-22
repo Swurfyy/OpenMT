@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.items;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.stream.Stream;
 
 @Getter
-public class ItemsModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class ItemsModule extends ExtendedSpigotModule {
     public ItemsModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
         super(moduleManager);
     }

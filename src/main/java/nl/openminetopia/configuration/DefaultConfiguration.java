@@ -1,5 +1,6 @@
 package nl.openminetopia.configuration;
 
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
@@ -42,6 +43,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
      * Rest API configuration
      */
     private final boolean restApiEnabled;
+    private final String restApiHost;
     private final int restApiPort;
     private final String restApiKey;
 
@@ -196,8 +198,13 @@ public class DefaultConfiguration extends ConfigurateConfig {
     /**
      * Spy Webhook Configuration
      */
-    public String commandSpyWebhookUrl;
-    public String chatSpyWebhookUrl;
+    public final String commandSpyWebhookUrl;
+    public final String chatSpyWebhookUrl;
+
+    /**
+     * Disabled modules configuration
+     */
+    public final List<String> disabledModules = new ArrayList<>();
 
     @SneakyThrows
     public DefaultConfiguration(File file) {
@@ -229,6 +236,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
          * Rest API configuration
          */
         this.restApiEnabled = rootNode.node("rest-api", "enabled").getBoolean(false);
+        this.restApiHost = rootNode.node("rest-api", "host").getString("127.0.0.1");
         this.restApiPort = rootNode.node("rest-api", "port").getInt(4567);
         this.restApiKey = rootNode.node("rest-api", "api-key").getString("CHANGE-ME");
 
@@ -517,6 +525,20 @@ public class DefaultConfiguration extends ConfigurateConfig {
          */
         this.chatSpyWebhookUrl = rootNode.node("spy", "chat-spy-webhook").getString("");
         this.commandSpyWebhookUrl = rootNode.node("spy", "command-spy-webhook").getString("");
+
+        /*
+         * Disabled modules configuration
+         */
+        this.rootNode.node("disabled-modules").get(String.class, new ArrayList<>());
+    }
+
+    public boolean isModuleDisabled(Class<? extends ExtendedSpigotModule> moduleClass) {
+        String packageName = moduleClass.getPackageName();
+
+        return disabledModules.stream().anyMatch(disabledModule -> switch (disabledModule.toLowerCase()) {
+            case "player", "data" -> false;
+            default -> disabledModule.equalsIgnoreCase(packageName);
+        });
     }
 
     @SneakyThrows

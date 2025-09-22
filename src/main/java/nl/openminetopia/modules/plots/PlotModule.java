@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.plots;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.StateFlag;
@@ -18,7 +18,7 @@ import nl.openminetopia.utils.WorldGuardUtils;
 import org.jetbrains.annotations.NotNull;
 
 @Setter @Getter
-public class PlotModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class PlotModule extends ExtendedSpigotModule {
 
     public PlotModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
         super(moduleManager);

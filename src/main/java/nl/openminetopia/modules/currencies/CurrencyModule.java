@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.currencies;
 
 import com.craftmend.storm.api.enums.Where;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
@@ -24,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
 
 @Getter
 @SuppressWarnings("UnstableApiUsage")
-public class CurrencyModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class CurrencyModule extends ExtendedSpigotModule {
 
     private final List<RegisteredCurrency> currencies = new ArrayList<>();
     private final Map<UUID, List<CurrencyModel>> currencyModels = new HashMap<>();

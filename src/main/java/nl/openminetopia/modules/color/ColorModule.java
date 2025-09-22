@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.color;
 
 import com.craftmend.storm.api.enums.Where;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +27,7 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-public class ColorModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class ColorModule extends ExtendedSpigotModule {
 
 
     public ColorModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {

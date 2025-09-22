@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.staff;
 
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.data.DataModule;
@@ -18,7 +18,7 @@ import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCommandSpyComm
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModSetLevelCommand;
 import org.jetbrains.annotations.NotNull;
 
-public class StaffModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class StaffModule extends ExtendedSpigotModule {
     public StaffModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }

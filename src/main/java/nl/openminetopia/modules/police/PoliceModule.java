@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.police;
 
 import com.craftmend.storm.api.enums.Where;
-import com.jazzkuh.modulemanager.spigot.SpigotModule;
+import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import nl.openminetopia.OpenMinetopia;
@@ -30,7 +30,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @Getter
-public class PoliceModule extends SpigotModule<@NotNull OpenMinetopia> {
+public class PoliceModule extends ExtendedSpigotModule {
 
     private final HashMap<UUID, Long> emergencyCooldowns = new HashMap<>();
 

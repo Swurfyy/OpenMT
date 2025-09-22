@@ -20,10 +20,13 @@ public class MainVerticle extends BaseVerticle {
                 // Handle every request using the router
                 .requestHandler(router)
                 // Start listening
-                .listen(OpenMinetopia.getDefaultConfiguration().getRestApiPort())
+                .listen(
+                        OpenMinetopia.getDefaultConfiguration().getRestApiPort(),
+                        OpenMinetopia.getDefaultConfiguration().getRestApiHost()
+                )
                 // Print the port on success
                 .onSuccess(server -> {
-                    OpenMinetopia.getInstance().getLogger().info("HTTP server started on port " + server.actualPort());
+                    OpenMinetopia.getInstance().getLogger().info("HTTP server started on port " + server.actualPort() + " and host " + OpenMinetopia.getDefaultConfiguration().getRestApiHost());
                     startPromise.complete();
                 })
                 // Print the problem on failure
