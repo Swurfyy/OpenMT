@@ -28,6 +28,7 @@ public class ActionbarRunnable extends AbstractDirtyRunnable<UUID> {
         MinetopiaPlayer minetopiaPlayer = playerManager.getOnlinePlayers().get(key);
         if (minetopiaPlayer == null) return;
         if (!minetopiaPlayer.isActionbarVisible()) return;
+        if (!minetopiaPlayer.isInPlace()) return;
         Objects.requireNonNull(minetopiaPlayer.getBukkit().getPlayer()).sendActionBar(ChatUtils.format(minetopiaPlayer, configuration.getActionbarText()));
     }
 }
