@@ -1,0 +1,22 @@
+banking:
+  economy-format: '#,##0.00'
+  atm-materials:
+    - RED_SANDSTONE_STAIRS
+  starting-balance: 0.0
+  inventories:
+    select-type-title: '<gray>Selecteer het rekeningtype:'
+    select-account-title: <type_color><type_name>
+    account-contents-title: <type_color><account_name> <reset>| <gold><account_balance>
+  notes:
+    EMERALD: 50.0
+    REDSTONE: 100.0
+    GOLD_NUGGET: 0.1
+    DIAMOND: 200.0
+    IRON_INGOT: 10.0
+    GHAST_TEAR: 500.0
+    COAL: 20.0
+    GOLD_INGOT: 1.0
+    QUARTZ: 5.0
+  lore:
+    - <yellow>Officieel Minetopia bankbiljet.
+    - <yellow>Eigendom van de Centrale Bank.

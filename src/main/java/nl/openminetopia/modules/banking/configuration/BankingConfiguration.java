@@ -31,7 +31,7 @@ public class BankingConfiguration extends ConfigurateConfig {
 
     @SneakyThrows
     public BankingConfiguration(File file) {
-        super(file, "banking.yml", "", false);
+        super(file, "banking.yml", "default/banking.yml", true);
 
         this.economyFormat = rootNode.node("banking", "economy-format").getString("#,##0.00");
         this.atmMaterials = new ArrayList<>();
@@ -46,7 +46,7 @@ public class BankingConfiguration extends ConfigurateConfig {
             this.atmMaterials.add(material);
         });
 
-        this.startingBalance = rootNode.node("banking", "starting-balance").getDouble(0.0);
+        this.startingBalance = rootNode.node("banking", "starting-balance").getDouble(0);
 
         this.typeSelectionTitle = rootNode.node("banking", "inventories", "select-type-title").getString("<gray>Selecteer het rekeningtype:");
         this.accountSelectionTitle = rootNode.node("banking", "inventories", "select-account-title").getString("<type_color><type_name>");
