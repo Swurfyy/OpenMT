@@ -522,8 +522,8 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.pvpEnabled = rootNode.node("pvp", "enabled").getBoolean(true);
         rootNode.node("pvp", "items").childrenList().forEach(pvpItem -> {
             ItemStack item = ConfigUtils.deserializeItemStack(pvpItem.node("item"));
-            String attackerMessage = pvpItem.node("attacker-message").getString("<red>Je hebt <dark_red><player> <red>aangevallen met een <dark_red><item>");
-            String victimMessage = pvpItem.node("victim-message").getString("<red>Je bent aangevallen door <dark_red><player> <red>met een <dark_red><item>");
+            String attackerMessage = pvpItem.node("attacker-message").getString("");
+            String victimMessage = pvpItem.node("victim-message").getString("");
             this.getPvpItems().add(new PvPItem(item, attackerMessage, victimMessage));
         });
 

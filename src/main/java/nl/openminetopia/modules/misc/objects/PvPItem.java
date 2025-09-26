@@ -41,9 +41,12 @@ public class PvPItem {
             itemToCheck.setItemMeta(checkDamageable);
         }
 
-        if (item.hasItemMeta() != itemToCheck.hasItemMeta()) return false;
-
-        if (!item.hasItemMeta()) return true; // Both have no meta, so they match at this point
+        // For PvP items, we want to allow items with custom names to match base items
+        // So if the configured item has no meta, it should match any item of the same type
+        if (!item.hasItemMeta()) return true; // Configured item has no meta, so it matches any item of the same type
+        
+        // If the configured item has meta but the item to check doesn't, they don't match
+        if (!itemToCheck.hasItemMeta()) return false;
 
         var meta = item.getItemMeta();
         var checkMeta = itemToCheck.getItemMeta();

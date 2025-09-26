@@ -95,9 +95,16 @@ public class PlayerAttackListener implements Listener {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
 
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, pvpItem.attackerMessage()
-                .replace("<attacker>", player.getName()).replace("<victim>", target.getName())));
-        target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, pvpItem.victimMessage()
-                .replace("<attacker>", player.getName()).replace("<victim>", target.getName())));
+        String attackerMessage = pvpItem.attackerMessage()
+                .replace("<attacker>", player.getName()).replace("<victim>", target.getName());
+        if (!attackerMessage.isEmpty()) {
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, attackerMessage));
+        }
+        
+        String victimMessage = pvpItem.victimMessage()
+                .replace("<attacker>", player.getName()).replace("<victim>", target.getName());
+        if (!victimMessage.isEmpty()) {
+            target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, victimMessage));
+        }
     }
 }
