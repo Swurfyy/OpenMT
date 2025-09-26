@@ -27,20 +27,21 @@ public class PlayerPreLoginListener implements Listener {
 
         long startTime = System.currentTimeMillis();
         OfflinePlayer player = Bukkit.getOfflinePlayer(event.getUniqueId());
-        try {
-            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player).get(10, TimeUnit.SECONDS);
+        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
+            if (throwable != null) {
+                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, MessageConfiguration.component("player_data_not_loaded"));
+                OpenMinetopia.getInstance().getLogger().warning("Error loading player model: " + throwable.getMessage());
+                throwable.printStackTrace();
+                return;
+            }
             if (minetopiaPlayer == null) {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, MessageConfiguration.component("player_data_not_loaded"));
                 OpenMinetopia.getInstance().getLogger().warning("Error loading player model: MinetopiaPlayer is null");
-                return;
             }
-        } catch (Exception e) {
-            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, MessageConfiguration.component("player_data_not_loaded"));
-            OpenMinetopia.getInstance().getLogger().warning("Error loading player model: " + e.getMessage());
-            return;
-        }
-        long endTime = System.currentTimeMillis();
-        long duration = endTime - startTime;
-        OpenMinetopia.getInstance().getLogger().info("Loaded player data for " + player.getName() + " (" + player.getUniqueId() + ") in " + duration + "ms");
+
+            long endTime = System.currentTimeMillis();
+            long duration = endTime - startTime;
+            OpenMinetopia.getInstance().getLogger().info("Loaded player data for " + player.getName() + " (" + player.getUniqueId() + ") in " + duration + "ms");
+        });
     }
 }
