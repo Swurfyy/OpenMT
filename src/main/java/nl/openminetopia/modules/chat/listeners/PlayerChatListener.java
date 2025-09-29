@@ -1,6 +1,7 @@
 package nl.openminetopia.modules.chat.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.text.Component;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
@@ -64,7 +65,7 @@ public class PlayerChatListener implements Listener {
         }
 
         // Format the message
-        String formattedMessage = configuration.getChatFormat().replace("<message>", originalMessage);
+        String formattedMessage = configuration.getChatFormat();
 
         // Check if the player is wearing a balaclava and replace placeholders with default values
         if (BalaclavaUtils.isBalaclavaItem(source.getInventory().getHelmet())) {
@@ -77,15 +78,22 @@ public class PlayerChatListener implements Listener {
                     .replace("<chat_color>", configuration.getDefaultChatColor());
         }
 
-        Bukkit.getConsoleSender().sendMessage(ChatUtils.format(minetopiaPlayer, formattedMessage)); // Log the message without potential scrambled name
+        Component formattedComponent = ChatUtils.format(minetopiaPlayer, formattedMessage).replaceText(
+                builder -> builder.matchLiteral("<message>").replacement(event.message())
+        );
+        Bukkit.getConsoleSender().sendMessage(formattedComponent); // Log the message without potential scrambled name
 
         for (Player target : recipients) {
+            Component finalMessage = formattedComponent;
             if (originalMessage.contains(target.getName())) {
-                formattedMessage = formattedMessage.replace(target.getName(), "<green>" + target.getName() + minetopiaPlayer.getActiveChatColor().color());
+                finalMessage = formattedComponent.replaceText(builder -> {
+                    builder.matchLiteral(target.getName())
+                           .replacement("<green>" + target.getName() + minetopiaPlayer.getActiveChatColor().color());
+                });
                 target.playSound(target.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }
 
-            target.sendMessage(ChatUtils.format(minetopiaPlayer, formattedMessage));
+            target.sendMessage(finalMessage);
         }
     }
 }
