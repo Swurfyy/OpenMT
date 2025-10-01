@@ -180,6 +180,9 @@ public class DefaultConfiguration extends ConfigurateConfig {
      */
     private final boolean pvpEnabled;
     private final List<PvPItem> pvpItems = new ArrayList<>();
+    private final boolean pvpSlownessEnabled;
+    private final int pvpSlownessDuration;
+    private final int pvpSlownessAmplifier;
 
     /**
      * Trashcan configuration
@@ -526,6 +529,9 @@ public class DefaultConfiguration extends ConfigurateConfig {
             String victimMessage = pvpItem.node("victim-message").getString("");
             this.getPvpItems().add(new PvPItem(item, attackerMessage, victimMessage));
         });
+        this.pvpSlownessEnabled = rootNode.node("pvp", "slowness", "enabled").getBoolean(true);
+        this.pvpSlownessDuration = rootNode.node("pvp", "slowness", "duration").getInt(20);
+        this.pvpSlownessAmplifier = rootNode.node("pvp", "slowness", "amplifier").getInt(3);
 
         /*
          * Trashcan configuration

@@ -19,6 +19,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class PlayerAttackListener implements Listener {
 
@@ -105,6 +107,13 @@ public class PlayerAttackListener implements Listener {
                 .replace("<attacker>", player.getName()).replace("<victim>", target.getName());
         if (!victimMessage.isEmpty()) {
             target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, victimMessage));
+        }
+
+        // Apply slowness effect to the target
+        if (OpenMinetopia.getDefaultConfiguration().isPvpSlownessEnabled()) {
+            int duration = OpenMinetopia.getDefaultConfiguration().getPvpSlownessDuration();
+            int amplifier = OpenMinetopia.getDefaultConfiguration().getPvpSlownessAmplifier();
+            target.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, duration, amplifier, false, false));
         }
     }
 }
