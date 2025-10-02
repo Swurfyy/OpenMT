@@ -42,7 +42,7 @@ public class PlayerAttackListener implements Listener {
                 event.setCancelled(true);
                 return;
             }
-            sendAttackedMessages(player, target, pvpItem);
+            sendAttackedMessagesWithSlowness(player, target, pvpItem);
             return;
         }
 
@@ -52,7 +52,7 @@ public class PlayerAttackListener implements Listener {
                 event.setCancelled(true);
                 return;
             }
-            sendAttackedMessages(player, target, pvpItem);
+            sendAttackedMessagesWithSlowness(player, target, pvpItem);
             return;
         }
 
@@ -108,9 +108,26 @@ public class PlayerAttackListener implements Listener {
         if (!victimMessage.isEmpty()) {
             target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, victimMessage));
         }
+    }
 
-        // Apply slowness effect to the target
-        if (OpenMinetopia.getDefaultConfiguration().isPvpSlownessEnabled()) {
+    private void sendAttackedMessagesWithSlowness(Player player, Player target, PvPItem pvpItem) {
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
+
+        String attackerMessage = pvpItem.attackerMessage()
+                .replace("<attacker>", player.getName()).replace("<victim>", target.getName());
+        if (!attackerMessage.isEmpty()) {
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, attackerMessage));
+        }
+        
+        String victimMessage = pvpItem.victimMessage()
+                .replace("<attacker>", player.getName()).replace("<victim>", target.getName());
+        if (!victimMessage.isEmpty()) {
+            target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, victimMessage));
+        }
+
+        // Apply slowness effect to the target only if the PvPItem has slowness enabled
+        if (pvpItem.slowness() && OpenMinetopia.getDefaultConfiguration().isPvpSlownessEnabled()) {
             int duration = OpenMinetopia.getDefaultConfiguration().getPvpSlownessDuration();
             int amplifier = OpenMinetopia.getDefaultConfiguration().getPvpSlownessAmplifier();
             target.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, duration, amplifier, false, false));

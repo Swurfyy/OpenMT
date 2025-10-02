@@ -527,7 +527,8 @@ public class DefaultConfiguration extends ConfigurateConfig {
             ItemStack item = ConfigUtils.deserializeItemStack(pvpItem.node("item"));
             String attackerMessage = pvpItem.node("attacker-message").getString("");
             String victimMessage = pvpItem.node("victim-message").getString("");
-            this.getPvpItems().add(new PvPItem(item, attackerMessage, victimMessage));
+            boolean slowness = pvpItem.node("slowness").getBoolean(false);
+            this.getPvpItems().add(new PvPItem(item, attackerMessage, victimMessage, slowness));
         });
         this.pvpSlownessEnabled = rootNode.node("pvp", "slowness", "enabled").getBoolean(true);
         this.pvpSlownessDuration = rootNode.node("pvp", "slowness", "duration").getInt(20);

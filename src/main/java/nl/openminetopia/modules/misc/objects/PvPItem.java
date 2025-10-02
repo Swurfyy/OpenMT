@@ -15,6 +15,7 @@ public class PvPItem {
     private final ItemStack item;
     private final String attackerMessage;
     private final String victimMessage;
+    private final boolean slowness;
 
     public String attackerMessage() {
         return attackerMessage.replace("<item>", item.getType().name());
