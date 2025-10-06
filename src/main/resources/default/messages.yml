@@ -118,7 +118,7 @@ player_data_not_loaded: "<red>Er is een fout opgetreden bij het laden van je geg
 player_bank_data_not_loaded: "<red>Er is een fout opgetreden bij het laden van je gegevens! Probeer het later opnieuw."
 player_time_self: "<gold>Jouw huidige speeltijd is momenteel <playtime>"
 player_time_other_player: "<gold>De speeltijd van <player> is momenteel <playtime>"
-player_time_format: "<yellow><days> dagen, <yellow><hours> uur, <yellow><minutes> <gold>minuten en <yellow><seconds> <gold>seconden"
+player_time_format: "<yellow><days> <gold>dagen, <yellow><hours> <gold>uur, <yellow><minutes> <gold>minuten en <yellow><seconds> <gold>seconden"
 
 # Plots
 plot_invalid_location: "<red>Je staat niet op een geldig plot."
