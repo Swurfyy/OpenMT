@@ -33,6 +33,11 @@ public class PinCommand extends BaseCommand {
             return;
         }
 
+        if (buyer.getUniqueId().equals(seller.getUniqueId())) {
+            ChatUtils.sendMessage(seller, MessageConfiguration.message("pin_cannot_request_self"));
+            return;
+        }
+
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
         
         // Check if seller has a COMPANY account

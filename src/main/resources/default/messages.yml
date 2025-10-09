@@ -69,6 +69,7 @@ pin_terminal_in_use: "<red>Deze pinconsole is momenteel in gebruik voor een beta
 pin_seller_needs_company_account: "<red>Je moet een bedrijfsrekening hebben om betalingsverzoeken te versturen."
 pin_buyer_no_private_account: "<red><player> heeft geen privérekening."
 pin_seller_no_company_account: "<red>De verkoper heeft geen bedrijfsrekening meer."
+pin_cannot_request_self: "<red>Je kunt geen betalingsverzoek naar jezelf sturen."
 
 # Chat
 chat_no_players_in_range: "<red>Er zijn geen spelers in de buurt om je bericht te horen!"

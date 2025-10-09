@@ -136,32 +136,37 @@ public class PinTerminalListener implements Listener {
             if (bankCard == null) continue;
             if (item.getType() != bankCard.getType()) continue;
 
+            // If neither has metadata, it's a match
             if (!item.hasItemMeta() && !bankCard.hasItemMeta()) return true;
-            if (item.hasItemMeta() != bankCard.hasItemMeta()) continue;
 
             var itemMeta = item.getItemMeta();
             var cardMeta = bankCard.getItemMeta();
 
-            if (itemMeta == null || cardMeta == null) continue;
-
-            // Check custom model data
+            // Check custom model data (if -1,, accepteert die elk materiaal van paper)
             @SuppressWarnings("deprecation")
-            boolean cardHasModel = cardMeta.hasCustomModelData();
-            if (cardHasModel) {
+            boolean cardHasCustomModel = cardMeta != null && cardMeta.hasCustomModelData();
+            if (cardHasCustomModel) {
                 @SuppressWarnings("deprecation")
-                boolean itemHasModel = itemMeta.hasCustomModelData();
-                if (!itemHasModel) continue;
+                int cardModelData = cardMeta.getCustomModelData();
+                
+                // If custom model data is -1, accept any item of this material (ignore all metadata)
+                if (cardModelData == -1) {
+                    return true;
+                }
+                
+                // Otherwise, check if custom model data matches
+                @SuppressWarnings("deprecation")
+                boolean itemHasCustomModel = itemMeta != null && itemMeta.hasCustomModelData();
+                if (!itemHasCustomModel) continue;
                 
                 @SuppressWarnings("deprecation")
                 int itemModelData = itemMeta.getCustomModelData();
-                @SuppressWarnings("deprecation")
-                int cardModelData = cardMeta.getCustomModelData();
                 
                 if (itemModelData != cardModelData) continue;
             }
 
             // Check item model (1.21.4+)
-            if (cardMeta.hasItemModel() && itemMeta.hasItemModel()) {
+            if (cardMeta != null && itemMeta != null && cardMeta.hasItemModel() && itemMeta.hasItemModel()) {
                 if (!itemMeta.getItemModel().equals(cardMeta.getItemModel())) continue;
             }
 
