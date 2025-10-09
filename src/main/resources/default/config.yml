@@ -1,6 +1,12 @@
 pin-terminal:
   block-type: PURPUR_STAIRS
 
+teleporter:
+  cooldown-seconds: 3
+  lines:
+    - "<gold>Teleporter"
+    - "<grey><x>;<y>;<z>;<world>"
+
 pvp:
   enabled: true
   items:

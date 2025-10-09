@@ -90,6 +90,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
      * Teleporter configuration
      */
     private final List<String> teleporterDisplayLines;
+    private final int teleporterCooldownSeconds;
 
     /**
      * Detection Gate configuration
@@ -296,6 +297,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "<gold>Teleporter",
                 "<grey><x>;<y>;<z>;<world>"
         ));
+        this.teleporterCooldownSeconds = rootNode.node("teleporter", "cooldown-seconds").getInt(3);
 
         /*
          * Detection Gate configuration
