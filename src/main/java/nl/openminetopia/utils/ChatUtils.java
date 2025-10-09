@@ -108,12 +108,14 @@ public class ChatUtils {
                     .replace("<city_color>", p.getColor());
         }
 
-        // fitness
-        var stats = mtp.getFitness().getStatistics();
-        if (stats != null && !stats.isEmpty()) {
-            msg = msg
-                    .replace("<fitness>", Integer.toString(mtp.getFitness().getTotalFitness()))
-                    .replace("<max_fitness>", Integer.toString(fitnessModule.getConfiguration().getMaxFitnessLevel()));
+        // fitness (only if module is enabled)
+        if (fitnessModule != null && mtp.getFitness() != null) {
+            var stats = mtp.getFitness().getStatistics();
+            if (stats != null && !stats.isEmpty()) {
+                msg = msg
+                        .replace("<fitness>", Integer.toString(mtp.getFitness().getTotalFitness()))
+                        .replace("<max_fitness>", Integer.toString(fitnessModule.getConfiguration().getMaxFitnessLevel()));
+            }
         }
 
         // banking

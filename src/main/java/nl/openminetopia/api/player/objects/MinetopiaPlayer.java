@@ -84,7 +84,10 @@ public class MinetopiaPlayer {
         if (this.getBukkit().getPlayer() != null && this.getBukkit().isOnline())
             this.getBukkit().getPlayer().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
 
-        this.fitness = new Fitness(this);
+        // Only initialize fitness if the module is enabled
+        if (fitnessModule != null) {
+            this.fitness = new Fitness(this);
+        }
 
         this.playtime = this.playerModel.getPlaytime();
         this.wageTime = this.playerModel.getWageTime();
@@ -120,7 +123,11 @@ public class MinetopiaPlayer {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
         StormDatabase.getInstance().saveStormModel(this.playerModel);
-        this.fitness.save();
+        
+        // Only save fitness if it was initialized
+        if (this.fitness != null) {
+            this.fitness.save();
+        }
 
         future.complete(null);
         return future;
