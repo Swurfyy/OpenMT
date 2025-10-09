@@ -11,7 +11,15 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.banking.commands.BankingCommand;
 import nl.openminetopia.modules.banking.commands.PinCommand;
-import nl.openminetopia.modules.banking.commands.subcommands.*;
+import nl.openminetopia.modules.banking.commands.subcommands.BankingBalanceCommand;
+import nl.openminetopia.modules.banking.commands.subcommands.BankingCreateCommand;
+import nl.openminetopia.modules.banking.commands.subcommands.BankingDeleteCommand;
+import nl.openminetopia.modules.banking.commands.subcommands.BankingFreezeCommand;
+import nl.openminetopia.modules.banking.commands.subcommands.BankingInfoCommand;
+import nl.openminetopia.modules.banking.commands.subcommands.BankingListCommand;
+import nl.openminetopia.modules.banking.commands.subcommands.BankingMyAccountsCommand;
+import nl.openminetopia.modules.banking.commands.subcommands.BankingOpenCommand;
+import nl.openminetopia.modules.banking.commands.subcommands.BankingUsersCommand;
 import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
@@ -111,6 +119,7 @@ public class BankingModule extends ExtendedSpigotModule {
         registerComponent(new BankingInfoCommand());
         registerComponent(new BankingBalanceCommand());
         registerComponent(new BankingListCommand());
+        registerComponent(new BankingMyAccountsCommand());
 
         registerComponent(new PlayerLoginListener());
         registerComponent(new BankingInteractionListener());

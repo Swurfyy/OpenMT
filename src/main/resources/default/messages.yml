@@ -66,6 +66,9 @@ pin_transaction_cancelled: "<red>De transactie is geannuleerd door een plugin."
 pin_payment_successful: "<gold>Je hebt succesvol <red><amount></red> <gold>betaald aan <red><player></red><gold>."
 pin_payment_received: "<gold>Je hebt <red><amount></red> <gold>ontvangen van <red><player></red> <gold>via de pinconsole."
 pin_terminal_in_use: "<red>Deze pinconsole is momenteel in gebruik voor een betalingsverzoek."
+pin_seller_needs_company_account: "<red>Je moet een bedrijfsrekening hebben om betalingsverzoeken te versturen."
+pin_buyer_no_private_account: "<red><player> heeft geen privérekening."
+pin_seller_no_company_account: "<red>De verkoper heeft geen bedrijfsrekening meer."
 
 # Chat
 chat_no_players_in_range: "<red>Er zijn geen spelers in de buurt om je bericht te horen!"

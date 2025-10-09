@@ -4,6 +4,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
+import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.banking.models.PinRequestModel;
 import nl.openminetopia.modules.data.storm.StormDatabase;
@@ -188,15 +189,16 @@ public class PinTerminalListener implements Listener {
             return;
         }
 
-        // Get seller's primary account
+        // Get seller's COMPANY account
         Player seller = Bukkit.getPlayer(request.getSellerUuid());
         BankAccountModel sellerAccount = bankingModule.getAccountsFromPlayer(request.getSellerUuid())
                 .stream()
+                .filter(account -> account.getType() == AccountType.COMPANY)
                 .findFirst()
                 .orElse(null);
 
         if (sellerAccount == null) {
-            ChatUtils.sendMessage(buyer, MessageConfiguration.message("pin_seller_no_account"));
+            ChatUtils.sendMessage(buyer, MessageConfiguration.message("pin_seller_no_company_account"));
             return;
         }
 

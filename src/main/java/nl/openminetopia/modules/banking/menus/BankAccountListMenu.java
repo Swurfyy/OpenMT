@@ -23,6 +23,8 @@ public class BankAccountListMenu extends PaginatedMenu {
                     .setName(accountModel.getType().getColor() + accountModel.getName())
                     .addLoreLine("<dark_gray><i>" + accountModel.getType().getName())
                     .addLoreLine("")
+                    .addLoreLine("<gold>Account ID: <yellow>" + accountModel.getUniqueId().toString())
+                    .addLoreLine("")
                     .addLoreLine("<gray>Account Permissions:");
 
             accountModel.getUsers().forEach((user, permission) -> {
