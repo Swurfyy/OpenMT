@@ -6,7 +6,9 @@ import lombok.SneakyThrows;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.banking.menus.BankContentsMenu;
 import nl.openminetopia.utils.config.ConfigurateConfig;
+import nl.openminetopia.utils.config.ConfigUtils;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ public class BankingConfiguration extends ConfigurateConfig {
 
     private final String economyFormat;
     private final List<Material> atmMaterials;
+    private final List<Material> pinTerminalMaterials;
+    private final List<ItemStack> bankCardItems;
 
     private final double startingBalance;
 
@@ -45,6 +49,20 @@ public class BankingConfiguration extends ConfigurateConfig {
             }
             this.atmMaterials.add(material);
         });
+
+        this.pinTerminalMaterials = new ArrayList<>();
+        rootNode.node("banking", "pin-terminal-materials").getList(String.class, List.of(
+                "PURPUR_STAIRS"
+        )).forEach(materialString -> {
+            Material material = Material.matchMaterial(materialString);
+            if (material == null) {
+                OpenMinetopia.getInstance().getLogger().warning("Invalid material in pin-terminal-materials: " + materialString);
+                return;
+            }
+            this.pinTerminalMaterials.add(material);
+        });
+
+        this.bankCardItems = ConfigUtils.loadItemMappings(rootNode.node("banking", "bank-card-items"), new ArrayList<>());
 
         this.startingBalance = rootNode.node("banking", "starting-balance").getDouble(0);
 

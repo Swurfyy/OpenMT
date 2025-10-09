@@ -1,3 +1,6 @@
+pin-terminal:
+  block-type: PURPUR_STAIRS
+
 pvp:
   enabled: true
   items:

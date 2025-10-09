@@ -2,6 +2,11 @@ banking:
   economy-format: '#,##0.00'
   atm-materials:
     - RED_SANDSTONE_STAIRS
+  pin-terminal-materials:
+    - PURPUR_STAIRS
+  bank-card-items:
+    - type: PAPER
+      custom-model-data: -1
   starting-balance: 0.0
   inventories:
     select-type-title: '<gray>Selecteer het rekeningtype:'

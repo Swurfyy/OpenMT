@@ -10,14 +10,17 @@ import net.milkbowl.vault.economy.Economy;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.banking.commands.BankingCommand;
+import nl.openminetopia.modules.banking.commands.PinCommand;
 import nl.openminetopia.modules.banking.commands.subcommands.*;
 import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.listeners.BankingInteractionListener;
+import nl.openminetopia.modules.banking.listeners.PinTerminalListener;
 import nl.openminetopia.modules.banking.listeners.PlayerLoginListener;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.banking.models.BankPermissionModel;
+import nl.openminetopia.modules.banking.models.PinRequestModel;
 import nl.openminetopia.modules.banking.tasks.WagePaymentTask;
 import nl.openminetopia.modules.banking.vault.VaultEconomyHandler;
 import nl.openminetopia.modules.data.DataModule;
@@ -26,6 +29,7 @@ import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.transactions.TransactionsModule;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.plugin.ServicePriority;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,6 +38,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @Getter
@@ -48,6 +53,9 @@ public class BankingModule extends ExtendedSpigotModule {
     @Getter @Setter
     private BankingConfiguration configuration;
     private WagePaymentTask wagePaymentTask;
+    
+    // Pin request management
+    private final Map<UUID, PinRequestModel> pinRequests = new ConcurrentHashMap<>();
 
     @Override
     public void onEnable() {
@@ -106,6 +114,9 @@ public class BankingModule extends ExtendedSpigotModule {
 
         registerComponent(new PlayerLoginListener());
         registerComponent(new BankingInteractionListener());
+        
+        registerComponent(new PinCommand());
+        registerComponent(new PinTerminalListener());
 
         wagePaymentTask = new WagePaymentTask(OpenMinetopia.getModuleManager().get(PlayerModule.class)::getConfiguration, PlayerManager.getInstance(), 5000L, 50, 30 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
         OpenMinetopia.getInstance().registerDirtyPlayerRunnable(wagePaymentTask, 20L);
@@ -299,4 +310,47 @@ public class BankingModule extends ExtendedSpigotModule {
         return "€" + decimalFormat.format(amount);
     }
 
+    // Pin request management methods
+    public void addPinRequest(UUID sellerUuid, PinRequestModel request) {
+        pinRequests.put(sellerUuid, request);
+    }
+
+    public boolean hasPinRequest(UUID sellerUuid) {
+        return pinRequests.containsKey(sellerUuid);
+    }
+
+    public PinRequestModel getPinRequest(UUID sellerUuid) {
+        return pinRequests.get(sellerUuid);
+    }
+
+    public void removePinRequest(UUID sellerUuid) {
+        pinRequests.remove(sellerUuid);
+    }
+
+    public PinRequestModel findPinRequestForBuyerAtLocation(UUID buyerUuid, Location location) {
+        return pinRequests.values().stream()
+                .filter(request -> request.getBuyerUuid().equals(buyerUuid))
+                .filter(PinRequestModel::hasTerminalLocation)
+                .filter(request -> isSameLocation(request.getTerminalLocation(), location))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public PinRequestModel findPinRequestAtLocation(Location location) {
+        return pinRequests.values().stream()
+                .filter(PinRequestModel::hasTerminalLocation)
+                .filter(request -> isSameLocation(request.getTerminalLocation(), location))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private boolean isSameLocation(Location loc1, Location loc2) {
+        if (loc1 == null || loc2 == null) return false;
+        if (!loc1.getWorld().equals(loc2.getWorld())) return false;
+        return loc1.getBlockX() == loc2.getBlockX()
+                && loc1.getBlockY() == loc2.getBlockY()
+                && loc1.getBlockZ() == loc2.getBlockZ();
+    }
+
 }
+
