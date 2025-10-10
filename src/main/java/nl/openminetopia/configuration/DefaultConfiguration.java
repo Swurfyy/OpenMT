@@ -184,6 +184,11 @@ public class DefaultConfiguration extends ConfigurateConfig {
     private final List<PvPItem> pvpItems = new ArrayList<>();
 
     /**
+     * Boots configuration
+     */
+    private final boolean bootsWorkInHand;
+
+    /**
      * Trashcan configuration
      */
     private final boolean trashcanEnabled;
@@ -506,6 +511,11 @@ public class DefaultConfiguration extends ConfigurateConfig {
             String victimMessage = pvpItem.node("victim-message").getString("<red>Je bent aangevallen door <dark_red><player> <red>met een <dark_red><item>");
             this.getPvpItems().add(new PvPItem(item, attackerMessage, victimMessage));
         });
+
+        /*
+         * Boots configuration
+         */
+        this.bootsWorkInHand = rootNode.node("boots", "work-in-hand").getBoolean(false);
 
         /*
          * Trashcan configuration
