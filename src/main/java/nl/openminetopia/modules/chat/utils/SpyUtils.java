@@ -40,7 +40,6 @@ public class SpyUtils {
 
             if (!minetopiaPlayer.isChatSpyEnabled()) continue;
             DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
-            System.out.println(onlinePlayer.getLocation().distance(player.getLocation()));
             if (onlinePlayer.getLocation().distance(player.getLocation()) < configuration.getChatRadiusRange()) continue;
             ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
         }
