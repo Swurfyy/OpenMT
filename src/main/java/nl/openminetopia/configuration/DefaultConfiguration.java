@@ -204,7 +204,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
     /**
      * Disabled modules configuration
      */
-    public List<String> disabledModules = new ArrayList<>();
+    public List<String> disabledModules;
 
     @SneakyThrows
     public DefaultConfiguration(File file) {

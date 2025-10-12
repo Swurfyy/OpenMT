@@ -38,7 +38,11 @@ public class SpyUtils {
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(onlinePlayer);
             if (minetopiaPlayer == null) return;
 
-            if (minetopiaPlayer.isChatSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
+            if (minetopiaPlayer.isChatSpyEnabled()) {
+                DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+                if (onlinePlayer.getLocation().distance(player.getLocation()) > configuration.getChatRadiusRange()) continue;
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
+            }
         }
     }
 
