@@ -39,24 +39,17 @@ public class ItemUtils {
 
         for (ItemStack item : validItems) {
             if (item == null) continue;
+
             if (item.getType() != itemToCheck.getType()) continue;
-
-            boolean hasMeta = item.hasItemMeta();
-            boolean checkHasMeta = itemToCheck.hasItemMeta();
-
-            if (hasMeta != checkHasMeta) continue;
-            if (!hasMeta) return true;
 
             ItemMeta meta = item.getItemMeta();
             ItemMeta checkMeta = itemToCheck.getItemMeta();
 
+            if (meta == null && checkMeta == null) return true;
             if (meta == null || checkMeta == null) continue;
 
-            boolean hasModelData = meta.hasCustomModelData();
-            boolean checkHasModelData = checkMeta.hasCustomModelData();
-
-            if (hasModelData != checkHasModelData) continue;
-            if (hasModelData && meta.getCustomModelData() != checkMeta.getCustomModelData()) continue;
+            if (meta.hasCustomModelData() != checkMeta.hasCustomModelData()) continue;
+            if (meta.hasCustomModelData() && meta.getCustomModelData() != checkMeta.getCustomModelData()) continue;
 
             if (meta instanceof Damageable damageMeta && checkMeta instanceof Damageable checkDamageMeta) {
                 if (damageMeta.getDamage() != checkDamageMeta.getDamage()) continue;

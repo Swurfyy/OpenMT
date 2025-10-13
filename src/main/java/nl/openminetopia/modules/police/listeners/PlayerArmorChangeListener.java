@@ -5,12 +5,13 @@ import nl.openminetopia.modules.police.utils.BalaclavaUtils;
 import nl.openminetopia.modules.police.utils.NightvisionUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.EquipmentSlot;
 
 public class PlayerArmorChangeListener implements Listener {
 
     @EventHandler
     public void armorChange(PlayerArmorChangeEvent event) {
-        if (event.getSlotType() != PlayerArmorChangeEvent.SlotType.HEAD) return;
+        if (event.getSlot() != EquipmentSlot.HEAD) return;
 
         /* ---- Balaclava ---- */
 

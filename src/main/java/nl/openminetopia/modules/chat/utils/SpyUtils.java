@@ -38,7 +38,10 @@ public class SpyUtils {
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(onlinePlayer);
             if (minetopiaPlayer == null) return;
 
-            if (minetopiaPlayer.isChatSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
+            if (!minetopiaPlayer.isChatSpyEnabled()) continue;
+            DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+            if (onlinePlayer.getLocation().distance(player.getLocation()) < configuration.getChatRadiusRange()) continue;
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
         }
     }
 
@@ -72,7 +75,7 @@ public class SpyUtils {
                         .setTitle(type == SpyType.CHAT ? "Chat Spy" : "Command Spy")
                         .addField(type == SpyType.CHAT ? "Message: " : "Command: ", content, false)
                         .setColor(type == SpyType.CHAT ? Color.BLUE : Color.RED)
-                        .setFooter("OpenMinetopia ©️ "+ Year.now().getValue(), "https://avatars.githubusercontent.com/u/185693104")
+                        .setFooter("OpenMinetopia ©️ " + Year.now().getValue(), "https://avatars.githubusercontent.com/u/185693104")
                         .setAuthor(player.getName(), "", "https://mc-heads.net/avatar/" + player.getUniqueId());
 
                 webhook.addEmbed(embed);
