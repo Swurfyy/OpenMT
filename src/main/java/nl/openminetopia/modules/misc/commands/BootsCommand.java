@@ -17,6 +17,8 @@ import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.UUID;
+
 @CommandAlias("boots")
 @CommandPermission("openminetopia.boots")
 @Description("Create special boots with different effects.")
@@ -94,8 +96,16 @@ public class BootsCommand extends BaseCommand {
 
         switch (effectType) {
             case SPEED -> addSpeedModifier(meta, level);
-            case ICE -> boots.addUnsafeEnchantment(Enchantment.FROST_WALKER, level);
-            case BLUB -> boots.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, level);
+            case ICE -> {
+                // Cap Frost Walker at level 2 (max vanilla level)
+                int iceLevel = Math.min(level, 2);
+                boots.addUnsafeEnchantment(Enchantment.FROST_WALKER, iceLevel);
+            }
+            case BLUB -> {
+                // Cap Depth Strider at level 3 (max vanilla level)
+                int blubLevel = Math.min(level, 3);
+                boots.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, blubLevel);
+            }
         }
 
         // Set display name if item doesn't have one
@@ -112,8 +122,9 @@ public class BootsCommand extends BaseCommand {
     private void addSpeedModifier(ItemMeta meta, int level) {
         double speedIncrease = level * 0.01; // 0.01 to 0.09
         
-        // Create unique NamespacedKey for this modifier
-        NamespacedKey key = new NamespacedKey(OpenMinetopia.getInstance(), "speed_boost");
+        // Create UNIQUE NamespacedKey for this modifier so multiple boots can stack
+        // Each boot gets a unique UUID to prevent modifiers from overwriting each other
+        NamespacedKey key = new NamespacedKey(OpenMinetopia.getInstance(), "speed_boost_" + UUID.randomUUID());
         
         // Check configuration for whether boots work in hand
         boolean worksInHand = OpenMinetopia.getDefaultConfiguration().isBootsWorkInHand();

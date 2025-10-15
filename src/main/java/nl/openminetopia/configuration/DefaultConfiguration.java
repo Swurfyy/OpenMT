@@ -509,7 +509,15 @@ public class DefaultConfiguration extends ConfigurateConfig {
             ItemStack item = ConfigUtils.deserializeItemStack(pvpItem.node("item"));
             String attackerMessage = pvpItem.node("attacker-message").getString("<red>Je hebt <dark_red><player> <red>aangevallen met een <dark_red><item>");
             String victimMessage = pvpItem.node("victim-message").getString("<red>Je bent aangevallen door <dark_red><player> <red>met een <dark_red><item>");
-            this.getPvpItems().add(new PvPItem(item, attackerMessage, victimMessage));
+            
+            // Load slowness configuration
+            boolean slownessEnabled = pvpItem.node("slowness", "enabled").getBoolean(false);
+            int slownessDuration = pvpItem.node("slowness", "duration").getInt(40);
+            int slownessAmplifier = pvpItem.node("slowness", "amplifier").getInt(4);
+            nl.openminetopia.modules.misc.objects.SlownessConfig slownessConfig = 
+                new nl.openminetopia.modules.misc.objects.SlownessConfig(slownessEnabled, slownessDuration, slownessAmplifier);
+            
+            this.getPvpItems().add(new PvPItem(item, attackerMessage, victimMessage, slownessConfig));
         });
 
         /*

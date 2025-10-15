@@ -18,6 +18,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class PlayerAttackListener implements Listener {
 
@@ -39,6 +41,7 @@ public class PlayerAttackListener implements Listener {
                 return;
             }
             sendAttackedMessages(player, target, pvpItem);
+            applySlownessEffect(target, pvpItem);
             return;
         }
 
@@ -49,6 +52,7 @@ public class PlayerAttackListener implements Listener {
                 return;
             }
             sendAttackedMessages(player, target, pvpItem);
+            applySlownessEffect(target, pvpItem);
             return;
         }
 
@@ -97,5 +101,25 @@ public class PlayerAttackListener implements Listener {
                 .replace("<attacker>", player.getName()).replace("<victim>", target.getName())));
         target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, pvpItem.victimMessage()
                 .replace("<attacker>", player.getName()).replace("<victim>", target.getName())));
+    }
+
+    private void applySlownessEffect(Player target, PvPItem pvpItem) {
+        if (pvpItem.slownessConfig() == null || !pvpItem.slownessConfig().enabled()) {
+            return;
+        }
+
+        int duration = pvpItem.slownessConfig().duration();
+        int amplifier = pvpItem.slownessConfig().amplifier();
+        
+        PotionEffect slownessEffect = new PotionEffect(
+            PotionEffectType.SLOWNESS, 
+            duration, 
+            amplifier, 
+            false, 
+            true, 
+            true
+        );
+        
+        target.addPotionEffect(slownessEffect);
     }
 }

@@ -34,7 +34,15 @@ pvp:
         type: SNOWBALL
       attacker-message: "<red>Je hebt <dark_red><victim> <red>geraakt met jouw sneeuwbal"
       victim-message: "<red>Je bent geraakt met een sneeuwbal!"
+      slowness:
+        enabled: true
+        duration: 40
+        amplifier: 4
     - item:
         type: ARROW
       attacker-message: "<red>Je hebt <dark_red><victim> <red>geraakt met jouw schot"
       victim-message: "<red>Je bent geraakt met een schot!"
+      slowness:
+        enabled: true
+        duration: 40
+        amplifier: 4
