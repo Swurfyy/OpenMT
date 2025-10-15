@@ -99,12 +99,12 @@ public class BootsCommand extends BaseCommand {
             case ICE -> {
                 // Cap Frost Walker at level 2 (max vanilla level)
                 int iceLevel = Math.min(level, 2);
-                boots.addUnsafeEnchantment(Enchantment.FROST_WALKER, iceLevel);
+                meta.addEnchant(Enchantment.FROST_WALKER, iceLevel, true);
             }
             case BLUB -> {
                 // Cap Depth Strider at level 3 (max vanilla level)
                 int blubLevel = Math.min(level, 3);
-                boots.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, blubLevel);
+                meta.addEnchant(Enchantment.DEPTH_STRIDER, blubLevel, true);
             }
         }
 

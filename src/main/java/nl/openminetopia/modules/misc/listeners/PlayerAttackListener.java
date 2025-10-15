@@ -91,6 +91,7 @@ public class PlayerAttackListener implements Listener {
         }
 
         sendAttackedMessages(player, target, pvpItem);
+        applySlownessEffect(target, pvpItem);
     }
 
     private void sendAttackedMessages(Player player, Player target, PvPItem pvpItem) {

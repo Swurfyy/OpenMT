@@ -50,16 +50,21 @@ public class PvPItem {
         var checkMeta = itemToCheck.getItemMeta();
         if (meta == null || checkMeta == null) return false;
 
+        // Only check custom model data if both items actually have it
         if (meta.hasCustomModelData() != checkMeta.hasCustomModelData()) return false;
-        if (meta.hasCustomModelData() && checkMeta.getCustomModelData() != meta.getCustomModelData()) return false;
+        if (meta.hasCustomModelData() && meta.getCustomModelData() != checkMeta.getCustomModelData()) return false;
 
-        if (VersionUtil.isCompatible("1.21.4") && meta.hasItemModel() && checkMeta.hasItemModel()) {
-            NamespacedKey modelA = meta.getItemModel();
-            NamespacedKey modelB = checkMeta.getItemModel();
+        // Only check item model if both items actually have it
+        if (VersionUtil.isCompatible("1.21.4")) {
+            if (meta.hasItemModel() != checkMeta.hasItemModel()) return false;
+            if (meta.hasItemModel() && checkMeta.hasItemModel()) {
+                NamespacedKey modelA = meta.getItemModel();
+                NamespacedKey modelB = checkMeta.getItemModel();
 
-            if (modelA != null || modelB != null) {
-                if (modelA == null || modelB == null) return false;
-                return modelA.equals(modelB);
+                if (modelA != null || modelB != null) {
+                    if (modelA == null || modelB == null) return false;
+                    if (!modelA.equals(modelB)) return false;
+                }
             }
         }
 
