@@ -13,7 +13,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -34,16 +33,7 @@ public class PlayerAttackListener implements Listener {
             return;
         }
 
-        if (event.getDamager() instanceof Snowball && ((Snowball) event.getDamager()).getShooter() instanceof Player player && event.getEntity() instanceof Player target) {
-            PvPItem pvpItem = MiscUtils.getPvPItem(new ItemStack(Material.SNOWBALL));
-            if (pvpItem == null) {
-                event.setCancelled(true);
-                return;
-            }
-            sendAttackedMessages(player, target, pvpItem);
-            applySlownessEffect(target, pvpItem);
-            return;
-        }
+        // Note: Snowball handling is in ProjectileHitListener since snowballs don't naturally cause damage
 
         if (event.getDamager() instanceof Arrow && ((Arrow) event.getDamager()).getShooter() instanceof Player player && event.getEntity() instanceof Player target) {
             PvPItem pvpItem = MiscUtils.getPvPItem(new ItemStack(Material.ARROW));

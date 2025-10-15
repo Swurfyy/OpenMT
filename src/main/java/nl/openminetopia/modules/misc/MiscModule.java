@@ -6,6 +6,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.misc.commands.BootsCommand;
 import nl.openminetopia.modules.misc.commands.HeadCommand;
 import nl.openminetopia.modules.misc.listeners.PlayerAttackListener;
+import nl.openminetopia.modules.misc.listeners.ProjectileHitListener;
 import nl.openminetopia.modules.misc.listeners.TrashcanListener;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,5 +23,6 @@ public class MiscModule extends ExtendedSpigotModule {
 
         registerComponent(new TrashcanListener());
         registerComponent(new PlayerAttackListener());
+        registerComponent(new ProjectileHitListener());
     }
 }

@@ -28,16 +28,17 @@ public class BootsCommand extends BaseCommand {
     @Syntax("<material|hand> <effect_type> <level>")
     @CommandCompletion("leather|chainmail|iron|golden|diamond|hand speed|ice|blub 1|2|3|4|5|6|7|8|9")
     public void onBoots(Player player, String materialArg, String effectTypeArg, int level) {
-        // Validate level
-        if (level < 1 || level > 9) {
-            player.sendMessage(ChatUtils.color("<red>Level must be between 1 and 9!"));
-            return;
-        }
-
         // Parse effect type
         BootEffectType effectType = BootEffectType.fromString(effectTypeArg);
         if (effectType == null) {
             player.sendMessage(ChatUtils.color("<red>Invalid effect type! Use: speed, ice, or blub"));
+            return;
+        }
+
+        // Validate level based on boot type
+        int maxLevel = getMaxLevel(effectType);
+        if (level < 1 || level > maxLevel) {
+            player.sendMessage(ChatUtils.color("<red>Level must be between 1 and " + maxLevel + " for " + effectType.name().toLowerCase() + " boots!"));
             return;
         }
 
@@ -110,10 +111,21 @@ public class BootsCommand extends BaseCommand {
 
         // Set display name if item doesn't have one
         if (!meta.hasDisplayName()) {
-            meta.displayName(ChatUtils.color("<aqua>" + effectType.getDisplayName() + " Boots " + level));
+            meta.displayName(ChatUtils.color("<yellow>" + effectType.getDisplayName()));
         }
 
         boots.setItemMeta(meta);
+    }
+
+    /**
+     * Get the maximum allowed level for a boot effect type
+     */
+    private int getMaxLevel(BootEffectType effectType) {
+        return switch (effectType) {
+            case ICE -> 2;
+            case BLUB -> 3;
+            case SPEED -> 9;
+        };
     }
 
     /**

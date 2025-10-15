@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum BootEffectType {
     SPEED("Speed"),
-    ICE("Frost Walker"),
-    BLUB("Depth Strider");
+    ICE("Ice Boots!"),
+    BLUB("Blub Boots!");
 
     private final String displayName;
 
