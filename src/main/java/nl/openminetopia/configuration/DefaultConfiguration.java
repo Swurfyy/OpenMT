@@ -283,10 +283,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "<temperature>°C",
                 " ",
                 "<world_color>Level:",
-                "<level> -> <calculated_level> (<levelups><white>)",
-                " ",
-                "<world_color>Fitheid:",
-                "<fitness>/<max_fitness>"
+                "<level> -> <calculated_level> (<levelups><white>)"
         ));
 
         /*

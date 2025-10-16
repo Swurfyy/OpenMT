@@ -45,7 +45,6 @@ public class RestAPIModule extends ExtendedSpigotModule {
                     new PlayerVerticle(),
                     new PrefixesVerticle(),
                     new ColorsVerticle(),
-                    new FitnessStatisticsVerticle(),
                     new BankAccountVerticle(),
                     new BankAccountsVerticle(),
                     new BankAccountUsersVerticle(),

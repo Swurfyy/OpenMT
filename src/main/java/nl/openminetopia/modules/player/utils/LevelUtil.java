@@ -4,7 +4,6 @@ import lombok.experimental.UtilityClass;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
@@ -35,11 +34,6 @@ public class LevelUtil {
         if (minetopiaPlayer.getPrefixes() != null && !minetopiaPlayer.getPrefixes().isEmpty()) {
             points += configuration.getPointsForPrefix();
         }
-
-        // Points per 20 fitness
-        Fitness fitness = minetopiaPlayer.getFitness();
-        if (fitness == null) return 0;
-        points += (double) (fitness.getTotalFitness() / 20) * configuration.getPointsPer20Fitness();
 
         // Points per 1 hour playtime
         points += (double) (minetopiaPlayer.getPlaytime() / 1000 / 3600) * configuration.getPointsPerHourPlayed();

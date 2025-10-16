@@ -44,8 +44,6 @@ public class MTWorldCreateCommand extends BaseCommand {
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(worldPlayer);
             if (minetopiaPlayer == null) return;
 
-            minetopiaPlayer.getFitness().getFitnessModule().getFitnessRunnable().forceMarkDirty(worldPlayer.getUniqueId());
-
             ScoreboardManager.getInstance().addScoreboard(worldPlayer);
         }
     }

@@ -13,8 +13,6 @@ import nl.openminetopia.modules.books.BooksModule;
 import nl.openminetopia.modules.books.configuration.BooksConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.configuration.ColorsConfiguration;
-import nl.openminetopia.modules.fitness.FitnessModule;
-import nl.openminetopia.modules.fitness.configuration.FitnessConfiguration;
 import nl.openminetopia.modules.items.ItemsModule;
 import nl.openminetopia.modules.labymod.LabymodModule;
 import nl.openminetopia.modules.labymod.configuration.LabymodConfiguration;
@@ -51,10 +49,6 @@ public class OpenMinetopiaCommand extends BaseCommand {
         ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
         colorModule.setConfiguration(new ColorsConfiguration(dataFolder));
         colorModule.getConfiguration().saveConfiguration();
-
-        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
-        fitnessModule.setConfiguration(new FitnessConfiguration(dataFolder));
-        fitnessModule.getConfiguration().saveConfiguration();
 
         BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
         bankingModule.setConfiguration(new BankingConfiguration(dataFolder));

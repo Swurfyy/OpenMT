@@ -6,13 +6,11 @@ import lombok.Setter;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
-import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.objects.*;
 import nl.openminetopia.modules.data.storm.StormDatabase;
-import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.player.PlayerModule;
@@ -62,13 +60,10 @@ public class MinetopiaPlayer {
     private ChatColor activeChatColor;
     private LevelColor activeLevelColor;
 
-    private @Setter Fitness fitness;
-
     private final @Getter(AccessLevel.PRIVATE) PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
     private final @Getter(AccessLevel.PRIVATE) PrefixModule prefixModule = OpenMinetopia.getModuleManager().get(PrefixModule.class);
     private final @Getter(AccessLevel.PRIVATE) ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
     private final @Getter(AccessLevel.PRIVATE) PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
-    private final @Getter(AccessLevel.PRIVATE) FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
     private final @Getter(AccessLevel.PRIVATE) PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
 
     public MinetopiaPlayer(UUID uuid, PlayerModel playerModel) {
@@ -83,8 +78,6 @@ public class MinetopiaPlayer {
 
         if (this.getBukkit().getPlayer() != null && this.getBukkit().isOnline())
             this.getBukkit().getPlayer().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
-
-        this.fitness = new Fitness(this);
 
         this.playtime = this.playerModel.getPlaytime();
         this.wageTime = this.playerModel.getWageTime();
@@ -120,7 +113,6 @@ public class MinetopiaPlayer {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
         StormDatabase.getInstance().saveStormModel(this.playerModel);
-        this.fitness.save();
 
         future.complete(null);
         return future;

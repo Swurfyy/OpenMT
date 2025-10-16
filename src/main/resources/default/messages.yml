@@ -109,33 +109,6 @@ color_expired: "<red>Deze kleur is vervallen"
 color_expires_in: "<gold>Deze kleur vervalt over <yellow><time><gold>."
 color_expires_never: "<gold>Deze kleur vervalt <yellow>nooit<gold>."
 
-# Fitness
-fitness_booster_added_to: "<gold>Fitness booster toegevoegd aan <yellow><player><gold>."
-fitness_info_header: "<gold>Fitness informatie van <yellow><player><gold>:"
-fitness_booster_info: "<gold>Booster: <yellow><amount> - <expires_at>"
-fitness_drinking_points: "<gold>Drinkpunten: <yellow><points>"
-fitness_drinking_fitness: "<gold>Fitness verdiend door drinken: <yellow><fitness><gold>/<yellow><max_fitness>"
-fitness_health_points: "<gold>Gezondheidspunten: <yellow><points>"
-fitness_health_fitness: "<gold>Fitness verdiend door gezondheid: <yellow><fitness><gold>/<yellow><max_fitness>"
-fitness_walking_distance: "<gold>Afgelegde kilometers: <yellow><distance>km"
-fitness_walking_fitness: "<gold>Fitness verdiend door lopen: <yellow><fitness><gold>/<yellow><max_fitness>"
-fitness_climbing_distance: "<gold>Geklommen kilometers: <yellow><distance>km"
-fitness_climbing_fitness: "<gold>Fitness verdiend door klimmen: <yellow><fitness><gold>/<yellow><max_fitness>"
-fitness_sprinting_distance: "<gold>Gesprintte kilometers: <yellow><distance>km"
-fitness_sprinting_fitness: "<gold>Fitness verdiend door sprinten: <yellow><fitness><gold>/<yellow><max_fitness>"
-fitness_swimming_distance: "<gold>Gezwommen kilometers: <yellow><distance>km"
-fitness_swimming_fitness: "<gold>Fitness verdiend door zwemmen: <yellow><fitness><gold>/<yellow><max_fitness>"
-fitness_flying_distance: "<gold>Gevlogen kilometers: <yellow><distance>km"
-fitness_flying_fitness: "<gold>Fitness verdiend door vliegen: <yellow><fitness><gold>/<yellow><max_fitness>"
-fitness_total_fitness: "<gold>Totaal fitness: <yellow><fitness><gold>/<yellow><max_fitness>"
-fitness_drinking_cooldown: "<red>Je moet nog even wachten voor je weer kunt drinken."
-fitness_drinking_water: "<gold>Je hebt water gedronken!"
-fitness_drinking_potion: "<gold>Je hebt een potion gedronken!"
-fitness_no_reset: "<red>Je hebt geen fitheidreset!"
-fitness_reset_enabled: "<gold>Succesvol <yellow><player> <gold>een fitheidreset gegeven."
-fitness_reset_disabled: "<gold>Succesvol de fitheidreset van <yellow><player> <gold>afgenomen."
-fitness_reset: "<gold>Jouw fitheid is succesvol <yellow>gereset<gold>."
-
 # Places
 
 # Player

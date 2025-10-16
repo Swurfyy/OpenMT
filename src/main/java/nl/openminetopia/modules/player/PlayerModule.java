@@ -112,7 +112,6 @@ public class PlayerModule extends ExtendedSpigotModule {
                 createdModel.setChatSpyEnabled(false);
                 createdModel.setPrefixes(new ArrayList<>());
                 createdModel.setColors(new ArrayList<>());
-                createdModel.setFitnessReset(false);
                 future.complete(createdModel);
 
                 StormDatabase.getInstance().saveStormModel(createdModel);

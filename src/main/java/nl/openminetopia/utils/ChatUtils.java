@@ -14,7 +14,6 @@ import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
-import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.police.utils.BalaclavaUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -57,7 +56,6 @@ public class ChatUtils {
 
         final var modules = OpenMinetopia.getModuleManager();
         final CurrencyModule currencyModule = modules.get(CurrencyModule.class);
-        final FitnessModule fitnessModule   = modules.get(FitnessModule.class);
         final BankingModule bankingModule   = modules.get(BankingModule.class);
 
         boolean balaclava = BalaclavaUtils.isWearingBalaclava(player);
@@ -96,24 +94,18 @@ public class ChatUtils {
         if (mtp.isInPlace()) {
             var w = mtp.getWorld();
             var p = mtp.getPlace();
-            msg = msg
-                    .replace("<world_title>", w.getTitle())
-                    .replace("<world_loadingname>", w.getLoadingName())
-                    .replace("<world_name>", w.getName())
-                    .replace("<world_color>", w.getColor())
-                    .replace("<city_title>", p.getTitle())
-                    .replace("<city_loadingname>", p.getLoadingName())
-                    .replace("<city_name>", p.getName())
-                    .replace("<temperature>", Double.toString(p.getTemperature()))
-                    .replace("<city_color>", p.getColor());
-        }
-
-        // fitness
-        var stats = mtp.getFitness().getStatistics();
-        if (stats != null && !stats.isEmpty()) {
-            msg = msg
-                    .replace("<fitness>", Integer.toString(mtp.getFitness().getTotalFitness()))
-                    .replace("<max_fitness>", Integer.toString(fitnessModule.getConfiguration().getMaxFitnessLevel()));
+            if (w != null && p != null) {
+                msg = msg
+                        .replace("<world_title>", w.getTitle())
+                        .replace("<world_loadingname>", w.getLoadingName())
+                        .replace("<world_name>", w.getName())
+                        .replace("<world_color>", w.getColor())
+                        .replace("<city_title>", p.getTitle())
+                        .replace("<city_loadingname>", p.getLoadingName())
+                        .replace("<city_name>", p.getName())
+                        .replace("<temperature>", Double.toString(p.getTemperature()))
+                        .replace("<city_color>", p.getColor());
+            }
         }
 
         // banking

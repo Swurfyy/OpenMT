@@ -7,8 +7,6 @@ import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.openminetopia.modules.color.models.ColorModel;
-import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
-import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.prefix.models.PrefixModel;
 
@@ -73,25 +71,8 @@ public class PlayerModel extends StormModel {
 
     @Column(
             type = ColumnType.ONE_TO_MANY,
-            references = FitnessStatisticModel.class,
-            matchTo = "player_id"
-    )
-    private List<FitnessStatisticModel> statistics = new ArrayList<>();
-
-    @Column(
-            type = ColumnType.ONE_TO_MANY,
-            references = FitnessBoosterModel.class,
-            matchTo = "player_id"
-    )
-    private List<FitnessBoosterModel> boosters = new ArrayList<>();
-
-    @Column(
-            type = ColumnType.ONE_TO_MANY,
             references = CriminalRecordModel.class,
             matchTo = "player_id"
     )
     private List<CriminalRecordModel> criminalRecords = new ArrayList<>();
-
-    @Column(name = "fitness_reset", defaultValue = "false")
-    private Boolean fitnessReset;
 }

@@ -22,7 +22,6 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
     private final int pointsPerVehicle;
     private final int pointsForPrefix;
     private final int pointsPerHourPlayed;
-    private final int pointsPer20Fitness;
 
     private final boolean autoLevelUp;
 
@@ -49,7 +48,6 @@ public class LevelCheckConfiguration extends ConfigurateConfig {
         this.pointsPerVehicle = levelCheckNode.node("points-per-vehicle").getInt(1200);
         this.pointsForPrefix = levelCheckNode.node("points-for-prefix").getInt(1750);
         this.pointsPerHourPlayed = levelCheckNode.node("points-per-hour-played").getInt(350);
-        this.pointsPer20Fitness = levelCheckNode.node("points-per-fitness").getInt(1500);
 
         this.autoLevelUp = levelCheckNode.node("auto-level-up").getBoolean(false);
 

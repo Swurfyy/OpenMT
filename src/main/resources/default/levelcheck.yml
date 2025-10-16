@@ -6,7 +6,6 @@ levelcheck:
   points-per-vehicle: 1200
   points-for-prefix: 1750
   points-per-hour-played: 350
-  points-per-fitness: 1500
   auto-level-up: false
 wage:
   enabled: true
