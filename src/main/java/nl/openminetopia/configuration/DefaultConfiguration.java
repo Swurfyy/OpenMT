@@ -504,8 +504,21 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.pvpEnabled = rootNode.node("pvp", "enabled").getBoolean(true);
         rootNode.node("pvp", "items").childrenList().forEach(pvpItem -> {
             ItemStack item = ConfigUtils.deserializeItemStack(pvpItem.node("item"));
-            String attackerMessage = pvpItem.node("attacker-message").getString("<red>Je hebt <dark_red><player> <red>aangevallen met een <dark_red><item>");
-            String victimMessage = pvpItem.node("victim-message").getString("<red>Je bent aangevallen door <dark_red><player> <red>met een <dark_red><item>");
+            
+            // Check if message nodes exist to distinguish between missing and empty values
+            String attackerMessage;
+            if (pvpItem.node("attacker-message").virtual()) {
+                attackerMessage = "<red>Je hebt <dark_red><player> <red>aangevallen met een <dark_red><item>";
+            } else {
+                attackerMessage = pvpItem.node("attacker-message").getString("");
+            }
+            
+            String victimMessage;
+            if (pvpItem.node("victim-message").virtual()) {
+                victimMessage = "<red>Je bent aangevallen door <dark_red><player> <red>met een <dark_red><item>";
+            } else {
+                victimMessage = pvpItem.node("victim-message").getString("");
+            }
             
             // Load slowness configuration
             boolean slownessEnabled = pvpItem.node("slowness", "enabled").getBoolean(false);

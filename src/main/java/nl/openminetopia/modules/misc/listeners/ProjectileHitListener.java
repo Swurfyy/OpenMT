@@ -62,10 +62,17 @@ public class ProjectileHitListener implements Listener {
     private void sendAttackedMessages(Player attacker, Player target, PvPItem pvpItem, MinetopiaPlayer minetopiaPlayer) {
         MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
 
-        attacker.sendMessage(ChatUtils.format(minetopiaPlayer, pvpItem.attackerMessage()
-                .replace("<attacker>", attacker.getName()).replace("<victim>", target.getName())));
-        target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, pvpItem.victimMessage()
-                .replace("<attacker>", attacker.getName()).replace("<victim>", target.getName())));
+        String attackerMessage = pvpItem.attackerMessage()
+                .replace("<attacker>", attacker.getName()).replace("<victim>", target.getName());
+        if (attackerMessage != null && !attackerMessage.isBlank()) {
+            attacker.sendMessage(ChatUtils.format(minetopiaPlayer, attackerMessage));
+        }
+
+        String victimMessage = pvpItem.victimMessage()
+                .replace("<attacker>", attacker.getName()).replace("<victim>", target.getName());
+        if (victimMessage != null && !victimMessage.isBlank()) {
+            target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, victimMessage));
+        }
     }
 
     private void applySlownessEffect(Player target, PvPItem pvpItem) {

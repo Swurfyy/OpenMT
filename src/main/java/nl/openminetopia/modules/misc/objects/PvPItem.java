@@ -18,10 +18,16 @@ public class PvPItem {
     private final SlownessConfig slownessConfig;
 
     public String attackerMessage() {
+        if (attackerMessage == null || attackerMessage.isEmpty()) {
+            return "";
+        }
         return attackerMessage.replace("<item>", item.getType().name());
     }
 
     public String victimMessage() {
+        if (victimMessage == null || victimMessage.isEmpty()) {
+            return "";
+        }
         return victimMessage.replace("<item>", item.getType().name());
     }
 
