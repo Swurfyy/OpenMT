@@ -22,7 +22,8 @@ public class HeadCommand extends BaseCommand {
             return;
         }
 
-        player.getInventory().remove(item);
+        // only remove 1 item from the stack
+        player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
         if (player.getInventory().getHelmet() != null) player.getInventory().addItem(player.getInventory().getHelmet());
         player.getInventory().setHelmet(item);
 
