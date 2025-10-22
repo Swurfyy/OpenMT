@@ -11,13 +11,10 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.player.commands.PlaytimeCommand;
-import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
-import nl.openminetopia.modules.player.listeners.LevelcheckNpcListener;
 import nl.openminetopia.modules.player.listeners.PlayerPreLoginListener;
 import nl.openminetopia.modules.player.listeners.PlayerQuitListener;
 import nl.openminetopia.modules.player.models.PlayerModel;
 
-import nl.openminetopia.modules.player.runnables.LevelCalculateRunnable;
 import nl.openminetopia.modules.player.runnables.MinetopiaPlayerSaveRunnable;
 import nl.openminetopia.modules.player.runnables.PlayerPlaytimeRunnable;
 import org.bukkit.Bukkit;
@@ -34,25 +31,16 @@ public class PlayerModule extends ExtendedSpigotModule {
         super(moduleManager);
     }
 
-    private LevelCheckConfiguration configuration;
-    private LevelCalculateRunnable levelCalculateRunnable;
 
     private MinetopiaPlayerSaveRunnable minetopiaPlayerSaveRunnable;
     private PlayerPlaytimeRunnable playerPlaytimeRunnable;
 
     @Override
     public void onEnable() {
-        configuration = new LevelCheckConfiguration(OpenMinetopia.getInstance().getDataFolder());
-        configuration.saveConfiguration();
-
         registerComponent(new PlayerPreLoginListener());
         registerComponent(new PlayerQuitListener());
-        if (OpenMinetopia.getInstance().isNpcSupport()) registerComponent(new LevelcheckNpcListener());
 
         registerComponent(new PlaytimeCommand());
-
-        levelCalculateRunnable = new LevelCalculateRunnable(this, PlayerManager.getInstance(), 5000L, 50, 30 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(levelCalculateRunnable, 20L);
 
         minetopiaPlayerSaveRunnable = new MinetopiaPlayerSaveRunnable(PlayerManager.getInstance(), 5 * 60 * 1000L, 50, 30 * 60 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()), true);
         OpenMinetopia.getInstance().registerDirtyPlayerRunnable(minetopiaPlayerSaveRunnable, 20L * 5);
@@ -70,7 +58,6 @@ public class PlayerModule extends ExtendedSpigotModule {
             minetopiaPlayer.updatePlaytime();
             minetopiaPlayer.save().join();
         }
-        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(levelCalculateRunnable);
         OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(minetopiaPlayerSaveRunnable);
         OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(playerPlaytimeRunnable);
     }
@@ -100,8 +87,6 @@ public class PlayerModule extends ExtendedSpigotModule {
                 PlayerModel createdModel = new PlayerModel();
                 createdModel.setUniqueId(uuid);
                 createdModel.setPlaytime(0L);
-                createdModel.setWageTime(0L);
-                createdModel.setLevel(1);
                 createdModel.setActivePrefixId(-1);
                 createdModel.setActivePrefixColorId(-1);
                 createdModel.setActiveChatColorId(-1);

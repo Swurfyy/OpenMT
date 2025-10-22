@@ -48,8 +48,6 @@ public class PlayerVerticle extends BaseVerticle {
                 } else {
                     jsonObject.put("success", true);
                     jsonObject.put("uuid", player.getUniqueId().toString());
-                    jsonObject.put("level", minetopiaPlayer.getLevel());
-                    jsonObject.put("calculated_level", minetopiaPlayer.getCalculatedLevel());
                     jsonObject.put("active_prefix", minetopiaPlayer.getActivePrefix().getPrefix());
                     jsonObject.put("active_prefix_color", minetopiaPlayer.getActiveColor(OwnableColorType.PREFIX).displayName());
                     jsonObject.put("active_name_color", minetopiaPlayer.getActiveColor(OwnableColorType.NAME).displayName());

@@ -15,7 +15,6 @@ import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.models.PlayerModel;
-import nl.openminetopia.modules.player.runnables.LevelCalculateRunnable;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.prefix.PrefixModule;
@@ -40,12 +39,8 @@ public class MinetopiaPlayer {
 
     @Getter
     private long playtime;
-    @Getter
-    private long wageTime;
     private transient long startTime;
 
-    private int level;
-    private @Setter int calculatedLevel;
 
     private boolean staffchatEnabled;
     private boolean commandSpyEnabled;
@@ -80,10 +75,7 @@ public class MinetopiaPlayer {
             this.getBukkit().getPlayer().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
 
         this.playtime = this.playerModel.getPlaytime();
-        this.wageTime = this.playerModel.getWageTime();
         this.startTime = System.currentTimeMillis();
-        this.level = this.playerModel.getLevel();
-        this.calculatedLevel = configuration.getDefaultLevel();
         this.staffchatEnabled = this.playerModel.getStaffchatEnabled();
         this.commandSpyEnabled = this.playerModel.getCommandSpyEnabled();
         this.chatSpyEnabled = this.playerModel.getChatSpyEnabled();
@@ -143,16 +135,6 @@ public class MinetopiaPlayer {
                 .findFirst().orElse(null);
     }
 
-    /* ---------- Level ---------- */
-
-    public void setLevel(int level) {
-        if (level < 0) {
-            return;
-        }
-        this.level = level;
-        this.playerModel.setLevel(level);
-        StormDatabase.getInstance().saveStormModel(this.playerModel);
-    }
 
     /* ---------- Staffchat ---------- */
 
@@ -319,10 +301,6 @@ public class MinetopiaPlayer {
         this.playerModel.setPlaytime(this.playtime);
     }
 
-    public void setWageTime(long wageTime) {
-        this.wageTime = wageTime;
-        this.playerModel.setWageTime(wageTime);
-    }
 
     private long sinceStart() {
         return System.currentTimeMillis() - this.startTime;

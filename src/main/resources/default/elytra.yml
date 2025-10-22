@@ -1,0 +1,8 @@
+elytra:
+  enabled: true
+  max-vertical-speed: 0.5
+  max-horizontal-speed: 2.0
+  detection-interval: 5
+  prevent-firework-boost: true
+  prevent-ground-spam: true
+  prevent-constant-flying: true

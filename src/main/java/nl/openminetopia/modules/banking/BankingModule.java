@@ -8,7 +8,6 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import net.milkbowl.vault.economy.Economy;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.banking.commands.BankingCommand;
 import nl.openminetopia.modules.banking.commands.PinCommand;
 import nl.openminetopia.modules.banking.commands.subcommands.BankingBalanceCommand;
@@ -29,12 +28,10 @@ import nl.openminetopia.modules.banking.listeners.PlayerLoginListener;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.banking.models.BankPermissionModel;
 import nl.openminetopia.modules.banking.models.PinRequestModel;
-import nl.openminetopia.modules.banking.tasks.WagePaymentTask;
 import nl.openminetopia.modules.banking.vault.VaultEconomyHandler;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
-import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.transactions.TransactionsModule;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -60,7 +57,6 @@ public class BankingModule extends ExtendedSpigotModule {
     private Collection<BankAccountModel> bankAccountModels;
     @Getter @Setter
     private BankingConfiguration configuration;
-    private WagePaymentTask wagePaymentTask;
     
     // Pin request management
     private final Map<UUID, PinRequestModel> pinRequests = new ConcurrentHashMap<>();
@@ -127,8 +123,6 @@ public class BankingModule extends ExtendedSpigotModule {
         registerComponent(new PinCommand());
         registerComponent(new PinTerminalListener());
 
-        wagePaymentTask = new WagePaymentTask(OpenMinetopia.getModuleManager().get(PlayerModule.class)::getConfiguration, PlayerManager.getInstance(), 5000L, 50, 30 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(wagePaymentTask, 20L);
 
         if (Bukkit.getPluginManager().isPluginEnabled("Vault")) {
             Bukkit.getServicesManager().register(Economy.class, new VaultEconomyHandler(), OpenMinetopia.getInstance(), ServicePriority.Normal);
@@ -144,7 +138,6 @@ public class BankingModule extends ExtendedSpigotModule {
                 accountModel.getSavingTask().cancel();
             }
         });
-        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(wagePaymentTask);
     }
 
     public List<BankAccountModel> getAccountsFromPlayer(UUID uuid) {

@@ -836,10 +836,6 @@ items:
     material: PAPER
     item_model: minecraft:custom/items/crimineel
     name: Crimineel
-  extrauurloon:
-    material: PAPER
-    item_model: minecraft:custom/items/extrauurloon
-    name: Extrauurloon
   whoamshead:
     material: PAPER
     item_model: minecraft:custom/items/whoamshead

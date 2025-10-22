@@ -281,9 +281,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "<world_title>",
                 "<world_color>Temperatuur:",
                 "<temperature>°C",
-                " ",
-                "<world_color>Level:",
-                "<level> -> <calculated_level> (<levelups><white>)"
+                " "
         ));
 
         /*
@@ -541,7 +539,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.trashcanEnabled = rootNode.node("trashcan", "enabled").getBoolean(true);
         this.trashcanBlocks = rootNode.node("trashcan", "blocks").getList(String.class, List.of(
                 "DROPPER"
-        )).stream().map(Material::matchMaterial).toList();
+        )).stream().map(Material::matchMaterial).collect(java.util.stream.Collectors.toList());
         this.trashcanUseDropperInventory = rootNode.node("trashcan", "use-dropper-inventory").getBoolean(false);
 
         /*

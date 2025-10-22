@@ -61,8 +61,6 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
 
         return switch (params.toLowerCase()) {
             case "prefix" -> minetopiaPlayer.getActivePrefix().getPrefix();
-            case "level" -> String.valueOf(minetopiaPlayer.getLevel());
-            case "calculated_level" -> String.valueOf(minetopiaPlayer.getCalculatedLevel());
             case "city" -> minetopiaPlayer.getPlace().getName();
             case "world" -> minetopiaPlayer.getWorld().getName();
             case "temperature" -> String.valueOf(minetopiaPlayer.getPlace().getTemperature());

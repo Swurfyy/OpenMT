@@ -15,7 +15,6 @@ import nl.openminetopia.modules.staff.chat.listeners.PlayerChatListener;
 import nl.openminetopia.modules.staff.mod.commands.ModCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModChatSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCommandSpyCommand;
-import nl.openminetopia.modules.staff.mod.commands.subcommands.ModSetLevelCommand;
 import org.jetbrains.annotations.NotNull;
 
 public class StaffModule extends ExtendedSpigotModule {
@@ -26,7 +25,6 @@ public class StaffModule extends ExtendedSpigotModule {
     @Override
     public void onEnable() {
         registerComponent(new ModCommand());
-        registerComponent(new ModSetLevelCommand());
         registerComponent(new ModChatSpyCommand());
         registerComponent(new ModCommandSpyCommand());
 

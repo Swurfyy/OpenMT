@@ -10,7 +10,6 @@ import net.kyori.adventure.title.Title;
 import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
-import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
@@ -18,11 +17,9 @@ import nl.openminetopia.modules.police.utils.BalaclavaUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @UtilityClass
 public class ChatUtils {
@@ -62,17 +59,12 @@ public class ChatUtils {
         String displayName = balaclava ? "<obf>Balaclava</obf><reset>" : stripMiniMessage(player.displayName());
         String namePlain   = balaclava ? "<obf>Balaclava</obf><reset>" : player.getName();
 
-        int levelUps = mtp.getCalculatedLevel() - mtp.getLevel();
-
         String msg = template;
 
         // vaste placeholders
         msg = msg
                 .replace("<player>", namePlain)
                 .replace("<level_color>", mtp.getActiveColor(OwnableColorType.LEVEL).color())
-                .replace("<level>", Integer.toString(mtp.getLevel()))
-                .replace("<calculated_level>", Integer.toString(mtp.getCalculatedLevel()))
-                .replace("<levelups>", levelUps == 0 ? "<gold>0" : (levelUps > 0 ? "<green>+" + levelUps : "<red>" + levelUps))
                 .replace("<prefix_color>", mtp.getActiveColor(OwnableColorType.PREFIX).color())
                 .replace("<prefix>", mtp.getActivePrefix().getPrefix())
                 .replace("<name_color>", mtp.getActiveColor(OwnableColorType.NAME).color())

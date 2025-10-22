@@ -9,11 +9,9 @@ import nl.openminetopia.modules.banking.menus.BankContentsMenu;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.menus.ColorTypeMenu;
-import nl.openminetopia.modules.player.events.PlayerLevelChangeEvent;
 import nl.openminetopia.modules.player.utils.PlaytimeUtil;
 import nl.openminetopia.modules.prefix.menus.PrefixMenu;
 import nl.openminetopia.utils.ChatUtils;
-import nl.openminetopia.utils.events.EventUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import nl.openminetopia.utils.menu.Menu;
 import org.bukkit.Material;
@@ -83,24 +81,6 @@ public class AdminToolInfoMenu extends Menu {
 
         /* -------- Level -------- */
 
-        ItemBuilder levelItemBuilder = new ItemBuilder(Material.TRIPWIRE_HOOK)
-                .setName("<gold>Level")
-                .addLoreLine("<gold>Level: " + minetopiaPlayer.getLevel())
-                .addLoreLine("")
-                .addLoreLine("<gold>Klik <yellow>hier <gold>om het <yellow>level <gold>van de speler aan te passen.")
-                .addLoreLine("")
-                .addLoreLine("<yellow>Rechtermuisklik <gold>om het level te verhogen.")
-                .addLoreLine("<yellow>Linkermuisklik <gold>om het level te verlagen.");
-
-        GuiItem targetLevelItem = new GuiItem(levelItemBuilder.toItemStack(), event -> {
-            PlayerLevelChangeEvent levelChangeEvent = new PlayerLevelChangeEvent(player, minetopiaPlayer.getLevel(), event.isRightClick() ? minetopiaPlayer.getLevel() + 1 : minetopiaPlayer.getLevel() - 1);
-            if (EventUtils.callCancellable(levelChangeEvent)) return;
-
-            minetopiaPlayer.setLevel(event.isRightClick() ? minetopiaPlayer.getLevel() + 1 : minetopiaPlayer.getLevel() - 1);
-            player.sendMessage(ChatUtils.color("<gold>Je hebt het level van <yellow>" + offlinePlayer.getName() + " <gold>aangepast naar <yellow>" + minetopiaPlayer.getLevel() + "<gold>."));
-            new AdminToolInfoMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open(player);
-        });
-        gui.setItem(13, targetLevelItem);
 
         /* -------- Banking -------- */
 

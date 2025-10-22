@@ -16,8 +16,6 @@ import nl.openminetopia.modules.color.configuration.ColorsConfiguration;
 import nl.openminetopia.modules.items.ItemsModule;
 import nl.openminetopia.modules.labymod.LabymodModule;
 import nl.openminetopia.modules.labymod.configuration.LabymodConfiguration;
-import nl.openminetopia.modules.player.PlayerModule;
-import nl.openminetopia.modules.player.configuration.LevelCheckConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.modules.plots.configuration.PlotCalculateConfiguration;
 import nl.openminetopia.utils.ChatUtils;
@@ -42,9 +40,6 @@ public class OpenMinetopiaCommand extends BaseCommand {
         OpenMinetopia.setMessageConfiguration(new MessageConfiguration(dataFolder));
         OpenMinetopia.getMessageConfiguration().saveConfiguration();
 
-        PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
-        playerModule.setConfiguration(new LevelCheckConfiguration(dataFolder));
-        playerModule.getConfiguration().saveConfiguration();
 
         ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
         colorModule.setConfiguration(new ColorsConfiguration(dataFolder));
@@ -75,7 +70,7 @@ public class OpenMinetopiaCommand extends BaseCommand {
     @Default
     public void onCommand(Player player) {
         player.sendMessage(ChatUtils.color(" "));
-        player.sendMessage(ChatUtils.color("<gold>Deze server maakt gebruik van <yellow>OpenMinetopia <gold>versie <yellow>" + OpenMinetopia.getInstance().getDescription().getVersion()));
+        player.sendMessage(ChatUtils.color("<gold>Deze server maakt gebruik van een Custom Fork van <yellow>OpenMinetopia <gold>op de versie <yellow>" + OpenMinetopia.getInstance().getDescription().getVersion()));
         player.sendMessage(ChatUtils.color("<gold>Auteurs: <yellow>" + OpenMinetopia.getInstance().getDescription().getAuthors().toString().replace("[", "").replace("]", "")));
         player.sendMessage(ChatUtils.color(" "));
     }
