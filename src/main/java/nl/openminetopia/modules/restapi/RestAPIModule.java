@@ -7,6 +7,7 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.restapi.base.VerticleManager;
 import nl.openminetopia.modules.restapi.verticles.MainVerticle;
@@ -18,6 +19,7 @@ import nl.openminetopia.modules.restapi.verticles.banking.transactions.BankAccou
 import nl.openminetopia.modules.restapi.verticles.places.PlacesVerticle;
 import nl.openminetopia.modules.restapi.verticles.player.*;
 import nl.openminetopia.modules.restapi.verticles.plots.PlotsVerticle;
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 public class RestAPIModule extends ExtendedSpigotModule {
@@ -31,6 +33,23 @@ public class RestAPIModule extends ExtendedSpigotModule {
     @Override
     public void onEnable() {
         if (OpenMinetopia.getDefaultConfiguration().isRestApiEnabled()) {
+            // Wait for BankingModule to fully load its data
+            Bukkit.getScheduler().runTaskLater(OpenMinetopia.getInstance(), () -> {
+                initializeRestAPI();
+            }, 40L); // Wait 2 seconds initially
+        }
+    }
+
+    private void initializeRestAPI() {
+        try {
+            // Check if BankingModule is loaded and has data
+            BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+            if (bankingModule == null || bankingModule.getBankAccountModels() == null || bankingModule.getBankAccountModels().isEmpty()) {
+                OpenMinetopia.getInstance().getLogger().warning("BankingModule not ready yet, retrying in 2 seconds...");
+                Bukkit.getScheduler().runTaskLater(OpenMinetopia.getInstance(), this::initializeRestAPI, 40L);
+                return;
+            }
+
             Vertx vertx = OpenMinetopia.getInstance().getOrCreateVertx();
 
             Context context = vertx.getOrCreateContext();
@@ -58,6 +77,11 @@ public class RestAPIModule extends ExtendedSpigotModule {
                     new BankAccountTransactionsVerticle(),
                     new BankAccountTransactionVerticle()
             );
+            
+            OpenMinetopia.getInstance().getLogger().info("REST API module initialized successfully!");
+        } catch (Exception e) {
+            OpenMinetopia.getInstance().getLogger().severe("Failed to initialize REST API: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

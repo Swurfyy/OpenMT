@@ -19,14 +19,14 @@ public class MainVerticle extends BaseVerticle {
         vertx.createHttpServer()
                 // Handle every request using the router
                 .requestHandler(router)
-                // Start listening
+                // Start listening on all interfaces (0.0.0.0) to avoid bind issues
                 .listen(
                         OpenMinetopia.getDefaultConfiguration().getRestApiPort(),
-                        OpenMinetopia.getDefaultConfiguration().getRestApiHost()
+                        "0.0.0.0"
                 )
                 // Print the port on success
                 .onSuccess(server -> {
-                    OpenMinetopia.getInstance().getLogger().info("HTTP server started on port " + server.actualPort() + " and host " + OpenMinetopia.getDefaultConfiguration().getRestApiHost());
+                    OpenMinetopia.getInstance().getLogger().info("HTTP server started on port " + server.actualPort() + " and host 0.0.0.0");
                     startPromise.complete();
                 })
                 // Print the problem on failure
