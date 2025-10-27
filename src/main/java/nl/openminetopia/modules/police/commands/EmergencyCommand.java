@@ -23,6 +23,7 @@ public class EmergencyCommand extends BaseCommand {
             return;
         }
 
+        // Check cooldown first
         if (hasCooldown(player)) {
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
 
@@ -33,6 +34,7 @@ public class EmergencyCommand extends BaseCommand {
             return;
         }
 
+        // Set cooldown and broadcast
         OpenMinetopia.getModuleManager().get(PoliceModule.class).getEmergencyCooldowns().put(player.getUniqueId(), System.currentTimeMillis());
         broadcastEmergency(message, sender);
     }
@@ -40,7 +42,7 @@ public class EmergencyCommand extends BaseCommand {
     private void broadcastEmergency(String message, CommandSender sender) {
         boolean isPlayer = sender instanceof Player;
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            if (!onlinePlayer.hasPermission("openminetopia.police")) return;
+            if (!onlinePlayer.hasPermission("openminetopia.police")) continue;
 
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(onlinePlayer);
 
@@ -90,16 +92,9 @@ public class EmergencyCommand extends BaseCommand {
 
     private String cooldownToTime(long cooldown) {
         long millis = (OpenMinetopia.getDefaultConfiguration().getEmergencyCooldown() * 1000L) - (System.currentTimeMillis() - cooldown);
-        long seconds = millisToSeconds(millis);
-        long minutes = millisToMinutes(millis);
+        long totalSeconds = millis / 1000;
+        long minutes = totalSeconds / 60;
+        long seconds = totalSeconds % 60;
         return minutes + " minuten en " + seconds + " seconden";
-    }
-
-    private long millisToSeconds(long millis) {
-        return millis / 1000;
-    }
-
-    private long millisToMinutes(long millis) {
-        return millis / 60000;
     }
 }

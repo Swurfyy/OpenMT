@@ -39,7 +39,12 @@ public class ChatUtils {
 
     public Component color(String message) {
         String noLegacy = stripSectionCodes(message);
-        return MM.deserialize(noLegacy).decoration(TextDecoration.ITALIC, false);
+        try {
+            return MM.deserialize(noLegacy).decoration(TextDecoration.ITALIC, false);
+        } catch (Exception e) {
+            // Fallback to plain text if MiniMessage parsing fails
+            return Component.text(noLegacy);
+        }
     }
 
     private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("dd-MM-yyyy");

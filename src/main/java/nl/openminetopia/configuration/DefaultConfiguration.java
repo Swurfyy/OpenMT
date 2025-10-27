@@ -169,6 +169,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
      * Bodysearch configuration
      */
     private final int bodysearchRange;
+    private final boolean bodysearchAllowItemRemoval;
 
     /**
      * Walkie-talkie configuration
@@ -486,6 +487,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
          * Bodysearch configuration
          */
         this.bodysearchRange = rootNode.node("bodysearch", "range").getInt(10);
+        this.bodysearchAllowItemRemoval = rootNode.node("bodysearch", "allow-item-removal").getBoolean(true);
 
         /*
          * Walkie-talkie configuration

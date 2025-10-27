@@ -170,6 +170,7 @@ police_bodysearch_self: "<red>Je kunt jezelf <dark_red>niet <red>fouilleren!"
 police_bodysearch_too_far: "<red>Deze speler is te ver weg om te kunnen <dark_red>fouilleren<red>!"
 police_bodysearch_executor: "<gold>Je bent <yellow><player> <gold>aan het fouilleren."
 police_bodysearch_target: "<gold>Je wordt gefouilleerd door <yellow><player><gold>."
+police_bodysearch_item_removal_disabled: "<red>Het verwijderen van items tijdens fouillering is uitgeschakeld."
 
 # Walkie-talkie
 police_walkietalkie_type_your_message: "<gold>Typ nu jouw bericht om naar <yellow><player> <gold>te verzenden."
@@ -184,6 +185,18 @@ police_walkietalkie_emergency_format: "<dark_red>[<red>NOODKNOP<dark_red>] <gray
 police_handcuff_on: "<red>Je bent in de boeien geslagen!"
 police_handcuff_off: "<green>Je bent uit de boeien gehaald!"
 police_handcuff_cant_pvp: "<red>Je kunt niet vechten als je in de <dark_red>handboeien<red> zit."
+police_handcuff_self: "<red>Je kunt jezelf niet boeien!"
+police_handcuff_released: "<green>Je hebt <dark_green><player> <green>uit de boeien gehaald!"
+police_handcuff_already_handcuffing: "<red>Je bent al iemand aan het boeien!"
+police_handcuff_applied: "<green>Je hebt <dark_green><player> <green>in de boeien geslagen!"
+
+# Chase
+police_chase_started: "<light_red>Je bent nu in een achtervolging! Uitloggen resulteert in een ban."
+police_chase_stopped: "<light_red>De achtervolging is gestaakt."
+police_chase_stopped_by_agent: "<green>De achtervolging van <dark_green><player> <green>is gestaakt."
+police_chase_started_by_agent: "<green>Je hebt een achtervolging gestart tegen <dark_green><player><green>."
+police_chase_self: "<red>Je kunt jezelf niet achtervolgen!"
+police_chase_too_far: "<red>De speler is te ver weg! (maximaal 10 blokken)."
 
 # Staffchat
 staff_chat_format: "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b><world_name></b><dark_gray>) <green><player><white>: <message>"

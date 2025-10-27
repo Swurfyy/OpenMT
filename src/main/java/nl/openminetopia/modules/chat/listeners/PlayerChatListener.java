@@ -88,7 +88,7 @@ public class PlayerChatListener implements Listener {
             if (originalMessage.contains(target.getName())) {
                 finalMessage = formattedComponent.replaceText(builder -> {
                     builder.matchLiteral(target.getName())
-                           .replacement("<green>" + target.getName() + minetopiaPlayer.getActiveChatColor().color());
+                           .replacement(ChatUtils.color("<green>" + target.getName() + minetopiaPlayer.getActiveChatColor().color()));
                 });
                 target.playSound(target.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }

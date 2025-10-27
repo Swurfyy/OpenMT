@@ -10,11 +10,15 @@ import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.police.commands.BodysearchCommand;
+import nl.openminetopia.modules.police.commands.ChaseCommand;
 import nl.openminetopia.modules.police.commands.CriminalRecordCommand;
 import nl.openminetopia.modules.police.commands.EmergencyCommand;
+import nl.openminetopia.modules.police.commands.HandcuffCommand;
+import nl.openminetopia.modules.police.chase.listeners.ChasePlayerQuitListener;
 import nl.openminetopia.modules.police.handcuff.HandcuffManager;
 import nl.openminetopia.modules.police.handcuff.listeners.*;
 import nl.openminetopia.modules.police.handcuff.objects.HandcuffedPlayer;
+import nl.openminetopia.modules.police.listeners.BodysearchInventoryListener;
 import nl.openminetopia.modules.police.listeners.PlayerArmorChangeListener;
 import nl.openminetopia.modules.police.listeners.PlayerPeppersprayListener;
 import nl.openminetopia.modules.police.listeners.PlayerTaserListener;
@@ -49,7 +53,10 @@ public class PoliceModule extends ExtendedSpigotModule {
         registerComponent(new EmergencyCommand());
         registerComponent(new CriminalRecordCommand());
         registerComponent(new BodysearchCommand());
+        registerComponent(new HandcuffCommand());
+        registerComponent(new ChaseCommand());
         registerComponent(new PlayerArmorChangeListener());
+        registerComponent(new BodysearchInventoryListener());
 
         /* ---- Handcuff ---- */
         registerComponent(new PlayerHandcuffListener());
@@ -70,6 +77,9 @@ public class PoliceModule extends ExtendedSpigotModule {
 
         /* ---- Taser ---- */
         registerComponent(new PlayerTaserListener());
+
+        /* ---- Chase ---- */
+        registerComponent(new ChasePlayerQuitListener());
     }
 
     @Override

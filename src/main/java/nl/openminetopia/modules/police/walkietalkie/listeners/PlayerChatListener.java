@@ -31,6 +31,9 @@ public class PlayerChatListener implements Listener {
 
         for (Player recipient : Bukkit.getOnlinePlayers()) {
             if (!recipient.hasPermission("openminetopia.walkietalkie")) continue;
+            // Only send to players who are also connected to police chat
+            if (!policeModule.getWalkieTalkieManager().isPoliceChatEnabled(recipient)) continue;
+            
             ChatUtils.sendMessage(recipient, formattedMessage);
         }
         Bukkit.getConsoleSender().sendMessage(ChatUtils.color(formattedMessage));

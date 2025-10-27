@@ -45,6 +45,7 @@ public class BodysearchCommand extends BaseCommand {
                 ChatUtils.sendFormattedMessage(minetopiaTarget, MessageConfiguration.message("police_bodysearch_target")
                         .replace("<player>", player.getName()));
 
+            // Always open the target's inventory
             player.openInventory(target.getInventory());
         });
     }

@@ -1,6 +1,10 @@
 pin-terminal:
   block-type: PURPUR_STAIRS
 
+bodysearch:
+  range: 10
+  allow-item-removal: true
+
 teleporter:
   cooldown-seconds: 3
   lines:
