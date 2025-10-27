@@ -10,22 +10,46 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+
 @CommandAlias("head")
 public class HeadCommand extends BaseCommand {
 
     @Default
     public void head(Player player) {
-        ItemStack item = player.getInventory().getItemInMainHand();
+        ItemStack itemInHand = player.getInventory().getItemInMainHand();
 
-        if (item.getType() == Material.AIR || !MiscUtils.isValidHeadItem(item)) {
+        if (itemInHand.getType() == Material.AIR || !MiscUtils.isValidHeadItem(itemInHand)) {
             player.sendMessage(ChatUtils.color("<red>Je kan dit item niet op je hoofd dragen!"));
             return;
         }
 
-        // only remove 1 item from the stack
-        player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
-        if (player.getInventory().getHelmet() != null) player.getInventory().addItem(player.getInventory().getHelmet());
-        player.getInventory().setHelmet(item);
+        // Create a copy with amount 1 for the helmet
+        ItemStack itemToWear = itemInHand.clone();
+        itemToWear.setAmount(1);
+
+        // Handle old helmet - add it back to inventory or drop it
+        if (player.getInventory().getHelmet() != null) {
+            ItemStack oldHelmet = player.getInventory().getHelmet();
+            HashMap<Integer, ItemStack> overflow = player.getInventory().addItem(oldHelmet);
+            // Drop any items that couldn't fit in inventory
+            for (ItemStack overflowItem : overflow.values()) {
+                player.getWorld().dropItemNaturally(player.getLocation(), overflowItem);
+            }
+        }
+        
+        // Set the helmet (only 1 item)
+        player.getInventory().setHelmet(itemToWear);
+        
+        // Remove 1 item from the hand
+        ItemStack remainingItem = itemInHand.clone();
+        remainingItem.setAmount(itemInHand.getAmount() - 1);
+        
+        if (remainingItem.getAmount() > 0) {
+            player.getInventory().setItemInMainHand(remainingItem);
+        } else {
+            player.getInventory().setItemInMainHand(null);
+        }
 
         player.sendMessage(ChatUtils.color("<green>Je hebt het item op je hoofd gezet!"));
     }

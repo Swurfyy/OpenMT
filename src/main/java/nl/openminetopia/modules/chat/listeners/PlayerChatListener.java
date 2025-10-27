@@ -78,7 +78,9 @@ public class PlayerChatListener implements Listener {
                     .replace("<chat_color>", configuration.getDefaultChatColor());
         }
 
-        Component formattedComponent = ChatUtils.format(minetopiaPlayer, formattedMessage).replaceText(
+        // First, replace the message placeholder with the actual message
+        Component baseComponent = ChatUtils.format(minetopiaPlayer, formattedMessage);
+        Component formattedComponent = baseComponent.replaceText(
                 builder -> builder.matchLiteral("<message>").replacement(event.message())
         );
         Bukkit.getConsoleSender().sendMessage(formattedComponent); // Log the message without potential scrambled name
@@ -86,10 +88,28 @@ public class PlayerChatListener implements Listener {
         for (Player target : recipients) {
             Component finalMessage = formattedComponent;
             if (originalMessage.contains(target.getName())) {
-                finalMessage = formattedComponent.replaceText(builder -> {
-                    builder.matchLiteral(target.getName())
-                           .replacement(ChatUtils.color("<green>" + target.getName() + minetopiaPlayer.getActiveChatColor().color()));
-                });
+                // Only highlight the player name within the message part, not in the display name
+                // We do this by applying the replacement only on the message component
+                final Component originalMessageComponent = event.message();
+                
+                // Check if the target's name appears in the message
+                final boolean hasNameInMessage = ChatUtils.stripMiniMessage(originalMessageComponent).contains(target.getName());
+                
+                // Highlight the target's name in the message if present
+                final Component messageComponent;
+                if (hasNameInMessage) {
+                    messageComponent = originalMessageComponent.replaceText(builder -> {
+                        builder.match(target.getName())
+                               .replacement(component -> ChatUtils.color("<green>" + target.getName() + minetopiaPlayer.getActiveChatColor().color()));
+                    });
+                } else {
+                    messageComponent = originalMessageComponent;
+                }
+                
+                // Rebuild the full message with the highlighted name
+                finalMessage = baseComponent.replaceText(
+                        builder -> builder.matchLiteral("<message>").replacement(messageComponent)
+                );
                 target.playSound(target.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }
 
