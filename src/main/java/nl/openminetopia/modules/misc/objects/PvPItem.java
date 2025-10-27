@@ -37,36 +37,42 @@ public class PvPItem {
         itemToCheck = itemToCheck.clone();
         if (item.getType() != itemToCheck.getType()) return false;
 
-        Damageable damageable = (Damageable) item.getItemMeta();
-        if (damageable.hasDamage()) {
-            damageable.setDamage(0);
-            item.setItemMeta(damageable);
+        // Remove damage from both items for comparison
+        if (item.hasItemMeta()) {
+            Damageable damageable = (Damageable) item.getItemMeta();
+            if (damageable.hasDamage()) {
+                damageable.setDamage(0);
+                item.setItemMeta(damageable);
+            }
         }
-        Damageable checkDamageable = (Damageable) itemToCheck.getItemMeta();
-        if (checkDamageable.hasDamage()) {
-            checkDamageable.setDamage(0);
-            itemToCheck.setItemMeta(checkDamageable);
+        if (itemToCheck.hasItemMeta()) {
+            Damageable checkDamageable = (Damageable) itemToCheck.getItemMeta();
+            if (checkDamageable.hasDamage()) {
+                checkDamageable.setDamage(0);
+                itemToCheck.setItemMeta(checkDamageable);
+            }
         }
 
-        if (item.hasItemMeta() != itemToCheck.hasItemMeta()) return false;
+        var meta = item.hasItemMeta() ? item.getItemMeta() : null;
+        var checkMeta = itemToCheck.hasItemMeta() ? itemToCheck.getItemMeta() : null;
 
-        if (!item.hasItemMeta()) return true; // Both have no meta, so they match at this point
+        // Check custom model data - only if the configured item explicitly sets it
+        if (meta != null && meta.hasCustomModelData()) {
+            if (checkMeta == null || !checkMeta.hasCustomModelData()) return false;
+            if (meta.getCustomModelData() != checkMeta.getCustomModelData()) return false;
+        } else if (checkMeta != null && checkMeta.hasCustomModelData()) {
+            // If the config doesn't set custom model data but the item has it, check if config uses -1 (wildcard)
+            // This allows renamed items to match config items with custom-model-data: -1
+            if (meta != null && meta.hasCustomModelData()) return false;
+        }
 
-        var meta = item.getItemMeta();
-        var checkMeta = itemToCheck.getItemMeta();
-        if (meta == null || checkMeta == null) return false;
-
-        // Only check custom model data if both items actually have it
-        if (meta.hasCustomModelData() != checkMeta.hasCustomModelData()) return false;
-        if (meta.hasCustomModelData() && meta.getCustomModelData() != checkMeta.getCustomModelData()) return false;
-
-        // Only check item model if both items actually have it
+        // Check item model - only if the configured item explicitly sets it
         if (VersionUtil.isCompatible("1.21.4")) {
-            if (meta.hasItemModel() != checkMeta.hasItemModel()) return false;
-            if (meta.hasItemModel() && checkMeta.hasItemModel()) {
+            if (meta != null && meta.hasItemModel()) {
+                if (checkMeta == null || !checkMeta.hasItemModel()) return false;
                 NamespacedKey modelA = meta.getItemModel();
                 NamespacedKey modelB = checkMeta.getItemModel();
-
+                
                 if (modelA != null || modelB != null) {
                     if (modelA == null || modelB == null) return false;
                     if (!modelA.equals(modelB)) return false;
