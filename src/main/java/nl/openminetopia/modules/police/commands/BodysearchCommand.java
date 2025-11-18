@@ -7,6 +7,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.modules.police.listeners.BodysearchInventoryListener;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 
@@ -45,6 +46,9 @@ public class BodysearchCommand extends BaseCommand {
                 ChatUtils.sendFormattedMessage(minetopiaTarget, MessageConfiguration.message("police_bodysearch_target")
                         .replace("<player>", player.getName()));
 
+            // Mark player as bodysearching before opening inventory
+            BodysearchInventoryListener.startBodysearch(player);
+            
             // Always open the target's inventory
             player.openInventory(target.getInventory());
         });
