@@ -44,6 +44,7 @@ public class PlotModule extends ExtendedSpigotModule {
         registerComponent(new PlotTeleportCommand());
         registerComponent(new PlotTransferCommand());
         registerComponent(new PlotCalculateCommand());
+        registerComponent(new PlotSetWozCommand());
 
         OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("plotName", context ->
                 WorldGuardUtils.getProtectedRegions(priority -> priority >= 0).stream()
@@ -61,6 +62,7 @@ public class PlotModule extends ExtendedSpigotModule {
     public static StateFlag PLOT_FLAG = new StateFlag("openmt-plot", true);
     public static StringFlag PLOT_DESCRIPTION = new StringFlag("openmt-description");
     public static StateFlag PLOT_TRANSFER = new StateFlag("openmt-transfer", true);
+    public static StringFlag PLOT_WOZ = new StringFlag("openmt-woz");
 
     public void loadFlags() {
         FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
@@ -68,10 +70,12 @@ public class PlotModule extends ExtendedSpigotModule {
             registry.register(PLOT_FLAG);
             registry.register(PLOT_DESCRIPTION);
             registry.register(PLOT_TRANSFER);
+            registry.register(PLOT_WOZ);
         } catch (FlagConflictException e) {
             PLOT_FLAG = (StateFlag) registry.get("openmt-plot");
             PLOT_DESCRIPTION = (StringFlag) registry.get("openmt-description");
             PLOT_TRANSFER = (StateFlag) registry.get("openmt-transfer");
+            PLOT_WOZ = (StringFlag) registry.get("openmt-woz");
         }
     }
 }
