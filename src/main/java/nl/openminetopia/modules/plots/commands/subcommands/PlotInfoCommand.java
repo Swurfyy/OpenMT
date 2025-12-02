@@ -12,14 +12,29 @@ import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.modules.plots.utils.PlotUtil;
 import nl.openminetopia.utils.ChatUtils;
-import nl.openminetopia.utils.WorldGuardUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @CommandAlias("plotinfo|pi")
 public class PlotInfoCommand extends BaseCommand {
+
+    private static final DecimalFormat WOZ_FORMAT;
+
+    static {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.GERMAN);
+        symbols.setGroupingSeparator('.');
+        symbols.setDecimalSeparator(',');
+        WOZ_FORMAT = new DecimalFormat("#,##0.00", symbols);
+    }
+
+    private String formatWozAmount(long amount) {
+        return "€" + WOZ_FORMAT.format(amount);
+    }
 
     @Default
     @Description("Bekijk informatie van een plot.")
@@ -55,6 +70,24 @@ public class PlotInfoCommand extends BaseCommand {
                 .replace("<owners>", (region.getOwners().size() > 0 ? owners : "Geen.")));
         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_members")
                 .replace("<members>", (region.getMembers().size() > 0 ? members : "Geen.")));
+
+        // Add WoZ value
+        String wozValue = region.getFlag(PlotModule.PLOT_WOZ);
+        if (wozValue != null && !wozValue.isEmpty()) {
+            try {
+                long wozAmount = Long.parseLong(wozValue);
+                String formattedWoz = formatWozAmount(wozAmount);
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_woz")
+                        .replace("<price>", formattedWoz));
+            } catch (NumberFormatException e) {
+                // If parsing fails, show raw value
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_woz")
+                        .replace("<price>", wozValue));
+            }
+        } else {
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_info_woz")
+                    .replace("<price>", "Niet ingesteld"));
+        }
 
         if (region.getFlag(PlotModule.PLOT_DESCRIPTION) != null) {
             String description = region.getFlag(PlotModule.PLOT_DESCRIPTION);
