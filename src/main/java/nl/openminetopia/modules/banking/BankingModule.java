@@ -11,6 +11,7 @@ import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.banking.commands.BankingCommand;
 import nl.openminetopia.modules.banking.commands.PinCommand;
 import nl.openminetopia.modules.banking.commands.subcommands.BankingBalanceCommand;
+import nl.openminetopia.modules.banking.commands.subcommands.BankingBaltopCommand;
 import nl.openminetopia.modules.banking.commands.subcommands.BankingCreateCommand;
 import nl.openminetopia.modules.banking.commands.subcommands.BankingDeleteCommand;
 import nl.openminetopia.modules.banking.commands.subcommands.BankingFreezeCommand;
@@ -116,6 +117,7 @@ public class BankingModule extends ExtendedSpigotModule {
         registerComponent(new BankingBalanceCommand());
         registerComponent(new BankingListCommand());
         registerComponent(new BankingMyAccountsCommand());
+        registerComponent(new BankingBaltopCommand());
 
         registerComponent(new PlayerLoginListener());
         registerComponent(new BankingInteractionListener());
