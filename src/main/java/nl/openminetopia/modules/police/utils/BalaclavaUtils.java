@@ -10,6 +10,8 @@ import org.bukkit.inventory.ItemStack;
 public class BalaclavaUtils {
 
     public void hideNameTag(Player player, boolean hide) {
+        if (player == null) return;
+
         if (hide) {
             BalaclavaNameTagManager.getInstance().hideNameTag(player);
         } else {
@@ -17,11 +19,18 @@ public class BalaclavaUtils {
         }
     }
 
-    public boolean isBalaclavaItem(ItemStack head) {
-        return ItemUtils.isSimilarToAny(head, OpenMinetopia.getDefaultConfiguration().getBalaclavaItems());
+    public boolean isBalaclavaItem(ItemStack item) {
+        if (item == null) return false;
+
+        return ItemUtils.isSimilarToAny(
+                item,
+                OpenMinetopia.getDefaultConfiguration().getBalaclavaItems()
+        );
     }
 
     public boolean isWearingBalaclava(Player player) {
+        if (player == null) return false;
+
         return isBalaclavaItem(player.getInventory().getHelmet());
     }
 }
