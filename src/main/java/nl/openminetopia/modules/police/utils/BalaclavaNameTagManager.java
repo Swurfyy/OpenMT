@@ -12,6 +12,7 @@ import java.util.UUID;
 
 public class BalaclavaNameTagManager {
 
+    private static final String TEAM_PREFIX = "bal_"; // kort houden!
     private static BalaclavaNameTagManager instance;
 
     public static BalaclavaNameTagManager getInstance() {
@@ -27,15 +28,13 @@ public class BalaclavaNameTagManager {
     }
 
     public void hideNameTag(Player player) {
-        UUID uuid = player.getUniqueId();
-        if (playersWithHiddenNameTags.add(uuid)) {
+        if (playersWithHiddenNameTags.add(player.getUniqueId())) {
             updateVisibility(player);
         }
     }
 
     public void showNameTag(Player player) {
-        UUID uuid = player.getUniqueId();
-        if (playersWithHiddenNameTags.remove(uuid)) {
+        if (playersWithHiddenNameTags.remove(player.getUniqueId())) {
             updateVisibility(player);
         }
     }
@@ -47,27 +46,24 @@ public class BalaclavaNameTagManager {
     public void updateVisibility(Player player) {
         boolean hide = playersWithHiddenNameTags.contains(player.getUniqueId());
         String playerName = player.getName();
+        String teamName = getTeamName(player);
 
-        // Update for all online viewers
         for (Player viewer : Bukkit.getOnlinePlayers()) {
             Scoreboard scoreboard = viewer.getScoreboard();
-            Team team = scoreboard.getTeam("balaclava_" + playerName);
+            Team team = scoreboard.getTeam(teamName);
 
             if (hide) {
                 if (team == null) {
-                    team = scoreboard.registerNewTeam("balaclava_" + playerName);
-                    team.setNameTagVisibility(NameTagVisibility.NEVER);
+                    team = scoreboard.registerNewTeam(teamName);
+                }
+                team.setNameTagVisibility(NameTagVisibility.NEVER);
+
+                if (!team.hasEntry(playerName)) {
                     team.addEntry(playerName);
-                } else {
-                    team.setNameTagVisibility(NameTagVisibility.NEVER);
-                    if (!team.hasEntry(playerName)) {
-                        team.addEntry(playerName);
-                    }
                 }
             } else {
-                if (team != null && team.hasEntry(playerName)) {
+                if (team != null) {
                     team.removeEntry(playerName);
-                    // Clean up empty team
                     if (team.getEntries().isEmpty()) {
                         team.unregister();
                     }
@@ -77,7 +73,6 @@ public class BalaclavaNameTagManager {
     }
 
     public void onPlayerJoin(Player player) {
-        // Update visibility for the new player for all existing players with hidden nametags
         for (UUID uuid : playersWithHiddenNameTags) {
             Player target = Bukkit.getPlayer(uuid);
             if (target != null && target.isOnline()) {
@@ -87,14 +82,14 @@ public class BalaclavaNameTagManager {
     }
 
     public void onPlayerQuit(Player player) {
-        // Clean up team references when player leaves
-        UUID uuid = player.getUniqueId();
-        playersWithHiddenNameTags.remove(uuid);
-        
+        playersWithHiddenNameTags.remove(player.getUniqueId());
+
+        String teamName = getTeamName(player);
         String playerName = player.getName();
+
         for (Player viewer : Bukkit.getOnlinePlayers()) {
             Scoreboard scoreboard = viewer.getScoreboard();
-            Team team = scoreboard.getTeam("balaclava_" + playerName);
+            Team team = scoreboard.getTeam(teamName);
             if (team != null) {
                 team.removeEntry(playerName);
                 if (team.getEntries().isEmpty()) {
@@ -107,25 +102,32 @@ public class BalaclavaNameTagManager {
     private void updateVisibilityForViewer(Player target, Player viewer) {
         boolean hide = playersWithHiddenNameTags.contains(target.getUniqueId());
         String targetName = target.getName();
+        String teamName = getTeamName(target);
+
         Scoreboard scoreboard = viewer.getScoreboard();
-        Team team = scoreboard.getTeam("balaclava_" + targetName);
+        Team team = scoreboard.getTeam(teamName);
 
         if (hide) {
             if (team == null) {
-                team = scoreboard.registerNewTeam("balaclava_" + targetName);
+                team = scoreboard.registerNewTeam(teamName);
                 team.setNameTagVisibility(NameTagVisibility.NEVER);
             }
             if (!team.hasEntry(targetName)) {
                 team.addEntry(targetName);
             }
         } else {
-            if (team != null && team.hasEntry(targetName)) {
+            if (team != null) {
                 team.removeEntry(targetName);
                 if (team.getEntries().isEmpty()) {
                     team.unregister();
                 }
             }
         }
+    }
+
+    private String getTeamName(Player player) {
+        // ✔ Altijd <= 16 chars → GEEN errors meer
+        return TEAM_PREFIX + player.getUniqueId().toString().substring(0, 8);
     }
 
     public Set<UUID> getPlayersWithHiddenNameTags() {
