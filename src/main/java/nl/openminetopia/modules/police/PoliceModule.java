@@ -18,6 +18,8 @@ import nl.openminetopia.modules.police.chase.listeners.ChasePlayerQuitListener;
 import nl.openminetopia.modules.police.handcuff.HandcuffManager;
 import nl.openminetopia.modules.police.handcuff.listeners.*;
 import nl.openminetopia.modules.police.handcuff.objects.HandcuffedPlayer;
+import nl.openminetopia.modules.police.listeners.BalaclavaInteractListener;
+import nl.openminetopia.modules.police.listeners.BalaclavaNameTagListener;
 import nl.openminetopia.modules.police.listeners.BodysearchInventoryListener;
 import nl.openminetopia.modules.police.listeners.PlayerArmorChangeListener;
 import nl.openminetopia.modules.police.listeners.PlayerPeppersprayListener;
@@ -56,6 +58,8 @@ public class PoliceModule extends ExtendedSpigotModule {
         registerComponent(new HandcuffCommand());
         registerComponent(new ChaseCommand());
         registerComponent(new PlayerArmorChangeListener());
+        registerComponent(new BalaclavaInteractListener());
+        registerComponent(new BalaclavaNameTagListener());
         registerComponent(new BodysearchInventoryListener());
 
         /* ---- Handcuff ---- */

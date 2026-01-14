@@ -16,12 +16,12 @@ public class PlayerArmorChangeListener implements Listener {
         /* ---- Balaclava ---- */
 
         if (BalaclavaUtils.isBalaclavaItem(event.getNewItem()) && !BalaclavaUtils.isBalaclavaItem(event.getOldItem())) {
-            BalaclavaUtils.obfuscate(event.getPlayer(), true);
+            BalaclavaUtils.hideNameTag(event.getPlayer(), true);
             return;
         }
 
         if (BalaclavaUtils.isBalaclavaItem(event.getOldItem()) && !BalaclavaUtils.isBalaclavaItem(event.getNewItem())) {
-            BalaclavaUtils.obfuscate(event.getPlayer(), false);
+            BalaclavaUtils.hideNameTag(event.getPlayer(), false);
         }
 
         /* ---- Night vision ---- */

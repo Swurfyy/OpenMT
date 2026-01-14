@@ -2,7 +2,6 @@ package nl.openminetopia.modules.police.utils;
 
 import lombok.experimental.UtilityClass;
 import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -10,12 +9,12 @@ import org.bukkit.inventory.ItemStack;
 @UtilityClass
 public class BalaclavaUtils {
 
-    public void obfuscate(Player player, boolean obfuscate) {
-        if (obfuscate) {
-            player.displayName(ChatUtils.color("<obf>Balaclava</obf><reset>"));
-            return;
+    public void hideNameTag(Player player, boolean hide) {
+        if (hide) {
+            BalaclavaNameTagManager.getInstance().hideNameTag(player);
+        } else {
+            BalaclavaNameTagManager.getInstance().showNameTag(player);
         }
-        player.displayName(ChatUtils.color(player.getName()));
     }
 
     public boolean isBalaclavaItem(ItemStack head) {
