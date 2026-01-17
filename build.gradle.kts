@@ -25,6 +25,7 @@ repositories {
     maven("https://repo.fancyplugins.de/releases")
     maven("https://dist.labymod.net/api/v1/maven/release/")
     maven("https://repo.triumphteam.dev/snapshots/")
+    maven("https://repo.nez.io/releases")
 }
 
 dependencies {
@@ -92,6 +93,9 @@ dependencies {
 
     /* Labymod */
     compileOnly("net.labymod.serverapi:server-bukkit:1.0.6")
+
+    /* TAB API */
+    compileOnly("com.github.NEZNAMY:TAB-API:5.4.0")
 }
 
 val targetJavaVersion = 21

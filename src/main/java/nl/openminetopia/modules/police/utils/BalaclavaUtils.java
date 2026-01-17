@@ -13,9 +13,9 @@ public class BalaclavaUtils {
         if (player == null) return;
 
         if (hide) {
-            BalaclavaNameTagManager.getInstance().hideNameTag(player);
+            TabNametagManager.getInstance().hideNameTag(player);
         } else {
-            BalaclavaNameTagManager.getInstance().showNameTag(player);
+            TabNametagManager.getInstance().showNameTag(player);
         }
     }
 

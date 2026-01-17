@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -20,6 +21,18 @@ public class BalaclavaInteractListener implements Listener {
 
         ItemStack itemInHand = event.getItem();
         if (itemInHand == null || !BalaclavaUtils.isBalaclavaItem(itemInHand)) {
+            return;
+        }
+
+        EquipmentSlot hand = event.getHand();
+        if (hand == null) {
+            return;
+        }
+
+        // Check if player already has a balaclava on
+        if (BalaclavaUtils.isWearingBalaclava(event.getPlayer())) {
+            event.setCancelled(true);
+            event.getPlayer().sendMessage(ChatUtils.color("<red>Je hebt al een bivakmuts op, oen!"));
             return;
         }
 
@@ -42,14 +55,23 @@ public class BalaclavaInteractListener implements Listener {
         // Set the helmet (only 1 item)
         event.getPlayer().getInventory().setHelmet(itemToWear);
 
-        // Remove 1 item from the hand
+        // Remove 1 item from the correct hand (main hand or offhand)
         ItemStack remainingItem = itemInHand.clone();
         remainingItem.setAmount(itemInHand.getAmount() - 1);
 
-        if (remainingItem.getAmount() > 0) {
-            event.getPlayer().getInventory().setItemInMainHand(remainingItem);
+        if (hand == EquipmentSlot.OFF_HAND) {
+            if (remainingItem.getAmount() > 0) {
+                event.getPlayer().getInventory().setItemInOffHand(remainingItem);
+            } else {
+                event.getPlayer().getInventory().setItemInOffHand(null);
+            }
         } else {
-            event.getPlayer().getInventory().setItemInMainHand(null);
+            // EquipmentSlot.HAND (main hand)
+            if (remainingItem.getAmount() > 0) {
+                event.getPlayer().getInventory().setItemInMainHand(remainingItem);
+            } else {
+                event.getPlayer().getInventory().setItemInMainHand(null);
+            }
         }
 
         event.getPlayer().sendMessage(ChatUtils.color("<dark_aqua>Je hebt een bivakmuts op je hoofd gezet."));

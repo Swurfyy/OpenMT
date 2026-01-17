@@ -29,3 +29,6 @@ dependencies:
     LabyModServerAPI:
       load: BEFORE
       required: false
+    TAB:
+      load: AFTER
+      required: false
