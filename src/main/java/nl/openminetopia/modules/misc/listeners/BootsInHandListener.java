@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -75,22 +76,52 @@ public class BootsInHandListener implements Listener {
         }
 
         // Check for modifiers without FEET restriction (old boots)
+        // We detect old boots by checking if modifiers work in MAIN_HAND or OFF_HAND
+        // New boots with FEET restriction won't have modifiers for these slots
         List<AttributeModifier> oldModifiers = new ArrayList<>();
+        
+        // Collect all modifiers that work in hands (MAIN_HAND or OFF_HAND)
+        // These are old modifiers that need to be fixed
         for (AttributeModifier modifier : meta.getAttributeModifiers(movementSpeed)) {
-            // Check if modifier doesn't have EquipmentSlotGroup.FEET restriction
-            // In Paper/Spigot API, if getSlot() returns null, it works everywhere
-            // We need to check if it's restricted to FEET or not
-            EquipmentSlotGroup slotGroup = modifier.slot();
+            double speedValue = modifier.amount();
+            int level = (int) Math.round(speedValue / 0.01);
             
-            // If slotGroup is null, it works everywhere (old behavior)
-            // If slotGroup is not FEET, we also want to fix it
-            if (slotGroup == null || slotGroup != EquipmentSlotGroup.FEET) {
-                // Calculate level from speed value (level * 0.01 = speed)
-                double speedValue = modifier.amount();
-                int level = (int) Math.round(speedValue / 0.01);
+            // Only fix level 3+ boots (0.03+ speed) - these should never work in hand
+            if (level < 3) {
+                continue;
+            }
+            
+            // Check if this modifier works in MAIN_HAND or OFF_HAND
+            boolean worksInMainHand = false;
+            boolean worksInOffHand = false;
+            
+            if (meta.getAttributeModifiers(EquipmentSlot.MAIN_HAND) != null &&
+                meta.getAttributeModifiers(EquipmentSlot.MAIN_HAND).containsKey(movementSpeed)) {
+                worksInMainHand = meta.getAttributeModifiers(EquipmentSlot.MAIN_HAND)
+                    .get(movementSpeed).contains(modifier);
+            }
+            
+            if (meta.getAttributeModifiers(EquipmentSlot.OFF_HAND) != null &&
+                meta.getAttributeModifiers(EquipmentSlot.OFF_HAND).containsKey(movementSpeed)) {
+                worksInOffHand = meta.getAttributeModifiers(EquipmentSlot.OFF_HAND)
+                    .get(movementSpeed).contains(modifier);
+            }
+            
+            // If modifier works in hands, it's an old modifier that needs fixing
+            if (worksInMainHand || worksInOffHand) {
+                oldModifiers.add(modifier);
+            } else {
+                // Check if modifier is NOT restricted to FEET only
+                // If it doesn't work in FEET specifically, it might work everywhere (old behavior)
+                boolean worksInFeet = false;
+                if (meta.getAttributeModifiers(EquipmentSlot.FEET) != null &&
+                    meta.getAttributeModifiers(EquipmentSlot.FEET).containsKey(movementSpeed)) {
+                    worksInFeet = meta.getAttributeModifiers(EquipmentSlot.FEET)
+                        .get(movementSpeed).contains(modifier);
+                }
                 
-                // Only fix level 3+ boots (0.03+ speed) - these should never work in hand
-                if (level >= 3) {
+                // If it doesn't work in FEET specifically, it works everywhere (old behavior)
+                if (!worksInFeet) {
                     oldModifiers.add(modifier);
                 }
             }
