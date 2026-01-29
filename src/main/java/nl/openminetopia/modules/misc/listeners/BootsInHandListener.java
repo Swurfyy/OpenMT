@@ -80,10 +80,10 @@ public class BootsInHandListener implements Listener {
         // New boots with FEET restriction won't have modifiers for these slots
         List<AttributeModifier> oldModifiers = new ArrayList<>();
         
-        // Collect all modifiers that work in hands (MAIN_HAND or OFF_HAND)
+        // Collect all modifiers that work in hands (HAND or OFF_HAND)
         // These are old modifiers that need to be fixed
         for (AttributeModifier modifier : meta.getAttributeModifiers(movementSpeed)) {
-            double speedValue = modifier.amount();
+            double speedValue = modifier.getAmount();
             int level = (int) Math.round(speedValue / 0.01);
             
             // Only fix level 3+ boots (0.03+ speed) - these should never work in hand
@@ -91,13 +91,13 @@ public class BootsInHandListener implements Listener {
                 continue;
             }
             
-            // Check if this modifier works in MAIN_HAND or OFF_HAND
-            boolean worksInMainHand = false;
+            // Check if this modifier works in HAND or OFF_HAND
+            boolean worksInHand = false;
             boolean worksInOffHand = false;
             
-            if (meta.getAttributeModifiers(EquipmentSlot.MAIN_HAND) != null &&
-                meta.getAttributeModifiers(EquipmentSlot.MAIN_HAND).containsKey(movementSpeed)) {
-                worksInMainHand = meta.getAttributeModifiers(EquipmentSlot.MAIN_HAND)
+            if (meta.getAttributeModifiers(EquipmentSlot.HAND) != null &&
+                meta.getAttributeModifiers(EquipmentSlot.HAND).containsKey(movementSpeed)) {
+                worksInHand = meta.getAttributeModifiers(EquipmentSlot.HAND)
                     .get(movementSpeed).contains(modifier);
             }
             
@@ -108,7 +108,7 @@ public class BootsInHandListener implements Listener {
             }
             
             // If modifier works in hands, it's an old modifier that needs fixing
-            if (worksInMainHand || worksInOffHand) {
+            if (worksInHand || worksInOffHand) {
                 oldModifiers.add(modifier);
             } else {
                 // Check if modifier is NOT restricted to FEET only
@@ -136,14 +136,14 @@ public class BootsInHandListener implements Listener {
 
             // Add new modifiers with FEET restriction
             for (AttributeModifier oldModifier : oldModifiers) {
-                double speedValue = oldModifier.amount();
+                double speedValue = oldModifier.getAmount();
                 NamespacedKey newKey = new NamespacedKey(OpenMinetopia.getInstance(), 
                     "speed_boost_" + UUID.randomUUID());
                 
                 AttributeModifier newModifier = new AttributeModifier(
                     newKey,
                     speedValue,
-                    oldModifier.operation(),
+                    oldModifier.getOperation(),
                     EquipmentSlotGroup.FEET
                 );
                 
