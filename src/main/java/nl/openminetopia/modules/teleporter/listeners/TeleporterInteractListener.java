@@ -3,11 +3,13 @@ package nl.openminetopia.modules.teleporter.listeners;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.modules.police.chase.ChaseManager;
 import nl.openminetopia.modules.teleporter.events.PlayerUseTeleporterEvent;
 import nl.openminetopia.modules.teleporter.tasks.TeleporterCountdownTask;
 import nl.openminetopia.modules.teleporter.utils.TeleporterCooldownManager;
 import nl.openminetopia.modules.teleporter.utils.TeleporterTaskManager;
 import nl.openminetopia.modules.teleporter.utils.TeleporterUtil;
+import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.events.EventUtils;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -17,7 +19,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class TeleporterInteractListener implements Listener {
+
+    // Track when players last received the chase message to prevent spam
+    private final Map<UUID, Long> lastChaseMessageTime = new HashMap<>();
+    private static final long MESSAGE_COOLDOWN_MS = 3000; // 3 seconds
 
     @EventHandler
     public void pressPlate(final PlayerInteractEvent event) {
@@ -53,6 +63,21 @@ public class TeleporterInteractListener implements Listener {
             Component cooldownMessage = Component.text("Je moet nog " + remainingSeconds + " seconden wachten voordat je opnieuw kunt teleporteren!")
                     .color(NamedTextColor.RED);
             player.sendMessage(cooldownMessage);
+            return;
+        }
+
+        // Check if player is being chased (in "/volg")
+        ChaseManager chaseManager = ChaseManager.getInstance();
+        if (chaseManager.isBeingChased(player)) {
+            // Only show message once every 3 seconds to prevent spam
+            UUID playerId = player.getUniqueId();
+            long currentTime = System.currentTimeMillis();
+            Long lastMessageTime = lastChaseMessageTime.get(playerId);
+            
+            if (lastMessageTime == null || (currentTime - lastMessageTime) >= MESSAGE_COOLDOWN_MS) {
+                player.sendMessage(ChatUtils.color("<red>Je kan de metro niet gebruiken in achtervolgingen!"));
+                lastChaseMessageTime.put(playerId, currentTime);
+            }
             return;
         }
 

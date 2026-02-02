@@ -37,6 +37,12 @@ public class EmergencyCommand extends BaseCommand {
         // Set cooldown and broadcast
         OpenMinetopia.getModuleManager().get(PoliceModule.class).getEmergencyCooldowns().put(player.getUniqueId(), System.currentTimeMillis());
         broadcastEmergency(message, sender);
+        
+        // Send feedback to the player
+        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+        if (minetopiaPlayer != null) {
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, "<light_green>Je 112 melding is naar de meldkamer verstuurd!");
+        }
     }
 
     private void broadcastEmergency(String message, CommandSender sender) {

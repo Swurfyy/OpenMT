@@ -42,9 +42,9 @@ public class ChaseCommand extends BaseCommand {
             return;
         }
 
-        // Check if agent is within 10 blocks of target
+        // Check if agent is within 20 blocks of target
         double distance = player.getLocation().distance(target.getLocation());
-        if (distance > 10) {
+        if (distance > 20) {
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_chase_too_far"));
             return;
         }
@@ -52,11 +52,8 @@ public class ChaseCommand extends BaseCommand {
         // Start the chase
         chaseManager.startChase(player, target);
         
-        // Send chase message to target
-        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
-        if (targetMinetopiaPlayer != null) {
-            ChatUtils.sendFormattedMessage(targetMinetopiaPlayer, MessageConfiguration.message("police_chase_started"));
-        }
+        // Send chase message to target (using sendMessage for direct MiniMessage parsing)
+        ChatUtils.sendMessage(target, MessageConfiguration.message("police_chase_started"));
         
         // Send confirmation to agent
         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_chase_started_by_agent")

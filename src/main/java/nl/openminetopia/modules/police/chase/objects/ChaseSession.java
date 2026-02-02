@@ -30,10 +30,7 @@ public class ChaseSession {
             autoStopTask.cancel();
         }
         
-        // Send stop message to target
-        MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
-        if (targetMinetopiaPlayer != null) {
-            ChatUtils.sendFormattedMessage(targetMinetopiaPlayer, MessageConfiguration.message("police_chase_stopped"));
-        }
+        // Send stop message to target (using sendMessage for direct MiniMessage parsing)
+        ChatUtils.sendMessage(target, MessageConfiguration.message("police_chase_stopped"));
     }
 }

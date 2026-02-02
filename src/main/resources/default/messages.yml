@@ -197,7 +197,7 @@ police_chase_stopped: "<light_red>De achtervolging is gestaakt."
 police_chase_stopped_by_agent: "<green>De achtervolging van <dark_green><player> <green>is gestaakt."
 police_chase_started_by_agent: "<green>Je hebt een achtervolging gestart tegen <dark_green><player><green>."
 police_chase_self: "<red>Je kunt jezelf niet achtervolgen!"
-police_chase_too_far: "<red>De speler is te ver weg! (maximaal 10 blokken)."
+police_chase_too_far: "<red>De speler is te ver weg! (maximaal 20 blokken)."
 
 # Staffchat
 staff_chat_format: "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b><world_name></b><dark_gray>) <green><player><white>: <message>"
