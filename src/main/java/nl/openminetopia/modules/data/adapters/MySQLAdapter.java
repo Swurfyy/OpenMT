@@ -22,6 +22,10 @@ import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.prefix.models.PrefixModel;
+import nl.openminetopia.modules.belasting.models.TaxExclusionModel;
+import nl.openminetopia.modules.belasting.models.TaxInvoiceModel;
+import nl.openminetopia.modules.belasting.models.TaxInvoicePlotModel;
+import nl.openminetopia.modules.data.storm.adapters.InvoiceStatusAdapter;
 import nl.openminetopia.modules.transactions.adapter.TransactionTypeAdapter;
 import nl.openminetopia.modules.transactions.enums.TransactionType;
 import nl.openminetopia.modules.transactions.objects.TransactionModel;
@@ -63,6 +67,7 @@ public class MySQLAdapter implements DatabaseAdapter {
         TypeRegistry.registerAdapter(Boolean.class, new FixedBooleanAdapter());
         TypeRegistry.registerAdapter(TransactionType.class, new TransactionTypeAdapter());
         TypeRegistry.registerAdapter(Long.class, new LongTypeAdapter());
+        TypeRegistry.registerAdapter(nl.openminetopia.modules.belasting.enums.InvoiceStatus.class, new InvoiceStatusAdapter());
 
         registerStormModel(new BankAccountModel());
         registerStormModel(new BankPermissionModel());
@@ -74,6 +79,9 @@ public class MySQLAdapter implements DatabaseAdapter {
         registerStormModel(new CriminalRecordModel());
         registerStormModel(new TransactionModel());
         registerStormModel(new CurrencyModel());
+        registerStormModel(new TaxInvoiceModel());
+        registerStormModel(new TaxInvoicePlotModel());
+        registerStormModel(new TaxExclusionModel());
     }
 
     @SneakyThrows

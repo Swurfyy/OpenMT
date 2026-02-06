@@ -1,11 +1,12 @@
 plugins {
     java
-    id("io.freefair.lombok") version "8.13.1"
+    id("io.freefair.lombok") version "8.14.4"
     id("com.gradleup.shadow") version "8.3.6"
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.18"
     id("maven-publish")
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
+
 
 group = "nl.openminetopia"
 version = "1.4.0"
@@ -29,6 +30,10 @@ repositories {
 }
 
 dependencies {
+    /* Lombok: pin version compatible with current JDK (fixes ExceptionInInitializerError / TypeTag UNKNOWN) */
+    compileOnly("org.projectlombok:lombok:1.18.34")
+    annotationProcessor("org.projectlombok:lombok:1.18.34")
+
     /* Paper */
     paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
 
@@ -98,16 +103,17 @@ dependencies {
     compileOnly("com.github.NEZNAMY:TAB-API:5.4.0")
 }
 
+configurations.all {
+    resolutionStrategy.force("org.projectlombok:lombok:1.18.34")
+}
+
 val targetJavaVersion = 21
 java {
     val javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
     targetCompatibility = javaVersion
-
-    if (JavaVersion.current() < javaVersion) {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
-        }
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
     }
 }
 

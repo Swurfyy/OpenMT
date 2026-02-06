@@ -1,0 +1,75 @@
+belasting:
+  tax-interval-days: 14
+  tax-calculation:
+    mode: PERCENTAGE
+    value: 0.5
+  last-cycle-run: 0
+
+  gui:
+    title: '<dark_gray>Belasting betalen'
+    rows: 3
+    slots:
+      confirm: 13
+      decline: 15
+      info: 4
+      background:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 14
+        - 16
+        - 17
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+    itemsadder:
+      confirm: 'openminetopia:belasting_confirm'
+      decline: 'openminetopia:belasting_decline'
+      info: 'openminetopia:belasting_info'
+      background: 'openminetopia:belasting_background'
+    fallback-material:
+      confirm: LIME_CONCRETE
+      decline: RED_CONCRETE
+      info: PAPER
+      background: GRAY_STAINED_GLASS_PANE
+
+  messages:
+    login-unpaid: '<green>Je hebt nog</green> <red>één OPEN belastingsbrief</red> <green>Betaal deze onmiddellijk!</green>'
+    gui-total: '<gray>Totaal te betalen: <yellow><amount>'
+    paid-success: '<green>Belasting betaald. Bedrag <yellow><amount> <green>is afgeschreven.</green>'
+    paid-insufficient: '<red>Je hebt niet genoeg saldo om deze belasting te betalen.</red>'
+    no-invoice: '<gray>Je hebt geen openstaande belastingsbrief.</gray>'
+    exclude-added: '<green>Speler <yellow><player> <green>is uitgesloten voor <yellow><duration><green>.</green>'
+    exclude-removed: '<green>Uitsluiting voor <yellow><player> <green>verlopen.</green>'
+    admin-no-invoices: '<gray>Geen facturen gevonden.</gray>'
+    time-format-invalid: '<red>Ongeldig tijdformaat. Gebruik bijv. 30m, 2h of 7d.</red>'
+    player-not-found: '<red>Speler niet gevonden.</red>'
+    simulate-done: '<green>Belastingcyclus gesimuleerd. <yellow><count> <green>nieuwe factuur/facturen aangemaakt. Gebruik /belasting admin unpaid om te controleren.</green>'
+    simulate-no-plots: '<yellow>Geen plot-eigenaren met WoZ gevonden. Geen facturen aangemaakt.</yellow>'
+    reset-cycle-done: '<green>Laatste cyclustijd gereset. Volgende (gesimuleerde of geplande) run zal opnieuw facturen aanmaken.</green>'
+    open-gui-opened: '<green>Betalings-GUI geopend voor <yellow><player><green>.</green>'
+    open-gui-no-invoice: '<yellow>Speler <white><player> <yellow>heeft geen openstaande factuur.</yellow>'
+    open-gui-not-online: '<red>Speler moet online zijn om de GUI te openen.</red>'
+
+  commands:
+    base: belasting
+    permission-admin: openminetopia.belasting.admin
+    permission-exclude: openminetopia.belasting.exclude
+
+  storage:
+    driver: storm
