@@ -21,7 +21,7 @@ public class BelastingAdminResetCycleCommand extends BaseCommand {
         BelastingModule module = OpenMinetopia.getModuleManager().get(BelastingModule.class);
         BelastingConfiguration config = module.getConfig();
 
-        module.getConfig().setLastCycleRun(0);
+        module.getConfig().setLastAndNextCycleRun(0, 0);
         ChatUtils.sendMessage(sender, config.getMessageResetCycleDone());
     }
 }

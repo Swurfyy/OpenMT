@@ -24,7 +24,7 @@ public class BelastingAdminSimulateCommand extends BaseCommand {
         module.getTaxService().runCycleForced().thenAccept(count -> {
             OpenMinetopia.getInstance().getServer().getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
                 if (count == null || count == 0) {
-                    ChatUtils.sendMessage(sender, config.getMessageSimulateNoPlots());
+                    ChatUtils.sendMessage(sender, config.getMessageSimulateNoNewInvoices());
                 } else {
                     String msg = config.getMessageSimulateDone().replace("<count>", String.valueOf(count));
                     ChatUtils.sendMessage(sender, msg);

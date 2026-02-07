@@ -17,6 +17,7 @@ public class BelastingGUIManager {
 
     public void openPaymentGui(Player player, TaxInvoiceModel invoice) {
         if (invoice == null) return;
-        new BelastingPaymentMenu(player, invoice, taxService, config).open(player);
+        BelastingPaymentMenu menu = new BelastingPaymentMenu(player, invoice, taxService, config);
+        menu.openWithDelay(player);
     }
 }

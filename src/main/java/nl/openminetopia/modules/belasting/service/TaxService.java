@@ -3,6 +3,8 @@ package nl.openminetopia.modules.belasting.service;
 import nl.openminetopia.modules.belasting.calculator.PlotTaxCalculator;
 import nl.openminetopia.modules.belasting.calculator.PlotTaxEntry;
 import nl.openminetopia.modules.belasting.configuration.BelastingConfiguration;
+import nl.openminetopia.modules.belasting.configuration.BelastingScheduleConfiguration;
+import nl.openminetopia.modules.belasting.configuration.CycleWindow;
 import nl.openminetopia.modules.belasting.enums.InvoiceStatus;
 import nl.openminetopia.modules.belasting.models.TaxExclusionModel;
 import nl.openminetopia.modules.belasting.models.TaxInvoiceModel;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 public class TaxService {
 
     private final BelastingConfiguration config;
+    private final BelastingScheduleConfiguration schedule;
     private final BelastingRepository repository;
     private final PlotTaxCalculator calculator;
     private final Set<UUID> excludedCache = ConcurrentHashMap.newKeySet();
@@ -28,8 +31,9 @@ public class TaxService {
 
     private static final long EXCLUSION_CACHE_MS = 60_000;
 
-    public TaxService(BelastingConfiguration config, BelastingRepository repository, PlotTaxCalculator calculator) {
+    public TaxService(BelastingConfiguration config, BelastingScheduleConfiguration schedule, BelastingRepository repository, PlotTaxCalculator calculator) {
         this.config = config;
+        this.schedule = schedule;
         this.repository = repository;
         this.calculator = calculator;
     }
@@ -68,16 +72,22 @@ public class TaxService {
 
     public CompletableFuture<Void> runCycle() {
         long now = System.currentTimeMillis();
-        long lastRun = config.getLastCycleRun();
-        long intervalMs = (long) config.getTaxIntervalDays() * 24 * 60 * 60 * 1000;
-        if (lastRun > 0 && (now - lastRun) < intervalMs) {
+        CycleWindow current = schedule != null ? schedule.getCurrentCycle(now) : null;
+        if (current == null) {
+            return CompletableFuture.completedFuture(null);
+        }
+        long lastRun = config.getLastCycleRunMillis();
+        if (lastRun == current.startMs()) {
             return CompletableFuture.completedFuture(null);
         }
 
         refreshExclusionCacheIfNeeded();
         Set<UUID> ownerUuids = collectOwnerUuids();
+        long cycleStart = current.startMs();
+        long nextStart = schedule.getNextCycleStart(now);
+
         if (ownerUuids.isEmpty()) {
-            config.setLastCycleRun(now);
+            config.setLastAndNextCycleRun(cycleStart, nextStart);
             return CompletableFuture.completedFuture(null);
         }
 
@@ -96,17 +106,21 @@ public class TaxService {
         }
 
         CompletableFuture<Void> all = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
-        return all.thenRun(() -> config.setLastCycleRun(now));
+        return all.whenComplete((v, ex) -> config.setLastAndNextCycleRun(cycleStart, nextStart));
     }
 
     public CompletableFuture<Integer> runCycleForced() {
         long now = System.currentTimeMillis();
         refreshExclusionCacheIfNeeded();
         Set<UUID> ownerUuids = collectOwnerUuids();
+        long cs = schedule != null ? schedule.getCurrentCycleStart(now) : 0;
+        final long nextStart = schedule != null ? schedule.getNextCycleStart(now) : 0;
+
         if (ownerUuids.isEmpty()) {
-            config.setLastCycleRun(now);
+            if (cs > 0) config.setLastAndNextCycleRun(now, nextStart);
             return CompletableFuture.completedFuture(0);
         }
+        final long cycleStart = cs > 0 ? cs : now;
         List<CompletableFuture<Integer>> futures = new ArrayList<>();
         for (UUID owner : ownerUuids) {
             CompletableFuture<Integer> step = isExcluded(owner)
@@ -124,7 +138,9 @@ public class TaxService {
                         .mapToInt(f -> f.join() != null ? f.join() : 0)
                         .sum());
         return all.thenApply(count -> {
-            config.setLastCycleRun(now);
+            if (schedule != null && schedule.getCycleByStart(cycleStart) != null) {
+                config.setLastAndNextCycleRun(cycleStart, nextStart);
+            }
             return count;
         });
     }
@@ -186,6 +202,23 @@ public class TaxService {
         return repository.getAllInvoices();
     }
 
+    /**
+     * Returns only invoices from the last run cycle (the cycle whose start is last-cycle-run).
+     * Used by admin commands so they show only the latest cycle.
+     */
+    public CompletableFuture<List<TaxInvoiceModel>> getInvoicesForLastCycle() {
+        long lastRun = config.getLastCycleRunMillis();
+        if (lastRun <= 0 || schedule == null) return CompletableFuture.completedFuture(List.of());
+        CycleWindow cycle = schedule.getCycleByStart(lastRun);
+        if (cycle == null) return CompletableFuture.completedFuture(List.of());
+        return repository.getAllInvoices().thenApply(invoices ->
+                invoices.stream()
+                        .filter(inv -> inv.getCreatedAt() != null
+                                && inv.getCreatedAt() >= cycle.startMs()
+                                && inv.getCreatedAt() <= cycle.endMs())
+                        .toList());
+    }
+
     public CompletableFuture<List<TaxInvoicePlotModel>> getPlotRows(int invoiceId) {
         return repository.getPlotRows(invoiceId);
     }
@@ -195,11 +228,18 @@ public class TaxService {
     }
 
     public CompletableFuture<Void> addExclusion(UUID playerUuid, long expiresAt) {
-        TaxExclusionModel model = new TaxExclusionModel();
-        model.setPlayerUuid(playerUuid);
-        model.setExpiresAt(expiresAt);
         addToExclusionCache(playerUuid);
-        return repository.saveExclusion(model);
+        return repository.getExclusion(playerUuid)
+                .thenCompose(existing -> {
+                    if (existing != null) {
+                        existing.setExpiresAt(expiresAt);
+                        return repository.saveExclusion(existing);
+                    }
+                    TaxExclusionModel model = new TaxExclusionModel();
+                    model.setPlayerUuid(playerUuid);
+                    model.setExpiresAt(expiresAt);
+                    return repository.saveExclusion(model);
+                });
     }
 
     public CompletableFuture<Void> cleanupExpiredExclusions() {

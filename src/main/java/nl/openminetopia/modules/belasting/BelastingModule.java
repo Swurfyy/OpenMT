@@ -7,6 +7,7 @@ import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.belasting.calculator.PlotTaxCalculator;
 import nl.openminetopia.modules.belasting.commands.*;
 import nl.openminetopia.modules.belasting.configuration.BelastingConfiguration;
+import nl.openminetopia.modules.belasting.configuration.BelastingScheduleConfiguration;
 import nl.openminetopia.modules.belasting.gui.BelastingGUIManager;
 import nl.openminetopia.modules.belasting.listeners.BelastingLoginListener;
 import nl.openminetopia.modules.belasting.service.TaxService;
@@ -20,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 public class BelastingModule extends ExtendedSpigotModule {
 
     private BelastingConfiguration config;
+    private BelastingScheduleConfiguration schedule;
     private BelastingRepository repository;
     private PlotTaxCalculator calculator;
     private TaxService taxService;
@@ -36,9 +38,12 @@ public class BelastingModule extends ExtendedSpigotModule {
         config = new BelastingConfiguration(OpenMinetopia.getInstance().getDataFolder());
         config.saveConfiguration();
 
+        schedule = new BelastingScheduleConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        schedule.saveConfiguration();
+
         repository = new BelastingRepository();
         calculator = new PlotTaxCalculator(config);
-        taxService = new TaxService(config, repository, calculator);
+        taxService = new TaxService(config, schedule, repository, calculator);
         guiManager = new BelastingGUIManager(taxService, config);
 
         registerComponent(new BelastingCommand());
@@ -52,9 +57,8 @@ public class BelastingModule extends ExtendedSpigotModule {
         registerComponent(new BelastingAdminOpenGuiCommand());
         registerComponent(new BelastingLoginListener());
 
-        long intervalTicks = (long) config.getTaxIntervalDays() * 24 * 60 * 60 * 20L;
         cycleTask = new BelastingCycleTask(this);
-        cycleTask.runTaskTimer(OpenMinetopia.getInstance(), 200L, Math.max(intervalTicks, 6000L));
+        cycleTask.runTaskTimer(OpenMinetopia.getInstance(), 200L, 72000L);
 
         exclusionCleanupTask = new BelastingExclusionCleanupTask(this);
         exclusionCleanupTask.runTaskTimer(OpenMinetopia.getInstance(), 36000L, 36000L);
@@ -64,5 +68,25 @@ public class BelastingModule extends ExtendedSpigotModule {
     public void onDisable() {
         if (cycleTask != null) cycleTask.cancel();
         if (exclusionCleanupTask != null) exclusionCleanupTask.cancel();
+    }
+
+    /**
+     * Reloads belasting config and all dependent services (calculator, taxService, guiManager, cycle task).
+     * Call this when /omt reload is executed so GUI, messages, intervals and slot layout use the new config.
+     */
+    public void reload() {
+        config = new BelastingConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        config.saveConfiguration();
+
+        schedule = new BelastingScheduleConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        schedule.saveConfiguration();
+
+        calculator = new PlotTaxCalculator(config);
+        taxService = new TaxService(config, schedule, repository, calculator);
+        guiManager = new BelastingGUIManager(taxService, config);
+
+        if (cycleTask != null) cycleTask.cancel();
+        cycleTask = new BelastingCycleTask(this);
+        cycleTask.runTaskTimer(OpenMinetopia.getInstance(), 200L, 72000L);
     }
 }

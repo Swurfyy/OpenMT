@@ -9,6 +9,7 @@ import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
+import nl.openminetopia.modules.belasting.BelastingModule;
 import nl.openminetopia.modules.books.BooksModule;
 import nl.openminetopia.modules.books.configuration.BooksConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
@@ -63,6 +64,9 @@ public class OpenMinetopiaCommand extends BaseCommand {
 
         ItemsModule module = OpenMinetopia.getModuleManager().get(ItemsModule.class);
         module.reload();
+
+        BelastingModule belastingModule = OpenMinetopia.getModuleManager().get(BelastingModule.class);
+        if (belastingModule != null) belastingModule.reload();
 
         sender.sendMessage(ChatUtils.color("<gold>De configuratiebestanden zijn succesvol herladen!"));
     }

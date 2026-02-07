@@ -25,7 +25,7 @@ public class BelastingAdminListCommand extends BaseCommand {
     public void onList(CommandSender sender) {
         BelastingModule module = OpenMinetopia.getModuleManager().get(BelastingModule.class);
         BelastingConfiguration config = module.getConfig();
-        module.getTaxService().getAllInvoices().thenCompose(invoices -> {
+        module.getTaxService().getInvoicesForLastCycle().thenCompose(invoices -> {
             if (invoices.isEmpty()) {
                 runSync(() -> ChatUtils.sendMessage(sender, config.getMessageAdminNoInvoices()));
                 return CompletableFuture.<Void>completedFuture(null);

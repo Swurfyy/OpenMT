@@ -23,7 +23,7 @@ public class BelastingRepository {
                     invoice.setId(id);
                     for (TaxInvoicePlotModel row : plotRows) {
                         row.setInvoiceId(id);
-                        StormDatabase.getInstance().saveStormModel(row);
+                        StormDatabase.getInstance().saveStormModel(row).join();
                     }
                 }
                 future.complete(invoice);
