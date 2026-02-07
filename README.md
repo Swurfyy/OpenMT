@@ -1,4 +1,4 @@
-# ✨ OpenMinetopia ✨
+# ✨ OpenMinetopia - Eclipse Fork ✨
 [![](https://dcbadge.limes.pink/api/server/Tz6MebCjrw)]([https://discord.gg/Tz6MebCjrw](https://discord.gg/6SZ6Xz6XaR)) [![Modrinth](https://img.shields.io/badge/Modrinth-1D1F23?style=for-the-badge&logo=Modrinth&link=https://modrinth.com/plugin/openminetopia)](https://modrinth.com/plugin/openminetopia) [![Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white&link=https://ko-fi.com/openminetopia)](https://ko-fi.com/aaronduran)![JitPack](https://img.shields.io/jitpack/version/nl.openminetopia/openminetopia)
 
 
@@ -21,7 +21,8 @@ Dit project is volledig open-source en iedereen kan meehelpen aan de ontwikkelin
 * De [bijdragers](https://github.com/DuranDevelopment/openminetopia/graphs/contributors) van het project
 * MrWouter, voor het ontwikkelen van de eerste goede Minetopia plugin, [MinetopiaSDB](https://minetopiasdb.nl/). Veel van zijn ontwerpkeuzes hebben invloed gehad op dit project.
 * [LearnSpigot](https://learnspigot.com) voor hun oneindige steun en kennis
-* 
+* Swurfyy & EclipseMC voor hun input, PR's & reviews.
+* Cursor & chatGPT voor de oneindige kennis en hulp, want christ.
 
 # Licentie
 Dit project is gelicentieerd onder de [GNU General Public License 3.0](LICENSE).
