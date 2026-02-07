@@ -42,9 +42,9 @@ public class RestAPIModule extends ExtendedSpigotModule {
 
     private void initializeRestAPI() {
         try {
-            // Check if BankingModule is loaded and has data
+            // Check if BankingModule is loaded (empty account list is valid, e.g. fresh DB or before first login)
             BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
-            if (bankingModule == null || bankingModule.getBankAccountModels() == null || bankingModule.getBankAccountModels().isEmpty()) {
+            if (bankingModule == null || bankingModule.getBankAccountModels() == null) {
                 OpenMinetopia.getInstance().getLogger().warning("BankingModule not ready yet, retrying in 2 seconds...");
                 Bukkit.getScheduler().runTaskLater(OpenMinetopia.getInstance(), this::initializeRestAPI, 40L);
                 return;
