@@ -32,3 +32,9 @@ dependencies:
     TAB:
       load: AFTER
       required: false
+    BetterTeams:
+      load: BEFORE
+      required: true
+    DecentHolograms:
+      load: BEFORE
+      required: true

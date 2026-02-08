@@ -1,0 +1,34 @@
+# Reactor Module Configuration
+# Configureer de Nucleaire Reactor King Of The Hill feature
+
+# Zet deze feature aan/uit
+enabled: true
+
+# Instellingen voor de reactor
+settings:
+  # Aantal teams dat minimaal nodig is om te starten
+  required-teams: 3
+  
+  # Aantal leden per team dat minimaal online moet zijn
+  required-members-per-team: 2
+  
+  # Timer instellingen (in seconden)
+  timer:
+    # Maximale timer waarde (100 = 100 seconden = 100%)
+    max-timer: 100
+    
+    # Snelheid waarmee de timer omhoog gaat (per seconde)
+    increment-per-second: 1
+    
+    # Snelheid waarmee de timer omlaag gaat als niemand op staat (per seconde)
+    decrement-per-second: 1
+  
+  # Exhaustion (uitputting) instellingen
+  exhaustion:
+    # Duur van exhaustion na het claimen (in minuten)
+    duration-minutes: 30
+  
+  # Beloning instellingen
+  reward:
+    # Bedrag dat het team ontvangt bij het claimen
+    amount: 1000.0

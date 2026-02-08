@@ -39,7 +39,8 @@ public class BelastingModule extends ExtendedSpigotModule {
         config.saveConfiguration();
 
         schedule = new BelastingScheduleConfiguration(OpenMinetopia.getInstance().getDataFolder());
-        schedule.saveConfiguration();
+        // Don't save schedule here - it can corrupt the list format structure
+        // Only save if we need to add missing cycles, not on every load
 
         repository = new BelastingRepository();
         calculator = new PlotTaxCalculator(config);
@@ -79,7 +80,8 @@ public class BelastingModule extends ExtendedSpigotModule {
         config.saveConfiguration();
 
         schedule = new BelastingScheduleConfiguration(OpenMinetopia.getInstance().getDataFolder());
-        schedule.saveConfiguration();
+        // Don't save schedule here - it can corrupt the list format structure
+        // Only save if we need to add missing cycles, not on every reload
 
         calculator = new PlotTaxCalculator(config);
         taxService = new TaxService(config, schedule, repository, calculator);

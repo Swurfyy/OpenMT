@@ -68,6 +68,9 @@ public class OpenMinetopiaCommand extends BaseCommand {
         BelastingModule belastingModule = OpenMinetopia.getModuleManager().get(BelastingModule.class);
         if (belastingModule != null) belastingModule.reload();
 
+        nl.openminetopia.modules.reactor.ReactorModule reactorModule = OpenMinetopia.getModuleManager().get(nl.openminetopia.modules.reactor.ReactorModule.class);
+        if (reactorModule != null) reactorModule.reload();
+
         sender.sendMessage(ChatUtils.color("<gold>De configuratiebestanden zijn succesvol herladen!"));
     }
 

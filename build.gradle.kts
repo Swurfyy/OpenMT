@@ -26,7 +26,8 @@ repositories {
     maven("https://repo.fancyplugins.de/releases")
     maven("https://dist.labymod.net/api/v1/maven/release/")
     maven("https://repo.triumphteam.dev/snapshots/")
-    maven("https://repo.nez.io/releases")
+    // CodeMC repository (for NBT-API dependency of DecentHolograms)
+    maven("https://repo.codemc.io/repository/maven-public/")
 }
 
 dependencies {
@@ -101,6 +102,12 @@ dependencies {
 
     /* TAB API */
     compileOnly("com.github.NEZNAMY:TAB-API:5.4.0")
+
+    /* BetterTeams - provided at runtime, accessed via reflection */
+    // BetterTeams is not available via Maven, it must be installed on the server
+
+    /* DecentHolograms - via JitPack as per official documentation */
+    compileOnly("com.github.decentsoftware-eu:decentholograms:2.8.4")
 }
 
 configurations.all {
