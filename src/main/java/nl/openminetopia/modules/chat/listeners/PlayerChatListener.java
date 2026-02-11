@@ -41,7 +41,7 @@ public class PlayerChatListener implements Listener {
         if (minetopiaPlayer.isStaffchatEnabled()) return;
 
         PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
-        if (policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)) return;
+        if (policeModule != null && policeModule.getWalkieTalkieManager() != null && policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)) return;
 
         event.setCancelled(true);
 

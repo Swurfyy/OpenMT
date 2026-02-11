@@ -1,5 +1,6 @@
 package nl.openminetopia.modules.belasting.service;
 
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.modules.belasting.calculator.PlotTaxCalculator;
 import nl.openminetopia.modules.belasting.calculator.PlotTaxEntry;
 import nl.openminetopia.modules.belasting.configuration.BelastingConfiguration;
@@ -71,77 +72,141 @@ public class TaxService {
     }
 
     public CompletableFuture<Void> runCycle() {
-        long now = System.currentTimeMillis();
-        CycleWindow current = schedule != null ? schedule.getCurrentCycle(now) : null;
-        if (current == null) {
-            return CompletableFuture.completedFuture(null);
-        }
-        long lastRun = config.getLastCycleRunMillis();
-        if (lastRun == current.startMs()) {
-            return CompletableFuture.completedFuture(null);
-        }
+        return CompletableFuture.runAsync(() -> {
+            long now = System.currentTimeMillis();
+            CycleWindow current = schedule != null ? schedule.getCurrentCycle(now) : null;
+            if (current == null) {
+                OpenMinetopia.getInstance().getLogger().info("[Belasting] Geen actieve cycle gevonden, skip belasting run.");
+                return;
+            }
+            long lastRun = config.getLastCycleRunMillis();
+            if (lastRun == current.startMs()) {
+                OpenMinetopia.getInstance().getLogger().info("[Belasting] Cycle al uitgevoerd voor deze periode, skip.");
+                return;
+            }
 
-        refreshExclusionCacheIfNeeded();
-        Set<UUID> ownerUuids = collectOwnerUuids();
-        long cycleStart = current.startMs();
-        long nextStart = schedule.getNextCycleStart(now);
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Start belasting cycle verwerking...");
+            long startTime = System.currentTimeMillis();
+            
+            refreshExclusionCacheIfNeeded();
+            Set<UUID> ownerUuids = collectOwnerUuids();
+            long cycleStart = current.startMs();
+            long nextStart = schedule.getNextCycleStart(now);
 
-        if (ownerUuids.isEmpty()) {
-            config.setLastAndNextCycleRun(cycleStart, nextStart);
-            return CompletableFuture.completedFuture(null);
-        }
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Gevonden " + ownerUuids.size() + " plot eigenaren om te verwerken.");
 
-        List<CompletableFuture<?>> futures = new ArrayList<>();
-        for (UUID uuid : ownerUuids) {
-            UUID owner = uuid;
-            CompletableFuture<Void> step = isExcluded(owner)
-                    .thenCompose(excluded -> {
-                        if (excluded) return CompletableFuture.completedFuture(null);
-                        return repository.getUnpaidInvoice(owner).thenCompose(existing -> {
-                            if (existing != null) return CompletableFuture.completedFuture(null);
-                            return createInvoiceFor(owner);
+            if (ownerUuids.isEmpty()) {
+                config.setLastAndNextCycleRun(cycleStart, nextStart);
+                OpenMinetopia.getInstance().getLogger().info("[Belasting] Geen eigenaren gevonden, cycle voltooid.");
+                return;
+            }
+
+            List<CompletableFuture<?>> futures = new ArrayList<>();
+            final int[] counters = {0, 0, 0}; // processed, skipped, created
+            
+            for (UUID uuid : ownerUuids) {
+                UUID owner = uuid;
+                CompletableFuture<Void> step = isExcluded(owner)
+                        .thenCompose(excluded -> {
+                            if (excluded) {
+                                synchronized (counters) { counters[1]++; }
+                                return CompletableFuture.completedFuture(null);
+                            }
+                            return repository.getUnpaidInvoice(owner).thenCompose(existing -> {
+                                if (existing != null) {
+                                    synchronized (counters) { counters[1]++; }
+                                    return CompletableFuture.completedFuture(null);
+                                }
+                                synchronized (counters) { counters[2]++; }
+                                return createInvoiceFor(owner);
+                            });
                         });
-                    });
-            futures.add(step);
-        }
+                futures.add(step);
+                synchronized (counters) {
+                    counters[0]++;
+                    // Log progress every 50 owners
+                    if (counters[0] % 50 == 0) {
+                        OpenMinetopia.getInstance().getLogger().info("[Belasting] Verwerkt " + counters[0] + "/" + ownerUuids.size() + " eigenaren...");
+                    }
+                }
+            }
 
-        CompletableFuture<Void> all = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
-        return all.whenComplete((v, ex) -> config.setLastAndNextCycleRun(cycleStart, nextStart));
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+            long duration = System.currentTimeMillis() - startTime;
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Cycle voltooid! " + counters[2] + " nieuwe facturen aangemaakt, " + counters[1] + " overgeslagen. Duur: " + duration + "ms");
+            config.setLastAndNextCycleRun(cycleStart, nextStart);
+        }).exceptionally(ex -> {
+            OpenMinetopia.getInstance().getLogger().severe("[Belasting] Fout tijdens cycle verwerking: " + ex.getMessage());
+            ex.printStackTrace();
+            return null;
+        });
     }
 
     public CompletableFuture<Integer> runCycleForced() {
-        long now = System.currentTimeMillis();
-        refreshExclusionCacheIfNeeded();
-        Set<UUID> ownerUuids = collectOwnerUuids();
-        long cs = schedule != null ? schedule.getCurrentCycleStart(now) : 0;
-        final long nextStart = schedule != null ? schedule.getNextCycleStart(now) : 0;
+        return CompletableFuture.supplyAsync(() -> {
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Start geforceerde belasting cycle simulatie...");
+            long startTime = System.currentTimeMillis();
+            
+            long now = System.currentTimeMillis();
+            refreshExclusionCacheIfNeeded();
+            Set<UUID> ownerUuids = collectOwnerUuids();
+            long cs = schedule != null ? schedule.getCurrentCycleStart(now) : 0;
+            final long nextStart = schedule != null ? schedule.getNextCycleStart(now) : 0;
 
-        if (ownerUuids.isEmpty()) {
-            if (cs > 0) config.setLastAndNextCycleRun(now, nextStart);
-            return CompletableFuture.completedFuture(0);
-        }
-        final long cycleStart = cs > 0 ? cs : now;
-        List<CompletableFuture<Integer>> futures = new ArrayList<>();
-        for (UUID owner : ownerUuids) {
-            CompletableFuture<Integer> step = isExcluded(owner)
-                    .thenCompose(excluded -> {
-                        if (excluded) return CompletableFuture.completedFuture(0);
-                        return repository.getUnpaidInvoice(owner).thenCompose(existing -> {
-                            if (existing != null) return CompletableFuture.completedFuture(0);
-                            return createInvoiceFor(owner).thenApply(v -> 1);
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Gevonden " + ownerUuids.size() + " plot eigenaren om te verwerken.");
+
+            if (ownerUuids.isEmpty()) {
+                if (cs > 0) config.setLastAndNextCycleRun(now, nextStart);
+                OpenMinetopia.getInstance().getLogger().info("[Belasting] Geen eigenaren gevonden, simulatie voltooid.");
+                return 0;
+            }
+            final long cycleStart = cs > 0 ? cs : now;
+            List<CompletableFuture<Integer>> futures = new ArrayList<>();
+            final int[] counters = {0, 0, 0}; // processed, skipped, created
+            
+            for (UUID owner : ownerUuids) {
+                CompletableFuture<Integer> step = isExcluded(owner)
+                        .thenCompose(excluded -> {
+                            if (excluded) {
+                                synchronized (counters) { counters[1]++; }
+                                return CompletableFuture.completedFuture(0);
+                            }
+                            return repository.getUnpaidInvoice(owner).thenCompose(existing -> {
+                                if (existing != null) {
+                                    synchronized (counters) { counters[1]++; }
+                                    return CompletableFuture.completedFuture(0);
+                                }
+                                synchronized (counters) { counters[2]++; }
+                                return createInvoiceFor(owner).thenApply(v -> 1);
+                            });
                         });
-                    });
-            futures.add(step);
-        }
-        CompletableFuture<Integer> all = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
-                .thenApply(v -> futures.stream()
-                        .mapToInt(f -> f.join() != null ? f.join() : 0)
-                        .sum());
-        return all.thenApply(count -> {
+                futures.add(step);
+                synchronized (counters) {
+                    counters[0]++;
+                    // Log progress every 50 owners
+                    if (counters[0] % 50 == 0) {
+                        OpenMinetopia.getInstance().getLogger().info("[Belasting] Verwerkt " + counters[0] + "/" + ownerUuids.size() + " eigenaren...");
+                    }
+                }
+            }
+            
+            CompletableFuture<Integer> all = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                    .thenApply(v -> futures.stream()
+                            .mapToInt(f -> f.join() != null ? f.join() : 0)
+                            .sum());
+            
+            int count = all.join();
+            long duration = System.currentTimeMillis() - startTime;
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Simulatie voltooid! " + counters[2] + " nieuwe facturen aangemaakt, " + counters[1] + " overgeslagen. Duur: " + duration + "ms");
+            
             if (schedule != null && schedule.getCycleByStart(cycleStart) != null) {
                 config.setLastAndNextCycleRun(cycleStart, nextStart);
             }
             return count;
+        }).exceptionally(ex -> {
+            OpenMinetopia.getInstance().getLogger().severe("[Belasting] Fout tijdens geforceerde cycle simulatie: " + ex.getMessage());
+            ex.printStackTrace();
+            return 0;
         });
     }
 
@@ -149,12 +214,20 @@ public class TaxService {
         Set<UUID> out = new HashSet<>();
         com.sk89q.worldguard.protection.regions.RegionContainer container =
                 com.sk89q.worldguard.WorldGuard.getInstance().getPlatform().getRegionContainer();
-        if (container == null) return out;
+        if (container == null) {
+            OpenMinetopia.getInstance().getLogger().warning("[Belasting] WorldGuard container niet gevonden!");
+            return out;
+        }
 
+        int worldCount = 0;
+        int regionCount = 0;
+        
         for (World world : Bukkit.getWorlds()) {
+            worldCount++;
             var manager = container.get(com.sk89q.worldedit.bukkit.BukkitAdapter.adapt(world));
             if (manager == null) continue;
             for (var region : manager.getRegions().values()) {
+                regionCount++;
                 if (region.getFlag(PlotModule.PLOT_FLAG) == null) continue;
                 String wozRaw = region.getFlag(PlotModule.PLOT_WOZ);
                 if (wozRaw == null || wozRaw.trim().isEmpty()) continue;
@@ -168,6 +241,8 @@ public class TaxService {
                 out.addAll(region.getOwners().getUniqueIds());
             }
         }
+        
+        OpenMinetopia.getInstance().getLogger().info("[Belasting] Scanned " + worldCount + " worlds, " + regionCount + " regions, gevonden " + out.size() + " unieke eigenaren.");
         return out;
     }
 

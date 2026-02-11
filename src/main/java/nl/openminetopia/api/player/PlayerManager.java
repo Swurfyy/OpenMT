@@ -69,6 +69,22 @@ public class PlayerManager {
             return CompletableFuture.completedFuture(onlinePlayers.get(uuid));
         }
 
+        // Check if already loading - return existing future
+        if (loadingPlayers.containsKey(uuid)) {
+            CompletableFuture<MinetopiaPlayer> existingFuture = loadingPlayers.get(uuid);
+            
+            // If player is now online and future is complete, ensure it's in onlinePlayers
+            if (player.isOnline() && existingFuture.isDone() && !existingFuture.isCompletedExceptionally()) {
+                existingFuture.thenAccept(minetopiaPlayer -> {
+                    if (minetopiaPlayer != null) {
+                        onlinePlayers.putIfAbsent(uuid, minetopiaPlayer);
+                    }
+                });
+            }
+            
+            return existingFuture;
+        }
+
         // Prevent duplicate loads
         return loadingPlayers.computeIfAbsent(uuid, id -> {
             CompletableFuture<MinetopiaPlayer> future = new CompletableFuture<>();
@@ -82,6 +98,8 @@ public class PlayerManager {
 
                 MinetopiaPlayer minetopiaPlayer = new MinetopiaPlayer(uuid, playerModel);
                 minetopiaPlayer.load().join();
+                
+                // Add to onlinePlayers if player is online
                 if (player.isOnline()) {
                     onlinePlayers.put(uuid, minetopiaPlayer);
                 }

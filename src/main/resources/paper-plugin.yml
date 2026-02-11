@@ -34,7 +34,7 @@ dependencies:
       required: false
     BetterTeams:
       load: BEFORE
-      required: true
+      required: false
     DecentHolograms:
       load: BEFORE
       required: true

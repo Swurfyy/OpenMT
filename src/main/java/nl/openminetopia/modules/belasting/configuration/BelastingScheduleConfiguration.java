@@ -29,9 +29,21 @@ public class BelastingScheduleConfiguration extends ConfigurateConfig {
     private final ZoneId zone;
 
     public BelastingScheduleConfiguration(File dataFolder) {
-        super(dataFolder, "schedule.yml", "default/schedule.yml", true);
+        // Use mergeDefaults = false to prevent overwriting user's manual edits
+        // Cycles are hardcoded, so we don't need to merge defaults
+        super(dataFolder, "schedule.yml", "default/schedule.yml", false);
         this.zone = ZoneId.systemDefault();
         this.cycles = parseCycles();
+    }
+     
+    /**
+     * Override saveConfiguration to prevent any writes to schedule.yml.
+     * Cycles are hardcoded, so the file should never be modified by the plugin.
+     */
+    @Override
+    public void saveConfiguration() {
+        // Do nothing - cycles are hardcoded and we don't want to overwrite user edits
+        // This prevents any accidental writes that could corrupt the schedule.yml file
     }
 
     private List<CycleWindow> parseCycles() {

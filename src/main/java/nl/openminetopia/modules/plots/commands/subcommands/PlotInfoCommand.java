@@ -6,6 +6,7 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.kyori.adventure.text.Component;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -42,7 +43,11 @@ public class PlotInfoCommand extends BaseCommand {
         ProtectedRegion region = PlotUtil.getPlot(player.getLocation());
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
+        if (minetopiaPlayer == null) {
+            OpenMinetopia.getInstance().getLogger().warning("[PlotInfoCommand] MinetopiaPlayer not loaded for " + player.getName());
+            player.sendMessage("§cJe speler data is nog niet geladen. Probeer het over een paar seconden opnieuw.");
+            return;
+        }
 
         if (region == null) {
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_invalid_location"));

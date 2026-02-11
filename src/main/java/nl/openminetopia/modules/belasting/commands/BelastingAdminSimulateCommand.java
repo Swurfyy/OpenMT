@@ -21,16 +21,24 @@ public class BelastingAdminSimulateCommand extends BaseCommand {
         BelastingModule module = OpenMinetopia.getModuleManager().get(BelastingModule.class);
         BelastingConfiguration config = module.getConfig();
 
+        OpenMinetopia.getInstance().getLogger().info("[Belasting] Simulatie gestart door " + sender.getName());
+        ChatUtils.sendMessage(sender, "<yellow>Belasting simulatie gestart... Dit kan even duren.");
+        
+        // Run async - the CompletableFuture chain is already async
         module.getTaxService().runCycleForced().thenAccept(count -> {
             OpenMinetopia.getInstance().getServer().getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
                 if (count == null || count == 0) {
                     ChatUtils.sendMessage(sender, config.getMessageSimulateNoNewInvoices());
+                    OpenMinetopia.getInstance().getLogger().info("[Belasting] Simulatie voltooid door " + sender.getName() + " - geen nieuwe facturen.");
                 } else {
                     String msg = config.getMessageSimulateDone().replace("<count>", String.valueOf(count));
                     ChatUtils.sendMessage(sender, msg);
+                    OpenMinetopia.getInstance().getLogger().info("[Belasting] Simulatie voltooid door " + sender.getName() + " - " + count + " nieuwe facturen aangemaakt.");
                 }
             });
         }).exceptionally(ex -> {
+            OpenMinetopia.getInstance().getLogger().severe("[Belasting] Simulatie gefaald voor " + sender.getName() + ": " + ex.getMessage());
+            ex.printStackTrace();
             OpenMinetopia.getInstance().getServer().getScheduler().runTask(OpenMinetopia.getInstance(), () ->
                     ChatUtils.sendMessage(sender, "<red>Simulatie mislukt: " + ex.getMessage()));
             return null;

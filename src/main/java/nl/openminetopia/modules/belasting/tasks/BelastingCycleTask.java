@@ -14,9 +14,14 @@ public class BelastingCycleTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        module.getTaxService().runCycle().exceptionally(ex -> {
-            OpenMinetopia.getInstance().getLogger().warning("Belasting cycle failed: " + ex.getMessage());
-            return null;
+        // Run async to prevent server lag
+        OpenMinetopia.getInstance().getServer().getScheduler().runTaskAsynchronously(OpenMinetopia.getInstance(), () -> {
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Cycle task gestart - controleer of nieuwe cycle moet worden uitgevoerd...");
+            module.getTaxService().runCycle().exceptionally(ex -> {
+                OpenMinetopia.getInstance().getLogger().severe("[Belasting] Cycle task gefaald: " + ex.getMessage());
+                ex.printStackTrace();
+                return null;
+            });
         });
     }
 }

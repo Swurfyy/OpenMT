@@ -11,6 +11,7 @@ import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.player.commands.PlaytimeCommand;
+import nl.openminetopia.modules.player.listeners.PlayerJoinListener;
 import nl.openminetopia.modules.player.listeners.PlayerPreLoginListener;
 import nl.openminetopia.modules.player.listeners.PlayerQuitListener;
 import nl.openminetopia.modules.player.models.PlayerModel;
@@ -38,6 +39,7 @@ public class PlayerModule extends ExtendedSpigotModule {
     @Override
     public void onEnable() {
         registerComponent(new PlayerPreLoginListener());
+        registerComponent(new PlayerJoinListener());
         registerComponent(new PlayerQuitListener());
 
         registerComponent(new PlaytimeCommand());
@@ -52,12 +54,47 @@ public class PlayerModule extends ExtendedSpigotModule {
 
     @Override
     public void onDisable() {
+        // First, try to get already loaded players (non-blocking)
+        List<CompletableFuture<Void>> saveFutures = new ArrayList<>();
+        
         for (Player player : Bukkit.getOnlinePlayers()) {
-            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player).join();
+            // Try to get already loaded player first (non-blocking)
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
+            
+            if (minetopiaPlayer == null) {
+                // If not loaded, try to load with timeout (non-blocking)
+                try {
+                    minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player)
+                            .get(2, java.util.concurrent.TimeUnit.SECONDS);
+                } catch (Exception e) {
+                    getLogger().warn("Could not load player data for " + player.getName() + " during shutdown: " + e.getMessage());
+                    continue;
+                }
+            }
+            
             if (minetopiaPlayer == null) continue;
+            
+            // Update playtime
             minetopiaPlayer.updatePlaytime();
-            minetopiaPlayer.save().join();
+            
+            // Save asynchronously with timeout
+            CompletableFuture<Void> saveFuture = minetopiaPlayer.save()
+                    .orTimeout(2, java.util.concurrent.TimeUnit.SECONDS)
+                    .exceptionally(throwable -> {
+                        getLogger().warn("Could not save player data for " + player.getName() + " during shutdown: " + throwable.getMessage());
+                        return null;
+                    });
+            saveFutures.add(saveFuture);
         }
+        
+        // Wait for all saves to complete (with timeout)
+        try {
+            CompletableFuture.allOf(saveFutures.toArray(new CompletableFuture[0]))
+                    .get(5, java.util.concurrent.TimeUnit.SECONDS);
+        } catch (Exception e) {
+            getLogger().warn("Some player data could not be saved during shutdown: " + e.getMessage());
+        }
+        
         OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(minetopiaPlayerSaveRunnable);
         OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(playerPlaytimeRunnable);
     }

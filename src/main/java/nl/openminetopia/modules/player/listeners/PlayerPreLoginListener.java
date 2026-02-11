@@ -27,21 +27,24 @@ public class PlayerPreLoginListener implements Listener {
 
         long startTime = System.currentTimeMillis();
         OfflinePlayer player = Bukkit.getOfflinePlayer(event.getUniqueId());
-        PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
-            if (throwable != null) {
-                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, MessageConfiguration.component("player_data_not_loaded"));
-                OpenMinetopia.getInstance().getLogger().warning("Error loading player model: " + throwable.getMessage());
-                throwable.printStackTrace();
-                return;
-            }
+        
+        // Load player data synchronously during pre-login (this is async thread, so blocking is OK)
+        try {
+            MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getMinetopiaPlayer(player).get();
+            
             if (minetopiaPlayer == null) {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, MessageConfiguration.component("player_data_not_loaded"));
                 OpenMinetopia.getInstance().getLogger().warning("Error loading player model: MinetopiaPlayer is null");
+                return;
             }
 
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
             OpenMinetopia.getInstance().getLogger().info("Loaded player data for " + player.getName() + " (" + player.getUniqueId() + ") in " + duration + "ms");
-        });
+        } catch (Exception e) {
+            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, MessageConfiguration.component("player_data_not_loaded"));
+            OpenMinetopia.getInstance().getLogger().warning("Error loading player model: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

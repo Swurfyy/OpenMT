@@ -51,6 +51,12 @@ public class EmergencyCommand extends BaseCommand {
             if (!onlinePlayer.hasPermission("openminetopia.police")) continue;
 
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(onlinePlayer);
+            
+            // Skip if player data is not loaded yet
+            if (minetopiaPlayer == null) {
+                OpenMinetopia.getInstance().getLogger().warning("[EmergencyCommand] MinetopiaPlayer not loaded for " + onlinePlayer.getName());
+                continue;
+            }
 
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_format")
                     .replace("<sender>", isPlayer ? sender.getName() : "Anoniem")

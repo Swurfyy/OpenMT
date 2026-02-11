@@ -53,6 +53,10 @@ public class ChatUtils {
     private static String nowTime() { return LocalTime.now().format(TIME_FMT); }
 
     public Component format(MinetopiaPlayer mtp, String template) {
+        if (mtp == null) {
+            OpenMinetopia.getInstance().getLogger().warning("[ChatUtils] format() called with null MinetopiaPlayer");
+            return Component.empty();
+        }
         Player player = mtp.getBukkit().getPlayer();
         if (player == null) return Component.empty();
 
@@ -138,6 +142,11 @@ public class ChatUtils {
     }
 
     public void sendFormattedMessage(MinetopiaPlayer minetopiaPlayer, String message) {
+        if (minetopiaPlayer == null) {
+            OpenMinetopia.getInstance().getLogger().warning("[ChatUtils] sendFormattedMessage() called with null MinetopiaPlayer");
+            return;
+        }
+        
         Component component = format(minetopiaPlayer,
                 message.replaceFirst("\\[(title|action)]", ""));
 

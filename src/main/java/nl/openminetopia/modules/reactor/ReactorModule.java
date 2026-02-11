@@ -54,8 +54,7 @@ public class ReactorModule extends ExtendedSpigotModule {
             return;
         }
 
-        // Enable debug mode first (set to false in production)
-        nl.openminetopia.modules.reactor.utils.BetterTeamsUtils.setDebugMode(true);
+        // Debug mode disabled for production
         
         // Re-initialize BetterTeams connection (in case it loaded after this class)
         // Use a delayed task to ensure BetterTeams is fully loaded

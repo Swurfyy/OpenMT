@@ -177,7 +177,12 @@ public class ReactorHologram {
      */
     public void delete() {
         if (hologram != null) {
-            hologram.delete();
+            try {
+                hologram.delete();
+            } catch (Exception e) {
+                // Ignore errors during shutdown (DecentHolograms might already be disabled)
+                reactor.getModule().getLogger().debug("Could not delete hologram during shutdown: " + e.getMessage());
+            }
         }
     }
 }

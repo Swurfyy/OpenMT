@@ -36,28 +36,28 @@ public class PlayerVerticle extends BaseVerticle {
             }
 
             PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
+                JSONObject responseJson = new JSONObject();
+                
                 if (throwable != null) {
                     throwable.printStackTrace();
-                    jsonObject.put("success", false);
-                    jsonObject.put("error", throwable.getMessage());
-                }
-
-                if (minetopiaPlayer == null) {
-                    jsonObject.put("success", false);
-                    jsonObject.put("error", "MinetopiaPlayer has not loaded.");
+                    responseJson.put("success", false);
+                    responseJson.put("error", throwable.getMessage());
+                } else if (minetopiaPlayer == null) {
+                    responseJson.put("success", false);
+                    responseJson.put("error", "MinetopiaPlayer has not loaded.");
                 } else {
-                    jsonObject.put("success", true);
-                    jsonObject.put("uuid", player.getUniqueId().toString());
-                    jsonObject.put("active_prefix", minetopiaPlayer.getActivePrefix().getPrefix());
-                    jsonObject.put("active_prefix_color", minetopiaPlayer.getActiveColor(OwnableColorType.PREFIX).displayName());
-                    jsonObject.put("active_name_color", minetopiaPlayer.getActiveColor(OwnableColorType.NAME).displayName());
-                    jsonObject.put("active_level_color", minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).displayName());
-                    jsonObject.put("active_chat_color", minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).displayName());
-                    jsonObject.put("playtimeSeconds", minetopiaPlayer.getPlaytime() / 1000);
-                    jsonObject.put("online", player.isOnline());
+                    responseJson.put("success", true);
+                    responseJson.put("uuid", player.getUniqueId().toString());
+                    responseJson.put("active_prefix", minetopiaPlayer.getActivePrefix().getPrefix());
+                    responseJson.put("active_prefix_color", minetopiaPlayer.getActiveColor(OwnableColorType.PREFIX).displayName());
+                    responseJson.put("active_name_color", minetopiaPlayer.getActiveColor(OwnableColorType.NAME).displayName());
+                    responseJson.put("active_level_color", minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).displayName());
+                    responseJson.put("active_chat_color", minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).displayName());
+                    responseJson.put("playtimeSeconds", minetopiaPlayer.getPlaytime() / 1000);
+                    responseJson.put("online", player.isOnline());
                 }
-                context.response().end(jsonObject.toJSONString());
-            }).join();
+                context.response().end(responseJson.toJSONString());
+            });
         } catch (Exception e) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("success", false);

@@ -35,17 +35,17 @@ public class PrefixesVerticle extends BaseVerticle {
             }
 
             PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
+                JSONObject responseJson = new JSONObject();
+                
                 if (throwable != null) {
                     throwable.printStackTrace();
-                    jsonObject.put("success", false);
-                    jsonObject.put("error", throwable.getMessage());
-                }
-
-                if (minetopiaPlayer == null) {
-                    jsonObject.put("success", false);
-                    jsonObject.put("error", "MinetopiaPlayer has not loaded.");
+                    responseJson.put("success", false);
+                    responseJson.put("error", throwable.getMessage());
+                } else if (minetopiaPlayer == null) {
+                    responseJson.put("success", false);
+                    responseJson.put("error", "MinetopiaPlayer has not loaded.");
                 } else {
-                    jsonObject.put("success", true);
+                    responseJson.put("success", true);
 
                     JSONObject prefixesObject = new JSONObject();
 
@@ -56,10 +56,10 @@ public class PrefixesVerticle extends BaseVerticle {
                         prefixesObject.put(prefix.getId(), prefixObject);
                     });
 
-                    jsonObject.put("prefixes", prefixesObject);
+                    responseJson.put("prefixes", prefixesObject);
                 }
-                context.response().end(jsonObject.toJSONString());
-            }).join();
+                context.response().end(responseJson.toJSONString());
+            });
         } catch (Exception e) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("success", false);

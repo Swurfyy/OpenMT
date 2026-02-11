@@ -28,6 +28,10 @@ repositories {
     maven("https://repo.triumphteam.dev/snapshots/")
     // CodeMC repository (for NBT-API dependency of DecentHolograms)
     maven("https://repo.codemc.io/repository/maven-public/")
+    // Lokale libs folder voor BetterTeams
+    flatDir {
+        dirs("libs")
+    }
 }
 
 dependencies {
@@ -103,8 +107,8 @@ dependencies {
     /* TAB API */
     compileOnly("com.github.NEZNAMY:TAB-API:5.4.0")
 
-    /* BetterTeams - provided at runtime, accessed via reflection */
-    // BetterTeams is not available via Maven, it must be installed on the server
+    /* BetterTeams - lokale JAR file */
+    compileOnly(files("libs/BetterTeams-4.15.2.jar"))
 
     /* DecentHolograms - via JitPack as per official documentation */
     compileOnly("com.github.decentsoftware-eu:decentholograms:2.8.4")

@@ -39,7 +39,10 @@ public class PlayerChatListener implements Listener {
 
         Bukkit.getServer().getOnlinePlayers().forEach(target -> {
             if (target.hasPermission("openminetopia.staffchat")) {
-                target.sendMessage(ChatUtils.format(minetopiaPlayer, formattedMessage));
+                MinetopiaPlayer targetMtp = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
+                if (targetMtp != null) {
+                    target.sendMessage(ChatUtils.format(minetopiaPlayer, formattedMessage));
+                }
             }
         });
 

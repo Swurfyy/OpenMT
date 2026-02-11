@@ -81,29 +81,28 @@ public class Reactor {
      * Updates the claiming state based on current players
      */
     private void updateClaimingState() {
-        // Count players per team
+        // Get config values
+        int requiredMembersPerTeam = module.getConfig().getRequiredMembersPerTeam();
+        int requiredTeams = module.getConfig().getRequiredTeams();
+        
+        // FIRST: Check if there are enough teams worldwide (all worlds) with enough online members
+        int onlineTeamsWithMinMembers = nl.openminetopia.modules.reactor.utils.BetterTeamsUtils.getOnlineTeamsWithMinMembers(requiredMembersPerTeam);
+        
+        // If not enough teams worldwide, reset claiming
+        if (onlineTeamsWithMinMembers < requiredTeams) {
+            if (claimingTeam != null) {
+                claimingTeam = null;
+            }
+            return;
+        }
+
+        // SECOND: Now check which team is in the region and can claim
+        // Count players per team IN THE REGION
         Map<UUID, Integer> teamCounts = new HashMap<>();
         for (UUID teamId : playersInRegion.values()) {
             if (teamId != null && !teamId.equals(NO_TEAM_PLACEHOLDER)) {
                 teamCounts.put(teamId, teamCounts.getOrDefault(teamId, 0) + 1);
             }
-        }
-
-        // Get config values
-        int requiredMembersPerTeam = module.getConfig().getRequiredMembersPerTeam();
-        int requiredTeams = module.getConfig().getRequiredTeams();
-        
-        // Check if we have enough teams with required members
-        long teamsWithEnoughMembers = teamCounts.values().stream()
-                .filter(count -> count >= requiredMembersPerTeam)
-                .count();
-
-        if (teamsWithEnoughMembers < requiredTeams) {
-            // Not enough teams, reset claiming
-            if (claimingTeam != null) {
-                claimingTeam = null;
-            }
-            return;
         }
 
         // Determine which team is claiming
@@ -112,10 +111,10 @@ public class Reactor {
         activeTeams.remove(NO_TEAM_PLACEHOLDER);
 
         if (activeTeams.size() == 0) {
-            // No teams present
+            // No teams present in region
             claimingTeam = null;
         } else if (activeTeams.size() == 1) {
-            // Only one team present - they can claim
+            // Only one team present - they can claim (if they have enough members in region)
             UUID singleTeam = activeTeams.iterator().next();
             if (teamCounts.getOrDefault(singleTeam, 0) >= requiredMembersPerTeam) {
                 claimingTeam = singleTeam;
@@ -143,26 +142,41 @@ public class Reactor {
             return;
         }
 
-        // Count active teams
-        Set<UUID> activeTeams = new HashSet<>(playersInRegion.values());
-        activeTeams.remove(null);
-        activeTeams.remove(NO_TEAM_PLACEHOLDER);
-
+        // Get config values
         int maxTimer = module.getConfig().getMaxTimer();
         int incrementPerSecond = module.getConfig().getIncrementPerSecond();
         int decrementPerSecond = module.getConfig().getDecrementPerSecond();
         int requiredMembersPerTeam = module.getConfig().getRequiredMembersPerTeam();
+        int requiredTeams = module.getConfig().getRequiredTeams();
+        
+        // FIRST: Check if there are enough teams worldwide (all worlds) with enough online members
+        int onlineTeamsWithMinMembers = nl.openminetopia.modules.reactor.utils.BetterTeamsUtils.getOnlineTeamsWithMinMembers(requiredMembersPerTeam);
+        
+        // If not enough teams worldwide, timer decreases
+        if (onlineTeamsWithMinMembers < requiredTeams) {
+            if (timerProgress > 0) {
+                timerProgress = Math.max(0, timerProgress - decrementPerSecond);
+            }
+            claimingTeam = null;
+            return;
+        }
+
+        // SECOND: Now check timer logic based on teams in region
+        // Count active teams IN THE REGION
+        Set<UUID> activeTeams = new HashSet<>(playersInRegion.values());
+        activeTeams.remove(null);
+        activeTeams.remove(NO_TEAM_PLACEHOLDER);
         
         if (activeTeams.size() == 0) {
-            // No teams present - timer decreases
+            // No teams present in region - timer decreases
             if (timerProgress > 0) {
                 timerProgress = Math.max(0, timerProgress - decrementPerSecond);
             }
         } else if (activeTeams.size() == 1) {
-            // Only one team present
+            // Only one team present in region
             UUID singleTeam = activeTeams.iterator().next();
             
-            // Check if this team has enough members
+            // Check if this team has enough members IN THE REGION
             long teamMemberCount = playersInRegion.values().stream()
                     .filter(teamId -> teamId != null && !teamId.equals(NO_TEAM_PLACEHOLDER) && teamId.equals(singleTeam))
                     .count();
@@ -185,7 +199,7 @@ public class Reactor {
                     }
                 }
             } else {
-                // Not enough members - timer decreases
+                // Not enough members in region - timer decreases
                 if (timerProgress > 0) {
                     timerProgress = Math.max(0, timerProgress - decrementPerSecond);
                 }
@@ -194,7 +208,7 @@ public class Reactor {
                 }
             }
         } else {
-            // Multiple teams present - timer decreases
+            // Multiple teams present in region - timer decreases
             if (timerProgress > 0) {
                 timerProgress = Math.max(0, timerProgress - decrementPerSecond);
             }

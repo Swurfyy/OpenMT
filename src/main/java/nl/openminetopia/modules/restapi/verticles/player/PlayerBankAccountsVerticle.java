@@ -39,8 +39,6 @@ public class PlayerBankAccountsVerticle extends BaseVerticle {
             JSONObject accountsObject = new JSONObject();
 
             bankingModule.getAccountsFromPlayer(playerUuid).forEach(account -> {
-                jsonObject.put("success", true);
-
                 JSONObject accountObject = new JSONObject();
                 accountObject.put("type", account.getType().name());
                 accountObject.put("name", account.getName());
@@ -50,16 +48,16 @@ public class PlayerBankAccountsVerticle extends BaseVerticle {
             });
 
             bankingModule.getAccountByIdAsync(playerUuid).whenComplete((bankAccountModel, throwable) -> {
+                JSONObject responseJson = new JSONObject();
+                
                 if (throwable != null) {
                     throwable.printStackTrace();
-                    jsonObject.put("success", false);
-                    jsonObject.put("error", throwable.getMessage());
-                }
-
-                if (bankAccountModel == null) {
-                    jsonObject.put("success", false);
+                    responseJson.put("success", false);
+                    responseJson.put("error", throwable.getMessage());
+                } else if (bankAccountModel == null) {
+                    responseJson.put("success", true);
                 } else {
-                    jsonObject.put("success", true);
+                    responseJson.put("success", true);
 
                     JSONObject accountObject = new JSONObject();
                     accountObject.put("type", bankAccountModel.getType().name());
@@ -68,10 +66,10 @@ public class PlayerBankAccountsVerticle extends BaseVerticle {
                     accountObject.put("balance", bankAccountModel.getBalance());
                     accountsObject.put(bankAccountModel.getUniqueId().toString(), accountObject);
                 }
-            }).join();
-
-            jsonObject.put("accounts", accountsObject);
-            context.response().end(jsonObject.toJSONString());
+                
+                responseJson.put("accounts", accountsObject);
+                context.response().end(responseJson.toJSONString());
+            });
         } catch (Exception e) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("success", false);
