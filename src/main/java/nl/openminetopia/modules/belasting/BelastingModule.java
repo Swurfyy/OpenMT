@@ -17,6 +17,8 @@ import nl.openminetopia.modules.belasting.tasks.BelastingExclusionCleanupTask;
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.UUID;
+
 @Getter
 public class BelastingModule extends ExtendedSpigotModule {
 
@@ -28,6 +30,7 @@ public class BelastingModule extends ExtendedSpigotModule {
     private BelastingGUIManager guiManager;
     private BelastingCycleTask cycleTask;
     private BelastingExclusionCleanupTask exclusionCleanupTask;
+    private BelastingLoginListener loginListener;
 
     public BelastingModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
         super(moduleManager);
@@ -56,7 +59,8 @@ public class BelastingModule extends ExtendedSpigotModule {
         registerComponent(new BelastingAdminSimulateCommand());
         registerComponent(new BelastingAdminResetCycleCommand());
         registerComponent(new BelastingAdminOpenGuiCommand());
-        registerComponent(new BelastingLoginListener());
+        loginListener = new BelastingLoginListener();
+        registerComponent(loginListener);
 
         cycleTask = new BelastingCycleTask(this);
         cycleTask.runTaskTimer(OpenMinetopia.getInstance(), 200L, 72000L);
@@ -90,5 +94,14 @@ public class BelastingModule extends ExtendedSpigotModule {
         if (cycleTask != null) cycleTask.cancel();
         cycleTask = new BelastingCycleTask(this);
         cycleTask.runTaskTimer(OpenMinetopia.getInstance(), 200L, 72000L);
+    }
+
+    /**
+     * Invalidate login cache for a player (called when invoice is paid)
+     */
+    public void invalidateLoginCache(UUID playerUuid) {
+        if (loginListener != null) {
+            loginListener.invalidateCache(playerUuid);
+        }
     }
 }

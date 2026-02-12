@@ -7,30 +7,42 @@ import nl.openminetopia.modules.belasting.models.TaxInvoiceModel;
 import nl.openminetopia.modules.belasting.models.TaxInvoicePlotModel;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 public class BelastingRepository {
 
     public CompletableFuture<TaxInvoiceModel> saveInvoice(TaxInvoiceModel invoice, List<TaxInvoicePlotModel> plotRows) {
         CompletableFuture<TaxInvoiceModel> future = new CompletableFuture<>();
-        StormDatabase.getExecutorService().submit(() -> {
-            try {
-                Integer id = StormDatabase.getInstance().saveStormModel(invoice).join();
-                if (id != null && id > 0) {
+        
+        // Save invoice first, then save plot rows
+        StormDatabase.getInstance().saveStormModel(invoice)
+                .thenCompose(id -> {
+                    if (id == null || id <= 0) {
+                        return CompletableFuture.completedFuture(invoice);
+                    }
+                    
                     invoice.setId(id);
+                    
+                    // Save all plot rows sequentially to avoid overwhelming the database
+                    CompletableFuture<Void> saveRowsFuture = CompletableFuture.completedFuture(null);
                     for (TaxInvoicePlotModel row : plotRows) {
                         row.setInvoiceId(id);
-                        StormDatabase.getInstance().saveStormModel(row).join();
+                        saveRowsFuture = saveRowsFuture.thenCompose(v -> 
+                            StormDatabase.getInstance().saveStormModel(row).thenApply(savedId -> null)
+                        );
                     }
-                }
-                future.complete(invoice);
-            } catch (Exception e) {
-                future.completeExceptionally(e);
-            }
-        });
+                    
+                    return saveRowsFuture.thenApply(v -> invoice);
+                })
+                .whenComplete((result, ex) -> {
+                    if (ex != null) {
+                        future.completeExceptionally(ex);
+                    } else {
+                        future.complete(result);
+                    }
+                });
+        
         return future;
     }
 
@@ -100,6 +112,57 @@ public class BelastingRepository {
 
     public CompletableFuture<Boolean> hasUnpaidInvoice(UUID playerUuid) {
         return getUnpaidInvoice(playerUuid).thenApply(inv -> inv != null);
+    }
+
+    /**
+     * Batch query to get all unpaid invoices for multiple players at once.
+     * This significantly reduces database queries from N queries to 1 query.
+     * Uses CompletableFuture chain to avoid nested .join() calls that can cause deadlocks.
+     */
+    public CompletableFuture<Map<UUID, TaxInvoiceModel>> getUnpaidInvoicesBatch(Set<UUID> playerUuids) {
+        if (playerUuids.isEmpty()) {
+            return CompletableFuture.completedFuture(Collections.emptyMap());
+        }
+
+        CompletableFuture<Map<UUID, TaxInvoiceModel>> future = new CompletableFuture<>();
+        
+        // Execute query in executor service to avoid blocking
+        StormDatabase.getExecutorService().submit(() -> {
+            try {
+                // Use CompletableFuture chain instead of nested .join() to avoid deadlocks
+                StormDatabase.getInstance().getStorm()
+                        .buildQuery(TaxInvoiceModel.class)
+                        .where("status", Where.EQUAL, InvoiceStatus.UNPAID.toString())
+                        .execute()
+                        .thenApply(allUnpaid -> {
+                            // Filter to only requested UUIDs and create map
+                            Map<UUID, TaxInvoiceModel> result = new java.util.HashMap<>();
+                            for (TaxInvoiceModel invoice : allUnpaid) {
+                                if (playerUuids.contains(invoice.getPlayerUuid())) {
+                                    // Only keep the first unpaid invoice per player (if multiple exist)
+                                    result.putIfAbsent(invoice.getPlayerUuid(), invoice);
+                                }
+                            }
+                            return result;
+                        })
+                        .whenComplete((result, ex) -> {
+                            if (ex != null) {
+                                // Log error but return empty map to allow processing to continue
+                                nl.openminetopia.OpenMinetopia.getInstance().getLogger().severe("[Belasting] Fout tijdens batch query voor unpaid invoices: " + ex.getMessage());
+                                ex.printStackTrace();
+                                future.complete(Collections.emptyMap());
+                            } else {
+                                future.complete(result);
+                            }
+                        });
+            } catch (Exception e) {
+                nl.openminetopia.OpenMinetopia.getInstance().getLogger().severe("[Belasting] Fout tijdens batch query setup: " + e.getMessage());
+                e.printStackTrace();
+                future.complete(Collections.emptyMap());
+            }
+        });
+        
+        return future;
     }
 
     public CompletableFuture<Void> saveExclusion(TaxExclusionModel exclusion) {
