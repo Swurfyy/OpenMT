@@ -125,9 +125,35 @@ public class ReactorModule extends ExtendedSpigotModule {
             return;
         }
         
+        // If manager is not initialized, try to initialize it now
         if (reactorManager == null) {
-            getLogger().warn("Cannot reload ReactorModule: manager not initialized.");
-            return;
+            // Check if required plugins are enabled
+            if (!Bukkit.getPluginManager().isPluginEnabled("BetterTeams")) {
+                getLogger().error("Cannot reload ReactorModule: BetterTeams is required but not enabled!");
+                return;
+            }
+
+            if (!Bukkit.getPluginManager().isPluginEnabled("DecentHolograms")) {
+                getLogger().error("Cannot reload ReactorModule: DecentHolograms is required but not enabled!");
+                return;
+            }
+
+            // Initialize BetterTeams connection
+            nl.openminetopia.modules.reactor.utils.BetterTeamsUtils.reinitialize();
+            
+            // Initialize manager if it wasn't initialized before
+            reactorManager = new ReactorManager(this);
+            
+            // Register listeners if not already registered
+            registerComponent(new ReactorRegionListener(this));
+            
+            // Start update task if not already running
+            if (updateTask == null) {
+                updateTask = new ReactorUpdateTask(this);
+                updateTask.runTaskTimer(OpenMinetopia.getInstance(), 0L, 20L);
+            }
+            
+            getLogger().info("ReactorModule manager initialized during reload.");
         }
 
         // Scan for new reactor regions (existing ones are preserved)

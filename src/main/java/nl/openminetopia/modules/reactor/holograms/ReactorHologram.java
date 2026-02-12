@@ -122,7 +122,9 @@ public class ReactorHologram {
 
         // Team member counts
         List<String> teamCounts = reactor.getTeamMemberCounts();
-        String countsLine = teamCounts.get(0) + " | " + teamCounts.get(1) + " | " + teamCounts.get(2);
+        // Dynamically join team counts instead of hardcoding indices
+        // This works with any number of required teams (2, 3, 4, etc.)
+        String countsLine = String.join(" | ", teamCounts);
         lines.add(countsLine);
 
         // Progress bar
