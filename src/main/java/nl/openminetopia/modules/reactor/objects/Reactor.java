@@ -38,6 +38,11 @@ public class Reactor {
     // Exhaustion state
     private boolean exhausted = false;
     private long exhaustionEndTime = 0; // Timestamp when exhaustion ends
+    
+    // Cached team member counts (to reduce API calls)
+    private List<String> cachedTeamMemberCounts = new ArrayList<>();
+    private long lastTeamCountsUpdate = 0;
+    private static final long TEAM_COUNTS_CACHE_DURATION_MS = 5000; // Update every 5 seconds
 
     public Reactor(ReactorModule module, String regionName, ProtectedRegion region, Location centerLocation) {
         this.module = module;
@@ -114,9 +119,9 @@ public class Reactor {
             // No teams present in region
             claimingTeam = null;
         } else if (activeTeams.size() == 1) {
-            // Only one team present - they can claim (if they have enough members in region)
+            // Only one team present - they can claim (if they have at least 1 member in region)
             UUID singleTeam = activeTeams.iterator().next();
-            if (teamCounts.getOrDefault(singleTeam, 0) >= requiredMembersPerTeam) {
+            if (teamCounts.getOrDefault(singleTeam, 0) >= 1) {
                 claimingTeam = singleTeam;
             } else {
                 claimingTeam = null;
@@ -176,12 +181,12 @@ public class Reactor {
             // Only one team present in region
             UUID singleTeam = activeTeams.iterator().next();
             
-            // Check if this team has enough members IN THE REGION
+            // Check if this team has at least 1 member IN THE REGION
             long teamMemberCount = playersInRegion.values().stream()
                     .filter(teamId -> teamId != null && !teamId.equals(NO_TEAM_PLACEHOLDER) && teamId.equals(singleTeam))
                     .count();
 
-            if (teamMemberCount >= requiredMembersPerTeam) {
+            if (teamMemberCount >= 1) {
                 // Team can claim - timer increases
                 if (claimingTeam == null || claimingTeam.equals(singleTeam)) {
                     claimingTeam = singleTeam;
@@ -248,8 +253,17 @@ public class Reactor {
      * Gets online member counts per team for display
      * Returns a list of "x/2" strings for up to 3 teams
      * Shows ALL teams with online members (not just those in the region)
+     * OPTIMIZED: Uses caching to reduce API calls
      */
     public List<String> getTeamMemberCounts() {
+        long currentTime = System.currentTimeMillis();
+        
+        // Return cached value if still valid
+        if (currentTime - lastTeamCountsUpdate < TEAM_COUNTS_CACHE_DURATION_MS && !cachedTeamMemberCounts.isEmpty()) {
+            return new ArrayList<>(cachedTeamMemberCounts);
+        }
+        
+        // Cache expired or empty, update it
         // Get all teams with online members (worldwide)
         java.util.Collection<UUID> allTeamsWithMembers = nl.openminetopia.modules.reactor.utils.BetterTeamsUtils.getAllTeamsWithOnlineMembers();
         
@@ -304,6 +318,10 @@ public class Reactor {
             counts.add("0/" + requiredMembersPerTeam);
         }
 
+        // Update cache
+        cachedTeamMemberCounts = new ArrayList<>(counts);
+        lastTeamCountsUpdate = currentTime;
+        
         return counts;
     }
 

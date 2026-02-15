@@ -22,6 +22,9 @@ public class ReactorHologram {
     private final Reactor reactor;
     private final Hologram hologram;
     private final Location location;
+    
+    // Cache for last hologram content to avoid unnecessary updates
+    private List<String> lastContent = null;
 
     public ReactorHologram(Reactor reactor, Location location) {
         this.reactor = reactor;
@@ -63,10 +66,30 @@ public class ReactorHologram {
 
     /**
      * Updates the hologram content
+     * OPTIMIZED: Only updates if content has actually changed
      */
     public void updateContent() {
         try {
             List<String> lines = buildHologramLines();
+            
+            // Check if content has changed
+            boolean contentChanged = false;
+            if (lastContent == null || lastContent.size() != lines.size()) {
+                contentChanged = true;
+            } else {
+                // Compare each line
+                for (int i = 0; i < lines.size(); i++) {
+                    if (i >= lastContent.size() || !lines.get(i).equals(lastContent.get(i))) {
+                        contentChanged = true;
+                        break;
+                    }
+                }
+            }
+            
+            // Only update if content has changed
+            if (!contentChanged) {
+                return;
+            }
             
             // Get the first page
             HologramPage page = hologram.getPage(0);
@@ -77,24 +100,36 @@ public class ReactorHologram {
             
             // Update lines - convert MiniMessage to legacy color codes
             int lineCount = page.size();
+            boolean linesChanged = false;
             for (int i = 0; i < lines.size(); i++) {
                 String lineText = convertMiniMessageToLegacy(lines.get(i));
                 if (i < lineCount) {
-                    // Update existing line
-                    page.setLine(i, lineText);
+                    // Check if line actually changed before updating
+                    HologramLine existingLine = page.getLine(i);
+                    if (existingLine == null || !lineText.equals(existingLine.getContent())) {
+                        page.setLine(i, lineText);
+                        linesChanged = true;
+                    }
                 } else {
                     // Add new line - need to create HologramLine for addLine
                     page.addLine(new HologramLine(page, page.getNextLineLocation(), lineText));
+                    linesChanged = true;
                 }
             }
             
             // Remove excess lines if new content has fewer lines
             while (page.size() > lines.size()) {
                 page.removeLine(page.size() - 1);
+                linesChanged = true;
             }
             
-            // Update hologram
-            hologram.showAll();
+            // Only call showAll() if lines actually changed
+            if (linesChanged) {
+                hologram.showAll();
+            }
+            
+            // Update cached content
+            lastContent = new java.util.ArrayList<>(lines);
         } catch (Exception e) {
             reactor.getModule().getLogger().warn("[ReactorHologram] Error updating hologram for " + reactor.getRegionName() + ": " + e.getMessage());
             e.printStackTrace();

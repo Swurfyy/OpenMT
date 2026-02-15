@@ -108,7 +108,7 @@ dependencies {
     compileOnly("com.github.NEZNAMY:TAB-API:5.4.0")
 
     /* BetterTeams - lokale JAR file */
-    compileOnly(files("libs/BetterTeams-4.15.2.jar"))
+    compileOnly(files("libs/BetterTeams-5.0.0.jar"))
 
     /* DecentHolograms - via JitPack as per official documentation */
     compileOnly("com.github.decentsoftware-eu:decentholograms:2.8.4")

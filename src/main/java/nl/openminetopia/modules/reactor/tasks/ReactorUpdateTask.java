@@ -41,15 +41,35 @@ public class ReactorUpdateTask extends BukkitRunnable {
     /**
      * Verifies which players are actually in the reactor region
      * This handles cases where players teleport or disconnect
+     * OPTIMIZED: Only checks players in the reactor's world, not all online players
      */
     private void verifyPlayersInRegion(Reactor reactor) {
         Set<UUID> playersToRemove = new HashSet<>();
+        
+        // Get the world where this reactor is located
+        org.bukkit.World reactorWorld = reactor.getCenterLocation().getWorld();
+        if (reactorWorld == null) {
+            // World is not loaded, remove all players
+            for (UUID playerId : reactor.getPlayersInRegion().keySet()) {
+                playersToRemove.add(playerId);
+            }
+            for (UUID playerId : playersToRemove) {
+                reactor.removePlayer(playerId);
+            }
+            return;
+        }
         
         // Check all tracked players
         for (UUID playerId : reactor.getPlayersInRegion().keySet()) {
             Player player = Bukkit.getPlayer(playerId);
             if (player == null || !player.isOnline()) {
                 // Player is offline
+                playersToRemove.add(playerId);
+                continue;
+            }
+            
+            // Skip if player is in a different world
+            if (!player.getWorld().equals(reactorWorld)) {
                 playersToRemove.add(playerId);
                 continue;
             }
@@ -81,8 +101,8 @@ public class ReactorUpdateTask extends BukkitRunnable {
             reactor.removePlayer(playerId);
         }
         
-        // Add any new players in the region
-        for (Player player : Bukkit.getOnlinePlayers()) {
+        // OPTIMIZED: Only check players in the reactor's world, not all online players
+        for (Player player : reactorWorld.getPlayers()) {
             if (reactor.getPlayersInRegion().containsKey(player.getUniqueId())) {
                 continue; // Already tracked
             }
