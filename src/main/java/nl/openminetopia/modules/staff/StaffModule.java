@@ -14,6 +14,7 @@ import nl.openminetopia.modules.staff.chat.commands.StaffchatCommand;
 import nl.openminetopia.modules.staff.chat.listeners.PlayerChatListener;
 import nl.openminetopia.modules.staff.mod.commands.ModCommand;
 import nl.openminetopia.modules.staff.mod.commands.AdminCommandSpyCommand;
+import nl.openminetopia.modules.staff.mod.commands.AdminChatSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModChatSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCommandSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCheckCommand;
@@ -31,6 +32,7 @@ public class StaffModule extends ExtendedSpigotModule {
         registerComponent(new ModCommandSpyCommand());
         registerComponent(new ModCheckCommand());
         registerComponent(new AdminCommandSpyCommand());
+        registerComponent(new AdminChatSpyCommand());
 
         registerComponent(new AdminToolCommand());
         registerComponent(new AdminToolOpenCommand());

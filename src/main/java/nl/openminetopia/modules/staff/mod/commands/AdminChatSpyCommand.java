@@ -18,25 +18,25 @@ import java.util.concurrent.CompletableFuture;
 
 @CommandAlias("mod")
 @CommandPermission("openmt.mod.admin")
-public class AdminCommandSpyCommand extends BaseCommand {
+public class AdminChatSpyCommand extends BaseCommand {
 
-    @Subcommand("enablecommandspy")
+    @Subcommand("enablechatspy")
     @Syntax("<username>")
-    @Description("Zet CommandSpy aan voor een andere speler")
+    @Description("Zet ChatSpy aan voor een andere speler")
     @CommandCompletion("@players")
-    public void onEnableCommandSpy(CommandSender sender, String targetName) {
-        handleCommandSpyToggle(sender, targetName, true);
+    public void onEnableChatSpy(CommandSender sender, String targetName) {
+        handleChatSpyToggle(sender, targetName, true);
     }
 
-    @Subcommand("disablecommandspy")
+    @Subcommand("disablechatspy")
     @Syntax("<username>")
-    @Description("Zet CommandSpy uit voor een andere speler")
+    @Description("Zet ChatSpy uit voor een andere speler")
     @CommandCompletion("@players")
-    public void onDisableCommandSpy(CommandSender sender, String targetName) {
-        handleCommandSpyToggle(sender, targetName, false);
+    public void onDisableChatSpy(CommandSender sender, String targetName) {
+        handleChatSpyToggle(sender, targetName, false);
     }
 
-    private void handleCommandSpyToggle(CommandSender sender, String targetName, boolean enable) {
+    private void handleChatSpyToggle(CommandSender sender, String targetName, boolean enable) {
         OfflinePlayer offlineTarget = Bukkit.getOfflinePlayer(targetName);
         if (offlineTarget == null || (offlineTarget.getName() == null && !offlineTarget.hasPlayedBefore())) {
             sender.sendMessage(ChatUtils.color("<red>Speler <dark_red>" + targetName + " <red>is niet gevonden."));
@@ -50,13 +50,12 @@ public class AdminCommandSpyCommand extends BaseCommand {
                 return;
             }
 
-            minetopiaPlayer.setCommandSpyEnabled(enable);
+            minetopiaPlayer.setChatSpyEnabled(enable);
 
             String resolvedName = offlineTarget.getName() != null ? offlineTarget.getName() : targetName;
-            sender.sendMessage(ChatUtils.color("<gold>Je hebt <yellow>CommandSpy <gold>voor <yellow>"
+            sender.sendMessage(ChatUtils.color("<gold>Je hebt <yellow>ChatSpy <gold>voor <yellow>"
                     + resolvedName
-                    + " <gold>" + (enable ? "aangezet" : "uitgezet") + "."));
-        });
+                    + " <gold>" + (enable ? "aangezet" : "uitgezet") + "."));        });
     }
 }
 
