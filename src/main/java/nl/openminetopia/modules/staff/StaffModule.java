@@ -13,8 +13,10 @@ import nl.openminetopia.modules.staff.admintool.listeners.PlayerInteractListener
 import nl.openminetopia.modules.staff.chat.commands.StaffchatCommand;
 import nl.openminetopia.modules.staff.chat.listeners.PlayerChatListener;
 import nl.openminetopia.modules.staff.mod.commands.ModCommand;
+import nl.openminetopia.modules.staff.mod.commands.AdminCommandSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModChatSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCommandSpyCommand;
+import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCheckCommand;
 import org.jetbrains.annotations.NotNull;
 
 public class StaffModule extends ExtendedSpigotModule {
@@ -27,6 +29,8 @@ public class StaffModule extends ExtendedSpigotModule {
         registerComponent(new ModCommand());
         registerComponent(new ModChatSpyCommand());
         registerComponent(new ModCommandSpyCommand());
+        registerComponent(new ModCheckCommand());
+        registerComponent(new AdminCommandSpyCommand());
 
         registerComponent(new AdminToolCommand());
         registerComponent(new AdminToolOpenCommand());
