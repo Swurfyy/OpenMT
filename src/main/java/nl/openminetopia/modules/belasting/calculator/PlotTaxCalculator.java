@@ -45,21 +45,50 @@ public class PlotTaxCalculator {
                 }
                 if (woz <= 0) continue;
 
-                double taxAmount = computeTaxForWoz(woz);
-                entries.add(new PlotTaxEntry(world.getName(), region.getId(), woz, taxAmount));
+                entries.add(new PlotTaxEntry(world.getName(), region.getId(), woz, 0.0));
             }
         }
-        return entries;
+        int ownedPlots = entries.size();
+        List<PlotTaxEntry> out = new ArrayList<>(entries.size());
+        for (PlotTaxEntry entry : entries) {
+            out.add(new PlotTaxEntry(
+                    entry.getWorldName(),
+                    entry.getPlotId(),
+                    entry.getWozValue(),
+                    computeTaxForWoz(entry.getWozValue(), ownedPlots)
+            ));
+        }
+        return out;
     }
 
     public double computeTaxForWoz(long woz) {
+        return computeTaxForWoz(woz, 1);
+    }
+
+    public double computeTaxForWoz(long woz, int ownedPlots) {
+        if (woz <= 0) return 0.0;
+        double taxValue = config.getTaxValueForPlotCount(Math.max(ownedPlots, 1));
         if (config.isTaxPercentage()) {
-            return woz * (config.getTaxCalculationValue() / 100.0);
+            return woz * (taxValue / 100.0);
         }
-        return woz * config.getTaxCalculationValue();
+        return woz * taxValue;
     }
 
     public double totalTax(List<PlotTaxEntry> entries) {
-        return entries.stream().mapToDouble(PlotTaxEntry::getTaxAmount).sum();
+        return totalTax(entries, entries != null ? entries.size() : 0);
+    }
+
+    public double totalTax(List<PlotTaxEntry> entries, int ownedPlots) {
+        if (entries == null || entries.isEmpty()) return 0.0;
+        final int count = Math.max(ownedPlots, 1);
+        return entries.stream().mapToDouble(e -> computeTaxForWoz(e.getWozValue(), count)).sum();
+    }
+
+    /**
+     * Counts only taxable plots (WOZ > 0). Empty/invalid WOZ plots should never influence bracket selection.
+     */
+    public int countTaxablePlots(List<PlotTaxEntry> entries) {
+        if (entries == null || entries.isEmpty()) return 0;
+        return (int) entries.stream().filter(e -> e.getWozValue() > 0).count();
     }
 }

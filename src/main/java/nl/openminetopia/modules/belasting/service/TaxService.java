@@ -107,12 +107,12 @@ public class TaxService {
                 return;
             }
 
-            // Batch query: get all unpaid invoices at once
-            OpenMinetopia.getInstance().getLogger().info("[Belasting] Start batch query voor " + ownerUuids.size() + " eigenaren...");
+            // Batch query: get invoices that already exist in this cycle window
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Start batch query voor bestaande cycle-facturen (" + ownerUuids.size() + " eigenaren)...");
             long queryStartTime = System.currentTimeMillis();
-            Map<UUID, TaxInvoiceModel> unpaidInvoices = repository.getUnpaidInvoicesBatch(ownerUuids).join();
+            Map<UUID, TaxInvoiceModel> cycleInvoices = repository.getInvoicesBatchForWindow(ownerUuids, current.startMs(), current.endMs()).join();
             long queryDuration = System.currentTimeMillis() - queryStartTime;
-            OpenMinetopia.getInstance().getLogger().info("[Belasting] Batch query voltooid in " + queryDuration + "ms, gevonden " + unpaidInvoices.size() + " unpaid invoices.");
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Batch query voltooid in " + queryDuration + "ms, gevonden " + cycleInvoices.size() + " bestaande cycle-facturen.");
             
             // Process in batches to avoid thread pool exhaustion
             final int[] counters = {0, 0, 0}; // processed, skipped, created
@@ -131,7 +131,7 @@ public class TaxService {
                 List<CompletableFuture<Void>> batchFutures = new ArrayList<>();
                 
                 for (UUID owner : batch) {
-                    CompletableFuture<Void> step = processOwnerForCycle(owner, ownerPlotCache.get(owner), unpaidInvoices.get(owner), counters);
+                    CompletableFuture<Void> step = processOwnerForCycle(owner, ownerPlotCache.get(owner), cycleInvoices.get(owner), counters);
                     batchFutures.add(step);
                 }
                 
@@ -166,14 +166,16 @@ public class TaxService {
     /**
      * Process a single owner for the cycle
      */
-    private CompletableFuture<Void> processOwnerForCycle(UUID owner, List<PlotTaxEntry> plots, TaxInvoiceModel existingInvoice, int[] counters) {
+    private CompletableFuture<Void> processOwnerForCycle(UUID owner, List<PlotTaxEntry> plots, TaxInvoiceModel existingCycleInvoice, int[] counters) {
         return isExcluded(owner).thenCompose(excluded -> {
             if (excluded) {
                 synchronized (counters) { counters[1]++; }
                 return CompletableFuture.completedFuture(null);
             }
             
-            if (existingInvoice != null) {
+            // Skip only when an invoice already exists for this owner in the current cycle.
+            // Older unpaid invoices must not block a new cycle invoice.
+            if (existingCycleInvoice != null) {
                 synchronized (counters) { counters[1]++; }
                 return CompletableFuture.completedFuture(null);
             }
@@ -213,24 +215,24 @@ public class TaxService {
             
             final long cycleStart = cs > 0 ? cs : now;
             
-            // Batch query: get all unpaid invoices at once
-            OpenMinetopia.getInstance().getLogger().info("[Belasting] Start batch query voor " + ownerUuids.size() + " eigenaren...");
+            // Batch query: get invoices that already exist in this cycle window
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Start batch query voor bestaande cycle-facturen (" + ownerUuids.size() + " eigenaren)...");
             long queryStartTime = System.currentTimeMillis();
-            Map<UUID, TaxInvoiceModel> unpaidInvoices;
+            Map<UUID, TaxInvoiceModel> cycleInvoices;
             try {
-                unpaidInvoices = repository.getUnpaidInvoicesBatch(ownerUuids)
+                cycleInvoices = repository.getInvoicesBatchForWindow(ownerUuids, cycleStart, currentEndFor(cycleStart, now))
                         .get(60, TimeUnit.SECONDS); // 60 second timeout to prevent infinite blocking
             } catch (TimeoutException e) {
                 OpenMinetopia.getInstance().getLogger().severe("[Belasting] Batch query timeout na 60 seconden! Mogelijk thread pool exhaustion of database probleem.");
                 OpenMinetopia.getInstance().getLogger().severe("[Belasting] Gebruik lege map als fallback om verder te gaan.");
-                unpaidInvoices = Collections.emptyMap();
+                cycleInvoices = Collections.emptyMap();
             } catch (Exception e) {
                 OpenMinetopia.getInstance().getLogger().severe("[Belasting] Batch query gefaald: " + e.getMessage());
                 e.printStackTrace();
-                unpaidInvoices = Collections.emptyMap();
+                cycleInvoices = Collections.emptyMap();
             }
             long queryDuration = System.currentTimeMillis() - queryStartTime;
-            OpenMinetopia.getInstance().getLogger().info("[Belasting] Batch query voltooid in " + queryDuration + "ms, gevonden " + unpaidInvoices.size() + " unpaid invoices.");
+            OpenMinetopia.getInstance().getLogger().info("[Belasting] Batch query voltooid in " + queryDuration + "ms, gevonden " + cycleInvoices.size() + " bestaande cycle-facturen.");
             
             // Process in batches to avoid thread pool exhaustion
             final int[] counters = {0, 0, 0}; // processed, skipped, created
@@ -249,7 +251,7 @@ public class TaxService {
                 List<CompletableFuture<Integer>> batchFutures = new ArrayList<>();
                 
                 for (UUID owner : batch) {
-                    CompletableFuture<Integer> step = processOwnerForCycleForced(owner, ownerPlotCache.get(owner), unpaidInvoices.get(owner), counters);
+                    CompletableFuture<Integer> step = processOwnerForCycleForced(owner, ownerPlotCache.get(owner), cycleInvoices.get(owner), counters);
                     batchFutures.add(step);
                 }
                 
@@ -289,14 +291,15 @@ public class TaxService {
     /**
      * Process a single owner for forced cycle
      */
-    private CompletableFuture<Integer> processOwnerForCycleForced(UUID owner, List<PlotTaxEntry> plots, TaxInvoiceModel existingInvoice, int[] counters) {
+    private CompletableFuture<Integer> processOwnerForCycleForced(UUID owner, List<PlotTaxEntry> plots, TaxInvoiceModel existingCycleInvoice, int[] counters) {
         return isExcluded(owner).thenCompose(excluded -> {
             if (excluded) {
                 synchronized (counters) { counters[1]++; }
                 return CompletableFuture.completedFuture(0);
             }
             
-            if (existingInvoice != null) {
+            // Skip only when an invoice already exists for this owner in the current cycle.
+            if (existingCycleInvoice != null) {
                 synchronized (counters) { counters[1]++; }
                 return CompletableFuture.completedFuture(0);
             }
@@ -349,9 +352,8 @@ public class TaxService {
                 }
                 if (woz <= 0) continue;
                 
-                // Calculate tax for this plot
-                double taxAmount = calculator.computeTaxForWoz(woz);
-                PlotTaxEntry entry = new PlotTaxEntry(world.getName(), region.getId(), woz, taxAmount);
+                // Tax amount depends on total owned plots per player, so we fill it later per owner.
+                PlotTaxEntry entry = new PlotTaxEntry(world.getName(), region.getId(), woz, 0.0);
                 
                 // Add this plot to all owners
                 for (UUID ownerUuid : region.getOwners().getUniqueIds()) {
@@ -380,7 +382,9 @@ public class TaxService {
     private CompletableFuture<Void> createInvoiceFor(UUID playerUuid, List<PlotTaxEntry> entries) {
         if (entries == null || entries.isEmpty()) return CompletableFuture.completedFuture(null);
 
-        double total = calculator.totalTax(entries);
+        int ownedPlots = calculator.countTaxablePlots(entries);
+        if (ownedPlots <= 0) return CompletableFuture.completedFuture(null);
+        double total = calculator.totalTax(entries, ownedPlots);
         String playerName = Optional.ofNullable(Bukkit.getOfflinePlayer(playerUuid).getName()).orElse(playerUuid.toString());
 
         TaxInvoiceModel invoice = new TaxInvoiceModel();
@@ -396,11 +400,17 @@ public class TaxService {
             row.setWorldName(e.getWorldName());
             row.setPlotId(e.getPlotId());
             row.setWozValue(e.getWozValue());
-            row.setTaxAmount(e.getTaxAmount());
+            row.setTaxAmount(calculator.computeTaxForWoz(e.getWozValue(), ownedPlots));
             return row;
         }).toList();
 
         return repository.saveInvoice(invoice, rows).thenAccept(v -> {});
+    }
+
+    private long currentEndFor(long cycleStart, long now) {
+        if (schedule == null) return now;
+        CycleWindow cycle = schedule.getCycleByStart(cycleStart);
+        return cycle != null ? cycle.endMs() : now;
     }
     
     /**

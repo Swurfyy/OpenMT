@@ -18,6 +18,7 @@ import nl.openminetopia.modules.staff.mod.commands.AdminChatSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModChatSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCommandSpyCommand;
 import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCheckCommand;
+import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCheckPlotsCommand;
 import org.jetbrains.annotations.NotNull;
 
 public class StaffModule extends ExtendedSpigotModule {
@@ -31,6 +32,7 @@ public class StaffModule extends ExtendedSpigotModule {
         registerComponent(new ModChatSpyCommand());
         registerComponent(new ModCommandSpyCommand());
         registerComponent(new ModCheckCommand());
+        registerComponent(new ModCheckPlotsCommand());
         registerComponent(new AdminCommandSpyCommand());
         registerComponent(new AdminChatSpyCommand());
 

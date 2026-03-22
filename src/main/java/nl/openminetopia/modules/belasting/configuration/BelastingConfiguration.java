@@ -22,6 +22,10 @@ public class BelastingConfiguration extends ConfigurateConfig {
     private final int taxIntervalDays;
     private final String taxCalculationMode;
     private final double taxCalculationValue;
+    private final double taxCalculationBracket1Value;
+    private final double taxCalculationBracket2Value;
+    private final double taxCalculationBracket3Value;
+    private final double taxCalculationBracket4Value;
     private volatile String lastCycleRunDisplay;
     private volatile String nextCycleRunDisplay;
 
@@ -85,6 +89,11 @@ public class BelastingConfiguration extends ConfigurateConfig {
         var calc = root.node("tax-calculation");
         this.taxCalculationMode = calc.node("mode").getString("PERCENTAGE");
         this.taxCalculationValue = calc.node("value").getDouble(0.5);
+        var brackets = calc.node("brackets");
+        this.taxCalculationBracket1Value = brackets.node("bracket1-value").getDouble(taxCalculationValue);
+        this.taxCalculationBracket2Value = brackets.node("bracket2-value").getDouble(taxCalculationValue);
+        this.taxCalculationBracket3Value = brackets.node("bracket3-value").getDouble(taxCalculationValue);
+        this.taxCalculationBracket4Value = brackets.node("bracket4-value").getDouble(taxCalculationValue);
         Object lastRaw = root.node("last-cycle-run").raw();
         if (lastRaw instanceof Number n) {
             long v = n.longValue();
@@ -254,5 +263,16 @@ public class BelastingConfiguration extends ConfigurateConfig {
 
     public boolean isTaxPercentage() {
         return "PERCENTAGE".equalsIgnoreCase(taxCalculationMode);
+    }
+
+    /**
+     * Select tax value by plot-count bracket:
+     * <=3 => bracket1, <=5 => bracket2, <=6 => bracket3, >6 => bracket4.
+     */
+    public double getTaxValueForPlotCount(int plotCount) {
+        if (plotCount <= 3) return taxCalculationBracket1Value;
+        if (plotCount <= 5) return taxCalculationBracket2Value;
+        if (plotCount <= 6) return taxCalculationBracket3Value;
+        return taxCalculationBracket4Value;
     }
 }

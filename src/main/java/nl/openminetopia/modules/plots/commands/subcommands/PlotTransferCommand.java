@@ -8,9 +8,11 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.annotation.Syntax;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.modules.belasting.BelastingModule;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.modules.plots.utils.PlotUtil;
 import nl.openminetopia.utils.ChatUtils;
@@ -63,6 +65,29 @@ public class PlotTransferCommand extends BaseCommand {
             return;
         }
 
+        BelastingModule belastingModule = OpenMinetopia.getModuleManager().get(BelastingModule.class);
+        if (belastingModule == null) {
+            executeTransfer(player, targetPlayer, region);
+            return;
+        }
+
+        belastingModule.getTaxService().hasUnpaidInvoice(player.getUniqueId()).thenAccept(hasUnpaid -> {
+            OpenMinetopia.getInstance().getServer().getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
+                if (!player.isOnline()) return;
+                if (Boolean.TRUE.equals(hasUnpaid)) {
+                    ChatUtils.sendMessage(player, "<red>Rustig aan tijger! Betaal eerst je belasting, hierna mag je je plot verpatsen!");
+                    return;
+                }
+                executeTransfer(player, targetPlayer, region);
+            });
+        }).exceptionally(ex -> {
+            OpenMinetopia.getInstance().getServer().getScheduler().runTask(OpenMinetopia.getInstance(), () ->
+                    ChatUtils.sendMessage(player, "<red>Er ging iets mis bij de belastingcontrole, probeer het later opnieuw."));
+            return null;
+        });
+    }
+
+    private void executeTransfer(Player player, OfflinePlayer targetPlayer, ProtectedRegion region) {
         // Get all current owners and members
         var currentOwners = region.getOwners().getUniqueIds();
         var currentMembers = region.getMembers().getUniqueIds();
@@ -92,8 +117,8 @@ public class PlotTransferCommand extends BaseCommand {
         if (targetOnlinePlayer != null && targetOnlinePlayer.isOnline()) {
             MinetopiaPlayer targetMinetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(targetOnlinePlayer);
             if (targetMinetopiaPlayer != null) {
-                targetOnlinePlayer.sendMessage(ChatUtils.format(targetMinetopiaPlayer, 
-                    "Je hebt plot <aqua>" + region.getId() + " <reset>ontvangen van <aqua>" + playerName + "<reset>."));
+                targetOnlinePlayer.sendMessage(ChatUtils.format(targetMinetopiaPlayer,
+                        "Je hebt plot <aqua>" + region.getId() + " <reset>ontvangen van <aqua>" + playerName + "<reset>."));
             }
         }
     }

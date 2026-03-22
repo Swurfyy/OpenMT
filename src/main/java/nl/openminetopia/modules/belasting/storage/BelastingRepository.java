@@ -165,6 +165,54 @@ public class BelastingRepository {
         return future;
     }
 
+    /**
+     * Batch query to get existing invoices for multiple players in a specific time window.
+     * Used to prevent duplicate invoices within the same cycle, while still allowing
+     * new cycle invoices even if older invoices are still unpaid.
+     */
+    public CompletableFuture<Map<UUID, TaxInvoiceModel>> getInvoicesBatchForWindow(Set<UUID> playerUuids, long startMs, long endMs) {
+        if (playerUuids.isEmpty() || startMs <= 0 || endMs <= 0 || endMs < startMs) {
+            return CompletableFuture.completedFuture(Collections.emptyMap());
+        }
+
+        CompletableFuture<Map<UUID, TaxInvoiceModel>> future = new CompletableFuture<>();
+
+        StormDatabase.getExecutorService().submit(() -> {
+            try {
+                StormDatabase.getInstance().getStorm()
+                        .buildQuery(TaxInvoiceModel.class)
+                        .execute()
+                        .thenApply(allInvoices -> {
+                            Map<UUID, TaxInvoiceModel> result = new HashMap<>();
+                            for (TaxInvoiceModel invoice : allInvoices) {
+                                UUID playerUuid = invoice.getPlayerUuid();
+                                Long createdAt = invoice.getCreatedAt();
+                                if (playerUuid == null || createdAt == null) continue;
+                                if (!playerUuids.contains(playerUuid)) continue;
+                                if (createdAt < startMs || createdAt > endMs) continue;
+                                result.putIfAbsent(playerUuid, invoice);
+                            }
+                            return result;
+                        })
+                        .whenComplete((result, ex) -> {
+                            if (ex != null) {
+                                nl.openminetopia.OpenMinetopia.getInstance().getLogger().severe("[Belasting] Fout tijdens batch query voor cycle-window invoices: " + ex.getMessage());
+                                ex.printStackTrace();
+                                future.complete(Collections.emptyMap());
+                            } else {
+                                future.complete(result);
+                            }
+                        });
+            } catch (Exception e) {
+                nl.openminetopia.OpenMinetopia.getInstance().getLogger().severe("[Belasting] Fout tijdens cycle-window query setup: " + e.getMessage());
+                e.printStackTrace();
+                future.complete(Collections.emptyMap());
+            }
+        });
+
+        return future;
+    }
+
     public CompletableFuture<Void> saveExclusion(TaxExclusionModel exclusion) {
         CompletableFuture<Void> future = new CompletableFuture<>();
         StormDatabase.getExecutorService().submit(() -> {
