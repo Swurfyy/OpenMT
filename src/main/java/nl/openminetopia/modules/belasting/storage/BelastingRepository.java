@@ -166,9 +166,9 @@ public class BelastingRepository {
     }
 
     /**
-     * Batch query to get existing invoices for multiple players in a specific time window.
-     * Used to prevent duplicate invoices within the same cycle, while still allowing
-     * new cycle invoices even if older invoices are still unpaid.
+     * Batch query to get existing UNPAID invoices for multiple players in a specific time window.
+     * Used to prevent duplicate unpaid invoices within the same cycle, while allowing
+     * new cycle invoices when only PAID invoices exist in that cycle window.
      */
     public CompletableFuture<Map<UUID, TaxInvoiceModel>> getInvoicesBatchForWindow(Set<UUID> playerUuids, long startMs, long endMs) {
         if (playerUuids.isEmpty() || startMs <= 0 || endMs <= 0 || endMs < startMs) {
@@ -188,6 +188,7 @@ public class BelastingRepository {
                                 UUID playerUuid = invoice.getPlayerUuid();
                                 Long createdAt = invoice.getCreatedAt();
                                 if (playerUuid == null || createdAt == null) continue;
+                                if (invoice.getStatus() != InvoiceStatus.UNPAID) continue;
                                 if (!playerUuids.contains(playerUuid)) continue;
                                 if (createdAt < startMs || createdAt > endMs) continue;
                                 result.putIfAbsent(playerUuid, invoice);
