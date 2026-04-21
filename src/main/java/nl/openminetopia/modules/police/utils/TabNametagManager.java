@@ -3,11 +3,17 @@ package nl.openminetopia.modules.police.utils;
 import me.neznamy.tab.api.TabAPI;
 import me.neznamy.tab.api.TabPlayer;
 import me.neznamy.tab.api.nametag.NameTagManager;
+import nl.openminetopia.OpenMinetopia;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 /**
@@ -20,6 +26,8 @@ public class TabNametagManager {
     private TabAPI tabApi;
     private NameTagManager nameTagManager;
     private boolean initializationAttempted = false;
+    private boolean bridgeUnavailableLogged = false;
+    private final Map<UUID, Integer> bridgeRetryCounters = new ConcurrentHashMap<>();
 
     private TabNametagManager() {
         // Lazy initialization - don't initialize here, wait until first use
@@ -41,10 +49,17 @@ public class TabNametagManager {
             return;
         }
         initializationAttempted = true;
-        
-        // Wait a bit to ensure TAB is fully loaded
-        if (!Bukkit.getPluginManager().isPluginEnabled("TAB")) {
-            Bukkit.getLogger().warning("[OpenMinetopia] TAB plugin not found. Balaclava nametag hiding will not work.");
+
+        // If TAB is not installed on this backend but TAB-Bridge is, API fallback is unavailable
+        // but bridge-based handling can still work.
+        boolean tabEnabled = Bukkit.getPluginManager().isPluginEnabled("TAB");
+        boolean bridgeEnabled = Bukkit.getPluginManager().isPluginEnabled("TAB-Bridge");
+        if (!tabEnabled) {
+            if (!bridgeEnabled) {
+                Bukkit.getLogger().warning("[OpenMinetopia] Neither TAB nor TAB-Bridge plugin found. Balaclava nametag hiding will not work.");
+            } else {
+                Bukkit.getLogger().info("[OpenMinetopia] TAB not found on backend; using TAB-Bridge pathway for balaclava nametag handling.");
+            }
             return;
         }
         
@@ -98,6 +113,10 @@ public class TabNametagManager {
      * @param player The player whose nametag should be hidden
      */
     public void hideNameTag(@NotNull Player player) {
+        if (setBridgeInvisibility(player, true)) {
+            return;
+        }
+
         if (!isAvailable()) {
             return;
         }
@@ -120,6 +139,10 @@ public class TabNametagManager {
      * @param player The player whose nametag should be shown
      */
     public void showNameTag(@NotNull Player player) {
+        if (setBridgeInvisibility(player, false)) {
+            return;
+        }
+
         if (!isAvailable()) {
             return;
         }
@@ -142,6 +165,9 @@ public class TabNametagManager {
      * @return true if nametag is hidden, false otherwise
      */
     public boolean hasHiddenNameTag(@NotNull Player player) {
+        Boolean bridgeInvisible = getBridgeInvisibility(player);
+        if (Boolean.TRUE.equals(bridgeInvisible)) return true;
+
         if (!isAvailable()) {
             return false;
         }
@@ -188,5 +214,84 @@ public class TabNametagManager {
     public void onPlayerQuit(@NotNull Player player) {
         // TAB handles cleanup automatically
         // No manual cleanup needed
+    }
+
+    @Nullable
+    private Object getBridgePlayer(@NotNull Player player) {
+        Plugin bridgePlugin = Bukkit.getPluginManager().getPlugin("TAB-Bridge");
+        if (bridgePlugin == null || !bridgePlugin.isEnabled()) {
+            if (!bridgeUnavailableLogged) {
+                Bukkit.getLogger().info("[OpenMinetopia] TAB-Bridge not available, using TAB API fallback for nametag handling.");
+                bridgeUnavailableLogged = true;
+            }
+            return null;
+        }
+        try {
+            Class<?> tabBridgeClass = Class.forName(
+                    "me.neznamy.tab.bridge.shared.TABBridge",
+                    true,
+                    bridgePlugin.getClass().getClassLoader()
+            );
+            Method getInstance = tabBridgeClass.getMethod("getInstance");
+            Object bridge = getInstance.invoke(null);
+            if (bridge == null) return null;
+            Method getPlayer = tabBridgeClass.getMethod("getPlayer", java.util.UUID.class);
+            Object bridgePlayer = getPlayer.invoke(bridge, player.getUniqueId());
+            return bridgePlayer;
+        } catch (Exception e) {
+            Bukkit.getLogger().log(Level.WARNING, "[OpenMinetopia] Failed to fetch BridgePlayer for " + player.getName(), e);
+            return null;
+        }
+    }
+
+    private boolean setBridgeInvisibility(@NotNull Player player, boolean invisible) {
+        Object bridgePlayer = getBridgePlayer(player);
+        if (bridgePlayer == null) {
+            scheduleBridgeRetry(player.getUniqueId(), invisible);
+            return false;
+        }
+        bridgeRetryCounters.remove(player.getUniqueId());
+        try {
+            Method setInvisible = bridgePlayer.getClass().getMethod("setInvisible", boolean.class);
+            setInvisible.invoke(bridgePlayer, invisible);
+            return true;
+        } catch (Exception e) {
+            Bukkit.getLogger().log(Level.WARNING, "[OpenMinetopia] Failed to set BridgePlayer invisibility for " + player.getName(), e);
+            return false;
+        }
+    }
+
+    private void scheduleBridgeRetry(@NotNull UUID playerUuid, boolean invisible) {
+        int attempts = bridgeRetryCounters.getOrDefault(playerUuid, 0);
+        if (attempts >= 8) {
+            if (attempts == 8) {
+                bridgeRetryCounters.put(playerUuid, 9);
+                Bukkit.getLogger().warning("[OpenMinetopia] TAB-Bridge did not expose BridgePlayer in time for " + playerUuid + ". Falling back to TAB API.");
+            }
+            return;
+        }
+        bridgeRetryCounters.put(playerUuid, attempts + 1);
+        Bukkit.getScheduler().runTaskLater(OpenMinetopia.getInstance(), () -> {
+            Player online = Bukkit.getPlayer(playerUuid);
+            if (online == null || !online.isOnline()) {
+                bridgeRetryCounters.remove(playerUuid);
+                return;
+            }
+            setBridgeInvisibility(online, invisible);
+        }, 10L);
+    }
+
+    @Nullable
+    private Boolean getBridgeInvisibility(@NotNull Player player) {
+        Object bridgePlayer = getBridgePlayer(player);
+        if (bridgePlayer == null) return null;
+        try {
+            Method isInvisible = bridgePlayer.getClass().getMethod("isInvisible");
+            Object value = isInvisible.invoke(bridgePlayer);
+            return value instanceof Boolean ? (Boolean) value : null;
+        } catch (Exception e) {
+            Bukkit.getLogger().log(Level.WARNING, "[OpenMinetopia] Failed to read BridgePlayer invisibility for " + player.getName(), e);
+            return null;
+        }
     }
 }

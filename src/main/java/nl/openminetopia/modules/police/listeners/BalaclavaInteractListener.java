@@ -54,6 +54,8 @@ public class BalaclavaInteractListener implements Listener {
 
         // Set the helmet (only 1 item)
         event.getPlayer().getInventory().setHelmet(itemToWear);
+        // Apply nametag hide immediately; armor-change events are not always fired for plugin-driven setHelmet.
+        BalaclavaUtils.hideNameTag(event.getPlayer(), true);
 
         // Remove 1 item from the correct hand (main hand or offhand)
         ItemStack remainingItem = itemInHand.clone();

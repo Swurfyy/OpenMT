@@ -38,7 +38,6 @@ public class PlayerJoinListener implements Listener {
             OpenMinetopia.getInstance().getLogger().info("Added " + player.getName() + " to onlinePlayers map during join");
         } catch (TimeoutException e) {
             // Timeout occurred - fallback to async loading
-            OpenMinetopia.getInstance().getLogger().warning("Timeout loading player data for " + player.getName() + " during join, falling back to async");
             handleAsync(player);
         } catch (Exception e) {
             OpenMinetopia.getInstance().getLogger().severe("Failed to load player data for " + player.getName() + " during join: " + e.getMessage());

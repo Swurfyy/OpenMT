@@ -32,6 +32,9 @@ dependencies:
     TAB:
       load: AFTER
       required: false
+    TAB-Bridge:
+      load: AFTER
+      required: false
     BetterTeams:
       load: BEFORE
       required: false
