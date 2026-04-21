@@ -13,10 +13,10 @@ public class BalaclavaUtils {
         if (player == null) return;
 
         if (hide) {
+            TabNametagManager.getInstance().hideNameTag(player);
             player.setDisplayName("");
             player.setCustomName("");
             player.setCustomNameVisible(false);
-            TabNametagManager.getInstance().hideNameTag(player);
         } else {
             TabNametagManager.getInstance().showNameTag(player);
             player.setCustomNameVisible(true);
