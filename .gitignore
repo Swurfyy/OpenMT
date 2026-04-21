@@ -117,4 +117,8 @@ run/
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 
+# Track everything under libs/ (local compileOnly deps; overrides *.jar above)
+!libs/
+!libs/**
+
 bin/
