@@ -16,6 +16,7 @@ import nl.openminetopia.framework.runnables.listeners.PlayerLifecycleListener;
 import nl.openminetopia.registry.CommandComponentRegistry;
 import nl.openminetopia.utils.input.ChatInputHandler;
 import nl.openminetopia.utils.placeholderapi.OpenMinetopiaExpansion;
+import nl.openminetopia.utils.placeholderapi.OpenMtExpansion;
 import nl.openminetopia.utils.wrappers.listeners.CitzensNpcClickListener;
 import nl.openminetopia.utils.wrappers.listeners.FancyNpcClickListener;
 import org.bstats.bukkit.Metrics;
@@ -89,7 +90,8 @@ public final class OpenMinetopia extends JavaPlugin {
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new OpenMinetopiaExpansion().register();
-            getLogger().info("Registered PlaceholderAPI expansion.");
+            new OpenMtExpansion().register();
+            getLogger().info("Registered PlaceholderAPI expansions (OpenMinetopia, openmt).");
         }
 
         // Registering of NPC wrapper listeners

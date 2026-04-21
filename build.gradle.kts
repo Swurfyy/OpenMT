@@ -104,9 +104,6 @@ dependencies {
     /* Labymod */
     compileOnly("net.labymod.serverapi:server-bukkit:1.0.6")
 
-    /* TAB-Bridge (local JAR; Maven artifact name/version differs from release filename) */
-    compileOnly(files("libs/TAB-Bridge.v6.1.8.jar"))
-
     /* BetterTeams - lokale JAR file */
     compileOnly(files("libs/BetterTeams-5.0.0.jar"))
 
