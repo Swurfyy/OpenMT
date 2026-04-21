@@ -3,6 +3,8 @@ package nl.openminetopia.modules.police.utils;
 import me.neznamy.tab.api.TabAPI;
 import me.neznamy.tab.api.TabPlayer;
 import me.neznamy.tab.api.nametag.NameTagManager;
+import me.neznamy.tab.bridge.shared.BridgePlayer;
+import me.neznamy.tab.bridge.shared.TABBridge;
 import nl.openminetopia.OpenMinetopia;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -23,8 +25,6 @@ import java.util.logging.Level;
 public class TabNametagManager {
 
     private static TabNametagManager instance;
-    private TabAPI tabApi;
-    private NameTagManager nameTagManager;
     private boolean initializationAttempted = false;
     private boolean bridgeUnavailableLogged = false;
     private final Map<UUID, Integer> bridgeRetryCounters = new ConcurrentHashMap<>();
@@ -97,10 +97,10 @@ public class TabNametagManager {
      * @return TabPlayer or null if not available
      */
     @Nullable
-    private TabPlayer getTabPlayer(@NotNull Player player) {
+    private BridgePlayer getBridgePlayer(@NotNull Player player) {
         if (tabApi == null) return null;
         try {
-            return tabApi.getPlayer(player.getUniqueId());
+            return TABBridge.getInstance().getPlayer(player.getUniqueId());
         } catch (Exception e) {
             Bukkit.getLogger().log(Level.WARNING, "[OpenMinetopia] Failed to get TabPlayer for " + player.getName(), e);
             return null;

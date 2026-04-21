@@ -105,7 +105,7 @@ dependencies {
     compileOnly("net.labymod.serverapi:server-bukkit:1.0.6")
 
     /* TAB API */
-    compileOnly("com.github.NEZNAMY:TAB-API:5.4.0")
+    compileOnly("com.github.NEZNAMY:TAB-Bridge:6.1.8")
 
     /* BetterTeams - lokale JAR file */
     compileOnly(files("libs/BetterTeams-5.0.0.jar"))
