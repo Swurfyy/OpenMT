@@ -14,7 +14,7 @@ public class BalaclavaNameTagListener implements Listener {
         // TAB handles nametag state automatically, but ensure state is correct
         // if player is wearing balaclava when they join
         if (BalaclavaUtils.isWearingBalaclava(event.getPlayer())) {
-            TabNametagManager.getInstance().hideNameTag(event.getPlayer());
+            BalaclavaUtils.hideNameTag(event.getPlayer(), true);
         }
     }
 
