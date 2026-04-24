@@ -157,6 +157,7 @@ plot_calculate_summary: "<white>[<red><bold>Calculate<reset><white>] <white>Kost
 emergency_too_soon: "<red><b>112</b></red> <dark_gray>| <gray>Je kan niet zo snel achter elkaar een melding maken."
 emergency_cooldown: "<red><b>112</b></red> <dark_gray>| <gray>Probeer het over <white><time> <gray> nog eens."
 emergency_format: "<red>[<white>112<red>] [<white><world>, <x>, <y>, <z></white><red>] <gray><sender>:</gray> <white><message></white>"
+emergency_sent: "<green>Je 112 melding is naar de meldkamer verstuurd!"
 
 # Criminal records
 police_criminal_record_date_format: "dd-MM-yyyy HH:mm:ss"
@@ -192,8 +193,8 @@ police_handcuff_already_handcuffing: "<red>Je bent al iemand aan het boeien!"
 police_handcuff_applied: "<green>Je hebt <dark_green><player> <green>in de boeien geslagen!"
 
 # Chase
-police_chase_started: "<light_red>Je bent nu in een achtervolging! Uitloggen resulteert in een ban."
-police_chase_stopped: "<light_red>De achtervolging is gestaakt."
+police_chase_started: "<red>Je bent nu in een achtervolging! Uitloggen resulteert in een ban."
+police_chase_stopped: "<red>De achtervolging is gestaakt."
 police_chase_stopped_by_agent: "<green>De achtervolging van <dark_green><player> <green>is gestaakt."
 police_chase_started_by_agent: "<green>Je hebt een achtervolging gestart tegen <dark_green><player><green>."
 police_chase_self: "<red>Je kunt jezelf niet achtervolgen!"

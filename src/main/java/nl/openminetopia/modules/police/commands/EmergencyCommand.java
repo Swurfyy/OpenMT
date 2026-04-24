@@ -41,7 +41,7 @@ public class EmergencyCommand extends BaseCommand {
         // Send feedback to the player
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer != null) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, "<light_green>Je 112 melding is naar de meldkamer verstuurd!");
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_sent"));
         }
     }
 
